@@ -1,4 +1,4 @@
-Matsoz::Application.routes.draw do
+Matsoz6::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
