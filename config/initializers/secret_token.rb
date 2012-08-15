@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Matsoz6::Application.config.secret_token = '0a37dbe9bd1634f81d159e33beb9602c3ac1534a5448f83633f1020f6787ef69a828dd98eaf7425af5d777cfc0d7839a90534c7b4c9715e104bd85ce26a2ab8a'
+Matsoz::Application.config.secret_token = '673320342b4295dade529af8c1c4fd5f3ddb1e40233e3fa2df4e97340d80f3684adca3559ee8448f2c74a67d080655e3fc9a1d3aefd16c32b2e26c3e9ef34148'
