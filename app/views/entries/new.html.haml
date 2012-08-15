@@ -1,0 +1,18 @@
+%h1 Create New Entry
+
+= form_tag entries_path do
+  = label :entry, :word, 'Word'
+  %br
+  = text_field :entry, 'word'
+  %br
+  = label :entry, :meaning, 'Meaning'
+  %br
+  = text_area :entry, 'meaning'
+  %br
+  = label :entry, :additionalInfo, 'Additional Info'
+  %br
+  = text_area :entry, 'additionalInfo'
+  %br
+  
+  
+  = submit_tag 'Create Entry'

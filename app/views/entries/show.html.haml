@@ -1,0 +1,86 @@
+
+- content_for(:head) do
+  %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, user-scalable=yes'}
+  %meta{'http-equiv'=>'Content-Type', 'content' => 'text/html; charset=UTF-8'}
+  = javascript_include_tag 'main.js'
+  = stylesheet_link_tag 'theme/blue/matsoz_blue.css'
+  = stylesheet_link_tag 'theme/yedi/matsoz_yedi.css'
+  - begin
+    = javascript_include_tag @entry.javascript_file
+  - rescue
+
+  - if Rails.env.development?
+    = javascript_include_tag 'development.js'
+
+  :javascript
+    var wordList = #{@word_list.to_json};
+    var currentLetter = '#{@current_letter}';
+
+#container
+  #navigation
+    .navlinktasiyici
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_1", :data=>{:letter => 'a'}}Aa
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_1", :data=>{:letter => 'b'}}Bb
+
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'c'}}Cc
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'ç'}}Çç
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'd'}}Dd
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'e'}}Ee
+      
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'f'}}Ff
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'g'}}Gg
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'h'}}Hh
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'ı'}}Iı
+      
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'i'}}İi
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'j'}}Jj
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'k'}}Kk
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'l'}}Ll
+      
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'm'}}Mm
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'n'}}Nn
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'o'}}Oo
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'ö'}}Öö
+      
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'p'}}Pp
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'r'}}Rr
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 's'}}Ss
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'ş'}}Şş
+      
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 't'}}Tt
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'u'}}Uu
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'ü'}}Üü
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'v'}}Vv
+      
+      %a{:href=>'#', :class=>"navlink navposition harf_sol_4", :data=>{:letter => 'y'}}Yy
+      %a{:href=>'#', :class=>"navlink navposition harf_sag_4", :data=>{:letter => 'z'}}Zz
+      
+      
+    #liste.sozcuktasiyici
+      - @all_entries.each do |entry|
+        - if entry == @entry
+          = link_to entry.word, entry_path(entry), {:class => 'sozcuklink sozcukselected'}
+        - else
+          = link_to entry.word, entry_path(entry), {:class => 'sozcuklink'}
+          
+  #inter_container.back
+    %div.tanim
+      %strong.name
+        = @entry.word + ": "
+      %span.definition
+        - @chunks.each do |chunk|
+          - chunk.each do |key, value|
+            - if value == nil
+              - if key != nil
+                %span>=key.gsub(' ', "\n")
+            - else
+              %span>= link_to key, entry_path(value)
+      %div.additional_info
+        - if @entry.additionalInfo
+          %em
+            = @entry.additionalInfo
+          
+    %div{:class=>'ornek ornek_border'}
+      #div{:class =>'ornekbaslik ornekbaslik_bg'}
+    %div.mavikontrol
+    %div.etkilesimalan

@@ -1,0 +1,10 @@
+
+- content_for(:head) do
+  %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, user-scalable=yes'}
+
+#content
+  #words_list
+    - @all_entries.each do |entry|
+      %p= link_to entry.word, entry_path(entry)
+      
+= link_to 'Create new entry',  new_entry_path

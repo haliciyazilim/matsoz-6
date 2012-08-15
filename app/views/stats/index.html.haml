@@ -1,0 +1,50 @@
+
+- content_for(:head) do
+  %meta{'http-equiv'=>'Content-Type', 'content' => 'text/html; charset=UTF-8'}
+  = javascript_include_tag "stats/stats.js"
+  = javascript_include_tag "stats/highcharts.js"
+  :javascript
+    var lastStat = #{@last.to_json(:methods => :date_str)};
+    var stats = #{@stats.to_json(:methods => :date_str)};
+    
+#stats
+  .date
+    %strong Stats by: 
+    = @last.date.strftime("%a, %d %b %Y")
+  
+  #table_container
+    %table
+      %tr.header
+        %th State
+        %th Count
+        %th Description
+      %tr.accepted
+        %td Accepted
+        %td= @accepted
+        %td Accepted by the designer and the consultant
+      %tr.delivered
+        %td Delivered
+        %td= @delivered
+        %td Accepted by designer, awaiting consultant's approval
+      %tr.finished
+        %td Finished
+        %td= @finished
+        %td Coding done, awaiting design elements or designer's approval
+      %tr.active
+        %td Active
+        %td= @started + @rejected   
+        %td Currently being worked on by developers (includes rejected ones)
+      %tr.inactive
+        %td Not Yet Started
+        %td= @unscheduled
+        %td Isn't being worked on yet
+      %tr.total
+        %td
+          %strong Total
+        %td
+          %strong= @accepted + @delivered + @finished + @started + @rejected + @unscheduled
+        %td 
+          %strong Total number of interactions
+    
+  #pie_chart{:style => "width: 100%; height: 400px"}
+  #stacked_area{:style => "width: 100%; height: 400px"}

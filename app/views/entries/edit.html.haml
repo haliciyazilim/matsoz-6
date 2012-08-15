@@ -1,0 +1,25 @@
+%h1= "Update #{@entry.word}"
+
+= form_for @entry do |form|
+  = label :entry, :word, 'Word'
+  %br
+  
+  = text_field :entry, 'word'
+  %br
+  = label :entry, :meaning, 'Meaning'
+  %br
+  = text_area :entry, 'meaning'
+  %br
+  = label :entry, :additionalInfo, 'Additional Info'
+  %br
+  = text_area :entry, 'additionalInfo'
+  %br
+  
+  Thumbnail:
+  = form.file_field :thumbnail
+  %br
+  
+  = submit_tag 'Update Entry'
+
+= button_to "Delete #{@entry.word}", entry_path(@entry), :method => :delete, :confirm => 'Are you sure?'
+= link_to "Back to #{@entry.word}", entry_path(@entry)
