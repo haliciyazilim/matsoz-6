@@ -1,4 +1,5 @@
 function __Styles(){
+    
     wholeTableFillColor = "white";
     wholeTableStrokeColor = "#a8dbe3";
 
