@@ -24,7 +24,7 @@ class Stat < ActiveRecord::Base
     token = hash['token']['guid']
     
     
-    xml_data = https.request_get('/services/v3/projects/589545/stories?filter=label%3A%22interaction%22%20includedone%3Atrue', {'X-TrackerToken' => token}).body
+    xml_data = https.request_get('/services/v3/projects/589545/stories?filter=label%3A%22interaction-6%22%20includedone%3Atrue', {'X-TrackerToken' => token}).body
     responseHash = Hash.from_xml(xml_data)
       
     stories = responseHash['stories']
