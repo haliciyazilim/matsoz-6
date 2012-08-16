@@ -13,28 +13,28 @@ class StatsController < ApplicationController
     @rejected = @last[:rejected]
     @unscheduled = @last[:unscheduled]
 
-    if !@accepted
-      @accepted = 0
-    end
-    
-    if !@delivered
-      @delivered = 0
-    end
-    
-    if !@finished
-      @finished = 0
-    end
-    
-    if !@started
-      @started = 0
-    end
-    
-    if !@rejected
-      @rejected = 0
-    end
-    
-    if !@unscheduled
-      @unscheduled = 0
-    end
+    # if !@accepted
+    #   @accepted = 0
+    # end
+    # 
+    # if !@delivered
+    #   @delivered = 0
+    # end
+    # 
+    # if !@finished
+    #   @finished = 0
+    # end
+    # 
+    # if !@started
+    #   @started = 0
+    # end
+    # 
+    # if !@rejected
+    #   @rejected = 0
+    # end
+    # 
+    # if !@unscheduled
+    #   @unscheduled = 0
+    # end
   end
 end

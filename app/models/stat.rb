@@ -29,11 +29,18 @@ class Stat < ActiveRecord::Base
       
     stories = responseHash['stories']
       
-    hash = {}
+    hash = {
+      :accepted => 0,
+      :delivered => 0,
+      :finished => 0,
+      :started => 0,
+      :rejected => 0,
+      :unscheduled => 0
+    }
     
     stories.each do |story|
       state = story['current_state'].to_sym
-      hash[state] ? hash[state] += 1 : hash[state] = 1
+      hash[state] += 1
     end
     
     date = Date.current()
