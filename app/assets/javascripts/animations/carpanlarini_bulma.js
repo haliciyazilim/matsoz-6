@@ -145,7 +145,7 @@ var Interaction = {
                     width:'45px',
                     height:'40px',
                     fontSize:'24px'
-                });
+                }, true, true);
             }
         }
 
@@ -196,8 +196,8 @@ var Interaction = {
         $(Interaction.answerDiv).css({
             position: 'absolute',
             top:'145px',
-            left:'30px',
-            width:'210px',
+            left:'20px',
+            width:'230px',
             height:'80px',
          //   border:'1px solid',
             color:'#069',
@@ -224,39 +224,56 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
-
+        Interaction.trial2 = 0;
         $('#prime').css("opacity", 0)
         $('#texttt').html('');
         $('#missingF').html('');
         Interaction.question = Interaction.questionArray[randomNumber];
+     //   Interaction.question = 1;
         Interaction.factorsOfQuestion = [];
-        Interaction.factorsOfQuestion = Util.getFactors(Interaction.question);
+        if(Interaction.question == 1){
+            Interaction.factorsOfQuestion[0] = 1;
+        }
+        else{
+            Interaction.factorsOfQuestion = Util.getFactors(Interaction.question);
+        }
         Interaction.factorNum = Interaction.factorsOfQuestion.length;
         for(var i = 0; i < Interaction.inputs.length; i++){
             Interaction.inputs[i].readOnly = false;
             $(Interaction.inputs[i]).css("opacity", 1);
             $(Interaction.inputs[i]).addClass("input");
-            Interaction.inputs[i].isEmpty = false;
             Interaction.inputs[i].style.color = "black";
         }
         for(var i = 0; i < 12-Interaction.factorNum; i++){
             Interaction.inputs[Interaction.inputs.length-1-i].readOnly = true;
             $(Interaction.inputs[Interaction.inputs.length-1-i]).css("opacity", 0.3);
             $(Interaction.inputs[Interaction.inputs.length-1-i]).removeClass("input");
-            Interaction.inputs[Interaction.inputs.length-1-i].isEmpty = true;
         }
 
         $('#questionNum').html(Interaction.question);
-
-        console.log("question: "+Interaction.question);
-        console.log("factorNum: "+Interaction.factorNum);
-        console.log("factors: "+Interaction.factorsOfQuestion);
-
     },
 
 
     preCheck : function(){
-
+        if(Interaction.trial == 1){
+            return true;
+        }
+        else{
+            for(var i = 0; i < Interaction.factorsOfQuestion.length; i++){
+                if(Interaction.inputs[i].value == ""){
+                    Interaction.setStatus('Lütfen tüm kutucukları doldurunuz.',false);
+                    Interaction.trial2 += 1;
+                    Interaction.trial += 1;
+                    break;
+                }
+            }
+            if(Interaction.trial2 == 1){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
     },
     isAnswerCorrect : function(value){
         Interaction.correctAnswerNum = 0;
@@ -292,17 +309,14 @@ var Interaction = {
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
 
         var missingFactorsStr = "";
-        if(Interaction.missingFactors.length > 1){
-            for(var i = 0; i < Interaction.missingFactors.length-1; i++){
-                missingFactorsStr = missingFactorsStr+Interaction.missingFactors[i]+", ";
-            }
-            missingFactorsStr = missingFactorsStr+"ve "+Interaction.missingFactors[Interaction.missingFactors.length-1];
-            $('#texttt').html('Eksik girdiğiniz çarpanlar:');
+
+        for(var i = 0; i < Interaction.factorsOfQuestion.length-1; i++){
+            missingFactorsStr = missingFactorsStr+Interaction.factorsOfQuestion[i]+", ";
         }
-        else if(Interaction.missingFactors.length == 1){
-            missingFactorsStr = missingFactorsStr+Interaction.missingFactors[0];
-            $('#texttt').html('Eksik girdiğiniz çarpan:');
-        }
+        missingFactorsStr = missingFactorsStr+"ve "+Interaction.factorsOfQuestion[Interaction.factorsOfQuestion.length-1];
+        $('#texttt').html('Bu sayının tüm çarpanları:');
+
+
 
         $('#missingF').html(missingFactorsStr);
 
