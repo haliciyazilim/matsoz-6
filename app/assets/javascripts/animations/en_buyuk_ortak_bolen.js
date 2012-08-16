@@ -17,7 +17,7 @@ var Animation = {
         $(Animation.animDiv).css({
             position:'absolute',
             top:'30px',
-            left:'40px',
+            left:'150px',
             width:'700px',
             height:'150px',
             fontSize:'20px'
@@ -32,7 +32,7 @@ var Animation = {
             height:'40px',
         });
 
-        $('#firstDiv').html('<div id="title1">3\'ün katları</div><div id="eq1"></div>');
+        $('#firstDiv').html('<div id="title1">36\'nın bölenleri</div><div id="eq1"></div>');
         $('#title1').css({
             position:'absolute',
             top:'10px',
@@ -43,13 +43,12 @@ var Animation = {
         $('#eq1').css({
             position:'absolute',
             top:'10px',
-            left:'130px',
+            left:'180px',
             width:'460px',
             height:'24px',
         });
-        $('#eq1').html('<span id="s1">3, </span><span id="s2">6, </span><span id="s3">9, </span><span id="s4">12, </span><span id="s5">15, </span>' +
-                        '<span id="s6">18, </span><span id="s7">21, </span><span id="s8">24, </span><span id="s9">27, </span><span id="s10">30, </span>' +
-                        '<span id="s11">33, </span><span id="s12">36, </span><span id="s13">39, ...</span>');
+        $('#eq1').html('<span id="s1">1, </span><span id="s2">2, </span><span id="s3">3, </span><span id="s4">4, </span><span id="s5">6, </span>' +
+            '<span id="s6">9, </span><span id="s7">12, </span><span id="s8">18</span>');
 
         $('#secondDiv').css({
             position:'absolute',
@@ -58,55 +57,55 @@ var Animation = {
             width:'600px',
             height:'40px',
         });
-        $('#secondDiv').html('<div id="title2">4\'ün katları</div><div id="eq2"></div>');
+        $('#secondDiv').html('<div id="title2">45\'in bölenleri</div><div id="eq2"></div>');
         $('#title2').css({
             position:'absolute',
             top:'10px',
             left:'10px',
             opacity:0
         });
-        $('#title2').delay(animStart+12000).animate({opacity:1}, 1000, 'easeInOutQuad');
+        $('#title2').delay(animStart+9000).animate({opacity:1}, 1000, 'easeInOutQuad');
         $('#eq2').css({
             position:'absolute',
             top:'10px',
-            left:'130px',
+            left:'180px',
             width:'460px',
             height:'24px',
         });
-        $('#eq2').html('<span id="d1">4, </span><span id="d2">8, </span><span id="d3">12, </span><span id="d4">16, </span><span id="d5">20, </span>' +
-            '<span id="d6">24, </span><span id="d7">28, </span><span id="d8">32, </span><span id="d9">36, </span><span id="d10">40, </span>' +
-            '<span id="d11">44, </span><span id="d12">48, </span><span id="d13">52, ...</span>');
+        $('#eq2').html('<span id="d1">1, </span><span id="d2">3, </span><span id="d3">4, </span><span id="d4">9, </span><span id="d5">15</span>');
 
         $('#thirdDiv').css({
             position:'absolute',
             top:'65px',
-            left:'510px',
-            width:'170px',
+            left:'360px',
+            width:'200px',
             height:'20px',
             fontWeight:'bold',
             opacity:0
         });
-        $('#thirdDiv').html('EKOK(3, 4) = 12');
-        $('#thirdDiv').delay(28000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
-        for(var i = 1; i < 14; i++){
+        $('#thirdDiv').html('EBOB(36, 45) = 9');
+        $('#thirdDiv').delay(20000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
+        for(var i = 1; i < 9; i++){
             $('#s'+i).css("opacity", 0).delay(animStart+1000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
-            $('#d'+i).css("opacity", 0).delay(animStart+13000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
+
+        }
+        for(var i = 1; i < 6; i++ ){
+            $('#d'+i).css("opacity", 0).delay(animStart+10000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
         }
 
-        $('#s4').delay(19000).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#s8').delay(16000).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#s12').delay(13000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s1').delay(12750).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s3').delay(11250).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s6').delay(9000).animate({color:animColor}, 1000, 'easeInOutQuad');
 
-        $('#d3').delay(7750).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d6').delay(5500).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d9').delay(3250).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d12').delay(1000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d1').delay(4500).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d2').delay(3750).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d4').delay(1500).animate({color:animColor}, 1000, 'easeInOutQuad');
 
-        var circ1 = new Path.Circle(new Point(258, 46), 18);
+        var circ1 = new Path.Circle(new Point(458, 46), 14);
         circ1.strokeColor = "red";
         circ1.opacity = 0;
 
-        var circ2 = new Path.Circle(new Point(235, 136), 18);
+        var circ2 = new Path.Circle(new Point(412, 136), 14);
         circ2.strokeColor = "red";
         circ2.opacity = 0;
 
@@ -114,7 +113,7 @@ var Animation = {
             style:{
                 opacity: 1,
             },
-            delay: 26500,
+            delay: 18000,
             duration: 1000,
             animationType: 'easeInOutQuad'
         });
@@ -123,7 +122,7 @@ var Animation = {
             style:{
                 opacity: 1,
             },
-            delay: 26500,
+            delay: 18000,
             duration: 1000,
             animationType: 'easeInOutQuad'
         });
@@ -136,7 +135,7 @@ var Interaction = {
     },
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yanda verilen sayıların en küçük ortak katını bulunuz.');
+        Main.setObjective('Yanda verilen sayıların en büyük ortak bölenini bulunuz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -147,31 +146,31 @@ var Interaction = {
         $(Interaction.container).append(Interaction.questionDiv);
 
         $(Interaction.questionDiv).css({
-           position:'absolute',
+            position:'absolute',
             top:'20px',
-            left:'120px', //120
-            width:'320px', //320
+            left:'100px', //120
+            width:'340px', //320
             height:'60px',
             fontSize:'26px',
             textAlign:'center',
-      //      border:'1px solid'
+        //          border:'1px solid'
         });
 
         $(Interaction.questionDiv).html('<div id="questionn"></div><span id="eq">=</span>');
         $('#questionn').css({
             position:'absolute',
             top:'20px',
-            left:'0px',
-            width:'200px',
+            left:'-10px',
+            width:'250px',
             height:'30px',
             textAlign:'right',
             fontWeight:'bold',
-     //       border: '1px solid'
+    //        border: '1px solid'
         });
         $('#eq').css({
             position:'absolute',
             top:'22px',
-            left:'206px',
+            left:'246px',
 
         });
 
@@ -182,70 +181,70 @@ var Interaction = {
         $(Interaction.answerDiv).css({
             position:'absolute',
             top:'100px',
-            left:'90px',
+            left:'100px',
             width:'440px',
             height:'90px',
             fontSize:'16px',
             color:answerDivColor,
-       //     border:'1px solid'
+         //        border:'1px solid'
         });
         $(Interaction.container).append('<div id="ans"></div>');
         $('#ans').css({
             position:'absolute',
             top:'200px',
-            left:'150px',
-            width:'220px',
+            left:'130px',
+            width:'240px',
             height:'20px',
             fontSize:'18px',
             color:"green",
             fontWeight:'bold',
             textAlign:'center',
-       //     border:'1px solid'
+            //     border:'1px solid'
 
         });
 
         $(Interaction.answerDiv).html('<div id="answer1">' +
-                                            '<span id="f1" style="font-weight:bold;"></span>' +
-                                            '<span id="n1"></span>' +
-                                            '<span id="n2"></span>' +
-                                            '<span id="n3"></span>' +
-                                            '<span id="n4"></span>' +
-                                            '<span id="n5"></span>' +
-                                            '<span id="n6"></span>' +
-                                            '<span id="n7"></span>' +
-                                            '<span id="n8"></span>' +
-                                            '<span id="n9" ></span>' +
-                                            '<span id="n10"></span>' +
-                                            '<span id="td1"></span>' +
-                                      '</div>' +
-                                    '<div id="answer2">' +
-                                            '<span id="f2" style="font-weight:bold;"></span>' +
-                                            '<span id="n11"></span>' +
-                                            '<span id="n12"></span>' +
-                                            '<span id="n13"></span>' +
-                                            '<span id="n14"></span>' +
-                                            '<span id="n15"></span>' +
-                                            '<span id="n16"></span>' +
-                                            '<span id="n17"></span>' +
-                                            '<span id="n18"></span>' +
-                                            '<span id="n19"></span>' +
-                                            '<span id="n20"></span>' +
-                                            '<span id="td2"></span>' +
-                                    '</div>' +
-                                    '<div id="answer3">' +
-                                            '<span id="f3" style="font-weight:bold;"></span>' +
-                                            '<span id="n21"></span>' +
-                                            '<span id="n22"></span>' +
-                                            '<span id="n23"></span>' +
-                                            '<span id="n24"></span>' +
-                                            '<span id="n25"></span>' +
-                                            '<span id="n26"></span>' +
-                                            '<span id="n27"></span>' +
-                                            '<span id="n28"></span>' +
-                                            '<span id="n29" ></span>' +
-                                            '<span id="n30"></span>' +
-                                            '<span id="td3"></span>' +
-                                    '</div>');
+            '<span id="f1" style="font-weight:bold;"></span>' +
+            '<span id="n1"></span>' +
+            '<span id="n2"></span>' +
+            '<span id="n3"></span>' +
+            '<span id="n4"></span>' +
+            '<span id="n5"></span>' +
+            '<span id="n6"></span>' +
+            '<span id="n7"></span>' +
+            '<span id="n8"></span>' +
+            '<span id="n9" ></span>' +
+            '<span id="n10"></span>' +
+            '<span id="n11"></span>' +
+            '</div>' +
+            '<div id="answer2">' +
+            '<span id="f2" style="font-weight:bold;"></span>' +
+            '<span id="n12"></span>' +
+            '<span id="n13"></span>' +
+            '<span id="n14"></span>' +
+            '<span id="n15"></span>' +
+            '<span id="n16"></span>' +
+            '<span id="n17"></span>' +
+            '<span id="n18"></span>' +
+            '<span id="n19"></span>' +
+            '<span id="n20"></span>' +
+            '<span id="n21"></span>' +
+            '<span id="n22"></span>' +
+            '</div>' +
+            '<div id="answer3">' +
+            '<span id="f3" style="font-weight:bold;"></span>' +
+            '<span id="n23"></span>' +
+            '<span id="n24"></span>' +
+            '<span id="n25"></span>' +
+            '<span id="n26"></span>' +
+            '<span id="n27"></span>' +
+            '<span id="n28"></span>' +
+            '<span id="n29"></span>' +
+            '<span id="n30"></span>' +
+            '<span id="n31" ></span>' +
+            '<span id="n32"></span>' +
+            '<span id="n33"></span>' +
+            '</div>');
         $('#answer1').css({
             position:'absolute',
             top:'0px',
@@ -283,7 +282,7 @@ var Interaction = {
 
         Interaction.appendInput({
             top:'13px',
-            left:'226px',
+            left:'266px',
             width:'45px',
             height:'40px',
             fontSize:'24px'
@@ -291,21 +290,20 @@ var Interaction = {
         $(Interaction.inputs).attr('maxlength', '3')
         $(Interaction.questionDiv).append(Interaction.input)
 
-        Interaction.setRandomGenerator(2)
+        Interaction.setRandomGenerator(13, 1);
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
         Interaction.randomNumber = Util.rand01();
+        Interaction.gcd = randomNumber;
+        console.log("randomNumber: "+randomNumber);
         Interaction.answerTitles = [];
         Interaction.question = [];
         $('#ans').html('');
         $('#f1').html('');
         $('#f2').html('');
         $('#f3').html('');
-        $('#td1').html('');
-        $('#td2').html('');
-        $('#td3').html('');
-        for(var i = 1; i < 31; i++){
+        for(var i = 1; i < 34; i++){
             $('#n'+i).html('');
             $('#n'+i).css("color", "black")
                 .css("font-weight", "normal")
@@ -338,68 +336,42 @@ var Interaction = {
 
         for(var i = 1; i <= Interaction.question.length; i++){
             $('#f'+i).html(Interaction.answerTitles[i-1]);
-            $('#td'+i).html(", ...");
         }
         for(var i = 0; i < Interaction.question.length; i++){
-            if(Interaction.answer > Interaction.question[i] * 10){
-                for(var j = 1; j < 6; j++){
-                    var a = 10*i+j;
-                    var b = Interaction.question[i] * j;
-                    var aStr = ""+b+", ";
-                    $('#n'+a).html(aStr);
-                }
-                var a = 10*i+6;
-                var b = Interaction.question[i]*6;
-                var aStr = "....., ";
-                $('#n'+a).html(aStr);
-
-                var a = 10*i+7;
-                var b = Interaction.answer - 2 * Interaction.question[i];
-                var aStr = ""+b+", ";
-                $('#n'+a).html(aStr);
-
-                var a = 10*i+8;
-                var b = Interaction.answer - Interaction.question[i];
-                var aStr = ""+b+", ";
-                $('#n'+a).html(aStr);
-
-                var a = 10*i+9;
-                var b = Interaction.answer;
-                var aStr = ""+b+", ";
-                $('#n'+a).html(aStr);
-                $('#n'+a).css("color", "green")
-                    .css("font-weight", "bold");
-
-                var a = 10*i+10;
-                var b = Interaction.answer + Interaction.question[i];
-                var aStr = ""+b;
-                $('#n'+a).html(aStr);
+            var arr = [];
+            if(Interaction.question[i] == 1){
+                arr[0] = 1;
             }
             else{
-                for(var j = 1; j <= 10; j++){
-                    var a = 10*i+j;
-                    var b = Interaction.question[i] * j;
-                    if(j == 10){
-                        var aStr = ""+b;
-                    }
-                    else{
-                        var aStr = ""+b+", ";
-                    }
-                    $('#n'+a).html(aStr);
-                    if(b == Interaction.answer){
-                        $('#n'+a).css("color", "green")
-                            .css("font-weight", "bold")
-                    }
+                arr = Util.getFactors(Interaction.question[i]);
+              //  arr.sort(function(a,b){return b-a});
+            }
+            for(var j = 0; j <arr.length; j++){
+                var a = 11*i+j+1;
+                var b = arr[j];
+                if(j == arr.length-1){
+                    var aStr = ""+b;
+                    var c = 11*i+j+2;
+                    $('#n'+c).html(", ...");
+                }
+                else{
+                    var aStr = ""+b+", ";
+                }
+                $('#n'+a).html(aStr);
+                if(b == Interaction.answer){
+                    $('#n'+a).css("color", "green")
+                        .css("font-weight", "bold")
                 }
             }
+
         }
 
         var anssStr = "";
         if(Interaction.question.length == 2){
-            anssStr += "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+") = "+Interaction.answer;
+            anssStr += "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+") = "+Interaction.answer;
         }
         else{
-            anssStr += "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+") = "+Interaction.answer;
+            anssStr += "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+") = "+Interaction.answer;
         }
 
         $('#ans').html(anssStr);
@@ -407,22 +379,41 @@ var Interaction = {
     },
     getQuestion : function(){
         if(Interaction.randomNumber == 0){ // 2 numbers
+            $(Interaction.answerDiv).css("left", "140px");
+            $('#ans').css("left", "160px");
             do{
-                Interaction.question[0] = Util.randomInteger(2, 16);
-                Interaction.question[1] = Util.randomInteger(2, 16, [Interaction.question[0]]);
-                Interaction.answer = Util.lcm(Interaction.question[0], Interaction.question[1]);
-            } while(Interaction.answer > 200);
-            Interaction.ques = "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+")";
+                Interaction.factor1 = Util.randomInteger(1,11);
+            } while(Util.getFactors(Interaction.gcd * Interaction.factor1).length > 10)
+            do{
+                Interaction.factor2 = Util.randomInteger(1,11,[Interaction.factor1]);
+            } while(Util.getFactors(Interaction.gcd * Interaction.factor2).length > 10)
+
+            Interaction.question[0] = Interaction.gcd * Interaction.factor1;
+            Interaction.question[1] = Interaction.gcd * Interaction.factor2;
+            Interaction.answer = Util.gcd(Interaction.question[0], Interaction.question[1]);
+            Interaction.ques = "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+")";
             $('#questionn').html(Interaction.ques)
         }
         else{ // 3 numbers
+            $(Interaction.answerDiv).css("left", "110px");
+            $('#ans').css("left", "130px");
             do{
-                Interaction.question[0] = Util.randomInteger(2, 16);
-                Interaction.question[1] = Util.randomInteger(2, 16, [Interaction.question[0]]);
-                Interaction.question[2] = Util.randomInteger(2, 16, [Interaction.question[0], Interaction.question[1]]);
-                Interaction.answer = Util.lcm(Interaction.question[0], Interaction.question[1], Interaction.question[2]);
-            } while(Interaction.answer > 200);
-            Interaction.ques = "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+")";
+                Interaction.factor1 = Util.randomInteger(1,11);
+            } while(Util.getFactors(Interaction.gcd * Interaction.factor1).length > 10)
+            do{
+                Interaction.factor2 = Util.randomInteger(1,11,[Interaction.factor1]);
+            } while(Util.getFactors(Interaction.gcd * Interaction.factor2).length > 10)
+            do{
+                Interaction.factor3 = Util.randomInteger(1,11,[Interaction.factor1, Interaction.factor2]);
+            } while(Util.getFactors(Interaction.gcd * Interaction.factor3).length > 10)
+            Interaction.question[0] = Interaction.gcd * Interaction.factor1;
+            Interaction.question[1] = Interaction.gcd * Interaction.factor2;
+            Interaction.question[2] = Interaction.gcd * Interaction.factor3;
+//            Interaction.question[0] = 100;
+//            Interaction.question[1] = 100;
+//            Interaction.question[2] = 100;
+            Interaction.answer = Util.gcd(Interaction.question[0], Interaction.question[1], Interaction.question[2]);
+            Interaction.ques = "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+")";
             $('#questionn').html(Interaction.ques);
         }
     },
@@ -496,7 +487,7 @@ var Interaction = {
 
             }
 
-            Interaction.answerTitles[i] += " katları : ";
+            Interaction.answerTitles[i] += " bölenleri : ";
         }
     }
 }

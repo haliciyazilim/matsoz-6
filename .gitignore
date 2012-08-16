@@ -15,4 +15,9 @@
 /tmp
 
 /.idea/
+<<<<<<< HEAD
 /nbproject/private/
+=======
+
+/app/assets/javascripts/development.js
+>>>>>>> 3296e9da7c03b6f2e73509221610dd5573562c09
