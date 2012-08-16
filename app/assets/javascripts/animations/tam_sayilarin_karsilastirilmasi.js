@@ -50,7 +50,7 @@ var Animation = {
             fontWeight:'bold',
             opacity:0
         });
-        $('#thirdDiv').delay(animStart+4000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
+        $('#thirdDiv').delay(animStart+4000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1000)});
 
         $(Animation.container).append('<img id="thermometer1" src="/assets/animations/tam_sayilarin_karsilastirilmasi/termometre01.jpg"/>');
         $('#thermometer1').css({
