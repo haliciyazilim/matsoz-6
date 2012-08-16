@@ -74,7 +74,7 @@ var Animation = {
             top:'30px',
             left:'240px',
             fontSize:'20px',
-            width:'100px',
+            width:'120px',
             height:'50px',
             opacity:0
         });
@@ -138,7 +138,7 @@ var Animation = {
             top:'120px',
             left:'240px',
             fontSize:'20px',
-            width:'100px',
+            width:'120px',
             height:'50px',
             opacity:0
         });
