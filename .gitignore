@@ -15,3 +15,5 @@
 /tmp
 
 /.idea/
+
+/app/assets/javascripts/development.js
