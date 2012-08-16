@@ -1,5 +1,5 @@
 function __Styles(){
-    
+
     answerDivColor = "#069";
     animColor = "#ff0000"
 }
@@ -65,7 +65,7 @@ var Animation = {
             left:'10px',
             opacity:0
         });
-        $('#title2').delay(animStart).animate({opacity:1}, 1000, 'easeInOutQuad');
+        $('#title2').delay(animStart+12000).animate({opacity:1}, 1000, 'easeInOutQuad');
         $('#eq2').css({
             position:'absolute',
             top:'10px',
@@ -80,25 +80,26 @@ var Animation = {
         $('#thirdDiv').css({
             position:'absolute',
             top:'65px',
-            left:'520px',
-            width:'150px',
+            left:'510px',
+            width:'170px',
             height:'20px',
+            fontWeight:'bold',
             opacity:0
         });
         $('#thirdDiv').html('EKOK(3, 4) = 12');
-        $('#thirdDiv').delay(13000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
+        $('#thirdDiv').delay(28000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
         for(var i = 1; i < 14; i++){
-            $('#s'+i).css("opacity", 0).delay(animStart+1000+i*500).animate({opacity:1}, 500, 'easeInOutQuad');
-            $('#d'+i).css("opacity", 0).delay(animStart+1000+i*500).animate({opacity:1}, 500, 'easeInOutQuad');
+            $('#s'+i).css("opacity", 0).delay(animStart+1000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
+            $('#d'+i).css("opacity", 0).delay(animStart+13000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
         }
 
-        $('#s4').delay(5000).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#s8').delay(3000).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#s12').delay(1000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s4').delay(19000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s8').delay(16000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s12').delay(13000).animate({color:animColor}, 1000, 'easeInOutQuad');
 
-        $('#d3').delay(5500).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d6').delay(4000).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d9').delay(2500).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d3').delay(7750).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d6').delay(5500).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d9').delay(3250).animate({color:animColor}, 1000, 'easeInOutQuad');
         $('#d12').delay(1000).animate({color:animColor}, 1000, 'easeInOutQuad');
 
         var circ1 = new Path.Circle(new Point(258, 46), 18);
@@ -113,7 +114,7 @@ var Animation = {
             style:{
                 opacity: 1,
             },
-            delay: 11500,
+            delay: 26500,
             duration: 1000,
             animationType: 'easeInOutQuad'
         });
@@ -122,7 +123,7 @@ var Animation = {
             style:{
                 opacity: 1,
             },
-            delay: 11500,
+            delay: 26500,
             duration: 1000,
             animationType: 'easeInOutQuad'
         });
@@ -147,12 +148,13 @@ var Interaction = {
 
         $(Interaction.questionDiv).css({
            position:'absolute',
-            top:'30px',
-            left:'120px',
-            width:'320px',
+            top:'20px',
+            left:'120px', //120
+            width:'320px', //320
             height:'60px',
             fontSize:'26px',
-    //        border:'1px solid'
+            textAlign:'center',
+      //      border:'1px solid'
         });
 
         $(Interaction.questionDiv).html('<div id="questionn"></div><span id="eq">=</span>');
@@ -163,8 +165,8 @@ var Interaction = {
             width:'200px',
             height:'30px',
             textAlign:'right',
-            fontWeight:'bold'
-    //        border: '1px solid'
+            fontWeight:'bold',
+     //       border: '1px solid'
         });
         $('#eq').css({
             position:'absolute',
@@ -179,13 +181,29 @@ var Interaction = {
 
         $(Interaction.answerDiv).css({
             position:'absolute',
-            top:'120px',
+            top:'100px',
             left:'90px',
             width:'440px',
             height:'90px',
             fontSize:'16px',
             color:answerDivColor,
+       //     border:'1px solid'
         });
+        $(Interaction.container).append('<div id="ans"></div>');
+        $('#ans').css({
+            position:'absolute',
+            top:'200px',
+            left:'150px',
+            width:'220px',
+            height:'20px',
+            fontSize:'18px',
+            color:"green",
+            fontWeight:'bold',
+            textAlign:'center',
+       //     border:'1px solid'
+
+        });
+
         $(Interaction.answerDiv).html('<div id="answer1">' +
                                             '<span id="f1" style="font-weight:bold;"></span>' +
                                             '<span id="n1"></span>' +
@@ -277,9 +295,10 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
-        Interaction.randomNumber = randomNumber;
+        Interaction.randomNumber = Util.rand01();
         Interaction.answerTitles = [];
         Interaction.question = [];
+        $('#ans').html('');
         $('#f1').html('');
         $('#f2').html('');
         $('#f3').html('');
@@ -374,6 +393,16 @@ var Interaction = {
                 }
             }
         }
+
+        var anssStr = "";
+        if(Interaction.question.length == 2){
+            anssStr += "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+") = "+Interaction.answer;
+        }
+        else{
+            anssStr += "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+") = "+Interaction.answer;
+        }
+
+        $('#ans').html(anssStr);
 
     },
     getQuestion : function(){

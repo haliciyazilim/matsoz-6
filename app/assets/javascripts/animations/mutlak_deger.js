@@ -281,15 +281,18 @@ var Interaction = {
 		//.css("border","1px solid red");
         
         Interaction.appendInput({
-            width: '45px',
+            width: '60px',
             //height: '32px',
             textAlign: 'center',
             fontSize: '20px'
-        });
+            
+            
+        },false);
         Interaction.input.id="girdi";
         
+        
         $("#soru #girilen").append(Interaction.input);
-        $("input").css("height","100%").css("margin","auto");
+        $("input").css("height","100%").css("margin","auto").attr("maxLength","4");
         
         Interaction.appendStatus({
             bottom:'50px',
@@ -316,7 +319,8 @@ var Interaction = {
         Interaction.soru="<strong style='color:#006E7D; font-size:24px;'>| </strong>"+Interaction.isaret+Interaction.randomNumber+" <strong style='color:#006E7D; font-size:24px;'>|</strong>";
         console.log(Interaction.soru);
         $("#istenen").html(Interaction.soru+" = ");
-        $("#cevap").html("")
+        $("#cevap").html("");
+        $("input").css("color","black");
     },
 	
     preCheck : function(){
