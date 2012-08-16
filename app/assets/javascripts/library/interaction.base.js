@@ -203,17 +203,14 @@ function InteractionBase(){
 	
 	
 	Interaction.setRandomGenerator = function(to,from){
-		var NUMBER_OF_SHAPES;
 		if(isNaN(from))
 			from=0;
-		NUMBER_OF_SHAPES = to - from;
 		
 		Interaction.__randomGenerator = {
-			NUMBER_OF_SHAPES : NUMBER_OF_SHAPES,
 			index : from,
-			shuffledArray : Util.getShuffledArray(NUMBER_OF_SHAPES),
+			shuffledArray : Util.getShuffledArray(to,from),
 			nextNumber:function(){
-				Interaction.__randomGenerator.index = Interaction.__randomGenerator.index%Interaction.__randomGenerator.NUMBER_OF_SHAPES;
+				Interaction.__randomGenerator.index = Interaction.__randomGenerator.index%Interaction.__randomGenerator.shuffledArray.length;
 				var number = Interaction.__randomGenerator.shuffledArray[Interaction.__randomGenerator.index];
 				Interaction.__randomGenerator.index ++;
 				return number;

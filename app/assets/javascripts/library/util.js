@@ -150,8 +150,11 @@ var Util = {
         return Util.randomInteger(0,10);
     },
 
-    gcd: function(a,b){
-        return b ? Util.gcd(b, a%b) : a;
+    gcd: function(a,b,c){
+        if(c == undefined)
+            return b ? Util.gcd(b, a%b) : a;
+        else
+            return Util.gcd(a,Util.gcd(b,c));
     },
     lcm: function(num1, num2, num3, num4){
         if(num3 == null || num3 == undefined)
