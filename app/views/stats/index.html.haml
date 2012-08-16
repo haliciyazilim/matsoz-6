@@ -4,8 +4,8 @@
   = javascript_include_tag "stats/stats.js"
   = javascript_include_tag "stats/highcharts.js"
   :javascript
-    var lastStat = #{@last.to_json(:methods => :date_str)};
-    var stats = #{@stats.to_json(:methods => :date_str)};
+    var lastStat = #{@last.to_json(:methods => [:date_str, :unreceived])};
+    var stats = #{@stats.to_json(:methods => [:date_str, :unreceived])};
     
 #stats
   .date
@@ -38,11 +38,15 @@
         %td Not Yet Started
         %td= @unscheduled
         %td Isn't being worked on yet
+      %tr.unreceived
+        %td Not Yet Received
+        %td= @unreceived
+        %td Haven't been received from the consultant yet
       %tr.total
         %td
           %strong Total
         %td
-          %strong= @accepted + @delivered + @finished + @started + @rejected + @unscheduled
+          %strong= @total
         %td 
           %strong Total number of interactions
     

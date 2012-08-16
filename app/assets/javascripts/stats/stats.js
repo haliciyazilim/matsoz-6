@@ -4,7 +4,8 @@ var chart2;
 
 $(document).ready(function() {
 	//var colors = ['#33aa33', '#55aa55', '#ffaa33', '#ff3333', '#777777'];
-	var colors = ['#33aa33', '#cccc33', '#ff7733', '#ff3333', '#666677'];
+	var colors = ['#33aa33', '#cccc33', '#ff7733', '#ff3333', '#666677', '#222233'];
+	var colorsReversed = ['#222233', '#666677', '#ff3333', '#ff7733', '#cccc33', '#33aa33'];
 	chart1 = new Highcharts.Chart({
 		chart: {
 			renderTo: 'pie_chart',
@@ -42,11 +43,12 @@ $(document).ready(function() {
 			type: 'pie',
 			name: 'Browser share',
 			data: [
-				['Accepted',		lastStat['accepted']],
-				['Delivered',		lastStat['delivered']],
-				['Finished',		lastStat['finished']],
-				['Active',			lastStat['started'] + lastStat['rejected']],
-				['Not Yet Started',	lastStat['unscheduled']]
+				['Accepted',			lastStat['accepted']],
+				['Delivered',			lastStat['delivered']],
+				['Finished',			lastStat['finished']],
+				['Active',				lastStat['started'] + lastStat['rejected']],
+				['Not Yet Started',		lastStat['unscheduled']],
+				['Not Yet Received',	lastStat['unreceived']]
 			]
 		}]
 	});
@@ -57,6 +59,7 @@ $(document).ready(function() {
 	var finished = [];
 	var active = [];
 	var unscheduled = [];
+	var unreceived = []
 	
 	for (var i = 0; i < stats.length; i++) {
 		console.log(stat);
@@ -68,6 +71,7 @@ $(document).ready(function() {
 		finished.push(stat['finished']);
 		active.push(stat['started'] + stat['rejected']);
 		unscheduled.push(stat['unscheduled']);
+		unreceived.push(stat['unreceived']);
 	}
 
 	chart2 = new Highcharts.Chart({
@@ -75,7 +79,7 @@ $(document).ready(function() {
 	        renderTo: 'stacked_area',
 	        type: 'area'
 	    },
-		colors: colors,
+		colors: colorsReversed,
 	    title: {
 	        text: 'Stats History'
 	    },
@@ -94,11 +98,6 @@ $(document).ready(function() {
 	        title: {
 	            text: 'Number'
 	        },
-	        // labels: {
-	        //     formatter: function() {
-	        //         return this.value / 1000;
-	        //     }
-	        // }
 	    },
 	    tooltip: {
 	        formatter: function() {
@@ -117,22 +116,47 @@ $(document).ready(function() {
 	            }
 	        }
 	    },
-	    series: [{
-	        name: 'Accepted',
-	        data: accepted
+		// 	    series: [{
+		// 	        name: 'Accepted',
+		// 	        data: accepted
+		// 	    }, {
+		// 	        name: 'Delivered',
+		// 	        data: delivered
+		// 	    }, {
+		// 	        name: 'Finished',
+		// 	        data: finished
+		// 	    }, {
+		// 	        name: 'Active',
+		// 	        data: active
+		// 	    }, {
+		// 	        name: 'Not Yet Started',
+		// 	        data: unscheduled
+		// 	    }, {
+		// 	name: 'Not Yet Received',
+		// 	data: unreceived
+		// }]
+		
+		series: [{
+			name: 'Not Yet Received',
+			data: unreceived
 	    }, {
-	        name: 'Delivered',
-	        data: delivered
+		    name: 'Not Yet Started',
+	        data: unscheduled
+	    }, {
+		    name: 'Active',
+	        data: active
 	    }, {
 	        name: 'Finished',
 	        data: finished
 	    }, {
-	        name: 'Active',
-	        data: active
+	        name: 'Delivered',
+	        data: delivered
 	    }, {
-	        name: 'Not Yet Started',
-	        data: unscheduled
-	    }]
+	        name: 'Accepted',
+	        data: accepted
+		}]
+		
+		
 	});	
 });
 

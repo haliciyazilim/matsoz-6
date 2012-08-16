@@ -15,5 +15,6 @@
 /tmp
 
 /.idea/
+/nbproject/private/
 
 /app/assets/javascripts/development.js

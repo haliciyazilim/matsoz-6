@@ -6,6 +6,18 @@ class Stat < ActiveRecord::Base
   attr_readonly :date
   attr_accessible :date, :accepted, :delivered, :finished, :started, :rejected, :unscheduled
   
+  def Stat.total
+    83
+  end
+  
+  def received
+    self[:accepted] + self[:delivered] + self[:finished] + self[:started] + self[:rejected] + self[:unscheduled]
+  end
+  
+  def unreceived
+    Stat.total - self.received
+  end
+  
   def date_str
     # return self.date.strftime("%a, %d %b %Y")
     return self.date.strftime("%b %d")
@@ -29,11 +41,18 @@ class Stat < ActiveRecord::Base
       
     stories = responseHash['stories']
       
-    hash = {}
+    hash = {
+      :accepted => 0,
+      :delivered => 0,
+      :finished => 0,
+      :started => 0,
+      :rejected => 0,
+      :unscheduled => 0
+    }
     
     stories.each do |story|
       state = story['current_state'].to_sym
-      hash[state] ? hash[state] += 1 : hash[state] = 1
+      hash[state] += 1
     end
     
     date = Date.current()

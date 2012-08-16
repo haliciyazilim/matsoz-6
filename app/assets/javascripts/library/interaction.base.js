@@ -207,7 +207,7 @@ function InteractionBase(){
 			from=0;
 		
 		Interaction.__randomGenerator = {
-			index : from,
+			index : 0,
 			shuffledArray : Util.getShuffledArray(to,from),
 			nextNumber:function(){
 				Interaction.__randomGenerator.index = Interaction.__randomGenerator.index%Interaction.__randomGenerator.shuffledArray.length;
