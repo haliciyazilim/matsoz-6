@@ -17,5 +17,3 @@
 /.idea/
 
 /app/assets/javascripts/development.js
-
-Gemfile.lock
