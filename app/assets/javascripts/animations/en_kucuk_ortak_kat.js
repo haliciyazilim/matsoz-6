@@ -80,9 +80,10 @@ var Animation = {
         $('#thirdDiv').css({
             position:'absolute',
             top:'65px',
-            left:'520px',
-            width:'150px',
+            left:'510px',
+            width:'170px',
             height:'20px',
+            fontWeight:'bold',
             opacity:0
         });
         $('#thirdDiv').html('EKOK(3, 4) = 12');
