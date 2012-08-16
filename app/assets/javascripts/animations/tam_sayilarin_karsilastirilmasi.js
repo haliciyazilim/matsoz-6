@@ -12,9 +12,23 @@ var Animation = {
             left:'300px',
             border:'1px solid',
             width:'400px',
-            height:'120px'
+            height:'120px',
+            fontSize:'24px'
         });
         $(Animation.animDiv).html('<div id="firstDiv">İzmir\'in ocak ayı sıcaklık ortalaması 7 °C</div><div id="secondDiv">Van\'ın ocak ayı sıcaklık ortalaması -7 °C</div><div id="thirdDiv"></div>');
+
+        $('#firstDiv').css({
+            position:'absolute',
+            top:'0px',
+            left:'0px',
+
+        });
+
+        $('#secondDiv').css({
+            position:'absolute',
+            top:'100px',
+            left:'0px',
+        });
 
         Main.animationFinished();
     }
