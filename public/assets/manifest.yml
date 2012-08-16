@@ -30,7 +30,7 @@ application.js: application-363316399c9b02b9eb98cd1b13517abd.js
 main.js: main-0ed1581748848c2ecaa8f5294ee6e840.js
 processFiles.sh: processFiles-a4eca39e2c4ee455b6d7c46521a387d9.sh
 stats/highcharts.js: stats/highcharts-a43fc1c32afb198c70856451d082285f.js
-stats/stats.js: stats/stats-34e906bbb8193933805a0416150a643a.js
+stats/stats.js: stats/stats-a974163dde4cdbd47af90af02a3fd408.js
 application.css: application-bb4bc1019d8649aed850f6a1936eaa88.css
 images/ui-bg_diagonals-thick_90_eeeeee_40x40.png: images/ui-bg_diagonals-thick_90_eeeeee_40x40-d2b7b5f7aaf083f1a4d035c07a03c5c7.png
 images/ui-bg_flat_15_cd0a0a_40x100.png: images/ui-bg_flat_15_cd0a0a_40x100-365b088852bd8c4e0b5eaa4a2ee5d923.png
