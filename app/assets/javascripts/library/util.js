@@ -2,7 +2,7 @@
 var Util = {
 
     isInteger: function (value) {
-        var intRegex = /^\d+$/;
+        var intRegex = /^\s*-?\s*\d+\s*$/;
         return intRegex.test(value);
         //	return value == Math.floor(value)
     },
