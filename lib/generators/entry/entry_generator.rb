@@ -5,10 +5,10 @@ class EntryGenerator < Rails::Generators::NamedBase
     EntryGenerator.source_root File.expand_path("../templates", __FILE__)
     
     create_file "app/assets/javascripts/animations/#{file_name}/#{file_name}.includes.js",
-%Q{//= require #{file_name}.styles.js
-//= require #{file_name}.common.js
-//= require #{file_name}.animation.js
-//= require #{file_name}.interaction.js
+%Q{//= require ./#{file_name}.styles.js
+//= require ./#{file_name}.common.js
+//= require ./#{file_name}.animation.js
+//= require ./#{file_name}.interaction.js 
 }
 
     copy_file "styles.js", "app/assets/javascripts/animations/#{file_name}/#{file_name}.styles.js"
