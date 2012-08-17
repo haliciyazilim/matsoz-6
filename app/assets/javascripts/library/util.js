@@ -187,6 +187,8 @@ var Util = {
             });
             $("head").append(img);
         }
+        if(imageArray.length == 0)
+            callback();
     },
     getShuffledArray : function(to,from){
         if(from == null || from == undefined )
