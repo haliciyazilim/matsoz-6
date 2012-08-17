@@ -76,7 +76,7 @@ class Entry < ActiveRecord::Base
   validates :word, :presence => true
   
   def javascript_file
-    #return 'animations/' + self.word.to_downcase_english.gsub(/\s+/, '_') + '/' + self.word.to_downcase_english.gsub(/\s+/, '_')  + '.js'
-	return 'animations/' + self.word.to_downcase_english.gsub(/\s+/, '_') + '.js'
+    return 'animations/' + self.word.to_downcase_english.gsub(/\s+/, '_') + '/' + self.word.to_downcase_english.gsub(/\s+/, '_')  + '.includes.js'
+	#return 'animations/' + self.word.to_downcase_english.gsub(/\s+/, '_') + '.js'
   end
 end

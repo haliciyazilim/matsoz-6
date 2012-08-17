@@ -1,81 +1,11 @@
-function __Styles(){
-
-    izmirColor ="#ff4a03";
-    vanColor = "#4885ff";
-}
-
-var Animation = {
-    init:function(container){
-        Animation.container = container;
-
-        var animStart = 1000;
-
-        Animation.animDiv = document.createElement('div');
-        Animation.animDiv.id = "animDiv";
-        $(Animation.container).append(Animation.animDiv);
-
-        $(Animation.animDiv).css({
-            position:'absolute',
-            top:'30px',
-            left:'250px',
-            width:'500px',
-            height:'150px',
-            fontSize:'22px'
-        });
-        $(Animation.animDiv).html('<div id="firstDiv">İzmir\'in ocak ayı sıcaklık ortalaması 7 °C</div><div id="secondDiv">Van\'ın ocak ayı sıcaklık ortalaması -7 °C</div><div id="thirdDiv">7 > -7</div>');
-
-        $('#firstDiv').css({
-            position:'absolute',
-            top:'0px',
-            left:'0px',
-            color:izmirColor,
-            opacity:0
-
-        });
-        $('#firstDiv').delay(animStart+2000).animate({opacity:1}, 1000, 'easeInOutQuad');
-
-        $('#secondDiv').css({
-            position:'absolute',
-            top:'130px',
-            left:'0px',
-            color:vanColor,
-            opacity:0
-        });
-        $('#secondDiv').delay(animStart+3000).animate({opacity:1}, 1000, 'easeInOutQuad');
-
-        $('#thirdDiv').css({
-            position:'absolute',
-            top:'60px',
-            left:'400px',
-            fontWeight:'bold',
-            opacity:0
-        });
-        $('#thirdDiv').delay(animStart+4000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1000)});
-
-        $(Animation.container).append('<img id="thermometer1" src="/assets/animations/tam_sayilarin_karsilastirilmasi/termometre01.jpg"/>');
-        $('#thermometer1').css({
-            position:'absolute',
-            top:'18px',
-            left:'50px',
-            opacity:0
-        });
-        $('#thermometer1').delay(animStart).animate({opacity:1}, 1000, 'easeInOutQuad');
-
-        $(Animation.container).append('<img id="thermometer2" src="/assets/animations/tam_sayilarin_karsilastirilmasi/termometre02.png"/>');
-        $('#thermometer2').css({
-            position:'absolute',
-            top:'18px',
-            left:'50px',
-            opacity:0
-        });
-        $('#thermometer2').delay(animStart+1000).animate({opacity:1}, 1000, 'easeInOutQuad');
-    }
-}
-
 var Interaction = {
-    getFramework:function(){
-        return 'paper';
-    },
+    
+	getFramework:function(){
+			return 'paper';
+		},
+	images:[
+        
+    ],
     init:function(container){
         Interaction.container = container;
         Main.setObjective('Yanda verilen tam sayıları, aralarına küçük "<" ya da büyük ">" işaretlerini sürükleyerek karşılaştırınız.');
@@ -161,7 +91,7 @@ var Interaction = {
                 top:'70px',
                 width:'200px',
                 height:'90px',
-     //           border:'1px solid'
+                //           border:'1px solid'
             });
         Interaction.firstFracDiv = document.createElement('div');
         Interaction.firstFracDiv.id = 'firstFracDiv';
@@ -173,7 +103,7 @@ var Interaction = {
             width:'30px',
             height:'30px',
             fontSize:'24px',
-    //        border: '1px solid',
+            //        border: '1px solid',
             textAlign:'right',
         });
         Interaction.secondFracDiv = document.createElement('div');
@@ -186,7 +116,7 @@ var Interaction = {
             width:'30px',
             height:'30px',
             fontSize:'24px',
-   //         border: '1px solid',
+            //         border: '1px solid',
             textAlign:'left',
         });
 
@@ -373,65 +303,6 @@ var Interaction = {
         );
         $('#sortingDiv img').draggable("disable");
         Interaction.oldActiveStr = Interaction.answerIdStr;
-        Interaction.getNumericalAxis(-12, 12, 25);
+        getNumericalAxis(-12, 12, 25);
     },
-
-    getNumericalAxis : function(startPoint, endPoint, piece){
-
-        Interaction.pause = 1;
-
-        setTimeout(
-            'Interaction.pause = 0;'
-            ,1500);
-
-        Interaction.numericalAxis = new Group();
-
-        // numericalAxis
-        var arr = new Group();
-        var arrow = new Path.OneSidedArrow(new Point(10, 180), new Point(570, 180), 10, 30)
-        var arrow2 = new Path.OneSidedArrow(new Point(570, 180), new Point(571, 180), 10, 30);
-        arrow.rotate(180);
-        arr.addChild(arrow);
-        arr.addChild(arrow2);
-
-        var iter = endPoint - startPoint;
-        var pieceLength = 500/iter;
-
-        // bigDots
-        var bigDots = new Group();
-        for(i = 0; i < iter + 1; i++){
-            var dot = new Path.Circle(new Point(40+(pieceLength*i), 180), 3);
-            dot.fillColor = "black";
-            bigDots.addChild(dot);
-        }
-
-        Interaction.numericalAxis.addChild(arr);
-        Interaction.numericalAxis.addChild(bigDots);
-
-        var pointDiv = document.createElement('div');
-        pointDiv.id = 'pointDiv'
-        $(Interaction.container).append(pointDiv)
-        $(pointDiv).html('<span id="s0">-12</span> <span id="s1">-11</span> <span id="s2">-10</span>&nbsp; <span id="s3">-9 </span>&nbsp; <span id="s4">-8 </span>&nbsp;&nbsp;' +
-                            '<span id="s5">-7</span>&nbsp;&nbsp; <span id="s6">-6 </span>&nbsp;&nbsp; <span id="s7">-5</span>&nbsp;&nbsp; <span id="s8">-4 </span> &nbsp;&nbsp;<span id="s9">-3 </span>&nbsp;&nbsp;&nbsp;' +
-                            '<span id="s10">-2</span>&nbsp;&nbsp; <span id="s11">-1 </span>&nbsp;&nbsp;&nbsp; <span id="s12">0</span> &nbsp;&nbsp;&nbsp;<span id="s13">1</span> &nbsp;&nbsp;&nbsp;&nbsp;<span id="s14">2 </span>&nbsp;&nbsp;&nbsp;&nbsp;' +
-                            '<span id="s15">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="s16">4</span>&nbsp;&nbsp;&nbsp;&nbsp; <span id="s17">5</span>&nbsp;&nbsp;&nbsp;&nbsp; <span id="s18">6</span>&nbsp;&nbsp;&nbsp; <span id="s19">7</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
-                            '<span id="s20">8</span> &nbsp;&nbsp;&nbsp;&nbsp;<span id="s21">9</span> &nbsp;&nbsp;<span id="s22">10</span> &nbsp;&nbsp;<span id="s23">11</span> &nbsp;&nbsp;<span id="s24">12</span>');
-        $(pointDiv).css({
-            position:'absolute',
-            top:'190px',
-            left:'30px',
-            width:'530px',
-            height:'30px',
-       //     border:'1px solid',
-            fontSize:'12px'
-        });
-        var d = Interaction.wh1+12;
-        var e = Interaction.wh2+12;
-
-
-        bigDots.children[d].fillColor = "red";
-        bigDots.children[e].fillColor = "red";
-        $('#s'+d).css("color","red");
-        $('#s'+e).css("color","red");
-    }
 }

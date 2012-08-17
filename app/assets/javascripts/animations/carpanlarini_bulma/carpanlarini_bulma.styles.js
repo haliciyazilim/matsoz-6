@@ -1,5 +1,4 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+    animationEqsColor = "green";
+    wholeFactorsColor = "#069"
 }
