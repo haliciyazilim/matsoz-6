@@ -243,7 +243,6 @@ div.tanim {
 	float:left;
 	position:absolute;
 	
-	overflow:hidden;
 	}
 	div.tanim strong{
 		color:#d42b19;
@@ -258,6 +257,21 @@ div.tanim {
 		padding-left:10px;
 		padding-top:5px;
 	}
+	
+	div.simgebg {
+		float:right;
+		width:79px;
+		height:143px;
+		position:relative;
+		left:0px;
+		bottom:48px;
+	}
+	div.simge {
+		width:98px;
+		height:104px;
+		
+		position:absolute;
+		}
 
 div.ornek {
 	font-size:14px;
