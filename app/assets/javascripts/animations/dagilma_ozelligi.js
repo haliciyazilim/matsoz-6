@@ -9,14 +9,14 @@ var Animation = {
         Animation.container = container;
          var fontSize=30;
         
-        var icerikSolSol=["3.(5+2)","3.7","21"];
-        var icerikSolSag=["3.5+3.2","15+6","21"];
+        var icerikSolSol=["3<dfn id='nokta'> • </dfn>(5+2)","3<dfn id='nokta'> • </dfn>7","21"];
+        var icerikSolSag=["3<dfn id='nokta'> • </dfn>5+3<dfn id='nokta'> • </dfn>2","15+6","21"];
         
-        var icerikSagSol=["4.(7-1)","4.6","24"];
-        var icerikSagSag=["4.7-4.1","28-4","24"];
+        var icerikSagSol=["4<dfn id='nokta'> • </dfn>(7-1)","4<dfn id='nokta'> • </dfn>6","24"];
+        var icerikSagSag=["4<dfn id='nokta'> • </dfn>7-4<dfn id='nokta'> • </dfn>1","28-4","24"];
         
-        var ornekSol=ornek("Sol",60,fontSize, icerikSolSol, icerikSolSag);
-        var ornekSag=ornek("Sag",400,fontSize, icerikSagSol, icerikSagSag);
+        var ornekSol=ornek("Sol",-95,40,fontSize, icerikSolSol, icerikSolSag);
+        var ornekSag=ornek("Sag",275,40,fontSize, icerikSagSol, icerikSagSag);
         
         for(var i=0;i<3;i++){
             $("#ornekSolSol"+i).delay(i*2500).animate({opacity:"1"},1000);
@@ -49,17 +49,17 @@ var Interaction = {
          // Ana Div
         $(container).append("<div id='soru'>");
             $("#soru")
-                .css("width","486px")
+                .css("width","550px")
                 .css("height","35px")
                 .css("position","absolute")
                 .css("left","0")
-                .css("top","50px")
+                .css("top","30px")
                 .css("right","0")
                 .css("margin","auto")
                 //.css("border","1px solid red");
         $("#soru").append("<div id='istenilen'>");
             $("#istenilen")
-                .css("width","185px")
+                .css("width","220px")
                 .css("height","35px")
                 .css("float","left")
                 .css("margin","auto")
@@ -68,10 +68,10 @@ var Interaction = {
                // .css("border","1px solid red");
        $("#soru").append("<div id='girilen'>");
             $("#girilen")
-                .css("width","300px")
+                .css("width","320px")
                 .css("height","35px")
-                .css("float","right")
-                .css("margin","auto")
+                .css("float","left")
+                .css("margin-left","5px")
                // .css("border","1px solid red");
         
         for(var i=0; i<=10; i++){
@@ -193,13 +193,18 @@ var Interaction = {
             
         }
         if(Interaction.isaretSayaci%2==0)
-            $("#istenilen").html(Interaction.random[0]+".("+Interaction.random[1]+"-"+Interaction.random[2]+") = ");
+            $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+"-"+Interaction.random[2]+") = ");
         else
-            $("#istenilen").html(Interaction.random[0]+".("+Interaction.random[1]+"+"+Interaction.random[2]+") = ");
+            $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+"+"+Interaction.random[2]+") = ");
         console.log(Interaction.random);
         
         $("#dogruCevap, #cevapVerilen").html("");
-        $("input").css("color","black");
+        $("input").css("color","black").attr("maxLength","2");
+        $("#ornekAlt").html("");
+        
+        
+        
+
     },
 	
     preCheck : function(){
@@ -241,30 +246,60 @@ var Interaction = {
         
     },
     onCorrectAnswer : function(){
+        esitliklerGosterim();
     },
     onWrongAnswer : function(){
     },
     onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğru cevaplardan biri yukarıda gösterilmiştir.', false);
         $("input").css("color","red");
-        $("#cevapVerilen").html($("#istenilen").html());
-        if(Interaction.isaretSayaci%2==0)
-            $("#dogruCevap").html("("+Interaction.random[0]+"."+Interaction.random[1]+")-("+Interaction.random[0]+"."+Interaction.random[2]+")");
-        else
-             $("#dogruCevap").html("("+Interaction.random[0]+"."+Interaction.random[1]+")+("+Interaction.random[0]+"."+Interaction.random[2]+")");
-        
+//        $("#cevapVerilen").html($("#istenilen").html());
+//        if(Interaction.isaretSayaci%2==0)
+//            $("#dogruCevap").html("("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[1]+")-("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[2]+")");
+//        else
+//             $("#dogruCevap").html("("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[1]+")+("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[2]+")");
+        esitliklerGosterim();
     }
-}// JavaScript Document
+}
 
-function ornek(isim, left, fontSize, icerikSol, icerikSag){
+
+function esitliklerGosterim(){
+
+    var solParantezSonuc=Interaction.isaretSayaci%2==0?(Interaction.random[1]-Interaction.random[2]):(Interaction.random[1]+Interaction.random[2])
+    var solSonSonuc=(Interaction.random[0]*solParantezSonuc);
+    var icerikAltSol=[Interaction.random[0]+"<dfn> • </dfn>"+"("+Interaction.random[1]+Interaction.isaret+Interaction.random[2]+")",Interaction.random[0]+"<dfn> • </dfn>"+solParantezSonuc,solSonSonuc];
+        
+    var sagParantez1Sonuc=Interaction.random[0]*Interaction.random[1];
+    var sagParantez2Sonuc=Interaction.random[0]*Interaction.random[2];
+    var sagSonSonuc=Interaction.isaretSayaci%2==0?(sagParantez1Sonuc-sagParantez2Sonuc):(sagParantez1Sonuc+sagParantez2Sonuc)
+    var icerikAltSag=["("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[1]+")"+"&nbsp;"+Interaction.isaret+"&nbsp;"+"("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[2]+")",sagParantez1Sonuc+Interaction.isaret+sagParantez2Sonuc,sagSonSonuc];
+        
+    var ornekAlt=ornek("Alt",-49,80,30, icerikAltSol, icerikAltSag);
+    
+    for(var i=0;i<3;i++){
+
+        //setTimeout(function(){$("#ornekAltSol"+i).fadeIn(1000)},(i*2500));
+            
+            $("#ornekAltSol"+i).delay(i*2500).animate({opacity:"1"},1000);
+            $("#esittirAlt"+i).delay(i*2500+750).animate({opacity:"1"},1000);
+            $("#ornekAltSag"+i).delay(i*2500+1500).animate({opacity:"1"},1000);
+        }
+}
+
+function ornek(isim, left, topDegeri,fontSize, icerikSol, icerikSag){
     this.isim=isim;
     this.left=left;
+    this.topDegeri=topDegeri;
     this.fontSize=fontSize;
     this.icerikSol=icerikSol;
     this.icerikSag=icerikSag;
     
-    $(Animation.container).append("<div id='ornek"+this.isim+"'>");
-         $("#ornek"+this.isim+"").append("<div id='icerikS"+this.isim+"'>");
+    if(this.isim=="Alt")
+        $(Interaction.container).append("<div id='ornek"+this.isim+"'>");
+    else
+        $(Animation.container).append("<div id='ornek"+this.isim+"'>");
+    
+    
         for(var i=0; i<3; i++){
             
             $("#ornek"+this.isim).append("<div class='ornekIcerik' id='ornek"+this.isim+"Sol"+i+"'>");
@@ -274,17 +309,17 @@ function ornek(isim, left, fontSize, icerikSol, icerikSag){
         }
         
         $("#ornek"+this.isim)
-                .css("width","350px")
+                .css("width","560px")
                 .css("height","140px")
                 .css("position","absolute")
                 .css("left",this.left)
-                .css("top","40px")
+                .css("top",this.topDegeri)
                 .css("margin","auto")
                 .css("font-size",fontSize)
                 //.css("border","1px solid red");
         
         $(".ornekIcerik")
-            .css("width","150px")
+            .css("width","260px")
             .css("height","30px")
             .css("float","left")
             .css("margin-bottom","20px")
@@ -301,14 +336,16 @@ function ornek(isim, left, fontSize, icerikSol, icerikSag){
             
         
         
-        for(var i=0; i<3; i++){
-              $("#ornek"+this.isim+"Sol"+i)
-                .html(this.icerikSol[i])
-                .css("text-align","right")
-                .css("opacity","0");
-              $("#ornek"+this.isim+"Sag"+i)
-                .html(this.icerikSag[i])
-                .css("opacity","0");
-              $("#esittir"+this.isim+i).css("opacity","0");
-        }
+        
+            for(var i=0; i<3; i++){
+                $("#ornek"+this.isim+"Sol"+i)
+                    .html(this.icerikSol[i])
+                    .css("text-align","right")
+                    .css("opacity","0");
+                $("#ornek"+this.isim+"Sag"+i)
+                    .html(this.icerikSag[i])
+                    .css("opacity","0");
+                $("#esittir"+this.isim+i).css("opacity","0");
+            }
+        
 }
