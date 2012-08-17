@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yanda verilen sayıların en büyük ortak bölenini bulunuz.');
+        Main.setObjective('Yanda verilen sayıların en küçük ortak katını bulunuz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -21,29 +21,29 @@ var Interaction = {
         $(Interaction.questionDiv).css({
             position:'absolute',
             top:'20px',
-            left:'100px', //120
-            width:'340px', //320
+            left:'120px', //120
+            width:'320px', //320
             height:'60px',
             fontSize:'26px',
             textAlign:'center',
-            //          border:'1px solid'
+            //      border:'1px solid'
         });
 
         $(Interaction.questionDiv).html('<div id="questionn"></div><span id="eq">=</span>');
         $('#questionn').css({
             position:'absolute',
             top:'20px',
-            left:'-10px',
-            width:'250px',
+            left:'0px',
+            width:'200px',
             height:'30px',
             textAlign:'right',
             fontWeight:'bold',
-            //        border: '1px solid'
+            //       border: '1px solid'
         });
         $('#eq').css({
             position:'absolute',
             top:'22px',
-            left:'246px',
+            left:'206px',
 
         });
 
@@ -54,19 +54,19 @@ var Interaction = {
         $(Interaction.answerDiv).css({
             position:'absolute',
             top:'100px',
-            left:'100px',
+            left:'90px',
             width:'440px',
             height:'90px',
             fontSize:'16px',
             color:answerDivColor,
-            //        border:'1px solid'
+            //     border:'1px solid'
         });
         $(Interaction.container).append('<div id="ans"></div>');
         $('#ans').css({
             position:'absolute',
             top:'200px',
-            left:'130px',
-            width:'240px',
+            left:'150px',
+            width:'220px',
             height:'20px',
             fontSize:'18px',
             color:"green",
@@ -88,10 +88,11 @@ var Interaction = {
             '<span id="n8"></span>' +
             '<span id="n9" ></span>' +
             '<span id="n10"></span>' +
-            '<span id="n11"></span>' +
+            '<span id="td1"></span>' +
             '</div>' +
             '<div id="answer2">' +
             '<span id="f2" style="font-weight:bold;"></span>' +
+            '<span id="n11"></span>' +
             '<span id="n12"></span>' +
             '<span id="n13"></span>' +
             '<span id="n14"></span>' +
@@ -101,22 +102,21 @@ var Interaction = {
             '<span id="n18"></span>' +
             '<span id="n19"></span>' +
             '<span id="n20"></span>' +
-            '<span id="n21"></span>' +
-            '<span id="n22"></span>' +
+            '<span id="td2"></span>' +
             '</div>' +
             '<div id="answer3">' +
             '<span id="f3" style="font-weight:bold;"></span>' +
+            '<span id="n21"></span>' +
+            '<span id="n22"></span>' +
             '<span id="n23"></span>' +
             '<span id="n24"></span>' +
             '<span id="n25"></span>' +
             '<span id="n26"></span>' +
             '<span id="n27"></span>' +
             '<span id="n28"></span>' +
-            '<span id="n29"></span>' +
+            '<span id="n29" ></span>' +
             '<span id="n30"></span>' +
-            '<span id="n31" ></span>' +
-            '<span id="n32"></span>' +
-            '<span id="n33"></span>' +
+            '<span id="td3"></span>' +
             '</div>');
         $('#answer1').css({
             position:'absolute',
@@ -155,7 +155,7 @@ var Interaction = {
 
         Interaction.appendInput({
             top:'13px',
-            left:'266px',
+            left:'226px',
             width:'45px',
             height:'40px',
             fontSize:'24px'
@@ -163,20 +163,21 @@ var Interaction = {
         $(Interaction.inputs).attr('maxlength', '3')
         $(Interaction.questionDiv).append(Interaction.input)
 
-        Interaction.setRandomGenerator(13, 1);
+        Interaction.setRandomGenerator(2)
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
         Interaction.randomNumber = Util.rand01();
-        Interaction.gcd = randomNumber;
-        console.log("randomNumber: "+randomNumber);
         Interaction.answerTitles = [];
         Interaction.question = [];
         $('#ans').html('');
         $('#f1').html('');
         $('#f2').html('');
         $('#f3').html('');
-        for(var i = 1; i < 34; i++){
+        $('#td1').html('');
+        $('#td2').html('');
+        $('#td3').html('');
+        for(var i = 1; i < 31; i++){
             $('#n'+i).html('');
             $('#n'+i).css("color", "black")
                 .css("font-weight", "normal")
@@ -209,46 +210,71 @@ var Interaction = {
 
         for(var i = 1; i <= Interaction.question.length; i++){
             $('#f'+i).html(Interaction.answerTitles[i-1]);
+            $('#td'+i).html(", ...");
         }
         for(var i = 0; i < Interaction.question.length; i++){
-            var arr = [];
-            if(Interaction.question[i] == 1){
-                arr[0] = 1;
+            if(Interaction.answer > Interaction.question[i] * 10){
+                for(var j = 1; j < 6; j++){
+                    var a = 10*i+j;
+                    var b = Interaction.question[i] * j;
+                    var aStr = ""+b+", ";
+                    $('#n'+a).html(aStr);
+                }
+                var a = 10*i+6;
+                var b = Interaction.question[i]*6;
+                var aStr = "....., ";
+                $('#n'+a).html(aStr);
+
+                var a = 10*i+7;
+                var b = Interaction.answer - 2 * Interaction.question[i];
+                var aStr = ""+b+", ";
+                $('#n'+a).html(aStr);
+
+                var a = 10*i+8;
+                var b = Interaction.answer - Interaction.question[i];
+                var aStr = ""+b+", ";
+                $('#n'+a).html(aStr);
+
+                var a = 10*i+9;
+                var b = Interaction.answer;
+                var aStr = ""+b+", ";
+                $('#n'+a).html(aStr);
+                $('#n'+a).css("color", "green")
+                    .css("font-weight", "bold");
+
+                var a = 10*i+10;
+                var b = Interaction.answer + Interaction.question[i];
+                var aStr = ""+b;
+                $('#n'+a).html(aStr);
             }
             else{
-                arr = Util.getFactors(Interaction.question[i]);
-                //  arr.sort(function(a,b){return b-a});
-            }
-            for(var j = 0; j <arr.length; j++){
-                var a = 11*i+j+1;
-                var b = arr[j];
-                if(j == arr.length-1){
-                    var aStr = ""+b;
-                    var c = 11*i+j+2;
-                    $('#n'+c).html(", ...");
-                }
-                else{
-                    var aStr = ""+b+", ";
-                }
-                $('#n'+a).html(aStr);
-                if(b == Interaction.answer){
-                    $('#n'+a).css("color", "green")
-                        .css("font-weight", "bold")
+                for(var j = 1; j <= 10; j++){
+                    var a = 10*i+j;
+                    var b = Interaction.question[i] * j;
+                    if(j == 10){
+                        var aStr = ""+b;
+                    }
+                    else{
+                        var aStr = ""+b+", ";
+                    }
+                    $('#n'+a).html(aStr);
+                    if(b == Interaction.answer){
+                        $('#n'+a).css("color", "green")
+                            .css("font-weight", "bold")
+                    }
                 }
             }
-
         }
 
         var anssStr = "";
         if(Interaction.question.length == 2){
-            anssStr += "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+") = "+Interaction.answer;
+            anssStr += "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+") = "+Interaction.answer;
         }
         else{
-            anssStr += "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+") = "+Interaction.answer;
+            anssStr += "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+") = "+Interaction.answer;
         }
 
         $('#ans').html(anssStr);
 
     },
-
 }

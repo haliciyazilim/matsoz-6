@@ -1,40 +1,21 @@
 var getQuestion = function(){
     if(Interaction.randomNumber == 0){ // 2 numbers
-        $(Interaction.answerDiv).css("left", "140px");
-        $('#ans').css("left", "160px");
         do{
-            Interaction.factor1 = Util.randomInteger(1,11);
-        } while(Util.getFactors(Interaction.gcd * Interaction.factor1).length > 10)
-        do{
-            Interaction.factor2 = Util.randomInteger(1,11,[Interaction.factor1]);
-        } while(Util.getFactors(Interaction.gcd * Interaction.factor2).length > 10)
-
-        Interaction.question[0] = Interaction.gcd * Interaction.factor1;
-        Interaction.question[1] = Interaction.gcd * Interaction.factor2;
-        Interaction.answer = Util.gcd(Interaction.question[0], Interaction.question[1]);
-        Interaction.ques = "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+")";
+            Interaction.question[0] = Util.randomInteger(2, 16);
+            Interaction.question[1] = Util.randomInteger(2, 16, [Interaction.question[0]]);
+            Interaction.answer = Util.lcm(Interaction.question[0], Interaction.question[1]);
+        } while(Interaction.answer > 200);
+        Interaction.ques = "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+")";
         $('#questionn').html(Interaction.ques)
     }
     else{ // 3 numbers
-        $(Interaction.answerDiv).css("left", "110px");
-        $('#ans').css("left", "130px");
         do{
-            Interaction.factor1 = Util.randomInteger(1,11);
-        } while(Util.getFactors(Interaction.gcd * Interaction.factor1).length > 10)
-        do{
-            Interaction.factor2 = Util.randomInteger(1,11,[Interaction.factor1]);
-        } while(Util.getFactors(Interaction.gcd * Interaction.factor2).length > 10)
-        do{
-            Interaction.factor3 = Util.randomInteger(1,11,[Interaction.factor1, Interaction.factor2]);
-        } while(Util.getFactors(Interaction.gcd * Interaction.factor3).length > 10)
-        Interaction.question[0] = Interaction.gcd * Interaction.factor1;
-        Interaction.question[1] = Interaction.gcd * Interaction.factor2;
-        Interaction.question[2] = Interaction.gcd * Interaction.factor3;
-//            Interaction.question[0] = 100;
-//            Interaction.question[1] = 100;
-//            Interaction.question[2] = 100;
-        Interaction.answer = Util.gcd(Interaction.question[0], Interaction.question[1], Interaction.question[2]);
-        Interaction.ques = "EBOB("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+")";
+            Interaction.question[0] = Util.randomInteger(2, 16);
+            Interaction.question[1] = Util.randomInteger(2, 16, [Interaction.question[0]]);
+            Interaction.question[2] = Util.randomInteger(2, 16, [Interaction.question[0], Interaction.question[1]]);
+            Interaction.answer = Util.lcm(Interaction.question[0], Interaction.question[1], Interaction.question[2]);
+        } while(Interaction.answer > 200);
+        Interaction.ques = "EKOK("+Interaction.question[0]+", "+Interaction.question[1]+", "+Interaction.question[2]+")";
         $('#questionn').html(Interaction.ques);
     }
 };
@@ -108,6 +89,6 @@ var getAnswerTitles = function(){
 
         }
 
-        Interaction.answerTitles[i] += " bölenleri : ";
+        Interaction.answerTitles[i] += " katları : ";
     }
 };
