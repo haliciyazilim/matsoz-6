@@ -91,8 +91,6 @@ var Interaction = {
                     padding:0,
                     margin:0,
                     boxSizing:'border-box',
-//                    border:'1px solid #999',
-//                    borderCollapse:'collapse'
                     border:'none',
                     borderRight:'1px solid #999',
                     borderBottom:'1px solid #999'
@@ -140,37 +138,44 @@ var Interaction = {
 		
 
 	preCheck : function(){
-        if(Interaction.operator == "+"){
-            Interaction.answer = Interaction.operand1 + Interaction.operand2;
-        }
-        else{
-            Interaction.answer = Interaction.operand1 * Interaction.operand2;
-        }
-        if(Interaction.quest == 0){
-            if(Interaction.answer == Interaction.inputs[Interaction.indexOfAnswer].value){
-                $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "green");
-                Interaction.quest += 1;
-                getSecondQuestion();
-                return false;
-            }
-            else{
-                if(Interaction.trial2 == 0){
-                    Interaction.setStatus('Yanlış cevap, lütfen tekrar deneyiniz.',false);
-                    Interaction.inputs[Interaction.indexOfAnswer].value = "";
-                    Interaction.trial2 += 1;
-                }
-                else{
-                    Interaction.setStatus('Yanlış cevap, doğrusu yanda gösterilmiştir.',false);
-                    Interaction.inputs[Interaction.indexOfAnswer].value = Interaction.answer;
-                    $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "red");
-                    Interaction.quest += 1;
-                    getSecondQuestion();
-                }
-            }
+        if(Interaction.inputs[Interaction.indexOfAnswer].value == ""){
+            Interaction.setStatus('Lütfen kutucuğu doldurunuz.', false);
             return false;
         }
         else{
-            return true;
+            if(Interaction.operator == "+"){
+                Interaction.answer = Interaction.operand1 + Interaction.operand2;
+            }
+            else{
+                Interaction.answer = Interaction.operand1 * Interaction.operand2;
+            }
+            if(Interaction.quest == 0){
+                if(Interaction.answer == Interaction.inputs[Interaction.indexOfAnswer].value){
+                    $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "green");
+                    Interaction.setStatus('');
+                    Interaction.quest += 1;
+                    getSecondQuestion();
+                    return false;
+                }
+                else{
+                    if(Interaction.trial2 == 0){
+                        Interaction.setStatus('Yanlış cevap, lütfen tekrar deneyiniz.',false);
+                        Interaction.inputs[Interaction.indexOfAnswer].value = "";
+                        Interaction.trial2 += 1;
+                    }
+                    else{
+                        Interaction.setStatus('Yanlış cevap, doğrusu yanda gösterilmiştir.',false);
+                        Interaction.inputs[Interaction.indexOfAnswer].value = Interaction.answer;
+                        $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "red");
+                        Interaction.quest += 1;
+                        getSecondQuestion();
+                    }
+                }
+                return false;
+            }
+            else{
+                return true;
+            }
         }
     },
 	isAnswerCorrect : function(value){
