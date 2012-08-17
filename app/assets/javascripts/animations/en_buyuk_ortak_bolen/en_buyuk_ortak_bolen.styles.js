@@ -1,5 +1,4 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+    answerDivColor = "#069";
+    animColor = "#ff0000";
 }
