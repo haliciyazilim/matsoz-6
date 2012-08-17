@@ -9,14 +9,14 @@ var Animation = {
         Animation.container = container;
          var fontSize=30;
         
-        var icerikSolSol=["3.(5.2)","3.10","30"];
-        var icerikSolSag=["(3.5).2","15.2","30"];
+        var icerikSolSol=["3<dfn id='nokta'> • </dfn>(5<dfn id='nokta'> • </dfn>2)","3<dfn id='nokta'> • </dfn>10","30"];
+        var icerikSolSag=["(3<dfn id='nokta'> • </dfn>5)<dfn id='nokta'> • </dfn>2","15<dfn id='nokta'> • </dfn>2","30"];
         
         var icerikSagSol=["4+(7+1)","4+8","12"];
         var icerikSagSag=["(4+7)+1","11+1","12"];
         
-        var ornekSol=ornek("Sol",60,fontSize, icerikSolSol, icerikSolSag);
-        var ornekSag=ornek("Sag",400,fontSize, icerikSagSol, icerikSagSag);
+        var ornekSol=ornek("Sol",-20,40,fontSize, icerikSolSol, icerikSolSag);
+        var ornekSag=ornek("Sag",340,40,fontSize, icerikSagSol, icerikSagSag);
         
         for(var i=0;i<3;i++){
             $("#ornekSolSol"+i).delay(i*2500).animate({opacity:"1"},1000);
@@ -49,17 +49,17 @@ var Interaction = {
          // Ana Div
         $(container).append("<div id='soru'>");
             $("#soru")
-                .css("width","405px")
+                .css("width","475px")
                 .css("height","35px")
                 .css("position","absolute")
                 .css("left","0")
-                .css("top","50px")
+                .css("top","30px")
                 .css("right","0")
                 .css("margin","auto")
                 //.css("border","1px solid red");
         $("#soru").append("<div id='istenilen'>");
             $("#istenilen")
-                .css("width","185px")
+                .css("width","220px")
                 .css("height","35px")
                 .css("float","left")
                 .css("margin","auto")
@@ -68,10 +68,10 @@ var Interaction = {
                // .css("border","1px solid red");
        $("#soru").append("<div id='girilen'>");
             $("#girilen")
-                .css("width","219px")
+                .css("width","220px")
                 .css("height","35px")
-                .css("float","right")
-                .css("margin","auto")
+                .css("float","left")
+                .css("margin-left","7px")
                // .css("border","1px solid red");
         
         for(var i=0; i<7; i++){
@@ -150,6 +150,8 @@ var Interaction = {
                 .css("color","green")
                 .css("font-size","30px");
                // .css("border","1px solid red");
+               
+        
     
         Interaction.appendStatus({
             bottom:'50px',
@@ -170,21 +172,24 @@ var Interaction = {
     nextQuestion: function(randomNumber){
         
         Interaction.isaretSayaci++
-        Interaction.isaret=Interaction.isaretSayaci%2==0?"•":"+";
+        Interaction.isaret=Interaction.isaretSayaci%2==0?" • ":"+";
         $("#div2, #div5").html(Interaction.isaret);
         Interaction.random=new Array();
-        for(i=0; i<3; i++){
-            Interaction.random.push(Math.floor(Math.random()*99+1));
-            
-        }
-        if(Interaction.isaretSayaci%2==0)
-            $("#istenilen").html(Interaction.random[0]+".("+Interaction.random[1]+"."+Interaction.random[2]+") = ");
-        else
-            $("#istenilen").html(Interaction.random[0]+"+("+Interaction.random[1]+"+"+Interaction.random[2]+") = ");
+        
+        //Interaction.randomSecimi=Math.floor(Math.random()*2+1)
+        //Interaction.randomFonksiyonu=Interaction.randomSecimi%2==0?random1():random2();
+        Interaction.randomFonksiyonu=Interaction.isaretSayaci%2==0?random1():random2();
+        
+        
+        $("#istenilen").html(Interaction.random[0]+Interaction.isaret+"("+Interaction.random[1]+Interaction.isaret+Interaction.random[2]+") = ");
+        
         console.log(Interaction.random);
         
         $("#dogruCevap, #cevapVerilen").html("");
         $("input").css("color","black");
+        $("#ornekAlt").html("");
+        
+        
     },
 	
     preCheck : function(){
@@ -226,29 +231,70 @@ var Interaction = {
         
     },
     onCorrectAnswer : function(){
+        esitliklerGosterim();
     },
     onWrongAnswer : function(){
     },
     onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğru cevaplardan biri yukarıda gösterilmiştir.', false);
         $("input").css("color","red");
-        $("#cevapVerilen").html($("#istenilen").html());
-        if(Interaction.isaretSayaci%2==0)
-            $("#dogruCevap").html("("+Interaction.random[0]+"."+Interaction.random[1]+")."+Interaction.random[2]);
-        else
-            $("#dogruCevap").html("("+Interaction.random[0]+"+"+Interaction.random[1]+")+"+Interaction.random[2]);
+//        $("#cevapVerilen").html($("#istenilen").html());
+//        if(Interaction.isaretSayaci%2==0)
+//            $("#dogruCevap").html("("+Interaction.random[0]+"."+Interaction.random[1]+")."+Interaction.random[2]);
+//        else
+//            $("#dogruCevap").html("("+Interaction.random[0]+"+"+Interaction.random[1]+")+"+Interaction.random[2]);
+        
+        esitliklerGosterim();
         
     }
-}// JavaScript Document
+}
 
-function ornek(isim, left, fontSize, icerikSol, icerikSag){
+function random1(){
+    for(i=0; i<3; i++){
+        Interaction.random.push(Math.floor(Math.random()*19+1));
+    }
+}
+        
+function random2(){
+    for(i=0; i<3; i++){
+        Interaction.random.push(Math.floor(Math.random()*99+1));
+    }
+}
+
+function esitliklerGosterim(){
+
+    var solParantezSonuc=Interaction.isaretSayaci%2==0?(Interaction.random[1]*Interaction.random[2]):(Interaction.random[1]+Interaction.random[2])
+    var solSonSonuc=Interaction.isaretSayaci%2==0?(Interaction.random[0]*solParantezSonuc):(Interaction.random[0]+solParantezSonuc)
+    var icerikAltSol=[Interaction.random[0]+Interaction.isaret+"("+Interaction.random[1]+Interaction.isaret+Interaction.random[2]+")",Interaction.random[0]+Interaction.isaret+solParantezSonuc,solSonSonuc];
+        
+    var sagParantezSonuc=Interaction.isaretSayaci%2==0?(Interaction.random[0]*Interaction.random[1]):(Interaction.random[0]+Interaction.random[1])
+    var sagSonSonuc=Interaction.isaretSayaci%2==0?(Interaction.random[2]*sagParantezSonuc):(Interaction.random[2]+sagParantezSonuc)
+    var icerikAltSag=["("+Interaction.random[0]+Interaction.isaret+Interaction.random[1]+")"+Interaction.isaret+Interaction.random[2],sagParantezSonuc+Interaction.isaret+Interaction.random[2],sagSonSonuc];
+        
+    var ornekAlt=ornek("Alt",30,80,30, icerikAltSol, icerikAltSag);
+    
+    for(var i=0;i<3;i++){
+
+        //setTimeout(function(){$("#ornekAltSol"+i).fadeIn(1000)},(i*2500));
+            
+            $("#ornekAltSol"+i).delay(i*2500).animate({opacity:"1"},1000);
+            $("#esittirAlt"+i).delay(i*2500+750).animate({opacity:"1"},1000);
+            $("#ornekAltSag"+i).delay(i*2500+1500).animate({opacity:"1"},1000);
+        }
+}
+
+function ornek(isim, left, topDegeri, fontSize, icerikSol, icerikSag){
     this.isim=isim;
     this.left=left;
+    this.topDegeri=topDegeri;
     this.fontSize=fontSize;
     this.icerikSol=icerikSol;
     this.icerikSag=icerikSag;
     
-    $(Animation.container).append("<div id='ornek"+this.isim+"'>");
+    if(this.isim=="Alt")
+        $(Interaction.container).append("<div id='ornek"+this.isim+"'>");
+    else
+        $(Animation.container).append("<div id='ornek"+this.isim+"'>");
          $("#ornek"+this.isim+"").append("<div id='icerikS"+this.isim+"'>");
         for(var i=0; i<3; i++){
             
@@ -259,17 +305,17 @@ function ornek(isim, left, fontSize, icerikSol, icerikSag){
         }
         
         $("#ornek"+this.isim)
-                .css("width","350px")
+                .css("width","495px")
                 .css("height","140px")
                 .css("position","absolute")
                 .css("left",this.left)
-                .css("top","40px")
+                .css("top",this.topDegeri)
                 .css("margin","auto")
-                .css("font-size",fontSize)
+                .css("font-size",this.fontSize)
                 //.css("border","1px solid red");
         
         $(".ornekIcerik")
-            .css("width","150px")
+            .css("width","220px")
             .css("height","30px")
             .css("float","left")
             .css("margin-bottom","20px")
@@ -284,9 +330,10 @@ function ornek(isim, left, fontSize, icerikSol, icerikSag){
             .html("=");
         
             
+        $("#nokta").css("line-height","30px");
         
-        
-        for(var i=0; i<3; i++){
+        if(this.isim=="Alt"){
+            for(var i=0; i<3; i++){
               $("#ornek"+this.isim+"Sol"+i)
                 .html(this.icerikSol[i])
                 .css("text-align","right")
@@ -295,5 +342,18 @@ function ornek(isim, left, fontSize, icerikSol, icerikSag){
                 .html(this.icerikSag[i])
                 .css("opacity","0");
               $("#esittir"+this.isim+i).css("opacity","0");
+            }
+        }
+        else{
+            for(var i=0; i<3; i++){
+              $("#ornek"+this.isim+"Sol"+i)
+                .html(this.icerikSol[i])
+                .css("text-align","right")
+                .css("opacity","0");
+              $("#ornek"+this.isim+"Sag"+i)
+                .html(this.icerikSag[i])
+                .css("opacity","0");
+              $("#esittir"+this.isim+i).css("opacity","0");
+            }
         }
 }
