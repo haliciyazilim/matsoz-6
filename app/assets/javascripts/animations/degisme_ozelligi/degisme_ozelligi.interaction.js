@@ -23,6 +23,8 @@ var Interaction = {
         Interaction.operatorText.justification = 'center';
         Interaction.operatorText.fillColor = operatorTextColor;
         Interaction.operatorText.content = '+';
+        Interaction.operatorText.strokeWidth = "1px";
+        Interaction.operatorText.strokeColor = operatorTextColor;
 
         Interaction.operandBox = [];
         for(var i = 0; i < 10; i++){
@@ -37,6 +39,9 @@ var Interaction = {
             Interaction.operandText[i].justification = 'center';
             Interaction.operandText[i].fillColor = operandTextColor;
             Interaction.operandText[i].content = i+1;
+            Interaction.operandText[i].strokeWidth = "1px";
+            Interaction.operandText[i].strokeColor = operandTextColor;
+
         }
 
         Interaction.operandBox2 = [];
@@ -52,6 +57,8 @@ var Interaction = {
             Interaction.operandText2[i].justification = 'center';
             Interaction.operandText2[i].fillColor = operandTextColor;
             Interaction.operandText2[i].content = i+1;
+            Interaction.operandText2[i].strokeWidth = "1px";
+            Interaction.operandText2[i].strokeColor = operandTextColor;
         }
 
         var tool = new Tool();
@@ -166,7 +173,7 @@ var Interaction = {
                     else{
                         Interaction.setStatus('Yanlış cevap, doğrusu yanda gösterilmiştir.',false);
                         Interaction.inputs[Interaction.indexOfAnswer].value = Interaction.answer;
-                        $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "red");
+                        $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "green");
                         Interaction.quest += 1;
                         getSecondQuestion();
                     }
@@ -194,7 +201,7 @@ var Interaction = {
 
         Interaction.setStatus('Yanlış cevap, doğrusu yanda gösterilmiştir.',false);
         Interaction.inputs[Interaction.indexOfAnswer].value = Interaction.answer;
-        $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "red");
+        $(Interaction.inputs[Interaction.indexOfAnswer]).css("color", "green");
         Interaction.pause2 = 0;
     }
 }
