@@ -129,14 +129,8 @@ var Interaction = {
         $('#texttt').html('');
         $('#missingF').html('');
         Interaction.question = Interaction.questionArray[randomNumber];
-        //   Interaction.question = 1;
         Interaction.factorsOfQuestion = [];
-        if(Interaction.question == 1){
-            Interaction.factorsOfQuestion[0] = 1;
-        }
-        else{
-            Interaction.factorsOfQuestion = Util.getFactors(Interaction.question);
-        }
+        Interaction.factorsOfQuestion = Util.getFactors(Interaction.question);
         Interaction.factorNum = Interaction.factorsOfQuestion.length;
         for(var i = 0; i < Interaction.inputs.length; i++){
             Interaction.inputs[i].readOnly = false;

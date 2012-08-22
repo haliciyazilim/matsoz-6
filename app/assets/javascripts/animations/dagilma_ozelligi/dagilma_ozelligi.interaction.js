@@ -101,34 +101,7 @@ var Interaction = {
         .css("padding-right","5px")
         .css("padding-left","5px")
 
-       $(container).append("<div id='cevap'>");
-            $("#cevap")
-                .css("width","405px")
-                .css("height","35px")
-                .css("position","absolute")
-                .css("left","0")
-                .css("top","135px")
-                .css("right","0")
-                .css("margin","auto")
-                //.css("border","1px solid red");
-        $("#cevap").append("<div id='cevapVerilen'>");
-            $("#cevapVerilen")
-                .css("width","185px")
-                .css("height","35px")
-                .css("float","left")
-                .css("margin","auto")
-                .css("font-size","30px")
-                .css("text-align","right")
-                // .css("border","1px solid red");
-       $("#cevap").append("<div id='dogruCevap'>");
-            $("#dogruCevap")
-                .css("width","213px")
-                .css("height","35px")
-                .css("float","right")
-                .css("margin","auto")
-                .css("color","green")
-                .css("font-size","30px");
-               // .css("border","1px solid red");
+       
     
         Interaction.appendStatus({
             bottom:'50px',
@@ -149,17 +122,18 @@ var Interaction = {
     nextQuestion: function(randomNumber){
         
         Interaction.isaretSayaci++
-        Interaction.isaret=Interaction.isaretSayaci%2==0?"-":"+";
+        Interaction.isaret=Interaction.isaretSayaci%2==0?" &#150; ":"+";
         $("#div5").html(Interaction.isaret);
         Interaction.random=new Array();
         for(i=0; i<3; i++){
             Interaction.random.push(Math.floor(Math.random()*99+1));
             
         }
+        Interaction.random=Interaction.random.sort().reverse();
         if(Interaction.isaretSayaci%2==0)
-            $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+"-"+Interaction.random[2]+") = ");
+            $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+" &#150; "+Interaction.random[2]+") = ");
         else
-            $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+"+"+Interaction.random[2]+") = ");
+            $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+" + "+Interaction.random[2]+") = ");
         console.log(Interaction.random);
         
         $("#dogruCevap, #cevapVerilen").html("");

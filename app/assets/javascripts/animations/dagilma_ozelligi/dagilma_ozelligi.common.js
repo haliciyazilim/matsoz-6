@@ -7,9 +7,9 @@ function esitliklerGosterim(){
     var sagParantez1Sonuc=Interaction.random[0]*Interaction.random[1];
     var sagParantez2Sonuc=Interaction.random[0]*Interaction.random[2];
     var sagSonSonuc=Interaction.isaretSayaci%2==0?(sagParantez1Sonuc-sagParantez2Sonuc):(sagParantez1Sonuc+sagParantez2Sonuc)
-    var icerikAltSag=["("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[1]+")"+"&nbsp;"+Interaction.isaret+"&nbsp;"+"("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[2]+")",sagParantez1Sonuc+Interaction.isaret+sagParantez2Sonuc,sagSonSonuc];
+    var icerikAltSag=["("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[1]+")"+Interaction.isaret+"("+Interaction.random[0]+"<dfn> • </dfn>"+Interaction.random[2]+")",sagParantez1Sonuc+Interaction.isaret+sagParantez2Sonuc,sagSonSonuc];
         
-    var ornekAlt=ornek("Alt",-49,80,30, icerikAltSol, icerikAltSag);
+    var ornekAlt=ornek("Alt",-118,80,30, icerikAltSol, icerikAltSag);
     
     for(var i=0;i<3;i++){
 
@@ -44,7 +44,7 @@ function ornek(isim, left, topDegeri,fontSize, icerikSol, icerikSag){
         }
         
         $("#ornek"+this.isim)
-                .css("width","560px")
+                .css("width","700px")
                 .css("height","140px")
                 .css("position","absolute")
                 .css("left",this.left)
@@ -54,7 +54,7 @@ function ornek(isim, left, topDegeri,fontSize, icerikSol, icerikSag){
                 //.css("border","1px solid red");
         
         $(".ornekIcerik")
-            .css("width","260px")
+            .css("width","330px")
             .css("height","30px")
             .css("float","left")
             .css("margin-bottom","20px")

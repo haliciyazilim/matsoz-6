@@ -230,6 +230,7 @@ var Interaction = {
             else{
                 Interaction.setStatus("Cevabınız yanlış; doğru cevap: <b style='color:green'>"+Interaction.randomNumber+"</b>", false);
                 $("#girdi").css("color","red");
+                $(".sayilar").css("opacity","1");
             }
 		
 	}

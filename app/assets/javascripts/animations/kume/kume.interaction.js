@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
 			Interaction.container = container;
-			Main.setObjective('');
+			Main.setObjective('Yanda ortak özellik yöntemi ile verilen kümenin elemanlarını yazınız ve soruları cevaplayınız.');
 			Interaction.paper = {
 				width:$(container).width(),
 				height:$(container).height()
