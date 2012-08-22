@@ -14,6 +14,10 @@
 /log/*.log
 /tmp
 
+# Ignore local initializations
+/config/initializers/local/*
+
+
 /.idea/
 /nbproject/private/
 
