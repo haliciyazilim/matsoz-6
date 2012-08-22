@@ -25,17 +25,23 @@ var Util = {
         var factorsArr = [];
         var currentUpperLimit = number;
 
-        for(var i = 0; i < currentUpperLimit; i++){
-            if(number % i == 0){
-                currentUpperLimit = number/i;
-                factorsArr.push(i);
-                if(currentUpperLimit != i)
-                    factorsArr.push(currentUpperLimit);
-            }
+        if(number == 1){
+            factorsArr.push(1);
+            return factorsArr;
         }
+        else{
+            for(var i = 0; i < currentUpperLimit; i++){
+                if(number % i == 0){
+                    currentUpperLimit = number/i;
+                    factorsArr.push(i);
+                    if(currentUpperLimit != i)
+                        factorsArr.push(currentUpperLimit);
+                }
+            }
 
-        factorsArr.sort(function(a,b){return a-b});
-        return factorsArr;
+            factorsArr.sort(function(a,b){return a-b});
+            return factorsArr;
+        }
     },
 
     getPrimeFactors: function(number){

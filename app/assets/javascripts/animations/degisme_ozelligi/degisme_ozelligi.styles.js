@@ -1,7 +1,7 @@
 function __Styles(){
-	operatorFillColor = "#8d0404";
+	operatorFillColor = "#c00000";
     operatorTextColor = "white"; // do bold
-    operandBoxesFillColor = "#006e7d";
+    operandBoxesFillColor = "#41818a";
     operandTextColor = "white"; // do bold
     generalStrokeColor = "#101010";
 

@@ -214,10 +214,7 @@ var Interaction = {
             $("#"+Interaction.oldStr).css("opacity", 1)
 
         if(Interaction.answerId)
-            $("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 1)
-
-        if(Interaction.ansF)
-            $(Interaction.ansF).remove();
+            $("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 1);
 
         $(Interaction.firstFracDiv).html('');
         $(Interaction.secondFracDiv).html('');
