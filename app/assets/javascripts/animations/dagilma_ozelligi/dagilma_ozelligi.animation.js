@@ -3,14 +3,14 @@ var Animation = {
         Animation.container = container;
          var fontSize=30;
         
-        var icerikSolSol=["3<dfn id='nokta'> • </dfn>(5+2)","3<dfn id='nokta'> • </dfn>7","21"];
-        var icerikSolSag=["3<dfn id='nokta'> • </dfn>5+3<dfn id='nokta'> • </dfn>2","15+6","21"];
+        var icerikSolSol=["3<dfn id='nokta'> • </dfn>(5 + 2)","3<dfn id='nokta'> • </dfn>7","21"];
+        var icerikSolSag=["3<dfn id='nokta'> • </dfn>5 + 3<dfn id='nokta'> • </dfn>2","15 + 6","21"];
         
-        var icerikSagSol=["4<dfn id='nokta'> • </dfn>(7-1)","4<dfn id='nokta'> • </dfn>6","24"];
-        var icerikSagSag=["4<dfn id='nokta'> • </dfn>7-4<dfn id='nokta'> • </dfn>1","28-4","24"];
+        var icerikSagSol=["4<dfn id='nokta'> • </dfn>(7 &#150; 1)","4<dfn id='nokta'> • </dfn>6","24"];
+        var icerikSagSag=["4<dfn id='nokta'> • </dfn>7 &#150; 4<dfn id='nokta'> • </dfn>1","28 &#150; 4","24"];
         
-        var ornekSol=ornek("Sol",-95,40,fontSize, icerikSolSol, icerikSolSag);
-        var ornekSag=ornek("Sag",275,40,fontSize, icerikSagSol, icerikSagSag);
+        var ornekSol=ornek("Sol",-165,40,fontSize, icerikSolSol, icerikSolSag);
+        var ornekSag=ornek("Sag",240,40,fontSize, icerikSagSol, icerikSagSag);
         
         for(var i=0;i<3;i++){
             $("#ornekSolSol"+i).delay(i*2500).animate({opacity:"1"},1000);

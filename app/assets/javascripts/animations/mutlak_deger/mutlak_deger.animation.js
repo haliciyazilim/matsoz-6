@@ -201,7 +201,7 @@ var Animation = {
                 .css("text-align","center")
                 .html("<strong>|</strong> -4 <strong>|</strong> = <strong>|</strong> 4 <strong>|</strong> = 4").css("opacity","0");;
                 
-                $("strong").css("font-size","20px")
+                $(container,"strong").css("font-size","20px")
                 
                 
                 $("#parantezSol").delay(animasyonBaslama*5).animate({opacity:"1"},animasyonDuration);
