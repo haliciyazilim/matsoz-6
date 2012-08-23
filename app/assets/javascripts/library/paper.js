@@ -5180,10 +5180,10 @@ Path.inject({ statics: new function() {
 				bottom = top + rect.height,
 				path = new Path();
 			path._add([
-				new Segment(Point.create(left, bottom)),
 				new Segment(Point.create(left, top)),
-				new Segment(Point.create(right, top)),
-				new Segment(Point.create(right, bottom))
+				new Segment(Point.create(left, bottom)),
+				new Segment(Point.create(right, bottom)),
+				new Segment(Point.create(right, top))
 			]);
 			path._closed = true;
 			return path;
