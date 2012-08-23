@@ -164,12 +164,12 @@ var Interaction = {
         $(Interaction.questionDiv).append(Interaction.input)
 
         Interaction.setRandomGenerator(13, 1);
+        Interaction.ansCirc = [];
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
         Interaction.randomNumber = Util.rand01();
         Interaction.gcd = randomNumber;
-        console.log("randomNumber: "+randomNumber);
         Interaction.answerTitles = [];
         Interaction.question = [];
         $('#ans').html('');
@@ -180,6 +180,12 @@ var Interaction = {
             $('#n'+i).html('');
             $('#n'+i).css("color", "black")
                 .css("font-weight", "normal")
+        }
+
+        for(var i = 0; i < 3; i++){
+            if(Interaction.ansCirc[i]){
+                Interaction.ansCirc[i].remove();
+            }
         }
 
         Interaction.input.style.color = "black";
@@ -210,6 +216,7 @@ var Interaction = {
         for(var i = 1; i <= Interaction.question.length; i++){
             $('#f'+i).html(Interaction.answerTitles[i-1]);
         }
+        Interaction.ansCirc = [];
         for(var i = 0; i < Interaction.question.length; i++){
             var arr = [];
             if(Interaction.question[i] == 1){
@@ -219,13 +226,11 @@ var Interaction = {
                 arr = Util.getFactors(Interaction.question[i]);
                 //  arr.sort(function(a,b){return b-a});
             }
-            for(var j = 0; j <arr.length; j++){
+            for(var j = 0; j < arr.length; j++){
                 var a = 11*i+j+1;
                 var b = arr[j];
                 if(j == arr.length-1){
                     var aStr = ""+b;
-                    var c = 11*i+j+2;
-                    $('#n'+c).html(", ...");
                 }
                 else{
                     var aStr = ""+b+", ";
@@ -233,7 +238,32 @@ var Interaction = {
                 $('#n'+a).html(aStr);
                 if(b == Interaction.answer){
                     $('#n'+a).css("color", "green")
-                        .css("font-weight", "bold")
+                        .css("font-weight", "bold");
+
+                    var circLeft = $('#n'+a).position().left;
+                    if(Interaction.question.length == 2){
+                        circLeft += 150;
+                    }
+                    else{
+                        circLeft += 120;
+                    }
+
+                    var circTop = $('#n'+a).position().top;
+                    circTop += 110;
+                    circTop += i*30;
+
+                    if(arr[j] >= 10){
+                        var radius = 14;
+                    }
+                    else{
+                        var radius = 10;
+                        circLeft -= 4;
+                    }
+
+                    Interaction.ansCirc[i] = new Path.Circle(new Point(circLeft, circTop), radius);
+                    Interaction.ansCirc[i].strokeColor = "red";
+                 //   Interaction.ansCirc[i].fillColor = "green";
+
                 }
             }
 

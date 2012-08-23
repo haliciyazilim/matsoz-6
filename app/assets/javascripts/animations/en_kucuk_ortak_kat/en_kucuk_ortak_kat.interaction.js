@@ -164,6 +164,7 @@ var Interaction = {
         $(Interaction.questionDiv).append(Interaction.input)
 
         Interaction.setRandomGenerator(2)
+        Interaction.ansCirc = [];
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
@@ -181,6 +182,12 @@ var Interaction = {
             $('#n'+i).html('');
             $('#n'+i).css("color", "black")
                 .css("font-weight", "normal")
+        }
+
+        for(var i = 0; i < 3; i++){
+            if(Interaction.ansCirc[i]){
+                Interaction.ansCirc[i].remove();
+            }
         }
 
         Interaction.input.style.color = "black";
@@ -210,8 +217,10 @@ var Interaction = {
 
         for(var i = 1; i <= Interaction.question.length; i++){
             $('#f'+i).html(Interaction.answerTitles[i-1]);
-            $('#td'+i).html(", ...");
+            $('#td'+i).html(" ...");
         }
+
+        Interaction.ansCirc = [];
         for(var i = 0; i < Interaction.question.length; i++){
             if(Interaction.answer > Interaction.question[i] * 10){
                 for(var j = 1; j < 6; j++){
@@ -242,9 +251,34 @@ var Interaction = {
                 $('#n'+a).css("color", "green")
                     .css("font-weight", "bold");
 
+                var circLeft = $('#n'+a).position().left;
+                circLeft += 102;
+
+
+                var circTop = $('#n'+a).position().top;
+                console.log(circTop);
+                circTop += 110;
+                circTop += i*30;
+
+                if(b >= 100){
+                    var radius = 18;
+                    circLeft += 2;
+                }
+                else if(b >= 10){
+                    var radius = 14;
+                }
+                else{
+                    var radius = 10;
+                    circLeft -= 4;
+                }
+
+                Interaction.ansCirc[i] = new Path.Circle(new Point(circLeft, circTop), radius);
+                Interaction.ansCirc[i].strokeColor = "red";
+               // Interaction.ansCirc[i].fillColor = "green";
+
                 var a = 10*i+10;
                 var b = Interaction.answer + Interaction.question[i];
-                var aStr = ""+b;
+                var aStr = ""+b+",";
                 $('#n'+a).html(aStr);
             }
             else{
@@ -252,7 +286,7 @@ var Interaction = {
                     var a = 10*i+j;
                     var b = Interaction.question[i] * j;
                     if(j == 10){
-                        var aStr = ""+b;
+                        var aStr = ""+b+",";
                     }
                     else{
                         var aStr = ""+b+", ";
@@ -261,6 +295,30 @@ var Interaction = {
                     if(b == Interaction.answer){
                         $('#n'+a).css("color", "green")
                             .css("font-weight", "bold")
+
+                        var circLeft = $('#n'+a).position().left;
+                        circLeft += 100;
+
+
+                        var circTop = $('#n'+a).position().top;
+                        circTop += 110;
+                        circTop += i*30;
+
+                        if(b >= 100){
+                            var radius = 18;
+                            circLeft += 4;
+                        }
+                        else if(b >= 10){
+                            var radius = 14;
+                        }
+                        else{
+                            var radius = 10;
+                            circLeft -= 4;
+                        }
+
+                        Interaction.ansCirc[i] = new Path.Circle(new Point(circLeft, circTop), radius);
+                        Interaction.ansCirc[i].strokeColor = "red";
+                    //    Interaction.ansCirc[i].fillColor = "green";
                     }
                 }
             }
