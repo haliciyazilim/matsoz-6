@@ -124,11 +124,8 @@ var Interaction = {
         Interaction.isaretSayaci++
         Interaction.isaret=Interaction.isaretSayaci%2==0?" &#150; ":"+";
         $("#div5").html(Interaction.isaret);
-        Interaction.random=new Array();
-        for(i=0; i<3; i++){
-            Interaction.random.push(Math.floor(Math.random()*99+1));
-            
-        }
+        Interaction.random=Interaction.isaretSayaci%2==0?tekBasamak():ciftBasamak();
+        
         Interaction.random=Interaction.random.sort().reverse();
         if(Interaction.isaretSayaci%2==0)
             $("#istenilen").html(Interaction.random[0]+"<dfn> • </dfn>("+Interaction.random[1]+" &#150; "+Interaction.random[2]+") = ");

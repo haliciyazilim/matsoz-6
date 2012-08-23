@@ -1,3 +1,21 @@
+function ciftBasamak() {
+    var sayilar=new Array ();
+    for (i=0; i<3; i++){
+            sayilar.push(Math.floor(Math.random()*99+1));
+            
+        }
+        return sayilar;
+}
+
+function tekBasamak() {
+    var sayilar=new Array ();
+    for (i=0; i<3; i++){
+            sayilar.push(Math.floor(Math.random()*9+1));
+            
+        }
+        return sayilar;
+}
+
 function esitliklerGosterim(){
 
     var solParantezSonuc=Interaction.isaretSayaci%2==0?(Interaction.random[1]-Interaction.random[2]):(Interaction.random[1]+Interaction.random[2])
