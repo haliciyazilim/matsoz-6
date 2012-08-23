@@ -273,7 +273,7 @@ var Animation = {
        
       // setTimeout(function(){dondur();},11000);
         
-        
+        Main.animationFinished(24000);
         
       
     }
