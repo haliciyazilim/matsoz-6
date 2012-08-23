@@ -412,11 +412,11 @@ var Util = {
         node.id = opt.id;
         node.className = opt.class;
         if(opt.css)
-            $(node).css(css);
+            $(node).css(opt.css);
         if(opt.html)
-            $(node).html(html);
+            $(node).html(opt.html);
         if(opt.value)
-            $(node).val(val);
+            $(node).val(opt.val);
         return node;
     },
 
