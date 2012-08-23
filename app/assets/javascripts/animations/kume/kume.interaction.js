@@ -218,7 +218,7 @@ var Interaction = {
             left:'214px',
             width:'160px',
             height:'40px',
-       //     border:'1px solid'
+        //    border:'1px solid'
         });
 
         $('#ques2').css({
@@ -289,8 +289,8 @@ var Interaction = {
         $(Interaction.container).append(Interaction.sortingDiv);
         $(Interaction.sortingDiv).css({
             position:'absolute',
-            left:'448px',
-            top:'130px',
+            left:'458px',
+            top:'135px',
             width:'100px',
             height:'50px',
             padding: 0,
@@ -734,27 +734,41 @@ var Interaction = {
             return false;
         }
         else if(Interaction.myTrial == 1){
-            $('#question22').css("opacity", 1);
-            $('#dropDiv1').droppable({disabled: true});
-            if(Interaction.oldStr){
-                $("#"+Interaction.oldStr).css("opacity", 1)
+            Interaction.dropped = Interaction.activeStr;
+            if(Interaction.dropped == null || Interaction.dropped == undefined){
+                Interaction.setStatus('Lütfen işaretlerden birini kutucuğa sürükleyiniz.', 'alert')
+                return false;
             }
+            else{
+                $('#question22').css("opacity", 1);
+                $('#dropDiv1').droppable({disabled: true});
+                if(Interaction.oldStr){
+                    $("#"+Interaction.oldStr).css("opacity", 1)
+                }
 
-            $('#sortingDiv img').draggable("enable");
+                $('#sortingDiv img').draggable("enable");
 
-            Interaction.myTrial += 1;
-            return false;
+                Interaction.myTrial += 1;
+                return false;
+            }
         }
         else if(Interaction.myTrial == 2){
-            $('#dropDiv2').droppable({disabled: true});
-            if(Interaction.oldStr2){
-                $("#"+Interaction.oldStr2).css("opacity", 1)
+            Interaction.dropped2 = Interaction.activeStr2;
+            if(Interaction.dropped2 == null || Interaction.dropped2 == undefined){
+                Interaction.setStatus('Lütfen işaretlerden birini kutucuğa sürükleyiniz.', 'alert')
+                return false;
             }
-            $('#sortingDiv img').draggable("disable");
-            Interaction.myTrial += 1;
-            $(Interaction.thirdQuestionDiv).css("opacity", 1);
-            Interaction.inputs[Interaction.length].focus();
-            return false;
+            else{
+                $('#dropDiv2').droppable({disabled: true});
+                if(Interaction.oldStr2){
+                    $("#"+Interaction.oldStr2).css("opacity", 1)
+                }
+                $('#sortingDiv img').draggable("disable");
+                Interaction.myTrial += 1;
+                $(Interaction.thirdQuestionDiv).css("opacity", 1);
+                Interaction.inputs[Interaction.length].focus();
+                return false;
+            }
         }
         else{
             return true;
