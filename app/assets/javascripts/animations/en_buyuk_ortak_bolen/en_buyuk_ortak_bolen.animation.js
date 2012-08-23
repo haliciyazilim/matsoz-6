@@ -42,7 +42,7 @@ var Animation = {
             height:'24px',
         });
         $('#eq1').html('<span id="s1">1, </span><span id="s2">2, </span><span id="s3">3, </span><span id="s4">4, </span><span id="s5">6, </span>' +
-            '<span id="s6">9, </span><span id="s7">12, </span><span id="s8">18</span>');
+            '<span id="s6">9, </span><span id="s7">12, </span><span id="s8">18, </span><span id="s9">36</span>');
 
         $('#secondDiv').css({
             position:'absolute',
@@ -58,7 +58,7 @@ var Animation = {
             left:'10px',
             opacity:0
         });
-        $('#title2').delay(animStart+9000).animate({opacity:1}, 1000, 'easeInOutQuad');
+        $('#title2').delay(animStart+9750).animate({opacity:1}, 1000, 'easeInOutQuad');
         $('#eq2').css({
             position:'absolute',
             top:'10px',
@@ -66,7 +66,7 @@ var Animation = {
             width:'460px',
             height:'24px',
         });
-        $('#eq2').html('<span id="d1">1, </span><span id="d2">3, </span><span id="d3">4, </span><span id="d4">9, </span><span id="d5">15</span>');
+        $('#eq2').html('<span id="d1">1, </span><span id="d2">3, </span><span id="d3">5, </span><span id="d4">9, </span><span id="d5">15, </span><span id="d6">45</span>');
 
         $('#thirdDiv').css({
             position:'absolute',
@@ -78,22 +78,22 @@ var Animation = {
             opacity:0
         });
         $('#thirdDiv').html('EBOB(36, 45) = 9');
-        $('#thirdDiv').delay(20000).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
-        for(var i = 1; i < 9; i++){
+        $('#thirdDiv').delay(20500).animate({opacity:1}, 1000, 'easeInOutQuad', function(){Main.animationFinished(1500)});
+        for(var i = 1; i < 10; i++){
             $('#s'+i).css("opacity", 0).delay(animStart+1000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
 
         }
-        for(var i = 1; i < 6; i++ ){
-            $('#d'+i).css("opacity", 0).delay(animStart+10000+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
+        for(var i = 1; i < 7; i++ ){
+            $('#d'+i).css("opacity", 0).delay(animStart+10750+i*750).animate({opacity:1}, 750, 'easeInOutQuad');
         }
 
-        $('#s1').delay(12750).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#s3').delay(11250).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#s6').delay(9000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s1').delay(14500).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s3').delay(13000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#s6').delay(10750).animate({color:animColor}, 1000, 'easeInOutQuad');
 
-        $('#d1').delay(4500).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d2').delay(3750).animate({color:animColor}, 1000, 'easeInOutQuad');
-        $('#d4').delay(1500).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d1').delay(4750).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d2').delay(4000).animate({color:animColor}, 1000, 'easeInOutQuad');
+        $('#d4').delay(2500).animate({color:animColor}, 1000, 'easeInOutQuad');
 
         var circ1 = new Path.Circle(new Point(458, 46), 14);
         circ1.strokeColor = "red";
@@ -107,7 +107,7 @@ var Animation = {
             style:{
                 opacity: 1,
             },
-            delay: 18000,
+            delay: 19500,
             duration: 1000,
             animationType: 'easeInOutQuad'
         });
@@ -116,7 +116,7 @@ var Animation = {
             style:{
                 opacity: 1,
             },
-            delay: 18000,
+            delay: 19500,
             duration: 1000,
             animationType: 'easeInOutQuad'
         });

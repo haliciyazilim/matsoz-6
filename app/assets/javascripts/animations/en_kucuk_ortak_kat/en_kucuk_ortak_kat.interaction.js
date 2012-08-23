@@ -248,7 +248,7 @@ var Interaction = {
                 var b = Interaction.answer;
                 var aStr = ""+b+", ";
                 $('#n'+a).html(aStr);
-                $('#n'+a).css("color", "white")
+                $('#n'+a).css("color", "green")
                     .css("font-weight", "bold");
 
                 var circLeft = $('#n'+a).position().left;
@@ -273,8 +273,8 @@ var Interaction = {
                 }
 
                 Interaction.ansCirc[i] = new Path.Circle(new Point(circLeft, circTop), radius);
-                Interaction.ansCirc[i].strokeColor = "green";
-                Interaction.ansCirc[i].fillColor = "green";
+                Interaction.ansCirc[i].strokeColor = "red";
+               // Interaction.ansCirc[i].fillColor = "green";
 
                 var a = 10*i+10;
                 var b = Interaction.answer + Interaction.question[i];
@@ -293,7 +293,7 @@ var Interaction = {
                     }
                     $('#n'+a).html(aStr);
                     if(b == Interaction.answer){
-                        $('#n'+a).css("color", "white")
+                        $('#n'+a).css("color", "green")
                             .css("font-weight", "bold")
 
                         var circLeft = $('#n'+a).position().left;
@@ -317,8 +317,8 @@ var Interaction = {
                         }
 
                         Interaction.ansCirc[i] = new Path.Circle(new Point(circLeft, circTop), radius);
-                        Interaction.ansCirc[i].strokeColor = "green";
-                        Interaction.ansCirc[i].fillColor = "green";
+                        Interaction.ansCirc[i].strokeColor = "red";
+                    //    Interaction.ansCirc[i].fillColor = "green";
                     }
                 }
             }

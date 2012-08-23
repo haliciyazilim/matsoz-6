@@ -230,16 +230,14 @@ var Interaction = {
                 var a = 11*i+j+1;
                 var b = arr[j];
                 if(j == arr.length-1){
-                    var aStr = ""+b+", ";
-                    var c = 11*i+j+2;
-                    $('#n'+c).html(" ...");
+                    var aStr = ""+b;
                 }
                 else{
                     var aStr = ""+b+", ";
                 }
                 $('#n'+a).html(aStr);
                 if(b == Interaction.answer){
-                    $('#n'+a).css("color", "white")
+                    $('#n'+a).css("color", "green")
                         .css("font-weight", "bold");
 
                     var circLeft = $('#n'+a).position().left;
@@ -263,8 +261,8 @@ var Interaction = {
                     }
 
                     Interaction.ansCirc[i] = new Path.Circle(new Point(circLeft, circTop), radius);
-                    Interaction.ansCirc[i].strokeColor = "green";
-                    Interaction.ansCirc[i].fillColor = "green";
+                    Interaction.ansCirc[i].strokeColor = "red";
+                 //   Interaction.ansCirc[i].fillColor = "green";
 
                 }
             }
