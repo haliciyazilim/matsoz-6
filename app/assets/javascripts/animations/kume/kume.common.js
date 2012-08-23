@@ -365,3 +365,84 @@ Set.SMALLER_THAN_GREATER_THAN_EVEN = 7;
 Set.SMALLER_THAN_GREATER_THAN_PRIME = 8;
 Set.FACTORS = 9;
 Set.MULTIPLIES = 10;
+
+Set.randomGenerator = function(type){
+
+    var sType,elements,value,value1,value2;
+    if(type == undefined || !isNaN(type))
+        sType= Util.randomInteger(0,11);
+    else
+        sType = type;
+    var set;
+    switch(sType){
+        case 1:{     // Set.SMALLER_THAN
+            var randNum = Util.randomInteger(1,7);
+            set = new Set({type:Set.SMALLER_THAN, value:randNum});
+            break;
+        }
+        case 2:{     // Set.SMALLER_THAN_ODD
+            var randNum = Util.randomInteger(2,12);
+            set = new Set({type:Set.SMALLER_THAN_ODD, value:randNum});
+            break;
+        }
+        case 3:{     // Set.SMALLER_THAN_EVEN
+            var randNum = Util.randomInteger(1,11);
+            set = new Set({type:Set.SMALLER_THAN_EVEN, value:randNum});
+            break;
+        }
+        case 4:{     // Set.SMALLER_THAN_PRIME
+            var randNum = Util.randomInteger(3,14);
+            set = new Set({type:Set.SMALLER_THAN_PRIME, value:randNum});
+            break;
+        }
+        case 5:{     // Set.SMALLER_THAN_GREATER_THAN
+            var randNum1 = Util.randomInteger(1,90);
+            var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 6:{     // Set.SMALLER_THAN_GREATER_THAN_ODD
+            var randNum1 = Util.randomInteger(1,80);
+            var randNum2 = randNum1+Util.randomInteger(4,13);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_ODD, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 7:{     // Set.SMALLER_THAN_GREATER_THAN_EVEN
+            var randNum1 = Util.randomInteger(1,80);
+            var randNum2 = randNum1+Util.randomInteger(4,13);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_EVEN, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 8:{     // Set.SMALLER_THAN_GREATER_THAN_PRIME
+            do{
+                var randNum1 = Util.randomInteger(1, 90);
+                var randNum2 = Util.randomInteger(1, 90);
+                var primeNums = [];
+                for(var i = randNum1+1; i < randNum2; i++){
+                    if(Util.isPrimeNumber(i)){
+                        primeNums.push(i);
+                    }
+                }
+            } while(primeNums.length == 0 || primeNums.length > 6)
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_PRIME, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 9:{     // Set.FACTORS
+            do{
+                var randNum = Util.randomInteger(1,97);
+                var factors = [];
+                factors = Util.getFactors(randNum);
+            }while(factors.length > 6)
+            set = new Set({type:Set.FACTORS, value:randNum});
+            break;
+        }
+        case 10:{    // Set.MULTIPLIES
+            var randNum1 = Util.randomInteger(2,17);
+            var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+            set = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
+            break;
+        }
+    }
+
+    return set;
+}
