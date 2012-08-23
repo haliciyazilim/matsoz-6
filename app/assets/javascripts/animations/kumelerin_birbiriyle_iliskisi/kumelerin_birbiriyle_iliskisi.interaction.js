@@ -38,7 +38,7 @@ var Interaction = {
             switch(randomNumber){
                 case 0:
                     Interaction.set1 = Interaction.set2 = Set.randomGenerator();
-                    
+
                     break;
                 case 1:
                     break;
