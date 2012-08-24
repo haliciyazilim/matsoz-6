@@ -3,10 +3,8 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
-//        var topLeftPoint = new Point(120,50);
-//        var setLetter = "T";
-//        Animation.venn = Set.randomGenerator(5);
-//        Animation.venn.drawVennDiagram(Animation.container, topLeftPoint, setLetter);
+        Animation.set = new Set({type:Set.ELEMENTS, elements:["a","e","ı","i","o","ö","u","ü"]});
+        Animation.set.definition = "Alfabemizdeki sesli harfler";
 
         Main.animationFinished();
 
