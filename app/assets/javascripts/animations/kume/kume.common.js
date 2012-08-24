@@ -303,14 +303,24 @@ var Set = Class.extend({
 
     },
 
-    getDefinitionString : function(){
-        var definitionString = "{ "+this.definition+" }";
+    getDefinitionString : function(setLetter){
+        if(setLetter == undefined){
+            var definitionString = "{ "+this.definition+" }";
+        }
+        else{
+            var definitionString = ""+setLetter+" = { "+this.definition+" }";
+        }
 
         return definitionString;
     },
 
-    getElementsString : function(){
-        var elementsString = "{ ";
+    getElementsString : function(setLetter){
+        if(setLetter == undefined){
+            var elementsString = "{ ";
+        }
+        else{
+            var elementsString = ""+setLetter+" = { ";
+        }
         for(var i = 0; i < this.elements.length-1; i++){
             elementsString += ""+this.elements[i]+", ";
         }
