@@ -129,7 +129,7 @@ var Set = Class.extend({
         }
     },
 
-    isSubSet:function(otherSet){
+    isSubsetOf:function(otherSet){
         if(this.elements.length > otherSet.elements.length){
             return false;
         }
@@ -162,7 +162,7 @@ var Set = Class.extend({
         }
     },
 
-    isDiscreteSet:function(otherSet){
+    isDisjointWith:function(otherSet){
         var a = [];
         var correctN = 0;
         for(var i = 0; i < this.elements.length; i++){
@@ -190,7 +190,7 @@ var Set = Class.extend({
         }
     },
 
-    isConcurrentSet:function(otherSet){
+    isIntersectingWith:function(otherSet){
         var a = [];
         var correctN = 0;
         for(var i = 0; i < this.elements.length; i++){
@@ -410,6 +410,39 @@ var Set = Class.extend({
         return a;
     },
 
+    getRandomSubset:function(){
+        var set;
+        if(this.type == Set.ELEMENTS){
+            var index1 = Util.randomInteger(0,5);
+            var index2 = Util.randomInteger(index1+1,6);
+            set = new Set({
+                type:Set.ELEMENTS,
+                elements:this.elements.slice(index1,index2)
+            });
+        }
+        else{
+            do
+                set = Set.randomGenerator();
+            while(set == undefined || !set.isSubsetOf(this));
+        }
+        return set;
+    },
+    getRandomDisjointSet:function(){
+        var set;
+
+        do
+            set = Set.randomGenerator();
+        while(set == undefined || !set.isDisjointWith(this));
+        return set;
+    },
+    getRandomIntersectingSet:function(){
+        var set;
+        do
+            set = Set.randomGenerator();
+        while(set == undefined || !set.isIntersectingWith(this));
+        return set;
+    },
+
     drawVennDiagram : function(container, topLeftPoint, setLetter){
         var size = new Size(150, 100);
         var rectangle = new Rectangle(topLeftPoint, size);
@@ -596,7 +629,7 @@ Set.randomGenerator = function(type){
 
     var sType,elements,value,value1,value2;
     if(type == undefined || !isNaN(type))
-        sType= Util.randomInteger(0,11);
+        sType= Util.randomInteger(1,11);
     else
         sType = type;
     var set;

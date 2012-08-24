@@ -29,4 +29,14 @@ function __Styles(){
     falseOptionStyle = {
         color:'#942323'
     }
+
+    setDivCss = {
+        position:'absolute',
+        left:'10px',
+        fontSize:'16px',
+        width:'300px',
+        lineHeight:'20px'
+
+
+    }
 }

@@ -5,7 +5,7 @@ var Interaction = {
     images:[],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yanda verilen sayının doğal sayı olup olmadığını, "evet" ya da "hayır"  düğmelerine basarak belirtiniz.');
+        Main.setObjective('Yanda verilen sayının doğal sayı olup olmadığını, "EVET" ya da "HAYIR" düğmelerine basarak belirtiniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -68,30 +68,6 @@ var Interaction = {
         $("#yanit img").attr("style","clear:none !important");
         $("#evet").css("margin-right","10px");
         $(".yanitlar").css("float","left").css("width","72").css("height","32");
-        
-//        $(container).append("<button id='btnDogalSayi'>");
-//        $("#btnDogalSayi")
-//            .css("width","100px")
-//            .css("height","30px")
-//            .css("position","absolute")
-//            .css("left","0")
-//            .css("top","160px")
-//            //.css("bottom","0")
-//            .css("right","0")
-//            .css("margin","auto")
-//            .html("Doğal Sayı")
-//        
-//        $(container).append("<button id='btnDogalSayiDegil'>");
-//        $("#btnDogalSayiDegil")
-//            .css("width","130px")
-//            .css("height","30px")
-//            .css("position","absolute")
-//            .css("left","0")
-//            .css("top","190px")
-//            //.css("bottom","0")
-//            .css("right","0")
-//            .css("margin","auto")
-//            .html("Doğal Sayı Değil")
         
         Interaction.cevap;
         
