@@ -13,7 +13,6 @@ var Interaction = {
             width:$(container).width(),
             height:$(container).height()
         };
-
         Interaction.firstQuestionDiv = document.createElement('div');
         Interaction.firstQuestionDiv.id = 'firstQuestionDiv';
         $(Interaction.container).append(Interaction.firstQuestionDiv);
@@ -154,7 +153,7 @@ var Interaction = {
             fontSize:'18px',
             paddingLeft:'10px'
         });
-        $(Interaction.secondQuestionDiv).html('<div id="questionText">Aşağıdaki boşluğa uygun işareti sürükleyiniz.</div><div id="question21"><div id="ques1">5</div><div id="dropDiv1"></div><div id="setL1">A</div></div><div id="question22"><div id="ques2">7</div><div id="dropDiv2"></div><div id="setL2">A</div>')
+        $(Interaction.secondQuestionDiv).html('<div id="questionText">Aşağıdaki boşluğa uygun işareti sürükleyiniz.</div><div id="question21"><div id="ques1"></div><div id="dropDiv1"></div><div id="setL1"></div></div><div id="question22"><div id="ques2"></div><div id="dropDiv2"></div><div id="setL2"></div>')
 
         $('#question21').css({
             position:'absolute',
@@ -295,7 +294,6 @@ var Interaction = {
             height:'50px',
             padding: 0,
             margin: 0,
-        //    border:'1px solid'
         });
 
         $(Interaction.sortingDiv).append('<div id="elementDiv"><img src="/assets/animations/kume/kume_kume_base.png" /><img id="element" src="/assets/animations/kume/kume_kume_fg.png" /><img id="elementHover" class="drg" src="/assets/animations/kume/kume_kume_hover.png" /></div>')
@@ -341,6 +339,7 @@ var Interaction = {
             stack: "#sortingDiv .drg",
             disabled: "false",
             start : function(event, ui){
+                Interaction.setStatus('');
                 $($(ui.helper.get(0)).siblings(this)[1]).css("opacity", 0)
                 $(ui.helper.get(0)).css("opacity", 1)
             },
@@ -378,7 +377,7 @@ var Interaction = {
                 $("#"+Interaction.activeStr).css("opacity", 1);
                 Interaction.oldActiveStr = Interaction.activeStr;
                 Interaction.oldStr = oldStr;
-            }
+            },
         });
 
         $('#dropDiv2').droppable({
@@ -399,7 +398,7 @@ var Interaction = {
                 $("#"+Interaction.activeStr2).css("opacity", 1);
                 Interaction.oldActiveStr2 = Interaction.activeStr2;
                 Interaction.oldStr2 = oldStr2;
-            }
+            },
         });
 
 
@@ -407,6 +406,8 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+
+        Interaction.myPause = 0;
 	    Interaction.randomNumber = randomNumber;
         Interaction.trial = 1;
         Interaction.myTrial = 0;
@@ -450,13 +451,19 @@ var Interaction = {
         $('#sortingDiv img').draggable("enable");
         $('#dropDiv1').droppable("enable");
         $('#dropDiv2').droppable("enable");
-        if(Interaction.oldActiveStr){
-            $("#"+Interaction.oldActiveStr).css("opacity" , 0)
-        }
 
-        if(Interaction.oldActiveStr2){
-            $("#"+Interaction.oldActiveStr2).css("opacity" , 0)
-        }
+//        if(Interaction.oldActiveStr){
+//            $("#"+Interaction.oldActiveStr).css("opacity" , 0)
+//        }
+//
+//        if(Interaction.oldActiveStr2){
+//            $("#"+Interaction.oldActiveStr2).css("opacity" , 0)
+//        }
+
+        $('#elementActive').css("opacity",0);
+        $('#element2Active').css("opacity",0);
+        $('#notElementActive').css("opacity",0);
+        $('#notElement2Active').css("opacity",0);
 
         if(Interaction.oldStr){
             $("#"+Interaction.oldStr).css("opacity", 1)
@@ -689,6 +696,34 @@ var Interaction = {
             $('#e'+i).html("."+Interaction.questionSet.elements[i-1]);
         }
 
+        var r = Util.randomInteger(0,3);
+        if(r == 0){ // both elements are not elements of Set
+            var a = [];
+            for(var i = 0; i < Interaction.questionSet.elements.length; i++){
+                a.push(Interaction.questionSet.elements[i]);
+            }
+            Interaction.element1 = Util.randomInteger(0, 99, a);
+            a.push(Interaction.element1);
+            Interaction.element2 = Util.randomInteger(0, 99, a);
+        }
+        else if(r == 1){ // only first element is element of Set
+            do{
+                Interaction.element1 = Util.randomInteger(0,99);
+            }while(Interaction.questionSet.elements.indexOf(Interaction.element1) == -1)
+            Interaction.element2 = Util.randomInteger(0,99, Interaction.questionSet.elements);
+        }
+        else{ // only second element is element of Set
+            do{
+                Interaction.element2 = Util.randomInteger(0,99);
+            }while(Interaction.questionSet.elements.indexOf(Interaction.element2) == -1)
+            Interaction.element1 = Util.randomInteger(0,99, Interaction.questionSet.elements);
+        }
+
+        $('#ques1').html(Interaction.element1);
+        $('#setL1').html(setLetterStr[0]);
+        $('#ques2').html(Interaction.element2);
+        $('#setL2').html(setLetterStr[0]);
+
 
         Interaction.appendInput({
             position:'absolute',
@@ -702,76 +737,178 @@ var Interaction = {
 
     },
 	preCheck : function(){
-        if(Interaction.myTrial == 0){
-            var myArr = [];
-            for(var i = 0; i < Interaction.length; i++){
-                myArr[i] = Interaction.inputs[i].value;
-            }
-            if(Interaction.checkAnswers(myArr)){
-                Interaction.setStatus('Tebrikler.',true);
-                for(var i = 0; i < Interaction.length; i++){
-                    $(Interaction.inputs[i]).css("color","green");
-                    Interaction.inputs[i].readOnly = true;
-                }
-                Interaction.vennDiagram.opacity = 1;
-                $('#vennElements').css("opacity", 1);
-            }
-            else{
-                Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
-                for(var i = 0; i < Interaction.length; i++){
-                    Interaction.inputs[i].value = Interaction.questionSet.elements[i];
-                    $(Interaction.inputs[i]).css("color", "green");
-                    Interaction.inputs[i].readOnly = true;
-                }
-                Interaction.vennDiagram.opacity = 1;
-                $('#vennElements').css("opacity", 1);
-
-            }
-            Interaction.myTrial += 1;
-            $(Interaction.secondQuestionDiv).css("opacity", 1);
-            $('#question21').css("opacity", 1);
-            $(Interaction.sortingDiv).css("opacity", 1)
+        if(Interaction.myPause == 1){
             return false;
         }
-        else if(Interaction.myTrial == 1){
-            Interaction.dropped = Interaction.activeStr;
-            if(Interaction.dropped == null || Interaction.dropped == undefined){
-                Interaction.setStatus('Lütfen işaretlerden birini kutucuğa sürükleyiniz.', 'alert')
-                return false;
-            }
-            else{
-                $('#question22').css("opacity", 1);
-                $('#dropDiv1').droppable({disabled: true});
-                if(Interaction.oldStr){
-                    $("#"+Interaction.oldStr).css("opacity", 1)
-                }
-
-                $('#sortingDiv img').draggable("enable");
-
-                Interaction.myTrial += 1;
-                return false;
-            }
-        }
-        else if(Interaction.myTrial == 2){
-            Interaction.dropped2 = Interaction.activeStr2;
-            if(Interaction.dropped2 == null || Interaction.dropped2 == undefined){
-                Interaction.setStatus('Lütfen işaretlerden birini kutucuğa sürükleyiniz.', 'alert')
-                return false;
-            }
-            else{
-                $('#dropDiv2').droppable({disabled: true});
-                if(Interaction.oldStr2){
-                    $("#"+Interaction.oldStr2).css("opacity", 1)
-                }
-                $('#sortingDiv img').draggable("disable");
-                Interaction.myTrial += 1;
-                $(Interaction.thirdQuestionDiv).css("opacity", 1);
-                Interaction.inputs[Interaction.length].focus();
-                return false;
-            }
-        }
         else{
-            return true;
+            if(Interaction.myTrial == 0){ // question1
+                var myArr = [];
+                for(var i = 0; i < Interaction.length; i++){
+                    myArr[i] = Interaction.inputs[i].value;
+                }
+                if(Interaction.checkAnswers(myArr)){
+                    Interaction.setStatus('Tebrikler!',true);
+                    for(var i = 0; i < Interaction.length; i++){
+                        $(Interaction.inputs[i]).css("color","green");
+                        Interaction.inputs[i].readOnly = true;
+                    }
+                    Interaction.vennDiagram.opacity = 1;
+                    $('#vennElements').css("opacity", 1);
+                }
+                else{
+                    Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                    for(var i = 0; i < Interaction.length; i++){
+                        Interaction.inputs[i].value = Interaction.questionSet.elements[i];
+                        $(Interaction.inputs[i]).css("color", "green");
+                        Interaction.inputs[i].readOnly = true;
+                    }
+                    Interaction.vennDiagram.opacity = 1;
+                    $('#vennElements').css("opacity", 1);
+
+                }
+                Interaction.myTrial += 1;
+                $(Interaction.secondQuestionDiv).css("opacity", 1);
+                $('#question21').css("opacity", 1);
+                $(Interaction.sortingDiv).css("opacity", 1)
+                return false;
+            }
+            else if(Interaction.myTrial == 1){ // question2
+                Interaction.dropped = Interaction.activeStr;
+                if(Interaction.dropped == null || Interaction.dropped == undefined){
+                    Interaction.setStatus('Lütfen işaretlerden birini kutucuğa sürükleyiniz.', 'alert')
+                    return false;
+                }
+                else{
+                    if(Interaction.questionSet.elements.indexOf(Interaction.element1) == -1){
+                        Interaction.answerIdStr = "notElementActive";
+                    }
+                    else{
+                        Interaction.answerIdStr = "elementActive";
+                    }
+                    if(Interaction.dropped == Interaction.answerIdStr){
+                        Interaction.setStatus('Tebrikler!', true);
+                        $("#question22").css("opacity", 1);
+                        $("#sortingDiv img").draggable("enable");
+                        $("#dropDiv1").droppable({disabled: true});
+                    }
+                    else{
+                        Interaction.myPause = 1;
+                        Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                        $("#"+Interaction.oldActiveStr).css("opacity", 0);
+                        Interaction.answerId = Interaction.answerIdStr.replace("Active", "Hover");
+                        $("#"+Interaction.oldActiveStr.replace("Active", "")).css("opacity", 1)
+                        $("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 0)
+                        Interaction.clone2 = $("#"+Interaction.answerId).clone();
+                        Interaction.clone2.attr('id', 'flying');
+
+                        $(Interaction.container).append(Interaction.clone2);
+                      //  $(Interaction.clone2).insertAfter($('#dropDiv1'));
+
+                        var ansTop = $(Interaction.sortingDiv).position().top;
+                        var ansLeft = $(Interaction.sortingDiv).position().left;
+
+                        if(Interaction.answerId == "notElementHover")
+                            ansLeft += 40;
+                        var flyTop = $('#dropDiv1').position().top + 143;
+                        var flyLeft = $('#dropDiv1').position().left + 35;
+
+                        $(Interaction.clone2).css("position", "absolute")
+                            .css("top",ansTop)
+                            .css("left", ansLeft)
+                            .css("opacity", 0);
+
+                        $(Interaction.clone2).delay(0).animate(
+                            {opacity:3, top: flyTop, left:flyLeft},
+                            2000,
+                            'easeInOutQuad',
+                            function(){
+                                $(Interaction.clone2).css("opacity", 0);
+                                $("#"+Interaction.answerIdStr).css("opacity", 1)
+                            }
+                        );
+                        setTimeout('Interaction.myPause = 0;',3000)
+                        setTimeout('$("#question22").css("opacity", 1);$("#sortingDiv img").draggable("enable");$("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 1);$("#dropDiv1").droppable({disabled: true});', 3000)
+                    }
+
+                    if(Interaction.oldStr){
+                        $("#"+Interaction.oldStr).css("opacity", 1)
+                    }
+
+                    Interaction.myTrial += 1;
+                    return false;
+                }
+            }
+            else if(Interaction.myTrial == 2){ // question3
+                Interaction.dropped2 = Interaction.activeStr2;
+                if(Interaction.dropped2 == null || Interaction.dropped2 == undefined){
+                    Interaction.setStatus('Lütfen işaretlerden birini kutucuğa sürükleyiniz.', 'alert')
+                    return false;
+                }
+                else{
+                    if(Interaction.questionSet.elements.indexOf(Interaction.element2) == -1){
+                        Interaction.answerIdStr2 = "notElement2Active";
+                    }
+                    else{
+                        Interaction.answerIdStr2 = "element2Active";
+                    }
+                    if(Interaction.dropped2 == Interaction.answerIdStr2){
+                        Interaction.setStatus('Tebrikler!', true);
+                        $("#dropDiv2").droppable({disabled: true});
+                        $(Interaction.thirdQuestionDiv).css("opacity", 1);
+                        Interaction.inputs[Interaction.length].focus();
+                    }
+                    else{
+                        Interaction.myPause = 1;
+                        Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                        $("#"+Interaction.oldActiveStr2).css("opacity", 0);
+                        Interaction.answerId2 = Interaction.answerIdStr2.replace("2Active", "Hover");
+                        $("#"+Interaction.oldActiveStr2.replace("2Active", "")).css("opacity", 1)
+                        $("#"+Interaction.answerId2.replace("Hover", "")).css("opacity", 0)
+                        Interaction.clone22 = $("#"+Interaction.answerId2).clone();
+                        Interaction.clone22.attr('id', 'flying2');
+
+                        $(Interaction.container).append(Interaction.clone22);
+                   //     $(Interaction.clone22).insertAfter($('#dropDiv2'));
+
+                        var ansTop2 = $(Interaction.sortingDiv).position().top;
+                        var ansLeft2 = $(Interaction.sortingDiv).position().left;
+
+                        if(Interaction.answerId2 == "notElementHover")
+                            ansLeft2 += 40;
+                        var flyTop2 = $('#dropDiv2').position().top + 143;
+                        var flyLeft2 = $('#dropDiv2').position().left + 239;
+
+                        $(Interaction.clone22).css("position", "absolute")
+                            .css("top",ansTop2)
+                            .css("left", ansLeft2)
+                            .css("opacity", 0);
+
+                        $(Interaction.clone22).delay(0).animate(
+                            {opacity:3, top: flyTop2, left:flyLeft2},
+                            2000,
+                            'easeInOutQuad',
+                            function(){
+                                $(Interaction.clone22).css("opacity", 0);
+                                $("#"+Interaction.answerIdStr2).css("opacity", 1)
+                            }
+                        );
+                        setTimeout('Interaction.myPause = 0;',3000);
+                        setTimeout('$("#"+Interaction.answerId2.replace("Hover", "")).css("opacity", 1);$("#dropDiv2").droppable({disabled: true});$(Interaction.thirdQuestionDiv).css("opacity", 1);Interaction.inputs[Interaction.length].focus();', 3000)
+                    }
+
+                    if(Interaction.oldStr2){
+                        $("#"+Interaction.oldStr2).css("opacity", 1)
+                    }
+
+                    $('#sortingDiv img').draggable("disable");
+
+                    Interaction.myTrial += 1;
+                    return false;
+                }
+            }
+            else{
+                return true;
+            }
         }
 		
     },
