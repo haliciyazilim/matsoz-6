@@ -303,6 +303,10 @@ var Set = Class.extend({
 
     },
 
+    getComplement : function(universalSet){
+        return universalSet.getDifference(this);
+    },
+
     getDefinitionString : function(setLetter){
         if(setLetter == undefined){
             var definitionString = "{ "+this.definition+" }";
@@ -404,7 +408,177 @@ var Set = Class.extend({
         }
 
         return a;
-    }
+    },
+
+    drawVennDiagram : function(container, topLeftPoint, setLetter){
+        var size = new Size(150, 100);
+        var rectangle = new Rectangle(topLeftPoint, size);
+        this.vennDiagram = new Path.Oval(rectangle);
+        this.vennDiagram.strokeColor = "black";
+
+        $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
+        $('#vennElements2').css({
+            position:'absolute',
+            top:topLeftPoint.y+14,
+            left:topLeftPoint.x+14,
+            width:'150px',
+            height:'100px',
+            fontSize:'16px',
+            textAlign:'center',
+            fontWeight:'bold',
+         //   border:'1px solid'
+        });
+        $('#vennLetter2').css({
+            position:'absolute',
+            top:'0px',
+            left:'0px',
+            width:'18px',
+            height:'18px',
+            fontWeight:'normal'
+        });
+        $('#vennLetter2').html(setLetter);
+        $('#e12').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e22').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e32').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e42').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e52').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e62').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+
+        switch(this.elements.length){
+            case 0:
+                break;
+            case 1:{
+                $('#e12').css({
+                    top:'42px',
+                    left:'62px'
+                });
+                break;
+            }
+            case 2:{
+                $('#e12').css({
+                    top:'40px',
+                    left:'34px'
+                });
+                $('#e22').css({
+                    top:'40px',
+                    left:'96px',
+                });
+                break;
+            }
+            case 3:{
+                $('#e12').css({
+                    top:'40px',
+                    left:'30px'
+                });
+                $('#e22').css({
+                    top:'15px',
+                    left:'67px',
+                });
+                $('#e32').css({
+                    top:'61px',
+                    left:'84px'
+                });
+                break;
+            }
+            case 4:{
+                $('#e12').css({
+                    top:'22px',
+                    left:'34px'
+                });
+                $('#e22').css({
+                    top:'22px',
+                    left:'88px',
+                });
+                $('#e32').css({
+                    top:'66px',
+                    left:'34px'
+                });
+                $('#e42').css({
+                    top:'66px',
+                    left:'88px',
+                });
+                break;
+            }
+            case 5:{
+                $('#e12').css({
+                    top:'20px',
+                    left:'32px'
+                });
+                $('#e22').css({
+                    top:'20px',
+                    left:'90px',
+                });
+                $('#e32').css({
+                    top:'68px',
+                    left:'32px'
+                });
+                $('#e42').css({
+                    top:'68px',
+                    left:'90px',
+                });
+                $('#e52').css({
+                    top:'42px',
+                    left:'62px'
+                });
+                break;
+            }
+            case 6:{
+                $('#e12').css({
+                    top:'42px',
+                    left:'62px'
+                });
+                $('#e22').css({
+                    top:'12px',
+                    left:'70px',
+                });
+                $('#e32').css({
+                    top:'30px',
+                    left:'106px'
+                });
+                $('#e42').css({
+                    top:'66px',
+                    left:'34px',
+                });
+                $('#e52').css({
+                    top:'18px',
+                    left:'24px'
+                });
+                $('#e62').css({
+                    top:'66px',
+                    left:'90px',
+                });
+                break;
+            }
+        }
+
+        for(var i = 1; i <= this.elements.length; i++){
+            $('#e'+i+"2").html("."+this.elements[i-1]);
+        }
+    },
 });
 Set.ELEMENTS = 0;
 Set.SMALLER_THAN = 1;
