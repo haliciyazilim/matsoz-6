@@ -22,7 +22,7 @@ var Interaction = {
         *	Initialize your interaction here
         */
         var referencePoint = new Point(100,100);
-        Interaction.createOptions(referencePoint.add(200,-50));
+        Interaction.createOptions(referencePoint.add(250,-50));
         Interaction.appendStatus({
             bottom:'30px',
             right:'210px'
@@ -31,98 +31,146 @@ var Interaction = {
             bottom:'20px',
             right:'100px'
         })
-
+        Interaction.set1Div = Util.dom({
+            tag:'div',
+            parent:container,
+            css:setDivCss
+        });
+        $(Interaction.set1Div).css({
+            top:'100px'
+        })
+        Interaction.set2Div = Util.dom({
+            tag:'div',
+            parent:container,
+            css:setDivCss
+        });
+        $(Interaction.set2Div).css({
+            top:'150px'
+        })
         Interaction.setRandomGenerator(4);
         Interaction.prepareNextQuestion();
 
 
-		},
+    },
 	nextQuestion: function(randomNumber){
-            Interaction.answer = randomNumber;
-            switch(randomNumber){
-                case 0:
-                    Interaction.set1 = Interaction.set2 = Set.randomGenerator();
+        Interaction.trial++;
+        Interaction.cleanOptions();
+//        /*<[[TEST*/ randomNumber = 1 /*TEST]]>*/
+        Interaction.generateSets(randomNumber);
 
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
-
-
-            Interaction.set1
-
-
-		},
+    },
 		
-	/*
-	*	this function is called inside Interaction.__checkAnswer() function
-	*	if this function returns false, check answer operation is cancelled
-	*/
+    cleanOptions:function(){
+        Interaction.clickedOption = null;
+        $(Interaction.options).each(function(){
+            $(this).css(optionsStyle);
+
+        })
+        $('.image-container')
+            .css({
+                backgroundPosition:'0px 0px'
+            })
+    },
     createOptions:function(referencePoint){
 
-            var equalSets       = Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Eşit kümeler'});
-            var subsetOfTheOther= Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Biri diğerinin alt kümesi'});
-            var disjointSets    = Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Ayrık kümeler'});
-            var intersectingSets= Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Kesişen kümeler'});
+        var equalSets       = Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Eşit kümeler'});
+        var subsetOfTheOther= Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Biri diğerinin alt kümesi'});
+        var disjointSets    = Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Ayrık kümeler'});
+        var intersectingSets= Util.dom({parent:Interaction.container,tag:'div',css:optionsStyle,html:'Kesişen kümeler'});
 
-            Interaction.options = [equalSets,subsetOfTheOther,disjointSets,intersectingSets];
+        Interaction.options = [equalSets,subsetOfTheOther,disjointSets,intersectingSets];
 
-            for(var i=0;i<Interaction.options.length;i++){
-                $(Interaction.options[i]).css({
-                    top:referencePoint.y+50*i,
-                    left:referencePoint.x
-                }).click(function(){
+        for(var i=0;i<Interaction.options.length;i++){
+            $(Interaction.options[i]).css({
+                top:referencePoint.y+50*i,
+                left:referencePoint.x
+            }).click(function(){
+                Interaction.cleanOptions();
                     Interaction.clickedOption = this;
-                    $(Interaction.options).each(function(){
-                        $(this).css(optionsStyle);
-
+                $('.image-container',this)
+                    .css({
+                        backgroundPosition:'-32px 0px'
                     })
-                    $('.image-container')
-                        .css({
-                            backgroundPosition:'0px 0px'
-                        })
-                    $('.image-container',this)
-                        .css({
-                            backgroundPosition:'-32px 0px'
-                        })
-                    $(Interaction.clickedOption).css(selectedOptionStyle);
-                }).prepend('<div class="image-container"></div>');
-                $('.image-container',Interaction.options[i])
-                    .css(optionsImageContainer)
+                $(Interaction.clickedOption).css(selectedOptionStyle);
+            }).prepend('<div class="image-container"></div>');
+            $('.image-container',Interaction.options[i])
+                .css(optionsImageContainer)
 
 
 
-            }
+        }
 
 
-        },
-    generateSets:function(){
+    },
+    generateSets:function(randomNumber){
+        var set1String,set2String;
+        Interaction.set1  = Set.randomGenerator();
+        switch(randomNumber){
+            case 0:
+                Interaction.set2 = Interaction.set1;
+                set1String = Interaction.set1.getDefinitionString();
+                set2String = Interaction.set2.getElementsString();
+                break;
+            case 1:
+                Interaction.set2 = Interaction.set1.getRandomSubset();
+                break;
+            case 2:
+                Interaction.set2 = Interaction.set1.getRandomSubset();
+                break;
+            case 3:
+                Interaction.set2 = Interaction.set1.getRandomSubset();
+                break;
+        }
+        if(randomNumber != 0 ){
+            var isSet1DefinitionString = Util.rand01() == 1;
+            var isSet2DefinitionString = Util.rand01() == 1;
+            if(Interaction.set1.isEqualSet(Interaction.set2))
+                isSet1DefinitionString = ! isSet2DefinitionString;
+            if(isSet1DefinitionString)
+                set1String = Interaction.set1.getDefinitionString();
+            else
+                set1String = Interaction.set1.getElementsString();
+            if(isSet2DefinitionString)
+                set2String = Interaction.set2.getDefinitionString();
+            else
+                set2String = Interaction.set2.getElementsString();
+        }
+        Interaction.set1Div.innerHTML = 'A = ' + set1String;
+        Interaction.set2Div.innerHTML = 'B = ' + set2String;
 
-        },
+    },
 	preCheck : function(){
-		
-		},
+		if(Interaction.clickedOption == null){
+            Interaction.setStatus("Lütfen bir şık seçiniz", "alert");
+            return false;
+        }
+    },
 	isAnswerCorrect : function(){
-		
-		},
+        if(Interaction.clickedOption == Interaction.options[0])
+            return Interaction.set1.isEqualSet(Interaction.set2);
+        if(Interaction.clickedOption == Interaction.options[1])
+            return Interaction.set1.isSubsetOf(Interaction.set2) || Interaction.set2.isSubsetOf(Interaction.set1);
+        if(Interaction.clickedOption == Interaction.options[2])
+            return Interaction.set1.isDisjointWith(Interaction.set2);
+        if(Interaction.clickedOption == Interaction.options[3])
+            return Interaction.set1.isIntersectingWith(Interaction.set2);
+    },
 	onCorrectAnswer : function(){
-            $(Interaction.clickedOption).css(trueOptionStyle);
-            $('.image-container',Interaction.clickedOption).css({
-                backgroundPosition:'-64px 0px'
-            });
-		},
+        $(Interaction.clickedOption).css(trueOptionStyle);
+        $('.image-container',Interaction.clickedOption).css({
+            backgroundPosition:'-64px 0px'
+        });
+    },
 	onWrongAnswer : function(){
-            $(Interaction.clickedOption).css(falseOptionStyle);
-            $('.image-container',Interaction.clickedOption).css({
-                backgroundPosition:'-96px 0px'
-            });
 		
-		},
+    },
 	onFail : function(){
+        Interaction.setStatus('Yanlış cevap.',false)
+
+        $(Interaction.clickedOption).css(falseOptionStyle);
+        $('.image-container',Interaction.clickedOption).css({
+            backgroundPosition:'-96px 0px'
+        });
 		
-		}
+    }
 }
