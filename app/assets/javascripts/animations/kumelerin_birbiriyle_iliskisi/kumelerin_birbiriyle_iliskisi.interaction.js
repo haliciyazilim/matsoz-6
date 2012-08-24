@@ -10,28 +10,32 @@ var Interaction = {
         }
     ],
     init:function(container){
-			Interaction.container = container;
-			Main.setObjective('Yanda verilen kümelerin birbirine göre durumunu belirtiniz ve kontrol ediniz.');
-			Interaction.paper = {
-				width:$(container).width(),
-				height:$(container).height()
-			}
-			
-			/*
-			*	Initialize your interaction here
-			*/
-			var referencePoint = new Point(100,100);
-            Interaction.createOptions(referencePoint.add(200,-50));
-            Interaction.appendStatus({
-                bottom:'30px',
-                right:'210px'
-            })
-            Interaction.appendButton({
-                bottom:'20px',
-                right:'100px'
-            })
-            Interaction.setRandomGenerator(4);
-			Interaction.prepareNextQuestion();
+        Interaction.container = container;
+
+        Main.setObjective('Yanda verilen kümelerin birbirine göre durumunu belirtiniz ve kontrol ediniz.');
+        Interaction.paper = {
+            width:$(container).width(),
+            height:$(container).height()
+        }
+
+        /*
+        *	Initialize your interaction here
+        */
+        var referencePoint = new Point(100,100);
+        Interaction.createOptions(referencePoint.add(200,-50));
+        Interaction.appendStatus({
+            bottom:'30px',
+            right:'210px'
+        })
+        Interaction.appendButton({
+            bottom:'20px',
+            right:'100px'
+        })
+
+        Interaction.setRandomGenerator(4);
+        Interaction.prepareNextQuestion();
+
+
 		},
 	nextQuestion: function(randomNumber){
             Interaction.answer = randomNumber;
@@ -47,6 +51,9 @@ var Interaction = {
                 case 3:
                     break;
             }
+
+
+            Interaction.set1
 
 
 		},
