@@ -93,6 +93,143 @@ var Set = Class.extend({
                 }
                 this.type = Set.MULTIPLIES;
                 break;
+            case Set.DIGIT:
+                this.definition = "rakamlar";
+                for(var i = 0; i < 10; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.DIGIT;
+                break;
+            case Set.DIGIT_ODD:
+                this.definition = "tek rakamlar";
+                for(var i = 0; i < 10; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.DIGIT_ODD;
+                break;
+            case Set.DIGIT_EVEN:
+                this.definition = "çift rakamlar";
+                for(var i = 0; i < 10; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.DIGIT_EVEN;
+                break;
+            case Set.SMALLER_THAN_DIGIT:
+                this.definition = ""+this.getValueStr(opt.value)+" küçük rakamlar";
+                if(opt.value > 10){
+                    var limit = 10;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = 0; i < limit; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.SMALLER_THAN_DIGIT;
+                break;
+            case Set.SMALLER_THAN_DIGIT_ODD:
+                this.definition = ""+this.getValueStr(opt.value)+" küçük tek rakamlar";
+                if(opt.value > 10){
+                    var limit = 10;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = 0; i < limit; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_DIGIT_ODD;
+                break;
+            case Set.SMALLER_THAN_DIGIT_EVEN:
+                this.definition = ""+this.getValueStr(opt.value)+" küçük çift rakamlar";
+                if(opt.value > 10){
+                    var limit = 10;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = 0; i < limit; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_DIGIT_EVEN;
+                break;
+            case Set.GREATER_THAN_DIGIT:
+                this.definition = ""+this.getValueStr(opt.value)+" büyük rakamlar";
+                if(opt.value < 0){
+                    var limit = 0;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = limit+1; i < 10; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.GREATER_THAN_DIGIT;
+                break;
+            case Set.GREATER_THAN_DIGIT_ODD:
+                this.definition = ""+this.getValueStr(opt.value)+" büyük tek rakamlar";
+                if(opt.value < 0){
+                    var limit = 0;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = limit+1; i < 10; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.GREATER_THAN_DIGIT_ODD;
+                break;
+            case Set.GREATER_THAN_DIGIT_EVEN:
+                this.definition = ""+this.getValueStr(opt.value)+" büyük çift rakamlar";
+                if(opt.value < 0){
+                    var limit = 0;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = limit+1; i < 10; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.GREATER_THAN_DIGIT_EVEN;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_DIGIT:
+                this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük rakamlar";
+                for(var i = opt.value1+1; i < opt.value2; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD:
+                this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük tek rakamlar";
+                for(var i = opt.value1+1; i < opt.value2; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN:
+                this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük çift rakamlar";
+                for(var i = opt.value1+1; i < opt.value2; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN;
+                break;
+
         }
     },
 
@@ -624,6 +761,19 @@ Set.SMALLER_THAN_GREATER_THAN_EVEN = 7;
 Set.SMALLER_THAN_GREATER_THAN_PRIME = 8;
 Set.FACTORS = 9;
 Set.MULTIPLIES = 10;
+Set.DIGIT = 11;
+Set.DIGIT_ODD = 12;
+Set.DIGIT_EVEN = 13;
+Set.SMALLER_THAN_DIGIT = 14;
+Set.SMALLER_THAN_DIGIT_ODD = 15;
+Set.SMALLER_THAN_DIGIT_EVEN = 16;
+Set.GREATER_THAN_DIGIT = 17;
+Set.GREATER_THAN_DIGIT_ODD = 18;
+Set.GREATER_THAN_DIGIT_EVEN = 19;
+Set.SMALLER_THAN_GREATER_THAN_DIGIT = 20;
+Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD = 21;
+Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN = 22;
+
 
 Set.randomGenerator = function(type){
 
