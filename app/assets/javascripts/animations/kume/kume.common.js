@@ -419,8 +419,8 @@ var Set = Class.extend({
         $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
         $('#vennElements2').css({
             position:'absolute',
-            top:topLeftPoint.y+14,
-            left:topLeftPoint.x+14,
+            top:topLeftPoint.y+parseInt($(container).css("padding")),
+            left:topLeftPoint.x+parseInt($(container).css("padding")),
             width:'150px',
             height:'100px',
             fontSize:'16px',
