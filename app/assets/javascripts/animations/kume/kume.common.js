@@ -4,7 +4,17 @@ var Set = Class.extend({
         switch(opt.type){
             case Set.ELEMENTS:
                 this.definition = ""+opt.elements.length+" elemanlı küme";
-                this.elements = opt.elements;
+                this.elements = [];
+                for(var i=0;i<opt.elements.length;i++){
+                    var isExist;
+                    //remove the duplicates
+                    for(var j=0;j<this.elements.length;j++)
+                        if(opt.elements[i] == this.elements[j])
+                            isExist = true;
+                    if(isExist)
+                        continue;
+                    this.elements.push(opt.elements[i])
+                }
                 this.elements.sort(function(a,b){return a-b})
                 this.type = Set.ELEMENTS;
                 break;
