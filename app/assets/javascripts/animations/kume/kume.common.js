@@ -4,7 +4,17 @@ var Set = Class.extend({
         switch(opt.type){
             case Set.ELEMENTS:
                 this.definition = ""+opt.elements.length+" elemanlı küme";
-                this.elements = opt.elements;
+                this.elements = [];
+                for(var i=0;i<opt.elements.length;i++){
+                    var isExist;
+                    //remove the duplicates
+                    for(var j=0;j<this.elements.length;j++)
+                        if(opt.elements[i] == this.elements[j])
+                            isExist = true;
+                    if(isExist)
+                        continue;
+                    this.elements.push(opt.elements[i])
+                }
                 this.elements.sort(function(a,b){return a-b})
                 this.type = Set.ELEMENTS;
                 break;
@@ -93,6 +103,143 @@ var Set = Class.extend({
                 }
                 this.type = Set.MULTIPLIES;
                 break;
+            case Set.DIGIT:
+                this.definition = "rakamlar";
+                for(var i = 0; i < 10; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.DIGIT;
+                break;
+            case Set.DIGIT_ODD:
+                this.definition = "tek rakamlar";
+                for(var i = 0; i < 10; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.DIGIT_ODD;
+                break;
+            case Set.DIGIT_EVEN:
+                this.definition = "çift rakamlar";
+                for(var i = 0; i < 10; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.DIGIT_EVEN;
+                break;
+            case Set.SMALLER_THAN_DIGIT:
+                this.definition = ""+this.getValueStr(opt.value)+" küçük rakamlar";
+                if(opt.value > 10){
+                    var limit = 10;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = 0; i < limit; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.SMALLER_THAN_DIGIT;
+                break;
+            case Set.SMALLER_THAN_DIGIT_ODD:
+                this.definition = ""+this.getValueStr(opt.value)+" küçük tek rakamlar";
+                if(opt.value > 10){
+                    var limit = 10;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = 0; i < limit; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_DIGIT_ODD;
+                break;
+            case Set.SMALLER_THAN_DIGIT_EVEN:
+                this.definition = ""+this.getValueStr(opt.value)+" küçük çift rakamlar";
+                if(opt.value > 10){
+                    var limit = 10;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = 0; i < limit; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_DIGIT_EVEN;
+                break;
+            case Set.GREATER_THAN_DIGIT:
+                this.definition = ""+this.getValueStr(opt.value)+" büyük rakamlar";
+                if(opt.value < 0){
+                    var limit = 0;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = limit+1; i < 10; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.GREATER_THAN_DIGIT;
+                break;
+            case Set.GREATER_THAN_DIGIT_ODD:
+                this.definition = ""+this.getValueStr(opt.value)+" büyük tek rakamlar";
+                if(opt.value < 0){
+                    var limit = 0;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = limit+1; i < 10; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.GREATER_THAN_DIGIT_ODD;
+                break;
+            case Set.GREATER_THAN_DIGIT_EVEN:
+                this.definition = ""+this.getValueStr(opt.value)+" büyük çift rakamlar";
+                if(opt.value < 0){
+                    var limit = 0;
+                }
+                else{
+                    var limit = opt.value;
+                }
+                for(var i = limit+1; i < 10; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.GREATER_THAN_DIGIT_EVEN;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_DIGIT:
+                this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük rakamlar";
+                for(var i = opt.value1+1; i < opt.value2; i++){
+                    this.elements.push(i);
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD:
+                this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük tek rakamlar";
+                for(var i = opt.value1+1; i < opt.value2; i++){
+                    if(i % 2 == 1){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN:
+                this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük çift rakamlar";
+                for(var i = opt.value1+1; i < opt.value2; i++){
+                    if(i % 2 == 0){
+                        this.elements.push(i);
+                    }
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN;
+                break;
+
         }
     },
 
@@ -129,7 +276,7 @@ var Set = Class.extend({
         }
     },
 
-    isSubSet:function(otherSet){
+    isSubsetOf:function(otherSet){
         if(this.elements.length > otherSet.elements.length){
             return false;
         }
@@ -162,7 +309,7 @@ var Set = Class.extend({
         }
     },
 
-    isDiscreteSet:function(otherSet){
+    isDisjointWith:function(otherSet){
         var a = [];
         var correctN = 0;
         for(var i = 0; i < this.elements.length; i++){
@@ -190,7 +337,7 @@ var Set = Class.extend({
         }
     },
 
-    isConcurrentSet:function(otherSet){
+    isIntersectingWith:function(otherSet){
         var a = [];
         var correctN = 0;
         for(var i = 0; i < this.elements.length; i++){
@@ -273,8 +420,64 @@ var Set = Class.extend({
         return c;
     },
 
+    getDifference : function(otherSet){
+        var difference = [];
+
+        for(var i = 0; i < this.elements.length; i++){
+            if(otherSet.elements.indexOf(this.elements[i]) == -1){
+                difference.push(this.elements[i]);
+            }
+        }
+
+        difference.sort(function(a,b){return a-b});
+
+        var c = new Set({type:Set.ELEMENTS, elements:difference});
+        var cStr = "";
+        if(otherSet.type == Set.ELEMENTS){
+            cStr = "'nin";
+        }
+        else if(otherSet.type == Set.FACTORS || otherSet.type == Set.MULTIPLIES){
+            cStr = "'nın";
+        }
+        else{
+            cStr = "'ın"
+        }
+        c.definition = ""+this.definition+" ile "+otherSet.definition+""+cStr+" farkı";
+        return c;
+    },
+
     getSubSets:function(){
 
+    },
+
+    getComplement : function(universalSet){
+        return universalSet.getDifference(this);
+    },
+
+    getDefinitionString : function(setLetter){
+        if(setLetter == undefined){
+            var definitionString = "{ "+this.definition+" }";
+        }
+        else{
+            var definitionString = ""+setLetter+" = { "+this.definition+" }";
+        }
+
+        return definitionString;
+    },
+
+    getElementsString : function(setLetter){
+        if(setLetter == undefined){
+            var elementsString = "{ ";
+        }
+        else{
+            var elementsString = ""+setLetter+" = { ";
+        }
+        for(var i = 0; i < this.elements.length-1; i++){
+            elementsString += ""+this.elements[i]+", ";
+        }
+        elementsString += this.elements[this.elements.length-1]+" }";
+
+        return elementsString;
     },
 
     getValueStr:function(value,opt){
@@ -352,7 +555,210 @@ var Set = Class.extend({
         }
 
         return a;
-    }
+    },
+
+    getRandomSubset:function(){
+        var set;
+        if(this.type == Set.ELEMENTS){
+            var index1 = Util.randomInteger(0,5);
+            var index2 = Util.randomInteger(index1+1,6);
+            set = new Set({
+                type:Set.ELEMENTS,
+                elements:this.elements.slice(index1,index2)
+            });
+        }
+        else{
+            do
+                set = Set.randomGenerator();
+            while(set == undefined || !set.isSubsetOf(this));
+        }
+        return set;
+    },
+    getRandomDisjointSet:function(){
+        var set;
+
+        do
+            set = Set.randomGenerator();
+        while(set == undefined || !set.isDisjointWith(this));
+        return set;
+    },
+    getRandomIntersectingSet:function(){
+        var set;
+        do
+            set = Set.randomGenerator();
+        while(set == undefined || !set.isIntersectingWith(this));
+        return set;
+    },
+
+    drawVennDiagram : function(container, topLeftPoint, setLetter){
+        var size = new Size(150, 100);
+        var rectangle = new Rectangle(topLeftPoint, size);
+        this.vennDiagram = new Path.Oval(rectangle);
+        this.vennDiagram.strokeColor = "black";
+
+        $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
+        $('#vennElements2').css({
+            position:'absolute',
+            top:topLeftPoint.y+parseInt($(container).css("padding")),
+            left:topLeftPoint.x+parseInt($(container).css("padding")),
+            width:'150px',
+            height:'100px',
+            fontSize:'16px',
+            textAlign:'center',
+            fontWeight:'bold',
+         //   border:'1px solid'
+        });
+        $('#vennLetter2').css({
+            position:'absolute',
+            top:'0px',
+            left:'0px',
+            width:'18px',
+            height:'18px',
+            fontWeight:'normal'
+        });
+        $('#vennLetter2').html(setLetter);
+        $('#e12').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e22').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e32').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e42').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e52').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+        $('#e62').css({
+            position:'absolute',
+            width:'24px',
+            height:'20px',
+        });
+
+        switch(this.elements.length){
+            case 0:
+                break;
+            case 1:{
+                $('#e12').css({
+                    top:'42px',
+                    left:'62px'
+                });
+                break;
+            }
+            case 2:{
+                $('#e12').css({
+                    top:'40px',
+                    left:'34px'
+                });
+                $('#e22').css({
+                    top:'40px',
+                    left:'96px',
+                });
+                break;
+            }
+            case 3:{
+                $('#e12').css({
+                    top:'40px',
+                    left:'30px'
+                });
+                $('#e22').css({
+                    top:'15px',
+                    left:'67px',
+                });
+                $('#e32').css({
+                    top:'61px',
+                    left:'84px'
+                });
+                break;
+            }
+            case 4:{
+                $('#e12').css({
+                    top:'22px',
+                    left:'34px'
+                });
+                $('#e22').css({
+                    top:'22px',
+                    left:'88px',
+                });
+                $('#e32').css({
+                    top:'66px',
+                    left:'34px'
+                });
+                $('#e42').css({
+                    top:'66px',
+                    left:'88px',
+                });
+                break;
+            }
+            case 5:{
+                $('#e12').css({
+                    top:'20px',
+                    left:'32px'
+                });
+                $('#e22').css({
+                    top:'20px',
+                    left:'90px',
+                });
+                $('#e32').css({
+                    top:'68px',
+                    left:'32px'
+                });
+                $('#e42').css({
+                    top:'68px',
+                    left:'90px',
+                });
+                $('#e52').css({
+                    top:'42px',
+                    left:'62px'
+                });
+                break;
+            }
+            case 6:{
+                $('#e12').css({
+                    top:'42px',
+                    left:'62px'
+                });
+                $('#e22').css({
+                    top:'12px',
+                    left:'70px',
+                });
+                $('#e32').css({
+                    top:'30px',
+                    left:'106px'
+                });
+                $('#e42').css({
+                    top:'66px',
+                    left:'34px',
+                });
+                $('#e52').css({
+                    top:'18px',
+                    left:'24px'
+                });
+                $('#e62').css({
+                    top:'66px',
+                    left:'90px',
+                });
+                break;
+            }
+        }
+
+        for(var i = 1; i <= this.elements.length; i++){
+            $('#e'+i+"2").html("."+this.elements[i-1]);
+        }
+    },
 });
 Set.ELEMENTS = 0;
 Set.SMALLER_THAN = 1;
@@ -365,3 +771,97 @@ Set.SMALLER_THAN_GREATER_THAN_EVEN = 7;
 Set.SMALLER_THAN_GREATER_THAN_PRIME = 8;
 Set.FACTORS = 9;
 Set.MULTIPLIES = 10;
+Set.DIGIT = 11;
+Set.DIGIT_ODD = 12;
+Set.DIGIT_EVEN = 13;
+Set.SMALLER_THAN_DIGIT = 14;
+Set.SMALLER_THAN_DIGIT_ODD = 15;
+Set.SMALLER_THAN_DIGIT_EVEN = 16;
+Set.GREATER_THAN_DIGIT = 17;
+Set.GREATER_THAN_DIGIT_ODD = 18;
+Set.GREATER_THAN_DIGIT_EVEN = 19;
+Set.SMALLER_THAN_GREATER_THAN_DIGIT = 20;
+Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD = 21;
+Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN = 22;
+
+
+Set.randomGenerator = function(type){
+
+    var sType,elements,value,value1,value2;
+    if(type == undefined || !isNaN(type))
+        sType= Util.randomInteger(1,11);
+    else
+        sType = type;
+    var set;
+    switch(sType){
+        case 1:{     // Set.SMALLER_THAN
+            var randNum = Util.randomInteger(1,7);
+            set = new Set({type:Set.SMALLER_THAN, value:randNum});
+            break;
+        }
+        case 2:{     // Set.SMALLER_THAN_ODD
+            var randNum = Util.randomInteger(2,12);
+            set = new Set({type:Set.SMALLER_THAN_ODD, value:randNum});
+            break;
+        }
+        case 3:{     // Set.SMALLER_THAN_EVEN
+            var randNum = Util.randomInteger(1,11);
+            set = new Set({type:Set.SMALLER_THAN_EVEN, value:randNum});
+            break;
+        }
+        case 4:{     // Set.SMALLER_THAN_PRIME
+            var randNum = Util.randomInteger(3,14);
+            set = new Set({type:Set.SMALLER_THAN_PRIME, value:randNum});
+            break;
+        }
+        case 5:{     // Set.SMALLER_THAN_GREATER_THAN
+            var randNum1 = Util.randomInteger(1,90);
+            var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 6:{     // Set.SMALLER_THAN_GREATER_THAN_ODD
+            var randNum1 = Util.randomInteger(1,80);
+            var randNum2 = randNum1+Util.randomInteger(4,13);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_ODD, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 7:{     // Set.SMALLER_THAN_GREATER_THAN_EVEN
+            var randNum1 = Util.randomInteger(1,80);
+            var randNum2 = randNum1+Util.randomInteger(4,13);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_EVEN, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 8:{     // Set.SMALLER_THAN_GREATER_THAN_PRIME
+            do{
+                var randNum1 = Util.randomInteger(1, 90);
+                var randNum2 = Util.randomInteger(1, 90);
+                var primeNums = [];
+                for(var i = randNum1+1; i < randNum2; i++){
+                    if(Util.isPrimeNumber(i)){
+                        primeNums.push(i);
+                    }
+                }
+            } while(primeNums.length == 0 || primeNums.length > 6)
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_PRIME, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 9:{     // Set.FACTORS
+            do{
+                var randNum = Util.randomInteger(1,97);
+                var factors = [];
+                factors = Util.getFactors(randNum);
+            }while(factors.length > 6)
+            set = new Set({type:Set.FACTORS, value:randNum});
+            break;
+        }
+        case 10:{    // Set.MULTIPLIES
+            var randNum1 = Util.randomInteger(2,17);
+            var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+            set = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
+            break;
+        }
+    }
+
+    return set;
+}
