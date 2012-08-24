@@ -94,6 +94,8 @@ var Set = Class.extend({
                 this.type = Set.MULTIPLIES;
                 break;
         }
+
+        this.getStrings();
     },
 
     isEqualSet:function(otherSet){
@@ -273,8 +275,43 @@ var Set = Class.extend({
         return c;
     },
 
+    getDifference : function(otherSet){
+        var difference = [];
+
+        for(var i = 0; i < this.elements.length; i++){
+            if(otherSet.elements.indexOf(this.elements[i]) == -1){
+                difference.push(this.elements[i]);
+            }
+        }
+
+        difference.sort(function(a,b){return a-b});
+
+        var c = new Set({type:Set.ELEMENTS, elements:difference});
+        var cStr = "";
+        if(otherSet.type == Set.ELEMENTS){
+            cStr = "'nin";
+        }
+        else if(otherSet.type == Set.FACTORS || otherSet.type == Set.MULTIPLIES){
+            cStr = "'nın";
+        }
+        else{
+            cStr = "'ın"
+        }
+        c.definition = ""+this.definition+" ile "+otherSet.definition+""+cStr+" farkı";
+        return c;
+    },
+
     getSubSets:function(){
 
+    },
+
+    getStrings : function(){
+        this.definitionStr = "{ "+this.definition+" }";
+        this.elementsStr = "{ ";
+        for(var i = 0; i < this.elements.length-1; i++){
+            this.elementsStr += ""+this.elements[i]+", ";
+        }
+        this.elementsStr += this.elements[this.elements.length-1]+" }";
     },
 
     getValueStr:function(value,opt){
