@@ -94,8 +94,6 @@ var Set = Class.extend({
                 this.type = Set.MULTIPLIES;
                 break;
         }
-
-        this.getStrings();
     },
 
     isEqualSet:function(otherSet){
@@ -305,13 +303,20 @@ var Set = Class.extend({
 
     },
 
-    getStrings : function(){
-        this.definitionStr = "{ "+this.definition+" }";
-        this.elementsStr = "{ ";
+    getDefinitionString : function(){
+        var definitionString = "{ "+this.definition+" }";
+
+        return definitionString;
+    },
+
+    getElementsString : function(){
+        var elementsString = "{ ";
         for(var i = 0; i < this.elements.length-1; i++){
-            this.elementsStr += ""+this.elements[i]+", ";
+            elementsString += ""+this.elements[i]+", ";
         }
-        this.elementsStr += this.elements[this.elements.length-1]+" }";
+        elementsString += this.elements[this.elements.length-1]+" }";
+
+        return elementsString;
     },
 
     getValueStr:function(value,opt){
