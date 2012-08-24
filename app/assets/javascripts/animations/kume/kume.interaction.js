@@ -147,7 +147,7 @@ var Interaction = {
             position:'absolute',
             top:'110px',
             left:'24px',
-         //   border:'1px solid',
+        //    border:'1px solid',
             width:'400px',
             height:'80px',
             fontSize:'18px',
@@ -185,8 +185,8 @@ var Interaction = {
             position:'absolute',
             left:'50px',
             top:'0px',
-            width:'36px',
-            height:'36px',
+            width:'50px',
+            height:'50px',
             padding:0,
             margin:0,
         //    border:'1px solid'
@@ -242,8 +242,8 @@ var Interaction = {
             position:'absolute',
             left:'50px',
             top:'0px',
-            width:'36px',
-            height:'36px',
+            width:'50px',
+            height:'50px',
             padding:0,
             margin:0,
             //    border:'1px solid'
@@ -401,12 +401,14 @@ var Interaction = {
             },
         });
 
+        Interaction.emptySetCounter = -1;
+        Interaction.emptySetIndex = Util.randomInteger(0,10);
 
         Interaction.setRandomGenerator(11,1);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        Interaction.emptySetCounter += 1;
         Interaction.myPause = 0;
 	    Interaction.randomNumber = randomNumber;
         Interaction.trial = 1;
@@ -482,99 +484,129 @@ var Interaction = {
         Interaction.activeStr = null;
         Interaction.activeStr2 = null;
 
-        switch(Interaction.randomNumber){
-            case 1:{     // Set.SMALLER_THAN
-                var randNum = Util.randomInteger(1,7);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN, value:randNum});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 2:{     // Set.SMALLER_THAN_ODD
-                var randNum = Util.randomInteger(2,12);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_ODD, value:randNum});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 3:{     // Set.SMALLER_THAN_EVEN
-                var randNum = Util.randomInteger(1,11);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_EVEN, value:randNum});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 4:{     // Set.SMALLER_THAN_PRIME
-                var randNum = Util.randomInteger(3,14);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_PRIME, value:randNum});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 5:{     // Set.SMALLER_THAN_GREATER_THAN
-                var randNum1 = Util.randomInteger(1,90);
-                var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN, value1:randNum1, value2:randNum2});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 6:{     // Set.SMALLER_THAN_GREATER_THAN_ODD
-                var randNum1 = Util.randomInteger(1,80);
-                var randNum2 = randNum1+Util.randomInteger(4,13);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN_ODD, value1:randNum1, value2:randNum2});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 7:{     // Set.SMALLER_THAN_GREATER_THAN_EVEN
-                var randNum1 = Util.randomInteger(1,80);
-                var randNum2 = randNum1+Util.randomInteger(4,13);
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN_EVEN, value1:randNum1, value2:randNum2});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 8:{     // Set.SMALLER_THAN_GREATER_THAN_PRIME
-                do{
-                    var randNum1 = Util.randomInteger(1, 90);
-                    var randNum2 = Util.randomInteger(1, 90);
-                    var primeNums = [];
-                    for(var i = randNum1+1; i < randNum2; i++){
-                        if(Util.isPrimeNumber(i)){
-                            primeNums.push(i);
+        if(Interaction.emptySetCounter == Interaction.emptySetIndex){
+
+            var emptySetDefs = [];
+            emptySetDefs[0] = "2'den büyük 3'ten küçük doğal sayılar";
+            emptySetDefs[1] = "3'den büyük 5'ten küçük asal sayılar";
+            emptySetDefs[2] = "9'dan büyük çift rakamlar";
+            emptySetDefs[3] = "2'den küçük asal sayılar";
+            emptySetDefs[4] = "0'dan küçük doğal sayılar";
+
+            var emptySetIndex = Util.randomInteger(0, 5);
+
+            Interaction.questionSet = new Set({type:Set.ELEMENTS, elements:[]});
+            Interaction.questionSet.definition = emptySetDefs[emptySetIndex];
+            $('#setDefinition').html(Interaction.questionSet.definition);
+
+            Interaction.length = 0;
+        }
+        else{
+
+            switch(Interaction.randomNumber){
+                case 1:{     // Set.SMALLER_THAN
+                    var randNum = Util.randomInteger(1,7);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN, value:randNum});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 2:{     // Set.SMALLER_THAN_ODD
+                    var randNum = Util.randomInteger(2,12);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_ODD, value:randNum});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 3:{     // Set.SMALLER_THAN_EVEN
+                    var randNum = Util.randomInteger(1,11);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_EVEN, value:randNum});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 4:{     // Set.SMALLER_THAN_PRIME
+                    var randNum = Util.randomInteger(3,14);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_PRIME, value:randNum});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 5:{     // Set.SMALLER_THAN_GREATER_THAN
+                    var randNum1 = Util.randomInteger(1,90);
+                    var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN, value1:randNum1, value2:randNum2});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 6:{     // Set.SMALLER_THAN_GREATER_THAN_ODD
+                    var randNum1 = Util.randomInteger(1,80);
+                    var randNum2 = randNum1+Util.randomInteger(4,13);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN_ODD, value1:randNum1, value2:randNum2});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 7:{     // Set.SMALLER_THAN_GREATER_THAN_EVEN
+                    var randNum1 = Util.randomInteger(1,80);
+                    var randNum2 = randNum1+Util.randomInteger(4,13);
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN_EVEN, value1:randNum1, value2:randNum2});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 8:{     // Set.SMALLER_THAN_GREATER_THAN_PRIME
+                    do{
+                        var randNum1 = Util.randomInteger(1, 90);
+                        var randNum2 = Util.randomInteger(1, 90);
+                        var primeNums = [];
+                        for(var i = randNum1+1; i < randNum2; i++){
+                            if(Util.isPrimeNumber(i)){
+                                primeNums.push(i);
+                            }
                         }
-                    }
-                } while(primeNums.length == 0 || primeNums.length > 6)
-                Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN_PRIME, value1:randNum1, value2:randNum2});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
+                    } while(primeNums.length == 0 || primeNums.length > 6)
+                    Interaction.questionSet = new Set({type:Set.SMALLER_THAN_GREATER_THAN_PRIME, value1:randNum1, value2:randNum2});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 9:{     // Set.FACTORS
+                    do{
+                        var randNum = Util.randomInteger(1,97);
+                        var factors = [];
+                        factors = Util.getFactors(randNum);
+                    }while(factors.length > 6)
+                    Interaction.questionSet = new Set({type:Set.FACTORS, value:randNum});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
+                case 10:{    // Set.MULTIPLIES
+                    var randNum1 = Util.randomInteger(2,17);
+                    var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+                    Interaction.questionSet = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
+                    $('#setDefinition').html(Interaction.questionSet.definition);
+                    break;
+                }
             }
-            case 9:{     // Set.FACTORS
-                do{
-                    var randNum = Util.randomInteger(1,97);
-                    var factors = [];
-                    factors = Util.getFactors(randNum);
-                }while(factors.length > 6)
-                Interaction.questionSet = new Set({type:Set.FACTORS, value:randNum});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
-            case 10:{    // Set.MULTIPLIES
-                var randNum1 = Util.randomInteger(2,17);
-                var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
-                Interaction.questionSet = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
-                $('#setDefinition').html(Interaction.questionSet.definition);
-                break;
-            }
+            Interaction.length = Interaction.questionSet.elements.length;
         }
 
-        Interaction.length = Interaction.questionSet.elements.length;
-
-        for(var i = 0; i < Interaction.length; i++){
-            Interaction.appendInput({
+        if(Interaction.length == 0){
+            var inp = Interaction.appendInput({
                 width:'26px',
                 height:'24px',
                 position:'static'
-            });
+            }, true, true);
+
+            $('#inputs').append(inp);
         }
-        for(var i = 0; i < Interaction.length; i++){
-            $('#inputs').append(Interaction.inputs[i]);
-            if(i != Interaction.length-1){
-                $('#inputs').append(" , ");
+        else{
+            for(var i = 0; i < Interaction.length; i++){
+                Interaction.appendInput({
+                    width:'26px',
+                    height:'24px',
+                    position:'static'
+                });
+            }
+            for(var i = 0; i < Interaction.length; i++){
+                $('#inputs').append(Interaction.inputs[i]);
+                if(i != Interaction.length-1){
+                    $('#inputs').append(" , ");
+                }
             }
         }
 
@@ -696,7 +728,12 @@ var Interaction = {
             $('#e'+i).html("."+Interaction.questionSet.elements[i-1]);
         }
 
-        var r = Util.randomInteger(0,3);
+        if(Interaction.length == 0){
+            r = 0;
+        }
+        else{
+            var r = Util.randomInteger(0,3);
+        }
         if(r == 0){ // both elements are not elements of Set
             var a = [];
             for(var i = 0; i < Interaction.questionSet.elements.length; i++){
@@ -733,7 +770,12 @@ var Interaction = {
             height:'30px',
             fontSize:'24px'
         });
-        $(Interaction.thirdQuestionDiv).append(Interaction.inputs[Interaction.length]);
+        if(Interaction.length == 0){
+            $(Interaction.thirdQuestionDiv).append(Interaction.inputs[1]);
+        }
+        else{
+            $(Interaction.thirdQuestionDiv).append(Interaction.inputs[Interaction.length]);
+        }
 
     },
 	preCheck : function(){
@@ -742,35 +784,86 @@ var Interaction = {
         }
         else{
             if(Interaction.myTrial == 0){ // question1
-                var myArr = [];
-                for(var i = 0; i < Interaction.length; i++){
-                    myArr[i] = Interaction.inputs[i].value;
-                }
-                if(Interaction.checkAnswers(myArr)){
-                    Interaction.setStatus('Tebrikler!',true);
-                    for(var i = 0; i < Interaction.length; i++){
-                        $(Interaction.inputs[i]).css("color","green");
-                        Interaction.inputs[i].readOnly = true;
+                if(Interaction.length == 0){
+                    if(Interaction.inputs[0].value == ""){
+                        Interaction.setStatus('Tebrikler!', true);
+                        Interaction.vennDiagram.opacity = 1;
+                        $('#vennElements').css("opacity", 1);
+                        Interaction.myTrial += 1;
+                        $(Interaction.secondQuestionDiv).css("opacity", 1);
+                        $('#question21').css("opacity", 1);
+                        $(Interaction.sortingDiv).css("opacity", 1);
+                        Interaction.inputs[0].readOnly = true;
+                        setTimeout(function(){
+                            $(Interaction.inputs).each(function(){
+                                this.blur();
+                            })
+
+                        }, 100);
+                        return false;
                     }
-                    Interaction.vennDiagram.opacity = 1;
-                    $('#vennElements').css("opacity", 1);
+                    else{
+                        Interaction.setStatus('Yanlış cevap, doğrusu boş küme olacaktı!',false);
+                        Interaction.inputs[0].value = "";
+                        Interaction.vennDiagram.opacity = 1;
+                        $('#vennElements').css("opacity", 1);
+                        Interaction.myTrial += 1;
+                        $(Interaction.secondQuestionDiv).css("opacity", 1);
+                        $('#question21').css("opacity", 1);
+                        $(Interaction.sortingDiv).css("opacity", 1);
+                        Interaction.inputs[0].readOnly = true;
+                        setTimeout(function(){
+                            $(Interaction.inputs).each(function(){
+                                this.blur();
+                            })
+
+                        }, 100);
+                        return false;
+                    }
                 }
                 else{
-                    Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                    var myArr = [];
                     for(var i = 0; i < Interaction.length; i++){
-                        Interaction.inputs[i].value = Interaction.questionSet.elements[i];
-                        $(Interaction.inputs[i]).css("color", "green");
-                        Interaction.inputs[i].readOnly = true;
+                        myArr[i] = Interaction.inputs[i].value;
                     }
-                    Interaction.vennDiagram.opacity = 1;
-                    $('#vennElements').css("opacity", 1);
+                    if(Interaction.checkAnswers(myArr)){
+                        Interaction.setStatus('Tebrikler!',true);
+                        for(var i = 0; i < Interaction.length; i++){
+                            $(Interaction.inputs[i]).css("color","green");
+                            Interaction.inputs[i].readOnly = true;
+                            setTimeout(function(){
+                                $(Interaction.inputs).each(function(){
+                                    this.blur();
+                                })
 
+                            }, 100);
+                        }
+                        Interaction.vennDiagram.opacity = 1;
+                        $('#vennElements').css("opacity", 1);
+                    }
+                    else{
+                        Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                        for(var i = 0; i < Interaction.length; i++){
+                            Interaction.inputs[i].value = Interaction.questionSet.elements[i];
+                            $(Interaction.inputs[i]).css("color", "green");
+                            Interaction.inputs[i].readOnly = true;
+                            setTimeout(function(){
+                                $(Interaction.inputs).each(function(){
+                                    this.blur();
+                                })
+
+                            }, 100);
+                        }
+                        Interaction.vennDiagram.opacity = 1;
+                        $('#vennElements').css("opacity", 1);
+
+                    }
+                    Interaction.myTrial += 1;
+                    $(Interaction.secondQuestionDiv).css("opacity", 1);
+                    $('#question21').css("opacity", 1);
+                    $(Interaction.sortingDiv).css("opacity", 1)
+                    return false;
                 }
-                Interaction.myTrial += 1;
-                $(Interaction.secondQuestionDiv).css("opacity", 1);
-                $('#question21').css("opacity", 1);
-                $(Interaction.sortingDiv).css("opacity", 1)
-                return false;
             }
             else if(Interaction.myTrial == 1){ // question2
                 Interaction.dropped = Interaction.activeStr;
@@ -855,7 +948,12 @@ var Interaction = {
                         Interaction.setStatus('Tebrikler!', true);
                         $("#dropDiv2").droppable({disabled: true});
                         $(Interaction.thirdQuestionDiv).css("opacity", 1);
-                        Interaction.inputs[Interaction.length].focus();
+                        if(Interaction.length == 0){
+                            Interaction.inputs[1].focus();
+                        }
+                        else{
+                            Interaction.inputs[Interaction.length].focus();
+                        }
                     }
                     else{
                         Interaction.myPause = 1;
@@ -893,7 +991,13 @@ var Interaction = {
                             }
                         );
                         setTimeout('Interaction.myPause = 0;',3000);
-                        setTimeout('$("#"+Interaction.answerId2.replace("Hover", "")).css("opacity", 1);$("#dropDiv2").droppable({disabled: true});$(Interaction.thirdQuestionDiv).css("opacity", 1);Interaction.inputs[Interaction.length].focus();', 3000)
+                        setTimeout('$("#"+Interaction.answerId2.replace("Hover", "")).css("opacity", 1);$("#dropDiv2").droppable({disabled: true});$(Interaction.thirdQuestionDiv).css("opacity", 1);', 3000)
+                        if(Interaction.length == 0){
+                            setTimeout('Interaction.inputs[1].focus();', 3000)
+                        }
+                        else{
+                            setTimeout('Interaction.inputs[Interaction.length].focus();', 3000)
+                        }
                     }
 
                     if(Interaction.oldStr2){
@@ -913,7 +1017,12 @@ var Interaction = {
 		
     },
 	isAnswerCorrect : function(value){
-        return value[Interaction.length] == Interaction.length;
+        if(Interaction.length == 0){
+            return value[1] == Interaction.length;
+        }
+        else{
+            return value[Interaction.length] == Interaction.length;
+        }
     },
 	onCorrectAnswer : function(){
         $(Interaction.inputs[Interaction.length]).css("color", "green");
@@ -923,8 +1032,14 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.',false);
-        Interaction.inputs[Interaction.length].value = Interaction.length;
-        $(Interaction.inputs[Interaction.length]).css("color", "green");
+        if(Interaction.length == 0){
+            Interaction.inputs[1].value = Interaction.length;
+            $(Interaction.inputs[1]).css("color", "green");
+        }
+        else{
+            Interaction.inputs[Interaction.length].value = Interaction.length;
+            $(Interaction.inputs[Interaction.length]).css("color", "green");
+        }
     },
     checkAnswers : function(myArr){
         var correctN = 0;
