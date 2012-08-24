@@ -31,6 +31,7 @@ Main.config = {
 Main.startAnimation = function(){
     animationView.onFrame = function(event) {
         Main.animationProject.activate();
+		View._focused = animationView;
         AnimationManager.update(event);
         if (typeof(Animation.onFrame) == 'function') {
             Animation.onFrame(event);
@@ -40,8 +41,9 @@ Main.startAnimation = function(){
         animationReady = true;
         return;
     } else {
-       Main.animationProject.activate();
-       Animation.init(Main.animation);
+		Main.animationProject.activate();
+		View._focused = animationView;
+		Animation.init(Main.animation);
     }
     try{
         if(__START_INTERACTION_IMMEDIATELY === true)
@@ -75,6 +77,7 @@ Main.startInteraction = function(){
         interactionReady = true;
     } else {
         Main.interactionProject.activate();
+		View._focused = interactionView;
         initializeRunLoop();
         Interaction.init(Main.interaction);
     }
@@ -160,6 +163,7 @@ Main.init = function(){
 			if (animationReady === true && interactionReady === true) {
 				interactionView.onFrame = function(event) {
 					Main.interactionProject.activate();
+					View._focused = interactionView;
 					AnimationManager.update(event);
 					if (typeof(Interaction.onFrame) == 'function') {
 						Interaction.onFrame(event);
