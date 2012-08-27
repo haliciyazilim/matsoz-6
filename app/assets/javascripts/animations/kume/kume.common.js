@@ -239,7 +239,34 @@ var Set = Class.extend({
                 }
                 this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN;
                 break;
-
+            case Set.SMALLER_THAN_LETTER:
+                this.definition = ""+this.getValueStr(opt.value,2)+" önce gelen harfler";
+                var startIndex = 0;
+                var endIndex = Set.turkishLetters.indexOf(opt.value);
+                for(var i = startIndex; i < endIndex; i++){
+                    this.elements.push(Set.turkishLetters[i]);
+                }
+                this.type = Set.SMALLER_THAN_LETTER;
+                break;
+            case Set.GREATER_THAN_LETTER:
+                this.definition = ""+this.getValueStr(opt.value,2)+" sonra gelen harfler";
+                var startIndex = Set.turkishLetters.indexOf(opt.value)+1;
+                var endIndex = 29;
+                for(var i = startIndex; i < endIndex; i++){
+                    this.elements.push(Set.turkishLetters[i]);
+                }
+                this.type = Set.GREATER_THAN_LETTER;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_LETTER:
+            //    this.definition = ""+this.getValueStr(opt.value1,2)+" sonra "+this.getValueStr(opt.value2,2) +" önce gelen harfler";
+                this.definition = ""+opt.value1+" ile "+opt.value2+" arasındaki harfler";
+                var startIndex = Set.turkishLetters.indexOf(opt.value1)+1;
+                var endIndex = Set.turkishLetters.indexOf(opt.value2);
+                for(var i = startIndex; i < endIndex; i++){
+                    this.elements.push(Set.turkishLetters[i]);
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_LETTER;
+                break;
         }
     },
 
@@ -553,6 +580,16 @@ var Set = Class.extend({
                 a += value+"'ün";
             }
         }
+        else if(opt == 2){
+            var a = "";
+            var d = ["a","ı","o", "u"];
+            if(d.indexOf(value) == -1){
+                a += value+"'den";
+            }
+            else{
+                a += value+"'dan";
+            }
+        }
 
         return a;
     },
@@ -591,173 +628,410 @@ var Set = Class.extend({
     },
 
     drawVennDiagram : function(container, topLeftPoint, setLetter){
-        var size = new Size(150, 100);
-        var rectangle = new Rectangle(topLeftPoint, size);
-        this.vennDiagram = new Path.Oval(rectangle);
-        this.vennDiagram.strokeColor = "black";
+        if(this.elements.length <= 6){
+            var size = new Size(150, 100);
+            var rectangle = new Rectangle(topLeftPoint, size);
+            this.vennDiagram = new Path.Oval(rectangle);
+            this.vennDiagram.strokeColor = "black";
 
-        $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
-        $('#vennElements2').css({
-            position:'absolute',
-            top:topLeftPoint.y+parseInt($(container).css("padding")),
-            left:topLeftPoint.x+parseInt($(container).css("padding")),
-            width:'150px',
-            height:'100px',
-            fontSize:'16px',
-            textAlign:'center',
-            fontWeight:'bold',
-         //   border:'1px solid'
-        });
-        $('#vennLetter2').css({
-            position:'absolute',
-            top:'0px',
-            left:'0px',
-            width:'18px',
-            height:'18px',
-            fontWeight:'normal'
-        });
-        $('#vennLetter2').html(setLetter);
-        $('#e12').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e22').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e32').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e42').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e52').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e62').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
+            $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
+            $('#vennElements2').css({
+                position:'absolute',
+                top:topLeftPoint.y+parseInt($(container).css("padding")),
+                left:topLeftPoint.x+parseInt($(container).css("padding")),
+                width:'150px',
+                height:'100px',
+                fontSize:'16px',
+                textAlign:'center',
+                fontWeight:'bold',
+             //   border:'1px solid'
+            });
+            $('#vennLetter2').css({
+                position:'absolute',
+                top:'0px',
+                left:'0px',
+                width:'18px',
+                height:'18px',
+                fontWeight:'normal'
+            });
+            $('#vennLetter2').html(setLetter);
+            $('#e12').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e22').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e32').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e42').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e52').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e62').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
 
-        switch(this.elements.length){
-            case 0:
-                break;
-            case 1:{
-                $('#e12').css({
-                    top:'42px',
-                    left:'62px'
-                });
-                break;
+            switch(this.elements.length){
+                case 0:
+                    break;
+                case 1:{
+                    $('#e12').css({
+                        top:'42px',
+                        left:'62px'
+                    });
+                    break;
+                }
+                case 2:{
+                    $('#e12').css({
+                        top:'40px',
+                        left:'34px'
+                    });
+                    $('#e22').css({
+                        top:'40px',
+                        left:'96px',
+                    });
+                    break;
+                }
+                case 3:{
+                    $('#e12').css({
+                        top:'40px',
+                        left:'30px'
+                    });
+                    $('#e22').css({
+                        top:'15px',
+                        left:'67px',
+                    });
+                    $('#e32').css({
+                        top:'61px',
+                        left:'84px'
+                    });
+                    break;
+                }
+                case 4:{
+                    $('#e12').css({
+                        top:'22px',
+                        left:'34px'
+                    });
+                    $('#e22').css({
+                        top:'22px',
+                        left:'88px',
+                    });
+                    $('#e32').css({
+                        top:'66px',
+                        left:'34px'
+                    });
+                    $('#e42').css({
+                        top:'66px',
+                        left:'88px',
+                    });
+                    break;
+                }
+                case 5:{
+                    $('#e12').css({
+                        top:'20px',
+                        left:'32px'
+                    });
+                    $('#e22').css({
+                        top:'20px',
+                        left:'90px',
+                    });
+                    $('#e32').css({
+                        top:'68px',
+                        left:'32px'
+                    });
+                    $('#e42').css({
+                        top:'68px',
+                        left:'90px',
+                    });
+                    $('#e52').css({
+                        top:'42px',
+                        left:'62px'
+                    });
+                    break;
+                }
+                case 6:{
+                    $('#e12').css({
+                        top:'42px',
+                        left:'62px'
+                    });
+                    $('#e22').css({
+                        top:'12px',
+                        left:'70px',
+                    });
+                    $('#e32').css({
+                        top:'30px',
+                        left:'106px'
+                    });
+                    $('#e42').css({
+                        top:'66px',
+                        left:'34px',
+                    });
+                    $('#e52').css({
+                        top:'18px',
+                        left:'24px'
+                    });
+                    $('#e62').css({
+                        top:'66px',
+                        left:'90px',
+                    });
+                    break;
+                }
             }
-            case 2:{
-                $('#e12').css({
-                    top:'40px',
-                    left:'34px'
-                });
-                $('#e22').css({
-                    top:'40px',
-                    left:'96px',
-                });
-                break;
-            }
-            case 3:{
-                $('#e12').css({
-                    top:'40px',
-                    left:'30px'
-                });
-                $('#e22').css({
-                    top:'15px',
-                    left:'67px',
-                });
-                $('#e32').css({
-                    top:'61px',
-                    left:'84px'
-                });
-                break;
-            }
-            case 4:{
-                $('#e12').css({
-                    top:'22px',
-                    left:'34px'
-                });
-                $('#e22').css({
-                    top:'22px',
-                    left:'88px',
-                });
-                $('#e32').css({
-                    top:'66px',
-                    left:'34px'
-                });
-                $('#e42').css({
-                    top:'66px',
-                    left:'88px',
-                });
-                break;
-            }
-            case 5:{
-                $('#e12').css({
-                    top:'20px',
-                    left:'32px'
-                });
-                $('#e22').css({
-                    top:'20px',
-                    left:'90px',
-                });
-                $('#e32').css({
-                    top:'68px',
-                    left:'32px'
-                });
-                $('#e42').css({
-                    top:'68px',
-                    left:'90px',
-                });
-                $('#e52').css({
-                    top:'42px',
-                    left:'62px'
-                });
-                break;
-            }
-            case 6:{
-                $('#e12').css({
-                    top:'42px',
-                    left:'62px'
-                });
-                $('#e22').css({
-                    top:'12px',
-                    left:'70px',
-                });
-                $('#e32').css({
-                    top:'30px',
-                    left:'106px'
-                });
-                $('#e42').css({
-                    top:'66px',
-                    left:'34px',
-                });
-                $('#e52').css({
-                    top:'18px',
-                    left:'24px'
-                });
-                $('#e62').css({
-                    top:'66px',
-                    left:'90px',
-                });
-                break;
-            }
+        }
+        else{
+            var size = new Size(180,110);
+            var rectangle = new Rectangle(topLeftPoint, size);
+            this.vennDiagram = new Path.Oval(rectangle);
+            this.vennDiagram.strokeColor = "black";
+
+            $(container).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
+                                '<div id="e12"></div><div id="e22"></div><div id="e32"></div>' +
+                                '<div id="e42"></div><div id="e52"></div><div id="e62"></div>' +
+                                '<div id="e72"></div><div id="e82"></div><div id="e92"></div>' +
+                                '<div id="e102"></div></div>');
+
+            $('#vennElements2').css({
+                position:'absolute',
+                top:topLeftPoint.y+parseInt($(container).css("padding")),
+                left:topLeftPoint.x+parseInt($(container).css("padding")),
+                width:'180px',
+                height:'110px',
+                fontSize:'16px',
+                textAlign:'center',
+                fontWeight:'bold',
+           //     border:'1px solid'
+            });
+            $('#vennLetter2').css({
+                position:'absolute',
+                top:'0px',
+                left:'0px',
+                width:'18px',
+                height:'18px',
+                fontWeight:'normal'
+            });
+            $('#vennLetter2').html(setLetter);
+
+            $('#e12').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e22').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e32').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e42').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e52').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e62').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e72').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e82').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e92').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e102').css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            switch(this.elements.length){
+                case 7:
+                    $('#e12').css({
+                        top:'48px',
+                        left:'76px'
+                    });
+                    $('#e22').css({
+                        top:'20px',
+                        left:'74px'
+                    });
+                    $('#e32').css({
+                        top:'30px',
+                        left:'42px'
+                    });
+                    $('#e42').css({
+                        top:'80px',
+                        left:'76px'
+                    });
+                    $('#e52').css({
+                        top:'66px',
+                        left:'40px'
+                    });
+                    $('#e62').css({
+                        top:'30px',
+                        left:'116px'
+                    });
+                    $('#e72').css({
+                        top:'64px',
+                        left:'120px'
+                    });
+                    break;
+                case 8:
+                    $('#e12').css({
+                        top:'46px',
+                        left:'28px'
+                    });
+                    $('#e22').css({
+                        top:'16px',
+                        left:'78px'
+                    });
+                    $('#e32').css({
+                        top:'18px',
+                        left:'42px'
+                    });
+                    $('#e42').css({
+                        top:'80px',
+                        left:'76px'
+                    });
+                    $('#e52').css({
+                        top:'74px',
+                        left:'36px'
+                    });
+                    $('#e62').css({
+                        top:'30px',
+                        left:'116px'
+                    });
+                    $('#e72').css({
+                        top:'64px',
+                        left:'120px'
+                    });
+                    $('#e82').css({
+                        top:'46px',
+                        left:'76px'
+                    });
+                    break;
+                case 9:
+                    $('#e12').css({
+                        top:'46px',
+                        left:'28px'
+                    });
+                    $('#e22').css({
+                        top:'16px',
+                        left:'76px'
+                    });
+                    $('#e32').css({
+                        top:'18px',
+                        left:'42px'
+                    });
+                    $('#e42').css({
+                        top:'80px',
+                        left:'70px'
+                    });
+                    $('#e52').css({
+                        top:'74px',
+                        left:'36px'
+                    });
+                    $('#e62').css({
+                        top:'22px',
+                        left:'112px'
+                    });
+                    $('#e72').css({
+                        top:'74px',
+                        left:'108px'
+                    });
+                    $('#e82').css({
+                        top:'46px',
+                        left:'78px'
+                    });
+                    $('#e92').css({
+                        top:'46px',
+                        left:'124px'
+                    });
+                    break;
+                case 10:
+                    $('#e12').css({
+                        top:'46px',
+                        left:'64px'
+                    });
+                    $('#e22').css({
+                        top:'16px',
+                        left:'76px'
+                    });
+                    $('#e32').css({
+                        top:'18px',
+                        left:'42px'
+                    });
+                    $('#e42').css({
+                        top:'80px',
+                        left:'70px'
+                    });
+                    $('#e52').css({
+                        top:'74px',
+                        left:'36px'
+                    });
+                    $('#e62').css({
+                        top:'22px',
+                        left:'112px'
+                    });
+                    $('#e72').css({
+                        top:'72px',
+                        left:'106px'
+                    });
+                    $('#e82').css({
+                        top:'46px',
+                        left:'98px'
+                    });
+                    $('#e92').css({
+                        top:'46px',
+                        left:'132px'
+                    });
+                    $('#e102').css({
+                        top:'44px',
+                        left:'24px'
+                    });
+                    break;
+
+            };
         }
 
         for(var i = 1; i <= this.elements.length; i++){
             $('#e'+i+"2").html("."+this.elements[i-1]);
         }
+    },
+
+    drawIntersectingVennDiagram : function(container, topLeftPoint, setLetter1, otherSet, setLetter2){
+
     },
 });
 Set.ELEMENTS = 0;
@@ -783,13 +1057,47 @@ Set.GREATER_THAN_DIGIT_EVEN = 19;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT = 20;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD = 21;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN = 22;
+Set.SMALLER_THAN_LETTER = 23;
+Set.GREATER_THAN_LETTER = 24;
+Set.SMALLER_THAN_GREATER_THAN_LETTER = 25;
+
+Set.turkishLetters = [];
+Set.turkishLetters[0] = "a";
+Set.turkishLetters[1] = "b";
+Set.turkishLetters[2] = "c";
+Set.turkishLetters[3] = "ç";
+Set.turkishLetters[4] = "d";
+Set.turkishLetters[5] = "e";
+Set.turkishLetters[6] = "f";
+Set.turkishLetters[7] = "g";
+Set.turkishLetters[8] = "ğ";
+Set.turkishLetters[9] = "h";
+Set.turkishLetters[10] = "ı";
+Set.turkishLetters[11] = "i";
+Set.turkishLetters[12] = "j";
+Set.turkishLetters[13] = "k";
+Set.turkishLetters[14] = "l";
+Set.turkishLetters[15] = "m";
+Set.turkishLetters[16] = "n";
+Set.turkishLetters[17] = "o";
+Set.turkishLetters[18] = "ö";
+Set.turkishLetters[19] = "p";
+Set.turkishLetters[20] = "r";
+Set.turkishLetters[21] = "s";
+Set.turkishLetters[22] = "ş";
+Set.turkishLetters[23] = "t";
+Set.turkishLetters[24] = "u";
+Set.turkishLetters[25] = "ü";
+Set.turkishLetters[26] = "v";
+Set.turkishLetters[27] = "y";
+Set.turkishLetters[28] = "z";
 
 
 Set.randomGenerator = function(type){
 
     var sType,elements,value,value1,value2;
     if(type == undefined || !isNaN(type))
-        sType= Util.randomInteger(1,11);
+        sType= Util.randomInteger(1,12);
     else
         sType = type;
     var set;
@@ -861,7 +1169,12 @@ Set.randomGenerator = function(type){
             set = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
             break;
         }
+        case 11:{   // Set.DIGIT
+            set = new Set({type:Set.DIGIT});
+            break;
+
+        }
     }
 
     return set;
-}
+};
