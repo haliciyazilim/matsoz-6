@@ -14,11 +14,10 @@ var Animation = {
             '/assets/animations/dogal_sayi/sayi06.jpg',
             '/assets/animations/dogal_sayi/sayi07.jpg',
             '/assets/animations/dogal_sayi/sayi08.jpg',
-            '/assets/animations/dogal_sayi/sayi09.jpg',
-            '/assets/animations/dogal_sayi/sayi10.jpg'
+            '/assets/animations/dogal_sayi/sayi09.jpg'
         ];
         
-        $(container).append("<div id='kapsayici'>")
+        //$(container).append("<div id='kapsayici'>")
         $("#kapsayici").css({
             zIndex:2,
             backgroundColor:"white"
@@ -44,7 +43,7 @@ var Animation = {
             
             
         });
-        $("#resim0").css("opacity","1");
+
         
         $(container).append("<div id='sifir' class='sayilar'>")
         $("#sifir").css({
@@ -65,68 +64,120 @@ var Animation = {
          $("#uc").css({
             right:"279px"
         }).html("3");
-        
+
+        $(container).append("<div id='dort' class='sayilar'>")
+        $("#dort").css({
+            right:"250px"
+        }).html("4");
+
+        $(container).append("<div id='bes' class='sayilar'>")
+        $("#bes").css({
+            right:"230px"
+        }).html("5");
+
+        $(container).append("<div id='alti' class='sayilar'>")
+        $("#alti").css({
+            right:"260px"
+        }).html("6");
+
+        $(container).append("<div id='yedi' class='sayilar'>")
+        $("#yedi").css({
+            right:"270px"
+        }).html("7");
+
+        $(container).append("<div id='sekiz' class='sayilar'>")
+        $("#sekiz").css({
+            right:"270px"
+        }).html("8");
+
+        $(container).append("<div id='dokuz' class='sayilar'>")
+        $("#dokuz").css({
+            right:"270px"
+        }).html("9");
+
+        $(container).append("<div id='oynakIki' class='oynakSayilar'>")
+        $("#oynakIki").css({
+            right:"555px"
+        }).html("2");
+
+        $(container).append("<div id='oynakUc' class='oynakSayilar'>")
+        $("#oynakUc").css({
+            right:"490px"
+        }).html("3");
+
+        $(container).append("<div id='oynakBes' class='oynakSayilar'>")
+        $("#oynakBes").css({
+            right:"360px"
+        }).html("5");
+
+        $(container).append("<div id='oynakYedi' class='oynakSayilar'>")
+        $("#oynakYedi").css({
+            right:"230px"
+        }).html("7");
+
+        $(container).append("<div id='oynakYedi2' class='oynakSayilar'>")
+        $("#oynakYedi2").css({
+            right:"230px"
+        }).html("7");
+
+        $(container).append("<div id='saymaSayilari' class='sayilar'>")
+        $("#saymaSayilari").css({
+            right:"0",
+            left:"0"
+        }).html("<strong id='saymaSayilariBaslik'>Sayma Sayıları:</strong> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...");
+
+
+
         $(".sayilar").css({
             position:"absolute",
             //top:"0",
-            bottom:"37px",
+            bottom:"35px",
             margin:"auto",
             fontSize:"20px",
             color:"#876327",
             zIndex:"1",
             opacity:"0"
         });
-        
-        // sıfır
-        $("#kapsayici")
-            .delay(hizB).animate({left:"180px"},hizA)
-            .delay(hizB).animate({left:"230px"},hizA)
-            .delay(hizB).animate({left:"300px"},hizA)
-            .delay(hizB).animate({left:"380px"},hizA)
-            .delay(hizB).animate({left:"480px"},hizA)
-            .delay(hizB).animate({opacity:"0"},hizA);
-        $("#sifir").delay(((hizB+hizA)*6)).animate({opacity:"1"},hizA/2);
-        $("#sifir").delay(hizB).animate({right:"700px",bottom:"130px", fontSize:"30"},hizA*2);
-        $("#resim0").delay(((hizB+hizA)*7)).animate({opacity:"0"},hizA);
-        
-        $("#resim1").delay(((hizB+hizA)*8)).animate({opacity:"1"},hizA);
-        $("#kapsayici")
-            .delay(hizB*3).animate({left:"0px", opacity:"1"},hizA)
-            .delay(hizB).animate({left:"230px"},hizA)
-            .delay(hizB).animate({left:"300px"},hizA)
-            .delay(hizB).animate({left:"380px"},hizA)
-            .delay(hizB).animate({opacity:"0"},hizA);
-        $("#bir").delay(((hizB+hizA)*12)).animate({opacity:"1"},hizA/2);    
-        $("#bir").delay(hizB).animate({right:"650px",bottom:"130px", fontSize:"30"},hizA*2);
-        $("#resim1").delay(((hizB+hizA)*5)).animate({opacity:"0"},hizA);
-        
-        $("#resim2").delay(((hizB+hizA)*14)).animate({opacity:"1"},hizA);
-        $("#kapsayici")
-            .delay(hizB*3).animate({left:"0px", opacity:"1"},hizA)
-            .delay(hizB).animate({left:"180px"},hizA)
-            .delay(hizB).animate({left:"230px"},hizA)
-            .delay(hizB).animate({left:"310px"},hizA)
-            .delay(hizB).animate({left:"390px"},hizA)
-            .delay(hizB).animate({left:"490px"},hizA)
-            .delay(hizB).animate({opacity:"0"},hizA);
-        $("#iki").delay(((hizB+hizA)*20)).animate({opacity:"1"},hizA/2);    
-        $("#iki").delay(hizB).animate({right:"600px",bottom:"130px", fontSize:"30"},hizA*2);
-        $("#resim2").delay(((hizB+hizA)*8)).animate({opacity:"0"},hizA);
-        
-         $("#resim3").delay(((hizB+hizA)*23)).animate({opacity:"1"},hizA);
-        $("#kapsayici")
-            .delay(hizB*3).animate({left:"0px", opacity:"1"},hizA)
-            .delay(hizB).animate({left:"170px"},hizA)
-            .delay(hizB).animate({left:"240px"},hizA)
-            .delay(hizB).animate({left:"310px"},hizA)
-            .delay(hizB).animate({left:"390px"},hizA)
-            .delay(hizB).animate({left:"490px"},hizA)
-            .delay(hizB).animate({opacity:"0"},hizA);
-        $("#uc").delay(((hizB+hizA)*28)).animate({opacity:"1"},hizA/2);    
-        $("#uc").delay(hizB).animate({right:"550px",bottom:"130px", fontSize:"30"},hizA*2);
-        $("#resim3").delay(((hizB+hizA)*8)).animate({opacity:"0"},hizA);
-        
-        Main.animationFinished(((hizB+hizA)*30))
+
+        $(".oynakSayilar").css({
+            position:"absolute",
+            //top:"0",
+            bottom:"130px",
+            margin:"auto",
+            fontSize:"30px",
+            color:"#FF0000",
+            zIndex:"1",
+            opacity:"0"
+        });
+
+        $("#saymaSayilariBaslik").css("color","#8FCED8");
+        $("#saymaSayilari").css("color","#000000").css("width","450px");
+
+        var sayilarArray=["sifir","bir","iki","uc","dort","bes","alti","yedi","sekiz","dokuz"];
+        var bekleme=0;
+        for(var i=1; i<11; i++){
+
+
+            var right=(750-65*i)+"px";
+            $("#resim"+(i-1)).delay(bekleme+hizB).animate({opacity:"1"},hizA);
+            $("#"+sayilarArray[(i-1)]).delay(bekleme+hizB).animate({opacity:"1"},hizA).delay(hizB).animate({right:right,bottom:"130px", fontSize:"30"},hizA*3);
+            $("#resim"+(i-1)).delay(2*(hizB+hizA)).animate({opacity:0},hizA);
+
+            bekleme=i*2*(hizA+hizB)+hizA*3*i;
+
+        }
+        console.log(bekleme);
+
+        $("#oynakUc").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"400px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
+        $("#oynakYedi").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"380px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
+        bekleme=bekleme+4*hizA+3*hizB;
+        $("#oynakIki").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"405px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
+        $("#oynakBes").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"390px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
+        $("#oynakYedi2").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"375px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
+        bekleme=bekleme+4*hizA+3*hizB;
+        $("#saymaSayilari").delay(bekleme).animate({opacity:"1"},hizA);
+
+        Main.animationFinished(bekleme+hizA);
     }
     
     
