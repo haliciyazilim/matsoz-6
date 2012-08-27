@@ -329,10 +329,12 @@ function InteractionBase(){
 		if(isCorrect){
 			Interaction.__status(Interaction.__status.CORRECT);
 			$(Interaction.inputs).each(function(index, element) {
-            	$(this).get(0).onkeydown = function(event){
-					if(event.keyCode != 13)
-						return false;
-				}   
+//            	$(this).get(0).onkeydown = function(event){
+//					if(event.keyCode != 13)
+//						return false;
+//				}
+
+                $(this).get(0).onkeydown = "if(event.keyCode != 13){ return false; }";
             });
 			
 			if(Interaction.onCorrectAnswer)
