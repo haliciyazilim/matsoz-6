@@ -634,8 +634,11 @@ var Set = Class.extend({
             this.vennDiagram = new Path.Oval(rectangle);
             this.vennDiagram.strokeColor = "black";
 
-            $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
-            $('#vennElements2').css({
+            this.div = document.createElement('div');
+            $(container).append(this.div);
+
+            $(this.div).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
+            $('#vennElements2', this.div).css({
                 position:'absolute',
                 top:topLeftPoint.y+parseInt($(container).css("padding")),
                 left:topLeftPoint.x+parseInt($(container).css("padding")),
@@ -646,7 +649,7 @@ var Set = Class.extend({
                 fontWeight:'bold',
              //   border:'1px solid'
             });
-            $('#vennLetter2').css({
+            $('#vennLetter2', this.div).css({
                 position:'absolute',
                 top:'0px',
                 left:'0px',
@@ -654,33 +657,33 @@ var Set = Class.extend({
                 height:'18px',
                 fontWeight:'normal'
             });
-            $('#vennLetter2').html(setLetter);
-            $('#e12').css({
+            $('#vennLetter2', this.div).html(setLetter);
+            $('#e12', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e22').css({
+            $('#e22', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e32').css({
+            $('#e32', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e42').css({
+            $('#e42', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e52').css({
+            $('#e52', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e62').css({
+            $('#e62', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
@@ -690,102 +693,102 @@ var Set = Class.extend({
                 case 0:
                     break;
                 case 1:{
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'42px',
                         left:'62px'
                     });
                     break;
                 }
                 case 2:{
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'40px',
                         left:'34px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'40px',
                         left:'96px',
                     });
                     break;
                 }
                 case 3:{
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'40px',
                         left:'30px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'15px',
                         left:'67px',
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'61px',
                         left:'84px'
                     });
                     break;
                 }
                 case 4:{
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'22px',
                         left:'34px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'22px',
                         left:'88px',
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'66px',
                         left:'34px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'66px',
                         left:'88px',
                     });
                     break;
                 }
                 case 5:{
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'20px',
                         left:'32px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'20px',
                         left:'90px',
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'68px',
                         left:'32px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'68px',
                         left:'90px',
                     });
-                    $('#e52').css({
+                    $('#e52', this.div).css({
                         top:'42px',
                         left:'62px'
                     });
                     break;
                 }
                 case 6:{
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'42px',
                         left:'62px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'12px',
                         left:'70px',
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'30px',
                         left:'106px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'66px',
                         left:'34px',
                     });
-                    $('#e52').css({
+                    $('#e52', this.div).css({
                         top:'18px',
                         left:'24px'
                     });
-                    $('#e62').css({
+                    $('#e62', this.div).css({
                         top:'66px',
                         left:'90px',
                     });
@@ -799,13 +802,16 @@ var Set = Class.extend({
             this.vennDiagram = new Path.Oval(rectangle);
             this.vennDiagram.strokeColor = "black";
 
-            $(container).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
+            this.div = document.createElement('div');
+            $(container).append(this.div);
+
+            $(this.div).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
                                 '<div id="e12"></div><div id="e22"></div><div id="e32"></div>' +
                                 '<div id="e42"></div><div id="e52"></div><div id="e62"></div>' +
                                 '<div id="e72"></div><div id="e82"></div><div id="e92"></div>' +
                                 '<div id="e102"></div></div>');
 
-            $('#vennElements2').css({
+            $('#vennElements2', this.div).css({
                 position:'absolute',
                 top:topLeftPoint.y+parseInt($(container).css("padding")),
                 left:topLeftPoint.x+parseInt($(container).css("padding")),
@@ -816,7 +822,7 @@ var Set = Class.extend({
                 fontWeight:'bold',
            //     border:'1px solid'
             });
-            $('#vennLetter2').css({
+            $('#vennLetter2', this.div).css({
                 position:'absolute',
                 top:'0px',
                 left:'0px',
@@ -824,199 +830,199 @@ var Set = Class.extend({
                 height:'18px',
                 fontWeight:'normal'
             });
-            $('#vennLetter2').html(setLetter);
+            $('#vennLetter2', this.div).html(setLetter);
 
-            $('#e12').css({
+            $('#e12', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e22').css({
+            $('#e22', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e32').css({
+            $('#e32', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e42').css({
+            $('#e42', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e52').css({
+            $('#e52', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e62').css({
+            $('#e62', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e72').css({
+            $('#e72', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e82').css({
+            $('#e82', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e92').css({
+            $('#e92', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
-            $('#e102').css({
+            $('#e102', this.div).css({
                 position:'absolute',
                 width:'24px',
                 height:'20px',
             });
             switch(this.elements.length){
                 case 7:
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'48px',
                         left:'76px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'20px',
                         left:'74px'
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'30px',
                         left:'42px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'80px',
                         left:'76px'
                     });
-                    $('#e52').css({
+                    $('#e52', this.div).css({
                         top:'66px',
                         left:'40px'
                     });
-                    $('#e62').css({
+                    $('#e62', this.div).css({
                         top:'30px',
                         left:'116px'
                     });
-                    $('#e72').css({
+                    $('#e72', this.div).css({
                         top:'64px',
                         left:'120px'
                     });
                     break;
                 case 8:
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'46px',
                         left:'28px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'16px',
                         left:'78px'
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'18px',
                         left:'42px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'80px',
                         left:'76px'
                     });
-                    $('#e52').css({
+                    $('#e52', this.div).css({
                         top:'74px',
                         left:'36px'
                     });
-                    $('#e62').css({
+                    $('#e62', this.div).css({
                         top:'30px',
                         left:'116px'
                     });
-                    $('#e72').css({
+                    $('#e72', this.div).css({
                         top:'64px',
                         left:'120px'
                     });
-                    $('#e82').css({
+                    $('#e82', this.div).css({
                         top:'46px',
                         left:'76px'
                     });
                     break;
                 case 9:
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'46px',
                         left:'28px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'16px',
                         left:'76px'
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'18px',
                         left:'42px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'80px',
                         left:'70px'
                     });
-                    $('#e52').css({
+                    $('#e52', this.div).css({
                         top:'74px',
                         left:'36px'
                     });
-                    $('#e62').css({
+                    $('#e62', this.div).css({
                         top:'22px',
                         left:'112px'
                     });
-                    $('#e72').css({
+                    $('#e72', this.div).css({
                         top:'74px',
                         left:'108px'
                     });
-                    $('#e82').css({
+                    $('#e82', this.div).css({
                         top:'46px',
                         left:'78px'
                     });
-                    $('#e92').css({
+                    $('#e92', this.div).css({
                         top:'46px',
                         left:'124px'
                     });
                     break;
                 case 10:
-                    $('#e12').css({
+                    $('#e12', this.div).css({
                         top:'46px',
                         left:'64px'
                     });
-                    $('#e22').css({
+                    $('#e22', this.div).css({
                         top:'16px',
                         left:'76px'
                     });
-                    $('#e32').css({
+                    $('#e32', this.div).css({
                         top:'18px',
                         left:'42px'
                     });
-                    $('#e42').css({
+                    $('#e42', this.div).css({
                         top:'80px',
                         left:'70px'
                     });
-                    $('#e52').css({
+                    $('#e52', this.div).css({
                         top:'74px',
                         left:'36px'
                     });
-                    $('#e62').css({
+                    $('#e62', this.div).css({
                         top:'22px',
                         left:'112px'
                     });
-                    $('#e72').css({
+                    $('#e72', this.div).css({
                         top:'72px',
                         left:'106px'
                     });
-                    $('#e82').css({
+                    $('#e82', this.div).css({
                         top:'46px',
                         left:'98px'
                     });
-                    $('#e92').css({
+                    $('#e92', this.div).css({
                         top:'46px',
                         left:'132px'
                     });
-                    $('#e102').css({
+                    $('#e102', this.div).css({
                         top:'44px',
                         left:'24px'
                     });
@@ -1026,7 +1032,7 @@ var Set = Class.extend({
         }
 
         for(var i = 1; i <= this.elements.length; i++){
-            $('#e'+i+"2").html("."+this.elements[i-1]);
+            $('#e'+i+"2", this.div).html("."+this.elements[i-1]);
         }
     },
 
