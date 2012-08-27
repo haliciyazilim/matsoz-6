@@ -39,7 +39,7 @@ var Animation = {
         Animation.container = container;
         Animation.animateVan();
         Animation.animateKume();
-
+        Main.animationFinished(12000);
 
 
 
