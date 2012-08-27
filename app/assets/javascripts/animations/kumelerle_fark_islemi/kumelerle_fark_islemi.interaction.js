@@ -15,11 +15,11 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:'40px',
+            bottom:'20px',
             right:'40px'
         });
         Interaction.appendStatus({
-            bottom:'50px',
+            bottom:'30px',
             right:'150px'
         });
         Interaction.set1Div = Util.dom({
@@ -28,7 +28,7 @@ var Interaction = {
             css:setDivCss
         });
         $(Interaction.set1Div).css({
-            top:'100px'
+            top:'10px'
         })
         Interaction.set2Div = Util.dom({
             tag:'div',
@@ -36,12 +36,14 @@ var Interaction = {
             css:setDivCss
         });
         $(Interaction.set2Div).css({
-            top:'150px'
+            top:'50px'
         })
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(){
         Interaction.flushInputs();
+        if(Interaction._set)
+            Interaction._set.removeVennDiagram();
         $(Interaction.answerSetDiv).remove();
         Interaction.generateSets();
         Interaction.answerSetDiv = Util.dom({
@@ -58,7 +60,7 @@ var Interaction = {
                 width:'2.5 ex',
                 height:'30px'
 
-            },true,inputCount==0);
+            },false,inputCount==0);
             input.maxLength = 2;
             $(Interaction.answerSetDiv)
                 .append(i>1?',':'')
@@ -70,7 +72,9 @@ var Interaction = {
     generateSets:function(){
         var set1String,set2String;
         Interaction.set1 = Set.randomGenerator();
-        Interaction.set2 = Interaction.set1.getRandomIntersectingSet();
+        do
+            Interaction.set2 = Interaction.set1.getRandomIntersectingSet();
+        while(Interaction.set1.getDifference(Interaction.set2).elements.length > 6)
         var isSet1DefinitionString = Util.rand01() == 1;
         var isSet2DefinitionString = Util.rand01() == 1;
         if(Interaction.set1.isEqualSet(Interaction.set2))
@@ -97,7 +101,10 @@ var Interaction = {
     },
 	isAnswerCorrect : function(values){
         if(typeof values == "string"){
-            values = [values];
+            if(values == "")
+                values = [];
+            else
+                values = [values];
         }
         var set = new Set({type:Set.ELEMENTS,elements:values});
         console.log(set);
@@ -111,6 +118,13 @@ var Interaction = {
 		
     },
 	onFail : function(){
-		
+        Interaction.setStatus('Yanlış, doğru cevabı venn şemasında görebilirsiniz.',false);
+        Interaction.showCorrectAnswer();
+    },
+    showCorrectAnswer:function(){
+        Interaction.pause();
+        Interaction._set = Interaction.set1.getDifference(Interaction.set2);
+        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A'");
+        setTimeout(Interaction.resume,2000);
     }
 }

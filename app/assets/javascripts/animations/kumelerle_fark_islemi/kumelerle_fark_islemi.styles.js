@@ -13,16 +13,16 @@ function __Styles(){
     };
     setDivCss = {
         position:'absolute',
-        left:'10px',
+        left:'50px',
         fontSize:'16px',
-        width:'300px',
+        width:'400px',
         lineHeight:'20px'
-    },
+    }
+
     answerSetDivCss = {
-        position:'absolute',
-        left:'310px',
-        fontSize:'18px',
-        top:'125px',
-        fontWeight:'bold'
+        position: 'absolute',
+        top:'100px',
+        left:'50px',
+        fontSize:'16px'
     }
 }
