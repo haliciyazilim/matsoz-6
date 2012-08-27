@@ -124,7 +124,7 @@ var Interaction = {
     showCorrectAnswer:function(){
         Interaction.pause();
         Interaction._set = Interaction.set1.getDifference(Interaction.set2);
-        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A'");
+        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A\\B");
         setTimeout(Interaction.resume,2000);
     }
 }
