@@ -23,13 +23,16 @@
 function soruTip1(){
     if(Interaction.randomNumber==0)
         Interaction.prepareNextQuestion();
-    Main.setObjective(Interaction.randomNumber+"<br/>tam sayısını sayı doğrusunda gösteriniz.");
+
+
+    Main.setObjective(Interaction.isaret+Interaction.sayi+"<br/>tam sayısını sayı doğrusunda gösteriniz.");
 }
 
 
 function soruTipi2(){
-        Main.setObjective("Sayı doğrusunda gösterilen noktanın hangi tam sayıyı gösterdiğini yazınız.");
-        $("#girdi").css("opacity","1");
-        $("#noktalar"+Interaction.randomNumber).css("opacity","1")
+
+    Main.setObjective("Sayı doğrusunda gösterilen noktanın hangi tam sayıyı gösterdiğini yazınız.");
+    $("#girdi").css("opacity","1");
+    $("#noktalar"+Interaction.randomNumber).css("opacity","1")
 }
 
