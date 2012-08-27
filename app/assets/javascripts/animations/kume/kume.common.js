@@ -1099,13 +1099,23 @@ Set.turkishLetters[27] = "y";
 Set.turkishLetters[28] = "z";
 
 
-Set.randomGenerator = function(type){
+Set.randomGenerator = function(type, length){
 
+    if(length == undefined || !isNan(length)){
+        length = 0;
+    }
     var sType,elements,value,value1,value2;
-    if(type == undefined || !isNaN(type))
-        sType= Util.randomInteger(1,12);
-    else
+    if(type == undefined || isNaN(type)){
+        if(length == 0){
+            sType= Util.randomInteger(1,26);
+        }
+        else{
+            sType = Util.randomInteger(1,26,[11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]);
+        }
+    }
+    else{
         sType = type;
+    }
     var set;
     switch(sType){
         case 1:{     // Set.SMALLER_THAN
@@ -1178,7 +1188,78 @@ Set.randomGenerator = function(type){
         case 11:{   // Set.DIGIT
             set = new Set({type:Set.DIGIT});
             break;
-
+        }
+        case 12:{   // Set.DIGIT_ODD
+            set = new Set({type:Set.DIGIT_ODD});
+            break;
+        }
+        case 13:{   // Set.DIGIT_EVEN
+            set = new Set({type:Set.DIGIT_EVEN});
+            break;
+        }
+        case 14:{   // Set.SMALLER_THAN_DIGIT
+            var randNum = Util.randomInteger(1,11);
+            set = new Set({type:Set.SMALLER_THAN_DIGIT, value:randNum});
+            break;
+        }
+        case 15:{   // Set.SMALLER_THAN_DIGIT_ODD
+            var randNum = Util.randomInteger(2,11);
+            set = new Set({type:Set.SMALLER_THAN_DIGIT_ODD, value:randNum});
+            break;
+        }
+        case 16:{   // Set.SMALLER_THAN_DIGIT_EVEN
+            var randNum = Util.randomInteger(1,11);
+            set = new Set({type:Set.SMALLER_THAN_DIGIT_EVEN, value:randNum});
+            break;
+        }
+        case 17:{   // Set.GREATER_THAN_DIGIT
+            var randNum = Util.randomInteger(0,9);
+            set = new Set({type:Set.GREATER_THAN_DIGIT, value:randNum});
+            break;
+        }
+        case 18:{   // Set.GREATER_THAN_DIGIT_ODD
+            var randNum = Util.randomInteger(0,9);
+            set = new Set({type:Set.GREATER_THAN_DIGIT_ODD, value:randNum});
+            break;
+        }
+        case 19:{   // Set.GREATER_THAN_DIGIT_EVEN
+            var randNum = Util.randomInteger(0,8);
+            set = new Set({type:Set.GREATER_THAN_DIGIT_EVEN, value:randNum});
+            break;
+        }
+        case 20:{   // Set.SMALLER_THAN_GREATER_THAN_DIGIT
+            var randNum1 = Util.randomInteger(0,8);
+            var randNum2 = Util.randomInteger(randNum1+2, 10);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 21:{   // Set.SMALLER_THAN_GREATER_THAN_ODD
+            var randNum1 = Util.randomInteger(0,8);
+            var randNum2 = Util.randomInteger(randNum1+3, 10);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 22:{   // Set.SMALLER_THAN_GREATER_THAN_EVEN
+            var randNum1 = Util.randomInteger(0,8);
+            var randNum2 = Util.randomInteger(randNum1+3, 10);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 23:{
+            var randNum = Util.randomInteger(1,29);
+            set = new Set({type:Set.SMALLER_THAN_LETTER, value:Set.turkishLetters[randNum]});
+            break;
+        }
+        case 24:{
+            var randNum = Util.randomInteger(0,28);
+            set = new Set({type:Set.GREATER_THAN_LETTER, value:Set.turkishLetters[randNum]});
+            break;
+        }
+        case 25:{
+            var randNum1 = Util.randomInteger(0,27);
+            var randNum2 = Util.randomInteger(randNum1+2, 29);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_LETTER, value1:Set.turkishLetters[randNum1], value2:Set.turkishLetters[randNum2]});
+            break;
         }
     }
 
