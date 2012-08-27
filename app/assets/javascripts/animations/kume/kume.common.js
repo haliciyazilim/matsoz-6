@@ -627,6 +627,10 @@ var Set = Class.extend({
         return set;
     },
 
+    removeVennDiagram : function(){
+        $(this.div).remove();
+        this.vennDiagram.remove();
+    },
     drawVennDiagram : function(container, topLeftPoint, setLetter){
         if(this.elements.length <= 6){
             var size = new Size(150, 100);

@@ -8,18 +8,18 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+        Main.setObjective('Yanda verilen kümelerin birbirine göre durumunu belirtiniz ve kontrol ediniz. Aynı anda birden fazla özellik olabilir.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
         }
 
         Interaction.appendButton({
-            bottom:'40px',
+            bottom:'20px',
             right:'40px'
         });
         Interaction.appendStatus({
-            bottom:'50px',
+            bottom:'30px',
             right:'150px'
         });
         Interaction.set1Div = Util.dom({
@@ -28,7 +28,7 @@ var Interaction = {
             css:setDivCss
         });
         $(Interaction.set1Div).css({
-            top:'100px'
+            top:'10px'
         })
         Interaction.set2Div = Util.dom({
             tag:'div',
@@ -36,7 +36,7 @@ var Interaction = {
             css:setDivCss
         });
         $(Interaction.set2Div).css({
-            top:'150px'
+            top:'50px'
         })
 
         Interaction.prepareNextQuestion();
@@ -50,7 +50,7 @@ var Interaction = {
             parent:Interaction.container,
             css:answerSetDivCss
         });
-        $(Interaction.answerSetDiv).append('A \\ B = { ');
+        $(Interaction.answerSetDiv).append("A' = { ");
         var inputCount = Interaction.set1.getDifference(Interaction.set2).elements.length;
         var i=0;
         do{i++;
@@ -62,10 +62,32 @@ var Interaction = {
             },true,inputCount==0);
             input.maxLength = 2;
             $(Interaction.answerSetDiv)
-                .append(i>1?',':'')
+                .append(i>1?', ':'')
                 .append(input)
         }while(i<inputCount)
         $(Interaction.answerSetDiv).append(' }');
+    },
+    generateSets:function(){
+        var set1String,set2String;
+        do
+            Interaction.set1  = Set.randomGenerator();
+        while(Interaction.set1.elements.length < 4)
+        do
+            Interaction.set2  = Set.randomGenerator();
+        while(Interaction.set1.elements.length <= Interaction.set2.elements.length || !Interaction.set2.isSubsetOf(Interaction.set1))
+        var isSet1DefinitionString = Util.rand01() == 1;
+        var isSet2DefinitionString = Util.rand01() == 1;
+        if(isSet1DefinitionString)
+            set1String = Interaction.set1.getDefinitionString();
+        else
+            set1String = Interaction.set1.getElementsString();
+        if(isSet2DefinitionString)
+            set2String = Interaction.set2.getDefinitionString();
+        else
+            set2String = Interaction.set2.getElementsString();
+        Interaction.set1Div.innerHTML = 'E = ' + set1String;
+        Interaction.set2Div.innerHTML = 'A = ' + set2String;
+
     },
 		
 	/*
@@ -75,8 +97,14 @@ var Interaction = {
 	preCheck : function(){
 		
     },
-	isAnswerCorrect : function(value){
-		
+    isAnswerCorrect : function(values){
+        if(typeof values == "string"){
+            values = [values];
+        }
+        var set = new Set({type:Set.ELEMENTS,elements:values});
+        console.log(set);
+        return set.isEqualSet(Interaction.set1.getDifference(Interaction.set2));
+
     },
 	onCorrectAnswer : function(){
 		
@@ -85,6 +113,13 @@ var Interaction = {
 		
     },
 	onFail : function(){
-		
+        Interaction.setStatus('Yanlış, doğru cevabı venn şemasında görebilirsiniz.',false);
+        Interaction.showCorrectAnswer();
+    },
+    showCorrectAnswer:function(){
+        Interaction.pause();
+        Interaction._set = Interaction.set1.getDifference(Interaction.set2);
+        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A'");
+        setTimeout(Interaction.resume,2000);
     }
 }
