@@ -32,7 +32,7 @@ var Animation = {
                     left:'50%',
                     marginLeft:'-127px',
                     marginTop:'-85px'
-                }).delay(2000*i).animate({opacity:1},2000);
+                }).delay(2000*i).animate({opacity:1},2000);//.animate({opacity:0},2000);
 
             }
 
