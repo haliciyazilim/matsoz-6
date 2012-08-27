@@ -239,7 +239,34 @@ var Set = Class.extend({
                 }
                 this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN;
                 break;
-
+            case Set.SMALLER_THAN_LETTER:
+                this.definition = ""+this.getValueStr(opt.value,2)+" önce gelen harfler";
+                var startIndex = 0;
+                var endIndex = Set.turkishLetters.indexOf(opt.value);
+                for(var i = startIndex; i < endIndex; i++){
+                    this.elements.push(Set.turkishLetters[i]);
+                }
+                this.type = Set.SMALLER_THAN_LETTER;
+                break;
+            case Set.GREATER_THAN_LETTER:
+                this.definition = ""+this.getValueStr(opt.value,2)+" sonra gelen harfler";
+                var startIndex = Set.turkishLetters.indexOf(opt.value)+1;
+                var endIndex = 29;
+                for(var i = startIndex; i < endIndex; i++){
+                    this.elements.push(Set.turkishLetters[i]);
+                }
+                this.type = Set.GREATER_THAN_LETTER;
+                break;
+            case Set.SMALLER_THAN_GREATER_THAN_LETTER:
+            //    this.definition = ""+this.getValueStr(opt.value1,2)+" sonra "+this.getValueStr(opt.value2,2) +" önce gelen harfler";
+                this.definition = ""+opt.value1+" ile "+opt.value2+" arasındaki harfler";
+                var startIndex = Set.turkishLetters.indexOf(opt.value1)+1;
+                var endIndex = Set.turkishLetters.indexOf(opt.value2);
+                for(var i = startIndex; i < endIndex; i++){
+                    this.elements.push(Set.turkishLetters[i]);
+                }
+                this.type = Set.SMALLER_THAN_GREATER_THAN_LETTER;
+                break;
         }
     },
 
@@ -553,6 +580,16 @@ var Set = Class.extend({
                 a += value+"'ün";
             }
         }
+        else if(opt == 2){
+            var a = "";
+            var d = ["a","ı","o", "u"];
+            if(d.indexOf(value) == -1){
+                a += value+"'den";
+            }
+            else{
+                a += value+"'dan";
+            }
+        }
 
         return a;
     },
@@ -590,174 +627,421 @@ var Set = Class.extend({
         return set;
     },
 
+    removeVennDiagram : function(){
+        $(this.div).remove();
+        this.vennDiagram.remove();
+    },
     drawVennDiagram : function(container, topLeftPoint, setLetter){
-        var size = new Size(150, 100);
-        var rectangle = new Rectangle(topLeftPoint, size);
-        this.vennDiagram = new Path.Oval(rectangle);
-        this.vennDiagram.strokeColor = "black";
+        if(this.elements.length <= 6){
+            var size = new Size(150, 100);
+            var rectangle = new Rectangle(topLeftPoint, size);
+            this.vennDiagram = new Path.Oval(rectangle);
+            this.vennDiagram.strokeColor = "black";
 
-        $(container).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
-        $('#vennElements2').css({
-            position:'absolute',
-            top:topLeftPoint.y+parseInt($(container).css("padding")),
-            left:topLeftPoint.x+parseInt($(container).css("padding")),
-            width:'150px',
-            height:'100px',
-            fontSize:'16px',
-            textAlign:'center',
-            fontWeight:'bold',
-         //   border:'1px solid'
-        });
-        $('#vennLetter2').css({
-            position:'absolute',
-            top:'0px',
-            left:'0px',
-            width:'18px',
-            height:'18px',
-            fontWeight:'normal'
-        });
-        $('#vennLetter2').html(setLetter);
-        $('#e12').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e22').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e32').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e42').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e52').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
-        $('#e62').css({
-            position:'absolute',
-            width:'24px',
-            height:'20px',
-        });
+            this.div = document.createElement('div');
+            $(container).append(this.div);
 
-        switch(this.elements.length){
-            case 0:
-                break;
-            case 1:{
-                $('#e12').css({
-                    top:'42px',
-                    left:'62px'
-                });
-                break;
+            $(this.div).append('<div id="vennElements2"><div id="vennLetter2"></div><div id="e12"></div><div id="e22"></div><div id="e32"></div><div id="e42"></div><div id="e52"></div><div id="e62"></div></div>');
+            $('#vennElements2', this.div).css({
+                position:'absolute',
+                top:topLeftPoint.y+parseInt($(container).css("padding")),
+                left:topLeftPoint.x+parseInt($(container).css("padding")),
+                width:'150px',
+                height:'100px',
+                fontSize:'16px',
+                textAlign:'center',
+                fontWeight:'bold',
+             //   border:'1px solid'
+            });
+            $('#vennLetter2', this.div).css({
+                position:'absolute',
+                top:'0px',
+                left:'0px',
+                width:'18px',
+                height:'18px',
+                fontWeight:'normal'
+            });
+            $('#vennLetter2', this.div).html(setLetter);
+            $('#e12', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e22', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e32', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e42', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e52', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e62', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+
+            switch(this.elements.length){
+                case 0:
+                    break;
+                case 1:{
+                    $('#e12', this.div).css({
+                        top:'42px',
+                        left:'62px'
+                    });
+                    break;
+                }
+                case 2:{
+                    $('#e12', this.div).css({
+                        top:'40px',
+                        left:'34px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'40px',
+                        left:'96px',
+                    });
+                    break;
+                }
+                case 3:{
+                    $('#e12', this.div).css({
+                        top:'40px',
+                        left:'30px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'15px',
+                        left:'67px',
+                    });
+                    $('#e32', this.div).css({
+                        top:'61px',
+                        left:'84px'
+                    });
+                    break;
+                }
+                case 4:{
+                    $('#e12', this.div).css({
+                        top:'22px',
+                        left:'34px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'22px',
+                        left:'88px',
+                    });
+                    $('#e32', this.div).css({
+                        top:'66px',
+                        left:'34px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'66px',
+                        left:'88px',
+                    });
+                    break;
+                }
+                case 5:{
+                    $('#e12', this.div).css({
+                        top:'20px',
+                        left:'32px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'20px',
+                        left:'90px',
+                    });
+                    $('#e32', this.div).css({
+                        top:'68px',
+                        left:'32px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'68px',
+                        left:'90px',
+                    });
+                    $('#e52', this.div).css({
+                        top:'42px',
+                        left:'62px'
+                    });
+                    break;
+                }
+                case 6:{
+                    $('#e12', this.div).css({
+                        top:'42px',
+                        left:'62px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'12px',
+                        left:'70px',
+                    });
+                    $('#e32', this.div).css({
+                        top:'30px',
+                        left:'106px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'66px',
+                        left:'34px',
+                    });
+                    $('#e52', this.div).css({
+                        top:'18px',
+                        left:'24px'
+                    });
+                    $('#e62', this.div).css({
+                        top:'66px',
+                        left:'90px',
+                    });
+                    break;
+                }
             }
-            case 2:{
-                $('#e12').css({
-                    top:'40px',
-                    left:'34px'
-                });
-                $('#e22').css({
-                    top:'40px',
-                    left:'96px',
-                });
-                break;
-            }
-            case 3:{
-                $('#e12').css({
-                    top:'40px',
-                    left:'30px'
-                });
-                $('#e22').css({
-                    top:'15px',
-                    left:'67px',
-                });
-                $('#e32').css({
-                    top:'61px',
-                    left:'84px'
-                });
-                break;
-            }
-            case 4:{
-                $('#e12').css({
-                    top:'22px',
-                    left:'34px'
-                });
-                $('#e22').css({
-                    top:'22px',
-                    left:'88px',
-                });
-                $('#e32').css({
-                    top:'66px',
-                    left:'34px'
-                });
-                $('#e42').css({
-                    top:'66px',
-                    left:'88px',
-                });
-                break;
-            }
-            case 5:{
-                $('#e12').css({
-                    top:'20px',
-                    left:'32px'
-                });
-                $('#e22').css({
-                    top:'20px',
-                    left:'90px',
-                });
-                $('#e32').css({
-                    top:'68px',
-                    left:'32px'
-                });
-                $('#e42').css({
-                    top:'68px',
-                    left:'90px',
-                });
-                $('#e52').css({
-                    top:'42px',
-                    left:'62px'
-                });
-                break;
-            }
-            case 6:{
-                $('#e12').css({
-                    top:'42px',
-                    left:'62px'
-                });
-                $('#e22').css({
-                    top:'12px',
-                    left:'70px',
-                });
-                $('#e32').css({
-                    top:'30px',
-                    left:'106px'
-                });
-                $('#e42').css({
-                    top:'66px',
-                    left:'34px',
-                });
-                $('#e52').css({
-                    top:'18px',
-                    left:'24px'
-                });
-                $('#e62').css({
-                    top:'66px',
-                    left:'90px',
-                });
-                break;
-            }
+        }
+        else{
+            var size = new Size(180,110);
+            var rectangle = new Rectangle(topLeftPoint, size);
+            this.vennDiagram = new Path.Oval(rectangle);
+            this.vennDiagram.strokeColor = "black";
+
+            this.div = document.createElement('div');
+            $(container).append(this.div);
+
+            $(this.div).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
+                                '<div id="e12"></div><div id="e22"></div><div id="e32"></div>' +
+                                '<div id="e42"></div><div id="e52"></div><div id="e62"></div>' +
+                                '<div id="e72"></div><div id="e82"></div><div id="e92"></div>' +
+                                '<div id="e102"></div></div>');
+
+            $('#vennElements2', this.div).css({
+                position:'absolute',
+                top:topLeftPoint.y+parseInt($(container).css("padding")),
+                left:topLeftPoint.x+parseInt($(container).css("padding")),
+                width:'180px',
+                height:'110px',
+                fontSize:'16px',
+                textAlign:'center',
+                fontWeight:'bold',
+           //     border:'1px solid'
+            });
+            $('#vennLetter2', this.div).css({
+                position:'absolute',
+                top:'0px',
+                left:'0px',
+                width:'18px',
+                height:'18px',
+                fontWeight:'normal'
+            });
+            $('#vennLetter2', this.div).html(setLetter);
+
+            $('#e12', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e22', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e32', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e42', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e52', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e62', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e72', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e82', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e92', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            $('#e102', this.div).css({
+                position:'absolute',
+                width:'24px',
+                height:'20px',
+            });
+            switch(this.elements.length){
+                case 7:
+                    $('#e12', this.div).css({
+                        top:'48px',
+                        left:'76px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'20px',
+                        left:'74px'
+                    });
+                    $('#e32', this.div).css({
+                        top:'30px',
+                        left:'42px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'80px',
+                        left:'76px'
+                    });
+                    $('#e52', this.div).css({
+                        top:'66px',
+                        left:'40px'
+                    });
+                    $('#e62', this.div).css({
+                        top:'30px',
+                        left:'116px'
+                    });
+                    $('#e72', this.div).css({
+                        top:'64px',
+                        left:'120px'
+                    });
+                    break;
+                case 8:
+                    $('#e12', this.div).css({
+                        top:'46px',
+                        left:'28px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'16px',
+                        left:'78px'
+                    });
+                    $('#e32', this.div).css({
+                        top:'18px',
+                        left:'42px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'80px',
+                        left:'76px'
+                    });
+                    $('#e52', this.div).css({
+                        top:'74px',
+                        left:'36px'
+                    });
+                    $('#e62', this.div).css({
+                        top:'30px',
+                        left:'116px'
+                    });
+                    $('#e72', this.div).css({
+                        top:'64px',
+                        left:'120px'
+                    });
+                    $('#e82', this.div).css({
+                        top:'46px',
+                        left:'76px'
+                    });
+                    break;
+                case 9:
+                    $('#e12', this.div).css({
+                        top:'46px',
+                        left:'28px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'16px',
+                        left:'76px'
+                    });
+                    $('#e32', this.div).css({
+                        top:'18px',
+                        left:'42px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'80px',
+                        left:'70px'
+                    });
+                    $('#e52', this.div).css({
+                        top:'74px',
+                        left:'36px'
+                    });
+                    $('#e62', this.div).css({
+                        top:'22px',
+                        left:'112px'
+                    });
+                    $('#e72', this.div).css({
+                        top:'74px',
+                        left:'108px'
+                    });
+                    $('#e82', this.div).css({
+                        top:'46px',
+                        left:'78px'
+                    });
+                    $('#e92', this.div).css({
+                        top:'46px',
+                        left:'124px'
+                    });
+                    break;
+                case 10:
+                    $('#e12', this.div).css({
+                        top:'46px',
+                        left:'64px'
+                    });
+                    $('#e22', this.div).css({
+                        top:'16px',
+                        left:'76px'
+                    });
+                    $('#e32', this.div).css({
+                        top:'18px',
+                        left:'42px'
+                    });
+                    $('#e42', this.div).css({
+                        top:'80px',
+                        left:'70px'
+                    });
+                    $('#e52', this.div).css({
+                        top:'74px',
+                        left:'36px'
+                    });
+                    $('#e62', this.div).css({
+                        top:'22px',
+                        left:'112px'
+                    });
+                    $('#e72', this.div).css({
+                        top:'72px',
+                        left:'106px'
+                    });
+                    $('#e82', this.div).css({
+                        top:'46px',
+                        left:'98px'
+                    });
+                    $('#e92', this.div).css({
+                        top:'46px',
+                        left:'132px'
+                    });
+                    $('#e102', this.div).css({
+                        top:'44px',
+                        left:'24px'
+                    });
+                    break;
+
+            };
         }
 
         for(var i = 1; i <= this.elements.length; i++){
-            $('#e'+i+"2").html("."+this.elements[i-1]);
+            $('#e'+i+"2", this.div).html("."+this.elements[i-1]);
         }
+    },
+
+    drawIntersectingVennDiagram : function(container, topLeftPoint, setLetter1, otherSet, setLetter2){
+
     },
 });
 Set.ELEMENTS = 0;
@@ -783,85 +1067,283 @@ Set.GREATER_THAN_DIGIT_EVEN = 19;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT = 20;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD = 21;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN = 22;
+Set.SMALLER_THAN_LETTER = 23;
+Set.GREATER_THAN_LETTER = 24;
+Set.SMALLER_THAN_GREATER_THAN_LETTER = 25;
+
+Set.turkishLetters = [];
+Set.turkishLetters[0] = "a";
+Set.turkishLetters[1] = "b";
+Set.turkishLetters[2] = "c";
+Set.turkishLetters[3] = "ç";
+Set.turkishLetters[4] = "d";
+Set.turkishLetters[5] = "e";
+Set.turkishLetters[6] = "f";
+Set.turkishLetters[7] = "g";
+Set.turkishLetters[8] = "ğ";
+Set.turkishLetters[9] = "h";
+Set.turkishLetters[10] = "ı";
+Set.turkishLetters[11] = "i";
+Set.turkishLetters[12] = "j";
+Set.turkishLetters[13] = "k";
+Set.turkishLetters[14] = "l";
+Set.turkishLetters[15] = "m";
+Set.turkishLetters[16] = "n";
+Set.turkishLetters[17] = "o";
+Set.turkishLetters[18] = "ö";
+Set.turkishLetters[19] = "p";
+Set.turkishLetters[20] = "r";
+Set.turkishLetters[21] = "s";
+Set.turkishLetters[22] = "ş";
+Set.turkishLetters[23] = "t";
+Set.turkishLetters[24] = "u";
+Set.turkishLetters[25] = "ü";
+Set.turkishLetters[26] = "v";
+Set.turkishLetters[27] = "y";
+Set.turkishLetters[28] = "z";
 
 
-Set.randomGenerator = function(type){
+Set.randomGenerator = function(type, length){
 
+    if(length == undefined || isNaN(length)){
+        length = 0;
+    }
     var sType,elements,value,value1,value2;
-    if(type == undefined || !isNaN(type))
-        sType= Util.randomInteger(1,11);
-    else
+    if(type == undefined || isNaN(type)){
+        if(length == 0){
+            sType= Util.randomInteger(1,26);
+        }
+        else{
+            sType = Util.randomInteger(1,26,[11,12,13,14,15,16,17,18,19,20,21,22]);
+        }
+    }
+    else{
         sType = type;
+    }
     var set;
     switch(sType){
         case 1:{     // Set.SMALLER_THAN
-            var randNum = Util.randomInteger(1,7);
+            if(length == 0){
+                var randNum = Util.randomInteger(1,7);
+            }
+            else{
+                var randNum = length;
+            }
             set = new Set({type:Set.SMALLER_THAN, value:randNum});
             break;
         }
         case 2:{     // Set.SMALLER_THAN_ODD
-            var randNum = Util.randomInteger(2,12);
+            if(length == 0){
+                var randNum = Util.randomInteger(2,12);
+            }
+            else{
+                var randNum = 2*length;
+            }
             set = new Set({type:Set.SMALLER_THAN_ODD, value:randNum});
             break;
         }
         case 3:{     // Set.SMALLER_THAN_EVEN
-            var randNum = Util.randomInteger(1,11);
+            if(length == 0){
+                var randNum = Util.randomInteger(1,11);
+            }
+            else{
+                var randNum = 2*length;
+            }
             set = new Set({type:Set.SMALLER_THAN_EVEN, value:randNum});
             break;
         }
         case 4:{     // Set.SMALLER_THAN_PRIME
-            var randNum = Util.randomInteger(3,14);
+            if(length == 0){
+                var randNum = Util.randomInteger(3,14);
+            }
+            else{
+                if(length == 7){
+                    var randNum = 18;
+                }
+                else if(length == 8){
+                    var randNum = 20;
+                }
+                else if(length == 9){
+                    var randNum = 24;
+                }
+                else{
+                    var randNum = 30;
+                }
+            }
             set = new Set({type:Set.SMALLER_THAN_PRIME, value:randNum});
             break;
         }
         case 5:{     // Set.SMALLER_THAN_GREATER_THAN
-            var randNum1 = Util.randomInteger(1,90);
-            var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(1,90);
+                var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+            }
+            else{
+                var randNum1 = Util.randomInteger(1, 90);
+                var randNum2 = randNum1+length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN, value1:randNum1, value2:randNum2});
             break;
         }
         case 6:{     // Set.SMALLER_THAN_GREATER_THAN_ODD
-            var randNum1 = Util.randomInteger(1,80);
-            var randNum2 = randNum1+Util.randomInteger(4,13);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(1,80);
+                var randNum2 = randNum1+Util.randomInteger(4,13);
+            }
+            else{
+                var randNum1 = Util.randomInteger(1,78);
+                var randNum2 = randNum1+2*length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_ODD, value1:randNum1, value2:randNum2});
             break;
         }
         case 7:{     // Set.SMALLER_THAN_GREATER_THAN_EVEN
-            var randNum1 = Util.randomInteger(1,80);
-            var randNum2 = randNum1+Util.randomInteger(4,13);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(1,80);
+                var randNum2 = randNum1+Util.randomInteger(4,13);
+            }
+            else{
+                var randNum1 = Util.randomInteger(1,78);
+                var randNum2 = randNum1+2*length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_EVEN, value1:randNum1, value2:randNum2});
             break;
         }
         case 8:{     // Set.SMALLER_THAN_GREATER_THAN_PRIME
-            do{
-                var randNum1 = Util.randomInteger(1, 90);
-                var randNum2 = Util.randomInteger(1, 90);
-                var primeNums = [];
-                for(var i = randNum1+1; i < randNum2; i++){
-                    if(Util.isPrimeNumber(i)){
-                        primeNums.push(i);
+            if(length == 0){
+                do{
+                    var randNum1 = Util.randomInteger(1, 90);
+                    var randNum2 = Util.randomInteger(1, 90);
+                    var primeNums = [];
+                    for(var i = randNum1+1; i < randNum2; i++){
+                        if(Util.isPrimeNumber(i)){
+                            primeNums.push(i);
+                        }
                     }
-                }
-            } while(primeNums.length == 0 || primeNums.length > 6)
+                } while(primeNums.length == 0 || primeNums.length > 6)
+            }
+            else{
+                do{
+                    var randNum1 = Util.randomInteger(1,30);
+                    var randNum2 = Util.randomInteger(randNum1+10, 100);
+                    var primeNums = [];
+                    for(var i = randNum1+1; i < randNum2; i++){
+                        if(Util.isPrimeNumber(i)){
+                            primeNums.push(i);
+                        }
+                    }
+                } while(primeNums.length != length)
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_PRIME, value1:randNum1, value2:randNum2});
             break;
         }
         case 9:{     // Set.FACTORS
-            do{
-                var randNum = Util.randomInteger(1,97);
-                var factors = [];
-                factors = Util.getFactors(randNum);
-            }while(factors.length > 6)
+            if(length == 0){
+                do{
+                    var randNum = Util.randomInteger(1,97);
+                    var factors = [];
+                    factors = Util.getFactors(randNum);
+                }while(factors.length > 6)
+            }
+            else{
+                do{
+                    var randNum = Util.randomInteger(1,99);
+                    var factors = [];
+                    factors = Util.getFactors(randNum);
+                } while(factors.length != length)
+            }
             set = new Set({type:Set.FACTORS, value:randNum});
             break;
         }
         case 10:{    // Set.MULTIPLIES
-            var randNum1 = Util.randomInteger(2,17);
-            var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(2,17);
+                var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+            }
+            else{
+                var randNum1 = Util.randomInteger(2,10);
+                var randNum2 = randNum1*length+(Util.randomInteger(1,randNum1));
+            }
             set = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 11:{   // Set.DIGIT
+            set = new Set({type:Set.DIGIT});
+            break;
+        }
+        case 12:{   // Set.DIGIT_ODD
+            set = new Set({type:Set.DIGIT_ODD});
+            break;
+        }
+        case 13:{   // Set.DIGIT_EVEN
+            set = new Set({type:Set.DIGIT_EVEN});
+            break;
+        }
+        case 14:{   // Set.SMALLER_THAN_DIGIT
+            var randNum = Util.randomInteger(1,11);
+            set = new Set({type:Set.SMALLER_THAN_DIGIT, value:randNum});
+            break;
+        }
+        case 15:{   // Set.SMALLER_THAN_DIGIT_ODD
+            var randNum = Util.randomInteger(2,11);
+            set = new Set({type:Set.SMALLER_THAN_DIGIT_ODD, value:randNum});
+            break;
+        }
+        case 16:{   // Set.SMALLER_THAN_DIGIT_EVEN
+            var randNum = Util.randomInteger(1,11);
+            set = new Set({type:Set.SMALLER_THAN_DIGIT_EVEN, value:randNum});
+            break;
+        }
+        case 17:{   // Set.GREATER_THAN_DIGIT
+            var randNum = Util.randomInteger(0,9);
+            set = new Set({type:Set.GREATER_THAN_DIGIT, value:randNum});
+            break;
+        }
+        case 18:{   // Set.GREATER_THAN_DIGIT_ODD
+            var randNum = Util.randomInteger(0,9);
+            set = new Set({type:Set.GREATER_THAN_DIGIT_ODD, value:randNum});
+            break;
+        }
+        case 19:{   // Set.GREATER_THAN_DIGIT_EVEN
+            var randNum = Util.randomInteger(0,8);
+            set = new Set({type:Set.GREATER_THAN_DIGIT_EVEN, value:randNum});
+            break;
+        }
+        case 20:{   // Set.SMALLER_THAN_GREATER_THAN_DIGIT
+            var randNum1 = Util.randomInteger(0,8);
+            var randNum2 = Util.randomInteger(randNum1+2, 10);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 21:{   // Set.SMALLER_THAN_GREATER_THAN_ODD
+            var randNum1 = Util.randomInteger(0,8);
+            var randNum2 = Util.randomInteger(randNum1+3, 10);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 22:{   // Set.SMALLER_THAN_GREATER_THAN_EVEN
+            var randNum1 = Util.randomInteger(0,8);
+            var randNum2 = Util.randomInteger(randNum1+3, 10);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN, value1:randNum1, value2:randNum2});
+            break;
+        }
+        case 23:{
+            var randNum = Util.randomInteger(1,29);
+            set = new Set({type:Set.SMALLER_THAN_LETTER, value:Set.turkishLetters[randNum]});
+            break;
+        }
+        case 24:{
+            var randNum = Util.randomInteger(0,28);
+            set = new Set({type:Set.GREATER_THAN_LETTER, value:Set.turkishLetters[randNum]});
+            break;
+        }
+        case 25:{
+            var randNum1 = Util.randomInteger(0,27);
+            var randNum2 = Util.randomInteger(randNum1+2, 29);
+            set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_LETTER, value1:Set.turkishLetters[randNum1], value2:Set.turkishLetters[randNum2]});
             break;
         }
     }
 
     return set;
-}
+};

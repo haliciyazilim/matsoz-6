@@ -54,10 +54,24 @@ var Interaction = {
                 //.css("border","1px solid red");
         
         for(i=-6; i<=6; i++){
-            $("#sayilar").append("<div class='sayilar' id=sayilar"+i+">");
+            var isaret=i<0?"&#8211;":"";
+            var sayi=i<0?i.toString().slice(1): i.toString();
+
+            if(i<0)
+                $("#sayilar").append("<div class='sayilar eksiSayilar' id=sayilar"+i+">");
+            else
+            $("#sayilar").append("<div class='sayilar artiSayilar' id=sayilar"+i+">");
+
             $("#sayilar"+i)
-                .css("margin","auto").html(i)
+                .css("margin","auto").html(isaret+""+sayi)
                 .css("border","0px solid red");
+
+            if(i<0)
+                $("#sayilar"+i).html(isaret+sayi+"&nbsp;&nbsp;&nbsp;")
+            else
+                $("#sayilar"+i).html(isaret+sayi)
+
+            console.log(isaret+""+i);
             if(i!=0)
                 $("#sayilar"+i).css("opacity","0");
             
@@ -71,8 +85,10 @@ var Interaction = {
             .css("float","left")
             .css("font-style","bold")
             .css("font-size",fontSize)
-            .css("text-align","center")
+            //.css("text-align","center")
             //.css("opacity","0");
+        $(".eksiSayilar").css("text-align","right");
+        $(".artiSayilar").css("text-align","center");
     $(".noktalar")
         .css("width",pieceLength)
         .css("height","10px")
@@ -102,10 +118,12 @@ var Interaction = {
             right:"0",
             left:"0"
 
-        },true, true);
+        },false, true);
         Interaction.input.id="girdi";
         $("#girdi").attr("maxLength","2");
-        
+
+
+
 	Interaction.appendStatus({
             bottom:'100px',
             right:'0',
@@ -127,10 +145,22 @@ var Interaction = {
 	Interaction.prepareNextQuestion();
 		},
 	nextQuestion: function(randomNumber){
+        $("#girdi").get(0).onkeydown = function(event){
+            console.log(Interaction.__status.CORRECT);
+            console.log(event.keyCode);
+            if(event.keyCode==109){
+                $("#girdi").val("–")
+                return false;
+            }
+        };
+
             if(randomNumber==0)
                 randomNumber++;
             Interaction.trial=1;
             Interaction.randomNumber = randomNumber;
+
+            Interaction.isaret=Interaction.randomNumber<0?"&#8211;":"";
+            Interaction.sayi=Interaction.randomNumber<0?Interaction.randomNumber.toString().slice(1): Interaction.randomNumber.toString();
             $("#girdi").css("opacity","0");
             Interaction.cevap = "";
              $("#girdi").css("color","black");
@@ -228,7 +258,8 @@ var Interaction = {
                 $(".sayilar").css("opacity","1");
             }
             else{
-                Interaction.setStatus("Cevabınız yanlış; doğru cevap: <b style='color:green'>"+Interaction.randomNumber+"</b>", false);
+
+                Interaction.setStatus("Cevabınız yanlış; doğru cevap: <b style='color:green'>"+Interaction.isaret +Interaction.sayi+"</b>", false);
                 $("#girdi").css("color","red");
                 $(".sayilar").css("opacity","1");
             }
