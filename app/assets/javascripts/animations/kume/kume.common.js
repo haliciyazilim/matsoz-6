@@ -1045,16 +1045,16 @@ var Set = Class.extend({
     },
 });
 Set.ELEMENTS = 0;
-Set.SMALLER_THAN = 1;
-Set.SMALLER_THAN_ODD = 2;
-Set.SMALLER_THAN_EVEN = 3;
-Set.SMALLER_THAN_PRIME = 4;
-Set.SMALLER_THAN_GREATER_THAN = 5;
-Set.SMALLER_THAN_GREATER_THAN_ODD = 6;
-Set.SMALLER_THAN_GREATER_THAN_EVEN = 7;
-Set.SMALLER_THAN_GREATER_THAN_PRIME = 8;
-Set.FACTORS = 9;
-Set.MULTIPLIES = 10;
+Set.SMALLER_THAN = 1;   // length option
+Set.SMALLER_THAN_ODD = 2;   // length option
+Set.SMALLER_THAN_EVEN = 3;  // length option
+Set.SMALLER_THAN_PRIME = 4;     // length option
+Set.SMALLER_THAN_GREATER_THAN = 5;  // length option
+Set.SMALLER_THAN_GREATER_THAN_ODD = 6;  // length option
+Set.SMALLER_THAN_GREATER_THAN_EVEN = 7;     // length option
+Set.SMALLER_THAN_GREATER_THAN_PRIME = 8;    // length option
+Set.FACTORS = 9;    // length option
+Set.MULTIPLIES = 10;    // length option
 Set.DIGIT = 11;
 Set.DIGIT_ODD = 12;
 Set.DIGIT_EVEN = 13;
@@ -1067,9 +1067,9 @@ Set.GREATER_THAN_DIGIT_EVEN = 19;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT = 20;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD = 21;
 Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN = 22;
-Set.SMALLER_THAN_LETTER = 23;
-Set.GREATER_THAN_LETTER = 24;
-Set.SMALLER_THAN_GREATER_THAN_LETTER = 25;
+Set.SMALLER_THAN_LETTER = 23;   // length option
+Set.GREATER_THAN_LETTER = 24;   // length option
+Set.SMALLER_THAN_GREATER_THAN_LETTER = 25;  // length option
 
 Set.turkishLetters = [];
 Set.turkishLetters[0] = "a";
@@ -1105,7 +1105,7 @@ Set.turkishLetters[28] = "z";
 
 Set.randomGenerator = function(type, length){
 
-    if(length == undefined || !isNan(length)){
+    if(length == undefined || isNaN(length)){
         length = 0;
     }
     var sType,elements,value,value1,value2;
@@ -1114,7 +1114,7 @@ Set.randomGenerator = function(type, length){
             sType= Util.randomInteger(1,26);
         }
         else{
-            sType = Util.randomInteger(1,26,[11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]);
+            sType = Util.randomInteger(1,26,[11,12,13,14,15,16,17,18,19,20,21,22]);
         }
     }
     else{
@@ -1123,69 +1123,147 @@ Set.randomGenerator = function(type, length){
     var set;
     switch(sType){
         case 1:{     // Set.SMALLER_THAN
-            var randNum = Util.randomInteger(1,7);
+            if(length == 0){
+                var randNum = Util.randomInteger(1,7);
+            }
+            else{
+                var randNum = length;
+            }
             set = new Set({type:Set.SMALLER_THAN, value:randNum});
             break;
         }
         case 2:{     // Set.SMALLER_THAN_ODD
-            var randNum = Util.randomInteger(2,12);
+            if(length == 0){
+                var randNum = Util.randomInteger(2,12);
+            }
+            else{
+                var randNum = 2*length;
+            }
             set = new Set({type:Set.SMALLER_THAN_ODD, value:randNum});
             break;
         }
         case 3:{     // Set.SMALLER_THAN_EVEN
-            var randNum = Util.randomInteger(1,11);
+            if(length == 0){
+                var randNum = Util.randomInteger(1,11);
+            }
+            else{
+                var randNum = 2*length;
+            }
             set = new Set({type:Set.SMALLER_THAN_EVEN, value:randNum});
             break;
         }
         case 4:{     // Set.SMALLER_THAN_PRIME
-            var randNum = Util.randomInteger(3,14);
+            if(length == 0){
+                var randNum = Util.randomInteger(3,14);
+            }
+            else{
+                if(length == 7){
+                    var randNum = 18;
+                }
+                else if(length == 8){
+                    var randNum = 20;
+                }
+                else if(length == 9){
+                    var randNum = 24;
+                }
+                else{
+                    var randNum = 30;
+                }
+            }
             set = new Set({type:Set.SMALLER_THAN_PRIME, value:randNum});
             break;
         }
         case 5:{     // Set.SMALLER_THAN_GREATER_THAN
-            var randNum1 = Util.randomInteger(1,90);
-            var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(1,90);
+                var randNum2 = Util.randomInteger(randNum1+2, randNum1+8);
+            }
+            else{
+                var randNum1 = Util.randomInteger(1, 90);
+                var randNum2 = randNum1+length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN, value1:randNum1, value2:randNum2});
             break;
         }
         case 6:{     // Set.SMALLER_THAN_GREATER_THAN_ODD
-            var randNum1 = Util.randomInteger(1,80);
-            var randNum2 = randNum1+Util.randomInteger(4,13);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(1,80);
+                var randNum2 = randNum1+Util.randomInteger(4,13);
+            }
+            else{
+                var randNum1 = Util.randomInteger(1,78);
+                var randNum2 = randNum1+2*length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_ODD, value1:randNum1, value2:randNum2});
             break;
         }
         case 7:{     // Set.SMALLER_THAN_GREATER_THAN_EVEN
-            var randNum1 = Util.randomInteger(1,80);
-            var randNum2 = randNum1+Util.randomInteger(4,13);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(1,80);
+                var randNum2 = randNum1+Util.randomInteger(4,13);
+            }
+            else{
+                var randNum1 = Util.randomInteger(1,78);
+                var randNum2 = randNum1+2*length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_EVEN, value1:randNum1, value2:randNum2});
             break;
         }
         case 8:{     // Set.SMALLER_THAN_GREATER_THAN_PRIME
-            do{
-                var randNum1 = Util.randomInteger(1, 90);
-                var randNum2 = Util.randomInteger(1, 90);
-                var primeNums = [];
-                for(var i = randNum1+1; i < randNum2; i++){
-                    if(Util.isPrimeNumber(i)){
-                        primeNums.push(i);
+            if(length == 0){
+                do{
+                    var randNum1 = Util.randomInteger(1, 90);
+                    var randNum2 = Util.randomInteger(1, 90);
+                    var primeNums = [];
+                    for(var i = randNum1+1; i < randNum2; i++){
+                        if(Util.isPrimeNumber(i)){
+                            primeNums.push(i);
+                        }
                     }
-                }
-            } while(primeNums.length == 0 || primeNums.length > 6)
+                } while(primeNums.length == 0 || primeNums.length > 6)
+            }
+            else{
+                do{
+                    var randNum1 = Util.randomInteger(1,30);
+                    var randNum2 = Util.randomInteger(randNum1+10, 100);
+                    var primeNums = [];
+                    for(var i = randNum1+1; i < randNum2; i++){
+                        if(Util.isPrimeNumber(i)){
+                            primeNums.push(i);
+                        }
+                    }
+                } while(primeNums.length != length)
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_PRIME, value1:randNum1, value2:randNum2});
             break;
         }
         case 9:{     // Set.FACTORS
-            do{
-                var randNum = Util.randomInteger(1,97);
-                var factors = [];
-                factors = Util.getFactors(randNum);
-            }while(factors.length > 6)
+            if(length == 0){
+                do{
+                    var randNum = Util.randomInteger(1,97);
+                    var factors = [];
+                    factors = Util.getFactors(randNum);
+                }while(factors.length > 6)
+            }
+            else{
+                do{
+                    var randNum = Util.randomInteger(1,99);
+                    var factors = [];
+                    factors = Util.getFactors(randNum);
+                } while(factors.length != length)
+            }
             set = new Set({type:Set.FACTORS, value:randNum});
             break;
         }
         case 10:{    // Set.MULTIPLIES
-            var randNum1 = Util.randomInteger(2,17);
-            var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(2,17);
+                var randNum2 = randNum1+randNum1*Util.randomInteger(0, 6)+Util.randomInteger(1,randNum1);
+            }
+            else{
+                var randNum1 = Util.randomInteger(2,10);
+                var randNum2 = randNum1*length+(Util.randomInteger(1,randNum1));
+            }
             set = new Set({type:Set.MULTIPLIES, value1:randNum1, value2:randNum2});
             break;
         }
@@ -1250,18 +1328,34 @@ Set.randomGenerator = function(type, length){
             break;
         }
         case 23:{
-            var randNum = Util.randomInteger(1,29);
+            if(length == 0){
+                var randNum = Util.randomInteger(1,29);
+            }
+            else{
+                var randNum = length;
+            }
             set = new Set({type:Set.SMALLER_THAN_LETTER, value:Set.turkishLetters[randNum]});
             break;
         }
         case 24:{
-            var randNum = Util.randomInteger(0,28);
+            if(length == 0){
+                var randNum = Util.randomInteger(0,28);
+            }
+            else{
+                var randNum = 28-length;
+            }
             set = new Set({type:Set.GREATER_THAN_LETTER, value:Set.turkishLetters[randNum]});
             break;
         }
         case 25:{
-            var randNum1 = Util.randomInteger(0,27);
-            var randNum2 = Util.randomInteger(randNum1+2, 29);
+            if(length == 0){
+                var randNum1 = Util.randomInteger(0,27);
+                var randNum2 = Util.randomInteger(randNum1+2, 29);
+            }
+            else{
+                var randNum1 = Util.randomInteger(0,18);
+                var randNum2 = randNum1+length+1;
+            }
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_LETTER, value1:Set.turkishLetters[randNum1], value2:Set.turkishLetters[randNum2]});
             break;
         }
