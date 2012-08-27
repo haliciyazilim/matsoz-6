@@ -454,14 +454,6 @@ var Interaction = {
         $('#dropDiv1').droppable("enable");
         $('#dropDiv2').droppable("enable");
 
-//        if(Interaction.oldActiveStr){
-//            $("#"+Interaction.oldActiveStr).css("opacity" , 0)
-//        }
-//
-//        if(Interaction.oldActiveStr2){
-//            $("#"+Interaction.oldActiveStr2).css("opacity" , 0)
-//        }
-
         $('#elementActive').css("opacity",0);
         $('#element2Active').css("opacity",0);
         $('#notElementActive').css("opacity",0);
@@ -1025,7 +1017,12 @@ var Interaction = {
         }
     },
 	onCorrectAnswer : function(){
-        $(Interaction.inputs[Interaction.length]).css("color", "green");
+        if(Interaction.length == 0){
+            $(Interaction.inputs[1]).css("color", "green");
+        }
+        else{
+            $(Interaction.inputs[Interaction.length]).css("color", "green");
+        }
     },
 	onWrongAnswer : function(){
 		
