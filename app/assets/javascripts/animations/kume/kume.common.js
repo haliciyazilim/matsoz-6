@@ -15,15 +15,13 @@ var Set = Class.extend({
                         continue;
                     this.elements.push(opt.elements[i])
                 }
-                this.elements.sort(function(a,b){return a-b})
-                this.type = Set.ELEMENTS;
+                this.elements.sort(function(a,b){return a-b});
                 break;
             case Set.SMALLER_THAN:
                 this.definition = ""+this.getValueStr(opt.value)+" küçük doğal sayılar";
                 for(var i = 0; i < opt.value; i++){
                     this.elements.push(i);
                 }
-                this.type = Set.SMALLER_THAN;
                 break;
 
             case Set.SMALLER_THAN_ODD:
@@ -33,7 +31,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_ODD;
                 break;
             case Set.SMALLER_THAN_EVEN:
                 this.definition = ""+this.getValueStr(opt.value)+" küçük çift doğal sayılar";
@@ -42,7 +39,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_EVEN;
                 break;
             case Set.SMALLER_THAN_PRIME:
                 this.definition = ""+this.getValueStr(opt.value)+" küçük asal sayılar";
@@ -51,14 +47,12 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_PRIME;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük doğal sayılar";
                 for(var i = opt.value1+1; i < opt.value2; i++){
                     this.elements.push(i);
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_ODD:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük tek doğal sayılar";
@@ -67,7 +61,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_ODD;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_EVEN:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük çift doğal sayılar";
@@ -76,7 +69,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_EVEN;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_PRIME:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük asal sayılar";
@@ -85,7 +77,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_PRIME;
                 break;
             case Set.FACTORS:
                 this.definition = ""+this.getValueStr(opt.value, 1)+" çarpanları";
@@ -94,21 +85,19 @@ var Set = Class.extend({
                 for(var i = 0; i < a.length; i++){
                     this.elements.push(a[i]);
                 }
-                this.type = Set.FACTORS;
                 break;
             case Set.MULTIPLIES:
                 this.definition = ""+this.getValueStr(opt.value1,1)+" "+this.getValueStr(opt.value2)+" küçük katları";
                 for(var i = 1; i < opt.value2/opt.value1; i++){
                     this.elements.push(opt.value1*i);
                 }
-                this.type = Set.MULTIPLIES;
                 break;
             case Set.DIGIT:
                 this.definition = "rakamlar";
                 for(var i = 0; i < 10; i++){
                     this.elements.push(i);
                 }
-                this.type = Set.DIGIT;
+                this.type = opt.type;
                 break;
             case Set.DIGIT_ODD:
                 this.definition = "tek rakamlar";
@@ -117,7 +106,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.DIGIT_ODD;
                 break;
             case Set.DIGIT_EVEN:
                 this.definition = "çift rakamlar";
@@ -126,7 +114,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.DIGIT_EVEN;
                 break;
             case Set.SMALLER_THAN_DIGIT:
                 this.definition = ""+this.getValueStr(opt.value)+" küçük rakamlar";
@@ -139,7 +126,6 @@ var Set = Class.extend({
                 for(var i = 0; i < limit; i++){
                     this.elements.push(i);
                 }
-                this.type = Set.SMALLER_THAN_DIGIT;
                 break;
             case Set.SMALLER_THAN_DIGIT_ODD:
                 this.definition = ""+this.getValueStr(opt.value)+" küçük tek rakamlar";
@@ -154,7 +140,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_DIGIT_ODD;
                 break;
             case Set.SMALLER_THAN_DIGIT_EVEN:
                 this.definition = ""+this.getValueStr(opt.value)+" küçük çift rakamlar";
@@ -169,7 +154,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_DIGIT_EVEN;
                 break;
             case Set.GREATER_THAN_DIGIT:
                 this.definition = ""+this.getValueStr(opt.value)+" büyük rakamlar";
@@ -182,7 +166,6 @@ var Set = Class.extend({
                 for(var i = limit+1; i < 10; i++){
                     this.elements.push(i);
                 }
-                this.type = Set.GREATER_THAN_DIGIT;
                 break;
             case Set.GREATER_THAN_DIGIT_ODD:
                 this.definition = ""+this.getValueStr(opt.value)+" büyük tek rakamlar";
@@ -197,7 +180,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.GREATER_THAN_DIGIT_ODD;
                 break;
             case Set.GREATER_THAN_DIGIT_EVEN:
                 this.definition = ""+this.getValueStr(opt.value)+" büyük çift rakamlar";
@@ -212,14 +194,12 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.GREATER_THAN_DIGIT_EVEN;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_DIGIT:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük rakamlar";
                 for(var i = opt.value1+1; i < opt.value2; i++){
                     this.elements.push(i);
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük tek rakamlar";
@@ -228,7 +208,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN:
                 this.definition = ""+this.getValueStr(opt.value1)+" büyük "+this.getValueStr(opt.value2)+" küçük çift rakamlar";
@@ -237,7 +216,6 @@ var Set = Class.extend({
                         this.elements.push(i);
                     }
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN;
                 break;
             case Set.SMALLER_THAN_LETTER:
                 this.definition = ""+this.getValueStr(opt.value,2)+" önce gelen harfler";
@@ -246,7 +224,6 @@ var Set = Class.extend({
                 for(var i = startIndex; i < endIndex; i++){
                     this.elements.push(Set.turkishLetters[i]);
                 }
-                this.type = Set.SMALLER_THAN_LETTER;
                 break;
             case Set.GREATER_THAN_LETTER:
                 this.definition = ""+this.getValueStr(opt.value,2)+" sonra gelen harfler";
@@ -255,7 +232,6 @@ var Set = Class.extend({
                 for(var i = startIndex; i < endIndex; i++){
                     this.elements.push(Set.turkishLetters[i]);
                 }
-                this.type = Set.GREATER_THAN_LETTER;
                 break;
             case Set.SMALLER_THAN_GREATER_THAN_LETTER:
             //    this.definition = ""+this.getValueStr(opt.value1,2)+" sonra "+this.getValueStr(opt.value2,2) +" önce gelen harfler";
@@ -265,9 +241,9 @@ var Set = Class.extend({
                 for(var i = startIndex; i < endIndex; i++){
                     this.elements.push(Set.turkishLetters[i]);
                 }
-                this.type = Set.SMALLER_THAN_GREATER_THAN_LETTER;
                 break;
         }
+        this.type = opt.type;
     },
 
     isEqualSet:function(otherSet){
@@ -893,12 +869,12 @@ var Set = Class.extend({
                         left:'76px'
                     });
                     $('#e22', this.div).css({
-                        top:'20px',
+                        top:'16px',
                         left:'74px'
                     });
                     $('#e32', this.div).css({
                         top:'30px',
-                        left:'42px'
+                        left:'32px'
                     });
                     $('#e42', this.div).css({
                         top:'80px',
@@ -906,7 +882,7 @@ var Set = Class.extend({
                     });
                     $('#e52', this.div).css({
                         top:'66px',
-                        left:'40px'
+                        left:'30px'
                     });
                     $('#e62', this.div).css({
                         top:'30px',
@@ -1041,6 +1017,14 @@ var Set = Class.extend({
     },
 
     drawIntersectingVennDiagram : function(container, topLeftPoint, setLetter1, otherSet, setLetter2){
+
+        var size = new Size(180, 110);
+        var rectangle = new Rectangle(topLeftPoint, size);
+        this.intersectVennDiagram = new Path.Oval(rectangle);
+        this.intersectVennDiagram.strokeColor = "black";
+
+        this.div = document.createElement('div');
+        $(container).append(this.div);
 
     },
 });
@@ -1327,7 +1311,7 @@ Set.randomGenerator = function(type, length){
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN, value1:randNum1, value2:randNum2});
             break;
         }
-        case 23:{
+        case 23:{   // Set.SMALLER_THAN_LETTER
             if(length == 0){
                 var randNum = Util.randomInteger(1,29);
             }
@@ -1337,7 +1321,7 @@ Set.randomGenerator = function(type, length){
             set = new Set({type:Set.SMALLER_THAN_LETTER, value:Set.turkishLetters[randNum]});
             break;
         }
-        case 24:{
+        case 24:{   // Set.GREATER_THAN_LETTER
             if(length == 0){
                 var randNum = Util.randomInteger(0,28);
             }
@@ -1347,7 +1331,7 @@ Set.randomGenerator = function(type, length){
             set = new Set({type:Set.GREATER_THAN_LETTER, value:Set.turkishLetters[randNum]});
             break;
         }
-        case 25:{
+        case 25:{   // Set.SMALLER_THAN_GREATER_THAN_LETTER
             if(length == 0){
                 var randNum1 = Util.randomInteger(0,27);
                 var randNum2 = Util.randomInteger(randNum1+2, 29);
