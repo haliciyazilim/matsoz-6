@@ -1,35 +1,49 @@
 var sorgular = function () {
     this.sorguSecici = Math.floor(Math.random() * 4 + 1);
     console.log("Soru Seçici: " + this.sorguSecici);
-    //var sorguSecici=3;
+    this.sorguSecici=2;
     switch (this.sorguSecici) {
-        case 1:
+        case 1: // 2'den küçük doğal sayılar
             this.kume = new Set({
                 type: Set.SMALLER_THAN,
-                value: 6
+                value: 2
             });
-            this.kume;
             break;
-        case 2:
+        case 2: //10'dan büyük 13'ten küçük doğal sayılar
             this.kume = new Set({
-                type: Set.GREATER_THAN_DIGIT_EVEN,
-                value: 0
+                type: Set.SMALLER_THAN_GREATER_THAN,
+                value1: 10,
+                value2:13
             });
-            this.kume;
             break;
-        case 3:
+        case 3: // Çift rakamlar
             this.kume = new Set({
-                type: Set.DIGIT,
+                type: Set.DIGIT_EVEN,
                 value: 10
             });
-            this.kume;
             break;
         case 4:
             this.kume = new Set({
-                type: Set.SMALLER_THAN_PRIME,
-                value: 10
+                type: Set.ELEMENTS,
+                elements: 0
             });
-            this.kume;
+            this.kume.definition='"0" rakamından oluşan küme';
+            break;
+
+        case 5:
+            this.kume = new Set({
+                type: Set.ELEMENTS,
+                elements:["k","l","m","n"]
+
+            });
+            this.kume.definition='"k,l,m,n" harflerinden oluşan küme';
+            break;
+        case 6:
+            this.kume = new Set({
+                type: Set.FACTORS,
+                value:6
+
+            });
             break;
     }
     this.uzunluk = function () {
@@ -37,6 +51,7 @@ var sorgular = function () {
     }
     this.yeniSoru = function (isim) {
         this.soruCesidi = Math.floor(Math.random() * 2 + 1);
+        this.soruCesidi=2;
         console.log("Soru Seçici: " + this.soruCesidi);
         this.isim = isim;
         //this.soru=sorgular();
