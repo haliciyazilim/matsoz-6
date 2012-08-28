@@ -92,6 +92,7 @@ Main.animateDefinition = function(){
 
 Main.init = function(){
 	Main.initializeNavigation();
+	Main.initializeSoundManager();
 	
 	Main.interaction = $('.etkilesimalan').get(0);
 	Main.animation = $('.ornek').get(0);
@@ -223,6 +224,46 @@ Main.initializeNavigation = function() {
 		createWordList($(this).data('letter'));
 	});
 	createWordList(currentLetter);
+}
+
+Main.initializeSoundManager = function() {
+	soundManager.mute();
+	
+	soundManager.setup({
+
+		// location: path to SWF files, as needed (SWF file name is appended later.)
+
+		url: '/swf/',
+
+		// optional: version of SM2 flash audio API to use (8 or 9; default is 8 if omitted, OK for most use cases.)
+		// flashVersion: 9,
+    
+		// use soundmanager2-nodebug-jsmin.js, or disable debug mode (enabled by default) after development/testing
+		// debugMode: false,
+    
+		// good to go: the onready() callback
+    
+		onready: function() {
+			
+			// SM2 has started - now you can create and play sounds!
+    	
+			Main.wrongSound = soundManager.createSound({
+				id: 'wrongSound',
+				url: '/sounds/wrong.mp3'
+				// onload: function() { console.log('sound loaded!', this); }
+				// other options here..
+			});
+			
+			Main.correctSound = soundManager.createSound({
+				id: 'correctSound',
+				url: '/sounds/correct.mp3'
+				// onload: function() { console.log('sound loaded!', this); }
+				// other options here..
+			});
+			//     	
+			// mySound.play();
+		}
+	});
 }
 
 Main.setObjective = function(str){
