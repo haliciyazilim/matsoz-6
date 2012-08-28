@@ -1723,6 +1723,7 @@ var Set = Class.extend({
                     textAlign:'center',
                     fontWeight:'bold',
                     border:'1px solid',
+                    opacity:0
                     //    opacity:0,
                 });
             //    $('#vennElements2',this.div).delay(2000).animate({left:"+=100px"}, 2000, 'easeInOutQuad', function(){$(this).css({opacity:0}));
@@ -1737,6 +1738,7 @@ var Set = Class.extend({
                     textAlign:'center',
                     fontWeight:'bold',
                     border:'1px solid',
+                    opacity:0
                 });
             //    $('#vennElements2',this.div2).delay(2000).animate({left:"-=100px"}, 2000, 'easeInOutQuad'});
 
