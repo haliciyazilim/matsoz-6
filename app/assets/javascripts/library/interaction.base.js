@@ -339,13 +339,19 @@ function InteractionBase(){
 			
 			if(Interaction.onCorrectAnswer)
 				Interaction.onCorrectAnswer();
+				
+			Main.correctSound.play();
 		}
 		else if(Interaction.trial == 0){
 			Interaction.__status(Interaction.__status.WRONG);
 			if(Interaction.onWrongAnswer)
 				Interaction.onWrongAnswer();
+				
+			Main.wrongSound.play();
 		}
 		else{
+			Main.wrongSound.play();
+			
 			$(Interaction.inputs).each(function(index, element) {
 				$(this).get(0).onfocus = null;
             	$(this).get(0).onkeydown = function(event){
