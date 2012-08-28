@@ -1,5 +1,17 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+    animationDotStyle = {
+        strokeColor:'#fff',
+        strokeWidth:2,
+        fillColor:'#000'
+    };
+    animationEdgeStyle = {
+        strokeColor:'#000',
+        strokeWidth:2
+    };
+    animationTextStyle = {
+        fontSize:18,
+        strokeWidth:1,
+        strokeColor:"#000"
+    }
+
 }
