@@ -59,7 +59,7 @@ var Interaction = {
                 width:'2.5 ex',
                 height:'30px'
 
-            },true,inputCount==0);
+            },false,inputCount==0);
             input.maxLength = 2;
             $(Interaction.answerSetDiv)
                 .append(i>1?', ':'')
