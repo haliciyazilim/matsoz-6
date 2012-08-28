@@ -20,11 +20,12 @@ var Interaction = {
 			
 			var a;
 			do {
-				a = Set.randomGenerator();
+				a = Set.randomGenerator(undefined);
 			} while (a.elements.length > 10);
-			
+			var start_time = Date.now();
 			a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
-			
+			var endTime = Date.now();
+			Main.setObjective(endTime-start_time);
 			
 			Interaction.prepareNextQuestion();
 			

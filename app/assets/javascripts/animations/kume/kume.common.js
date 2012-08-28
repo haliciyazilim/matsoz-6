@@ -624,7 +624,7 @@ var Set = Class.extend({
         this.vennDiagram.remove();
     },
     drawVennDiagram : function(container, topLeftPoint, setLetter){
-		var vennSize = new Size(100*1.5, 100);
+		var vennSize = new Size(this.elements.length*10*1.5 + 85, /*this.elements.length*6 +*/ 100);
 		
 		var vennBoundingBox = new Rectangle(topLeftPoint, vennSize);		
 		var oval = Path.Oval(vennBoundingBox);
@@ -644,30 +644,53 @@ var Set = Class.extend({
 			// 
 
 		var elementBoxSize = new Size(24, 20);
-		var elements = [];
+		var elementLocations = [];
 		
 		isAvailable = function (point) {
-			if (!oval.hitTest(point)) {
-				return false;
+			var point2 = point.add(elementBoxSize.width, -elementBoxSize.height);
+			var point3 = point.add(elementBoxSize.width, 0);
+			var point4 = point.add(0, -elementBoxSize.height);						
+			
+			var corners = [
+				point,
+				point2,
+				point3,
+				point4
+			]
+			
+			for (var i = 0; i < 4; i++) {
+				if (!oval.hitTest(corners[i])) {
+					return false;
+				}
+				
+				for (var j = 0; j < elementLocations.length; j++) {
+					var otherRect = new Rectangle(new Point(elementLocations[j].x, elementLocations[j].y - elementBoxSize.height),
+													elementBoxSize);
+													
+					// console.log(otherRect, corners[i]);
+													
+					if (otherRect.contains(corners[i])) {
+						return false;
+					}
+				}
 			}
 			
 			return true;
 		}
 		
 		for (var i = 0; i < this.elements.length; i++) {
+			var point;
 			
+			do {
+				point = new Point(Util.randomInteger(topLeftPoint.x/5, (topLeftPoint.x + vennSize.width)/5)*5,
+				 				Util.randomInteger(topLeftPoint.y/5, (topLeftPoint.y+ vennSize.height)/5)*5);
+			} while (!isAvailable(point));
+			
+			var text = new PointText(point.add(2, -2));
+			text.content = "."+this.elements[i];
+			
+			elementLocations.push(point);
 		}
-		
-		// var tool = new Tool();
-		// tool.onMouseMove = function(event) {
-		// 	if (oval.hitTest(event.point)) {
-		// 		oval.strokeColor = 'red';
-		// 	} else {
-		// 		oval.strokeColor = 'green';
-		// 	}
-		// }
-		
-		
     },
 
     drawIntersectingVennDiagram : function(container, topLeftPoint, setLetter1, otherSet, setLetter2){
