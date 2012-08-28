@@ -18,10 +18,20 @@ var Interaction = {
 			*	Initialize your interaction here
 			*/
 			
+			var a;
+			do {
+				a = Set.randomGenerator();
+			} while (a.elements.length > 10);
+			
+			a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
+			
+			
 			Interaction.prepareNextQuestion();
+			
+			
 		},
 	nextQuestion: function(randomNumber){
-	
+			
 		},
 		
 	/*
