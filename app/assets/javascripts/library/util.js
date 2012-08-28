@@ -124,20 +124,23 @@ var Util = {
         return Math.floor(Math.random()*2);
     },
 
-    randomInteger: function(start, end, excluding) {
+    randomInteger: function(start, end, excluding, preprocessed) {
         var excludingArray = [];
         if (excluding != undefined && excluding != null) {
+			if (preprocessed === true) {
+				
+			} else {
+	            for (var i = 0; i < excluding.length; i++) {
+	                var num = excluding[i];
+	                if (Util.isInteger(num) && num < end && num >= start) {
+	                    if (excludingArray.indexOf(num) === -1) {
+	                        excludingArray.push(num);
+	                    }
+	                }
+	            }
 
-            for (var i = 0; i < excluding.length; i++) {
-                var num = excluding[i];
-                if (Util.isInteger(num) && num < end && num >= start) {
-                    if (excludingArray.indexOf(num) === -1) {
-                        excludingArray.push(num);
-                    }
-                }
-            }
-
-            excludingArray.sort(function(a,b){return a-b});
+	            excludingArray.sort(function(a,b){return a-b});
+			}
 
             end -= excludingArray.length;
         }
@@ -147,7 +150,9 @@ var Util = {
         for (var i = 0; i < excludingArray.length; i++) {
             if (excludingArray[i] <= randNum) {
                 randNum++;
-            }
+            } else {
+				return randNum;
+			}
         }
 
         return randNum;
