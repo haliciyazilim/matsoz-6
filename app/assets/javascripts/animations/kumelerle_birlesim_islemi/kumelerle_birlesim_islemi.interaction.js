@@ -31,26 +31,27 @@ var Interaction = {
 
         $("#kumeUst")
             .css("left","10px")
-            .css("top","40px");
+            .css("top","10px");
 
         $("#kumeAlt")
             .css("left","10px")
-            .css("top","90px");
+            .css("top","50px");
 
         $("#cevap")
             .css("left","10px")
-            .css("top","140px")
+            .css("top","100px")
             .css("width","100%");
 
         $("#dogruCevap")
             .css("left","10px")
-            .css("top","190px")
-            .css("width","100%");
+            .css("top","210px")
+            .css("width","100%")
+            .css("color","green");
 
 
 
 
-       // Interaction.kume.drawVennDiagram(Interaction.container,new Point(400,40),"C");
+        // Interaction.kume.drawVennDiagram(Interaction.container,new Point(400,40),"C");
 
         Interaction.appendStatus({
             bottom:'20px',
@@ -65,11 +66,10 @@ var Interaction = {
         });
 
         Interaction.prepareNextQuestion();
-		},
-	nextQuestion: function(randomNumber){
+    },
+    nextQuestion: function(randomNumber){
 
         Interaction.flushInputs();
-
         Interaction.birinciKume=new sorgular();
         Interaction.ikinciKume=new sorgular();
 
@@ -98,27 +98,27 @@ var Interaction = {
         $("#kumeAlt").html(Interaction.soru2);
 
         $('#cevap').html("");
-        $('#cevap').append("A U B = {");
+        $('#cevap').append("A U B = { ");
         for(var i = 0; i < Interaction.birlesimUzunluk; i++){
             $('#cevap').append(Interaction.inputs[i]);
             if(i != Interaction.birlesimUzunluk-1){
                 $('#cevap').append(" , ");
             }
             else if(i == Interaction.birlesimUzunluk-1){
-                $('#cevap').append("}");
+                $('#cevap').append(" }");
             }
         }
-	},
-		
-	/*
-	*	this function is called inside Interaction.__checkAnswer() function
-	*	if this function returns false, check answer operation is cancelled
-	*/
-	preCheck : function(){
-		
-		},
-	isAnswerCorrect : function(value){
-         Interaction.girilenler=new Array();
+    },
+
+    /*
+     *	this function is called inside Interaction.__checkAnswer() function
+     *	if this function returns false, check answer operation is cancelled
+     */
+    preCheck : function(){
+
+    },
+    isAnswerCorrect : function(value){
+        Interaction.girilenler=new Array();
         for(var i=0; i<value.length;i++){
             Interaction.girilenler.push(value[i]);
         }
@@ -133,38 +133,21 @@ var Interaction = {
             return true;
         else
             return false;
-		
-		},
-	onCorrectAnswer : function(){
-		
-		},
-	onWrongAnswer : function(){
-		
-		},
-	onFail : function(){
+
+    },
+    onCorrectAnswer : function(){
+
+
+    },
+    onWrongAnswer : function(){
+
+    },
+    onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.',false);
 
-        $('#dogruCevap').html("");
-        $('#dogruCevap').append("A U B = {");
-        for(var i = 0; i < Interaction.birlesimUzunluk; i++){
-            $('#dogruCevap').append(Interaction.birlesim.elements[i]);
-            if(i != Interaction.birlesimUzunluk-1){
-                $('#dogruCevap').append(" , ");
-            }
-            else if(i == Interaction.birlesimUzunluk-1){
-                $('#dogruCevap').append("}");
-            }
+        for(var i=0; i<Interaction.inputs.length;i++){
+            $("#girdi"+i).val(Interaction.birlesim.elements[i]);
+            $("input").css("color","green");
         }
-
-        Interaction.yanlisCevaplar=new Array();
-        for(var i=0;i<Interaction.birlesimUzunluk;i++){
-            for(var j=0; j<Interaction.girilenler.length;j++)
-            if(Interaction.birlesim.elements[i]!=Interaction.girilenler[i])
-                Interaction.yanlisCevaplar.push(Interaction.girilenler[i]);
-        }
-        console.log(Interaction.yanlisCevaplar);
-
-
-		
-		}
+    }
 }
