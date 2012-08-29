@@ -313,7 +313,7 @@ var Animation = {
         $("#madde83").html("Ø ⊂ A");
 
         $("#liste8",container).append("<li id='madde84'>")
-        $("#madde84").html("boş küme her kümenin alt kümesidir.");
+        $("#madde84").html("Boş küme her kümenin alt kümesidir.");
 
         $("#liste8",container).css({
             position:"absolute",
@@ -333,14 +333,16 @@ var Animation = {
         $("#madde91").html("A = {a,b,c}");
 
         $("#liste9",container).append("<li id='madde92'>")
-        $("#madde92").html("H = {b,c}");
+        $("#madde92").html("E  evrensel küme");
 
         $("#liste9",container).append("<li id='madde93'>")
-        $("#madde93").html("H ⊂ A");
+        $("#madde93").html("A ⊂ E");
+
+        $("#liste9",container).append("<li id='madde94'>")
+        $("#madde94").html("Her küme evrensel kümenin alt kümesidir.");
 
         $("#liste9",container).css({
             position:"absolute",
-            width:"200px",
             top:"60px",
             left:"490px"
 
@@ -351,7 +353,7 @@ var Animation = {
         var eSize = new Size(200, 130);
         Animation.eKumesi = new Path.Rectangle(new Point(270,25), eSize);
         Animation.eKumesi.strokeColor="red";
-        Animation.eKumesi.opacity=1;
+        Animation.eKumesi.opacity=0;
 
 
 
@@ -360,8 +362,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"70px",
-            left:"363px",
+            top:"45px",
+            left:"470px",
             color:"red",
             opacity:"0"
 
@@ -392,7 +394,7 @@ var Animation = {
                 opacity: 0
             },
             duration: 1000,
-            delay: 4000
+            delay: 5000
 
         });
 
@@ -418,7 +420,7 @@ var Animation = {
                 opacity: 0
             },
             duration: 1000,
-            delay: 8000
+            delay: 9000
 
         });
 
@@ -444,7 +446,7 @@ var Animation = {
                 opacity: 0
             },
             duration: 1000,
-            delay: 12000
+            delay: 13000
 
         });
 
@@ -471,7 +473,7 @@ var Animation = {
                 opacity: 0
             },
             duration: 1000,
-            delay: 16000
+            delay: 17000
 
         });
 
@@ -498,7 +500,7 @@ var Animation = {
                 opacity: 0
             },
             duration: 1000,
-            delay: 20000
+            delay: 21000
 
         });
 
@@ -524,7 +526,7 @@ var Animation = {
                 opacity: 0
             },
             duration: 1000,
-            delay: 24000
+            delay: 25000
 
         });
 
@@ -551,7 +553,7 @@ var Animation = {
                 strokeColor: new RgbColor(0,0,0)
             },
             duration: 1000,
-            delay: 29000
+            delay: 30000
 
         });
 
@@ -560,6 +562,34 @@ var Animation = {
         $("#madde82").delay(31000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
         $("#madde83").delay(32000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
         $("#madde84").delay(33000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+
+
+        //dokuzuncu küme ve elemanlarıın gösterimi: Evrensel küme
+
+        Animation.eKumesi.animate({
+            style: {
+                opacity:1
+            },
+            duration: 1000,
+            delay: 35000
+
+        });
+
+
+
+        $("#eKumesiBaslik").delay(35000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde92").delay(36000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde93").delay(37000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#madde94").delay(38000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+
+        Animation.eKumesi.animate({
+            style: {
+                opacity:0
+            },
+            duration: 1000,
+            delay: 40000
+
+        });
 
     }
 }
