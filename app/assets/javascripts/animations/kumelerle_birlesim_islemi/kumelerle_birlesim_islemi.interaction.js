@@ -100,14 +100,14 @@ var Interaction = {
 
 
         $('#cevap').html("");
-        $('#cevap').append("A U B = { ");
+        $('#cevap').append("<b>A</b> U <b>B = {</b> ");
         for(var i = 0; i < Interaction.birlesimUzunluk; i++){
             $('#cevap').append(Interaction.inputs[i]);
             if(i != Interaction.birlesimUzunluk-1){
                 $('#cevap').append(" , ");
             }
             else if(i == Interaction.birlesimUzunluk-1){
-                $('#cevap').append(" }");
+                $('#cevap').append("<b>}</b>");
             }
         }
     },
