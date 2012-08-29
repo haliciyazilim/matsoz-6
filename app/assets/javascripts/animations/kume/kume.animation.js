@@ -66,7 +66,7 @@ var Animation = {
             fontSize:'20px',
             opacity:0,
         });
-        $('#vL').delay(vennDrawStart+2500).animate({opacity:1}, 1000, 'easeInOutQuad');
+        $('#vL').delay(vennDrawStart+2500).animate({opacity:1}, 1000, 'easeInOutQuad',function(){Main.animationFinished();});
         $('#el1').css({
             position:'absolute',
             top:'30px',
@@ -144,7 +144,5 @@ var Animation = {
                 }
             }
         });
-        Main.animationFinished();
-
     }
 }
