@@ -1,5 +1,5 @@
 var Interaction = {
-    
+
 	getFramework:function(){
 			return 'paper';
 		},
@@ -70,6 +70,7 @@ var Interaction = {
     nextQuestion: function(randomNumber){
 
         Interaction.flushInputs();
+
         Interaction.birinciKume=new sorgular();
         Interaction.ikinciKume=new sorgular();
 
@@ -97,15 +98,16 @@ var Interaction = {
 
         $("#kumeAlt").html(Interaction.soru2);
 
+
         $('#cevap').html("");
-        $('#cevap').append("A U B = { ");
+        $('#cevap').append("<b>A</b> U <b>B = {</b> ");
         for(var i = 0; i < Interaction.birlesimUzunluk; i++){
             $('#cevap').append(Interaction.inputs[i]);
             if(i != Interaction.birlesimUzunluk-1){
                 $('#cevap').append(" , ");
             }
             else if(i == Interaction.birlesimUzunluk-1){
-                $('#cevap').append(" }");
+                $('#cevap').append("<b>}</b>");
             }
         }
     },
@@ -137,7 +139,6 @@ var Interaction = {
     },
     onCorrectAnswer : function(){
 
-
     },
     onWrongAnswer : function(){
 
@@ -145,9 +146,9 @@ var Interaction = {
     onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.',false);
 
-        for(var i=0; i<Interaction.inputs.length;i++){
+        for(var i=0;i<Interaction.birlesimUzunluk;i++)
             $("#girdi"+i).val(Interaction.birlesim.elements[i]);
-            $("input").css("color","green");
-        }
+
+        $("input").css("color","green");
     }
 }

@@ -27,7 +27,7 @@ var Animation = {
             left:"0",
             right:"0",
             margin: "auto",
-            width: "379px",
+            width: "319px",
             height: "170px"
             //opacity:"0"
         });
@@ -50,13 +50,13 @@ var Animation = {
         $("#"+kumeId[4]+", #"+kumeId[5]).delay(hizB*3+hizA*4).animate({opacity:"1"},hizA);
 
 
-        $("#"+kumeId[4]).delay(hizB).animate({left:"100px",right:"0"},hizA);
-        $("#"+kumeId[5]).delay(hizB).animate({right:"100px",left:"0"},hizA);
+        $("#"+kumeId[4]).delay(hizB).animate({left:"170px",right:"0"},hizA);
+        $("#"+kumeId[5]).delay(hizB).animate({right:"170px",left:"0"},hizA);
 
         $("#"+kumeId[4]+", #"+kumeId[5]).delay(hizB*2).animate({opacity:"0"},hizA);
 
         $("#"+kumeId[6]).delay(hizB*6+hizA*6).animate({opacity:"1"},hizA);
 
-        Main.animationFinished(1000);
+        Main.animationFinished(12000);
 	}
 }
