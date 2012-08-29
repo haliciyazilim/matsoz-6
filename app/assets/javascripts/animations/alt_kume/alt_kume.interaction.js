@@ -33,7 +33,7 @@ var Interaction = {
 
         $("#dogruCevap")
             .css("left","10px")
-            .css("top","90px")
+            .css("top","100px")
             .css("width","100%")
             .css("color","green");
 
@@ -57,6 +57,7 @@ var Interaction = {
 	},
 	nextQuestion: function(randomNumber){
         Interaction.flushInputs();
+        $("#dogruCevap").html("");
 
 
 
@@ -148,11 +149,20 @@ var Interaction = {
 		
 		},
 	onFail : function(){
-        Interaction.dogruCevaplardanBiri=Util.getShuffledArray(Interaction.birinciKume.uzunluk());
+        var kumeAdresArray=Util.getShuffledArray(Interaction.birinciKume.uzunluk());
+        Interaction.kumeElemanlar=Interaction.birinciKume.elemanlar();
+        console.log(Interaction.kumeElemanlar[kumeAdresArray[i]]);
 
-        Interaction.dogruCevaplar
+        $("#dogruCevap").append("<b>A</b> U <b>B = {</b> ");
+        for(var i=0; i<Interaction.inputs.length;i++){
+            $("#dogruCevap").append(Interaction.kumeElemanlar[kumeAdresArray[i]]);
+            if((i+1)!=Interaction.inputs.length)
+                $("#dogruCevap").append(", ");
+            else
+                $("#dogruCevap").append(" <b>}</b>");
+        }
 
-        $("")
+
         Interaction.setStatus('Yanlış cevap, doğru cevaplardan biri yukarıda gösterilmiştir.',false);
 		$("input:not(.dogru)").css("color","red");
         $(".dogru").css("color","green");
