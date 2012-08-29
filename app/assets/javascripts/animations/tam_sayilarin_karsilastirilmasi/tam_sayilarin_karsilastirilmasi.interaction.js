@@ -257,7 +257,7 @@ var Interaction = {
         }
     },
     onCorrectAnswer : function(){
-
+        getNumericalAxis(-12, 12, 25);
     },
     onWrongAnswer : function(){
 

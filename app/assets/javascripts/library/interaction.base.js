@@ -349,9 +349,7 @@ function InteractionBase(){
 				
 			Main.wrongSound.play();
 		}
-		else{
-			Main.wrongSound.play();
-			
+		else{			
 			$(Interaction.inputs).each(function(index, element) {
 				$(this).get(0).onfocus = null;
             	$(this).get(0).onkeydown = function(event){
@@ -362,6 +360,8 @@ function InteractionBase(){
 
 			if(Interaction.onFail)
 				Interaction.onFail();
+				
+			Main.wrongSound.play();
 		}
 		if(isCorrect || Interaction.trial > 0){
 			Interaction.button.onclick = Interaction.prepareNextQuestion;
