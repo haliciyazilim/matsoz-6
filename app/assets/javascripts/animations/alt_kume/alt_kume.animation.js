@@ -567,5 +567,8 @@ var Animation = {
 
         });
 
+        Main.animationFinished(48000);
+
     }
+
 }
