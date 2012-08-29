@@ -163,7 +163,7 @@ var Animation = {
             fontSize:'12px',
             opacity:0
         });
-        $('#seventhDiv').delay(seventhDivStart).animate({opacity:1}, basicFadeInDuration, 'easeInOutQuad', function(){Main.animationFinished(2000);})
+        $('#seventhDiv').delay(seventhDivStart).animate({opacity:1}, basicFadeInDuration, 'easeInOutQuad', function(){Main.animationFinished(1000);})
 
     }
 }
