@@ -41,8 +41,23 @@ function negatifTamSayi(){
 }
 
 function ondalikKesir(){
-    var ondalikKesir=Math.random()*99+1;
+    var ondalikKesir=0;
+    function sayiSec(){
+    ondalikKesir=Math.random()*99+1;
     ondalikKesir=ondalikKesir.toFixed(2);
+    }
+
+    sayiSec();
+    var kesik= ondalikKesir.toString().substring(0,ondalikKesir.toString().length-3);
+    console.log("test: "+kesik);
+    console.log("LEnght: "+ondalikKesir.toString().length)
+    var test=ondalikKesir-parseFloat(kesik,10);
+    test=test.toFixed(2);
+    console.log("sonuc: "+test);
+    if((test)==0)
+        sayiSec();
+
+
     $("#soru").append("<div id='ondalikKesir'>");
         $("#ondalikKesir")
             .css("width","100px")

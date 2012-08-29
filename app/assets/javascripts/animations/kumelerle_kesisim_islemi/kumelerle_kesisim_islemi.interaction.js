@@ -51,8 +51,8 @@ var Interaction = {
             parent:Interaction.container,
             css:answerSetDivCss
         });
-        $(Interaction.answerSetDiv).append('A \\ B = { ');
-        var inputCount = Interaction.set1.getDifference(Interaction.set2).elements.length;
+        $(Interaction.answerSetDiv).append('A ∩ B = { ');
+        var inputCount = Interaction.set1.getIntersection(Interaction.set2).elements.length;
         var i=0;
         do{i++;
             var input = Interaction.appendInput({
@@ -108,7 +108,7 @@ var Interaction = {
         }
         var set = new Set({type:Set.ELEMENTS,elements:values});
         console.log(set);
-        return set.isEqualSet(Interaction.set1.getDifference(Interaction.set2));
+        return set.isEqualSet(Interaction.set1.getIntersection(Interaction.set2));
 
     },
     onCorrectAnswer : function(){
