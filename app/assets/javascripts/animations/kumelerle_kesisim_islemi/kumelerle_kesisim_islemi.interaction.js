@@ -22,8 +22,19 @@ var Interaction = {
 			do {
 				a = Set.randomGenerator(undefined);
 			} while (a.elements.length > 10);
+			
+			var b;
+			do {
+				//b = Set.randomGenerator(undefined);
+				b = a.getRandomIntersectingSet();
+			} while (b.elements.length > 10);
+			
+			
+			console.log(a.elements, b.elements);
+			
 			var start_time = Date.now();
-			a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
+			// a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
+			Set.drawSets(Interaction.container, new Point(100,100),[a] ,['C', '1']);
 			var endTime = Date.now();
 			Main.setObjective(endTime-start_time);
 			
