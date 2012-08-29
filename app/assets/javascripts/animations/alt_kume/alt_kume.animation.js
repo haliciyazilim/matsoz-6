@@ -6,8 +6,46 @@ var Animation = {
             type: Set.ELEMENTS,
             elements:["a","b","c"]
         });
-        Animation.aKumesi.drawVennDiagram(Animation.container,new Point(300,40),"A");
+        //Animation.aKumesi.drawVennDiagram(Animation.container,new Point(300,40),"A");
+        //Animation.aKumesi.strokeColor=new RgbColor(0,0,0);
+
+        //A
+        var fSize = new Size(210, 140);
+        var fDortgen = new Rectangle(new Point(165,20), fSize);
+
+        Animation.aKumesi = new Path.Oval(fDortgen);
         Animation.aKumesi.strokeColor=new RgbColor(0,0,0);
+        $(container).append("<div id='aKumeBaslik' class='elemanlar'>");
+        $(container).append("<div id='elemanA' class='elemanlar'>");
+        $(container).append("<div id='elemanB' class='elemanlar'>");
+        $(container).append("<div id='elemanC' class='elemanlar'>");
+
+        $(".elemanlar").css({
+            position:"absolute",
+            width:"20px",
+            height:"20px",
+            fontSize:"20px"
+        });
+
+        $("#aKumeBaslik").css({
+            left:"190px",
+            top:"35px"
+        }).html("A");
+
+        $("#elemanA").css({
+            left:"240px",
+            top:"80px"
+        }).html(".a");
+
+        $("#elemanB").css({
+            left:"280px",
+            top:"120px"
+        }).html(".b");
+
+        $("#elemanC").css({
+            left:"320px",
+            top:"80px"
+        }).html(".c");
 
         //B
         $(container).append("<ul id='liste1'>")
@@ -18,20 +56,10 @@ var Animation = {
         $("#liste1",container).append("<li id='madde12'>")
         $("#madde12").html("B = {a}");
 
-        $("#liste1",container).append("<li id='madde13'>")
+        $("#liste1",container).append("<li id='madde13' class='simge'>")
         $("#madde13").html("B ⊂ A");
 
-        $("#liste1",container).css({
-            position:"absolute",
-            width:"200px",
-            top:"60px",
-            left:"490px"
-
-        });
-
-        $("li",container).css("height","20").css("opacity","0");
-
-        Animation.bKumesi = new Path.Circle(new Point(345, 90), 20);
+        Animation.bKumesi = new Path.Circle(new Point(235, 75), 20);
         Animation.bKumesi.strokeColor="red";
         Animation.bKumesi.opacity=0;
 
@@ -42,8 +70,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"80px",
-            left:"335px",
+            top:"70px",
+            left:"220px",
             color:"red",
             opacity:"0"
 
@@ -60,20 +88,12 @@ var Animation = {
         $("#liste2",container).append("<li id='madde22'>")
         $("#madde22").html("C = {b}");
 
-        $("#liste2",container).append("<li id='madde23'>")
+        $("#liste2",container).append("<li id='madde23' class='simge'>")
         $("#madde23").html("C ⊂ A");
 
-        $("#liste2",container).css({
-            position:"absolute",
-            width:"200px",
-            top:"60px",
-            left:"490px"
 
-        });
 
-        $("li",container).css("height","20").css("opacity","0");
-
-        Animation.cKumesi = new Path.Circle(new Point(380, 70), 20);
+        Animation.cKumesi = new Path.Circle(new Point(275, 115), 20);
         Animation.cKumesi.strokeColor="red";
         Animation.cKumesi.opacity=0;
 
@@ -84,8 +104,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"60px",
-            left:"370px",
+            top:"105px",
+            left:"260px",
             color:"red",
             opacity:"0"
 
@@ -101,20 +121,12 @@ var Animation = {
         $("#liste3",container).append("<li id='madde32'>")
         $("#madde32").html("D = {c}");
 
-        $("#liste3",container).append("<li id='madde33'>")
+        $("#liste3",container).append("<li id='madde33' class='simge'>")
         $("#madde33").html("D ⊂ A");
 
-        $("#liste3",container).css({
-            position:"absolute",
-            width:"200px",
-            top:"60px",
-            left:"490px"
 
-        });
 
-        $("li",container).css("height","20").css("opacity","0");
-
-        Animation.dKumesi = new Path.Circle(new Point(400, 110), 20);
+        Animation.dKumesi = new Path.Circle(new Point(315, 78), 20);
         Animation.dKumesi.strokeColor="red";
         Animation.dKumesi.opacity=0;
 
@@ -125,8 +137,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"100px",
-            left:"390px",
+            top:"70px",
+            left:"300px",
             color:"red",
             opacity:"0"
 
@@ -143,23 +155,15 @@ var Animation = {
         $("#liste4",container).append("<li id='madde42'>")
         $("#madde42").html("F = {a,b}");
 
-        $("#liste4",container).append("<li id='madde43'>")
+        $("#liste4",container).append("<li id='madde43' class='simge'>")
         $("#madde43").html("F ⊂ A");
 
-        $("#liste4",container).css({
-            position:"absolute",
-            width:"200px",
-            top:"60px",
-            left:"490px"
 
-        });
-
-        $("li",container).css("height","20").css("opacity","0");
 
         var fSize = new Size(80, 60);
-        var fDortgen = new Rectangle(new Point(320,50), fSize);
+        var fDortgen = new Rectangle(new Point(215,70), fSize);
         Animation.fKumesi = new Path.Oval(fDortgen);
-        Animation.fKumesi.rotate(-30);
+        Animation.fKumesi.rotate(40);
 
         //Animation.dKumesi = new Path.Circle(new Point(400, 110), 20);
         Animation.fKumesi.strokeColor="red";
@@ -172,8 +176,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"70px",
-            left:"415px",
+            top:"80px",
+            left:"225px",
             color:"red",
             opacity:"0"
 
@@ -190,23 +194,15 @@ var Animation = {
         $("#liste5",container).append("<li id='madde52'>")
         $("#madde52").html("G = {a,c}");
 
-        $("#liste5",container).append("<li id='madde53'>")
+        $("#liste5",container).append("<li id='madde53' class='simge'>")
         $("#madde53").html("G ⊂ A");
 
-        $("#liste5",container).css({
-            position:"absolute",
-            width:"200px",
-            top:"60px",
-            left:"490px"
 
-        });
 
-        $("li",container).css("height","20").css("opacity","0");
-
-        var gSize = new Size(80, 50);
-        var gDortgen = new Rectangle(new Point(330,80), gSize);
+        var gSize = new Size(120, 50);
+        var gDortgen = new Rectangle(new Point(215,50), gSize);
         Animation.gKumesi = new Path.Oval(gDortgen);
-        Animation.gKumesi.rotate(30);
+        //Animation.gKumesi.rotate(-10);
 
         //Animation.dKumesi = new Path.Circle(new Point(400, 110), 20);
         Animation.gKumesi.strokeColor="red";
@@ -219,8 +215,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"90px",
-            left:"405px",
+            top:"70px",
+            left:"215px",
             color:"red",
             opacity:"0"
 
@@ -237,23 +233,14 @@ var Animation = {
         $("#liste6",container).append("<li id='madde62'>")
         $("#madde62").html("H = {b,c}");
 
-        $("#liste6",container).append("<li id='madde63'>")
+        $("#liste6",container).append("<li id='madde63' class='simge'>")
         $("#madde63").html("H ⊂ A");
 
-        $("#liste6",container).css({
-            position:"absolute",
-            width:"200px",
-            top:"60px",
-            left:"490px"
 
-        });
-
-        $("li",container).css("height","20").css("opacity","0");
-
-        var hSize = new Size(80, 50);
-        var hDortgen = new Rectangle(new Point(345,65), hSize);
+        var hSize = new Size(100, 50);
+        var hDortgen = new Rectangle(new Point(245,70), hSize);
         Animation.hKumesi = new Path.Oval(hDortgen);
-        Animation.hKumesi.rotate(70);
+        Animation.hKumesi.rotate(-50);
 
         //Animation.dKumesi = new Path.Circle(new Point(400, 110), 20);
         Animation.hKumesi.strokeColor="red";
@@ -267,7 +254,7 @@ var Animation = {
             width:"200px",
             height:"30px",
             top:"70px",
-            left:"363px",
+            left:"350px",
             color:"red",
             opacity:"0"
 
@@ -284,20 +271,13 @@ var Animation = {
         $("#liste7",container).append("<li id='madde72'>")
         $("#madde72").html("A = {a,b,c}");
 
-        $("#liste7",container).append("<li id='madde73'>")
+        $("#liste7",container).append("<li id='madde73' class='simge'>")
         $("#madde73").html("A ⊂ A");
 
         $("#liste7",container).append("<li id='madde74'>")
         $("#madde74").html("Her küme kendinin alt kümesidir.");
 
-        $("#liste7",container).css({
-            position:"absolute",
-            top:"60px",
-            left:"490px"
 
-        });
-
-        $("li",container).css("height","20").css("opacity","0");
 
 
         // Boş küme
@@ -309,20 +289,12 @@ var Animation = {
         $("#liste8",container).append("<li id='madde82'>")
         $("#madde82").html("Boş küme {} Ø");
 
-        $("#liste8",container).append("<li id='madde83'>")
+        $("#liste8",container).append("<li id='madde83' class='simge'>")
         $("#madde83").html("Ø ⊂ A");
 
         $("#liste8",container).append("<li id='madde84'>")
         $("#madde84").html("Boş küme her kümenin alt kümesidir.");
 
-        $("#liste8",container).css({
-            position:"absolute",
-            top:"60px",
-            left:"490px"
-
-        });
-
-        $("li",container).css("height","20").css("opacity","0");
 
 
 
@@ -335,23 +307,16 @@ var Animation = {
         $("#liste9",container).append("<li id='madde92'>")
         $("#madde92").html("E  evrensel küme");
 
-        $("#liste9",container).append("<li id='madde93'>")
+        $("#liste9",container).append("<li id='madde93' class='simge'>")
         $("#madde93").html("A ⊂ E");
 
         $("#liste9",container).append("<li id='madde94'>")
         $("#madde94").html("Her küme evrensel kümenin alt kümesidir.");
 
-        $("#liste9",container).css({
-            position:"absolute",
-            top:"60px",
-            left:"490px"
 
-        });
 
-        $("li",container).css("height","20").css("opacity","0");
-
-        var eSize = new Size(200, 130);
-        Animation.eKumesi = new Path.Rectangle(new Point(270,25), eSize);
+        var eSize = new Size(240, 160);
+        Animation.eKumesi = new Path.Rectangle(new Point(150,10), eSize);
         Animation.eKumesi.strokeColor="red";
         Animation.eKumesi.opacity=0;
 
@@ -362,8 +327,8 @@ var Animation = {
             position:"absolute",
             width:"200px",
             height:"30px",
-            top:"45px",
-            left:"470px",
+            top:"35px",
+            left:"385px",
             color:"red",
             opacity:"0"
 
@@ -371,6 +336,17 @@ var Animation = {
         }).html("E");
 
 
+        $("ul",container).css({
+            position:"absolute",
+
+            top:"60px",
+            left:"420px"
+
+        });
+
+        $(".simge").css("color","red");
+
+        $("li",container).css("height","20").css("opacity","0");
 
         //birinci küme ve elemanlarının gösterimi
 
@@ -385,16 +361,16 @@ var Animation = {
 
 
         $("#madde11").css("opacity","1")
-        $("#bKumesiBaslik").delay(1000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde12").delay(2000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);;
-        $("#madde13").delay(3000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);;
+        $("#bKumesiBaslik").delay(1000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde12").delay(2000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);;
+        $("#madde13").delay(3000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);;
 
         Animation.bKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 5000
+            delay: 6000
 
         });
 
@@ -405,22 +381,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 5000
+            delay: 6000
 
         });
 
 
 
-        $("#cKumesiBaslik").delay(5000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde22").delay(6000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde23").delay(7000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#cKumesiBaslik").delay(6000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde22").delay(7000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde23").delay(8000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.cKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 9000
+            delay: 11000
 
         });
 
@@ -431,22 +407,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 9000
+            delay: 11000
 
         });
 
 
 
-        $("#dKumesiBaslik").delay(9000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde32").delay(10000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde33").delay(11000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#dKumesiBaslik").delay(11000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde32").delay(12000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde33").delay(13000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.dKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 13000
+            delay: 16000
 
         });
 
@@ -458,22 +434,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 13000
+            delay: 16000
 
         });
 
 
 
-        $("#fKumesiBaslik").delay(13000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde42").delay(14000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde43").delay(15000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#fKumesiBaslik").delay(16000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde42").delay(17000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde43").delay(18000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.fKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 17000
+            delay: 21000
 
         });
 
@@ -485,22 +461,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 17000
+            delay: 21000
 
         });
 
 
 
-        $("#gKumesiBaslik").delay(17000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde52").delay(18000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde53").delay(19000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#gKumesiBaslik").delay(21000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde52").delay(22000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde53").delay(23000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.gKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 21000
+            delay: 26000
 
         });
 
@@ -511,57 +487,57 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 21000
+            delay: 26000
 
         });
 
 
 
-        $("#hKumesiBaslik").delay(21000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde62").delay(22000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde63").delay(23000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#hKumesiBaslik").delay(26000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde62").delay(27000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde63").delay(28000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.hKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 25000
+            delay: 31000
 
         });
 
         //yedinci küme ve elemanlarıın gösterimi: A alt küme A
 
-        Animation.aKumesi.vennDiagram.animate({
+        Animation.aKumesi.animate({
             style: {
                 strokeColor: new RgbColor(1,0,0)
             },
             duration: 1000,
-            delay: 25000
+            delay: 31000
 
         });
 
 
 
-        $("#vennLetter2").delay(25000).animate({color:"#FF0000"},1000).delay(4000).animate({color:"#000000"},1000);
-        $("#madde72").delay(26000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde73").delay(27000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde74").delay(28000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#aKumeBaslik").delay(31000).animate({color:"#FF0000"},1000).delay(5000).animate({color:"#000000"},1000);
+        $("#madde72").delay(32000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde73").delay(33000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde74").delay(34000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
-        Animation.aKumesi.vennDiagram.animate({
+        Animation.aKumesi.animate({
             style: {
                 strokeColor: new RgbColor(0,0,0)
             },
             duration: 1000,
-            delay: 30000
+            delay: 37000
 
         });
 
         //sekizinci küme ve elemanlarıın gösterimi: A alt küme A
 
-        $("#madde82").delay(31000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde83").delay(32000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde84").delay(33000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#madde82").delay(38000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde83").delay(39000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#madde84").delay(40000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
 
 
         //dokuzuncu küme ve elemanlarıın gösterimi: Evrensel küme
@@ -571,25 +547,28 @@ var Animation = {
                 opacity:1
             },
             duration: 1000,
-            delay: 35000
+            delay: 42000
 
         });
 
 
 
-        $("#eKumesiBaslik").delay(35000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde92").delay(36000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde93").delay(37000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde94").delay(38000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#eKumesiBaslik").delay(42000).animate({opacity:"1"},1000).delay(5000).animate({opacity:"0"},1000);
+        $("#madde92").delay(43000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde93").delay(44000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde94").delay(45000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.eKumesi.animate({
             style: {
                 opacity:0
             },
             duration: 1000,
-            delay: 40000
+            delay: 48000
 
         });
 
+        Main.animationFinished(48000);
+
     }
+
 }

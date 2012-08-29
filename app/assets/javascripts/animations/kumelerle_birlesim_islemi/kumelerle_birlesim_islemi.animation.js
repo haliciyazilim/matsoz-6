@@ -57,6 +57,6 @@ var Animation = {
 
         $("#"+kumeId[6]).delay(hizB*6+hizA*6).animate({opacity:"1"},hizA);
 
-        Main.animationFinished(1000);
+        Main.animationFinished(12000);
 	}
 }
