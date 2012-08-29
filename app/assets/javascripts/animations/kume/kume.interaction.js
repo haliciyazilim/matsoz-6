@@ -404,6 +404,17 @@ var Interaction = {
         Interaction.emptySetCounter = -1;
         Interaction.emptySetIndex = Util.randomInteger(0,10);
 
+        Interaction.loadingDots = new Group();
+
+        var a;
+        for(var i = 0; i < 4; i++){
+            a = new Path.Circle(new Point(474+i*15,230),4);
+            a.fillColor = "grey";
+            a.opacity = 0.2;
+            Interaction.loadingDots.addChild(a);
+        }
+        Interaction.loadingDots.opacity = 0;
+
         Interaction.setRandomGenerator(11,1);
         Interaction.prepareNextQuestion();
     },
@@ -782,9 +793,10 @@ var Interaction = {
                         Interaction.vennDiagram.opacity = 1;
                         $('#vennElements').css("opacity", 1);
                         Interaction.myTrial += 1;
-                        $(Interaction.secondQuestionDiv).css("opacity", 1);
-                        $('#question21').css("opacity", 1);
-                        $(Interaction.sortingDiv).css("opacity", 1);
+
+                        Interaction.animateDots();
+                        setTimeout('$(Interaction.secondQuestionDiv).css("opacity", 1);$("#question21").css("opacity", 1);$(Interaction.sortingDiv).css("opacity", 1);Interaction.setStatus("")', 2600);
+
                         Interaction.inputs[0].readOnly = true;
                         setTimeout(function(){
                             $(Interaction.inputs).each(function(){
@@ -800,9 +812,10 @@ var Interaction = {
                         Interaction.vennDiagram.opacity = 1;
                         $('#vennElements').css("opacity", 1);
                         Interaction.myTrial += 1;
-                        $(Interaction.secondQuestionDiv).css("opacity", 1);
-                        $('#question21').css("opacity", 1);
-                        $(Interaction.sortingDiv).css("opacity", 1);
+
+                        Interaction.animateDots();
+                        setTimeout('$(Interaction.secondQuestionDiv).css("opacity", 1);$("#question21").css("opacity", 1);$(Interaction.sortingDiv).css("opacity", 1);Interaction.setStatus("")', 2600);
+
                         Interaction.inputs[0].readOnly = true;
                         setTimeout(function(){
                             $(Interaction.inputs).each(function(){
@@ -851,9 +864,8 @@ var Interaction = {
 
                     }
                     Interaction.myTrial += 1;
-                    $(Interaction.secondQuestionDiv).css("opacity", 1);
-                    $('#question21').css("opacity", 1);
-                    $(Interaction.sortingDiv).css("opacity", 1)
+                    Interaction.animateDots();
+                    setTimeout('$(Interaction.secondQuestionDiv).css("opacity", 1);$("#question21").css("opacity", 1);$(Interaction.sortingDiv).css("opacity", 1);Interaction.setStatus("")', 2600);
                     return false;
                 }
             }
@@ -872,7 +884,8 @@ var Interaction = {
                     }
                     if(Interaction.dropped == Interaction.answerIdStr){
                         Interaction.setStatus('Tebrikler!', true);
-                        $("#question22").css("opacity", 1);
+                        Interaction.animateDots();
+                        setTimeout('$("#question22").css("opacity", 1);Interaction.setStatus("")',2600);
                         $("#sortingDiv img").draggable("enable");
                         $("#dropDiv1").droppable({disabled: true});
                     }
@@ -911,8 +924,9 @@ var Interaction = {
                                 $("#"+Interaction.answerIdStr).css("opacity", 1)
                             }
                         );
-                        setTimeout('Interaction.myPause = 0;',3000)
-                        setTimeout('$("#question22").css("opacity", 1);$("#sortingDiv img").draggable("enable");$("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 1);$("#dropDiv1").droppable({disabled: true});', 3000)
+                        setTimeout('Interaction.myPause = 0;',2700);
+                        Interaction.animateDots();
+                        setTimeout('$("#question22").css("opacity", 1);$("#sortingDiv img").draggable("enable");$("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 1);$("#dropDiv1").droppable({disabled: true});Interaction.setStatus("")', 2600)
                     }
 
                     if(Interaction.oldStr){
@@ -939,7 +953,8 @@ var Interaction = {
                     if(Interaction.dropped2 == Interaction.answerIdStr2){
                         Interaction.setStatus('Tebrikler!', true);
                         $("#dropDiv2").droppable({disabled: true});
-                        $(Interaction.thirdQuestionDiv).css("opacity", 1);
+                        Interaction.animateDots();
+                        setTimeout('$(Interaction.thirdQuestionDiv).css("opacity", 1);Interaction.setStatus("")',2600);
                         if(Interaction.length == 0){
                             Interaction.inputs[1].focus();
                         }
@@ -982,13 +997,14 @@ var Interaction = {
                                 $("#"+Interaction.answerIdStr2).css("opacity", 1)
                             }
                         );
-                        setTimeout('Interaction.myPause = 0;',3000);
-                        setTimeout('$("#"+Interaction.answerId2.replace("Hover", "")).css("opacity", 1);$("#dropDiv2").droppable({disabled: true});$(Interaction.thirdQuestionDiv).css("opacity", 1);', 3000)
+                        setTimeout('Interaction.myPause = 0;',2700);
+                        Interaction.animateDots();
+                        setTimeout('$("#"+Interaction.answerId2.replace("Hover", "")).css("opacity", 1);$("#dropDiv2").droppable({disabled: true});$(Interaction.thirdQuestionDiv).css("opacity", 1);Interaction.setStatus("")', 2600)
                         if(Interaction.length == 0){
-                            setTimeout('Interaction.inputs[1].focus();', 3000)
+                            setTimeout('Interaction.inputs[1].focus();', 2700)
                         }
                         else{
-                            setTimeout('Interaction.inputs[Interaction.length].focus();', 3000)
+                            setTimeout('Interaction.inputs[Interaction.length].focus();', 2700)
                         }
                     }
 
@@ -1063,5 +1079,30 @@ var Interaction = {
         else{
             return false;
         }
-    }
+    },
+    animateDots : function(){
+        Interaction.myPause = 1;
+        Interaction.loadingDots.opacity = 1;
+
+        for(var i = 0; i < 4; i++){
+            Interaction.loadingDots.children[i].animate({
+                style:{
+                    opacity:1,
+                },
+                duration:400,
+                delay:500*i+200,
+                animationType:'easeInOutQuad'
+            });
+            Interaction.loadingDots.children[i].animate({
+                style:{
+                    opacity:0.2
+                },
+                duration:400,
+                delay:500*i+700,
+                animationType:'easeInOutQuad',
+            });
+        }
+        setTimeout('Interaction.loadingDots.opacity = 0;Interaction.myPause = 0;',2600)
+    },
+
 }

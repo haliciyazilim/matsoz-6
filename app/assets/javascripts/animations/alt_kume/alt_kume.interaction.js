@@ -5,7 +5,6 @@ var Interaction = {
 		},
     init:function(container){
         Interaction.container = container;
-		Main.setObjective('Yanda verilen kümenin iki elemanlı alt kümelerinden birini bulunuz ve kontrol ediniz');
 
         Interaction.paper = {
 		    width:$(container).width(),
@@ -14,9 +13,10 @@ var Interaction = {
 
         $(container).append("<div id='kumeUst' class='soru'>");
         $(container).append("<div id='cevap' class='soru'>");
+        $(container).append("<div id='dogruCevap' class='soru'>");
 
         $(".soru")
-            .css("width","300px")
+            .css("width","100%")
             .css("height","30px")
             .css("position","absolute")
             .css("margin","auto")
@@ -31,13 +31,81 @@ var Interaction = {
             .css("left","10px")
             .css("top","50px");
 
+        $("#dogruCevap")
+            .css("left","10px")
+            .css("top","100px")
+            .css("width","100%")
+            .css("color","green");
+
+        Interaction.appendStatus({
+            bottom:'20px',
+            right:'160px',
+            width:"280px",
+            textAlign:"center"
+        });
+
+        Interaction.appendButton({
+            bottom:'10px',
+            right:'40px'
+        });
+
+        Interaction.liste=Util.getShuffledArray(9,1);
+        console.log(Interaction.liste)
+
+        Interaction.soruSayaci=0;
 		Interaction.prepareNextQuestion();
 	},
 	nextQuestion: function(randomNumber){
-        Interaction.birinciKume=new sorgular();
+        Interaction.flushInputs();
+        $("#dogruCevap").html("");
+
+
+
+        Interaction.birinciKume=new sorgular(Interaction.liste[Interaction.soruSayaci]);
         Interaction.soru=Interaction.birinciKume.yeniSoru("A");
-        console.log(Interaction.soru);
+
+        Interaction.elemanlar=Interaction.birinciKume.elemanlar();
+
+        //console.log(Interaction.soru);
         $("#kumeUst").html(Interaction.soru);
+        console.log("Uzunluk: "+Interaction.birinciKume.uzunluk());
+
+        Interaction.elemanSayisi=istenenElemanSayisi(Interaction.birinciKume.uzunluk());
+        var elemanSayisiYazi=["","bir","iki","üç"];
+
+        Main.setObjective("Yanda verilen kümenin <span style='color:#ff0000;'><span id='eleman'>"+elemanSayisiYazi[Interaction.elemanSayisi]+"</span> elemanlı alt kümelerinden birini</span> bulunuz ve kontrol ediniz");
+        for(var i=0; i<Interaction.elemanSayisi;i++){
+            Interaction.appendInput({
+                width: '26px',
+                height: '24px',
+                textAlign: 'center',
+                fontSize: '16px',
+                position:"static"
+            },false);
+            Interaction.inputs[i].id="girdi"+i;
+        }
+
+        $('#cevap').html("");
+        $('#cevap').append("B = { ");
+        for(var i = 0; i < Interaction.elemanSayisi; i++){
+            $('#cevap').append(Interaction.inputs[i]);
+            if(i != Interaction.elemanSayisi-1){
+                $('#cevap').append(" , ");
+            }
+            else if(i == Interaction.elemanSayisi-1){
+                $('#cevap').append(" }");
+            }
+        }
+
+
+        console.log("İstenen Eleman: "+Interaction.elemanSayisi);
+
+        console.log("Soru Sayacı: "+Interaction.soruSayaci+"<br/>");
+        Interaction.soruSayaci++;
+
+        if(Interaction.soruSayaci==8)
+            Interaction.soruSayaci=0;
+
 		},
 		
 	/*
@@ -48,15 +116,55 @@ var Interaction = {
 		
 		},
 	isAnswerCorrect : function(value){
+        Interaction.dogruCevaplar=Interaction.birinciKume.elemanlar();
+        Interaction.dogruElemanSayisi=0;
+        for(var i=0; i<Interaction.inputs.length;i++){
+            for(var j=0; j<Interaction.birinciKume.uzunluk();j++){
+                var simdikiDogruSayisi=Interaction.dogruElemanSayisi;
+                console.log("şimdiki: "+simdikiDogruSayisi)
+                console.log("girilen: "+$("#girdi"+i).val()+", "+Interaction.dogruCevaplar[j])
+                if($("#girdi"+i).val()==Interaction.dogruCevaplar[j]){
+                    Interaction.dogruElemanSayisi++
+                    Interaction.dogruCevaplar[j]="xx";
+                    $("#girdi"+i).addClass("dogru")
+                    continue;
+
+                }
+            }
+
+        }
+        if(Interaction.dogruElemanSayisi==Interaction.inputs.length)
+        return true;
+
+
+        console.log("Doğru eleman sayısı: "+Interaction.dogruElemanSayisi);
+
 		
 		},
 	onCorrectAnswer : function(){
+
 		
 		},
 	onWrongAnswer : function(){
 		
 		},
 	onFail : function(){
-		
+        var kumeAdresArray=Util.getShuffledArray(Interaction.birinciKume.uzunluk());
+        Interaction.kumeElemanlar=Interaction.birinciKume.elemanlar();
+        console.log(Interaction.kumeElemanlar[kumeAdresArray[i]]);
+
+        $("#dogruCevap").append("<b>A</b> U <b>B = {</b> ");
+        for(var i=0; i<Interaction.inputs.length;i++){
+            $("#dogruCevap").append(Interaction.kumeElemanlar[kumeAdresArray[i]]);
+            if((i+1)!=Interaction.inputs.length)
+                $("#dogruCevap").append(", ");
+            else
+                $("#dogruCevap").append(" <b>}</b>");
+        }
+
+
+        Interaction.setStatus('Yanlış cevap, doğru cevaplardan biri yukarıda gösterilmiştir.',false);
+		$("input:not(.dogru)").css("color","red");
+        $(".dogru").css("color","green");
 		}
 }

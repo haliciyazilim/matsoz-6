@@ -23,7 +23,7 @@ var Animation = {
             backgroundColor:"white"
         });
         for ( var i=0;i<=10;i++ ){
-            $(container).append("<img id='resim"+i+"' class='resim' src="+resimler[i]+">");
+            $(container).append("<img id='resim"+i+"' class='resim' src='"+resimler[i]+"'>");
             //$("#resim"+i).css("opacity","0")
         }
         $(".resim")
