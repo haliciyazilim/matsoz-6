@@ -691,6 +691,17 @@ var Set = Class.extend({
 			
 			elementLocations.push(point);
 		}
+		
+		// var tool = new Tool();
+		// tool.onMouseMove = function(event) {
+		// 	if (oval.hitTest(event.point)) {
+		// 		oval.strokeColor = 'red';
+		// 	} else {
+		// 		oval.strokeColor = 'green';
+		// 	}
+		// }
+		
+		
     },
 
     drawIntersectingVennDiagram : function(container, topLeftPoint, setLetter1, otherSet, setLetter2){
