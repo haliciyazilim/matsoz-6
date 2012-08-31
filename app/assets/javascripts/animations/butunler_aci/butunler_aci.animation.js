@@ -37,7 +37,7 @@ var Animation = {
             },
             callback:function(){
                 var angle = new Angle({
-                    angle:60,
+                    angle:70,
                     phase:0,
                     center:new Point(550,100),
                     textPosition:new Point(550,140)

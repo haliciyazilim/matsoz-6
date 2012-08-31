@@ -71,7 +71,7 @@ Angle.prototype.redraw = function(pointOrAngle){
     if(this.suplement)
         this.suplement.redraw(180 - this.angle);
     if(this.complement)
-        this.complement.redraw(180 - this.angle);
+        this.complement.redraw(90 - this.angle);
     var firstLegPoint = this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-this.phase,this.centerPoint);
     var secondLegPoint = this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-(this.phase + this.angle),this.centerPoint);
 //    if(this.isNeighbour == true){
