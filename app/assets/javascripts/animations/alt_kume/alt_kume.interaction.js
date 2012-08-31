@@ -153,7 +153,7 @@ var Interaction = {
         Interaction.kumeElemanlar=Interaction.birinciKume.elemanlar();
         console.log(Interaction.kumeElemanlar[kumeAdresArray[i]]);
 
-        $("#dogruCevap").append("<b>A</b> U <b>B = {</b> ");
+        $("#dogruCevap").append("<b>A ⊂ B = {</b> ");
         for(var i=0; i<Interaction.inputs.length;i++){
             $("#dogruCevap").append(Interaction.kumeElemanlar[kumeAdresArray[i]]);
             if((i+1)!=Interaction.inputs.length)
