@@ -60,7 +60,7 @@ Angle.prototype.redraw = function(pointOrAngle){
         if(angle > 270)
             angle = 0;
     }
-    else{
+    else if (this.complement || this.owner && this.owner.complement){
         if(angle > 90 && angle <= 270)
             angle = 90;
         if(angle > 270)
@@ -85,8 +85,9 @@ Angle.prototype.redraw = function(pointOrAngle){
         this.suplement.redraw(180 - this.angle);
     if(this.complement)
         this.complement.redraw(90 - this.angle);
-    var firstLegPoint = this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-this.phase,this.centerPoint);
-    var secondLegPoint = this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-(this.phase + this.angle),this.centerPoint);
+    var firstLegPoint = this.firstLegPoint = this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-this.phase,this.centerPoint);
+    var secondLegPoint = this.secondLegPoint =  this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-(this.phase + this.angle),this.centerPoint);
+
 //    if(this.isNeighbour == true){
         this.firstLeg = new Path.OneSidedArrow(
             this.centerPoint,
