@@ -67,4 +67,13 @@ function __Styles(){
     falseOptionStyle = {
         color:'#942323'
     };
+
+    questionDivStyle = {
+        position:'absolute',
+        top:'100px',
+        left:'100px',
+        width:'300px',
+        height:'40px',
+        border:'1px solid'
+    };
 }
