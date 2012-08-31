@@ -381,22 +381,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 6000
+            delay: 7000
 
         });
 
 
 
-        $("#cKumesiBaslik").delay(6000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde22").delay(7000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde23").delay(8000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#cKumesiBaslik").delay(7000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde22").delay(8000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde23").delay(9000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.cKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 11000
+            delay: 12000
 
         });
 
@@ -407,22 +407,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 11000
+            delay: 13000
 
         });
 
 
 
-        $("#dKumesiBaslik").delay(11000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde32").delay(12000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde33").delay(13000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#dKumesiBaslik").delay(13000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde32").delay(14000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde33").delay(15000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.dKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 16000
+            delay: 18000
 
         });
 
@@ -434,22 +434,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 16000
+            delay: 19000
 
         });
 
 
 
-        $("#fKumesiBaslik").delay(16000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde42").delay(17000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde43").delay(18000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#fKumesiBaslik").delay(19000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde42").delay(20000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde43").delay(21000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.fKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 21000
+            delay: 24000
 
         });
 
@@ -461,22 +461,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 21000
+            delay: 25000
 
         });
 
 
 
-        $("#gKumesiBaslik").delay(21000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde52").delay(22000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde53").delay(23000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#gKumesiBaslik").delay(25000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde52").delay(26000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde53").delay(27000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.gKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 26000
+            delay: 30000
 
         });
 
@@ -487,22 +487,22 @@ var Animation = {
                 opacity: 1
             },
             duration: 1000,
-            delay: 26000
+            delay: 31000
 
         });
 
 
 
-        $("#hKumesiBaslik").delay(26000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde62").delay(27000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde63").delay(28000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#hKumesiBaslik").delay(31000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde62").delay(32000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde63").delay(33000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.hKumesi.animate({
             style: {
                 opacity: 0
             },
             duration: 1000,
-            delay: 31000
+            delay: 36000
 
         });
 
@@ -513,31 +513,31 @@ var Animation = {
                 strokeColor: new RgbColor(1,0,0)
             },
             duration: 1000,
-            delay: 31000
+            delay: 37000
 
         });
 
 
 
-        $("#aKumeBaslik").delay(31000).animate({color:"#FF0000"},1000).delay(5000).animate({color:"#000000"},1000);
-        $("#madde72").delay(32000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde73").delay(33000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde74").delay(34000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#aKumeBaslik").delay(37000).animate({color:"#FF0000"},1000).delay(5000).animate({color:"#000000"},1000);
+        $("#madde72").delay(38000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde73").delay(39000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde74").delay(40000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.aKumesi.animate({
             style: {
                 strokeColor: new RgbColor(0,0,0)
             },
             duration: 1000,
-            delay: 37000
+            delay: 43000
 
         });
 
         //sekizinci küme ve elemanlarıın gösterimi: A alt küme A
 
-        $("#madde82").delay(38000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde83").delay(39000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
-        $("#madde84").delay(40000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
+        $("#madde82").delay(44000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde83").delay(45000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#madde84").delay(46000).animate({opacity:"1"},1000).delay(1000).animate({opacity:"0"},1000);
 
 
         //dokuzuncu küme ve elemanlarıın gösterimi: Evrensel küme
@@ -547,27 +547,27 @@ var Animation = {
                 opacity:1
             },
             duration: 1000,
-            delay: 42000
+            delay: 49000
 
         });
 
 
 
-        $("#eKumesiBaslik").delay(42000).animate({opacity:"1"},1000).delay(5000).animate({opacity:"0"},1000);
-        $("#madde92").delay(43000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
-        $("#madde93").delay(44000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
-        $("#madde94").delay(45000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
+        $("#eKumesiBaslik").delay(50000).animate({opacity:"1"},1000).delay(5000).animate({opacity:"0"},1000);
+        $("#madde92").delay(51000).animate({opacity:"1"},1000).delay(4000).animate({opacity:"0"},1000);
+        $("#madde93").delay(52000).animate({opacity:"1"},1000).delay(3000).animate({opacity:"0"},1000);
+        $("#madde94").delay(53000).animate({opacity:"1"},1000).delay(2000).animate({opacity:"0"},1000);
 
         Animation.eKumesi.animate({
             style: {
                 opacity:0
             },
             duration: 1000,
-            delay: 48000
+            delay: 56000
 
         });
 
-        Main.animationFinished(48000);
+        Main.animationFinished(56000);
 
     }
 
