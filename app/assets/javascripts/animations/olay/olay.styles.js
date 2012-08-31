@@ -68,12 +68,22 @@ function __Styles(){
         color:'#942323'
     };
 
+    imagesDivStyle = {
+        position:'absolute',
+        top:'20px',
+        left:'20px',
+        width:'248px',
+        height:'233px',
+        border:'1px solid',
+    };
+
     questionDivStyle = {
         position:'absolute',
-        top:'100px',
-        left:'100px',
-        width:'300px',
-        height:'40px',
-        border:'1px solid'
-    };
+        top:'40px',
+        left:'320px',
+        width:'250px',
+        height:'80px',
+    //    border:'1px solid',
+        fontSize:'20px'
+    }
 }
