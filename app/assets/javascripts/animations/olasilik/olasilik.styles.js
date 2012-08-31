@@ -11,16 +11,14 @@ function __Styles(){
         left:'260px',
         height:'100px',
         width:'320px',
-    //    border:'1px solid'
     };
 
     questionTextStyle = {
         position:'absolute',
         top:'30px',
-        left:'0px',
-        width:'240px',
+        left:'-10px',
+        width:'250px',
         height:'20px',
-    //    border:'1px solid',
         fontSize:'18px',
         textAlign:'right'
     };

@@ -3,12 +3,29 @@ var generateBalls = function(){
         var numOfColors = Util.randomInteger(2,5);
         Interaction.ballsGroup = new Group();
 
-        Interaction.questionArr = ["Kırmızı","Mavi"];
-        if(numOfColors > 2){
-            Interaction.questionArr.push("Sarı");
-        }
-        if(numOfColors > 3){
-            Interaction.questionArr.push("Yeşil");
+        Interaction.myColors = [];
+        var c = [];
+        c = Util.getShuffledArray(4);
+        Interaction.myColors[0] = ballColors[c[0]];
+        Interaction.myColors[1] = ballColors[c[1]];
+        Interaction.myColors[2] = ballColors[c[2]];
+        Interaction.myColors[3] = ballColors[c[3]];
+
+        Interaction.questionArr = [];
+
+        for(var i = 0; i < numOfColors; i++){
+            if(Interaction.myColors[i] == "#ff0000"){
+                Interaction.questionArr[i] = "Kırmızı";
+            }
+            else if(Interaction.myColors[i] == "#0096ff"){
+                Interaction.questionArr[i] = "Mavi";
+            }
+            else if(Interaction.myColors[i] == "#ff9900"){
+                Interaction.questionArr[i] = "Turuncu";
+            }
+            else if(Interaction.myColors[i] == "#00c800"){
+                Interaction.questionArr[i] = "Yeşil";
+            }
         }
 
         Interaction.ballArr = [];
@@ -23,7 +40,7 @@ var generateBalls = function(){
             for(var j = 0; j < numOfBalls; j++){
 
                 a = new Path.Circle(new Point(50+j*42+ballsSoFar*42,30), 18);
-                a.fillColor = ballColors[i];
+                a.fillColor = Interaction.myColors[i];
 
                 pp = new Raster('shadow');
                 pp.position = new Point(50+j*42+ballsSoFar*42,30);
