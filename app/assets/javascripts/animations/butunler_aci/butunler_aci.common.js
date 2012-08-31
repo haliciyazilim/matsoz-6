@@ -51,10 +51,21 @@ Angle.prototype.redraw = function(pointOrAngle){
         angle = pointOrAngle;
     else
         angle = 360-Util.radianToDegree(Util.findAngle(this.centerPoint.x,-this.centerPoint.y,pointOrAngle.x,-pointOrAngle.y)) - this.phase;
-    if(angle > 180 && angle <= 270)
-        angle = 180;
-    if(angle > 270)
-        angle = 0;
+
+    if(this.suplement){
+        if(angle > 180 && angle <= 270)
+            angle = 180;
+        if(angle > 270)
+            angle = 0;
+
+    }
+    else{
+        if(angle > 90 && angle <= 270)
+            angle = 90;
+        if(angle > 270)
+            angle = 0;
+    }
+
     var snapAngles = [0,30,45,60,90,120,135,150,180];
     var snapTolarence = 3;
     for(var i=0; i < snapAngles.length; i++)
@@ -67,6 +78,7 @@ Angle.prototype.redraw = function(pointOrAngle){
         this.firstLeg.remove();
     if(this.isNeighbour == true){
         this.phase = this.owner.angle + this.owner.phase;
+        this.centerPoint = this.owner.centerPoint;
     }
     if(this.suplement)
         this.suplement.redraw(180 - this.angle);
