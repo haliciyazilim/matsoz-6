@@ -17,19 +17,21 @@ var Interaction = {
             height:$(container).height()
         };
         Interaction.appendStatus({
-            bottom:'30px',
+            bottom:'15px',
             right:'250px',
             width:'300px',
-            height:'26px',
-            textAlign:'center'
+        //    height:'26px',
+            textAlign:'center',
+        //    border:'1px solid'
 
         });
         Interaction.appendButton({
-            bottom:'30px',
-            right:'80px'
+            bottom:'15px',
+            right:'110px'
         });
 
-        var questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
+        Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
+        Interaction.imagesDiv = Util.dom({parent:Interaction.container, tag:'div', css:imagesDivStyle});
 
 
 
@@ -79,6 +81,8 @@ var Interaction = {
         }
 
         Interaction.question = new Question(Interaction.questionType, qIndex);
+        $(Interaction.questionDiv).html(Interaction.question.question);
+
     },
 	preCheck : function(){
         if(Interaction.clickedOption == null){
@@ -99,6 +103,7 @@ var Interaction = {
         $('.image-container',Interaction.clickedOption).css({
             backgroundPosition:'-64px 0px'
         });
+        Interaction.myPause = 1;
     },
 	onWrongAnswer : function(){
 		
@@ -116,6 +121,7 @@ var Interaction = {
         });
 
         $(Interaction.answer).css(trueOptionStyle);
+        Interaction.myPause = 1;
     },
     createOptions:function(referencePoint){
         if($(Interaction.certainEvent)){
@@ -146,16 +152,18 @@ var Interaction = {
         }
         for(var i=0;i<Interaction.options.length;i++){
             $(Interaction.options[i]).css({
-                top:referencePoint.y+50*i,
-                left:referencePoint.x
+                top:referencePoint.y+30+40*i,
+                left:referencePoint.x-20
             }).click(function(){
-                    Interaction.cleanOptions();
-                    Interaction.clickedOption = this;
-                    $('.image-container',this)
-                        .css({
-                            backgroundPosition:'-32px 0px'
-                        })
-                    $(Interaction.clickedOption).css(selectedOptionStyle);
+                    if(!Interaction.myPause){
+                        Interaction.cleanOptions();
+                        Interaction.clickedOption = this;
+                        $('.image-container',this)
+                            .css({
+                                backgroundPosition:'-32px 0px'
+                            })
+                        $(Interaction.clickedOption).css(selectedOptionStyle);
+                    }
                 }).prepend('<div class="image-container"></div>');
             $('.image-container',Interaction.options[i])
                 .css(optionsImageContainer)
