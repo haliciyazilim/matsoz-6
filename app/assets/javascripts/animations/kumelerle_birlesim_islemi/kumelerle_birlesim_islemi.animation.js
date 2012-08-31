@@ -24,39 +24,45 @@ var Animation = {
             position: "absolute",
             top: "0",
             bottom: "0",
-            left:"0",
-            right:"0",
+
             margin: "auto",
             width: "319px",
             height: "170px"
             //opacity:"0"
         });
 
-        $("#"+kumeId[6]).css("width","492");
+        $("#"+kumeId[6]).css({
+          width:"492px",
+          left:"0px",
+          right:"0px"
+        });
 
-        $("#"+kumeId[0]).css("right","400px");
-        $("#"+kumeId[1]).css("left","400px");
+        $("#"+kumeId[0]).css("left","10px");
+        $("#"+kumeId[1]).css("right","10px");
 
-        $("#"+kumeId[2]).css("right","400px");
-        $("#"+kumeId[3]).css("left","400px");
+        $("#"+kumeId[2]).css("left","10px");
+        $("#"+kumeId[3]).css("right","10px");
+
+        $("#"+kumeId[4]).css("left","150px");
+        $("#"+kumeId[5]).css("right","150px");
 
 
         $("#"+kumeId[0]+", #"+kumeId[1]+", #"+kumeId[2]+", #"+kumeId[3]).delay(hizB).animate({opacity:"1"},hizA);
-        $("#"+kumeId[0]+", #"+kumeId[2]).delay(hizB).animate({left:"0px",right:"0"},hizA*3);
-        $("#"+kumeId[1]+", #"+kumeId[3]).delay(hizB).animate({right:"0px",left:"0"},hizA*3);
+        $("#"+kumeId[0]+", #"+kumeId[2]).delay(hizB).animate({left:"150px"},hizA*3);
+        $("#"+kumeId[1]+", #"+kumeId[3]).delay(hizB).animate({right:"150px"},hizA*3);
 
         $("#"+kumeId[0]+", #"+kumeId[1]+", #"+kumeId[2]+", #"+kumeId[3]).delay(hizB).animate({opacity:"0"},hizA);
 
         $("#"+kumeId[4]+", #"+kumeId[5]).delay(hizB*3+hizA*4).animate({opacity:"1"},hizA);
 
 
-        $("#"+kumeId[4]).delay(hizB).animate({left:"170px",right:"0"},hizA);
-        $("#"+kumeId[5]).delay(hizB).animate({right:"170px",left:"0"},hizA);
+        //$("#"+kumeId[5]).delay(hizB).animate({left:"170px",right:"0"},hizA);
+        //$("#"+kumeId[4]).delay(hizB).animate({right:"170px",left:"0"},hizA);
 
         $("#"+kumeId[4]+", #"+kumeId[5]).delay(hizB*2).animate({opacity:"0"},hizA);
 
-        $("#"+kumeId[6]).delay(hizB*6+hizA*6).animate({opacity:"1"},hizA);
+        $("#"+kumeId[6]).delay(hizB*5+hizA*5).animate({opacity:"1"},hizA);
 
-        Main.animationFinished(12000);
+        Main.animationFinished(10000);
 	}
 }

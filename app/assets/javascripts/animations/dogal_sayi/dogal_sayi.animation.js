@@ -126,6 +126,8 @@ var Animation = {
             left:"0"
         }).html("<strong id='saymaSayilariBaslik'>Sayma Sayıları:</strong> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...");
 
+        $(container).append("<div id='donusumStr'>");
+        $(container).append("<div id='sayiOlusturmaStr'>");
 
 
         $(".sayilar").css({
@@ -150,6 +152,36 @@ var Animation = {
             opacity:"0"
         });
 
+        $("#donusumStr").css({
+            width:"350px",
+            position:"absolute",
+            //top:"0",
+            bottom:"70px",
+            left:"0",
+            right:"0",
+            margin:"auto",
+            fontSize:"20px",
+            color:"#000000"
+
+
+        }).html("<b>Rakamların tarih boyunca dönüşümü</b>");
+
+        $("#sayiOlusturmaStr").css({
+            width:"300px",
+            position:"absolute",
+            //top:"0",
+            bottom:"40px",
+            left:"0",
+            right:"0",
+            margin:"auto",
+            fontSize:"20px",
+            color:"#000000",
+            opacity:"0"
+
+
+
+        }).html("<b>Rakamlarla sayıları oluştururuz.</b>");
+
         $("#saymaSayilariBaslik").css("color","#8FCED8");
         $("#saymaSayilari").css("color","#000000").css("width","450px");
 
@@ -167,6 +199,8 @@ var Animation = {
 
         }
         console.log(bekleme);
+        $("#donusumStr").delay((bekleme-hizA)).animate({opacity:"0"},hizA)
+        $("#sayiOlusturmaStr").delay((bekleme)).animate({opacity:"1"},hizA)
 
         $("#oynakUc").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"400px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
         $("#oynakYedi").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"380px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
@@ -175,6 +209,8 @@ var Animation = {
         $("#oynakBes").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"390px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
         $("#oynakYedi2").delay(bekleme).animate({opacity:"1"},hizA).animate({right:"375px",bottom:"70px",color:"#000000"},hizA*2).delay(hizB*3).animate({opacity:"0"},hizA);
         bekleme=bekleme+4*hizA+3*hizB;
+
+        $("#sayiOlusturmaStr").delay(6*hizA+6*hizB).animate({opacity:"0"},hizA);
         $("#saymaSayilari").delay(bekleme).animate({opacity:"1"},hizA);
 
         Main.animationFinished(bekleme+hizA);
