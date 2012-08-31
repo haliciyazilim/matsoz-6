@@ -29,6 +29,8 @@ var Interaction = {
             right:'80px'
         });
 
+        var questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
+
 
 
         Interaction.setRandomGenerator(4);
