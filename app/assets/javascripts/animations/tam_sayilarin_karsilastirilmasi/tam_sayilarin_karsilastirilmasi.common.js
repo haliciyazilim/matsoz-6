@@ -1,11 +1,5 @@
 var getNumericalAxis = function(startPoint, endPoint, piece){
 
-    Interaction.pause = 1;
-
-    setTimeout(
-        'Interaction.pause = 0;'
-        ,1500);
-
     Interaction.numericalAxis = new Group();
 
     // numericalAxis

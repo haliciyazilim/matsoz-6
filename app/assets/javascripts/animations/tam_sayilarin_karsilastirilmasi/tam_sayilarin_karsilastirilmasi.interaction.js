@@ -192,6 +192,7 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
+        Interaction.trial += 1;
         if(Interaction.numericalAxis)
             Interaction.numericalAxis.remove();
         if($('#pointDiv'))
@@ -263,6 +264,7 @@ var Interaction = {
 
     },
     onFail : function(){
+        Interaction.pause = 1;
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
         $("#"+Interaction.oldActiveStr).css("opacity", 0);
         Interaction.answerId = Interaction.answerIdStr.replace("Active", "Hover");
@@ -295,11 +297,13 @@ var Interaction = {
             'easeInOutQuad',
             function(){
                 $(Interaction.clone2).css("opacity", 0);
-                $("#"+Interaction.answerIdStr).css("opacity", 1)
+                $("#"+Interaction.answerIdStr).css("opacity", 1);
+
             }
         );
         $('#sortingDiv img').draggable("disable");
         Interaction.oldActiveStr = Interaction.answerIdStr;
         getNumericalAxis(-12, 12, 25);
+        setTimeout('Interaction.pause = 0;',2000);
     },
 }
