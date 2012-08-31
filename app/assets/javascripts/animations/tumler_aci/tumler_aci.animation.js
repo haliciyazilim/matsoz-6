@@ -14,7 +14,7 @@ var Animation = {
             center:new Point(500,100)
         });
         Animation.angle1.setComplement(Animation.complementAngle1);
-        Animation.angle1.draw();
+        Animation.angle1.draw(false,5000);
 
         var animHelper = new AnimationHelper({
             point1:Animation.angle1.centerPoint,
@@ -28,7 +28,7 @@ var Animation = {
                 point3:new Point(200,140)
             },
             duration:1000,
-            delay:1000,
+            delay:5000,
             update:function(){
                 Animation.angle1.centerPoint = this.point1;
                 Animation.angle1.textPosition = this.point3;
@@ -39,7 +39,7 @@ var Animation = {
                 var angle = new Angle({
                     angle:40,
                     phase:0,
-                    center:new Point(550,100),
+                    center:new Point(500,100),
                     textPosition:new Point(550,140)
                 });
 
@@ -50,7 +50,7 @@ var Animation = {
                     isNeighbour:true
                 });
                 angle.setComplement(complementAngle)
-                angle.redraw();
+                angle.draw(false,5000);
             }
 
         })
