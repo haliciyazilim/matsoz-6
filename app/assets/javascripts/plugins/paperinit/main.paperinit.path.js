@@ -195,35 +195,47 @@ Main.paperInit.Path = function() {
 									point2.y - arrowHeadSize*Math.sin(a1)
 								) 
 							);
-		var path3 = new Path.Line(
-							point2,
-							new Point( 
-									point2.x + arrowHeadSize*Math.cos(a2) , 
-									point2.y - arrowHeadSize*Math.sin(a2) 
-								) 
-							);
-		var pt = new Path();
-		pt.add(point2);
-		pt.add(new Point( 
-						point2.x + arrowHeadSize*Math.cos(a1),
-						point2.y - arrowHeadSize*Math.sin(a1)
-					));
-		pt.add(new Point( 
-						point2.x + arrowHeadSize*Math.cos(a2) , 
-						point2.y - arrowHeadSize*Math.sin(a2) 
-					) );
-		pt.closed = true;
+//        console.log(
+//            point2.x + arrowHeadSize*Math.cos(a1),
+//            point2.y - arrowHeadSize*Math.sin(a1)
+//        );
+//        console.log(
+//            point2.x + arrowHeadSize*Math.cos(a2) ,
+//            point2.y - arrowHeadSize*Math.sin(a2)
+//        );
+        var path3 = new Path.Line(
+                    point2,
+                    new Point(
+                            point2.x + arrowHeadSize*Math.cos(a2) ,
+                            point2.y - arrowHeadSize*Math.sin(a2)
+                        )
+                    );
+//		var pt = new Path();
+//		pt.add(point2);
+//		pt.add(new Point(
+//						point2.x + arrowHeadSize*Math.cos(a1),
+//						point2.y - arrowHeadSize*Math.sin(a1)
+//					));
+//		pt.add(new Point(
+//						point2.x + arrowHeadSize*Math.cos(a2) ,
+//						point2.y - arrowHeadSize*Math.sin(a2)
+//					) );
+
+        var head = new Path();
+        var headRefPoint = point2.findPointTo(point1,arrowHeadSize);
+        head.add(point2);
+        head.add(headRefPoint.getRotatedPoint(angle,point2));
+        head.add(headRefPoint.getRotatedPoint(-angle,point2));
+        head.closed = true;
+//		pt.closed = true;
 		path.strokeColor = 'black';
-		// try {
-			pt.style = {
-				strokeColor: 'black',
-				fillColor : 'black'
-			};
-		// } catch (e) {
-		// 	console.log(e);
-		// }
+        head.style = {
+            strokeColor: 'black',
+            fillColor : 'black'
+        };
+
 		group.addChild(path);
-		group.addChild(pt);
+		group.addChild(head);
 		group.strokeWidth = 2;
 		return group;
 	}

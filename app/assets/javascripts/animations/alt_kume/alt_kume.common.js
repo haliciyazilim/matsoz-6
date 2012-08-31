@@ -1,7 +1,7 @@
 var sorgular = function (soruSirasi) {
     this.sorguSecici = soruSirasi
     console.log("Soru Seçici: " + this.sorguSecici);
-    this.sorguSecici=7;
+    //this.sorguSecici=7;
     switch (this.sorguSecici) {
         case 1: // 2'den küçük doğal sayılar
             this.kume = new Set({
@@ -64,12 +64,13 @@ var sorgular = function (soruSirasi) {
         return this.kume.elements.length;
     }
     this.yeniSoru = function (isim) {
+
         this.soruCesidi = Math.floor(Math.random() * 2 + 1);
         //this.soruCesidi=2;
         console.log("Soru çeşidi: " + this.soruCesidi);
         this.isim = isim;
 
-        if (this.soruCesidi == 2) return this.kume.getDefinitionString(isim);
+        if (this.soruCesidi == 2 || this.sorguSecici==7) return this.kume.getDefinitionString(isim);
         else return this.kume.getElementsString(isim);
     }
     this.getKume = function () {

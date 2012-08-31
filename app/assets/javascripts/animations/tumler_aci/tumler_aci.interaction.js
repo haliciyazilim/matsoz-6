@@ -48,24 +48,24 @@ var Interaction = {
             case 1:
                 Interaction.button.className = "next_button";
 
-                var angle = new Angle({
-                    angle:Util.randomInteger(20,70),
-                    phase:0,
-                    center:Interaction.firstAnglePosition,
-                    textPosition:Interaction.textPosition
-                });
-                Interaction.angle = angle;
-                var suplementAngle  = new Angle({
-                    angle:120,
-                    phase: 15,
-                    center:Interaction.secondAnglePosition
+                    var angle = new Angle({
+                        angle:Util.randomInteger(20,70),
+                        phase:0,
+                        center:Interaction.firstAnglePosition,
+                        textPosition:Interaction.textPosition
+                    });
+                    Interaction.angle = angle;
+                    var complementAngle  = new Angle({
+                        angle:120,
+                        phase: 15,
+                        center:Interaction.secondAnglePosition
 
-                });
-                if(randomNumber == 1){
-                    suplementAngle.isNeighbour = true;
-                    angle.centerPoint = new Point(270,150)
+                    });
+                if(Util.rand01() == 1){
+                    complementAngle.isNeighbour = true;
+                    angle.centerPoint = new Point(215,150)
                 }
-                angle.setSuplement(suplementAngle);
+                angle.setComplement(complementAngle);
                 angle.draw(true);
                 angle.redraw();
                 break;
@@ -83,12 +83,12 @@ var Interaction = {
                     reverseText:false,
                     css:{
                     },
-                    correctAnswer:180 - Interaction.angle.angle
+                    correctAnswer:90 - Interaction.angle.angle
                 });
                 Interaction.questionDiv = Util.dom({
                     tag:'div',
                     parent:Interaction.container,
-                    html:'Bütünleyen açı ölçüsü = ',
+                    html:'Tümleyen açı ölçüsü = ',
                     css:{
                         position:'absolute',
                         top:'70px',
@@ -152,12 +152,12 @@ var Interaction = {
         Interaction.pause();
         $(Interaction.questionDiv).fadeOut(1000,function(){
             $(this).remove();
-            Interaction.suplementAngle = new Angle({
+            Interaction.complementAngle = new Angle({
                 angle:10,
                 phase:10,
                 center:Interaction.secondAnglePosition
             });
-            Interaction.angle.setSuplement(Interaction.suplementAngle);
+            Interaction.angle.setComplement(Interaction.complementAngle);
             Interaction.angle.redraw();
             Interaction.resume(1000);
         });

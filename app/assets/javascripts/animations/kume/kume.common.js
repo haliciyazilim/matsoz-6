@@ -1902,21 +1902,22 @@ Set.turkishLetters[27] = "y";
 Set.turkishLetters[28] = "z";
 
 Set.wordsArray = [];
-Set.wordsArray[0] = "ANKARA";
-Set.wordsArray[1] = "İSTANBUL";
-Set.wordsArray[2] = "ELMA";
-Set.wordsArray[3] = "ADANA";
-Set.wordsArray[4] = "İZMİR";
-Set.wordsArray[5] = "MATEMATİK";
-Set.wordsArray[6] = "BİLGİSAYAR";
-Set.wordsArray[7] = "OKUL";
-Set.wordsArray[8] = "SINIF";
-Set.wordsArray[9] = "ATATÜRK";
-Set.wordsArray[10] = "TÜRKİYE";
-Set.wordsArray[11] = "AİLE";
-Set.wordsArray[12] = "AHLAK";
-Set.wordsArray[13] = "KÜME";
-Set.wordsArray[14] = "ÖĞRETMEN";
+
+Set.wordsArray[0] = "elma";
+Set.wordsArray[1] = "matematik";
+Set.wordsArray[2] = "bilgisayar";
+Set.wordsArray[3] = "okul";
+Set.wordsArray[4] = "sınıf";
+Set.wordsArray[5] = "aile";
+Set.wordsArray[6] = "ahlak";
+Set.wordsArray[7] = "küme";
+Set.wordsArray[8] = "öğretmen";
+Set.wordsArray[9] = "gündüz";
+Set.wordsArray[10] = "gece";
+Set.wordsArray[11] = "aynalar";
+Set.wordsArray[12] = "kütüphane";
+Set.wordsArray[13] = "kahverengi";
+Set.wordsArray[14] = "mendil";
 
 
 Set.randomGenerator = function(type, length){
