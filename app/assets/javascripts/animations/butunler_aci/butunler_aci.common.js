@@ -7,6 +7,7 @@
 *   })
 */
 function Angle(opt){
+    this.animate = Item.prototype.animate;
     this.angle = opt.angle;
     if(opt.phase)
         this.phase = opt.phase;
@@ -21,6 +22,7 @@ function Angle(opt){
         this.textPosition = opt.textPosition;
     if(opt.isNeighbour)
         this.isNeighbour = opt.isNeighbour;
+    this.elements = {};
 }
 Angle.prototype.setAngle = function(angleValue){
     this.angle = angleValue;
@@ -52,12 +54,11 @@ Angle.prototype.redraw = function(pointOrAngle){
     else
         angle = 360-Util.radianToDegree(Util.findAngle(this.centerPoint.x,-this.centerPoint.y,pointOrAngle.x,-pointOrAngle.y)) - this.phase;
 
-    if(this.suplement){
+    if(this.suplement || this.owner && this.owner.suplement){
         if(angle > 180 && angle <= 270)
             angle = 180;
         if(angle > 270)
             angle = 0;
-
     }
     else{
         if(angle > 90 && angle <= 270)
@@ -90,13 +91,15 @@ Angle.prototype.redraw = function(pointOrAngle){
         this.firstLeg = new Path.OneSidedArrow(
             this.centerPoint,
             firstLegPoint,
-            Angle.ARROW_HEAD_SIZE
+            Angle.ARROW_HEAD_SIZE,
+            Angle.ARROW_HEAD_ANGLE
         );
 //    }
     this.secondLeg = new Path.OneSidedArrow(
         this.centerPoint,
         secondLegPoint,
-        Angle.ARROW_HEAD_SIZE
+        Angle.ARROW_HEAD_SIZE,
+        Angle.ARROW_HEAD_ANGLE
     );
     if(this.isInteractive){
         if(this.interactiveLeg)
@@ -155,11 +158,14 @@ Angle.prototype.redraw = function(pointOrAngle){
         this.typeText.content = typeTextString
         this.typeText.set_style(Angle.TEXT_STYLE)
     }
+
 }
 
-Angle.prototype.draw = function(isInteractive){
+Angle.prototype.draw = function(isInteractive,duration){
     if(isInteractive == undefined)
         isInteractive = false;
+    if(duration == undefined)
+        duration = 0 ;
     this.isInteractive = isInteractive;
     this.redraw(this.angle);
     if(isInteractive){
@@ -177,17 +183,108 @@ Angle.prototype.draw = function(isInteractive){
                 this.angleObject.redraw(event.point);
             }
         }
+        tool.onMouseUp = function(){
+            this.drag = false;
+        }
         tool.activate();
         this.tool = tool;
+
     }
-}
 
+    this.opacity = 0;
+    this.setAngleOpacity(0);
+    this.animate({
+        style:{opacity:1},
+        duration:Math.floor(duration/3),
+        update:function(){
+           this.setAngleOpacity(this.opacity);
+        }
+    })
+    if(this.suplement){
+        this.suplement.opacity = 0;
+
+        this.suplement.setAngleOpacity(0);
+        this.suplement.animate({
+            style:{opacity:1},
+            duration:Math.floor(duration/3),
+            delay:Math.floor(duration/3),
+            update:function(){
+                console.log(this.angle,this.opacity);
+                this.setAngleOpacity(this.opacity);
+            }
+        })
+    }
+    if(this.complement){
+        this.complement.opacity = 0;
+        this.complement.setAngleOpacity(0);
+        this.complement.animate({
+            style:{opacity:1},
+            duration:Math.floor(duration/3),
+            delay:Math.floor(duration/3),
+            update:function(){
+                this.setAngleOpacity(this.opacity);
+            }
+        })
+    }
+    if(this.textPosition){
+        if(this.angleText)
+            this.angleText.opacity = 0;
+        if(this.typeText)
+            this.typeText.opacity = 0;
+        this.animate({
+            style:{textOpacity:1},
+            duration:Math.floor(duration/3),
+            delay:Math.floor(duration*2/3),
+            init:function(){
+                this.textOpacity = 0;
+            },
+            update:function(){
+                if(this.angleText)
+                    this.angleText.opacity = this.textOpacity;
+                if(this.typeText)
+                    this.typeText.opacity = this.textOpacity;
+            }
+        })
+    }
+
+};
+Angle.prototype.setAngleOpacity = function(opacity){
+    if(this.firstLeg)
+        this.firstLeg.opacity = opacity;
+    if(this.secondLeg)
+        this.secondLeg.opacity = opacity;
+    if(this.arcText)
+        this.arcText.opacity = opacity;
+    if(this.arc)
+        this.arc.opacity = opacity;
+};
 Angle.prototype.remove = function(){
-
+    if(this.arc)
+        this.arc.remove();
+    if(this.suplement)
+        this.suplement.remove();
+    if(this.complement)
+        this.complement.remove();
+    if(this.angleText)
+        this.angleText.remove();
+    if(this.typeText)
+        this.typeText.remove();
+    if(this.arcText)
+        this.arcText.remove();
+    if(this.firstLeg)
+        this.firstLeg.remove();
+    if(this.secondLeg)
+        this.secondLeg.remove();
+    if(this.interactiveLeg)
+        this.interactiveLeg.remove();
+    if(this.arcCircle)
+        this.arcCircle.remove();
 
 }
+
 Angle.RADIUS = 100;
 Angle.ARROW_HEAD_SIZE = 10;
+Angle.ARROW_HEAD_ANGLE = 18;
 Angle.TEXT_STYLE= {
     justification:'center',
     fontSize:15

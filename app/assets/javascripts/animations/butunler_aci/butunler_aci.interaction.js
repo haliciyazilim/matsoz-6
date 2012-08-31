@@ -1,14 +1,14 @@
 var Interaction = {
-    
-	getFramework:function(){
-			return 'paper';
-		},
-	images:[
-        
+
+    getFramework:function(){
+        return 'paper';
+    },
+    images:[
+
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki ilk açının kollarını hareket ettirerek bütünleyeni olan açının ölçüsündeki değişimi görebilirsiniz.');
+        Main.setObjective('Yandaki ilk açının kollarını hareket ettirerek tümleyeni olan açının ölçüsündeki değişimi görebilirsiniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -34,19 +34,22 @@ var Interaction = {
         Interaction.setRandomGenerator(2);
         Interaction.alterLevelButton.onclick = Interaction.enterLevel2;
         Interaction.level = 1;
-        /*<[[TEST*/Interaction.level = 2;/*TEST]]>*/
+//        /*<[[TEST*/Interaction.level = 2;/*TEST]]>*/
         Interaction.firstAnglePosition = new Point(130,150);
         Interaction.secondAnglePosition = new Point(370,150);
         Interaction.textPosition = new Point(270,220);
         Interaction.prepareNextQuestion();
     },
-	nextQuestion: function(randomNumber){
+    nextQuestion: function(randomNumber){
+        $(Interaction.questionDiv).remove();
+
         Main.interactionProject.activeLayer.removeChildren();
         switch(Interaction.level){
             case 1:
                 Interaction.button.className = "next_button";
+
                 var angle = new Angle({
-                    angle:60,
+                    angle:Util.randomInteger(20,70),
                     phase:0,
                     center:Interaction.firstAnglePosition,
                     textPosition:Interaction.textPosition
@@ -55,23 +58,13 @@ var Interaction = {
                 var suplementAngle  = new Angle({
                     angle:120,
                     phase: 15,
-                    center:Interaction.secondAnglePosition,
-                    isNeighbour:false
+                    center:Interaction.secondAnglePosition
+
                 });
-//                Interaction.button.className = "next_button";
-//                var angle = new Angle({
-//                    angle:60,
-//                    phase:0,
-//                    center:new Point(250,150),
-//                    textPosition:new Point(270,220)
-//                });
-//
-//                var suplementAngle  = new Angle({
-//                    angle:120,
-//                    phase: 15,
-//                    center:new Point(250,150),
-//                    isNeighbour:true
-//                })
+                if(randomNumber == 1){
+                    suplementAngle.isNeighbour = true;
+                    angle.centerPoint = new Point(270,150)
+                }
                 angle.setSuplement(suplementAngle);
                 angle.draw(true);
                 angle.redraw();
@@ -79,7 +72,7 @@ var Interaction = {
 
             case 2:
                 Interaction.angle = new Angle({
-                    angle:Util.randomInteger(10,170),
+                    angle:Util.randomInteger(10,80),
                     phase:Util.randomInteger(0,60)-30,
                     center:Interaction.firstAnglePosition
                 });
@@ -95,7 +88,7 @@ var Interaction = {
                 Interaction.questionDiv = Util.dom({
                     tag:'div',
                     parent:Interaction.container,
-                    html:'Bütünler açı ölçüsü = ',
+                    html:'Bütünleyen açı ölçüsü = ',
                     css:{
                         position:'absolute',
                         top:'70px',
@@ -115,6 +108,8 @@ var Interaction = {
         Interaction.level = 1;
         Interaction.alterLevelButton.innerHTML = '2. seviyeye geç';
         Interaction.alterLevelButton.onclick = Interaction.enterLevel2;
+        $(Interaction.questionDiv).remove();
+
         Interaction.prepareNextQuestion();
     },
 
@@ -127,28 +122,28 @@ var Interaction = {
     },
 
 
-	/*
-	*	this function is called inside Interaction.__checkAnswer() function
-	*	if this function returns false, check answer operation is cancelled
-	*/
-	preCheck : function(){
-		if(Interaction.level == 1){
+    /*
+     *	this function is called inside Interaction.__checkAnswer() function
+     *	if this function returns false, check answer operation is cancelled
+     */
+    preCheck : function(){
+        if(Interaction.level == 1){
             Interaction.prepareNextQuestion();
             return false;
         }
     },
-	isAnswerCorrect : function(value){
+    isAnswerCorrect : function(value){
 
     },
-	onCorrectAnswer : function(){
-		if(Interaction.level = 2){
+    onCorrectAnswer : function(){
+        if(Interaction.level = 2){
             Interaction.showAnswer();
         }
     },
-	onWrongAnswer : function(){
-		
+    onWrongAnswer : function(){
+
     },
-	onFail : function(){
+    onFail : function(){
         if(Interaction.level == 2){
             Interaction.showAnswer();
         }
