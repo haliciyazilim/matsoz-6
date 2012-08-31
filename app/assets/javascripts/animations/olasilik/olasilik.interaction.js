@@ -58,6 +58,9 @@ var Interaction = {
         if(Interaction.ballsGroup){
             Interaction.ballsGroup.remove();
         }
+        if(Interaction.ansGroup){
+            Interaction.ansGroup.remove();
+        }
 
         $(Interaction.inputs[0]).css("color","black");
         $(Interaction.inputs[1]).css("color","black");
@@ -88,6 +91,39 @@ var Interaction = {
 	onCorrectAnswer : function(){
         $(Interaction.inputs[0]).css("color","green");
         $(Interaction.inputs[1]).css("color","green");
+        var answerFillColor = Interaction.myColors[Interaction.qIndex];
+
+        var answerCirc = new Path.Circle(new Point(120,180),18);
+        answerCirc.fillColor = answerFillColor;
+        var shadow = new Raster('shadow');
+        shadow.position = new Point(120,180)
+        Interaction.ansGroup = new Group();
+        Interaction.ansGroup.addChild(answerCirc);
+        Interaction.ansGroup.addChild(shadow);
+
+        Interaction.ansGroup.animate({
+            style:{
+                position:new Point(Interaction.ansGroup.position.x,Interaction.ansGroup.position.y-90),
+            },
+            duration:1000,
+            delay:1000,
+            animationType:'easeInOutQuad',
+            callback:function(){
+                Interaction.ansGroup.firstPosition = Interaction.ansGroup.position;
+            }
+        });
+        Interaction.ansGroup.X = 0;
+        Interaction.ansGroup.animate({
+            style:{
+                X:80,
+            },
+            duration:1000,
+            delay:2500,
+            animationType:'easeInOutQuad',
+            update:function(){
+                this.position = this.firstPosition.add(1.5*this.X,0.015*this.X*this.X);
+            }
+        })
     },
 	onWrongAnswer : function(){
 		

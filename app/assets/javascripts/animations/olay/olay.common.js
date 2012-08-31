@@ -104,9 +104,9 @@ Question.coinArray[3] = "\"Yazı gelme olasılığı\" ve \"Yazı ya da tura gel
 
 Question.wheelArray = [];
 Question.wheelArray[0] = "Yeşil gelme olasılığı";
-Question.wheelArray[1] = "Kırmızı, mavi, mor renklerden birinin gelme olasılığı";
-Question.wheelArray[2] = "\"Kırmı gelme olasılığı\" ve \"Mavi ya da sarı gelme olasılığı\"";
-Question.wheelArray[3] = "\"Sarı gelme olasılığı\" ve \"Kırmızı gelme olasılığı\"";
+Question.wheelArray[1] = "Turuncu, mavi, mor renklerden birinin gelme olasılığı";
+Question.wheelArray[2] = "\"Turuncu gelme olasılığı\" ve \"Mavi ya da mor gelme olasılığı\"";
+Question.wheelArray[3] = "\"Sarı gelme olasılığı\" ve \"Turuncu gelme olasılığı\"";
 
 Question.pouchArray = [];
 Question.pouchArray[0] = "Kırmızı top çekme olasılığı";

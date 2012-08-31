@@ -7,7 +7,24 @@ var Interaction = {
         {
             id:'radio_buttons',
             src:'/assets/radio_buttons.png'
+        },
+        {
+            id:'dice',
+            src:'/assets/animations/olay/olay_etki_01.jpg'
+        },
+        {
+            id:'coin',
+            src:'/assets/animations/olay/olay_etki_02.jpg'
+        },
+        {
+            id:'wheel',
+            src:'/assets/animations/olay/olay_etki_03.jpg'
+        },
+        {
+            id:'pouch',
+            src:'/assets/animations/olay/olay_etki_04.jpg'
         }
+
     ],
     init:function(container){
         Interaction.container = container;
@@ -31,7 +48,7 @@ var Interaction = {
         });
 
         Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
-        Interaction.imagesDiv = Util.dom({parent:Interaction.container, tag:'div', css:imagesDivStyle});
+    //    Interaction.imagesDiv = Util.dom({parent:Interaction.container, tag:'div', css:imagesDivStyle});
 
 
 
@@ -40,24 +57,37 @@ var Interaction = {
     },
 	nextQuestion: function(randomNumber){
         Interaction.cleanOptions();
+        Interaction.myPause = 0;
         Interaction.randomNumber = randomNumber;
         Interaction.randomNumber2 = Util.randomInteger(1,4);
         var referencePoint = new Point(100,100);
         Interaction.createOptions(referencePoint.add(250,0));
          var qIndex;
 
+        if(Interaction.pp){
+            Interaction.pp.remove();
+        }
+
         switch(Interaction.randomNumber){
             case 0:
                 Interaction.questionType = Question.DICE;
+                Interaction.pp = new Raster('dice');
+                Interaction.pp.position = new Point(144,136);
                 break;
             case 1:
                 Interaction.questionType = Question.COIN;
+                Interaction.pp = new Raster('coin');
+                Interaction.pp.position = new Point(144,136);
                 break;
             case 2:
                 Interaction.questionType = Question.WHEEL;
+                Interaction.pp = new Raster('wheel');
+                Interaction.pp.position = new Point(144,136);
                 break;
             case 3:
                 Interaction.questionType = Question.POUCH;
+                Interaction.pp = new Raster('pouch');
+                Interaction.pp.position = new Point(144,136);
                 break;
         }
 
