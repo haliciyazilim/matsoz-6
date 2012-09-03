@@ -22,9 +22,12 @@ var Interaction = {
 		},
 	nextQuestion: function(randomNumber){
 	        new OppositeAngles({
-                angle:60,
+                angle:120,
                 phase:0,
-                center:new Point(250,150)
+                center:new Point(
+                        Interaction.paper.width*0.5,
+                        Interaction.paper.height*0.5
+                    )
             }).draw();
 		},
 		
