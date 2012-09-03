@@ -51,13 +51,11 @@ var Interaction = {
         });
         $(Interaction.questionDiv).append(Interaction.inputs[0]);
         $(Interaction.questionDiv).append(Interaction.inputs[1]);
+        Interaction.myIndex = 0;
 
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        if(Interaction.ballsGroup){
-            Interaction.ballsGroup.remove();
-        }
         if(Interaction.ansGroup){
             Interaction.ansGroup.remove();
         }
@@ -65,19 +63,50 @@ var Interaction = {
         $(Interaction.inputs[0]).css("color","black");
         $(Interaction.inputs[1]).css("color","black");
 
-        generateBalls();
-        Interaction.qIndex = Util.randomInteger(0,Interaction.questionArr.length);
+        if(Interaction.questionArr){
+            if(Interaction.myIndex == Interaction.questionArr.length-1){
+                $(Interaction.questionDiv).css("opacity",0);
+                if(Interaction.ballsGroup){
+                    Interaction.ballsGroup.remove();
+                }
+                generateBalls();
+                Interaction.shuffledIndex = Util.getShuffledArray(Interaction.questionArr.length);
 
-        Interaction.question = ""+Interaction.questionArr[Interaction.qIndex]+" top çekilme olasılığı =";
+                Interaction.ballDropTime = (Interaction.totalBall * 400) + 1000;
+                Interaction.qIndex = Interaction.shuffledIndex[Interaction.myIndex];
+                Interaction.question = ""+Interaction.questionArr[Interaction.qIndex]+" top çekilme olasılığı =";
+                $(Interaction.questionText).html(Interaction.question);
+                Interaction.answer = Interaction.ballArr[Interaction.qIndex] / Interaction.totalBall;
 
-        $(Interaction.questionText).html(Interaction.question);
-        Interaction.answer = Interaction.ballArr[Interaction.qIndex] / Interaction.totalBall;
-	
+                setTimeout('$(Interaction.questionDiv).css("opacity",1)', Interaction.ballDropTime);
+
+            }
+            else{
+                Interaction.myIndex += 1;
+                Interaction.qIndex = Interaction.shuffledIndex[Interaction.myIndex];
+                Interaction.question = ""+Interaction.questionArr[Interaction.qIndex]+" top çekilme olasılığı =";
+                $(Interaction.questionText).html(Interaction.question);
+                Interaction.answer = Interaction.ballArr[Interaction.qIndex] / Interaction.totalBall;
+            }
+        }
+        else{
+            $(Interaction.questionDiv).css("opacity",0);
+            generateBalls();
+            Interaction.shuffledIndex = Util.getShuffledArray(Interaction.questionArr.length);
+            Interaction.ballDropTime = (Interaction.totalBall * 400) + 1000;
+
+            Interaction.qIndex = Interaction.shuffledIndex[Interaction.myIndex];
+            Interaction.question = ""+Interaction.questionArr[Interaction.qIndex]+" top çekilme olasılığı =";
+            $(Interaction.questionText).html(Interaction.question);
+            Interaction.answer = Interaction.ballArr[Interaction.qIndex] / Interaction.totalBall;
+
+            setTimeout('$(Interaction.questionDiv).css("opacity",1)', Interaction.ballDropTime);
+        }
     },
 		
 
 	preCheck : function(){
-		
+
     },
 	isAnswerCorrect : function(value){
 
@@ -89,6 +118,7 @@ var Interaction = {
         }
     },
 	onCorrectAnswer : function(){
+        Interaction.pause();
         $(Interaction.inputs[0]).css("color","green");
         $(Interaction.inputs[1]).css("color","green");
         var answerFillColor = Interaction.myColors[Interaction.qIndex];
@@ -122,8 +152,9 @@ var Interaction = {
             animationType:'easeInOutQuad',
             update:function(){
                 this.position = this.firstPosition.add(1.5*this.X,0.015*this.X*this.X);
-            }
-        })
+            },
+        });
+        setTimeout('Interaction.resume();',3500)
     },
 	onWrongAnswer : function(){
 		
