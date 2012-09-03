@@ -1,5 +1,6 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+//    Angle.RADIUS = 145;
+    OppositeAngles.letterTextStyle = {
+        fontSize:14
+    }
 }

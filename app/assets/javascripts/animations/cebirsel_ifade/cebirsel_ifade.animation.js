@@ -1,7 +1,7 @@
 var Animation = {
     images:[],
 	init:function(container){
-        Animation.container = container;
-
-    }
+			Animation.container = container;
+		
+		}
 }
