@@ -28,15 +28,16 @@ var Interaction = {
                 $("#sol"+i).html(i);
                 //$("#sag"+i).html(i);
 
-                Interaction.appendInput({
+                var input = Interaction.appendInput({
                     width: '35px',
                     height: '32px',
                     textAlign: 'center',
                     fontSize: '20px'
 
-                },isNumber=false,isEmpty=false);
-                Interaction.inputs[i-1].id="girdi"+i;
-                $("#sag"+i).html($("#girdi"+i));
+                },false,false);
+//                Interaction.inputs[i-1].id="girdi"+i;
+//                $("#sag"+i).html($("#girdi"+i));
+                $("#sag"+i).append(input);
             }
 
         }
