@@ -51,6 +51,7 @@ var Animation = {
                 });
                 angle.setSuplement(suplementAngle)
                 angle.draw(false,5000);
+                Main.animationFinished(5000);
             }
 
         })
