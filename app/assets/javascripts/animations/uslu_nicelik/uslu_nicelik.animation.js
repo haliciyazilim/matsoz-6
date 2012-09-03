@@ -14,6 +14,7 @@ var Animation = {
             left:'0px',
             top:'0px'
         });
-        $('#sl').delay(1000).animate({left:'+:100px'},1000,'easeInOutQuad');
+        setTimeout('$("#pow").html(2);',1000);
+        $('#sl').delay(1300).animate({left:'+=104px'},1000,'easeInOutQuad',function(){$('#s1').delay(0).animate({opacity:1},1000,'easeInOutQuad')});
     }
 };
