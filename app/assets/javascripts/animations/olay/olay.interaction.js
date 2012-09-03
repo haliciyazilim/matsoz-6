@@ -21,7 +21,23 @@ var Interaction = {
             src:'/assets/animations/olay/olay_etki_03.jpg'
         },
         {
+            id:'wheel2',
+            src:'/assets/animations/olay/olay_etki_03.jpg'
+        },
+        {
+            id:'wheel3',
+            src:'/assets/animations/olay/olay_etki_03.jpg'
+        },
+        {
             id:'pouch',
+            src:'/assets/animations/olay/olay_etki_04.jpg'
+        },
+        {
+            id:'pouch2',
+            src:'/assets/animations/olay/olay_etki_04.jpg'
+        },
+        {
+            id:'pouch3',
             src:'/assets/animations/olay/olay_etki_04.jpg'
         }
 
@@ -33,26 +49,22 @@ var Interaction = {
             width:$(container).width(),
             height:$(container).height()
         };
+
         Interaction.appendStatus({
             bottom:'15px',
             right:'250px',
             width:'300px',
-        //    height:'26px',
-            textAlign:'center',
-        //    border:'1px solid'
-
+            textAlign:'center'
         });
+
         Interaction.appendButton({
             bottom:'15px',
             right:'110px'
         });
 
         Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
-    //    Interaction.imagesDiv = Util.dom({parent:Interaction.container, tag:'div', css:imagesDivStyle});
 
-
-
-        Interaction.setRandomGenerator(4);
+        Interaction.setRandomGenerator(8);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -85,8 +97,28 @@ var Interaction = {
                 Interaction.pp.position = new Point(144,136);
                 break;
             case 3:
+                Interaction.questionType = Question.WHEEL2;
+                Interaction.pp = new Raster('wheel2');
+                Interaction.pp.position = new Point(144,136);
+                break;
+            case 4:
+                Interaction.questionType = Question.WHEEL3;
+                Interaction.pp = new Raster('wheel3');
+                Interaction.pp.position = new Point(144,136);
+                break;
+            case 5:
                 Interaction.questionType = Question.POUCH;
                 Interaction.pp = new Raster('pouch');
+                Interaction.pp.position = new Point(144,136);
+                break;
+            case 6:
+                Interaction.questionType = Question.POUCH2;
+                Interaction.pp = new Raster('pouch2');
+                Interaction.pp.position = new Point(144,136);
+                break;
+            case 7:
+                Interaction.questionType = Question.POUCH3;
+                Interaction.pp = new Raster('pouch3');
                 Interaction.pp.position = new Point(144,136);
                 break;
         }
@@ -116,7 +148,7 @@ var Interaction = {
     },
 	preCheck : function(){
         if(Interaction.clickedOption == null){
-            Interaction.setStatus("Lütfen bir şık seçiniz", "alert");
+            Interaction.setStatus("Lütfen bir şık seçiniz!", "alert");
             return false;
         }
     },
