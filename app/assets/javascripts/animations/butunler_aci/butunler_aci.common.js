@@ -23,6 +23,7 @@ function Angle(opt){
     if(opt.isNeighbour)
         this.isNeighbour = opt.isNeighbour;
     this.elements = {};
+    this.radius = Angle.RADIUS;
 }
 Angle.prototype.setAngle = function(angleValue){
     this.angle = angleValue;
@@ -85,8 +86,8 @@ Angle.prototype.redraw = function(pointOrAngle){
         this.suplement.redraw(180 - this.angle);
     if(this.complement)
         this.complement.redraw(90 - this.angle);
-    var firstLegPoint = this.firstLegPoint = this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-this.phase,this.centerPoint);
-    var secondLegPoint = this.secondLegPoint =  this.centerPoint.add(Angle.RADIUS,0).getRotatedPoint(-(this.phase + this.angle),this.centerPoint);
+    var firstLegPoint = this.firstLegPoint = this.centerPoint.add(this.radius,0).getRotatedPoint(-this.phase,this.centerPoint);
+    var secondLegPoint = this.secondLegPoint =  this.centerPoint.add(this.radius,0).getRotatedPoint(-(this.phase + this.angle),this.centerPoint);
 
 //    if(this.isNeighbour == true){
         this.firstLeg = new Path.OneSidedArrow(
@@ -119,20 +120,20 @@ Angle.prototype.redraw = function(pointOrAngle){
         this.arcCircle.remove();
     if(this.angle == 90){
         this.arc = new Path();
-        this.arc.add(this.centerPoint.findPointTo(firstLegPoint,Angle.RADIUS*0.2));
-        var cornerPoint = this.centerPoint.findPointTo(firstLegPoint,Angle.RADIUS*0.2*Math.sqrt(2)).getRotatedPoint(-this.angle*0.5, this.centerPoint);
+        this.arc.add(this.centerPoint.findPointTo(firstLegPoint,this.radius*0.2));
+        var cornerPoint = this.centerPoint.findPointTo(firstLegPoint,this.radius*0.2*Math.sqrt(2)).getRotatedPoint(-this.angle*0.5, this.centerPoint);
         this.arc.add(cornerPoint);
-        this.arc.add(this.centerPoint.findPointTo(secondLegPoint,Angle.RADIUS*0.2));
+        this.arc.add(this.centerPoint.findPointTo(secondLegPoint,this.radius*0.2));
         this.arc.set_style(Angle.ARC_STYLE);
         this.arcCircle = new Path.Circle(this.centerPoint.findPointTo(cornerPoint,50,true),3).set_style({fillColor:'#000'});
     }
     else{
-        this.arc = new Path.ArcByAngle(this.centerPoint,Angle.RADIUS*0.2,-(this.angle+this.phase),-this.phase);
+        this.arc = new Path.ArcByAngle(this.centerPoint,this.radius*0.2,-(this.angle+this.phase),-this.phase);
         this.arc.set_style(Angle.ARC_STYLE);
     }
     if(this.arcText)
         this.arcText.remove();
-    var middlePoint = this.centerPoint.add(Angle.RADIUS*0.2+22,0).getRotatedPoint(-(this.angle*0.5+this.phase),this.centerPoint);
+    var middlePoint = this.centerPoint.add(this.radius*0.2+22,0).getRotatedPoint(-(this.angle*0.5+this.phase),this.centerPoint);
     this.arcText = new PointText(middlePoint.add(0,7));
     this.arcText.content = this.angle + "°";
     this.arcText.fontSize = 14;

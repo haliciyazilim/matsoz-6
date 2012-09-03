@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
 			Interaction.container = container;
-			Main.setObjective('İki doğrunun kesişmesi sonucu ters yönlerde oluşan eş açılar.');
+			Main.setObjective('Yanda yazılı cümleleri cebirsel ifadelere dönüştürünüz. Bilinmeyen yerine x, a, n veya k harfi kullanabilirsiniz. Daha sonra yazdığınızı kontrol ediniz.');
 			Interaction.paper = {
 				width:$(container).width(),
 				height:$(container).height()
@@ -21,14 +21,7 @@ var Interaction = {
 			Interaction.prepareNextQuestion();
 		},
 	nextQuestion: function(randomNumber){
-	        new OppositeAngles({
-                angle:120,
-                phase:0,
-                center:new Point(
-                        Interaction.paper.width*0.5,
-                        Interaction.paper.height*0.5
-                    )
-            }).draw();
+	
 		},
 		
 	/*

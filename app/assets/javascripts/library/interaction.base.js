@@ -80,7 +80,7 @@ function InteractionBase(){
 		if(isNumber == undefined || isNumber == null)
 			isNumber = true;
 		var input = Interaction.createInput(isNumber,3);
-		input.isEmpty = isEmpty;
+		input.setAttribute("isEmpty",isEmpty);
 		$(input)
 			.css({
 				position:'absolute'
@@ -294,16 +294,16 @@ function InteractionBase(){
 				}
 			}
 		}
-		else{
+		else{ // appendInput()
 			if(Interaction.inputs.length >= 1){
 				var values = [];
 				for(var i=0; i<Interaction.inputs.length;i++){
 					values[i] = Interaction.inputs[i].value;
-					if(Interaction.inputs[i].getAttribute('isNumber') == 'true'){			
-						if(!Interaction.inputs[i].isEmpty && $(Interaction.inputs[i]).val() == ""){
-							Interaction.__status(Interaction.__status.EMPTY);
-							return;
-						}
+                    if(Interaction.inputs[i].getAttribute('isEmpty') == 'false' && $(Interaction.inputs[i]).val() == ""){
+                        Interaction.__status(Interaction.__status.EMPTY);
+                        return;
+                    }
+					if(Interaction.inputs[i].getAttribute('isNumber') == 'true'){
 						if(isNaN(values[i]) && values[i].indexOf(',') < 0) {
 							Interaction.__status(Interaction.__status.NUMBER);
 							return;

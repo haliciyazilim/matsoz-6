@@ -45,7 +45,8 @@ function __Styles(){
         color:'#000',
         cursor:'pointer',
         width:'300px'
-    }
+    };
+
     optionsImageContainer = {
         position:'relative',
         width:'32px',
@@ -83,7 +84,6 @@ function __Styles(){
         left:'320px',
         width:'250px',
         height:'80px',
-    //    border:'1px solid',
         fontSize:'20px'
     }
 }

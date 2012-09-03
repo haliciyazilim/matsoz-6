@@ -32,4 +32,33 @@ function __Styles(){
         top:'38px',
         left:'248px'
     };
+
+    animationDivStyle = {
+        position:'absolute',
+        top:'30px',
+        left:'30px',
+        height:'160px',
+        width:'700px',
+        border:'1px solid'
+    };
+
+    firstDivStyle = {
+        position:'absolute',
+        top:'10px',
+        left:'100px',
+        height:'60px',
+        width:'500px',
+        border:'1px solid',
+        fontSize:'18px'
+    };
+
+    secondDivStyle = {
+        position:'absolute',
+        top:'80px',
+        left:'160px',
+        height:'60px',
+        width:'410px',
+        border:'1px solid',
+        fontSize:'18px'
+    };
 };

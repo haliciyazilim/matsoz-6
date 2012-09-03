@@ -69,12 +69,17 @@ var Animation = {
         $('#denom2').html(9);
 
         var fourthDiv = Util.dom({parent:animDiv, tag:'div', css:fourthDivStyle, html:'<span style="color:red;">Tümleyen olay</span>' +
-            '<div id="thirdFrac" style="position:absolute;top:-17px;left:120px;width:50px;height:51px;padding:0;margin:0;line-height:25px;">' +
+            '<div id="thirdFrac" style="position:absolute;opacity:0;top:-17px;left:140px;width:50px;height:51px;padding:0;margin:0;line-height:25px;">' +
                 '<div id="nom3"></div><div id="line3"></div><div id="denom3"></div></div>' +
-            '<span style="position:absolute;left:180px">=</span>' +
-            '<div id="fourthFrac" style="position:absolute;top:-17px;left:200px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
+            '<div id="tfFrac" style="position:absolute;top:-17px;left:110px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
+            '<div id="nomtf"></div><div id="linetf"></div><div id="denomtf"></div></div>' +
+            '<span id="pls" style="position:absolute;left:146px">+</span>' +
+            '<div id="tsFrac" style="position:absolute;top:-17px;left:160px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
+            '<div id="nomts"></div><div id="linets"></div><div id="denomts"></div></div>' +
+            '<span style="position:absolute;left:200px">=</span>' +
+            '<div id="fourthFrac" style="position:absolute;top:-17px;left:220px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
                 '<div id="nom4"></div><div id="line4"></div><div id="denom4"></div></div>' +
-            '<span style="position:absolute;left:240px;width:30px;">= <b>1</b></span>'});
+            '<span style="position:absolute;left:260px;width:30px;">= <b>1</b></span>'});
 
         $('#line3').css("height", "1px")
             .css("border-top", "1px solid")
@@ -87,6 +92,30 @@ var Animation = {
         $('#denom3').css("text-align", "center")
             .css("height", "25px");
         $('#denom3').html(9);
+
+        $('#linetf').css("height", "1px")
+            .css("border-top", "1px solid")
+            .css("padding", 0);
+
+        $('#nomtf').css("text-align", "center")
+            .css("height", "25px");
+        $('#nomtf').html(4);
+
+        $('#denomtf').css("text-align", "center")
+            .css("height", "25px");
+        $('#denomtf').html(9);
+
+        $('#linets').css("height", "1px")
+            .css("border-top", "1px solid")
+            .css("padding", 0);
+
+        $('#nomts').css("text-align", "center")
+            .css("height", "25px");
+        $('#nomts').html(5);
+
+        $('#denomts').css("text-align", "center")
+            .css("height", "25px");
+        $('#denomts').html(9);
 
         $('#line4').css("height", "1px")
             .css("border-top", "1px solid")
@@ -115,6 +144,10 @@ var Animation = {
         AnimationManager.delay(function(){animateNumber(0)},firstFracStart+1000);
         $('#ss').css("opacity",0).delay(secondFracStart).animate({opacity:1},1000,'easeInOutQuad');
         AnimationManager.delay(function(){animateNumber(1)},secondFracStart+1000);
-        $(fourthDiv).delay(fourthDivStart).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000)});
+        $(fourthDiv).delay(fourthDivStart).animate({opacity:1},1000,'easeInOutQuad');
+        $('#tfFrac').delay(fourthDivStart+2000).animate({opacity:0},500,'easeInOutQuad');
+        $('#tsFrac').delay(fourthDivStart+2000).animate({opacity:0},500,'easeInOutQuad');
+        $('#pls').delay(fourthDivStart+2000).animate({opacity:0},500,'easeInOutQuad');
+        $('#thirdFrac').delay(fourthDivStart+2000).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000)});
     }
 }
