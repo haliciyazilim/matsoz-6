@@ -128,7 +128,7 @@ var Animation = {
             left:'470px',
             opacity:0
         });
-        $('#tAns').delay(colorChanges).animate({opacity:1},1000,'easeInOutQuad');
+        $('#tAns').delay(colorChanges).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
 
     }
 };

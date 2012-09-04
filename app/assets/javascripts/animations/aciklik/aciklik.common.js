@@ -68,7 +68,7 @@ function adamlariKaristir(){
     }
 
     setTimeout(function(){Interaction.izin=false;},5000);
-    //setTimeout(function(){adamlariKaristir()},10000);
+    setTimeout(function(){adamlariKaristir()},10000);
 
     hesapla();
 
