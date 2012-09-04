@@ -12,29 +12,52 @@ var Interaction = {
 			height:$(container).height()
 		}
 
+        Interaction.rCocuk="/assets/animations/saymanin_temel_ilkesi/cocuk.png";
+        Interaction.rTisortBeyaz="/assets/animations/saymanin_temel_ilkesi/tisort_beyaz.png";
+        Interaction.rTisortKirmizi="/assets/animations/saymanin_temel_ilkesi/tisort_kirmizi.png";
+        Interaction.rTisortMavi="/assets/animations/saymanin_temel_ilkesi/tisort_mavi.png";
+        Interaction.rTisortMor="/assets/animations/saymanin_temel_ilkesi/tisort_mor.png";
+        Interaction.rTisortSari="/assets/animations/saymanin_temel_ilkesi/tisort_sari.png";
+
+        Interaction.rPantolontBeyaz="/assets/animations/saymanin_temel_ilkesi/pantolon_beyaz.png";
+        Interaction.rPantolonKahve="/assets/animations/saymanin_temel_ilkesi/pantolon_kahve.png";
+        Interaction.rPantolonMavi="/assets/animations/saymanin_temel_ilkesi/pantolon_mavi.png";
+        Interaction.rPantolonSiyah="/assets/animations/saymanin_temel_ilkesi/pantolon_siyah.png";
+
+        Interaction.rAyakkabitBeyaz="/assets/animations/saymanin_temel_ilkesi/ayakkabi_beyaz.png";
+        Interaction.rAyakkabiKahve="/assets/animations/saymanin_temel_ilkesi/ayakkabi_kahve.png";
+        Interaction.rAyakkabiSiyah="/assets/animations/saymanin_temel_ilkesi/ayakkabi_siyah.png";
+
+
         Interaction.tisortlerStr=["sarı","kırmızı","mavi","mor"];
         Interaction.pantolonlarStr=["siyah","mavi","kahverengi"];
         Interaction.ayakkabilarStr=["kahverengi","gri"];
-			
+
+        $(container).append("<img id='cocuk' src='"+Interaction.rCocuk+"'>");
+
+        $(container).append("<img id='cocukTisort' src='"+Interaction.rTisortBeyaz+"'>");
+        $(container).append("<img id='cocukPantolon' src='"+Interaction.rPantolontBeyaz+"'>");
+        $(container).append("<img id='cocukAyakkabi' src='"+Interaction.rAyakkabitBeyaz+"'>");
+
 		$(container).append("<div id='tisortCerceve'>");
-            $("#tisortCerceve").append("<div id='tisort1' class='esyalar tisortler'>");
-            $("#tisortCerceve").append("<div id='tisort2' class='esyalar tisortler'>");
-            $("#tisortCerceve").append("<div id='tisort3' class='esyalar tisortler'>");
-            $("#tisortCerceve").append("<div id='tisort4' class='esyalar tisortler'>");
+            $("#tisortCerceve").append("<img id='tisort1' class='esyalar tisortler' src='"+Interaction.rTisortSari+"'>");
+            $("#tisortCerceve").append("<img id='tisort2' class='esyalar tisortler' src='"+Interaction.rTisortKirmizi+"'>");
+            $("#tisortCerceve").append("<img id='tisort3' class='esyalar tisortler' src='"+Interaction.rTisortMavi+"'>");
+            $("#tisortCerceve").append("<img id='tisort4' class='esyalar tisortler' src='"+Interaction.rTisortMor+"'>");
         $(container).append("<div id='pantolonCerceve'>");
-            $("#pantolonCerceve").append("<div id='pantolon1' class='esyalar pantolonlar'>");
-            $("#pantolonCerceve").append("<div id='pantolon2' class='esyalar pantolonlar'>");
-            $("#pantolonCerceve").append("<div id='pantolon3' class='esyalar pantolonlar'>");
+            $("#pantolonCerceve").append("<img id='pantolon1' class='esyalar pantolonlar' src='"+Interaction.rPantolonSiyah+"'>");
+            $("#pantolonCerceve").append("<img id='pantolon2' class='esyalar pantolonlar' src='"+Interaction.rPantolonMavi+"'>");
+            $("#pantolonCerceve").append("<img id='pantolon3' class='esyalar pantolonlar' src='"+Interaction.rPantolonKahve+"'>");
         $(container).append("<div id='ayakkabiCerceve'>");
-            $("#ayakkabiCerceve").append("<div id='ayakkabi1' class='esyalar ayakkabilar'>");
-            $("#ayakkabiCerceve").append("<div id='ayakkabi2' class='esyalar ayakkabilar'>");
+            $("#ayakkabiCerceve").append("<img id='ayakkabi1' class='esyalar ayakkabilar' src='"+Interaction.rAyakkabiKahve+"'>");
+            $("#ayakkabiCerceve").append("<img id='ayakkabi2' class='esyalar ayakkabilar' src='"+Interaction.rAyakkabiSiyah+"'>");
 
         $("#tisortCerceve").css({
             position:"absolute",
             width:"230px",
             height:"50px",
-            top:"50px",
-            left:"50px",
+            top:"20px",
+            left:"20px"
             //backgroundColor:"red"
         });
 
@@ -42,8 +65,8 @@ var Interaction = {
             position:"absolute",
             width:"170px",
             height:"70px",
-            top:"120px",
-            left:"50px",
+            top:"100px",
+            left:"15px"
             //backgroundColor:"yellow"
         });
 
@@ -51,35 +74,75 @@ var Interaction = {
             position:"absolute",
             width:"110px",
             height:"30px",
-            top:"210px",
-            left:"50px",
+            top:"200px",
+            left:"15px"
             //backgroundColor:"orange"
         });
 
         $(".esyalar").css({
             position:"absolute",
-            width:"50px",
+            width:"59px",
             top:"0px",
             cursor:"pointer"
 
         });
 
         for(var i=1;i<5;i++){
-            $("#tisort"+i).css({left:(i-1)*60});
-            $("#pantolon"+i).css({left:(i-1)*60});
-            $("#ayakkabi"+i).css({left:(i-1)*60});
+            $("#tisort"+i).css({left:(i-1)*70});
+            $("#pantolon"+i).css({left:(i-1)*70});
+            $("#ayakkabi"+i).css({left:(i-1)*70});
 
         }
 
         $(".tisortler").css({
-            height:"50px"
+            height:"75px",
+            zIndex:4
         });
         $(".pantolonlar").css({
-            height:"70px"
+            height:"95px",
+            zIndex:3
         });
         $(".ayakkabilar").css({
-            height:"30px"
+            height:"30px",
+            zIndex:2
         });
+
+        $("#cocuk").css({
+            position:"absolute",
+            width:"96px",
+            height:"232px",
+            top:"0px",
+            left:"370px"
+        });
+
+        $("#cocukTisort").css({
+            position:"absolute",
+            width:"59px",
+            height:"75",
+            top:"60px",
+            left:"404px",
+            zIndex:3
+        });
+
+        $("#cocukPantolon").css({
+            position:"absolute",
+            width:"59px",
+            height:"95px",
+            top:"122px",
+            left:"399px",
+            zIndex:2
+        });
+
+        $("#cocukAyakkabi").css({
+            position:"absolute",
+            width:"59px",
+            height:"30px",
+            top:"203px",
+            left:"398px",
+            zIndex:1
+        });
+/*
+
 
         $("#tisort1").css({backgroundColor:"green"});
         $("#tisort2").css({backgroundColor:"blue"});
@@ -92,6 +155,7 @@ var Interaction = {
 
         $("#ayakkabi1").css({backgroundColor:"green"});
         $("#ayakkabi2").css({backgroundColor:"blue"});
+*/
 
 
         $(container).append("<div id='kiyafetlerStr'>")
@@ -99,8 +163,8 @@ var Interaction = {
             position:"absolute",
             width:"350px",
             height:"30px",
-            bottom:"40px",
-            right:"0px",
+            bottom:"30px",
+            right:"20px",
             textAlign:"right"
         });
 
@@ -124,8 +188,8 @@ var Interaction = {
 
             sil(this,$(this).get(0).className);
             //console.log(seciliYeniId);
-            $(this).clone().attr("id",seciliYeniId).appendTo("#"+seciliCerceveId).css("opacity","0.6");
-            $(this).css("opacity","0.6");
+            $(this).clone().attr("id",seciliYeniId).appendTo("#"+seciliCerceveId).css("opacity","0.4");
+            $(this).css("opacity","0.4");
 
 
 
@@ -220,7 +284,7 @@ var Interaction = {
             if(testSonucu==true){
             $(tisort).animate({
                 left:animLeft,
-                top:animTop+"px"
+                top:(animTop-10)+"px"
 
             },2000,"easeInOutSine",function(){
                 $(this).get(0).id=$(this).get(0).id+"G";
@@ -231,7 +295,7 @@ var Interaction = {
 
             $(pantolon).animate({
                 left:animLeft,
-                top:(animTop-20)+"px"
+                top:(animTop-30)+"px"
 
             },2000,"easeInOutSine",function(){
                 $(this).get(0).id=$(this).get(0).id+"G";
@@ -242,7 +306,7 @@ var Interaction = {
 
             $(ayakkabi).animate({
                 left:animLeft,
-                top:(animTop-40)+"px"
+                top:(animTop-47)+"px"
 
             },2000,"easeInOutSine",function(){
                 $(this).get(0).id=$(this).get(0).id+"G";

@@ -1,4 +1,4 @@
 function __Styles(){
-    animTop=20;
-    animLeft=400;
+    animTop=50;
+    animLeft=384;
 }

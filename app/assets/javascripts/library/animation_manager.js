@@ -86,10 +86,23 @@ AnimationManager.Animation = function (item, animationHash) {
 			} else {
 				return (7.5625*(ratio-=(2.625/2.75))*ratio + .984375);
 			}
+		} else if (this.animationType == 'easeOutElastic') {
+			// 			
+			// Math.easeOutElastic = function (t, b, c, d, a, p) {
+			// 	if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+			// 	if (a < Math.abs(c)) { a=c; var s=p/4; }
+			// 	else var s = p/(2*Math.PI) * Math.asin (c/a);
+			// 	return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+			// };
+			//
 			
+			var p = 0.3;
+			var a = 1;
 			
-			
-			
+			if (ratio==0) return 0;  if (ratio==1) return 1;  
+			if (a < Math.abs(1)) { a=1; var s=p/4; }
+			else var s = p/(2*Math.PI) * Math.asin (1/a);
+			return a*Math.pow(2,-10*ratio) * Math.sin( (ratio-s)*(2*Math.PI)/p ) + 1;
 		} else if (this.animationType == 'custom') {
 			return this.mappingFunction(ratio);
 		} else {

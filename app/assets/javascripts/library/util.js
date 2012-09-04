@@ -58,6 +58,22 @@ var Util = {
         return returnedArray;
     },
 
+    getWholePrimeFactors: function(number){
+        var primeFactors = [];
+        var wholePrimeFactors = [];
+
+        primeFactors = Util.getPrimeFactors(number);
+
+        for(var i = 0; i < primeFactors.length; i++){
+            for(var j = primeFactors[i]; j <= number; j *= primeFactors[i]){
+                if(number % j == 0){
+                    wholePrimeFactors.push(primeFactors[i]);
+                }
+            }
+        }
+        return wholePrimeFactors;
+    },
+
     findDistance:function (x1,y1,x2,y2){
         var _i = x1-x2;
         var _j = y1-y2;
