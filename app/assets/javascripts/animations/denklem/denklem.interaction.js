@@ -90,7 +90,7 @@ var Interaction = {
         var leftScale = [];
         var rightScale = [];
         /*<[[TEST*/
-            randomNumber = 0;
+//            randomNumber = 0;
         /*TEST]]>*/
         var equationString = "";
         var variableCharacter = "";

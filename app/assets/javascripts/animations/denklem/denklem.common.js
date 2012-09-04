@@ -20,6 +20,7 @@ var Scales = function(opt){
     this.rightKnucklePoint = this.knucklePoint.add(83,0);
     this.leftWeights = [];
     this.rightWeights = [];
+    this.animationType = "easeOutBounce";
 
 //    this.setAngle(30);
 
@@ -35,8 +36,21 @@ Scales.prototype.setAngle = function(angle){
     this.right.position = this.position.add(this.rightKnucklePoint.getRotatedPoint(angle,this.knucklePoint).subtract(this.rightKnucklePoint));
     this.calculateLeftWeightPositions();
     this.calculateRightWeightPositions();
+}
+Scales.prototype.insideLeft = function(point){
 
+    return  point.x < this.left.position.x &&
+            point.x > this.left.position.x  - this.left.width*0.5 &&
+            point.y < this.left.position.y + this.left.height*0.5 &&
+            point.y > this.left.position.y
 
+}
+Scales.prototype.insideRight = function(point){
+
+    return  point.x > this.right.position.x &&
+            point.x < this.right.position.x  + this.right.width*0.5 &&
+            point.y < this.right.position.y + this.right.height*0.5 &&
+            point.y > this.right.position.y
 
 }
 Scales.prototype.calculateLeftWeightPositions = function(){
@@ -64,6 +78,7 @@ Scales.prototype.calculateRightWeightPositions = function(){
 Scales.prototype.addWeightToLeft = function(weight,calculate){
     if(this.leftWeights.length >= 4)
         return false;
+    weight.owner = this;
     this.leftWeights.push(weight);
     if(calculate == true)
         this.calculateWeights();
@@ -73,6 +88,7 @@ Scales.prototype.addWeightToLeft = function(weight,calculate){
 Scales.prototype.addWeightToRight = function(weight,calculate){
     if(this.rightWeights.length >= 4)
         return false;
+    weight.owner = this;
     this.rightWeights.push(weight);
     if(calculate == true)
         this.calculateWeights();
@@ -91,6 +107,7 @@ Scales.prototype.calculateWeights = function(){
     var duration = 7000 / (Math.abs(totalLeftWeights-totalRightWeights)+1);
     totalLeftWeights+=0.3;totalRightWeights+=0.3; // escape from zero values
     var angle = 30;
+    this.animationType = "easeOutBounce";
     if(totalLeftWeights < totalRightWeights){
         duration *= totalLeftWeights / totalRightWeights;
         angle *= 1;
@@ -101,6 +118,9 @@ Scales.prototype.calculateWeights = function(){
     }
     else{
         angle = 0;
+        duration = 4000;
+        this.animationType = "easeOutElastic";
+
     }
 //    console.log("Angle: ",angle," Duration: ",duration);
     if(this.angle != angle)
@@ -117,15 +137,25 @@ Scales.prototype.animateToAngle = function(angle,duration){
     this.animate({
         style:{_angle:angle},
         duration:duration,
-        delay:500,
-        animationType:'easeOutBounce',
+        delay:100,
+        animationType:this.animationType,
+        init:this.beforeAnimate,
         update:function(){
             this.setAngle(this._angle);
         },
-        callback:Interaction.resume
+        callback:function(){
+            Interaction.resume();
+            if(this.angle == 0 && this.onEqual)
+                this.onEqual();
+        }
     })
 }
-
+Scales.prototype.callOnEqual = function(func){
+    this.onEqual = func;
+}
+Scales.prototype.callBeforeAnimate = function(func){
+    this.beforeAnimate = func;
+}
 Scales.prototype.emptyScales = function(){
     $(this.leftWeights).each(function(){
         this.remove();
@@ -137,13 +167,35 @@ Scales.prototype.emptyScales = function(){
     this.rightWeights = [];
     this.calculateWeights();
 }
-
+Scales.prototype.removeWeight = function(weight,calculate){
+    if(calculate == undefined)
+        calculate = false;
+    var isFound = false;
+    var leftIndex = this.leftWeights.indexOf(weight);
+    if(leftIndex >= 0){
+        this.leftWeights[leftIndex].remove();
+        this.leftWeights.splice(leftIndex,1);
+        isFound = true;
+    }
+    else{
+        var rightIndex = this.rightWeights.indexOf(weight);
+        if(rightIndex >= 0){
+            this.rightWeights[rightIndex].remove();
+            this.rightWeights.splice(rightIndex,1);
+            isFound = true;
+        }
+    }
+    if(isFound && calculate){
+        this.calculateWeights();
+    }
+    return isFound;
+}
 var Weight = function(opt){
     if(opt.type)
         this.type = opt.type;
     else
         throw "Please indicate the type of weight";
-
+    this.owner = null;
     var raster;
     switch(this.type){
         case 1:
@@ -176,8 +228,15 @@ var Weight = function(opt){
             break;
     }
     this.raster = raster;
+    this.raster.weight = this;
 }
 
 Weight.prototype.remove = function(){
     this.raster.remove();
 }
+Weight.prototype.clone = function(){
+    var weight = new Weight({type:this.type});
+    weight.raster.position = this.raster.position;
+    return weight;
+}
+
