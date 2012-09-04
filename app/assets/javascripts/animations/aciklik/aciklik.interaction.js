@@ -6,7 +6,7 @@ var Interaction = {
 
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+        Main.setObjective('Yandaki insanların yaşları için açıklık ve aritmetik ortalama hesaplanmıştır. İstediğiniz kişiyi çıkararak açıklık ve aritmetik ortalamayı inceleyiniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
