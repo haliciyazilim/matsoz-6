@@ -68,7 +68,7 @@ function adamlariKaristir(){
     }
 
     setTimeout(function(){Interaction.izin=false;},5000);
-    setTimeout(function(){adamlariKaristir()},10000);
+    //setTimeout(function(){adamlariKaristir()},10000);
 
     hesapla();
 
@@ -101,7 +101,9 @@ function hesapla(){
     console.log("Buyuk: "+enBuyuk+", Küçük: "+enKucuk);
     var aciklik=enBuyuk-enKucuk;
 
-    var ortalama=Util.format((Interaction.kisilerYasToplam-gidenlerToplam)/Interaction.kisilerArray.length-elemanSayisi,{places:2});
+    var ortalama=Util.format(parseInt(Interaction.kisilerYasToplam-gidenlerToplam,10)/parseInt(Interaction.kisilerArray.length-elemanSayisi),{places:2});
+
+    console.log("Kişiler yas Toplam: "+Interaction.kisilerYasToplam+", gidenler Toplam:"+gidenlerToplam+",Kişiler Uzunluk: "+Interaction.kisilerArray.length+",giden Eleman sayısı "+elemanSayisi)
 
     $("#sonucAciklik").html(aciklik);
     $("#sonucOrtalama").html(ortalama);
