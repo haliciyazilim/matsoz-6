@@ -167,7 +167,11 @@ var Interaction = {
                 if(this.drag == true){
                     if(Interaction.scales.insideLeft(event.point)){
                         if(this.item.weight.owner == null){
-                            Interaction.scales.addWeightToLeft(this.item.weight,true);
+                            if(Interaction.scales.addWeightToLeft(this.item.weight,true) === false){
+                                Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);
+                                this.item.remove();
+                            }
+                                ;
                         }else{//revert to first position
                             Interaction.pause();
                             this.item.animate({
@@ -179,7 +183,10 @@ var Interaction = {
                     }
                     else if(Interaction.scales.insideRight(event.point)){
                         if(this.item.weight.owner == null){
-                            Interaction.scales.addWeightToRight(this.item.weight,true);
+                            if(Interaction.scales.addWeightToRight(this.item.weight,true) === false){
+                                Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);
+                                this.item.remove();
+                            }
                         }else{//revert to first position
                             Interaction.pause();
                             this.item.animate({
