@@ -34,7 +34,7 @@ var Interaction = {
 			
 			var start_time = Date.now();
 			// a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
-			Set.drawSets(Interaction.container, new Point(100,100),[a] ,['C', '1']);
+			Set.drawSets(Interaction.container, new Point(100,100),[a, b] ,['C', '1']);
 			var endTime = Date.now();
 			Main.setObjective(endTime-start_time);
 			

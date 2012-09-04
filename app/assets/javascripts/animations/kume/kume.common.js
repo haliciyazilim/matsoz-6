@@ -724,816 +724,9 @@ var Set = Class.extend({
 			}
 		}
     },
-
-    drawIntersectingVennDiagram : function(container, topLeftPoint, setLetter, otherSet, setLetter2){
-
-        var size, size2, topLeftPoint2, rectangle, rectangle2;
-        var a = this.elements.length;
-        var b = otherSet.elements.length;
-        var c = this.getIntersection(otherSet).elements.length;
-        var isEqual = this.isEqualSet(otherSet);
-
-        var thisDifferenceOther = this.getDifference(otherSet);
-        var otherDifferenceThis = otherSet.getDifference(this);
-        var intersection = this.getIntersection(otherSet);
-
-        // deciding Sizes
-        if(a > 6){
-            if(this.isEqualSet(otherSet)){
-                size = new Size(180,100);
-            }
-            else{
-                size = new Size(220,100);
-            }
-        }
-        else{
-            size = new Size(150,100);
-        }
-        if(b > 6){
-            if(this.isEqualSet(otherSet)){
-                size2 = new Size(180,100);
-            }
-            else{
-                size2 = new Size(220,100);
-            }
-        }
-        else{
-            size2 = new Size(150,100);
-        }
-
-        // deciding positions and changing sizes according to positions
-        if(this.isEqualSet(otherSet)){
-            topLeftPoint2 = new Point(topLeftPoint);
-        }
-        else{
-            if(this.isSubsetOf(otherSet)){
-                topLeftPoint2 = new Point(topLeftPoint);
-                size.height -= 20;
-                topLeftPoint.y += 10;
-                if(a > 6 && b > 6){
-                    size.width -= 50;
-                    size2.width += 20;
-                }
-                else if(a < 6 && b < 6){
-                    size.width -= 30;
-                    size2.width += 30;
-                }
-            }
-            else if(otherSet.isSubsetOf(this)){
-                topLeftPoint2 = new Point(topLeftPoint);
-                size2.height -= 20;
-                topLeftPoint2.y += 10;
-
-                if(a > 6 && b > 6){
-                    size2.width -= 50;
-                    size.width += 20;
-                }
-                else if(a < 6 && b < 6){
-                    size2.width -= 30;
-                    size.width += 30;
-                }
-                topLeftPoint2.x += (size.width - size2.width);
-            }
-            else{
-                topLeftPoint2 = new Point(topLeftPoint);
-                topLeftPoint2.x += size.width;
-                if(c == 0){
-                }
-                else if(c < 3){
-                    if(a > 6 && b > 6){
-                        topLeftPoint2.x -= 90;
-                    }
-                    else{
-                        topLeftPoint2.x -= 60;
-                    }
-                }
-                else if(c < 5){
-                    if(a > 6 && b > 6){
-                        topLeftPoint2.x -= 110;
-                    }
-                    else{
-                        topLeftPoint2.x -= 80;
-                    }
-                }
-                else if(c < 7){
-                    if (a > 6 && b > 6){
-                        topLeftPoint2.x -= 130;
-                    }
-                    else{
-                        topLeftPoint2.x -= 100;
-                    }
-                }
-                else{
-                    topLeftPoint2.x -= 150;
-                }
-            }
-        }
-
-        this.intersectingVennDiagram = new Group();
-        topLeftPoint.x -= 100;
-        rectangle = new Rectangle(topLeftPoint, size);
-        this.diagram1 = new Path.Oval(rectangle);
-        this.diagram1.strokeColor = "black";
-
-        topLeftPoint2.x += 100;
-        rectangle2 = new Rectangle(topLeftPoint2, size2);
-        this.diagram2 = new Path.Oval(rectangle2);
-        this.diagram2.strokeColor = "black";
-
-        // creating neccessary html elements
-        if(this.isEqualSet(otherSet)){
-            this.div = document.createElement('div');
-            $(container).append(this.div);
-
-            this.div2 = document.createElement('div');
-            $(container).append(this.div2);
-
-            $(this.div).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
-                                '<div id="e12" class="elements"></div><div id="e22" class="elements"></div><div id="e32" class="elements"></div>' +
-                                '<div id="e42" class="elements"></div><div id="e52" class="elements"></div><div id="e62" class="elements"></div>' +
-                                '<div id="e72" class="elements"></div><div id="e82" class="elements"></div><div id="e92" class="elements"></div>' +
-                                '<div id="e102" class="elements"></div></div>');
-
-            $(this.div2).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
-                '<div id="e12" class="elements"></div><div id="e22" class="elements"></div><div id="e32" class="elements"></div>' +
-                '<div id="e42" class="elements"></div><div id="e52" class="elements"></div><div id="e62" class="elements"></div>' +
-                '<div id="e72" class="elements"></div><div id="e82" class="elements"></div><div id="e92" class="elements"></div>' +
-                '<div id="e102" class="elements"></div></div>');
-
-            $('#vennElements2', this.div).css({
-                position:'absolute',
-                top:topLeftPoint.y+parseInt($(container).css("padding")),
-                left:topLeftPoint.x+parseInt($(container).css("padding")),
-                width:''+size.width+'px',
-                height:'100px',
-                fontSize:'16px',
-                textAlign:'center',
-                fontWeight:'bold',
-            //    border:'1px solid',
-            //    opacity:0,
-            });
-            $('#vennElements2',this.div).delay(2000).animate({left:"+=100px"}, 2000, 'easeInOutQuad');
-
-            $('#vennElements2', this.div2).css({
-                position:'absolute',
-                top:topLeftPoint2.y+parseInt($(container).css("padding")),
-                left:topLeftPoint2.x+parseInt($(container).css("padding")),
-                width:''+size.width+'px',
-                height:'100px',
-                fontSize:'16px',
-                textAlign:'center',
-                fontWeight:'bold',
-            //    border:'1px solid',
-            });
-            $('#vennElements2',this.div2).delay(2000).animate({left:"-=100px"}, 2000, 'easeInOutQuad', function(){$(this).css({opacity:0})});
-
-
-            $('#vennLetter2', this.div).css({
-                position:'absolute',
-                top:'0px',
-                left:'0px',
-                width:'18px',
-                height:'18px',
-                fontWeight:'normal',
-            //    opacity:0,
-            });
-            $('#vennLetter2', this.div).html(setLetter);
-
-            $('#vennLetter2', this.div2).css({
-                position:'absolute',
-                top:'0px',
-                right:'0px',
-                width:'18px',
-                height:'18px',
-                fontWeight:'normal',
-             //   opacity:0,
-            });
-            $('#vennLetter2', this.div2).html(setLetter2);
-            $('.elements').css({
-                position:'absolute',
-                width:'24px',
-                height:'20px'
-            });
-
-            switch(this.elements.length){
-                case 0:
-                    break;
-                case 1:
-                    $('#e12',this.div).css({
-                        top:'42px',
-                        left:'62px'
-                    });
-                    $('#e12',this.div2).css({
-                        top:'42px',
-                        left:'62px'
-                    });
-                    break;
-                case 2:
-                    $('#e12', this.div).css({
-                        top:'40px',
-                        left:'34px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'40px',
-                        left:'96px',
-                    });
-                    $('#e12', this.div2).css({
-                        top:'40px',
-                        left:'34px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'40px',
-                        left:'96px',
-                    });
-                    break;
-                case 3:
-                    $('#e12', this.div).css({
-                        top:'40px',
-                        left:'30px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'15px',
-                        left:'67px',
-                    });
-                    $('#e32', this.div).css({
-                        top:'61px',
-                        left:'84px'
-                    });
-                    $('#e12', this.div2).css({
-                        top:'40px',
-                        left:'30px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'15px',
-                        left:'67px',
-                    });
-                    $('#e32', this.div2).css({
-                        top:'61px',
-                        left:'84px'
-                    });
-                    break;
-                case 4:
-                    $('#e12', this.div).css({
-                        top:'22px',
-                        left:'34px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'22px',
-                        left:'88px',
-                    });
-                    $('#e32', this.div).css({
-                        top:'66px',
-                        left:'34px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'66px',
-                        left:'88px',
-                    });
-                    $('#e12', this.div2).css({
-                        top:'22px',
-                        left:'34px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'22px',
-                        left:'88px',
-                    });
-                    $('#e32', this.div2).css({
-                        top:'66px',
-                        left:'34px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'66px',
-                        left:'88px',
-                    });
-                    break;
-                case 5:
-                    $('#e12', this.div).css({
-                        top:'20px',
-                        left:'32px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'20px',
-                        left:'90px',
-                    });
-                    $('#e32', this.div).css({
-                        top:'68px',
-                        left:'32px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'68px',
-                        left:'90px',
-                    });
-                    $('#e52', this.div).css({
-                        top:'42px',
-                        left:'62px'
-                    });
-                    $('#e12', this.div2).css({
-                        top:'20px',
-                        left:'32px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'20px',
-                        left:'90px',
-                    });
-                    $('#e32', this.div2).css({
-                        top:'68px',
-                        left:'32px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'68px',
-                        left:'90px',
-                    });
-                    $('#e52', this.div2).css({
-                        top:'42px',
-                        left:'62px'
-                    });
-                    break;
-                case 6:
-                    $('#e12', this.div).css({
-                        top:'42px',
-                        left:'62px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'12px',
-                        left:'70px',
-                    });
-                    $('#e32', this.div).css({
-                        top:'30px',
-                        left:'106px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'66px',
-                        left:'34px',
-                    });
-                    $('#e52', this.div).css({
-                        top:'18px',
-                        left:'24px'
-                    });
-                    $('#e62', this.div).css({
-                        top:'66px',
-                        left:'90px',
-                    });
-                    $('#e12', this.div2).css({
-                        top:'42px',
-                        left:'62px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'12px',
-                        left:'70px',
-                    });
-                    $('#e32', this.div2).css({
-                        top:'30px',
-                        left:'106px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'66px',
-                        left:'34px',
-                    });
-                    $('#e52', this.div2).css({
-                        top:'18px',
-                        left:'24px'
-                    });
-                    $('#e62', this.div2).css({
-                        top:'66px',
-                        left:'90px',
-                    });
-                    break;
-                case 7:
-                    $('#e12', this.div).css({
-                        top:'44px',
-                        left:'76px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'12px',
-                        left:'74px'
-                    });
-                    $('#e32', this.div).css({
-                        top:'26px',
-                        left:'32px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'76px',
-                        left:'76px'
-                    });
-                    $('#e52', this.div).css({
-                        top:'62px',
-                        left:'30px'
-                    });
-                    $('#e62', this.div).css({
-                        top:'26px',
-                        left:'116px'
-                    });
-                    $('#e72', this.div).css({
-                        top:'60px',
-                        left:'120px'
-                    });
-                    $('#e12', this.div2).css({
-                        top:'44px',
-                        left:'76px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'12px',
-                        left:'74px'
-                    });
-                    $('#e32', this.div2).css({
-                        top:'26px',
-                        left:'32px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'76px',
-                        left:'76px'
-                    });
-                    $('#e52', this.div2).css({
-                        top:'62px',
-                        left:'30px'
-                    });
-                    $('#e62', this.div2).css({
-                        top:'26px',
-                        left:'116px'
-                    });
-                    $('#e72', this.div2).css({
-                        top:'60px',
-                        left:'120px'
-                    });
-                    break;
-                case 8:
-                    $('#e12', this.div).css({
-                        top:'42px',
-                        left:'28px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'12px',
-                        left:'78px'
-                    });
-                    $('#e32', this.div).css({
-                        top:'14px',
-                        left:'42px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'76px',
-                        left:'76px'
-                    });
-                    $('#e52', this.div).css({
-                        top:'70px',
-                        left:'36px'
-                    });
-                    $('#e62', this.div).css({
-                        top:'26px',
-                        left:'116px'
-                    });
-                    $('#e72', this.div).css({
-                        top:'60px',
-                        left:'120px'
-                    });
-                    $('#e82', this.div).css({
-                        top:'42px',
-                        left:'76px'
-                    });
-                    $('#e12', this.div2).css({
-                        top:'42px',
-                        left:'28px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'12px',
-                        left:'78px'
-                    });
-                    $('#e32', this.div2).css({
-                        top:'14px',
-                        left:'42px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'76px',
-                        left:'76px'
-                    });
-                    $('#e52', this.div2).css({
-                        top:'70px',
-                        left:'36px'
-                    });
-                    $('#e62', this.div2).css({
-                        top:'26px',
-                        left:'116px'
-                    });
-                    $('#e72', this.div2).css({
-                        top:'60px',
-                        left:'120px'
-                    });
-                    $('#e82', this.div2).css({
-                        top:'42px',
-                        left:'76px'
-                    });
-                    break;
-                case 9:
-                    $('#e12', this.div).css({
-                        top:'42px',
-                        left:'28px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'12px',
-                        left:'76px'
-                    });
-                    $('#e32', this.div).css({
-                        top:'14px',
-                        left:'42px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'76px',
-                        left:'70px'
-                    });
-                    $('#e52', this.div).css({
-                        top:'70px',
-                        left:'36px'
-                    });
-                    $('#e62', this.div).css({
-                        top:'18px',
-                        left:'112px'
-                    });
-                    $('#e72', this.div).css({
-                        top:'70px',
-                        left:'108px'
-                    });
-                    $('#e82', this.div).css({
-                        top:'42px',
-                        left:'78px'
-                    });
-                    $('#e92', this.div).css({
-                        top:'42px',
-                        left:'124px'
-                    });
-                    $('#e12', this.div2).css({
-                        top:'42px',
-                        left:'28px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'12px',
-                        left:'76px'
-                    });
-                    $('#e32', this.div2).css({
-                        top:'14px',
-                        left:'42px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'76px',
-                        left:'70px'
-                    });
-                    $('#e52', this.div2).css({
-                        top:'70px',
-                        left:'36px'
-                    });
-                    $('#e62', this.div2).css({
-                        top:'18px',
-                        left:'112px'
-                    });
-                    $('#e72', this.div2).css({
-                        top:'70px',
-                        left:'108px'
-                    });
-                    $('#e82', this.div2).css({
-                        top:'42px',
-                        left:'78px'
-                    });
-                    $('#e92', this.div2).css({
-                        top:'42px',
-                        left:'124px'
-                    });
-                    break;
-                case 10:
-                    $('#e12', this.div).css({
-                        top:'42px',
-                        left:'64px'
-                    });
-                    $('#e22', this.div).css({
-                        top:'12px',
-                        left:'76px'
-                    });
-                    $('#e32', this.div).css({
-                        top:'14px',
-                        left:'42px'
-                    });
-                    $('#e42', this.div).css({
-                        top:'76px',
-                        left:'70px'
-                    });
-                    $('#e52', this.div).css({
-                        top:'70px',
-                        left:'36px'
-                    });
-                    $('#e62', this.div).css({
-                        top:'18px',
-                        left:'112px'
-                    });
-                    $('#e72', this.div).css({
-                        top:'68px',
-                        left:'106px'
-                    });
-                    $('#e82', this.div).css({
-                        top:'42px',
-                        left:'98px'
-                    });
-                    $('#e92', this.div).css({
-                        top:'42px',
-                        left:'132px'
-                    });
-                    $('#e102', this.div).css({
-                        top:'40px',
-                        left:'24px'
-                    });
-                    $('#e12', this.div2).css({
-                        top:'42px',
-                        left:'64px'
-                    });
-                    $('#e22', this.div2).css({
-                        top:'12px',
-                        left:'76px'
-                    });
-                    $('#e32', this.div2).css({
-                        top:'14px',
-                        left:'42px'
-                    });
-                    $('#e42', this.div2).css({
-                        top:'76px',
-                        left:'70px'
-                    });
-                    $('#e52', this.div2).css({
-                        top:'70px',
-                        left:'36px'
-                    });
-                    $('#e62', this.div2).css({
-                        top:'18px',
-                        left:'112px'
-                    });
-                    $('#e72', this.div2).css({
-                        top:'68px',
-                        left:'106px'
-                    });
-                    $('#e82', this.div2).css({
-                        top:'42px',
-                        left:'98px'
-                    });
-                    $('#e92', this.div2).css({
-                        top:'42px',
-                        left:'132px'
-                    });
-                    $('#e102', this.div2).css({
-                        top:'40px',
-                        left:'24px'
-                    });
-                    break;
-
-            }   // equal set elements positioning
-
-            for(var i = 1; i <= this.elements.length; i++){
-                $('#e'+i+"2", this.div).html("."+this.elements[i-1]);
-                $('#e'+i+"2", this.div2).html("."+this.elements[i-1]);
-            }
-        }
-        else{
-            if(this.isSubsetOf(otherSet)){
-                this.div = document.createElement('div');
-                $(container).append(this.div);
-
-                this.div2 = document.createElement('div');
-                $(container).append(this.div2);
-
-                $(this.div).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
-                    '<div id="e12" class="elements"></div><div id="e22" class="elements"></div><div id="e32" class="elements"></div>' +
-                    '<div id="e42" class="elements"></div><div id="e52" class="elements"></div><div id="e62" class="elements"></div>' +
-                    '<div id="e72" class="elements"></div><div id="e82" class="elements"></div><div id="e92" class="elements"></div>' +
-                    '<div id="e102" class="elements"></div></div>');
-
-                $(this.div2).append('<div id="vennElements2"><div id="vennLetter2"></div>' +
-                    '<div id="e12" class="elements"></div><div id="e22" class="elements"></div><div id="e32" class="elements"></div>' +
-                    '<div id="e42" class="elements"></div><div id="e52" class="elements"></div><div id="e62" class="elements"></div>' +
-                    '<div id="e72" class="elements"></div><div id="e82" class="elements"></div><div id="e92" class="elements"></div>' +
-                    '<div id="e102" class="elements"></div></div>');
-
-                $('#vennElements2', this.div).css({
-                    position:'absolute',
-                    top:topLeftPoint.y+parseInt($(container).css("padding")),
-                    left:topLeftPoint.x+parseInt($(container).css("padding")),
-                    width:''+size.width+'px',
-                    height:''+size.height+'px',
-                    fontSize:'16px',
-                    textAlign:'center',
-                    fontWeight:'bold',
-                    border:'1px solid',
-                    opacity:0
-                    //    opacity:0,
-                });
-            //    $('#vennElements2',this.div).delay(2000).animate({left:"+=100px"}, 2000, 'easeInOutQuad', function(){$(this).css({opacity:0}));
-
-                $('#vennElements2', this.div2).css({
-                    position:'absolute',
-                    top:topLeftPoint2.y+parseInt($(container).css("padding")),
-                    left:topLeftPoint2.x+parseInt($(container).css("padding")),
-                    width:''+size2.width+'px',
-                    height:''+size2.height+'px',
-                    fontSize:'16px',
-                    textAlign:'center',
-                    fontWeight:'bold',
-                    border:'1px solid',
-                    opacity:0
-                });
-            //    $('#vennElements2',this.div2).delay(2000).animate({left:"-=100px"}, 2000, 'easeInOutQuad'});
-
-
-                $('#vennLetter2', this.div).css({
-                    position:'absolute',
-                    top:'0px',
-                    right:'0px',
-                    width:'18px',
-                    height:'18px',
-                    fontWeight:'normal',
-                    //    opacity:0,
-                });
-                $('#vennLetter2', this.div).html(setLetter);
-
-                $('#vennLetter2', this.div2).css({
-                    position:'absolute',
-                    top:'0px',
-                    left:'0px',
-                    width:'18px',
-                    height:'18px',
-                    fontWeight:'normal',
-                    //   opacity:0,
-                });
-                $('#vennLetter2', this.div2).html(setLetter2);
-                $('.elements').css({
-                    position:'absolute',
-                    width:'24px',
-                    height:'20px'
-                });
-
-                switch(this.elements.length){
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    case 7:
-                        break;
-                    case 8:
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        break;
-                }
-
-                for(var i = 1; i <= this.elements.length; i++){
-                    $('#e'+i+"2", this.div).html("."+this.elements[i-1]);
-                    $('#e'+i+"2", this.div2).html("."+this.elements[i-1]);
-                }
-            }
-            else if(otherSet.isSubsetOf(this)){
-
-            }
-            else{
-
-            }
-        }
-        this.diagram1.animate({
-            style:{
-                position: new Point(this.diagram1.position.x+100,this.diagram1.position.y)
-            },
-            duration:2000,
-            delay:2000,
-            animationType:'easeInOutQuad',
-            callback:function(){
-                if(isEqual){
-                    this.fillColor = "orange";
-                }
-            }
-        });
-        this.diagram2.animate({
-            style:{
-                position: new Point(this.diagram2.position.x-100,this.diagram2.position.y),
-                opacity:10
-            },
-            duration:2000,
-            delay:2000,
-            animationType:'easeInOutQuad',
-            callback:function(){
-                if(isEqual){
-                    this.opacity=0;
-                }
-            }
-        });
-
-
-
-
-
-    },
 });
+
+
 Set.ELEMENTS = 0;
 Set.SMALLER_THAN = 1;   // length option
 Set.SMALLER_THAN_ODD = 2;   // length option
@@ -1907,15 +1100,18 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 
 
 	if (intersection.elements.length == 0) {
-		var separation = (set1DifferenceSet2.elements.length+1)*10*2 + 100;	
+		var separation = (set1DifferenceSet2.elements.length+1)*10*2 + 110;	
 	} else {
-		var separation = set1DifferenceSet2.elements.length*10*1.8 + 45;
+		var separation = set1DifferenceSet2.elements.length*8*1.8 + 75;
 	}
 	
 	var vennDiagram = new Group();
 	
 	var noOfElements1 = sets[0].elements.length;
-	var vennSize1 = new Size(noOfElements1*10*2 + 100, /*this.elements.length*6 +*/ 118);
+	
+	// var vennSize = new Size(this.elements.length*10*1.8 + 110, /*this.elements.length*6 +*/ 128);
+	
+	var vennSize1 = new Size(noOfElements1*10*2 + 110, /*this.elements.length*6 +*/ 128);
 	
 	var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
 	var oval1 = Path.Oval(vennBoundingBox1);
@@ -1925,7 +1121,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	
 	
 	var noOfElements2 = sets[1].elements.length;
-	var vennSize2 = new Size(noOfElements2*10*2 + 100, /*this.elements.length*6 +*/ 118);
+	var vennSize2 = new Size(noOfElements2*10*2 + 110, /*this.elements.length*6 +*/ 128);
 	var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 0), vennSize2);
 	var oval2 = Path.Oval(vennBoundingBox2);
 	oval2.strokeColor = 'black';
@@ -1954,6 +1150,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	
 	var drawElements = function (elements, boundingBox, elementSize, hitTest) {
 		var elementLocations = [];
+		var elementGroup = new Group();
 		
 		isAvailable = function (point) {
 			var point2 = point.add(elementSize.width, -elementSize.height);
@@ -1999,15 +1196,17 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 				 				Util.randomInteger(topLeftPoint.y/5, (topLeftPoint.y+ vennSize.height)/5)*5);
 				
 				trials++;
-			} while (!isAvailable(point) && trials < noOfElements*20);
+			} while (!isAvailable(point) && trials < noOfElements*200+100);
 						
+						
+			console.log("trials: " + trials);
 			var text = new PointText(point.add(elementSize.width/2 - 10, -elementSize.height/2 + 8));
 			text.set_style({
 				fontSize: 14
 			})
 			text.content = "."+elements[i];
 			
-			vennDiagram.addChild(text);
+			elementGroup.addChild(text);
 			
 			// rect = new Path.Rectangle(point, new Size(elementBoxSize.width,-elementBoxSize.height));
 			// rect.strokeColor = 'black';
@@ -2015,9 +1214,9 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			
 			elementLocations.push(point);
 			
-			if (trials == noOfElements*20) {
-				// vennDiagram.remove();
-				// this.vennDiagram = new Group();
+			if (trials == noOfElements*200+100) {
+				elementGroup.remove();
+				elementGroup = new Group();
 				elementLocations = [];
 				i = -1;
 			}
@@ -2025,31 +1224,55 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		
 	}
 	
-	elementsSize = new Size(32, 20);
 	
+	// // var elementBoxSize = new Size(30, 24);
+	// var elementBoxSize = new Size(vennSize.width/(noOfElements+0.8), vennSize.height/(noOfElements+0.8))
+	// // elementsSize = new Size(0,0);
+	// if (elementBoxSize.width < 44) {
+	// 	elementBoxSize.width = 44;
+	// }
+	// 
+	// if (elementBoxSize.height < 30) {
+	// 	elementBoxSize.height = 30;
+	// }
 	
+	// elementsSize = new Size(44, 30);
+	elementsSize = new Size(32, 28);	
+	
+	var start_time = Date.now();
+	var bb1 = new Rectangle(new Point(vennBoundingBox1.x, vennBoundingBox1.y), new Size(separation, vennBoundingBox1.height));
 	drawElements(set1DifferenceSet2.elements,
-		 		vennBoundingBox1,
+		 		bb1,
 		 		elementsSize,
 		 function(point) {
 			return (oval1.hitTest(point) && !oval2.hitTest(point));
 	});
+	var endTime = Date.now();
+	console.log("First part: " + (endTime-start_time));
 	
-	
-	intersectionBoundingBox = new Rectangle(topLeftPoint.add(separation, 0), new Size(vennSize1.width - separation, vennSize1.height));
+	var start_time = Date.now();	
+	intersectionBoundingBox = new Rectangle(topLeftPoint.add(separation, 20), new Size(vennSize1.width - separation, vennSize1.height - 40));
+	var rr = new Path.Rectangle(intersectionBoundingBox);
+	rr.strokeColor = 'black';
 	drawElements(intersection.elements,
 		 		intersectionBoundingBox,
 		 		elementsSize,
 		 function(point) {
 			return (oval1.hitTest(point) && oval2.hitTest(point));
 	});
+	var endTime = Date.now();
+	console.log("Second part: " + (endTime-start_time));
 	
+	var start_time = Date.now();
+	var bb2 = new Rectangle(new Point(vennBoundingBox2.x + vennBoundingBox1.width - separation, vennBoundingBox2.y), new Size(vennBoundingBox2.width - vennBoundingBox1.width + separation, vennBoundingBox2.height));
 	drawElements(set2DifferenceSet1.elements,
-		 		vennBoundingBox2,
+		 		bb2,
 		 		elementsSize,
 		 function(point) {
 			return (!oval1.hitTest(point) && oval2.hitTest(point));
 	});
+	var endTime = Date.now();
+	console.log("Third part: " + (endTime-start_time));
 	
 	// if (elementBoxSize.width < 36) {
 	// 	elementBoxSize.width = 36;
