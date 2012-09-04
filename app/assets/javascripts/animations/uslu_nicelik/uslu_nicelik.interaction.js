@@ -43,20 +43,6 @@ var Interaction = {
             $(Interaction.answerDiv).remove();
         }
 
-        Interaction.base = Util.randomInteger(1,11);
-
-        if(Interaction.base < 4){
-            Interaction.power = Util.randomInteger(1,6);
-        }
-        else if(Interaction.base < 10){
-            Interaction.power = Util.randomInteger(1,4);
-        }
-        else{
-            Interaction.power = Util.randomInteger(1,10);
-        }
-
-        Interaction.answer = Math.pow(Interaction.base,Interaction.power);
-
         Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
 
         Interaction.answerDiv = Util.dom({parent:Interaction.container, tag:'div', css:answerDivStyle});
@@ -73,6 +59,20 @@ var Interaction = {
                 fontSize:'30px'
             });
             $(Interaction.input).attr('maxlength', '2');
+
+            Interaction.base = Util.randomInteger(1,11);
+
+            if(Interaction.base < 4){
+                Interaction.power = Util.randomInteger(1,6);
+            }
+            else if(Interaction.base < 10){
+                Interaction.power = Util.randomInteger(1,4);
+            }
+            else{
+                Interaction.power = Util.randomInteger(1,8);
+            }
+
+            Interaction.answer = Math.pow(Interaction.base,Interaction.power);
 
             $(Interaction.questionDiv).append('<span id="qp" style="position:absolute;left:180px;top:10px;font-size:20px;"></span>' +
                 '<span style="position:absolute;left:200px;top:30px"> = </span>' +
@@ -93,11 +93,26 @@ var Interaction = {
             });
             $(Interaction.input).attr('maxlength', '2');
 
+            Interaction.base = Util.randomInteger(2,11);
+
+            if(Interaction.base < 4){
+                Interaction.power = Util.randomInteger(1,6);
+            }
+            else if(Interaction.base < 10){
+                Interaction.power = Util.randomInteger(1,4);
+            }
+            else{
+                Interaction.power = Util.randomInteger(1,8);
+            }
+
+            Interaction.answer = Math.pow(Interaction.base,Interaction.power);
+
             $(Interaction.questionDiv).append('<span id="qb" style="text-align:right;width:30px;position:absolute;left:130px;top:28px;"></span>' +
                 '<span style="position:absolute;left:190px;top:30px"> = </span>' +
                 '<span id="qa" style="position:absolute;left:214px;top:28px;"></span>');
             $('#qb').html(Interaction.base);
             $('#qa').html(Interaction.answer);
+
         }
         else{
             Main.setObjective('Yandaki üslü nicelikte <span style="color:red;">değeri</span> bulunuz.');
@@ -112,12 +127,28 @@ var Interaction = {
             });
             $(Interaction.input).attr('maxlength', '10');
 
+            Interaction.base = Util.randomInteger(2,11);
+
+            if(Interaction.base < 4){
+                Interaction.power = Util.randomInteger(1,6);
+            }
+            else if(Interaction.base < 10){
+                Interaction.power = Util.randomInteger(1,4);
+            }
+            else{
+                Interaction.power = Util.randomInteger(1,8);
+            }
+
+            Interaction.answer = Math.pow(Interaction.base,Interaction.power);
+
             $(Interaction.questionDiv).append('<span id="qb" style="text-align:right;width:30px;position:absolute;left:70px;top:28px;"></span>' +
                 '<span id="qp" style="position:absolute;left:100px;top:10px;font-size:20px;"></span>' +
                 '<span style="position:absolute;left:120px;top:30px"> = </span>');
 
             $('#qb').html(Interaction.base);
             $('#qp').html(Interaction.power);
+
+
 
         }
 
