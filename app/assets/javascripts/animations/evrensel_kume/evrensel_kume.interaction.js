@@ -34,6 +34,7 @@ var Interaction = {
             Interaction.set2.removeVennDiagram()
             Interaction.set3.removeVennDiagram()
             Interaction.rect.remove();
+            Interaction.rectText.remove();
         }
         Interaction.generateSets();
 
