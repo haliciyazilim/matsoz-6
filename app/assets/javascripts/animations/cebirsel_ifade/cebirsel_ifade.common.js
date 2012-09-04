@@ -6,8 +6,8 @@ function sorular(){
 
     console.log("sayi: "+this.randomSayi+", "+this.isaretSecimi);
 
-    //this.soruCesidi=Math.floor(Math.random()*3+1);;
-    this.soruCesidi=1;
+    this.soruCesidi=Math.floor(Math.random()*3+1);;
+    //this.soruCesidi=4;
 
     switch (this.soruCesidi){
         case 1:
@@ -113,7 +113,7 @@ function soruCesidi2 (sayi,isaret){
 
     //$("#girdiler").html($("#girdi1")+$("#girdi2")+$("#girdi3"));
 
-    Interaction.dogruCevap=[2,"x",2];
+    Interaction.dogruCevap=[2,this.isaret,2,"x"];
     return this.cumleler[this.cumleSecimi];
 
 
@@ -202,8 +202,151 @@ function soruCesidi4 (sayi){
         margin:"0 auto"
     });
 
-    Interaction.dogruCevap=[4,"x",2];
+    Interaction.dogruCevap=[4,2,"x"];
     return this.cumleler[this.cumleSecimi];
+}
+
+function kontrol(value){
+    var degisim=["a","n","k"];
+
+    for(var i=0; i<value.length;i++){
+        for(var j=0; j<degisim.length;j++){
+            if (value[j]==degisim[i]){
+                console.log("buldum");
+                value[j]="x";
+                break;
+            }
+        }
+    }
+    console.log("değişen value: "+value[0]+", "+value[1]+", "+value[2]);
+    Interaction.soruCesidi=Interaction.dogruCevap[0];
+    Interaction.sinanacakDegerler=[];
+    for(var i=0; i<Interaction.dogruCevap.length;i++)
+        Interaction.sinanacakDegerler.push(Interaction.dogruCevap[i]);
+    Interaction.testSayaci=0;
+    switch (Interaction.soruCesidi){
+        case 1:
+            for(var i=0; i<value.length;i++){
+                for(var j=1; j<(Interaction.dogruCevap.length);j++){
+                    if(Interaction.sinanacakDegerler[j]==value[i]){
+                        Interaction.testSayaci++
+                        Interaction.sinanacakDegerler[j]="dogru";
+                    }
+                }
+            }
+            if(Interaction.testSayaci==3)
+                if(value[1]=="+"){
+                    return true
+                }
+                else if( value[1]=="-" && Interaction.dogruCevap[3]==value[2]){
+                    return true
+                }
+
+            break;
+
+        case 2:
+
+            for(var i=0; i<value.length;i++){
+                for(var j=2; j<(Interaction.dogruCevap.length);j++){
+                    if(Interaction.sinanacakDegerler[j]==value[i]){
+                        Interaction.testSayaci++
+                        Interaction.sinanacakDegerler[j]="dogru";
+
+                    }
+                }
+            }
+            console.log(value[0],value[1]);
+
+            if(Interaction.testSayaci==2){
+                if(Interaction.dogruCevap[1]==true)
+                    return true;
+                else{
+                    if(Interaction.dogruCevap[3]==value[0])
+                        return true;
+                }
+            }
+            break;
+
+        case 3:
+            for(var i=0; i<value.length;i++){
+                for(var j=1; j<(Interaction.dogruCevap.length);j++){
+                    if(Interaction.sinanacakDegerler[j]==value[i]){
+                        Interaction.testSayaci++
+                        Interaction.sinanacakDegerler[j]="dogru";
+                    }
+                }
+            }
+            if(Interaction.testSayaci==4)
+                if(value[2]=="+" && value[3]==Interaction.dogruCevap[4]){
+                    return true
+                }
+                else if(value[1]=="+" && value[0]==Interaction.dogruCevap[4]){
+                    return true
+                }
+                else if(value[2]=="-" && Interaction.dogruCevap[4]==value[3]){
+                    return true
+                }
+
+            break;
+
+        case 4:
+
+            for(var i=0; i<value.length;i++){
+                for(var j=1; j<(Interaction.dogruCevap.length);j++){
+                    if(Interaction.sinanacakDegerler[j]==value[i]){
+                        Interaction.testSayaci++
+                        Interaction.sinanacakDegerler[j]="dogru";
+
+                    }
+                }
+            }
+            console.log(value[0],value[1]);
+
+            if(Interaction.testSayaci==2 && Interaction.dogruCevap[1]==value[0]){
+                return true;
+            }
+            break;
+    }
+}
+
+function hataliCevap(){
+
+    Interaction.soruCesidi=Interaction.dogruCevap[0];
+    switch (Interaction.soruCesidi){
+        case 1:
+            for(var i=1; i<=3;i++){
+                $("#girdi"+i).val(Interaction.dogruCevap[i])
+            }
+            break;
+
+        case 2:
+            if(Interaction.testSayaci==2){
+                for(var i=2; i<=3;i++){
+                    $("#girdi"+(i-1)).val(Interaction.dogruCevap[i]);
+                }
+            }
+            else{
+                $("#girdi1").val("x");
+                $("#girdi2").val("2");
+            }
+
+            break;
+
+        case 3:
+            for(var i=1; i<=5;i++){
+                $("#girdi"+(i)).val(Interaction.dogruCevap[i])
+            }
+
+
+            break;
+
+        case 4:
+            for(var i=1; i<=2;i++){
+                $("#girdi"+i).val(Interaction.dogruCevap[i])
+            }
+            break;
+            break;
+    }
 }
 
 
