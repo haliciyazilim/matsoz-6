@@ -26,7 +26,7 @@ var Interaction = {
             .css("font-size","16px")
             .css("left","0px")
             .css("right","0px")
-            .css("top","30px")
+            .css("top","90px")
             .css("font-size","20px")
             .css("text-align","center")
             //.css("border","1px solid red");
@@ -39,7 +39,7 @@ var Interaction = {
             .css("font-size","16px")
             .css("left","0px")
             .css("right","0px")
-            .css("top","60px")
+            .css("top","140px")
             .css("font-size","20px")
             .css("text-align","center")
             //.css("border","1px solid red");
@@ -48,7 +48,7 @@ var Interaction = {
             bottom:'20px',
             right:'160px',
             width:"280px",
-            textAlign:"center",
+            textAlign:"center"
 
         });
 
@@ -60,6 +60,9 @@ var Interaction = {
 			Interaction.prepareNextQuestion();
 		},
 	nextQuestion: function(randomNumber){
+        Interaction.flushInputs();
+        $("#girdiler").html("");
+        $("input").css("color","black");
         Interaction.gelenSoru=sorular();
 
         $("#soru").html(Interaction.gelenSoru);
@@ -74,23 +77,11 @@ var Interaction = {
 		
 		},
 	isAnswerCorrect : function(value){
+        var kntrl=kontrol(value);
 
-        Interaction.soruCesidi=Interaction.dogruCevap[0];
+        if(kntrl==true)
+            return true;
 
-        Interaction.testSayaci=0;
-        switch (Interaction.soruCesidi){
-            case 1:
-                for(var i=0; i<value.length;i++){
-                    for(var j=0; j<(Interaction.dogruCevap.length-1);j++){
-                        if(Interaction.dogruCevap[j+1]==value[i]){
-                            Interaction.testSayaci++
-                        }
-                    }
-                }
-                if(Interaction.testSayaci==3)
-                return true;
-                break;
-        }
 
 		
 		},
@@ -101,6 +92,9 @@ var Interaction = {
 		
 		},
 	onFail : function(){
+        hataliCevap();
+        Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.',false);
+        $("input").css("color","green");
 		
 		}
 }
