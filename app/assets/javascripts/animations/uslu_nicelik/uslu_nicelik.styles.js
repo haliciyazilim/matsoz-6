@@ -31,7 +31,17 @@ function __Styles(){
         width:'500px',
         height:'140px',
         fontSize:'32px',
-        border:'1px solid'
+    //    border:'1px solid'
     };
+
+    finalDivStyle = {
+        position:'absolute',
+        top:'76px',
+        left:'140px',
+        width:'120px',
+        height:'50px',
+        fontSize:'32px'
+    //    border:'1px solid'
+    }
 
 }
