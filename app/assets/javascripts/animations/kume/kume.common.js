@@ -1089,7 +1089,8 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		return sets[0].drawVennDiagram(container, topLeftPoint, letters[0]);
 	}
 	
-	
+	var vennDiagram1 = new Group();
+	var vennDiagram2 = new Group();
 	
 	var set1 = sets[0];
 	var set2 = sets[1];
@@ -1098,56 +1099,155 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
     var set2DifferenceSet1 = set2.getDifference(set1);
     var intersection = set1.getIntersection(set2);
 
+	var noOfElements1 = sets[0].elements.length;
+	var noOfElements2 = sets[1].elements.length;
 
-	if (intersection.elements.length == 0) {
+	elementsSize1 = new Size(32, 28);
+	elementsSize2 = new Size(32, 28);
+	elementsSize3 = new Size(32, 28);
+
+	if (set1DifferenceSet2.elements.length == 0 && set2DifferenceSet1.elements.length == 0) {
+		var separation = 0;	
+		
+		var vennSize1 = new Size(noOfElements1*10*1.8 + 110, 128);	
+		var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
+		var textPoint1 = new Point(vennBoundingBox1.x+vennBoundingBox1.width*0.1, vennBoundingBox1.y+vennBoundingBox1.height*0.1);
+		
+		var vennSize2 = new Size(noOfElements2*10*1.8 + 110, 128);
+		var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 0), vennSize2);
+		var textPoint2 = new Point(vennBoundingBox2.x+vennBoundingBox2.width*0.82, vennBoundingBox2.y+vennBoundingBox2.height*0.1);
+		
+		var bb1 = new Rectangle();
+		intersectionBoundingBox = vennBoundingBox1;
+		var bb2 = new Rectangle();
+		
+		elementsSize2 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
+		if (elementsSize2.width < 36) {
+			elementsSize2.width = 36;
+		}
+
+		if (elementsSize2.height < 30) {
+			elementsSize2.height = 30;
+		}
+	} else if (set1DifferenceSet2.elements.length == 0) {
+		var separation = -20;	
+		
+		var vennSize1 = new Size(noOfElements1*10*2 + 72, 92);	
+		var vennBoundingBox1 = new Rectangle(topLeftPoint.add(0,18), vennSize1);
+		var textPoint1 = new Point(vennBoundingBox1.x + vennBoundingBox1.width*0.82, vennBoundingBox1.y + vennBoundingBox1.height*0.1);
+		
+		var vennSize2 = new Size(noOfElements2*10*2 + 160, 128);
+		var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 0), vennSize2);
+		var textPoint2 = new Point(vennBoundingBox2.x+vennBoundingBox2.width*0.82, vennBoundingBox2.y+vennBoundingBox2.height*0.1);
+
+		var bb1 = new Rectangle();
+		intersectionBoundingBox = vennBoundingBox1;
+		var bb2 = new Rectangle(new Point(vennBoundingBox2.x + vennBoundingBox1.width - separation, vennBoundingBox2.y), new Size(vennBoundingBox2.width - vennBoundingBox1.width + separation, vennBoundingBox2.height));
+		
+		elementsSize1 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
+		if (elementsSize1.width < 32) {
+			elementsSize1.width = 32;
+		}
+
+		if (elementsSize1.height < 28) {
+			elementsSize1.height = 28;
+		}
+	} else if (set2DifferenceSet1.elements.length == 0) {		
+		var vennSize1 = new Size(noOfElements1*10*2 + 110, 128);	
+		var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
+		var textPoint1 = new Point(vennBoundingBox1.x+vennBoundingBox1.width*0.1, vennBoundingBox1.y+vennBoundingBox1.height*0.1);
+		
+		var vennSize2 = new Size(noOfElements2*10*2 + 72, 92);
+		var separation = vennSize1.width - vennSize2.width - 20;
+		var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 18), vennSize2);
+		var textPoint2 = new Point(vennBoundingBox2.x+vennBoundingBox2.width*0.1, vennBoundingBox2.y+vennBoundingBox2.height*0.1);
+	
+		var bb1 = new Rectangle(new Point(vennBoundingBox1.x, vennBoundingBox1.y), new Size(separation, vennBoundingBox1.height));
+		intersectionBoundingBox = vennBoundingBox2;
+		var bb2 = new Rectangle();
+		
+		elementsSize3 = new Size(vennSize2.width/(noOfElements2+0.8), vennSize2.height/(noOfElements2+0.8))
+		if (elementsSize3.width < 32) {
+			elementsSize3.width = 32;
+		}
+
+		if (elementsSize3.height < 28) {
+			elementsSize3.height = 28;
+		}
+	} else if (intersection.elements.length == 0) {
 		var separation = (set1DifferenceSet2.elements.length+1)*10*2 + 110;	
+		
+		var vennSize1 = new Size(noOfElements1*10*1.8 + 110, 128);	
+		var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
+		var textPoint1 = new Point(vennBoundingBox1.x+vennBoundingBox1.width*0.1, vennBoundingBox1.y+vennBoundingBox1.height*0.1);
+		
+		var vennSize2 = new Size(noOfElements2*10*1.8 + 110, 128);
+		var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 0), vennSize2);
+		var textPoint2 = new Point(vennBoundingBox2.x+vennBoundingBox2.width*0.82, vennBoundingBox2.y+vennBoundingBox2.height*0.1);
+		
+		var bb1 = vennBoundingBox1;
+		intersectionBoundingBox = new Rectangle();
+		var bb2 = vennBoundingBox2;
+		
+		elementsSize1 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
+		if (elementsSize1.width < 36) {
+			elementsSize1.width = 36;
+		}
+
+		if (elementsSize1.height < 30) {
+			elementsSize1.height = 30;
+		}		
+		
+		elementsSize3 = new Size(vennSize2.width/(noOfElements2+0.8), vennSize2.height/(noOfElements2+0.8))
+		if (elementsSize3.width < 36) {
+			elementsSize3.width = 36;
+		}
+
+		if (elementsSize3.height < 30) {
+			elementsSize3.height = 30;
+		}		
+		
 	} else {
 		var separation = set1DifferenceSet2.elements.length*8*1.8 + 75;
+		
+		var vennSize1 = new Size(noOfElements1*10*2 + 110, 128);	
+		var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
+		var textPoint1 = new Point(vennBoundingBox1.x+vennBoundingBox1.width*0.1, vennBoundingBox1.y+vennBoundingBox1.height*0.1);
+		
+		var vennSize2 = new Size(noOfElements2*10*2 + 110, 128);
+		var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 0), vennSize2);
+		var textPoint2 = new Point(vennBoundingBox2.x+vennBoundingBox2.width*0.82, vennBoundingBox2.y+vennBoundingBox2.height*0.1);
+		
+		var bb1 = new Rectangle(new Point(vennBoundingBox1.x, vennBoundingBox1.y), new Size(separation, vennBoundingBox1.height));
+		intersectionBoundingBox = new Rectangle(topLeftPoint.add(separation, 20), new Size(vennSize1.width - separation, vennSize1.height - 40));
+		var bb2 = new Rectangle(new Point(vennBoundingBox2.x + vennBoundingBox1.width - separation, vennBoundingBox2.y), new Size(vennBoundingBox2.width - vennBoundingBox1.width + separation, vennBoundingBox2.height));
 	}
-	
-	var vennDiagram = new Group();
-	
-	var noOfElements1 = sets[0].elements.length;
-	
-	// var vennSize = new Size(this.elements.length*10*1.8 + 110, /*this.elements.length*6 +*/ 128);
-	
-	var vennSize1 = new Size(noOfElements1*10*2 + 110, /*this.elements.length*6 +*/ 128);
-	
-	var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
+				
 	var oval1 = Path.Oval(vennBoundingBox1);
 	oval1.strokeColor = 'black';
 	oval1.fillColor = new RgbColor(1, 1, 1, 0);
-	vennDiagram.addChild(oval1)
-	
-	
-	var noOfElements2 = sets[1].elements.length;
-	var vennSize2 = new Size(noOfElements2*10*2 + 110, /*this.elements.length*6 +*/ 128);
-	var vennBoundingBox2 = new Rectangle(topLeftPoint.add(separation, 0), vennSize2);
+	vennDiagram1.addChild(oval1)
+
 	var oval2 = Path.Oval(vennBoundingBox2);
 	oval2.strokeColor = 'black';
 	oval2.fillColor = new RgbColor(1, 1, 1, 0);
-	vennDiagram.addChild(oval2);
+	vennDiagram2.addChild(oval2);
+		
+	var text = new PointText(textPoint1);
+	text.set_style({
+		fontSize: 14
+	})
+	text.content = letters[0];
+	vennDiagram1.addChild(text);
 	
-	
-	
-	// var rect = new Path.Rectangle(vennBoundingBox);
-	// rect.strokeColor = 'black';
-	
-	// var availablePoints = [];
-		// 	
-		// for (var i = 0; i < size.width; i++) {
-		// 	for (var j = 0; j < size.height; j++) {
-		// 		if ()
-		// 	}
-		// }
-		// 
-	
-	// var elementBoxSize = new Size(30, 24);
-	
-	
-	// var elementBoxSize1 = new Size(noOfElements1*10*1.8 + 90/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
-
-	
+	text = new PointText(textPoint2);
+	text.set_style({
+		fontSize: 14
+	})
+	text.content = letters[1];
+	vennDiagram2.addChild(text);
+		
+		
 	var drawElements = function (elements, boundingBox, elementSize, hitTest) {
 		var elementLocations = [];
 		var elementGroup = new Group();
@@ -1182,7 +1282,6 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return true;
 		}
 		
-		
 		var noOfElements = elements.length;
 		var topLeftPoint = new Point(boundingBox.x, boundingBox.y);
 		var vennSize = boundingBox.size;
@@ -1196,7 +1295,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 				 				Util.randomInteger(topLeftPoint.y/5, (topLeftPoint.y+ vennSize.height)/5)*5);
 				
 				trials++;
-			} while (!isAvailable(point) && trials < noOfElements*200+100);
+			} while (!isAvailable(point) && trials < noOfElements*50);
 						
 						
 			console.log("trials: " + trials);
@@ -1214,7 +1313,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			
 			elementLocations.push(point);
 			
-			if (trials == noOfElements*200+100) {
+			if (trials == noOfElements*50) {
 				elementGroup.remove();
 				elementGroup = new Group();
 				elementLocations = [];
@@ -1222,28 +1321,16 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			}
 		}
 		
+		return elementGroup;
 	}
 	
-	
-	// // var elementBoxSize = new Size(30, 24);
-	// var elementBoxSize = new Size(vennSize.width/(noOfElements+0.8), vennSize.height/(noOfElements+0.8))
-	// // elementsSize = new Size(0,0);
-	// if (elementBoxSize.width < 44) {
-	// 	elementBoxSize.width = 44;
-	// }
-	// 
-	// if (elementBoxSize.height < 30) {
-	// 	elementBoxSize.height = 30;
-	// }
-	
-	// elementsSize = new Size(44, 30);
-	elementsSize = new Size(32, 28);	
-	
 	var start_time = Date.now();
-	var bb1 = new Rectangle(new Point(vennBoundingBox1.x, vennBoundingBox1.y), new Size(separation, vennBoundingBox1.height));
-	drawElements(set1DifferenceSet2.elements,
+	// var rr1 = new Path.Rectangle(bb1);
+	// rr1.strokeColor = 'red';
+		
+	var elementsGroup1 = drawElements(set1DifferenceSet2.elements,
 		 		bb1,
-		 		elementsSize,
+		 		elementsSize1,
 		 function(point) {
 			return (oval1.hitTest(point) && !oval2.hitTest(point));
 	});
@@ -1251,12 +1338,11 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	console.log("First part: " + (endTime-start_time));
 	
 	var start_time = Date.now();	
-	intersectionBoundingBox = new Rectangle(topLeftPoint.add(separation, 20), new Size(vennSize1.width - separation, vennSize1.height - 40));
-	var rr = new Path.Rectangle(intersectionBoundingBox);
-	rr.strokeColor = 'black';
-	drawElements(intersection.elements,
+	// var rr = new Path.Rectangle(intersectionBoundingBox);
+	// rr.strokeColor = 'green';
+	var elementsGroup2 = drawElements(intersection.elements,
 		 		intersectionBoundingBox,
-		 		elementsSize,
+		 		elementsSize2,
 		 function(point) {
 			return (oval1.hitTest(point) && oval2.hitTest(point));
 	});
@@ -1264,25 +1350,25 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	console.log("Second part: " + (endTime-start_time));
 	
 	var start_time = Date.now();
-	var bb2 = new Rectangle(new Point(vennBoundingBox2.x + vennBoundingBox1.width - separation, vennBoundingBox2.y), new Size(vennBoundingBox2.width - vennBoundingBox1.width + separation, vennBoundingBox2.height));
-	drawElements(set2DifferenceSet1.elements,
+	// var rr2 = new Path.Rectangle(bb2);
+	// rr2.strokeColor = 'blue';
+	var elementsGroup3 = drawElements(set2DifferenceSet1.elements,
 		 		bb2,
-		 		elementsSize,
+		 		elementsSize3,
 		 function(point) {
 			return (!oval1.hitTest(point) && oval2.hitTest(point));
 	});
 	var endTime = Date.now();
 	console.log("Third part: " + (endTime-start_time));
 	
-	// if (elementBoxSize.width < 36) {
-	// 	elementBoxSize.width = 36;
-	// }
-	// 
-	// if (elementBoxSize.height < 24) {
-	// 	elementBoxSize.height = 24;
-	// }		
-	// 
-	// 
+	vennDiagram1.addChild(elementsGroup1);
+	vennDiagram1.addChild(elementsGroup2);
 	
+	vennDiagram2.addChild(elementsGroup2.clone());
+	vennDiagram2.addChild(elementsGroup3);
 	
+	return {
+		set1: vennDiagram1,
+		set2: vennDiagram2
+	}		
 };
