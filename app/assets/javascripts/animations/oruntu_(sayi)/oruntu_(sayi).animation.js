@@ -3,7 +3,5 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
-
-//        Main.animationFinished();
     }
 }

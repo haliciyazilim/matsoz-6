@@ -24,7 +24,7 @@ var Interaction = {
 	arr.addChild(arrow2);
         arr.strokeWidth=2;
 	
-        var pieceLength = 450/13;
+        var pieceLength = 455/13;
 	
         Interaction.smallDots = new Group();
 	for(var i = 0; i < 13; i++){
@@ -49,7 +49,7 @@ var Interaction = {
                 .css("height","40px")
                 .css("position","absolute")
                 .css("left","67px")
-                .css("top",sayiDogrusuTop+-18)
+                .css("top",sayiDogrusuTop+(-18))
                 .css("margin","auto")
                 //.css("border","1px solid red");
         
@@ -75,33 +75,42 @@ var Interaction = {
             if(i!=0)
                 $("#sayilar"+i).css("opacity","0");
             
-            $("#noktalar").append("<div class='noktalar' id=noktalar"+i+">");
+            $("#noktalar").append("<span class='noktalar' id=noktalar"+i+">");
             
         }
-        
+
         $(".sayilar")
             .css("width",pieceLength)
             .css("height","10px")
             .css("float","left")
             .css("font-style","bold")
             .css("font-size",fontSize)
-            //.css("text-align","center")
-            //.css("opacity","0");
+        //.css("margin-left","1px")
+        //.css("text-align","center")
+        //.css("opacity","0");
         $(".eksiSayilar").css("text-align","right");
         $(".artiSayilar").css("text-align","center");
-    $(".noktalar")
-        .css("width",pieceLength)
-        .css("height","10px")
-        .css("float","left")
-        .css("margin","auto")
-        .css("font-size","40px")
-        .css("color","red")
-        .css("text-align","center")
-        .css("opacity","0")
-        .html("•")
+        $(".noktalar")
+
+            .css("width","35")
+
+            .css("height","10px")
+            .css("float","left")
+            .css("margin","auto")
+            .css("font-size","40px")
+            .css("color","red")
+            .css("text-align","center")
+            .css("opacity","1")
+            .html("•")
         //.css("border","1px solid red");
-        
-        
+
+      /*  if( navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod' || navigator.platform == 'Linux armv6l' || navigator.platform == 'Linux armv7l') {
+            $("#noktalar-6").css({left:"1px",top:"1px"})
+            $("#noktalar-5").css({left:"10px",top:"1px"})
+            $("#noktalar6").css({left:"25px",top:"1px"})
+        }*/
+
+
         
     
     Interaction.setRandomGenerator(7,-6);
