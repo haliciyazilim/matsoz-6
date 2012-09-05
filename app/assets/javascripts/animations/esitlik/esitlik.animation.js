@@ -4,6 +4,6 @@ var Animation = {
         Animation.container = container;
 
 
-//        Main.animationFinished();
+        Main.animationFinished();
     }
 }

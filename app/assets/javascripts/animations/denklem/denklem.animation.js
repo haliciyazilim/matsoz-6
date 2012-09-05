@@ -79,6 +79,6 @@ var Animation = {
         $("#ucan_3").delay(5000).animate({top:'-89px',left:'-71px'},1000);
         $("#saklanan_x").delay(5000).animate({opacity: 0},1000);
         $("#ucan_3").delay(1000).animate({top:'0px',left:'0px'},1000);
-        $("#saklanan_x").delay(1000).animate({opacity: 1},1000);
+        $("#saklanan_x").delay(1000).animate({opacity: 1},1000,Main.animationFinished);
     }
 }
