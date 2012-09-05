@@ -76,10 +76,10 @@ var Animation = {
             '<span id="pls" style="position:absolute;left:146px">+</span>' +
             '<div id="tsFrac" style="position:absolute;top:-17px;left:160px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
             '<div id="nomts"></div><div id="linets"></div><div id="denomts"></div></div>' +
-            '<span style="position:absolute;left:200px">=</span>' +
-            '<div id="fourthFrac" style="position:absolute;top:-17px;left:220px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
+            '<span id="eqq" style="opacity:0;position:absolute;left:200px">=</span>' +
+            '<div id="fourthFrac" style="opacity:0;position:absolute;top:-17px;left:220px;width:30px;height:51px;padding:0;margin:0;line-height:25px;">' +
                 '<div id="nom4"></div><div id="line4"></div><div id="denom4"></div></div>' +
-            '<span style="position:absolute;left:260px;width:30px;">= <b>1</b></span>'});
+            '<span id="last" style="opacity:0;position:absolute;left:260px;width:30px;">= <b>1</b></span>'});
 
         $('#line3').css("height", "1px")
             .css("border-top", "1px solid")
@@ -145,9 +145,12 @@ var Animation = {
         $('#ss').css("opacity",0).delay(secondFracStart).animate({opacity:1},1000,'easeInOutQuad');
         AnimationManager.delay(function(){animateNumber(1)},secondFracStart+1000);
         $(fourthDiv).delay(fourthDivStart).animate({opacity:1},1000,'easeInOutQuad');
-        $('#tfFrac').delay(fourthDivStart+2000).animate({opacity:0},500,'easeInOutQuad');
-        $('#tsFrac').delay(fourthDivStart+2000).animate({opacity:0},500,'easeInOutQuad');
-        $('#pls').delay(fourthDivStart+2000).animate({opacity:0},500,'easeInOutQuad');
-        $('#thirdFrac').delay(fourthDivStart+2000).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000)});
+        $('#tfFrac').delay(fourthDivStart+2000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#tsFrac').delay(fourthDivStart+2000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#pls').delay(fourthDivStart+2000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#thirdFrac').delay(fourthDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
+        $('#eqq').delay(fourthDivStart+3500).animate({opacity:1},1000,'easeInOutQuad');
+        $('#fourthFrac').delay(fourthDivStart+3500).animate({opacity:1},1000,'easeInOutQuad');
+        $('#last').delay(fourthDivStart+5000).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000);})
     }
 }
