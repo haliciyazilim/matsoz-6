@@ -39,6 +39,8 @@ var Interaction = {
             top:'50px'
         })
 
+
+
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(){
@@ -88,6 +90,42 @@ var Interaction = {
         Interaction.set1Div.innerHTML = 'E = ' + set1String;
         Interaction.set2Div.innerHTML = 'A = ' + set2String;
 
+        var start_time = Date.now();
+        // a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
+        var sets = Set.drawSets(Interaction.container, new Point(120,140),[Interaction.set1, Interaction.set2] ,['E', 'A']);
+        var endTime = Date.now();
+        // Main.setObjective(endTime-start_time);
+        sets.set1.scale(0.7);
+        sets.set2.scale(0.7);
+
+        var originalPosition1 = sets.set1.position;
+        sets.set1.position = sets.set1.position.add(-100,0);
+
+        var originalPosition2 = sets.set2.position;
+        sets.set2.position = sets.set2.position.add(100,0);
+
+        sets.set1.animate({
+            style: {
+                position: originalPosition1
+            },
+            duration: 1000,
+            delay: 1000,
+            animationType: 'easeInEaseOut'
+        })
+
+        sets.set2.animate({
+            style: {
+                position: originalPosition2
+            },
+            duration: 1000,
+            delay: 1000,
+            animationType: 'easeInEaseOut',
+            callback: function () {
+                sets.set2.children[2].remove();
+                sets.set2.remove();
+            }
+        })
+
     },
 		
 	/*
@@ -118,8 +156,10 @@ var Interaction = {
     },
     showCorrectAnswer:function(){
         Interaction.pause();
-        Interaction._set = Interaction.set1.getDifference(Interaction.set2);
-        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A'");
+//        Interaction._set = Interaction.set1.getDifference(Interaction.set2);
+//        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A'");
         setTimeout(Interaction.resume,2000);
+
+
     }
 }

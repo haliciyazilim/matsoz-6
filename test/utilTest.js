@@ -67,4 +67,16 @@ utilTest.prototype.testRand01 = function(){
 utilTest.prototype.testRandomInteger = function(){
     assertEquals(3,Util.randomInteger(3,4));
     assertTrue([3,4,8,9].indexOf(Util.randomInteger(2,10,[3,4,8,9])) == -1);
+    assertNumber(Util.randomInteger(10));
+    assertFalse(Util.randomInteger(4,5) == 5);
+};
+
+utilTest.prototype.testRandomDigit = function(){
+    assertTrue(Util.randomDigit() < 10);
+    assertTrue(Util.randomDigit() >= 0);
+    assertNumber(Util.randomDigit());
+};
+
+utilTest.prototype.testGcd = function(){
+
 };
