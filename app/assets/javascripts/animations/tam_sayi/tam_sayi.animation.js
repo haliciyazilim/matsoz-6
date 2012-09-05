@@ -39,15 +39,19 @@ var Animation = {
         $("#resimCerceve").append("<img id='cetvelKirmizi' src=" + resimler[7] + ">");
         $("#resimCerceve").append("<div id='mesafeBildirimUst' class='bildirim'>");
         $("#resimCerceve").append("<div id='mesafeBildirimAlt' class='bildirim'>");
+
+        $(container).css("font-family","arial");
         $(container).append("<div id='negatifTamSayilarBaslik' class='basliklar'>");
         $(container).append("<div id='pozitifTamSayilarBaslik' class='basliklar'>");
         $(container).append("<div id='sifirBaslik' class='basliklar'>");
         $(container).append("<div id='sifirIcerik' class='icerik'>");
-        $(container).append("<div id='negatifTamSayilarParantez' class='icerik'>");
+
         $(container).append("<div id='negatifTamSayilarIcerik' class='icerik'>");
-        $(container).append("<div id='pozitifTamSayilarParantez' class='icerik'>");
-        $(container).append("<div id='pozitifTamSayilarIcerik' class='icerik'>");
-        $(container).append("<div id='tamSayiKumesi'>");
+        $(container).append("<span id='pozitifTamSayilarIcerik' class='icerik'>");
+
+        $(container).append("<span id='tamSayiKumesiParantezSol'>");
+        $(container).append("<span id='tamSayiKumesiParantezSag'>");
+
         $("#cetvelKirmizi, #cetvelSiyah").css({
             position: "absolute",
             bottom: "0px",
@@ -56,22 +60,61 @@ var Animation = {
             zIndex: "3",
             opacity: "0"
         });
-        $("#tamSayiKumesi").css({
+
+        $("#tamSayiKumesiParantezSol").css({
             position: "absolute",
             bottom: "40px",
-            right: "83px",
-            margin: "auto",
+            right: "381px",
+            //margin: "auto",
             zIndex: "4",
             opacity: "0",
             // color:"red",
             //fontSize:"11px"
-        }).html("Z ={&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ");
-        $(".basliklar").css({
+        }).html("Z ={");
+        $("#tamSayiKumesiParantezSag").css({
+            position: "absolute",
+            bottom: "40px",
+
+            //margin: "auto",
+            zIndex: "4",
+            opacity: "0",
+            // color:"red",
+            //fontSize:"11px"
+        }).html("}");
+
+        $(container).append("<div id='virgul1' class='virguller'>,</div>");
+        $("#virgul1").css({
+            position:"absolute",
+            right:"226px",
+            bottom:"40px",
+            opacity:"0"
+        });
+
+        $(container).append("<div id='virgul2' class='virguller'>,</div>");
+        $("#virgul2").css({
+            position:"absolute",
+            right:"210px",
+            bottom:"40px",
+            opacity:"0"
+        });
+        var platform=navigator.platform.substr(0,5);
+        if( platform=="Linux") {
+            $("#tamSayiKumesiParantezSag").css({
+                right: "93px"
+            });
+        }
+        else{
+            $("#tamSayiKumesiParantezSag").css({
+                right: "83px"
+            });
+        }
+
+            $(".basliklar").css({
             position: "absolute",
             bottom: "130px",
             margin: "auto",
             zIndex: "4",
-            //opacity:"0",
+            opacity:"0"
             // color:"red",
             //fontSize:"11px"
         });
@@ -87,33 +130,52 @@ var Animation = {
             right: "70px",
             opacity: "0"
         }).html("Positif Tam Sayılar");
+
         $(".icerik").css({
             position: "absolute",
             bottom: "100px",
-            margin: "auto",
-            zIndex: "4",
-            opacity: "0"
+            zIndex:4
         });
-        $("#negatifTamSayilarParantez").css({
+
+        $("#negatifTamSayilarIcerik").css({
             right: "243px",
             opacity: "0"
-        }).html("{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}");
-        $("#negatifTamSayilarIcerik").css({
-            right: "250px",
-            opacity: "0"
-        }).html("… &#8211;7, &#8211;6, &#8211;5, &#8211;3, &#8211;2, &#8211;1");
+        }).html("<span class='negatifTamSayilarParantez'>{</span><span id='negatifTamSayilar'>… &#8211;7, &#8211;6, &#8211;5, &#8211;3, &#8211;2, &#8211;1</span><span class='negatifTamSayilarParantez'>}</span>");
+
         $("#sifirIcerik").css({
             right: "214px",
             opacity: "0"
         }).html("0");
-        $("#pozitifTamSayilarParantez").css({
-            right: "60px",
-            opacity: "0"
-        }).html("{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}");
+
         $("#pozitifTamSayilarIcerik").css({
-            right: "67px",
-            opacity: "0"
-        }).html("1, 2, 3, 4, 5, 6, 7…");
+            opacity:"0",
+            right: "62px",
+            //width:"120px",
+            //border:"1px red solid"
+            //opacity: "0"
+        }).html("<span class='pozitifTamSayilarParantez'>{</span> <span id='pozitifTamSayilar'>1, 2, 3, 4, 5, 6, 7…</span> <span class='pozitifTamSayilarParantez'>}</span>");
+        $("#pozitifTamSayilar, #negatifTamSayilar").css({
+            position:"relative",
+            //border:"1px red solid"
+
+        });
+       /* $("#pozitifTamSayilarParantezSol").css({
+            right: "188px",
+            width: "6px",
+            height:"15px",
+            //opacity: "0"
+
+        }).html("{");
+
+        var parantezSagKonum=(188 - parseInt($('#pozitifTamSayilarIcerik').width(),10))+"px";
+
+        $("#pozitifTamSayilarParantezSag").css({
+            right: "68px",
+            width: "6px",
+            height:"15px",
+            //opacity: "0"
+        }).html("}");*/
+
         $(".bildirim").html("4 m");
         $("#mesafeBildirimUst").css({
             position: "absolute",
@@ -148,25 +210,26 @@ var Animation = {
             opacity: "0"
         });
         $("#kus").css({
-            top: "-85px"
+            top: "26px"
         });
         $("#balik").css({
-            top: "95px"
+            top: "110px"
         });
         $(".canlilar").css({
             position: "absolute",
-            bottom: "0",
+            //bottom: "0",
             margin: "auto",
             right: "0px",
             zIndex: "3"
         });
+
+
         $("#kus").delay(3000).animate({
-            "right": "250px",
-            konum: 250
+            right: "250px"
         }, 4000, "linear", function () {
             dondurKus();
         }).animate({
-                "right": "200px"
+                right: "200px"
             }, 2000, "linear")
         //.animate({"right":"250px"},2000,"linear",function(){dondurKus();});
         $("#balik").delay(2000).animate({
@@ -210,33 +273,51 @@ var Animation = {
         $("#negatifTamSayilarIcerik").delay(15000).animate({
             opacity: "1"
         }, 1000)
+
         $("#sifirIcerik").delay(17000).animate({
             opacity: "1"
         }, 1000)
+
         $("#pozitifTamSayilarIcerik").delay(19000).animate({
             opacity: "1"
         }, 1000)
-        $("#negatifTamSayilarParantez").delay(15000).animate({
+
+/*
+        $(".negatifTamSayilarParantez").delay(15000).animate({
             opacity: "1"
         }, 1000)
-        $("#pozitifTamSayilarParantez").delay(19000).animate({
+        $(".pozitifTamSayilarParantez").delay(19000).animate({
             opacity: "1"
         }, 1000)
-        $("#negatifTamSayilarIcerik").delay(5000).animate({
-            bottom: "40px",
-            right: "226px"
+*/
+        $("#negatifTamSayilar").delay(20000).animate({
+            top: "60px",
+            left: "20px"
         }, 1000)
-        $("#sifirIcerik").delay(3000).animate({
+        $("#sifirIcerik").delay(2000).animate({
             bottom: "40px",
             right: "214px"
         }, 1000)
-        $("#pozitifTamSayilarIcerik").delay(1000).animate({
-            bottom: "40px",
-            right: "90px"
-        }, 1000)
-        $("#tamSayiKumesi").delay(22000).animate({
+
+        if(platform=="Linux") {
+            $("#pozitifTamSayilar").delay(20000).animate({
+            top: "60px",
+            right: "35px"
+            }, 1000)
+
+
+        }
+        else{
+            $("#pozitifTamSayilar").delay(20000).animate({
+                top: "60px",
+                right: "15px"
+            }, 1000)
+        }
+
+        $("#tamSayiKumesiParantezSol, #tamSayiKumesiParantezSag, .virguller").delay(21000).animate({
             opacity: "1"
         }, 500);
+
         $("#negatifTamSayilarBaslik").delay(8000).animate({
             opacity: "0"
         }, 1000)
@@ -246,24 +327,31 @@ var Animation = {
         $("#pozitifTamSayilarBaslik").delay(4000).animate({
             opacity: "0"
         }, 1000)
-        $("#negatifTamSayilarParantez").delay(6000).animate({
+        $(".negatifTamSayilarParantez").delay(20000).animate({
             opacity: "0"
         }, 1000)
-        $("#pozitifTamSayilarParantez").delay(2000).animate({
+        $(".pozitifTamSayilarParantez").delay(20000).animate({
             opacity: "0"
         }, 1000)
-        $("#negatifTamSayilarIcerik").delay(1000).animate({
-            bottom: "90px"
+
+
+        $("#negatifTamSayilar").delay(1000).animate({
+            top: "10px"
         }, 1000)
         $("#sifirIcerik").delay(1000).animate({
             bottom: "90px"
         }, 1000)
-        $("#pozitifTamSayilarIcerik").delay(1000).animate({
-            bottom: "90px"
+        $("#pozitifTamSayilar").delay(1000).animate({
+            top: "10px"
         }, 1000)
-        $("#tamSayiKumesi").delay(500).animate({
+        $("#tamSayiKumesiParantezSol, #tamSayiKumesiParantezSag, .virguller").delay(500).animate({
             bottom: "90px"
         }, 1000);
+
+
+        //alert(navigator.platform);
+
+
         //$("#kus").animate({ "-webkit-transform": "scaleX(-1)"},1000);
         // setTimeout(function(){dondur();},11000);
         Main.animationFinished(24000);

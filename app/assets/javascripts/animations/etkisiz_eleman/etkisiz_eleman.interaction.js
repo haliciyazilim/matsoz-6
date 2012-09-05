@@ -8,6 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
+
         Main.setObjective('Yandaki işlemlerin sonuçlarını yazınız ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
@@ -53,6 +54,7 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+
 
         Interaction.randomNumber = randomNumber;
         $('#ansText').html('');
@@ -127,12 +129,15 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
+
         return value == Interaction.answer;
     },
 	onCorrectAnswer : function(){
         $('#ansText').html(Interaction.answerStr);
         $(Interaction.answerDiv).css("opacity",1);
         $(Interaction.input).css("color","green");
+
+
     },
 	onWrongAnswer : function(){
 		

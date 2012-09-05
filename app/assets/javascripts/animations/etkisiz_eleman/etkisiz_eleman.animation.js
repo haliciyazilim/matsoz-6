@@ -3,6 +3,7 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
+
         var animStart = 1000;
         var secondStart = animStart+5500;
         var thirdStart = secondStart+5500;
@@ -52,6 +53,5 @@ var Animation = {
         $('#eq72').delay(fourthStart).animate({opacity:1},1000,'easeInOutQuad');
         $('#eq82').delay(fourthStart+1500).animate({opacity:1},1000,'easeInOutQuad');
         $('#lastText2').delay(fifthStart).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000)});
-
     }
 }

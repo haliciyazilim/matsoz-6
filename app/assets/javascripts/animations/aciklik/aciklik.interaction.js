@@ -50,6 +50,17 @@ var Interaction = {
 
         });
 
+        $(container).append("<button id='btn'> Yeniden dene</button>")
+        $("#btn").css({
+            position:"absolute",
+            left:"400px",
+            bottom:"40px"
+        });
+
+        $("#btn").click(function (){
+            adamlariKaristir();
+        });
+
         adamlariGetir();
 
 

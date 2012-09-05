@@ -4,7 +4,8 @@
             $("#kus").css("-webkit-transform","scaleX("+yon+")")
                 .css("-moz-transform","scaleX("+yon+")")
                 .css("-ms-transform","scaleX("+yon+")")
-                .css("transform","scaleX("+yon+")");
+                .css("transform","scaleX("+yon+")")
+                .css("-o-transform","scaleX("+yon+")");
             kusDondurmeSayisi++;
         }
         
@@ -14,7 +15,9 @@
             $("#balik").css("-webkit-transform","scaleX("+yon+")")
                 .css("-moz-transform","scaleX("+yon+")")
                 .css("-ms-transform","scaleX("+yon+")")
-                .css("transform","scaleX("+yon+")");
+                .css("transform","scaleX("+yon+")")
+                .css("-o-transform","scaleX("+yon+")");
+
             balikDondurmeSayisi++;
         }
        

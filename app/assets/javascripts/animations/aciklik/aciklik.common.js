@@ -32,10 +32,13 @@ function adamlariGetir(){
         function(){
             console.log("vurma");
             if(Interaction.izin==true){
-                $(this).animate({opacity:"0"},1000);
-                $(this).addClass("yok");
+                if($(this).css("opacity")=="1"){
+                    $(this).animate({opacity:"0.3"},1000);
+                    $(this).addClass("yok");
+                }
+                else
+                    $(this).css("opacity","1").removeClass("yok");
                 hesapla();
-
             }
 
         }
@@ -67,8 +70,8 @@ function adamlariKaristir(){
 
     }
 
-    setTimeout(function(){Interaction.izin=false;},5000);
-    setTimeout(function(){adamlariKaristir()},10000);
+    //setTimeout(function(){Interaction.izin=false;},5000);
+    //setTimeout(function(){adamlariKaristir()},10000);
 
     hesapla();
 
@@ -83,6 +86,8 @@ function hesapla(){
         gidenlerToplam+=parseInt($(".yok").get(i).id,10);
     }
     var kalanlar=$(".kisiler").not(".yok");
+   /* if(kalanlar.length==2)
+        Interaction.izin=false;*/
     console.log("kalanlar"+kalanlar.length);
 
     var kalanlarArray=[];
@@ -99,7 +104,8 @@ function hesapla(){
     var enBuyuk=buyuktenKucuge[0];
     var enKucuk=buyuktenKucuge[buyuktenKucuge.length-1];
     console.log("Buyuk: "+enBuyuk+", Küçük: "+enKucuk);
-    var aciklik=enBuyuk-enKucuk;
+    var aciklik=enBuyuk-enKucuk>0?enBuyuk-enKucuk:0 ;
+
 
     var ortalama=Util.format(parseInt(Interaction.kisilerYasToplam-gidenlerToplam,10)/parseInt(Interaction.kisilerArray.length-elemanSayisi),{places:2});
 

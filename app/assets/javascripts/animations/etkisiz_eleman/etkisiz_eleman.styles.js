@@ -1,5 +1,6 @@
 function __Styles(){
 
+
     animDivStyle = {
         position:'absolute',
         top:'40px',
@@ -39,6 +40,5 @@ function __Styles(){
         color:'#069',
         textAlign:'center',
         //    border:'1px solid'
-    }
-
+    };
 }
