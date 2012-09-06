@@ -92,3 +92,20 @@ istenenElemanSayisi=function(kumeTamSayisi){
     return this.rastgeleSayi;
 
 }
+
+function semaGoster(elements){
+    this.elements=elements;
+    console.log("this.elements: "+this.elements);
+    Interaction.ikinciKume=new Set({
+        type: Set.ELEMENTS,
+        elements:this.elements
+    });
+    console.log([Interaction.birinciKume.kume.elements , Interaction.ikinciKume.elements]);
+    Set.animateSets({
+        container:Interaction.container,
+        position:new Point(200,100),
+        sets:[Interaction.birinciKume.kume , Interaction.ikinciKume],
+        letters:['A','B']
+
+    });
+}

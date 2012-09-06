@@ -78,5 +78,37 @@ utilTest.prototype.testRandomDigit = function(){
 };
 
 utilTest.prototype.testGcd = function(){
-
+    assertTrue(Util.gcd(12,13,14) == 1);
+    assertEquals(Util.gcd(4,24),Util.gcd(4,8,24));
+    assertEquals(Util.gcd(4,6), Util.gcd(4,8,10));
+    assertEquals(7,Util.gcd(21,77));
+    assertEquals(1,Util.gcd(6,7,8));
+    assertEquals(4,Util.gcd(20,12));
+    assertEquals(Util.gcd(8,10),Util.gcd(22,24));
 };
+
+utilTest.prototype.testLcm = function(){
+    assertEquals(12*11,Util.lcm(12,11));
+    assertEquals(2*Util.lcm(12,13,14),Util.lcm(24,26,28));
+    assertEquals(Util.lcm(6,7),Util.lcm(3,6,7));
+    assertEquals(12,Util.lcm(12,3));
+};
+
+utilTest.prototype.testReduceFractions = function(){
+    assertEquals(Util.reduceFractions(4,6),Util.reduceFractions(2,3));
+    assertArray(Util.reduceFractions(10,5));
+    assertEquals([1,3],Util.reduceFractions(4,12));
+    assertEquals([2,7],Util.reduceFractions(6,21));
+};
+
+utilTest.prototype.testGetShuffledArray = function(){
+    var a = Util.getShuffledArray(12,1);
+    var total = 0;
+    for(var i = 0; i < a.length; i++){
+        total += a[i];
+    }
+    assertEquals(66,total);
+    assertArray(Util.getShuffledArray(10));
+    assertEquals(Util.getShuffledArray(6).length,Util.getShuffledArray(10,4).length);
+};
+

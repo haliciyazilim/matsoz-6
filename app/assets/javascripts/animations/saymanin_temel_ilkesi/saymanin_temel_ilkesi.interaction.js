@@ -179,36 +179,13 @@ var Interaction = {
 
         }).attr("disabled","disabled").html("Göster");
 
-        $(".esyalar").click(function(){
-            Interaction.setStatus("");
-            $("#kiyafetlerStr").html("");
-            var seciliCerceveId=$(this).get(0).parentNode.id;
-            var secilen=$(this).get(0).id;
-            var seciliYeniId=$(this).get(0).id+"A";
-
-            sil(this,$(this).get(0).className);
-            //console.log(seciliYeniId);
-            $(this).clone().attr("id",seciliYeniId).appendTo("#"+seciliCerceveId).css("opacity","0.4");
-            $(this).css("opacity","0.4");
-
-
-
-            //console.log($(this).get(0).parentNode.id);
-            //console.log("seçilen: "+$(this).get(0).id);
-            console.log("Sınıf işmi: "+$(this).get(0).className);
-
-
-            console.log("Giydirilmişler: "+$(".esyalar").length);
-            var esyalarUzunluk=$(".esyalar").length;
-            if(esyalarUzunluk==12)
-                $("#btnGoster").removeAttr("disabled");
-
-        });
+        $(".esyalar").click(esyalarClick);
 
         Interaction.kombinasyonlar=new Array();
 
         $("#btnGoster").click(function(){
 
+            $(".esyalar").unbind("click");
             $(this).attr("disabled","disabled");
             $(".giydirilmis").remove();
 
@@ -314,10 +291,15 @@ var Interaction = {
 
                 $("#kiyafetlerStr").html(Interaction.tisortlerStr[tisort.charAt(tisort.length-2)-1]+" tişört, "+Interaction.pantolonlarStr[pantolon.charAt(pantolon.length-2)-1]+" pantolon, "+Interaction.ayakkabilarStr[ayakkabi.charAt(ayakkabi.length-2)-1]+" ayakkabı");
 
+                $(".esyalar").bind("click",esyalarClick);
 
 
             });
 
+            }
+            else{
+                hepsiniSil();
+                $(".esyalar").bind("click",esyalarClick);
             }
 
             console.log(giydirilmisGrup);

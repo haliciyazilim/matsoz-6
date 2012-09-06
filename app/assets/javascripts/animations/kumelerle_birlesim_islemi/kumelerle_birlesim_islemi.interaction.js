@@ -34,12 +34,12 @@ var Interaction = {
             .css("top","10px");
 
         $("#kumeAlt")
-            .css("left","10px")
-            .css("top","50px");
+            .css("left","300px")
+            .css("top","10px");
 
         $("#cevap")
             .css("left","10px")
-            .css("top","100px")
+            .css("top","60px")
             .css("width","100%");
 
         $("#dogruCevap")
@@ -68,6 +68,9 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
     nextQuestion: function(randomNumber){
+
+        Main.interactionProject.activeLayer.removeChildren();
+
 
         Interaction.flushInputs();
 
@@ -131,6 +134,9 @@ var Interaction = {
             if(Interaction.birlesim.elements[i]==Interaction.girilenler[i])
                 dogruSayisi++;
         }
+
+
+
         if(dogruSayisi==Interaction.birlesimUzunluk)
             return true;
         else
@@ -138,6 +144,7 @@ var Interaction = {
 
     },
     onCorrectAnswer : function(){
+        semaGoster();
 
     },
     onWrongAnswer : function(){
@@ -150,5 +157,7 @@ var Interaction = {
             $("#girdi"+i).val(Interaction.birlesim.elements[i]);
 
         $("input").css("color","green");
+
+       semaGoster();
     }
 }

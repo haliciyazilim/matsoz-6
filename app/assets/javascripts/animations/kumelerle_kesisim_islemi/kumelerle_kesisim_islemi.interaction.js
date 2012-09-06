@@ -15,11 +15,11 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:'20px',
+            bottom:'00px',
             right:'40px'
         });
         Interaction.appendStatus({
-            bottom:'30px',
+            bottom:'10px',
             right:'150px'
         });
         Interaction.set1Div = Util.dom({
@@ -42,8 +42,7 @@ var Interaction = {
     },
     nextQuestion: function(){
         Interaction.flushInputs();
-        if(Interaction._set)
-            Interaction._set.removeVennDiagram();
+        Main.interactionProject.activeLayer.removeChildren();
         $(Interaction.answerSetDiv).remove();
         Interaction.generateSets();
         Interaction.answerSetDiv = Util.dom({
@@ -71,10 +70,14 @@ var Interaction = {
     },
     generateSets:function(){
         var set1String,set2String;
-        Interaction.set1 = Set.randomGenerator();
+        do
+            Interaction.set1 = Set.randomGenerator();
+        while(Interaction.set1.elements.length > 10)
         do
             Interaction.set2 = Interaction.set1.getRandomIntersectingSet();
-        while(Interaction.set1.getDifference(Interaction.set2).elements.length > 6)
+        while(Interaction.set1.getDifference(Interaction.set2).elements.length > 6 ||
+            Interaction.set1.getDifference(Interaction.set2).elements.length ==0 ||
+            Interaction.set2.getDifference(Interaction.set1).elements.length ==0 )
         var isSet1DefinitionString = Util.rand01() == 1;
         var isSet2DefinitionString = Util.rand01() == 1;
         if(Interaction.set1.isEqualSet(Interaction.set2))
@@ -112,6 +115,7 @@ var Interaction = {
 
     },
     onCorrectAnswer : function(){
+        Interaction.showCorrectAnswer();
 
     },
     onWrongAnswer : function(){
@@ -124,7 +128,13 @@ var Interaction = {
     showCorrectAnswer:function(){
         Interaction.pause();
         Interaction._set = Interaction.set1.getDifference(Interaction.set2);
-        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A\\B");
-        setTimeout(Interaction.resume,2000);
+        Set.animateSets({
+            container:Interaction.container,
+            position:new Point(120,140),
+            sets:[Interaction.set1, Interaction.set2],
+            letters:['A','B'],
+            callback:Interaction.resume
+        })
+
     }
 }

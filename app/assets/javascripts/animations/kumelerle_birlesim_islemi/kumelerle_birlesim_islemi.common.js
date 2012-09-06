@@ -47,3 +47,12 @@ var sorgular = function () {
         return this.kume;
     }
 }
+
+function semaGoster(){
+    Set.animateSets({
+        container:Interaction.container,
+        position:new Point(130,100),
+        sets:[Interaction.birinciKume.kume , Interaction.ikinciKume.kume],
+        letters:['A','B']
+    });
+}

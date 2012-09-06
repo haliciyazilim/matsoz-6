@@ -412,14 +412,27 @@ var Set = Class.extend({
 
     getUnion:function(otherSet){
         var union = [];
+        var other = [];
+        for(var t = 0; t < otherSet.elements.length; t++){
+            other.push(otherSet.elements[t]);
+        }
 
         for(var i = 0; i < this.elements.length; i++){
             union.push(this.elements[i]);
         }
 
-        for(var j = 0; j < otherSet.elements.length; j++){
-            if(union.indexOf(otherSet.elements[j]) == -1){
-                union.push(otherSet.elements[j]);
+        for(var j = 0; j < other.length; j++){
+            for(var k = 0; k < this.elements.length; k++){
+                if(other[j] == this.elements[k]){
+                    other[j] = "axxwt";
+                    break;
+                }
+            }
+        }
+
+        for(var m = 0; m < other.length; m ++){
+            if(other[m] != "axxwt"){
+                union.push(other[m]);
             }
         }
 
@@ -441,12 +454,26 @@ var Set = Class.extend({
 
     getDifference : function(otherSet){
         var difference = [];
+        var th = [];
+        var num;
 
         for(var i = 0; i < this.elements.length; i++){
-            if(otherSet.elements.indexOf(this.elements[i]) == -1){
-                difference.push(this.elements[i]);
+            th.push(this.elements[i]);
+        }
+
+        for(var j = 0; j < th.length; j++){
+            for(var k = 0, num = 0; k < otherSet.elements.length; k++){
+                if(th[j] != otherSet.elements[k]){
+                    num += 1;
+                }
+            }
+            if(num == otherSet.elements.length){
+                difference.push(th[j]);
             }
         }
+
+
+
 
         difference.sort(function(a,b){return a-b});
 
@@ -1076,6 +1103,228 @@ Set.randomGenerator = function(type, length){
     return set;
 };
 
+Set.animateDifferenceSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+            sets.set1.children[3].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+    });
+    sets.set2.children[0].animate({
+        style:{
+//            fillColor: new RgbColor(0.5,1,0.5,0)
+        },
+        duration:1000,
+        delay:2000,
+        callback:function(){
+            sets.set2.animate({
+                style:{opacity:0},
+                duration:1000,
+                update:function(){
+//                    sets.intersect.opacity = this.opacity;
+//                    sets.intersectClone.opacity = this.opacity;
+                },
+                callback:function(){
+                    sets.set2.remove();
+                    sets.intersect.remove()
+                    sets.intersectClone.remove();
+                    if(opt.callback)
+                        opt.callback();
+                    sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
+                }
+            })
+
+        }
+    })
+
+    return sets;
+}
+
+Set.animateSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+//            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+//            sets.set2.remove();
+            if(opt.callback)
+                opt.callback();
+        }
+
+    });
+
+    return sets;
+}
+
+Set.animateComplementSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+
+    var start_time = Date.now();
+    // a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
+//    var sets = Set.drawSets(Interaction.container, new Point(120,140),[Interaction.set1, Interaction.set2] ,['E', 'A']);
+    var endTime = Date.now();
+    // Main.setObjective(endTime-start_time);
+//    sets.set1.scale(0.7);
+//    sets.set2.scale(0.7);
+
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+    });
+//    sets.set2.children[0].fillColor = new RgbColor(0.5,1,0.5,0.5);
+    sets.set2.children[0].animate({
+        style:{
+            fillColor: new RgbColor(0.5,1,0.5,0)
+        },
+        duration:1000,
+        delay:2000,
+        callback:function(){
+            sets.set2.animate({
+                style:{opacity:0},
+                duration:1000,
+                update:function(){
+                    sets.intersect.opacity = this.opacity;
+                    sets.intersectClone.opacity = this.opacity;
+                },
+                callback:function(){
+                    sets.set2.remove();
+                    sets.intersect.remove()
+                    sets.intersectClone.remove();
+                    if(opt.callback)
+                        opt.callback();
+                    sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
+                }
+            })
+        }
+    })
+
+    return sets;
+
+}
+
+Set.animateDisjointSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+    var originalPosition2 = sets.set2.position;
+    console.log(originalPosition1);
+    console.log(originalPosition2);
+    sets.set2.position = sets.set2.position.add(-75,0);
+    if(opt.callback)
+        opt.callback();
+    return sets;
+}
+Set.animateEqualSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+            sets.set2.remove();
+            if(opt.callback)
+                opt.callback();
+        }
+
+    });
+
+    return sets;
+
+}
+
 
 Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	if (!sets.length) {
@@ -1364,12 +1613,16 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	
 	vennDiagram1.addChild(elementsGroup1);
 	vennDiagram1.addChild(elementsGroup2);
-	
-	vennDiagram2.addChild(elementsGroup2.clone());
+	var elementsGroup2Clone = elementsGroup2.clone();
+	vennDiagram2.addChild(elementsGroup2Clone);
 	vennDiagram2.addChild(elementsGroup3);
-	
+
 	return {
 		set1: vennDiagram1,
-		set2: vennDiagram2
-	}		
+		set2: vennDiagram2,
+        intersect: elementsGroup2,
+        intersectClone : elementsGroup2Clone
+	}
+
+
 };
