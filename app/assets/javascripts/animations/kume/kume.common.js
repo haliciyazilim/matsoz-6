@@ -412,14 +412,27 @@ var Set = Class.extend({
 
     getUnion:function(otherSet){
         var union = [];
+        var other = [];
+        for(var t = 0; t < otherSet.elements.length; t++){
+            other.push(otherSet.elements[t]);
+        }
 
         for(var i = 0; i < this.elements.length; i++){
             union.push(this.elements[i]);
         }
 
-        for(var j = 0; j < otherSet.elements.length; j++){
-            if(union.indexOf(otherSet.elements[j]) == -1){
-                union.push(otherSet.elements[j]);
+        for(var j = 0; j < other.length; j++){
+            for(var k = 0; k < this.elements.length; k++){
+                if(other[j] == this.elements[k]){
+                    other[j] = "axxwt";
+                    break;
+                }
+            }
+        }
+
+        for(var m = 0; m < other.length; m ++){
+            if(other[m] != "axxwt"){
+                union.push(other[m]);
             }
         }
 
@@ -443,8 +456,10 @@ var Set = Class.extend({
         var difference = [];
 
         for(var i = 0; i < this.elements.length; i++){
-            if(otherSet.elements.indexOf(this.elements[i]) == -1){
-                difference.push(this.elements[i]);
+            for(var j = 0; j < otherSet.elements.length; j++){
+                if(this.elements[i] != otherSet.elements[j]){
+                    difference.push(this.elements[i]);
+                }
             }
         }
 
