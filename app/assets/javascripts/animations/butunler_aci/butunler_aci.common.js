@@ -60,11 +60,16 @@ Angle.prototype.redraw = function(pointOrAngle){
             angle = 180;
         if(angle > 270)
             angle = 0;
+        if(angle < 0)
+            angle = 0;
     }
     else if (this.complement || this.owner && this.owner.complement){
+//    else{
         if(angle > 90 && angle <= 270)
             angle = 90;
         if(angle > 270)
+            angle = 0;
+        if(angle < 0)
             angle = 0;
     }
 
@@ -170,9 +175,11 @@ Angle.prototype.draw = function(isInteractive,duration){
         duration = 0 ;
     this.isInteractive = isInteractive;
     this.redraw(this.angle);
-    if(isInteractive){
+    if(isInteractive === true){
+        console.log("tool will be created")
         var tool = new Tool();
         tool.onMouseDown = function(event){
+            console.log(event);
             if(event.item && event.item.class == "interactive_angle_leg"){
                 this.drag = true
                 this.angleObject = event.item.angleObject;
