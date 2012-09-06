@@ -412,19 +412,29 @@ var Set = Class.extend({
 
     getUnion:function(otherSet){
         var union = [];
+        var other = [];
+        for(var t = 0; t < otherSet.elements.length; t++){
+            other.push(otherSet.elements[t]);
+        }
 
         for(var i = 0; i < this.elements.length; i++){
             union.push(this.elements[i]);
         }
 
-        for(var j = 0; j < otherSet.elements.length; j++){
-            for(var k = 0; k < union.length; k++){
-                if(otherSet.elements[j] != union[k]){
-                    union.push(otherSet.elements[j]);
+        for(var j = 0; j < other.length; j++){
+            for(var k = 0; k < this.elements.length; k++){
+                if(other[j] == this.elements[k]){
+                    other[j] = "axxwt";
+                    break;
                 }
             }
         }
-        console.log(union);
+
+        for(var m = 0; m < other.length; m ++){
+            if(other[m] != "axxwt"){
+                union.push(other[m]);
+            }
+        }
 
         union.sort(function(a,b){return a-b});
         var c = new Set({type:Set.ELEMENTS, elements:union});
