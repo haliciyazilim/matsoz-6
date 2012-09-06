@@ -1093,7 +1093,7 @@ Set.animateDifferenceSets = function(opt){
         animationType: 'easeInEaseOut',
         callback:function(){
 
-            sets.set2.children[2].remove();
+            sets.set1.children[3].remove();
         }
     });
 
@@ -1107,7 +1107,7 @@ Set.animateDifferenceSets = function(opt){
     });
     sets.set2.children[0].animate({
         style:{
-            fillColor: new RgbColor(0.5,1,0.5,0)
+//            fillColor: new RgbColor(0.5,1,0.5,0)
         },
         duration:1000,
         delay:2000,
@@ -1116,8 +1116,8 @@ Set.animateDifferenceSets = function(opt){
                 style:{opacity:0},
                 duration:1000,
                 update:function(){
-                    sets.intersect.opacity = this.opacity;
-                    sets.intersectClone.opacity = this.opacity;
+//                    sets.intersect.opacity = this.opacity;
+//                    sets.intersectClone.opacity = this.opacity;
                 },
                 callback:function(){
                     sets.set2.remove();
@@ -1179,6 +1179,14 @@ Set.animateSets = function(opt){
 Set.animateComplementSets = function(opt){
     var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
 
+    var start_time = Date.now();
+    // a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
+//    var sets = Set.drawSets(Interaction.container, new Point(120,140),[Interaction.set1, Interaction.set2] ,['E', 'A']);
+    var endTime = Date.now();
+    // Main.setObjective(endTime-start_time);
+//    sets.set1.scale(0.7);
+//    sets.set2.scale(0.7);
+
     var originalPosition1 = sets.set1.position;
     sets.set1.position = sets.set1.position.add(-100,0);
 
@@ -1227,7 +1235,7 @@ Set.animateComplementSets = function(opt){
                     sets.intersectClone.remove();
                     if(opt.callback)
                         opt.callback();
-                    sets.set1.children[1].content = opt.letters[1] + "'";
+                    sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
                 }
             })
         }
@@ -1581,7 +1589,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	var elementsGroup2Clone = elementsGroup2.clone();
 	vennDiagram2.addChild(elementsGroup2Clone);
 	vennDiagram2.addChild(elementsGroup3);
-	
+
 	return {
 		set1: vennDiagram1,
 		set2: vennDiagram2,
