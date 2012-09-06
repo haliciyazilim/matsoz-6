@@ -2,6 +2,9 @@ var sil=function(secilen, parent){
     this.secilen=secilen
     this.parent=parent;
 
+    console.log("secilen: "+this.secilen+", parent: "+this.parent);
+    console.log(this.secilen);
+    console.log($("#pantolon1"));
     if($(this.secilen).hasClass("tisortler")==true){
         $(".tisortler").css("opacity","1");
         var tisortElemanlar=$(".tisortler");
@@ -85,6 +88,7 @@ var kombinasyonKontrol=function(grup){
             if(this.eslesme==3){
                 //alert("sııntı var: "+i);
                 Interaction.setStatus('Daha önce bu kıyafet üçlüsünü seçtin.',false);
+
                 this.genelSayac=1;
                 break;
 
@@ -110,5 +114,56 @@ var kombinasyonKontrol=function(grup){
     }
 
 
+
+}
+
+function esyalarClick (){
+
+    Interaction.setStatus("");
+    $("#kiyafetlerStr").html("");
+    var seciliCerceveId=$(this).get(0).parentNode.id;
+    var secilen=$(this).get(0).id;
+    var seciliYeniId=$(this).get(0).id+"A";
+
+    sil(this,$(this).get(0).className);
+    //console.log(seciliYeniId);
+    $(this).clone().attr("id",seciliYeniId).appendTo("#"+seciliCerceveId).css("opacity","0.4");
+    $(this).css("opacity","0.4");
+
+
+
+    //console.log($(this).get(0).parentNode.id);
+    //console.log("seçilen: "+$(this).get(0).id);
+    console.log("Sınıf işmi: "+$(this).get(0).className);
+
+
+    console.log("Giydirilmişler: "+$(".esyalar").length);
+    var esyalarUzunluk=$(".esyalar").length;
+    if(esyalarUzunluk==12)
+        $("#btnGoster").removeAttr("disabled");
+
+}
+
+function hepsiniSil(){
+    var uzunlukT=$(".tisortler").length;
+
+    for(var i=4; i<uzunlukT; i++){
+        var idNo=$(".tisortler").get(i).id;
+        $("#"+idNo).remove();
+    }
+
+    var uzunlukP=$(".pantolonlar").length;
+
+    for(var i=3; i<uzunlukP; i++){
+        var idNo=$(".pantolonlar").get(i).id;
+        $("#"+idNo).remove();
+    }
+
+    var uzunlukA=$(".ayakkabilar").length;
+
+    for(var i=2; i<uzunlukA; i++){
+        var idNo=$(".ayakkabilar").get(i).id;
+        $("#"+idNo).remove();
+    }
 
 }
