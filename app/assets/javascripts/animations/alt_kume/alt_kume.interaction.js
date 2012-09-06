@@ -56,6 +56,8 @@ var Interaction = {
 		Interaction.prepareNextQuestion();
 	},
 	nextQuestion: function(randomNumber){
+
+        Main.interactionProject.activeLayer.removeChildren();
         Interaction.flushInputs();
         $("#dogruCevap").html("");
 
@@ -116,7 +118,10 @@ var Interaction = {
 		
 		},
 	isAnswerCorrect : function(value){
-        Interaction.dogruCevaplar=Interaction.birinciKume.elemanlar();
+        Interaction.dogruCevaplar=[]
+        for(var i=0; i<Interaction.birinciKume.elemanlar().length;i++){
+            Interaction.dogruCevaplar.push(Interaction.birinciKume.elemanlar()[i]);
+        }
         Interaction.dogruElemanSayisi=0;
         for(var i=0; i<Interaction.inputs.length;i++){
             for(var j=0; j<Interaction.birinciKume.uzunluk();j++){
@@ -139,11 +144,16 @@ var Interaction = {
 
         console.log("Doğru eleman sayısı: "+Interaction.dogruElemanSayisi);
 
-		
+
 		},
 	onCorrectAnswer : function(){
-
-		
+        var inputUzunluk=$(".input").length;
+        var girilenDegerler=[];
+        for (var i=0; i<inputUzunluk;i++){
+            girilenDegerler.push($(".input").get(i).value);
+        }
+        console.log("girilen Degerler: "+girilenDegerler);
+		semaGoster(girilenDegerler);
 		},
 	onWrongAnswer : function(){
 		
@@ -152,10 +162,11 @@ var Interaction = {
         var kumeAdresArray=Util.getShuffledArray(Interaction.birinciKume.uzunluk());
         Interaction.kumeElemanlar=Interaction.birinciKume.elemanlar();
         console.log(Interaction.kumeElemanlar[kumeAdresArray[i]]);
-
+        Interaction.yeniKume=[];
         $("#dogruCevap").append("<b>A ⊂ B = {</b> ");
         for(var i=0; i<Interaction.inputs.length;i++){
             $("#dogruCevap").append(Interaction.kumeElemanlar[kumeAdresArray[i]]);
+            Interaction.yeniKume.push(Interaction.kumeElemanlar[kumeAdresArray[i]]);
             if((i+1)!=Interaction.inputs.length)
                 $("#dogruCevap").append(", ");
             else
@@ -166,5 +177,7 @@ var Interaction = {
         Interaction.setStatus('Yanlış cevap, doğru cevaplardan biri yukarıda gösterilmiştir.',false);
 		$("input:not(.dogru)").css("color","red");
         $(".dogru").css("color","green");
+
+        semaGoster(Interaction.yeniKume);
 		}
 }
