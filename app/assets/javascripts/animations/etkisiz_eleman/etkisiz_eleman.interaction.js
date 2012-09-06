@@ -65,11 +65,13 @@ var Interaction = {
                 Interaction.num1 = 0;
                 Interaction.num2 = 100;
                 Interaction.operator = "x";
+                Interaction.feint = 0;
             }
             else{   // 100 x 0
                 Interaction.num1 = 100;
                 Interaction.num2 = 0;
                 Interaction.operator = "x";
+                Interaction.feint = 0;
             }
         }
         else{
@@ -133,8 +135,9 @@ var Interaction = {
         return value == Interaction.answer;
     },
 	onCorrectAnswer : function(){
-        $('#ansText').html(Interaction.answerStr);
-        $(Interaction.answerDiv).css("opacity",1);
+        if(Interaction.feint != 0){
+            $('#ansText').html(Interaction.answerStr);
+        }
         $(Interaction.input).css("color","green");
 
 
@@ -144,7 +147,9 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir!',false);
-        $('#ansText').html(Interaction.answerStr);
+        if(Interaction.feint != 0){
+            $('#ansText').html(Interaction.answerStr);
+        }
         Interaction.input.value = Interaction.answer;
         $(Interaction.input).css("color","green");
     }
