@@ -11,7 +11,7 @@ var OppositeAngles = function(opt){
         this.radius = 145;
     this.centerPoint = opt.center;
 
-    this.draggable = opt.draggable?opt.draggable:true;
+    this.draggable = opt.draggable!=undefined?opt.draggable:true;
     if(opt.textPosition)
         this.textPosition = opt.textPosition;
     this.angles = [];

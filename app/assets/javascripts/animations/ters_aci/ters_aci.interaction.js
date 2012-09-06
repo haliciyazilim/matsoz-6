@@ -8,16 +8,12 @@ var Interaction = {
     ],
     init:function(container){
 			Interaction.container = container;
-			Main.setObjective('İki doğrunun kesişmesi sonucu ters yönlerde oluşan eş açılar.');
+			Main.setObjective('Yandaki şekilde doğruları hareket ettirerek oluşan ters açıların durumunu gözlemleyiniz.');
 			Interaction.paper = {
 				width:$(container).width(),
 				height:$(container).height()
 			}
-			
-			/*
-			*	Initialize your interaction here
-			*/
-			
+
 			Interaction.prepareNextQuestion();
 		},
 	nextQuestion: function(randomNumber){
