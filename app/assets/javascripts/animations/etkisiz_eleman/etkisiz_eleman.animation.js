@@ -19,7 +19,7 @@ var Animation = {
                 '<span id="eq6" style="opacity:0;position:absolute;top:40px;left:0px;">0 + 38 = 38</span>' +
                 '<span id="eq7" style="opacity:0;position:absolute;top:0px;left:0px;">a + <span style="color:red;">0</span> = a</span>' +
                 '<span id="eq8" style="opacity:0;position:absolute;top:40px;left:0px;"><span style="color:red;">0</span> + a = a</span>' +
-                '<span id="lastText" style="font-size:24px;opacity:0;position:absolute;width:220px;top:100px;left:-40px;text-align:center;">toplama işlemi için etkisiz eleman 0</span>'
+                '<span id="lastText" style="font-size:24px;opacity:0;position:absolute;width:220px;top:100px;left:-40px;text-align:center;">toplama işlemi için etkisiz eleman <span style="color:red;">0</span></span>'
         });
 
         $('#eq1').delay(animStart).animate({opacity:1},1000,'easeInOutQuad').delay(3500).animate({opacity:0},1000,'easeInOutQuad');
@@ -41,7 +41,7 @@ var Animation = {
                 '<span id="eq62" style="opacity:0;position:absolute;top:40px;left:0px;">1 x 46 = 46</span>' +
                 '<span id="eq72" style="opacity:0;position:absolute;top:0px;left:0px;">a x <span style="color:red;">1</span> = a</span>' +
                 '<span id="eq82" style="opacity:0;position:absolute;top:40px;left:0px;"><span style="color:red;">1</span> x a = a</span>' +
-                '<span id="lastText2" style="font-size:24px;opacity:0;position:absolute;width:220px;top:100px;left:-40px;text-align:center;">çarpma işlemi için etkisiz eleman 1</span>'
+                '<span id="lastText2" style="font-size:24px;opacity:0;position:absolute;width:220px;top:100px;left:-40px;text-align:center;">çarpma işlemi için etkisiz eleman <span style="color:red;">1</span></span>'
         });
 
         $('#eq12').delay(animStart).animate({opacity:1},1000,'easeInOutQuad').delay(3500).animate({opacity:0},1000,'easeInOutQuad');
