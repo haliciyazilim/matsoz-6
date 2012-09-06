@@ -48,8 +48,8 @@ var Animation = {
         $("#"+kumeId[0]+", #"+kumeId[1]+", #"+kumeId[2]+", #"+kumeId[3]).delay(hizB).animate({opacity:"0"},hizA);
 
         $("#"+kumeId[4]).delay(hizB*3+hizA*4).animate({opacity:"1"},hizA).delay(hizB).animate({opacity:"0"},hizA);
-        $("#"+kumeId[5]).delay(hizB*4+hizA*5).animate({opacity:"1"},hizA);
+        $("#"+kumeId[5]).delay(hizB*4+hizA*5).animate({opacity:"1"},hizA,Main.animationFinished);
 
-        Main.animationFinished(1000);
+
     }
 }

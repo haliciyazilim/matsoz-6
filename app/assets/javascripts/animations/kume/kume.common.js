@@ -1076,6 +1076,220 @@ Set.randomGenerator = function(type, length){
     return set;
 };
 
+Set.animateDifferenceSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+    });
+    sets.set2.children[0].animate({
+        style:{
+            fillColor: new RgbColor(0.5,1,0.5,0)
+        },
+        duration:1000,
+        delay:2000,
+        callback:function(){
+            sets.set2.animate({
+                style:{opacity:0},
+                duration:1000,
+                update:function(){
+                    sets.intersect.opacity = this.opacity;
+                    sets.intersectClone.opacity = this.opacity;
+                },
+                callback:function(){
+                    sets.set2.remove();
+                    sets.intersect.remove()
+                    sets.intersectClone.remove();
+                    if(opt.callback)
+                        opt.callback();
+                    sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
+                }
+            })
+
+        }
+    })
+
+    return sets;
+}
+
+Set.animateSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+//            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+//            sets.set2.remove();
+            if(opt.callback)
+                opt.callback();
+        }
+
+    });
+
+    return sets;
+}
+
+Set.animateComplementSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+    });
+//    sets.set2.children[0].fillColor = new RgbColor(0.5,1,0.5,0.5);
+    sets.set2.children[0].animate({
+        style:{
+            fillColor: new RgbColor(0.5,1,0.5,0)
+        },
+        duration:1000,
+        delay:2000,
+        callback:function(){
+            sets.set2.animate({
+                style:{opacity:0},
+                duration:1000,
+                update:function(){
+                    sets.intersect.opacity = this.opacity;
+                    sets.intersectClone.opacity = this.opacity;
+                },
+                callback:function(){
+                    sets.set2.remove();
+                    sets.intersect.remove()
+                    sets.intersectClone.remove();
+                    if(opt.callback)
+                        opt.callback();
+                    sets.set1.children[1].content = opt.letters[1] + "'";
+                }
+            })
+        }
+    })
+
+    return sets;
+
+}
+
+Set.animateDisjointSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+    var originalPosition2 = sets.set2.position;
+    console.log(originalPosition1);
+    console.log(originalPosition2);
+    sets.set2.position = sets.set2.position.add(-75,0);
+    if(opt.callback)
+        opt.callback();
+    return sets;
+}
+Set.animateEqualSets = function(opt){
+    var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
+
+    var originalPosition1 = sets.set1.position;
+    sets.set1.position = sets.set1.position.add(-100,0);
+
+    var originalPosition2 = sets.set2.position;
+    sets.set2.position = sets.set2.position.add(100,0);
+
+    sets.set1.animate({
+        style: {
+            position: originalPosition1
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+
+            sets.set2.children[2].remove();
+        }
+    });
+
+    sets.set2.animate({
+        style: {
+            position: originalPosition2
+        },
+        duration: 1000,
+        delay: 1000,
+        animationType: 'easeInEaseOut',
+        callback:function(){
+            sets.set2.remove();
+            if(opt.callback)
+                opt.callback();
+        }
+
+    });
+
+    return sets;
+
+}
+
 
 Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	if (!sets.length) {
@@ -1364,12 +1578,16 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	
 	vennDiagram1.addChild(elementsGroup1);
 	vennDiagram1.addChild(elementsGroup2);
-	
-	vennDiagram2.addChild(elementsGroup2.clone());
+	var elementsGroup2Clone = elementsGroup2.clone();
+	vennDiagram2.addChild(elementsGroup2Clone);
 	vennDiagram2.addChild(elementsGroup3);
 	
 	return {
 		set1: vennDiagram1,
-		set2: vennDiagram2
-	}		
+		set2: vennDiagram2,
+        intersect: elementsGroup2,
+        intersectClone : elementsGroup2Clone
+	}
+
+
 };
