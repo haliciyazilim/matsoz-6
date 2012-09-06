@@ -32,12 +32,10 @@ function adamlariGetir(){
         function(){
             console.log("vurma");
             if(Interaction.izin==true){
-                if($(this).css("opacity")=="1"){
-                    $(this).animate({opacity:"0.3"},1000);
+
+                    $(this).animate({opacity:"0"},1000);
                     $(this).addClass("yok");
-                }
-                else
-                    $(this).css("opacity","1").removeClass("yok");
+
                 hesapla();
             }
 
