@@ -15,11 +15,11 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:'20px',
+            bottom:'0px',
             right:'40px'
         });
         Interaction.appendStatus({
-            bottom:'30px',
+            bottom:'10px',
             right:'150px'
         });
         Interaction.set1Div = Util.dom({
@@ -42,8 +42,7 @@ var Interaction = {
     },
 	nextQuestion: function(){
         Interaction.flushInputs();
-        if(Interaction._set)
-            Interaction._set.removeVennDiagram();
+        Main.interactionProject.activeLayer.removeChildren();
         $(Interaction.answerSetDiv).remove();
         Interaction.generateSets();
         Interaction.answerSetDiv = Util.dom({
@@ -124,7 +123,12 @@ var Interaction = {
     showCorrectAnswer:function(){
         Interaction.pause();
         Interaction._set = Interaction.set1.getDifference(Interaction.set2);
-        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A\\B");
-        setTimeout(Interaction.resume,2000);
+        Interaction.answer = Set.animateDifferenceSets({
+            container:Interaction.container,
+            position:new Point(120,140),
+            sets:[Interaction.set1, Interaction.set2],
+            letters:['A', 'B'],
+            callback:Interaction.resume
+        })
     }
 }

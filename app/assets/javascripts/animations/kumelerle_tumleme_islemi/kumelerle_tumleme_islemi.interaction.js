@@ -15,11 +15,11 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:'20px',
+            bottom:'0px',
             right:'40px'
         });
         Interaction.appendStatus({
-            bottom:'30px',
+            bottom:'10px',
             right:'150px'
         });
         Interaction.set1Div = Util.dom({
@@ -47,6 +47,7 @@ var Interaction = {
         Interaction.flushInputs();
         $(Interaction.answerSetDiv).remove();
         Interaction.generateSets();
+        Main.interactionProject.activeLayer.removeChildren();
         Interaction.answerSetDiv = Util.dom({
             tag:'div',
             parent:Interaction.container,
@@ -73,7 +74,7 @@ var Interaction = {
         var set1String,set2String;
         do
             Interaction.set1  = Set.randomGenerator();
-        while(Interaction.set1.elements.length < 4)
+        while(Interaction.set1.elements.length < 4 || Interaction.set1.elements.length > 10)
         do
             Interaction.set2  = Set.randomGenerator();
         while(Interaction.set1.elements.length <= Interaction.set2.elements.length || !Interaction.set2.isSubsetOf(Interaction.set1))
@@ -90,41 +91,7 @@ var Interaction = {
         Interaction.set1Div.innerHTML = 'E = ' + set1String;
         Interaction.set2Div.innerHTML = 'A = ' + set2String;
 
-        var start_time = Date.now();
-        // a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
-        var sets = Set.drawSets(Interaction.container, new Point(120,140),[Interaction.set1, Interaction.set2] ,['E', 'A']);
-        var endTime = Date.now();
-        // Main.setObjective(endTime-start_time);
-        sets.set1.scale(0.7);
-        sets.set2.scale(0.7);
 
-        var originalPosition1 = sets.set1.position;
-        sets.set1.position = sets.set1.position.add(-100,0);
-
-        var originalPosition2 = sets.set2.position;
-        sets.set2.position = sets.set2.position.add(100,0);
-
-        sets.set1.animate({
-            style: {
-                position: originalPosition1
-            },
-            duration: 1000,
-            delay: 1000,
-            animationType: 'easeInEaseOut'
-        })
-
-        sets.set2.animate({
-            style: {
-                position: originalPosition2
-            },
-            duration: 1000,
-            delay: 1000,
-            animationType: 'easeInEaseOut',
-            callback: function () {
-                sets.set2.children[2].remove();
-                sets.set2.remove();
-            }
-        })
 
     },
 		
@@ -145,7 +112,8 @@ var Interaction = {
 
     },
 	onCorrectAnswer : function(){
-		
+        Interaction.showCorrectAnswer();
+
     },
 	onWrongAnswer : function(){
 		
@@ -158,8 +126,14 @@ var Interaction = {
         Interaction.pause();
 //        Interaction._set = Interaction.set1.getDifference(Interaction.set2);
 //        Interaction._set.drawVennDiagram(Interaction.container,new Point(100,145),"A'");
-        setTimeout(Interaction.resume,2000);
-
+//        setTimeout(Interaction.resume,2000);
+        Interaction.answer = Set.animateComplementSets({
+            container:Interaction.container,
+            position:new Point(120,140),
+            sets:[Interaction.set1, Interaction.set2],
+            letters:['E', 'A'],
+            callback:Interaction.resume
+        })
 
     }
 }
