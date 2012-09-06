@@ -418,10 +418,13 @@ var Set = Class.extend({
         }
 
         for(var j = 0; j < otherSet.elements.length; j++){
-            if(union.indexOf(otherSet.elements[j]) == -1){
-                union.push(otherSet.elements[j]);
+            for(var k = 0; k < union.length; k++){
+                if(otherSet.elements[j] != union[k]){
+                    union.push(otherSet.elements[j]);
+                }
             }
         }
+        console.log(union);
 
         union.sort(function(a,b){return a-b});
         var c = new Set({type:Set.ELEMENTS, elements:union});
@@ -443,8 +446,10 @@ var Set = Class.extend({
         var difference = [];
 
         for(var i = 0; i < this.elements.length; i++){
-            if(otherSet.elements.indexOf(this.elements[i]) == -1){
-                difference.push(this.elements[i]);
+            for(var j = 0; j < otherSet.elements.length; j++){
+                if(this.elements[i] != otherSet.elements[j]){
+                    difference.push(this.elements[i]);
+                }
             }
         }
 
