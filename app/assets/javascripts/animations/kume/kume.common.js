@@ -454,14 +454,26 @@ var Set = Class.extend({
 
     getDifference : function(otherSet){
         var difference = [];
+        var th = [];
+        var num;
 
         for(var i = 0; i < this.elements.length; i++){
-            for(var j = 0; j < otherSet.elements.length; j++){
-                if(this.elements[i] != otherSet.elements[j]){
-                    difference.push(this.elements[i]);
+            th.push(this.elements[i]);
+        }
+
+        for(var j = 0; j < th.length; j++){
+            for(var k = 0, num = 0; k < otherSet.elements.length; k++){
+                if(th[j] != otherSet.elements[k]){
+                    num += 1;
                 }
             }
+            if(num == otherSet.elements.length){
+                difference.push(th[j]);
+            }
         }
+
+
+
 
         difference.sort(function(a,b){return a-b});
 
