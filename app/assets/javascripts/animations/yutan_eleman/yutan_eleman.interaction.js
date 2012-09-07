@@ -71,7 +71,7 @@ var Interaction = {
             }
         }
         else{
-            Interaction.feint = Util.randomInteger(0,6);
+            Interaction.feint = Util.randomInteger(0,4);
             if(Interaction.feint != 0){     // no feint
                 if(Interaction.randomNumber == 0){  // 0 x a
                     Interaction.num1 = 0;
