@@ -37,6 +37,7 @@ utilTest.prototype.testGetFactors = function(){
     assertNotEquals([1,2,3,6,7], Util.getFactors(6));
     assertEquals(4,Util.getFactors(6).length);
     assertEquals([1],Util.getFactors(1));
+    assertEquals([],Util.getFactors(-1));
 };
 
 utilTest.prototype.testGetPrimeFactors = function(){
@@ -75,6 +76,7 @@ utilTest.prototype.testRandomDigit = function(){
     assertTrue(Util.randomDigit() < 10);
     assertTrue(Util.randomDigit() >= 0);
     assertNumber(Util.randomDigit());
+    assertFalse(Util.randomDigit() > 10);
 };
 
 utilTest.prototype.testGcd = function(){
@@ -110,5 +112,20 @@ utilTest.prototype.testGetShuffledArray = function(){
     assertEquals(66,total);
     assertArray(Util.getShuffledArray(10));
     assertEquals(Util.getShuffledArray(6).length,Util.getShuffledArray(10,4).length);
+    assertEquals([],Util.getShuffledArray());
+    assertEquals([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],Util.getShuffledArray(10,-1).sort());
 };
 
+utilTest.prototype.testFormat=function(){
+  assertString(Util.format(15));
+  assertString(Util.format("15"));
+  assertEquals("14,15",Util.format(14.15,{places:2}));
+  assertEquals("14,150",Util.format(14.15,{places:3}));
+};
+
+utilTest.prototype.testStringreverse=function(){
+    assertString("abc".reverse());
+    assertEquals("cba","abc".reverse());
+
+
+}
