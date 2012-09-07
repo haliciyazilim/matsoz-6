@@ -8,20 +8,21 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+        Main.setObjective('Yandaki örüntüde bir sonraki adımda gelecek sayıyı yazarak kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
         }
 
-        /*
-        *	Initialize your interaction here
-        */
+
+
 
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        Interaction.generatePatters(randomNumber);
+        console.log("I'm here");
+        new QuadraticPattern(1,0,4).draw(new Point(20,175));
     },
 		
 	/*
@@ -42,5 +43,21 @@ var Interaction = {
     },
 	onFail : function(){
 		
+    },
+    generatePatters: function(randomNumber){
+        Interaction.patternType = randomNumber;
+        var pattern;
+        switch(randomNumber){
+            case 0:
+
+                pattern = new Pattern();
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+        }
     }
 }
