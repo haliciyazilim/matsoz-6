@@ -76,7 +76,7 @@ var Interaction = {
         }
         else{
             Interaction.operator = Util.rand01() ? "x" : "+";
-            Interaction.feint = Util.randomInteger(0,6);
+            Interaction.feint = Util.randomInteger(0,5);
             if(Interaction.feint != 0){     // no feint
                 if(Interaction.randomNumber == 0){  // 0 x a
                     Interaction.num1 = (Interaction.operator == "x") ? 1 : 0;
@@ -138,6 +138,7 @@ var Interaction = {
         if(Interaction.feint != 0){
             $('#ansText').html(Interaction.answerStr);
         }
+
         $(Interaction.input).css("color","green");
 
 

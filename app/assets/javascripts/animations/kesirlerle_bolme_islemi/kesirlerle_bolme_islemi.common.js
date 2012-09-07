@@ -26,7 +26,7 @@ var Fraction = Class.extend({
                         this.value = this.integer + (this.nominator / this.denominator);
                 }
             }
-            catch{
+            catch(err){
                 return false;
             }
             finally{
