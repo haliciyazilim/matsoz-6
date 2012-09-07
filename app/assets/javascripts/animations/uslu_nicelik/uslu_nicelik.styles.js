@@ -6,7 +6,6 @@ function __Styles(){
         left:'80px',
         width:'400px',
         height:'80px',
-    //    border:'1px solid',
         fontSize:'30px'
     };
 
@@ -16,7 +15,6 @@ function __Styles(){
         left:'10px',
         width:'510px',
         height:'40px',
-   //     border:'1px solid',
         color:'#069',
         fontSize:'22px',
         textAlign:'center',
@@ -28,20 +26,8 @@ function __Styles(){
         position:'absolute',
         top:'40px',
         left:'200px',
-        width:'500px',
+        width:'400px',
         height:'140px',
-        fontSize:'32px',
-    //    border:'1px solid'
-    };
-
-    finalDivStyle = {
-        position:'absolute',
-        top:'76px',
-        left:'140px',
-        width:'120px',
-        height:'50px',
         fontSize:'32px'
-    //    border:'1px solid'
-    }
-
+    };
 }

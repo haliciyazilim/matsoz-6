@@ -1,46 +1,31 @@
-var Fraction = Class.extend({
+var RationalNumber = Class.extend({
     init:function(opt){
-        if(opt.denominator == 0){
-            throw "divisionByZero";
+        if(opt.integer){
+            this.integer = opt.integer;
+        }
+        this.nominator = opt.nominator;
+        this.denominator = opt.denominator;
+        if(opt.factor){
+            this.factor = opt.factor;
         }
         else{
-            try{
-                switch(opt.type){
-                    case Fraction.SIMPLE:
-                        this.definition = ""+opt.nominator+" bölü "+opt.denominator;
-                        this.nominator = opt.nominator;
-                        this.denominator = opt.denominator;
-                        this.value = this.nominator / this.denominator;
-                        break;
-                    case Fraction.COMPOUND:
-                        this.definition = ""+opt.nominator+" bölü "+opt.denominator;
-                        this.nominator = opt.nominator;
-                        this.denominator = opt.denominator;
-                        this.value = this.nominator / this.denominator;
-                        break;
-                    case Fraction.MIXED:
-                        this.definition = ""+opt.integer+" tam "+opt.nominator+" bölü "+opt.denominator;
-                        this.nominator = opt.nominator;
-                        this.denominator = opt.denominator;
-                        this.integer = opt.integer;
-                        this.value = this.integer + (this.nominator / this.denominator);
-                }
-            }
-            catch(err){
-                return false;
-            }
-            finally{
-                return true;
-            }
+            this.factor = 1;
         }
-    },
 
-    reduceFraction:function(){
+        this.determineType();
+        this.determineDefinition();
+        this.determineValue();
+
+    },
+    simplification:function(){
         try{
-            var a = [];
-            a = Util.reduceFractions(this.nominator, this.denominator);
-            this.nominator = a[0];
-            this.denominator = a[1];
+            var gcd = Util.gcd(this.nominator,this.denominator);
+
+            this.nominator = this.nominator/gcd;
+            this.denominator = this.denominator/gcd;
+
+            this.determineDefinition();
+            this.determineValue();
         }
         catch(err){
             return false;
@@ -49,12 +34,102 @@ var Fraction = Class.extend({
             return true;
         }
     },
+    denomEqualization:function(otherRationalNumber){
+        try{
+            var lcm = Util.lcm(this.denominator,otherRationalNumber.denominator);
 
-    addWith:function(otherFraction){
+            this.nominator = this.nominator * (lcm/this.denominator);
+            this.denominator = lcm;
 
+            otherRationalNumber.nominator = otherRationalNumber.nominator * (lcm/otherRationalNumber.denominator);
+            otherRationalNumber.denominator = lcm;
+
+            this.determineDefinition();
+            this.determineValue();
+
+            otherRationalNumber.determineDefinition();
+            otherRationalNumber.determineValue();
+        }
+        catch(err){
+            return false;
+        }
+        finally{
+            return true;
+        }
+    },
+    addition:function(otherRationalNumber){
+
+    },
+    substraction:function(otherRationalNumber){
+
+    },
+    multiplication:function(otherRationalNumber){
+
+    },
+    division:function(otherRationalNumber){
+
+    },
+    conversion:function(){
+
+    },
+    additionInvert:function(){
+
+    },
+    multiplicationInvert:function(){
+
+    },
+    toHTML:function(fontSize){
+
+    },
+    determineType:function(){
+        if(this.factor == -1){
+            this.type = RationalNumber.RATIONAL;
+        }
+        else{
+            if(this.integer){
+                this.type = RationalNumber.COMPLEX;
+            }
+            else{
+                if(this.nominator < this.denominator){
+                    this.type = RationalNumber.SIMPLE;
+                }
+                else{
+                    this.type = RationalNumber.COMPOUND;
+                }
+            }
+        }
+    },
+    determineDefinition:function(){
+        if(this.factor == -1){
+            if(this.integer){
+                this.definition = "-"+this.integer+" tam "+this.nominator+" bölü "+this.denominator;
+            }
+            else{
+                this.definition = "-"+this.nominator+" bölü "+this.denominator;
+            }
+        }
+        else{
+            if(this.integer){
+                this.definition = ""+this.integer+" tam "+this.nominator+" bölü "+this.denominator;
+            }
+            else{
+                this.definition = ""+this.nominator+" bölü "+this.denominator;
+            }
+        }
+    },
+    determineValue:function(){
+        var value;
+        if(this.integer){
+            value = this.integer + (this.nominator/this.denominator);
+        }
+        else{
+            value = this.nominator/this.denominator;
+        }
+        this.value = this.factor * value;
     }
 });
 
-Fraction.SIMPLE = 0;
-Fraction.COMPOUND = 1;
-Fraction.MIXED = 2;
+RationalNumber.RATIONAL = 0;
+RationalNumber.SIMPLE = 1;
+RationalNumber.COMPOUND = 2;
+RationalNumber.COMPLEX = 3;
