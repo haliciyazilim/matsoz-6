@@ -17,7 +17,7 @@ var Animation = {
                 '<span id="num9" style="opacity:0;position:absolute;top:128px;left:18px;">1</span>'
         });
 
-        Animation.firstDiv = Util.dom({parent:Animation.container, tag:'div', css:secondDivStyle,
+        Animation.secondDiv = Util.dom({parent:Animation.container, tag:'div', css:secondDivStyle,
             html:'<div id="firstLine" style="opacity:0;"><b>24</b> = 2 x 2 x 2 x 3</div>' +
                 '<div id="secondLine" style="opacity:0;"><span style="position:absolute;top:46px;left:34px;"> = </span>' +
                     '<div id="x1" style="position:absolute;top:46px;left:54px;">2</div><div id="y1" style="position:absolute;top:36px;left:66px;font-size:18px;">3</div>' +

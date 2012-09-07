@@ -33,8 +33,8 @@ function __Styles(){
 
     secondDivStyle = {
         position:'absolute',
-        top:'90px',
-        left:'400px',
+        top:'110px',
+        left:'440px',
         width:'200px',
         height:'70px',
     //    border:'1px solid',
