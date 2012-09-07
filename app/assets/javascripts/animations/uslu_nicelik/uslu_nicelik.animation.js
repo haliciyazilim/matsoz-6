@@ -4,131 +4,89 @@ var Animation = {
         Animation.container = container;
 
         var animStart = 1000;
-
-        var firstPowChange = animStart + 2000;
-        var firstSlide = firstPowChange + 500;
-        var firstFadeIn = firstSlide + 1000;
-
-        var secondPowChange = firstFadeIn + 2500;
-        var secondSlide = secondPowChange + 500;
-        var secondFadeIn = secondSlide + 1000;
-
-        var thirdPowChange = secondFadeIn + 2500;
-        var thirdSlide = thirdPowChange + 500;
-        var thirdFadeIn = thirdSlide + 1000;
-
-        var fourthPowChange = thirdFadeIn + 2500;
-        var fourthSlide = fourthPowChange + 500;
-        var fourthFadeIn = fourthSlide + 1000;
-
-        var firstEq = fourthFadeIn + 3000;
-        var gettingCloser = firstEq + 2000;
-
-        var ttextFadeIn = gettingCloser + 2000;
-
-        var transformation = ttextFadeIn + 2000;
-
-        var colorChanges = transformation + 2000;
+        var secondEqStart = animStart+3000;
+        var thirdEqStart = secondEqStart+3000;
+        var fourthEqStart = thirdEqStart+3000;
+        var fifthEqStart = fourthEqStart+3000;
+        var slideStart = fifthEqStart+2000;
+        var textStart = slideStart+7000;
+        var colorChanges = textStart+2000;
 
         Animation.animDiv = Util.dom({parent:Animation.container, tag:'div', css:animDivStyle,
-        html:'<div id="ttext" style="position:absolute;left:40px;font-size:20px;opacity:0">a, b, n birer doğal sayı olmak üzere;</div>' +
-            '<div id="wholeN" style="opacity:0;position:absolute;top:0px;left:0px;"><div id="bbase" style="position:absolute;top:90px;left:0px;">2</div><div id="pow" style="position:absolute;top:80px;left:20px;font-size:20px;">1</div>' +
-            '<div id="eq" style="position:absolute;top:90px;left:40px;">=</div></div>' +
-            '<div id="ans" style="position:absolute;top:90px;left:70px;"> ' +
-            '<span id="s4" style="opacity:0;position:absolute;width:44px;"> 2 x</span> ' +
-            '<span id="s3" style="opacity:0;position:absolute;width:44px;"> 2 x</span> ' +
-            '<span id="s2" style="opacity:0;position:absolute;width:44px;"> 2 x</span> ' +
-            '<span id="s1" style="opacity:0;position:absolute;width:96px;"> 2 x 2 = </span>' +
-            '<span id="sl" style="opacity:0;position:absolute;width:20px;">2</span></div>'
+            html:'<span id="s0" style="opacity:0;font-size:24px;">a, b, n birer doğal sayı olmak üzere;</span>' +
+                '<span id="s1" style="opacity:0;position:absolute;top:30px;left:152px;">' +
+                    '<span>2</span>' +
+                    '<span style="position:relative;top:-16px;font-size:20px;">1</span>' +
+                    '<span> = 2</span>' +
+                '</span>' +
+                '<span id="s2" style="opacity:0;position:absolute;top:30px;left:96px;">' +
+                    '<span>2</span>' +
+                    '<span style="position:relative;top:-16px;font-size:20px;">2</span>' +
+                    '<span> = 2 x 2 = 4</span>' +
+                '</span>' +
+                '<span id="s3" style="opacity:0;position:absolute;top:30px;left:70px;">' +
+                    '<span>2</span>' +
+                    '<span style="position:relative;top:-16px;font-size:20px;">3</span>' +
+                    '<span> = 2 x 2 x 2 = 8</span>' +
+                '</span>' +
+                '<span id="s4" style="opacity:0;position:absolute;top:30px;left:46px;">' +
+                    '<span>2</span>' +
+                    '<span style="position:relative;top:-16px;font-size:20px;">4</span>' +
+                    '<span> = 2 x 2 x 2 x 2 = 16</span>' +
+                '</span>' +
+                '<span id="s5" style="opacity:0;position:absolute;top:30px;left:20px;">' +
+                    '<span id="base5">2</span>' +
+                    '<span id="pow5" style="position:relative;top:-16px;font-size:20px;">5</span>' +
+                    '<span id="lastAns"> = <span id="lastEq">2 x 2 x 2 x 2 x 2 = </span></span>' +
+                '</span>' +
+                '<span id="lastAns2" style="opacity:0;position:absolute;top:30px;left:340px;">32</span>' +
+                '<span id="sf" style="opacity:0;position:absolute;top:100px;left:150px;">' +
+                    '<span id="b1">a</span>' +
+                    '<span id="b2" style="position:relative;top:-16px;font-size:22px;">n</span>' +
+                    '<span> = <span id="b3">b</span></span>' +
+                '</span>' +
+                '<span id="f1" style="opacity:0;position:absolute;top:106px;left:60px;color:red;font-size:20px;">taban</span>' +
+                '<span id="f2" style="opacity:0;position:absolute;top:48px;left:130px;color:#069;font-size:20px;width:100px;">kuvvet (üs)</span>' +
+                '<span id="f3" style="opacity:0;position:absolute;top:106px;left:270px;color:green;font-size:20px;">değer</span>' +
+                '<img id="im1" style="opacity:0;position:absolute;top:113px;left:117px;" src="/assets/animations/uslu_nicelik/uslu_ok_1.png"/>' +
+                '<img id="im2" style="opacity:0;position:absolute;top:68px;left:167px;" src="/assets/animations/uslu_nicelik/uslu_ok_2.png"/>' +
+                '<img id="im3" style="opacity:0;position:absolute;top:113px;left:238px;" src="/assets/animations/uslu_nicelik/uslu_ok_3.png"/>'
         });
 
-        $('#wholeN').delay(animStart).animate({opacity:1},1000,'easeInOutQuad');
-        $('#sl').delay(animStart).animate({opacity:1},1000,'easeInOutQuad');
+        $('#s1').delay(animStart).animate({opacity:1},1000,'easeInOutQuad').delay(1000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#s2').delay(secondEqStart).animate({opacity:1},1000,'easeInOutQuad').delay(1000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#s3').delay(thirdEqStart).animate({opacity:1},1000,'easeInOutQuad').delay(1000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#s4').delay(fourthEqStart).animate({opacity:1},1000,'easeInOutQuad').delay(1000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#s5').delay(fifthEqStart).animate({opacity:1},1000,'easeInOutQuad');
+        $('#lastAns2').delay(fifthEqStart).animate({opacity:1},1000,'easeInOutQuad');
+        $('#lastEq').delay(slideStart).animate({opacity:0},1000,'easeInOutQuad');
+        $('#s5').delay(slideStart-fifthEqStart+2000).animate({left:'+=128px'},1000,'easeInOutQuad');
+        $('#lastAns2').delay(slideStart-fifthEqStart+2000).animate({left:'-=128px'},1000,'easeInOutQuad');
 
-        setTimeout('$("#pow").html(2)',firstPowChange);
-        $('#sl').delay(firstSlide-animStart-1000).animate({left:"+=104px"},1000,'easeInOutQuad');
-        $('#s1').delay(firstFadeIn).animate({opacity:1},1000,'easeInOutQuad',
-            function(){
-                $('#sl').html(4);
-            });
+        $('#s5').delay(1000).animate({top:'+=70px'},1000,'easeInOutQuad');
+        $('#lastAns2').delay(1000).animate({top:'+=70px'},1000,'easeInOutQuad');
 
-        setTimeout('$("#pow").html(3)',secondPowChange);
-        $('#sl').delay(secondSlide-firstSlide-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s1').delay(secondSlide-firstFadeIn-1000).animate({left:"+50px"},1000,'easeInOutQuad');
-        $('#s2').delay(secondFadeIn).animate({opacity:1},1000,'easeInOutQuad',
-            function(){
-                $('#sl').html(8);
-            });
+        $('#s0').delay(textStart).animate({opacity:1},1000,'easeInOutQuad');
 
-        setTimeout('$("#pow").html(4)',thirdPowChange);
-        $('#sl').delay(thirdSlide-secondSlide-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s1').delay(thirdSlide-secondSlide-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s2').delay(thirdSlide-secondFadeIn-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s3').delay(thirdFadeIn).animate({opacity:1},1000,'easeInOutQuad',
-            function(){
-                $('#sl').html(16);
-            });
+        $('#s5').delay(3000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#lastAns2').delay(3000).animate({opacity:0},1000,'easeInOutQuad');
 
-        setTimeout('$("#pow").html(5)',fourthPowChange);
-        $('#sl').delay(fourthSlide-thirdSlide-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s1').delay(fourthSlide-thirdSlide-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s2').delay(fourthSlide-thirdSlide-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s3').delay(fourthSlide-thirdFadeIn-1000).animate({left:"+=50px"},1000,'easeInOutQuad');
-        $('#s4').delay(fourthFadeIn).animate({opacity:1},1000,'easeInOutQuad',
-            function(){
-                $('#sl').html(32);
-            });
+        $('#sf').delay(colorChanges).animate({opacity:1},1000,'easeInOutQuad');
 
-        for(var i = 1; i < 4; i++){
-            $('#s'+i).delay(firstEq-fourthSlide-1000).animate({opacity:0},1000,'easeInOutQuad');
-        }
-        $('#s4').delay(firstEq-fourthFadeIn-1000).animate({opacity:0},1000,'easeInOutQuad');
+        $('#f1').delay(colorChanges+3000).animate({opacity:1},1000,'easeInOutQuad');
+        $('#f2').delay(colorChanges+5000).animate({opacity:1},1000,'easeInOutQuad');
+        $('#f3').delay(colorChanges+7000).animate({opacity:1},1000,'easeInOutQuad');
 
-        $('#wholeN').delay(gettingCloser-animStart-1000).animate({left:"+=150px"},1000,'easeInOutQuad');
-        $('#sl').delay(gettingCloser-fourthSlide-1000).animate({left:"-=104px"},1000,'easeInOutQuad');
+        $('#im1').delay(colorChanges+3000).animate({opacity:1},1000,'easeInOutQuad');
+        $('#im2').delay(colorChanges+5000).animate({opacity:1},1000,'easeInOutQuad');
+        $('#im3').delay(colorChanges+7000).animate({opacity:1},1000,'easeInOutQuad');
 
-        $('#ttext').delay(ttextFadeIn).animate({opacity:1},1000,'easeInOutQuad');
+        $('#b1').delay(colorChanges+3000).animate({color:"#ff0000"},1000,'easeInOutQuad');
+        $('#b2').delay(colorChanges+5000).animate({color:"#069"},1000,'easeInOutQuad');
+        $('#b3').delay(colorChanges+7000).animate({color:"#008000"},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
 
-        Animation.finalDiv = Util.dom({parent:Animation.animDiv, tag:'div',css:finalDivStyle,
-            html:'<div id="fBase" style="position:absolute;top:10px;left:10px">a</div>' +
-                '<div id="fPow" style="position:absolute;top:0px;left:30px;font-size:20px">n</div>' +
-                '<span id="fEq" style="position:absolute;top:12px;left:50px;">=</span>' +
-                '<div id="fAns" style="position:absolute;top:10px;left:84px;">b</div>'
-        });
 
-        $('#wholeN').delay(transformation-gettingCloser-1000).animate({opacity:0},1000,'easeInOutQuad');
-        $('#sl').delay(transformation-gettingCloser-1000).animate({opacity:0},1000,'easeInOutQuad');
-        $(Animation.finalDiv).css("opacity",0).delay(transformation).animate({opacity:1},1000,'easeInOutQuad');
 
-        $('#fBase').delay(colorChanges).animate({color:'#ff0000'},1000,'easeInOutQuad');
-        $('#fPow').delay(colorChanges).animate({color:'#069'},1000,'easeInOutQuad');
-        $('#fAns').delay(colorChanges).animate({color:'#008000'},1000,'easeInOutQuad');
-
-        $(Animation.container).append('<span id="tBase" style="color:red;">taban</span>' +
-            '<span id="tPow" style="color:#069;">kuvvet (üs)</span>' +
-            '<span id="tAns" style="color:green;">değer</span>')
-
-        $('#tBase').css({
-            position:'absolute',
-            top:'136px',
-            left:'280px',
-            opacity:0
-        });
-        $('#tBase').delay(colorChanges).animate({opacity:1},1000,'easeInOutQuad');
-        $('#tPow').css({
-            position:'absolute',
-            top:'80px',
-            left:'340px',
-            opacity:0
-        });
-        $('#tPow').delay(colorChanges).animate({opacity:1},1000,'easeInOutQuad');
-        $('#tAns').css({
-            position:'absolute',
-            top:'136px',
-            left:'470px',
-            opacity:0
-        });
-        $('#tAns').delay(colorChanges).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
 
     }
 };
