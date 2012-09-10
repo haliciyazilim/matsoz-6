@@ -7,6 +7,10 @@ var NumberWithShape = function(opt){
         this.isHiddenNumber = opt.isHiddenNumber;
     else
         this.isHiddenNumber = false;
+    if(opt.color)
+        this.color = opt.color;
+    else
+        this.color = '#193';
 }
 
 NumberWithShape.prototype.draw = function(){
@@ -30,7 +34,7 @@ NumberWithShape.prototype.draw = function(){
             position,
             this.size,
             new Point(0.4,0.3)
-        ).set_style({strokeColor:'#000',fillColor:'#193'}));
+        ).set_style({strokeColor:'#000',fillColor:this.color}));
     }
     if(this.number == 1){
         this.width = this.size;
@@ -49,18 +53,18 @@ NumberWithShape.prototype.draw = function(){
     this.numberText.justification = 'center';
     this.numberText.content = this.number;
     this.numberText.fontSize = 16;
-
-    this.setOpacity(0);
-
+    if(this.isHiddenNumber === true){
+        this.setOpacity(0);
+    }
 }
 
 NumberWithShape.prototype.setOpacity = function(opacity){
-    if(this.isHiddenNumber === true){
+
         for(var i=0;i<this.cubeArray.length;i++)
             this.cubeArray[i].opacity = opacity;
 
         this.numberText.opacity = opacity;
-    }
+
 }
 
 NumberWithShape.prototype.removeShape = function (){
@@ -86,27 +90,25 @@ var Pattern = Class.extend({
         var hiddenNumberPosition;
         console.log(""+this,this.hiddenNumber);
         var totalWidth = 0;
+        this.cubeSize++;
         do{
-            for(var i=0;i < nums.length;i++){
-                nums[i].removeShape();
-            }
-            nums = [];
             totalWidth = 0;
-            $(this.numbers).each(function(index){
-                var num = new NumberWithShape({
-                    position:position.add(120*index,0),
-                    number:this,
-                    size:self.cubeSize,
-                    isHiddenNumber:(this == self.hiddenNumber)
-                });
-                num.draw();
-                nums.push(num);
-                totalWidth+= (index==0?0:self.cubeSize) + num.width;
-            });
-
             this.cubeSize--;
+            for(var i=0; i<this.numbers.length;i++)
+                totalWidth += (i==0?0:this.cubeSize) + this.cubeSize * Math.ceil(this.numbers[i] / 4);
         }
         while(totalWidth > 570)
+        $(this.numbers).each(function(index){
+            var num = new NumberWithShape({
+                position:position.add(120*index,0),
+                number:this,
+                size:self.cubeSize,
+                isHiddenNumber:(this == self.hiddenNumber)
+            });
+            num.draw();
+            nums.push(num);
+//            totalWidth+= (index==0?0:self.cubeSize) + num.width;
+        });
         position = position.add(-totalWidth*0.5,0)
 
         totalWidth = 0;
@@ -144,6 +146,10 @@ var Pattern = Class.extend({
             });
         }
 
+    },
+    remove:function(){
+        for(var i=0;i<this.numberWithShapes.length;i++)
+            this.numberWithShapes[i].removeShape();
     }
 });
 
@@ -195,7 +201,7 @@ var ExponentialPattern = Pattern.extend({
     },
     toString:function(){
         return (this.coefficient>1?this.coefficient:"") +
-            "" + this.base +"<sup>n</sup>" +
+            "(" + this.base +"<sup>n</sup>)" +
             (this.constant > 0 ? " + "+this.constant:(this.constant < 0 ? this.constant: ""));
     }
 });
