@@ -1536,17 +1536,29 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		var topLeftPoint = new Point(boundingBox.x, boundingBox.y);
 		var vennSize = boundingBox.size;
 		
-		for (var i = 0; i < noOfElements; i++) {
-			var point;
+		
+		var excludingArray = [];
+
+		for (var i = 0; i < vennSize.width * vennSize.height, i++) {
 			
-			var trials = 0;
-			do {
-				point = new Point(Util.randomInteger(topLeftPoint.x/5, (topLeftPoint.x + vennSize.width)/5)*5,
-				 				Util.randomInteger(topLeftPoint.y/5, (topLeftPoint.y+ vennSize.height)/5)*5);
-				
-				trials++;
-			} while (!isAvailable(point) && trials < noOfElements*50);
+		}
+		
+		for (var i = 0; i < noOfElements; i++) {
+			// var point;
+			
+			// var trials = 0;
+			// do {
+			// 	point = new Point(Util.randomInteger(topLeftPoint.x/5, (topLeftPoint.x + vennSize.width)/5)*5,
+			// 	 				Util.randomInteger(topLeftPoint.y/5, (topLeftPoint.y+ vennSize.height)/5)*5);
+			// 	
+			// 	trials++;
+			// } while (!isAvailable(point) && trials < noOfElements*50);
 						
+						
+						
+			var randomPoint = Util.randomInteger(0, vennSize.width * vennSize.height, excludingArray);
+			var point = new Point(randomPoint % vennSize.width, randomPoint / vennSize.width);
+			
 						
 			console.log("trials: " + trials);
 			var text = new PointText(point.add(elementSize.width/2 - 10, -elementSize.height/2 + 8));
