@@ -210,6 +210,10 @@ function kontrol(value){
     var degisim=["a","n","k"];
 
     for(var i=0; i<value.length;i++){
+        value[i]=value[i].trim();
+    }
+    for(var i=0; i<value.length;i++){
+
         for(var j=0; j<degisim.length;j++){
             if (value[j]==degisim[i]){
                 console.log("buldum");
@@ -218,6 +222,7 @@ function kontrol(value){
             }
         }
     }
+
     console.log("değişen value: "+value[0]+", "+value[1]+", "+value[2]);
     Interaction.soruCesidi=Interaction.dogruCevap[0];
     Interaction.sinanacakDegerler=[];
@@ -228,7 +233,7 @@ function kontrol(value){
         case 1:
             for(var i=0; i<value.length;i++){
                 for(var j=1; j<(Interaction.dogruCevap.length);j++){
-                    if(Interaction.sinanacakDegerler[j]==value[i]){
+                    if(Interaction.sinanacakDegerler[j]==value[i].trim()){
                         Interaction.testSayaci++
                         Interaction.sinanacakDegerler[j]="dogru";
                     }

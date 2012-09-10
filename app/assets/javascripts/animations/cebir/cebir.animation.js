@@ -64,7 +64,7 @@ var Animation = {
             $("#"+idlerIfade[i]).delay(i*1000+zaman).animate({top:"135px",opacity:"1"},1000);
         }
 
-        Main.animationFinished(1000);
+        Main.animationFinished(6000);
 		
 	}
 }
