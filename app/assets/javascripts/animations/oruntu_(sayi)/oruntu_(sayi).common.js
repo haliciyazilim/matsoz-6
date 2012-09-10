@@ -7,44 +7,35 @@ var NumberWithShape = function(opt){
         this.isHiddenNumber = opt.isHiddenNumber;
     else
         this.isHiddenNumber = false;
-    if(opt.color)
-        this.color = opt.color;
+    if(opt.fillColor)
+        this.fillColor = opt.fillColor;
     else
-        this.color = '#193';
+        this.fillColor = '#a9dbe4';
+    if(opt.strokeColor)
+        this.strokeColor = opt.strokeColor
+    else
+        this.strokeColor = "#41818a"
 }
 
 NumberWithShape.prototype.draw = function(){
     this.removeShape();
     this.cubeArray = [];
+    this.sqrt = Math.ceil(Math.sqrt(this.number))
     for(var i=0; i < this.number; i++){
         var position = this.position;
-        if(i < 8){
-            position = position.add(
-                this.size  * (i % 2),
-                -this.size * Math.floor(i / 2)
-            );
-        }
-        else{
-            position = position.add(
-                this.size * Math.floor(i / 4),
-                -this.size * Math.floor(i % 4)
-            );
-        }
+
+        position = position.add(
+            this.size * Math.floor(i % this.sqrt),
+            -this.size * Math.floor(i / this.sqrt)
+        );
+
         this.cubeArray.push(new Path.Cube(
             position,
             this.size,
             new Point(0.4,0.3)
-        ).set_style({strokeColor:'#000',fillColor:this.color}));
+        ).set_style({strokeColor:this.strokeColor,fillColor:this.fillColor}));
     }
-    if(this.number == 1){
-        this.width = this.size;
-    }
-    else if (this.number <= 8){
-        this.width = this.size * 2 ;
-    }
-    else{
-        this.width = this.size * Math.ceil(this.number / 4);
-    }
+    this.width = this.size * this.sqrt;
     if(this.number <=8)
         this.height = this.size * Math.ceil(this.number /2 );
     else
@@ -91,13 +82,16 @@ var Pattern = Class.extend({
         console.log(""+this,this.hiddenNumber);
         var totalWidth = 0;
         this.cubeSize++;
+
+
+
         do{
             totalWidth = 0;
             this.cubeSize--;
             for(var i=0; i<this.numbers.length;i++)
-                totalWidth += (i==0?0:this.cubeSize) + this.cubeSize * Math.ceil(this.numbers[i] / 4);
+                totalWidth += (i==0?0:this.cubeSize) + this.cubeSize * Math.ceil(this.numbers[i] / Math.ceil(Math.sqrt(this.numbers[i])));
         }
-        while(totalWidth > 570)
+        while(totalWidth > 500)
         $(this.numbers).each(function(index){
             var num = new NumberWithShape({
                 position:position.add(120*index,0),

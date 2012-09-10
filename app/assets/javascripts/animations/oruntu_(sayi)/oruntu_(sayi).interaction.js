@@ -14,11 +14,11 @@ var Interaction = {
             height:$(container).height()
         }
         Interaction.appendButton({
-            bottom:"40px",
+            bottom:"20px",
             right:"40px"
         });
         Interaction.appendStatus({
-            bottom:"50px",
+            bottom:"30px",
             right:"150px"
         })
         Interaction.setRandomGenerator(3);
@@ -33,7 +33,7 @@ var Interaction = {
         /*TEST]]>*/
 //        var pattern = new QuadraticPattern(1,0,4);
         var pattern = Interaction.generatePattern(randomNumber);
-        var inputPosition = pattern.draw(new Point(290,135));
+        var inputPosition = pattern.draw(new Point(260,165));
         Interaction.appendInput({
             position:'absolute',
             top:inputPosition.y,

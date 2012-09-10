@@ -8,7 +8,8 @@ var Animation = {
                 number:i*3,
                 position:Animation.referencePoint.add(120*i,0),
                 size:25,
-                color:"#FFFF00"
+                fillColor:"#f3c884",
+                strokeColor:"#9b773d"
             });
             num.draw();
             num.setOpacity(0);
