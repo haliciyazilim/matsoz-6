@@ -181,9 +181,9 @@ var Interaction = {
         for(var i=1; i<=4;i++){
             $("#dogru"+i).css("color","green").html(Interaction.dogrular[i-1]);
             if(Interaction.dogrular[i-1]==Interaction.girilenler[i-1])
-                $("#girdi"+i).css("color","green");
+                $("#sag"+i+" input").css("color","green");
             else
-            $("#girdi"+i).css("color","red");
+            $("#sag"+i+" input").css("color","red");
         }
 
         Interaction.setStatus("Yanlış cevap; doğrusu yukarıdadır.",false);
