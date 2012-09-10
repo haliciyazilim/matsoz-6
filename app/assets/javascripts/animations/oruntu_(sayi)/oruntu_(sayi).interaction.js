@@ -13,51 +13,90 @@ var Interaction = {
             width:$(container).width(),
             height:$(container).height()
         }
-
-
-
-
+        Interaction.appendButton({
+            bottom:"20px",
+            right:"40px"
+        });
+        Interaction.appendStatus({
+            bottom:"30px",
+            right:"150px"
+        })
+        Interaction.setRandomGenerator(3);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        Interaction.generatePatters(randomNumber);
-        console.log("I'm here");
-        new QuadraticPattern(1,0,4).draw(new Point(20,175));
+        Interaction.flushInputs();
+        if(Interaction.pattern)
+            Interaction.pattern.remove();
+        /*<[[TEST*/
+//            randomNumber = 0;
+        /*TEST]]>*/
+//        var pattern = new QuadraticPattern(1,0,4);
+        var pattern = Interaction.generatePattern(randomNumber);
+        var inputPosition = pattern.draw(new Point(260,165));
+        Interaction.appendInput({
+            position:'absolute',
+            top:inputPosition.y,
+            left:inputPosition.x,
+            marginLeft:"-18.5px",
+            marginTop:'-25px'
+        }).focus();
+        /*<[[TEST*/
+//            Main.setObjective(pattern.toString());
+        /*TEST]]>*/
+        Interaction.pattern = pattern;
+
     },
 		
-	/*
-	*	this function is called inside Interaction.__checkAnswer() function
-	*	if this function returns false, check answer operation is cancelled
-	*/
 	preCheck : function(){
 
     },
 	isAnswerCorrect : function(value){
-
+        return Interaction.pattern.hiddenNumber == value;
     },
 	onCorrectAnswer : function(){
-		
+		Interaction.setStatus('Tebrikler! Bu örüntünün genel sayısı: '+Interaction.pattern.toString(),true);
+        Interaction.showAnswer();
     },
 	onWrongAnswer : function(){
 		
     },
 	onFail : function(){
-		
+		Interaction.setStatus('Olmadı! Bu örüntünün genel sayısı: '+Interaction.pattern.toString(),false);
+        Interaction.showAnswer();
+
     },
-    generatePatters: function(randomNumber){
-        Interaction.patternType = randomNumber;
+    generatePattern: function(randomNumber){
         var pattern;
+        var coefficient = Util.randomInteger(1,5);
+        var constant = Util.randomInteger(0,5);
+        var base = 2;
+        var length = 5;
+        var hiddenNumberIndex = Util.randomInteger(0,length-1);
+        /*<[[TEST*/
+//            coefficient = 4;
+//            constant = 5;
+        /*TEST]]>*/
         switch(randomNumber){
             case 0:
-
-                pattern = new Pattern();
+                pattern = new LinearPattern(coefficient,constant,length);
                 break;
-
             case 1:
+                pattern = new QuadraticPattern(coefficient,constant,length);
                 break;
-
             case 2:
+                pattern = new ExponentialPattern(Math.ceil(coefficient*0.5),constant,base,length);
                 break;
         }
+        console.log(pattern.numbers,pattern.numbers[hiddenNumberIndex]);
+        pattern.setHiddenNumber(pattern.numbers[hiddenNumberIndex]);
+        Interaction.patternType = randomNumber;
+        return pattern;
+    },
+    showAnswer:function(){
+        Interaction.pause();
+        Interaction.pattern.showHiddenNumber(1000,1000);
+        $(Interaction.input).animate({opacity:0},500);
+        Interaction.resume(2000);
     }
 }
