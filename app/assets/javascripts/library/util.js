@@ -429,7 +429,9 @@ var Util = {
 
     dom:function(opt){
         var node = document.createElement(opt.tag);
-        $(opt.parent).append(node);
+        if(opt.parent){
+            $(opt.parent).append(node);
+        }
         node.id = opt.id;
         node.className = opt.class;
         if(opt.css)
