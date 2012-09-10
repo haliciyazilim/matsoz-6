@@ -190,10 +190,11 @@ var RationalNumber = Class.extend({
 
         var line = fontSize+4;
         var height = (2*line)+1;
-        var width = height;
+        var width = height+10;
         var width2 = Math.round(width * 0.5);
         var width3 = width - width2;
         var lineWidth = width2;
+        var intHeight = 2*line;
 
         var fontStr = ""+fontSize+"px";
         var lineStr = ""+line+"px";
@@ -202,6 +203,7 @@ var RationalNumber = Class.extend({
         var width2Str = ""+width2+"px";
         var width3Str = ""+width3+"px";
         var lineWidthStr = ""+lineWidth+"px";
+        var intHeightStr = ""+intHeight+"px";
 
         var myCss = {
             position:'absolute',
@@ -216,9 +218,11 @@ var RationalNumber = Class.extend({
         var intStyle = {
             width:width3Str,
             height:heightStr,
-            textAlign:'center',
+            textAlign:'right',
+            paddingRight:'4px',
+            boxSizing:'border-box',
             float:'left',
-            lineHeight:heightStr
+            lineHeight:intHeightStr
         };
         var nomStyle = {
             width:width2Str,
