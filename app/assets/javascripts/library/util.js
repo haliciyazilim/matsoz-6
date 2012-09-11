@@ -127,14 +127,14 @@ var Util = {
         if (decimal < 1) {
             return ""+Math.floor(number+0.5);
         }
+        var decimalDividend = Math.pow(10,decimal);
+        number = number * decimalDividend;
+        number+=0.5;
+        number = Math.floor(number);
 
-        var float = number - Math.floor(number);
-        var result = ""+Math.floor(number)+",";
-        for(var i=0;i<decimal;i++) {
-            result += Math.floor(float*Math.pow(10,i+1) + (i==decimal-1?0.5000000001:0)) % 10;
-        }
-
-        return result;
+        var base = Math.floor(number/decimalDividend);
+        var float  = number % decimalDividend;
+        return base + ","+float;
     },
     rand01: function(){
         return Math.floor(Math.random()*2);
