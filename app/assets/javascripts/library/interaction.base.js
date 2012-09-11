@@ -164,8 +164,8 @@ function InteractionBase(){
 					Interaction.button.click();
 			})
 			.css({
-				width:(parseInt($(".input").css('font-size'),10)*(maxLength*0.5+0.5))+"px",
-				height:(parseInt($(".input").css('font-size'),10)*1.2)+"px"
+				width:(parseInt($(input).css('font-size'),10)*(maxLength*0.5+0.5))+"px",
+				height:(parseInt($(input).css('font-size'),10)*1.2)+"px"
 			});
 			
 		if (css) {
