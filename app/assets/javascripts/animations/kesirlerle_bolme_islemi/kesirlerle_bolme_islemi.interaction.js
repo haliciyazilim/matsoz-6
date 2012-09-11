@@ -18,7 +18,7 @@ var Interaction = {
             for(var j = 0; j < 6; j++){
                 var num = RationalNumber.randomGenerator();
                 num.simplification();
-                var html = num.toHTML(24);
+                var html = num.toHTML(32);
 
                 $(Interaction.container).append(html);
 
