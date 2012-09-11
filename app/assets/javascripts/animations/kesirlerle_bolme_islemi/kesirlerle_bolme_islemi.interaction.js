@@ -14,9 +14,26 @@ var Interaction = {
             height:$(container).height()
         };
 
-        /*
-        *	Initialize your interaction here
-        */
+        for(var i = 0; i < 3; i++){
+            for(var j = 0; j < 6; j++){
+                var num = RationalNumber.randomGenerator();
+                num.simplification();
+                var html = num.toHTML(24);
+
+                $(Interaction.container).append(html);
+
+                var top = 20+(i*94);
+                var left = 5+(96*j);
+                var topStr = ""+top+"px";
+                var leftStr = ""+left+"px";
+
+                $(html).css({
+                    position:'absolute',
+                    top:topStr,
+                    left:leftStr
+                });
+            }
+        }
 
         Interaction.prepareNextQuestion();
     },
