@@ -25,7 +25,7 @@ var Animation = {
                 },
                 callback:function(){
                     var text1 = new PointText(this.numberText.position.add(0,16));
-                    text1.content = this.order + ". Sayı"
+                    text1.content = this.order + ". sayı"
                     text1.justification = 'center';
                     var text2 = new PointText(this.numberText.position.add(0,32));
                     text2.content = "3 . " + this.order + " = " + (3*this.order);
@@ -66,5 +66,6 @@ var Animation = {
                 delay:3000
             });
         },10000)
+        Main.animationFinished(14000);
     }
 }
