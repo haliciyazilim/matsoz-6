@@ -42,6 +42,7 @@ var Interaction = {
 
         }
 
+
         $("input").css("margin","0 auto").css("margin-top","3px");
         $(".madde").css({
             width:"148px",
@@ -61,6 +62,9 @@ var Interaction = {
             float:"left"
 
         });
+
+        $("#sol0, #sag0, #dogru0").css("border-bottom","2px solid #a9dbe4").css("font-weight","bold").css("color","#006e7d").css("height","35px").css("margin-bottom","10px")
+        $("#dogru0").css("opacity","0");
 
         $("#soru")
             .css("width","450px")
@@ -90,6 +94,7 @@ var Interaction = {
 		},
 	nextQuestion: function(randomNumber){
         $(".cevap").html("");
+        $("#dogru0").css("opacity","0");
         $("input").css("color","black");
         $("#soru").animate({left:"150px"},1000);
 
@@ -178,6 +183,7 @@ var Interaction = {
 	onFail : function(){
         $("#soru").animate({left:"0px"},1000);
         $("#dogru0").html("Doğru Cevaplar");
+        $("#dogru0").css("opacity","1");
         for(var i=1; i<=4;i++){
             $("#dogru"+i).css("color","green").html(Interaction.dogrular[i-1]);
             if(Interaction.dogrular[i-1]==Interaction.girilenler[i-1])
