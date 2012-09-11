@@ -31,8 +31,7 @@ var Interaction = {
 	nextQuestion: function(randomNumber){
         Interaction.randomNumber = randomNumber;
         Interaction.flushInputs();
-      //  Interaction.myRandom = Util.randomInteger(0,3);
-        Interaction.myRandom = 2;
+        Interaction.myRandom = Util.randomInteger(0,3);
         if(Interaction.questionDiv){
             $(Interaction.questionDiv).remove();
         }
@@ -71,11 +70,15 @@ var Interaction = {
 
         Interaction.d1 = e[0];
         Interaction.d2 = e[1];
+        var t = Math.floor(c*10000)/100;
+        var y = ""+t;
+        var u = y.split(".");
+       Interaction.pp = ""+u[0]+","+u[1];
         if(Interaction.randomNumber == 2){
-            Interaction.e = Util.numberTurkishFloating(c*100);
+            Interaction.e = Interaction.pp;
         }
         else{
-            Interaction.e = c*100;
+            Interaction.e = t;
         }
 
         Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle});
@@ -84,8 +87,6 @@ var Interaction = {
         var p = Interaction.nom*a;
         p = Math.floor(p*10000)/10000;
         var g = p * 10;
-        console.log(p);
-        console.log(g);
         if(p % 10 == 0){
             b = 1;
         }
@@ -107,7 +108,7 @@ var Interaction = {
                     position:'absolute',
                     top:'26px',
                     left:'248px',
-                    width:'62px',
+                    width:'68px',
                     height:'34px',
                     fontSize:'28px'
                 });
@@ -124,6 +125,7 @@ var Interaction = {
                     '<span id="decc" style="position:absolute;top:29px;left:214px;"> % </span>');
                 $('#dec').html(kk);
 
+                $(Interaction.input).attr("maxLength",4);
                 $(Interaction.questionDiv).append(Interaction.input);
                 break;
             case 1:
@@ -169,8 +171,8 @@ var Interaction = {
                 Interaction.appendInput({
                     position:'absolute',
                     top:'2px',
-                    left:'2px',
-                    width:'50px',
+                    left:'0px',
+                    width:'52px',
                     height:'34px',
                     fontSize:'28px'
                 });
@@ -178,14 +180,14 @@ var Interaction = {
                 Interaction.appendInput({
                     position:'absolute',
                     top:'48px',
-                    left:'2px',
-                    width:'50px',
+                    left:'0px',
+                    width:'52px',
                     height:'34px',
                     fontSize:'28px'
                 });
 
                 $(Interaction.questionDiv).append('<span id="eqq1" style="position:absolute;top:29px;left:66px;"> = </span>' +
-                    '<div id="lline" style="position:absolute;left:0px;top:42px;width:56px;height:1px;padding:0;border-top:2px solid;"></div>' +
+                    '<div id="lline" style="position:absolute;left:-2px;top:42px;width:60px;height:1px;padding:0;border-top:2px solid;"></div>' +
                     '<span id="eqq2" style="position:absolute;top:29px;left:190px;"> = </span>' +
                     '<span id="dec" style="position:absolute;top:28px;left:86px;text-align:center;width:100px;"></span>' +
                     '<span id="decc" style="position:absolute;top:29px;left:214px;"></span>');
@@ -205,7 +207,17 @@ var Interaction = {
     },
 	isAnswerCorrect : function(value){
         if(Interaction.myRandom == 0){
-            return value == Interaction.e;
+            if(Interaction.randomNumber == 2){
+                if(value == Interaction.pp || value == Interaction.pp+"0"){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return value == Interaction.e;
+            }
         }
         else if(Interaction.myRandom == 1){
             var m = ""+Interaction.d2+"0";

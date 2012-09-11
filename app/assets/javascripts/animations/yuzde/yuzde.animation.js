@@ -4,8 +4,8 @@ var Animation = {
         Animation.container = container;
 
         var firstDivStart = 1000;
-        var secondDivStart = firstDivStart+10000;
-        var thirdDivStart = secondDivStart+10000;
+        var secondDivStart = firstDivStart+6250;
+        var thirdDivStart = secondDivStart+6250;
 
         Animation.firstDiv = Util.dom({parent:Animation.container, tag:'div', css:firstDivStyle,
         html:'<span id="eq1" style="opacity:0;position:absolute;font-size:20px;top:24px;left:46px;"> = </span>' +
@@ -149,35 +149,35 @@ var Animation = {
             width:'36px'
         });
 
-        $(firstNode).delay(firstDivStart).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq1').delay(firstDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#frac2').delay(firstDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq2').delay(firstDivStart+4000).animate({opacity:1},1000,'easeInOutQuad');
-        $(secondNode).delay(firstDivStart+4000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq3').delay(firstDivStart+6000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#a1').delay(firstDivStart+6000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq4').delay(firstDivStart+8000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#b1').delay(firstDivStart+8000).animate({opacity:1},1000,'easeInOutQuad');
+        $(firstNode).delay(firstDivStart).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq1').delay(firstDivStart+1250).animate({opacity:1},500,'easeInOutQuad');
+        $('#frac2').delay(firstDivStart+1250).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq2').delay(firstDivStart+2500).animate({opacity:1},500,'easeInOutQuad');
+        $(secondNode).delay(firstDivStart+2500).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq3').delay(firstDivStart+3750).animate({opacity:1},500,'easeInOutQuad');
+        $('#a1').delay(firstDivStart+3750).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq4').delay(firstDivStart+5000).animate({opacity:1},500,'easeInOutQuad');
+        $('#b1').delay(firstDivStart+5000).animate({opacity:1},500,'easeInOutQuad');
 
-        $(thirdNode).delay(secondDivStart).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq5').delay(secondDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#frac3').delay(secondDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq6').delay(secondDivStart+4000).animate({opacity:1},1000,'easeInOutQuad');
-        $(fourthNode).delay(secondDivStart+4000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq7').delay(secondDivStart+6000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#a2').delay(secondDivStart+6000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq8').delay(secondDivStart+8000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#b2').delay(secondDivStart+8000).animate({opacity:1},1000,'easeInOutQuad');
+        $(thirdNode).delay(secondDivStart).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq5').delay(secondDivStart+1250).animate({opacity:1},500,'easeInOutQuad');
+        $('#frac3').delay(secondDivStart+1250).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq6').delay(secondDivStart+2500).animate({opacity:1},500,'easeInOutQuad');
+        $(fourthNode).delay(secondDivStart+2500).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq7').delay(secondDivStart+3750).animate({opacity:1},500,'easeInOutQuad');
+        $('#a2').delay(secondDivStart+3750).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq8').delay(secondDivStart+5000).animate({opacity:1},500,'easeInOutQuad');
+        $('#b2').delay(secondDivStart+5000).animate({opacity:1},500,'easeInOutQuad');
 
-        $(fifthNode).delay(thirdDivStart).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq9').delay(thirdDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#frac4').delay(thirdDivStart+2000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq10').delay(thirdDivStart+4000).animate({opacity:1},1000,'easeInOutQuad');
-        $(sixthNode).delay(thirdDivStart+4000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq11').delay(thirdDivStart+6000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#a3').delay(thirdDivStart+6000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#eq12').delay(thirdDivStart+8000).animate({opacity:1},1000,'easeInOutQuad');
-        $('#b3').delay(thirdDivStart+8000).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
+        $(fifthNode).delay(thirdDivStart).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq9').delay(thirdDivStart+1250).animate({opacity:1},500,'easeInOutQuad');
+        $('#frac4').delay(thirdDivStart+1250).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq10').delay(thirdDivStart+2500).animate({opacity:1},500,'easeInOutQuad');
+        $(sixthNode).delay(thirdDivStart+2500).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq11').delay(thirdDivStart+3750).animate({opacity:1},500,'easeInOutQuad');
+        $('#a3').delay(thirdDivStart+3750).animate({opacity:1},500,'easeInOutQuad');
+        $('#eq12').delay(thirdDivStart+5000).animate({opacity:1},500,'easeInOutQuad');
+        $('#b3').delay(thirdDivStart+5000).animate({opacity:1},500,'easeInOutQuad',function(){Main.animationFinished(1000);});
 
     }
 };
