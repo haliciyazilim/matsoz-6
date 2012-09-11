@@ -164,7 +164,11 @@ var Util = {
 
             end -= excludingArray.length;
         }
-
+		
+		if (end <= start) {
+			throw "Impossible random number";
+		}
+		
         var randNum = Math.floor(Math.random()*(end-start)+start)
 
         for (var i = 0; i < excludingArray.length; i++) {
