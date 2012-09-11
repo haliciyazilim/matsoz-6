@@ -1205,21 +1205,14 @@ Set.animateSets = function(opt){
 
 Set.animateComplementSets = function(opt){
     var sets  = Set.drawSets(opt.container, opt.position, opt.sets, opt.letters);
-
-    var start_time = Date.now();
-    // a.drawVennDiagram(Interaction.container, new Point(200,100), 'C');
-//    var sets = Set.drawSets(Interaction.container, new Point(120,140),[Interaction.set1, Interaction.set2] ,['E', 'A']);
-    var endTime = Date.now();
-    // Main.setObjective(endTime-start_time);
-//    sets.set1.scale(0.7);
-//    sets.set2.scale(0.7);
-
     var originalPosition1 = sets.set1.position;
     sets.set1.position = sets.set1.position.add(-100,0);
-
     var originalPosition2 = sets.set2.position;
     sets.set2.position = sets.set2.position.add(100,0);
-
+    sets.set1.children[0].opacity = 0;
+    sets.set1.children[0] = new Path.Rectangle(sets.set1.children[0].bounds).set_style({strokeWidth:1,strokeColor:"#000"});
+    sets.set1.children[1].position = sets.set1.children[1].position.add(-15,10);
+    sets.set1.children[1].fillColor = "#f00";
     sets.set1.animate({
         style: {
             position: originalPosition1
@@ -1228,48 +1221,36 @@ Set.animateComplementSets = function(opt){
         delay: 1000,
         animationType: 'easeInEaseOut',
         callback:function(){
-
+            sets.set1.children[1].content = opt.letters[1] + "'";
+            sets.set1.children[0].insertBelow(sets.set1.children[1]);
             sets.set2.children[2].remove();
         }
     });
-
     sets.set2.animate({
         style: {
             position: originalPosition2
         },
         duration: 1000,
         delay: 1000,
-        animationType: 'easeInEaseOut',
+        animationType: 'easeInEaseOut'
     });
-//    sets.set2.children[0].fillColor = new RgbColor(0.5,1,0.5,0.5);
-    sets.set2.children[0].animate({
+    sets.set1.children[0].fillColor = new RgbColor(0.8,0.8,0.8,0);
+    sets.set1.children[0].animate({
         style:{
-            fillColor: new RgbColor(0.5,1,0.5,0)
+            fillColor: new RgbColor(0.8,0.8,0.8,1)
         },
         duration:1000,
         delay:2000,
+        init:function(){
+            sets.set2.children[0].fillColor = new RgbColor(1,1,1,1);
+            sets.set2.children[1].remove();
+        },
         callback:function(){
-            sets.set2.animate({
-                style:{opacity:0},
-                duration:1000,
-                update:function(){
-                    sets.intersect.opacity = this.opacity;
-                    sets.intersectClone.opacity = this.opacity;
-                },
-                callback:function(){
-                    sets.set2.remove();
-                    sets.intersect.remove()
-                    sets.intersectClone.remove();
-                    if(opt.callback)
-                        opt.callback();
-                    sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
-                }
-            })
+            if(opt.callback)
+                opt.callback();
         }
-    })
-
+    });
     return sets;
-
 }
 
 Set.animateDisjointSets = function(opt){
