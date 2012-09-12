@@ -31,7 +31,7 @@ function __Styles(){
         width:'340px',
         height:'100px',
     //    border:'1px solid',
-        fontSize:'28px'
+        fontSize:'24px'
     };
 
 };
