@@ -116,7 +116,7 @@ Question.coinArray = [];
 Question.coinArray[0] = "Yazı ya da tura gelmeme olasılığı";    // impossible event
 Question.coinArray[1] = "Yazı ya da tura gelme olasılığı";      // certain event
 Question.coinArray[2] = "\"Yazı gelme olasılığı\" ve \"Tura gelme olasılığı\"";     // complement event
-Question.coinArray[3] = "\"Yazı gelme olasılığı\" ve \"Yazı ya da tura gelme olasılığı\"";  // not complement event
+Question.coinArray[3] = "\"Yazı gelme olasılığı\" ve \"Tura gelmeme olasılığı\"";  // not complement event
 
 Question.wheelArray = [];
 Question.wheelArray[0] = "Yeşil gelme olasılığı";   // impossible event
@@ -125,31 +125,31 @@ Question.wheelArray[2] = "\"Kırmızı gelme olasılığı\" ve \"Mavi gelme ola
 Question.wheelArray[3] = "\"Kırmızı gelme olasılığı\" ve \"Mavi gelme olasılığı\"";     // not complement event
 
 Question.wheel2Array = [];
-Question.wheel2Array[0] = "";
-Question.wheel2Array[1] = "";
-Question.wheel2Array[2] = "";
-Question.wheel2Array[3] = "";
+Question.wheel2Array[0] = "Kırmızı gelme olasılığı";    // impossible event
+Question.wheel2Array[1] = "Yeşil, mor, turuncu renklerden birinin gelme olasılığı";  // certain event
+Question.wheel2Array[2] = "\"Yeşil gelme olasılığı\" ve \"Mor gelme olasılığı\" ve \"Turuncu gelme olasılığı\"";   // complement event
+Question.wheel2Array[3] = "\"Yeşil gelme olasılığı\" ve \"Mor gelme olasılığı\"";
 
 Question.wheel3Array = [];
-Question.wheel3Array[0] = "";
-Question.wheel3Array[1] = "";
-Question.wheel3Array[2] = "";
-Question.wheel3Array[3] = "";
+Question.wheel3Array[0] = "Sarı gelme olasılığı";       // impossible event
+Question.wheel3Array[1] = "Pembe, beyaz, gri renklerden birinin gelme olasılığı";  // certain event
+Question.wheel3Array[2] = "\"Pembe gelme olasılığı\" ve \"Beyaz gelme olasılığı\" ve \"Gri gelme olasılığı\"";  // complement event
+Question.wheel3Array[3] = "\"Pembe gelme olasılığı\" ve \"Beyaz gelme olasılığı\"";  // not complement event
 
 Question.pouchArray = [];
 Question.pouchArray[0] = "Kırmızı top çekme olasılığı";     // impossible event
 Question.pouchArray[1] = "Mor, pembe, yeşil renk toplardan birini çekme olasılığı";     // certain event
-Question.pouchArray[2] = "\"Pembe top çekme olasılığı\" ve \"Mor ya da yeşil top çekme olasılığı\"";    // complement event
-Question.pouchArray[3] = "\"Mor top çekme olasılığı\" ve \"Mor ya da yeşil top çekme olasılığı\"";      // not complement event
+Question.pouchArray[2] = "\"Mor top çekme olasılığı\" ve \"Pembe top çekme olasılığı\" ve \"Yeşil top çekme olasılığı\"";    // complement event
+Question.pouchArray[3] = "\"Mor top çekme olasılığı\" ve \"Pembe top çekme olasılığı\"";      // not complement event
 
 Question.pouch2Array = [];
-Question.pouch2Array[0] = "";
-Question.pouch2Array[1] = "";
-Question.pouch2Array[2] = "";
-Question.pouch2Array[3] = "";
+Question.pouch2Array[0] = "Yeşil top çekme olasılığı";      // impossible event
+Question.pouch2Array[1] = "Mavi, kahverengi, turuncu renk toplardan birini çekme olasılığı";    // certain event
+Question.pouch2Array[2] = "\"Mavi top çekme olasılığı\" ve \"Kahverengi top çekme olasılığı\" ve \"Turuncu top çekme olasılığı";    // complement event
+Question.pouch2Array[3] = "\"Mavi top çekme olasılığı\" ve \"Kahverengi top çekme olasılığı\"";     // not complement event
 
 Question.pouch3Array = [];
-Question.pouch3Array[0] = "";
-Question.pouch3Array[1] = "";
-Question.pouch3Array[2] = "";
-Question.pouch3Array[3] = "";
+Question.pouch3Array[0] = "Sarı top çekme olasılığı";       // impossible event
+Question.pouch3Array[1] = "Kırmızı, gri, beyaz renk toplardan birini çekme olasılığı";      // certain event
+Question.pouch3Array[2] = "\"Kırmızı top çekme olasılığı\" ve \"Gri top çekme olasılığı\" ve \"Beyaz top çekme olasılığı\"";    // complement event
+Question.pouch3Array[3] = "\"Kırmızı top çekme olasılığı\" ve \"Gri top çekme olasılığı\"";     // not complement event

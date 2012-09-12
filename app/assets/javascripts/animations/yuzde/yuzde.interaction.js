@@ -106,17 +106,17 @@ var Interaction = {
             case 0:
                 Interaction.appendInput({
                     position:'absolute',
-                    top:'26px',
+                    top:'24px',
                     left:'248px',
                     width:'68px',
                     height:'34px',
-                    fontSize:'28px'
+                    fontSize:'24px'
                 });
                 var myNode = Interaction.rationalNumber.toHTML(28);
                 $(Interaction.questionDiv).append(myNode);
                 $(myNode).css({
                     position:'absolute',
-                    top:'10px',
+                    top:'7px',
                     left:'-22px'
                 });
                 $(Interaction.questionDiv).append('<span id="eqq1" style="position:absolute;top:29px;left:66px;"> = </span>' +
@@ -131,38 +131,38 @@ var Interaction = {
             case 1:
                 Interaction.appendInput({
                     position:'absolute',
-                    top:'26px',
+                    top:'24px',
                     left:'88px',
                     width:'30px',
                     height:'34px',
-                    fontSize:'28px'
+                    fontSize:'24px'
                 });
 
                 Interaction.appendInput({
                     position:'absolute',
-                    top:'26px',
+                    top:'24px',
                     left:'130px',
-                    width:'52px',
+                    width:'58px',
                     height:'34px',
-                    fontSize:'28px'
+                    fontSize:'24px'
                 });
 
                 var myNode = Interaction.rationalNumber.toHTML(28);
                 $(Interaction.questionDiv).append(myNode);
                 $(myNode).css({
                     position:'absolute',
-                    top:'10px',
+                    top:'7px',
                     left:'-22px'
                 });
 
                 $(Interaction.questionDiv).append('<span id="eqq1" style="position:absolute;top:29px;left:66px;"> = </span>' +
-                    '<span id="eqq2" style="position:absolute;top:29px;left:190px;"> = </span>' +
+                    '<span id="eqq2" style="position:absolute;top:29px;left:196px;"> = </span>' +
                     '<span id="comma" style="position:absolute;top:29px;left:120px;">,</span>' +
-                    '<span id="decc" style="position:absolute;top:29px;left:214px;"></span>');
+                    '<span id="decc" style="position:absolute;top:29px;left:220px;"></span>');
                 $('#decc').html(" %"+Interaction.e);
 
                 $(Interaction.inputs[0]).attr("maxLength",1);
-                $(Interaction.inputs[1]).attr("maxLength",3);
+                $(Interaction.inputs[1]).attr("maxLength",4);
 
                 $(Interaction.questionDiv).append(Interaction.inputs[0]);
                 $(Interaction.questionDiv).append(Interaction.inputs[1]);
@@ -170,32 +170,32 @@ var Interaction = {
             case 2:
                 Interaction.appendInput({
                     position:'absolute',
-                    top:'2px',
-                    left:'0px',
-                    width:'52px',
+                    top:'-1px',
+                    left:'-4px',
+                    width:'56px',
                     height:'34px',
-                    fontSize:'28px'
+                    fontSize:'24px'
                 });
 
                 Interaction.appendInput({
                     position:'absolute',
-                    top:'48px',
-                    left:'0px',
-                    width:'52px',
+                    top:'45px',
+                    left:'-4px',
+                    width:'56px',
                     height:'34px',
-                    fontSize:'28px'
+                    fontSize:'24px'
                 });
 
                 $(Interaction.questionDiv).append('<span id="eqq1" style="position:absolute;top:29px;left:66px;"> = </span>' +
-                    '<div id="lline" style="position:absolute;left:-2px;top:42px;width:60px;height:1px;padding:0;border-top:2px solid;"></div>' +
+                    '<div id="lline" style="position:absolute;left:-6px;top:39px;width:62px;height:1px;padding:0;border-top:2px solid;"></div>' +
                     '<span id="eqq2" style="position:absolute;top:29px;left:190px;"> = </span>' +
                     '<span id="dec" style="position:absolute;top:28px;left:86px;text-align:center;width:100px;"></span>' +
                     '<span id="decc" style="position:absolute;top:29px;left:214px;"></span>');
                 $('#dec').html(kk);
                 $('#decc').html(" %"+Interaction.e);
 
-                $(Interaction.inputs[0]).attr("maxLength",3);
-                $(Interaction.inputs[1]).attr("maxLength",3);
+                $(Interaction.inputs[0]).attr("maxLength",4);
+                $(Interaction.inputs[1]).attr("maxLength",4);
 
                 $(Interaction.questionDiv).append(Interaction.inputs[0]);
                 $(Interaction.questionDiv).append(Interaction.inputs[1]);

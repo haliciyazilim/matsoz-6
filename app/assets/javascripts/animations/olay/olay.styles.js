@@ -80,10 +80,11 @@ function __Styles(){
 
     questionDivStyle = {
         position:'absolute',
-        top:'40px',
+        top:'20px',
         left:'320px',
         width:'250px',
         height:'80px',
-        fontSize:'20px'
+        fontSize:'20px',
+    //    border:'1px solid'
     }
 }

@@ -10,7 +10,7 @@ function __Styles(){
         top:'100px',
         left:'260px',
         height:'100px',
-        width:'320px',
+        width:'320px'
     };
 
     questionTextStyle = {
@@ -38,8 +38,7 @@ function __Styles(){
         top:'30px',
         left:'30px',
         height:'160px',
-        width:'700px',
-        border:'1px solid'
+        width:'700px'
     };
 
     firstDivStyle = {
@@ -48,7 +47,6 @@ function __Styles(){
         left:'100px',
         height:'60px',
         width:'500px',
-        border:'1px solid',
         fontSize:'18px'
     };
 
@@ -58,7 +56,6 @@ function __Styles(){
         left:'160px',
         height:'60px',
         width:'410px',
-        border:'1px solid',
         fontSize:'18px'
     };
 };

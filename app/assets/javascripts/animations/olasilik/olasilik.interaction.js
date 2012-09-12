@@ -3,10 +3,20 @@ var Interaction = {
 	getFramework:function(){
 			return 'paper';
     },
-	images:[{
-        id:'shadow',
-        src:'/assets/animations/olasilik/top_golge.png'
-    }],
+	images:[
+        {
+            id:'shadow',
+            src:'/assets/animations/olasilik/top_golge.png'
+        },
+        {
+            id:'pouch1',
+            src:'/assets/animations/olasilik/olasilik_torba_01.png'
+        },
+        {
+            id:'pouch2',
+            src:'/assets/animations/olasilik/olasilik_torba_02.png'
+        }
+    ],
     init:function(container){
         Interaction.container = container;
 
@@ -58,6 +68,12 @@ var Interaction = {
 	nextQuestion: function(randomNumber){
         if(Interaction.ansGroup){
             Interaction.ansGroup.remove();
+        }
+        if(Interaction.pouch1){
+            Interaction.pouch1.remove();
+        }
+        if(Interaction.pouch2){
+            Interaction.pouch2.remove();
         }
 
         $(Interaction.inputs[0]).css("color","black");
@@ -122,18 +138,21 @@ var Interaction = {
         $(Interaction.inputs[0]).css("color","green");
         $(Interaction.inputs[1]).css("color","green");
         var answerFillColor = Interaction.myColors[Interaction.qIndex];
-
-        var answerCirc = new Path.Circle(new Point(120,180),18);
+        Interaction.pouch2 = new Raster('pouch2');
+        Interaction.pouch2.position = new Point(92.5,184.5);
+        var answerCirc = new Path.Circle(new Point(115,196),18);
         answerCirc.fillColor = answerFillColor;
         var shadow = new Raster('shadow');
-        shadow.position = new Point(120,180)
+        shadow.position = new Point(115,196);
         Interaction.ansGroup = new Group();
         Interaction.ansGroup.addChild(answerCirc);
         Interaction.ansGroup.addChild(shadow);
+        Interaction.pouch1 = new Raster('pouch1');
+        Interaction.pouch1.position = new Point(92.5,184.5);
 
         Interaction.ansGroup.animate({
             style:{
-                position:new Point(Interaction.ansGroup.position.x,Interaction.ansGroup.position.y-90),
+                position:new Point(Interaction.ansGroup.position.x,Interaction.ansGroup.position.y-110)
             },
             duration:1000,
             delay:1000,
@@ -145,14 +164,17 @@ var Interaction = {
         Interaction.ansGroup.X = 0;
         Interaction.ansGroup.animate({
             style:{
-                X:80,
+                X:36
             },
             duration:1000,
             delay:2500,
             animationType:'easeInOutQuad',
             update:function(){
-                this.position = this.firstPosition.add(1.5*this.X,0.015*this.X*this.X);
+                this.position = this.firstPosition.add(2.51*this.X,0.04*this.X*this.X);
             },
+            callback:function(){
+                Interaction.ansGroup.firstPosition = Interaction.ansGroup.position;
+            }
         });
         setTimeout('Interaction.resume();',3500)
     },
