@@ -22,11 +22,11 @@ var Interaction = {
         },
         {
             id:'wheel2',
-            src:'/assets/animations/olay/olay_etki_03.jpg'
+            src:'/assets/animations/olay/olay_etki_03_1.jpg'
         },
         {
             id:'wheel3',
-            src:'/assets/animations/olay/olay_etki_03.jpg'
+            src:'/assets/animations/olay/olay_etki_03_2.jpg'
         },
         {
             id:'pouch',
@@ -34,11 +34,11 @@ var Interaction = {
         },
         {
             id:'pouch2',
-            src:'/assets/animations/olay/olay_etki_04.jpg'
+            src:'/assets/animations/olay/olay_etki_04_1.jpg'
         },
         {
             id:'pouch3',
-            src:'/assets/animations/olay/olay_etki_04.jpg'
+            src:'/assets/animations/olay/olay_etki_04_2.jpg'
         }
 
     ],
