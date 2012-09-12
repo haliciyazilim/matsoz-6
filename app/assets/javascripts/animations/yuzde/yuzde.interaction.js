@@ -31,8 +31,7 @@ var Interaction = {
 	nextQuestion: function(randomNumber){
         Interaction.randomNumber = randomNumber;
         Interaction.flushInputs();
-        //Interaction.myRandom = Util.randomInteger(0,3);
-        Interaction.myRandom = 2;
+        Interaction.myRandom = Util.randomInteger(0,3);
         if(Interaction.questionDiv){
             $(Interaction.questionDiv).remove();
         }
