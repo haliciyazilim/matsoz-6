@@ -129,3 +129,10 @@ utilTest.prototype.testStringreverse=function(){
 
 
 }
+
+utilTest.prototype.testNumberTurkishFloating = function(){
+    assertEquals("16,40",Util.numberTurkishFloating(16.40,2));
+    assertEquals("1,00",Util.numberTurkishFloating(1,2));
+    assertEquals("3,33333",Util.numberTurkishFloating(3.333333333,5));
+    assertEquals("6,667",Util.numberTurkishFloating(6.66666,3));
+}
