@@ -1,39 +1,45 @@
 function InteractionBase(){
-	if(window['__Styles'] !== undefined){
+    __Interaction_Base_Languages();
+    if(window['__Styles'] !== undefined){
 		__Styles();
 	}
+    if(window['__Languages'] !== undefined){
+        __Languages();
+    }
+
 	Interaction.inputs = [];
 	Interaction.__isPaused = false;
 	Interaction.__inputVersion = 0;
 	Interaction.__status = function(e){
 		switch(e){
 			case Interaction.__status.WRONG:
-					Interaction.setStatus('Yanlış cevap, tekrar deneyiniz.',false);
+					Interaction.setStatus(Language.getText("status.false"),false);
 				break;
 				
 			case Interaction.__status.FAIL:
+                Interaction.setStatus(Language.getText("status.fail"),false);
 				break;
 				
 			case Interaction.__status.CORRECT:
-				Interaction.setStatus('Tebrikler!',true);
+                Interaction.setStatus(Language.getText("status.true"),true);
 				break;
 				
 			case Interaction.__status.FLOATING:
-				Interaction.setStatus('Lütfen ondalıklı sayıları virgülle yazınız.',false);
+				Interaction.setStatus(Language.getText("status.numberFloating"),"alert");
 				break;
 				
 			case Interaction.__status.EMPTY:
 				if(Interaction.inputs.length > 1)
-					Interaction.setStatus('Lütfen tüm kutucukları doldurunuz', "alert");
+					Interaction.setStatus(Language.getText("status.emptyInputs"), "alert");
 				else
-					Interaction.setStatus('Lütfen kutucuğu doldurunuz', "alert");
+					Interaction.setStatus(Language.getText("status.emptyInput"), "alert");
 				break;
 				
 			case Interaction.__status.NUMBER:
 				if(Interaction.inputs.length > 1)
-					Interaction.setStatus('Lütfen kutucuklara sayı giriniz',false);
+					Interaction.setStatus(Language.getText("status.emptyNumbers"),"alert");
 				else
-					Interaction.setStatus('Lütfen bir sayı giriniz.',false);
+					Interaction.setStatus(Language.getText("status.emptyNumber"),"alert");
 				break;
 		}
 	}
