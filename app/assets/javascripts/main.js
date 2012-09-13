@@ -22,6 +22,7 @@ var Main = function(){
 		}
 	}
 	$(document).ready(Main.init);
+
 }
 
 Main.config = {
@@ -98,8 +99,11 @@ Main.init = function(){
 	Main.animation = $('.ornek').get(0);
 	Main.objective = $('.mavikontrol').get(0);
 	//Main.InteractionContainer.appendChild(Main.ObjectiveContainer);
-	
-	var framework;
+
+    //Set the curent language
+    Language.init(Language.TURKISH);
+
+    var framework;
 	if (typeof(Interaction.getFramework) == "function") {
 		framework = Interaction.getFramework();
 	} else {

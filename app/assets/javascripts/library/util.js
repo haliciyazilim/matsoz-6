@@ -134,6 +134,11 @@ var Util = {
 
         var base = Math.floor(number/decimalDividend);
         var float  = number % decimalDividend;
+        if(float == 0){
+            float = "";
+            for(var i=0;i<decimal;i++)
+                float += "0";
+        }
         return base + ","+float;
     },
     rand01: function(){
