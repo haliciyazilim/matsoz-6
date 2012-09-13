@@ -31,6 +31,7 @@ animations/dogal_sayi/sayi06.jpg: animations/dogal_sayi/sayi06-c3afc7b23a80e05de
 animations/dogal_sayi/sayi07.jpg: animations/dogal_sayi/sayi07-1892c5e4425ba926bfd2dc343bbe2da6.jpg
 animations/dogal_sayi/sayi08.jpg: animations/dogal_sayi/sayi08-396790c7273ae0f9c4ae16ddf0b07834.jpg
 animations/dogal_sayi/sayi09.jpg: animations/dogal_sayi/sayi09-18ab69fbae9825b30cc4f72c9558f98d.jpg
+animations/isin/kursun_kalem_.png: animations/isin/kursun_kalem_-ea15e4fde0fb22177d8aabc8e47dbd60.png
 animations/kume/kume_hedef.png: animations/kume/kume_hedef-4cc416befa78f4caf93846a8c1689ff7.png
 animations/kume/kume_kume_active.png: animations/kume/kume_kume_active-cfc28578d917ec5cd967274ea7bb0093.png
 animations/kume/kume_kume_base.png: animations/kume/kume_kume_base-54e37822f52086f2a5bc9486ddca9222.png
@@ -212,6 +213,11 @@ animations/dogal_sayi/dogal_sayi.common.js: animations/dogal_sayi/dogal_sayi.com
 animations/dogal_sayi/dogal_sayi.includes.js: animations/dogal_sayi/dogal_sayi.includes-a611382acb86d92de42c754825e1d3a6.js
 animations/dogal_sayi/dogal_sayi.interaction.js: animations/dogal_sayi/dogal_sayi.interaction-ce9e2a4ddfcf2d7d17667465c1f0bf8c.js
 animations/dogal_sayi/dogal_sayi.styles.js: animations/dogal_sayi/dogal_sayi.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
+animations/dogru/dogru.animation.js: animations/dogru/dogru.animation-7db5158f9a75732075e6b4ad4616bff0.js
+animations/dogru/dogru.common.js: animations/dogru/dogru.common-21c0853351912956d6b89ab2e63e6994.js
+animations/dogru/dogru.includes.js: animations/dogru/dogru.includes-8464ada2645c7c65bcfe2686d29f229e.js
+animations/dogru/dogru.interaction.js: animations/dogru/dogru.interaction-136db91688f7c01301bd89568917d15a.js
+animations/dogru/dogru.styles.js: animations/dogru/dogru.styles-2799a13ada7b28614745a0e7bcf0b3d9.js
 animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.animation.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.animation-bba16a61acc0ce12c7442fa3f1ce9fe6.js
 animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.common.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.common-71c9eaf3c06bffedf041f8d52c511254.js
 animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.includes.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.includes-7fb7d00b4e45527b429c41fc65fe8e29.js
@@ -242,6 +248,11 @@ animations/evrensel_kume/evrensel_kume.common.js: animations/evrensel_kume/evren
 animations/evrensel_kume/evrensel_kume.includes.js: animations/evrensel_kume/evrensel_kume.includes-b28ba14f9873712453db937f59e52e11.js
 animations/evrensel_kume/evrensel_kume.interaction.js: animations/evrensel_kume/evrensel_kume.interaction-1aa832c22637daf124a0016acca9d0d8.js
 animations/evrensel_kume/evrensel_kume.styles.js: animations/evrensel_kume/evrensel_kume.styles-6600e0cc58ecd6670ff16e52c5c50988.js
+animations/isin/isin.animation.js: animations/isin/isin.animation-02da5f4a428e21180d8fa3f623db9a49.js
+animations/isin/isin.common.js: animations/isin/isin.common-66783be88461ee4508f202ea3e12f9e9.js
+animations/isin/isin.includes.js: animations/isin/isin.includes-12ba0a91f945e13f9bbb3a94f174d7ca.js
+animations/isin/isin.interaction.js: animations/isin/isin.interaction-141f59e94bda5500e647dacf60b52b8d.js
+animations/isin/isin.styles.js: animations/isin/isin.styles-e887c1ca0dcd02dbb2ae12efab97bb7d.js
 animations/kesirlerle_bolme_islemi/kesirlerle_bolme_islemi.animation.js: animations/kesirlerle_bolme_islemi/kesirlerle_bolme_islemi.animation-bba16a61acc0ce12c7442fa3f1ce9fe6.js
 animations/kesirlerle_bolme_islemi/kesirlerle_bolme_islemi.common.js: animations/kesirlerle_bolme_islemi/kesirlerle_bolme_islemi.common-7e2074c699b071f899c15fb2a9368d10.js
 animations/kesirlerle_bolme_islemi/kesirlerle_bolme_islemi.includes.js: animations/kesirlerle_bolme_islemi/kesirlerle_bolme_islemi.includes-fb65bcb9c350695dedbee4cdcbed4f0c.js
