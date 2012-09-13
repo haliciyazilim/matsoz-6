@@ -82,10 +82,10 @@ var Interaction = {
                 pattern = new LinearPattern(coefficient,constant,length);
                 break;
             case 1:
-                pattern = new QuadraticPattern(coefficient,constant,length);
+                pattern = new QuadraticPattern(1,0,length);
                 break;
             case 2:
-                pattern = new ExponentialPattern(Math.ceil(coefficient*0.5),constant,base,length);
+                pattern = new ExponentialPattern(1,0,base,length);
                 break;
         }
         console.log(pattern.numbers,pattern.numbers[hiddenNumberIndex]);

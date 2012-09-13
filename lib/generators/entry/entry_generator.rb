@@ -15,6 +15,7 @@ class EntryGenerator < Rails::Generators::NamedBase
     copy_file "common.js", "app/assets/javascripts/animations/#{file_name}/#{file_name}.common.js"
     copy_file "animation.js", "app/assets/javascripts/animations/#{file_name}/#{file_name}.animation.js"
     copy_file "interaction.js", "app/assets/javascripts/animations/#{file_name}/#{file_name}.interaction.js"
+    copy_file "languages.js", "app/assets/javascripts/animations/#{file_name}/#{file_name}.languages.js"
 
   end
 end

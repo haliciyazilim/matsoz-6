@@ -69,6 +69,7 @@ var Interaction = {
     },
 	nextQuestion: function(randomNumber){
         Interaction.cleanOptions();
+        Interaction.trial = 1;
         Interaction.myPause = 0;
         Interaction.randomNumber = randomNumber;
         Interaction.randomNumber2 = Util.randomInteger(1,4);
