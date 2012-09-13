@@ -59,13 +59,13 @@ var Interaction = {
                     Interaction.circle2.strokeColor = "black";
                     Interaction.circle2.fillColor = "black";
 
-                    Interaction.text1 = new PointText(new Point(Interaction.firstPoint.x, Interaction.firstPoint.y+4));
+                    Interaction.text1 = new PointText(new Point(Interaction.firstPoint.x, Interaction.firstPoint.y+5));
                     Interaction.text1.justification = 'center';
                     Interaction.text1.fillColor = 'white';
                     Interaction.text1.content = 'A';
                     Interaction.text1.strokeWidth = '1px';
 
-                    Interaction.text2 = new PointText(new Point(Interaction.secondPoint.x, Interaction.secondPoint.y+4));
+                    Interaction.text2 = new PointText(new Point(Interaction.secondPoint.x, Interaction.secondPoint.y+5));
                     Interaction.text2.justification = 'center';
                     Interaction.text2.fillColor = 'white';
                     Interaction.text2.content = 'B';
