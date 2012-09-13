@@ -1498,8 +1498,12 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	vennDiagram2.addChild(text);
 		
 		
-	var drawElements = function (elements, boundingBox, elementSize, hitTest) {
-		var granularity = 15;
+	var drawElements = function (elements, boundingBox, elementSize, hitTest, fontSize) {
+		if (fontSize == undefined) {
+			fontSize = 12;
+		}
+		
+		var granularity = fontSize;
 		var elementLocations = [];
 		var elementGroup = new Group();
 		
@@ -1579,9 +1583,10 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			
 			
 			// point = point.add(Util.randomInteger(0, granularity), -Util.randomInteger(0, granularity));
-			var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
+			// var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
+			var text = new PointText(point);
 			text.set_style({
-				fontSize: 14
+				fontSize: fontSize
 			})
 			text.content = "."+elements[i];
 			
@@ -1599,8 +1604,8 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			var top = point.y - elementSize.height;
 			var bottom = point.y + elementSize.height;
 			
-			// var rect = new Path.Rectangle(new Point(left, top), new Size(right-left, bottom - top));
-			// rect.strokeColor = 'blue';
+			var rect = new Path.Rectangle(new Point(left, top), new Size(right-left, bottom - top));
+			rect.strokeColor = 'blue';
 			
 			left = Math.floor((left - topLeftPoint.x) / granularity);
 			right = Math.floor((right - topLeftPoint.x) / granularity);
