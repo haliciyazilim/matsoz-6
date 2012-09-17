@@ -19,16 +19,22 @@ var Animation = {
         Animation.dot2.fillColor = "black";
         Animation.dot2.opacity = 0;
 
+        Animation.arrow = new Path.OneSidedArrow(new Point(587.5,80.5), new Point(588.5,80.5), 10,30);
+        Animation.arrow.opacity = 0;
+
         var letters = Util.dom({parent:Animation.container, tag:'div', css:lettersStyle,
-            html:'<span style="float:left">A</span> <span style="float:right">B</span><span style="position:relative;top:30px;">[AB</span>'
+            html:'<span style="float:left">A</span> <span style="float:right">B</span><span style="position:relative;top:30px;">[AB</span>&nbsp;&nbsp;&nbsp;<span style="position:relative;top:30px;">AB</span>'
         });
+
+        var myArrow = new Path.OneSidedArrow(new Point(400,116),new Point(440,116),10,20);
+        myArrow.opacity = 0;
 
         var pencil = Util.dom({parent:Animation.container, tag:'div', css:pencilStyle,
             html:'<img id="pencil" src="/assets/animations/isin/kursun_kalem_.png"/>'
         });
 
         $(pencil).delay(pencilStart).animate({opacity:1},1000,'easeInOutQuad')
-            .delay(500).animate({left:'+=330px'},4000,'linear')
+            .delay(500).animate({left:'+=350px'},4000,'linear')
             .delay(500).animate({opacity:0},1000,'easeInOutQuad');
 
         var animHelper = new AnimationHelper({
@@ -37,7 +43,7 @@ var Animation = {
 
         animHelper.animate({
             style:{
-                X:330
+                X:350
             },
             duration:4000,
             delay:lineStart,
@@ -74,6 +80,24 @@ var Animation = {
             animationType:'easeInOutQuad'
         });
 
+        Animation.arrow.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:dotStart,
+            animationType:'easeInOutQuad'
+        });
+
         $(letters).delay(lettersStart).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);})
+
+        myArrow.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:lettersStart,
+            animationType:'easeInOutQuad'
+        });
     }
 }
