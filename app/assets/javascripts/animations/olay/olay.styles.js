@@ -8,28 +8,31 @@ function __Styles(){
     animDivStyle = {
         position:'absolute',
         top:'20px',
-        left:'320px',
+        left:'300px',
         height:'160px',
-        width:'450px',
-        //border:'1px solid',
+        width:'460px',
         fontSize:'16px'
     };
     firstDivStyle = {
         position:'absolute',
         top:'0px',
-        left:'0px',
-        opacity:0
+        right:'0px',
+        opacity:0,
+        padding:0,
+        margin:0
     };
     secondDivStyle = {
         position:'absolute',
         top:'36px',
-        left:'191px',
-        opacity:0
+        right:'0px',
+        opacity:0,
+        padding:0,
+        margin:0
     };
     thirdDivStyle = {
         position:'absolute',
-        top:'82px',
-        left:'0px',
+        top:'72px',
+        left:'0px'
     };
     fourthDivStyle = {
         position:'absolute',

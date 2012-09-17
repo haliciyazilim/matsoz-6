@@ -115,10 +115,14 @@ var Animation = {
         dot2.fillColor = "black";
         dot2.opacity = 0;
 
-        var myLine = new Path.Line(new Point(186.5,80.5),new Point(576.5,80.5));
-        myLine.strokeWidth = 3;
-        myLine.strokeColor = "black";
-        myLine.opacity = 0;
+        Animation.myLine = new Group();
+        var myLinee = new Path.OneSidedArrow(new Point(186.5,80.5),new Point(576.5,80.5),10,30);
+        myLinee.strokeWidth = 3;
+        Animation.myLine.addChild(myLinee);
+        var myLinee2 = new Path.OneSidedArrow(new Point(186.5,80.5),new Point(184.5,80.5),10,30);
+        myLinee2.strokeWidth = 3;
+        Animation.myLine.addChild(myLinee2);
+        Animation.myLine.opacity = 0;
 
         Animation.circleGroup.addChild(firstGroup);
         Animation.circleGroup.addChild(secondGroup);
@@ -131,11 +135,15 @@ var Animation = {
         Animation.circleGroup.addChild(fifth2Group);
         Animation.circleGroup.addChild(dot1);
         Animation.circleGroup.addChild(dot2);
-        Animation.circleGroup.addChild(myLine);
 
         var letters = Util.dom({parent:Animation.container, tag:'div', css:lettersStyle,
-            html:'<span style="float:left">A</span> <span style="float:right">B</span><span style="position:relative;top:30px;">AB</span>'
+            html:'<span style="float:left">A</span> <span style="float:right">B</span><span style="position:relative;top:30px;">AB</span>&nbsp;&nbsp;&nbsp;<span style="position:relative;top:30px;">AB</span>'
         });
+
+        var myArroww = new Path.Line(new Point(396,116),new Point(430,116));
+        myArroww.strokeColor = "black";
+        myArroww.strokeWidth = 2;
+        myArroww.opacity = 0;
 
         var animHelper = new AnimationHelper({
             X:0
@@ -153,6 +161,7 @@ var Animation = {
                 Animation.line = new Path.Line(new Point(334.5-this.X,80.5), new Point(424.5+this.X,80.5));
                 Animation.line.strokeColor = "black";
                 Animation.line.insertBelow(Animation.circleGroup);
+                Animation.line.insertBelow(Animation.myLine);
             }
         });
 
@@ -343,7 +352,7 @@ var Animation = {
             delay:dotStart,
             animationType:'easeInOutQuad'
         });
-        myLine.animate({
+        Animation.myLine.animate({
             style:{
                 opacity:1
             },
@@ -360,5 +369,14 @@ var Animation = {
             animationType:'easeInOutQuad'
         });
         $(letters).delay(lettersStart).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
+
+        myArroww.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:lettersStart,
+            animationType:'easeInOutQuad'
+        });
     }
 }

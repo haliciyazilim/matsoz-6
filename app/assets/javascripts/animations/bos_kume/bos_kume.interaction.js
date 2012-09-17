@@ -152,6 +152,7 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
+        Interaction.trial=1;
         if(Interaction.aktifBtn==1){
             if(Interaction.soru.kume.elements.length==0){
                 return true;
@@ -179,7 +180,7 @@ var Interaction = {
             $("#rbBosKumeDegil").css("background-position","-64px 0px")
         }
         else if(Interaction.aktifBtn==-1){
-            Interaction.setStatus("Yanlış cevap; yukarıdaki küme boş.",false);
+            Interaction.setStatus("Yanlış cevap; yukarıdaki küme, boş kümedir.",false);
             $("#bosKumeDegil").css("color","red");
             $("#bosKume").css("color","green");
 

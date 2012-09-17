@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki alanda iki nokta belirleyerek bir doğru oluşturunuz.');
+        Main.setObjective('Yandaki alanda iki nokta belirleyerek bir doğru parçası oluşturunuz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -69,16 +69,6 @@ var Interaction = {
                     var myRand = Util.randomInteger(0,5);
                     myRand *= 2;
 
-                    Interaction.line1 = new Path.Line(new Point(Interaction.firstPoint.findPointTo(Interaction.secondPoint,-35)),new Point(Interaction.firstPoint));
-                    Interaction.line1.strokeColor = "black";
-                    Interaction.line1.strokeWidth = 4;
-                    Interaction.arrow = new Path.OneSidedArrow(new Point(Interaction.firstPoint.findPointTo(Interaction.secondPoint,-35)), new Point(Interaction.firstPoint.findPointTo(Interaction.secondPoint,-36)), 10,30);
-
-                    Interaction.line2 = new Path.Line(new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-35)),new Point(Interaction.secondPoint));
-                    Interaction.line2.strokeColor = "black";
-                    Interaction.line2.strokeWidth = 4;
-                    Interaction.arrow2 = new Path.OneSidedArrow(new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-35)), new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-36)), 10,30);
-
                     Interaction.circle2 = new Path.Circle(Interaction.secondPoint,6);
                     Interaction.circle2.strokeColor = "black";
                     Interaction.circle2.fillColor = "black";
@@ -103,7 +93,7 @@ var Interaction = {
                     Interaction.text3 = new PointText(new Point(186.5,260.5));
                     Interaction.text3.justification = 'center';
                     Interaction.text3.fillColor = 'black';
-                    Interaction.text3.content = ""+Interaction.letters[myRand+0]+Interaction.letters[myRand+1]+" doğrusu";
+                    Interaction.text3.content = ""+Interaction.letters[myRand+0]+Interaction.letters[myRand+1]+" doğru parçası";
                     Interaction.text3.strokeWidth = '1px';
                 }
             }
@@ -112,11 +102,6 @@ var Interaction = {
             }
         }
     },
-		
-	/*
-	*	this function is called inside Interaction.__checkAnswer() function
-	*	if this function returns false, check answer operation is cancelled
-	*/
 	preCheck : function(){
 
     },

@@ -3,10 +3,6 @@ var deleteAll = function(){
         Interaction.path.remove();
     }
 
-    if(Interaction.line1){
-        Interaction.line1.remove();
-    }
-
     if(Interaction.line2){
         Interaction.line2.remove();
     }
@@ -29,14 +25,6 @@ var deleteAll = function(){
 
     if(Interaction.text3){
         Interaction.text3.remove();
-    }
-
-    if(Interaction.arrow){
-        Interaction.arrow.remove();
-    }
-
-    if(Interaction.arrow2){
-        Interaction.arrow2.remove();
     }
 
     Interaction.clickk = 0;

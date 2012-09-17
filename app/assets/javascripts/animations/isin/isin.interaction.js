@@ -14,7 +14,7 @@ var Interaction = {
             height:$(container).height()
         };
 
-        $(Interaction.container).append('<button id="again" class="repeat_button" style="position:absolute;bottom:20px;right:250px;"></button>');
+        $(Interaction.container).append('<button id="again" class="repeat_button" style="position:absolute;bottom:20px;right:150px;"></button>');
 
         Interaction.prepareNextQuestion();
     },
@@ -23,6 +23,21 @@ var Interaction = {
         $('#again').get(0).onclick = null;
 
         Interaction.clickk = 0;
+        Interaction.letters = [];
+        Interaction.letters[0] = "A";
+        Interaction.letters[1] = "B";
+        Interaction.letters[2] = "C";
+        Interaction.letters[3] = "D";
+        Interaction.letters[4] = "E";
+        Interaction.letters[5] = "F";
+        Interaction.letters[6] = "K";
+        Interaction.letters[7] = "L";
+        Interaction.letters[8] = "M";
+        Interaction.letters[9] = "N";
+
+        Interaction.rectangle = new Path.Rectangle(new Point(40.5,40.5),new Size(500,160));
+        Interaction.rectangle.strokeColor = "black";
+        Interaction.rectangle.fillColor = "white";
 
         var tool = new Tool();
 
@@ -30,12 +45,12 @@ var Interaction = {
 
             if(Interaction.clickk == 0){
                 Interaction.firstPoint = event.downPoint;
-                if(Interaction.firstPoint.x > 40 && Interaction.firstPoint.y > 40 && Interaction.firstPoint.x < 550 && Interaction.firstPoint.y < 210){
+                if(Interaction.rectangle.hitTest(Interaction.firstPoint)){
                     Interaction.path = new Path();
                     Interaction.path.strokeColor = "black";
                     Interaction.path.strokeWidth = 4;
                     Interaction.path.add(event.downPoint);
-                    Interaction.circle1 = new Path.Circle(Interaction.firstPoint,9);
+                    Interaction.circle1 = new Path.Circle(Interaction.firstPoint,6);
                     Interaction.circle1.strokeColor = "black";
                     Interaction.circle1.fillColor = "black";
 
@@ -44,32 +59,47 @@ var Interaction = {
             }
             else if(Interaction.clickk == 1){
                 Interaction.secondPoint = event.downPoint;
-                if(Interaction.secondPoint.x > 40 && Interaction.secondPoint.y > 40 && Interaction.secondPoint.x < 550 && Interaction.secondPoint.y < 210){
+                if(Interaction.rectangle.hitTest(Interaction.secondPoint)){
                     Interaction.clickk += 1;
                     Interaction.path.add(event.downPoint);
 
                     $('#again').css("opacity",1);
                     $('#again').get(0).onclick = deleteAll;
 
-                    Interaction.line2 = new Path.Line(new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-30)),new Point(Interaction.secondPoint));
+                    var myRand = Util.randomInteger(0,5);
+                    myRand *= 2;
+
+                    Interaction.line2 = new Path.Line(new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-35)),new Point(Interaction.secondPoint));
                     Interaction.line2.strokeColor = "black";
                     Interaction.line2.strokeWidth = 4;
+                    Interaction.arrow = new Path.OneSidedArrow(new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-35)), new Point(Interaction.secondPoint.findPointTo(Interaction.firstPoint,-36)), 10,30);
 
-                    Interaction.circle2 = new Path.Circle(Interaction.secondPoint,9);
+                    Interaction.circle2 = new Path.Circle(Interaction.secondPoint,6);
                     Interaction.circle2.strokeColor = "black";
                     Interaction.circle2.fillColor = "black";
 
-                    Interaction.text1 = new PointText(new Point(Interaction.firstPoint.x, Interaction.firstPoint.y+5));
+                    var myPoint1 = Interaction.firstPoint.findPointTo(Interaction.secondPoint,20);
+                    myPoint1 = myPoint1.getRotatedPoint(90,Interaction.firstPoint);
+                    var myPoint2 = Interaction.secondPoint.findPointTo(Interaction.firstPoint,20);
+                    myPoint2 = myPoint2.getRotatedPoint(-90,Interaction.secondPoint);
+
+                    Interaction.text1 = new PointText(new Point(myPoint1.x, myPoint1.y+4));
                     Interaction.text1.justification = 'center';
-                    Interaction.text1.fillColor = 'white';
-                    Interaction.text1.content = 'A';
+                    Interaction.text1.fillColor = 'black';
+                    Interaction.text1.content = Interaction.letters[myRand];
                     Interaction.text1.strokeWidth = '1px';
 
-                    Interaction.text2 = new PointText(new Point(Interaction.secondPoint.x, Interaction.secondPoint.y+5));
+                    Interaction.text2 = new PointText(new Point(myPoint2.x, myPoint2.y+4));
                     Interaction.text2.justification = 'center';
-                    Interaction.text2.fillColor = 'white';
-                    Interaction.text2.content = 'B';
+                    Interaction.text2.fillColor = 'black';
+                    Interaction.text2.content = Interaction.letters[myRand+1];
                     Interaction.text2.strokeWidth = '1px';
+
+                    Interaction.text3 = new PointText(new Point(186.5,260.5));
+                    Interaction.text3.justification = 'center';
+                    Interaction.text3.fillColor = 'black';
+                    Interaction.text3.content = ""+Interaction.letters[myRand+0]+Interaction.letters[myRand+1]+" ışını";
+                    Interaction.text3.strokeWidth = '1px';
                 }
             }
             else{

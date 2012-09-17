@@ -15,8 +15,8 @@ var Animation = {
         Animation.animDiv = Util.dom({parent:Animation.container, tag:'div', css:animationDivStyle});
 
         Animation.firstDiv = Util.dom({parent:Animation.animDiv, tag:'div', css:firstDivStyle,
-            html:'<div id="textt" style="opacity:0;position:absolute;top:18px;left:0px;">Bir olayın olma olasılığı =</div>' +
-                '<div id="fract" style="position:absolute;top:0px;left:210px;height:51px;width:280px;padding:0;margin:0;line-height:25px;">' +
+            html:'<div id="textt" style="opacity:0;position:absolute;top:18px;left:2px;padding:0;margin:0;">Bir olayın olma olasılığı =</div>' +
+                '<div id="fract" style="position:absolute;left:210px;height:52px;width:280px;padding:0;margin:0;line-height:25px;">' +
                 '<div id="nomt" style="opacity:0;"></div><div id="linet" style="opacity:0;"></div><div id="denomt" style="opacity:0;"></div></div>'
         });
 
