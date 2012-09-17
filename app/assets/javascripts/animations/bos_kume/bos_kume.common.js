@@ -73,6 +73,7 @@ var sorgular = function () {
                 value:15
             });
             this.kume.definition="Asal sayılar";
+            this.kume.elements=[2, 3, 5, 7, 11, 13,"..."];
             this.kume;
             break;
         case 10:
