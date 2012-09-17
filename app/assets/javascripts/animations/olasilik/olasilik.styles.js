@@ -38,7 +38,8 @@ function __Styles(){
         top:'30px',
         left:'30px',
         height:'160px',
-        width:'700px'
+        width:'700px',
+        verticalAlign:'middle'
     };
 
     firstDivStyle = {
