@@ -27,6 +27,18 @@ var deleteAll = function(){
         Interaction.text2.remove();
     }
 
+    if(Interaction.text3){
+        Interaction.text3.remove();
+    }
+
+    if(Interaction.arrow){
+        Interaction.arrow.remove();
+    }
+
+    if(Interaction.arrow2){
+        Interaction.arrow2.remove();
+    }
+
     Interaction.clickk = 0;
 
     Interaction.firstPoint = null;
