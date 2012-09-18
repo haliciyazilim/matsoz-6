@@ -1,5 +1,9 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+	strokeColor = "#41818a";
+    fillColor = "#a8dbe3";
+
+    lineStyle = {
+        strokeWidth:2,
+        strokeColor:'#41818a'
+    }
 }
