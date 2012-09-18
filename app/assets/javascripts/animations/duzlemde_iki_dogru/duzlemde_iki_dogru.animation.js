@@ -1421,8 +1421,5 @@ var Animation = {
                 Main.animationFinished(1000);
             }
         });
-
-
-
     }
 };
