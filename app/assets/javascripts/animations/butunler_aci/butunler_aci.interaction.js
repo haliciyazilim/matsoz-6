@@ -26,10 +26,14 @@ var Interaction = {
             parent:Interaction.container,
             css:{
                 position:'absolute',
-                bottom:'10px',
-                right:'40px'
-            },
-            html:'2. seviyeye geç'
+                bottom:'5px',
+                right:'40px',
+                width:'105px',
+                height:'42px',
+                border:0,
+                backgroundImage:"url(/assets/animations/butunler_aci/seviye_2.png)"
+
+            }
         });
         Interaction.setRandomGenerator(2);
         Interaction.alterLevelButton.onclick = Interaction.enterLevel2;
@@ -106,7 +110,7 @@ var Interaction = {
 
     enterLevel1: function(){
         Interaction.level = 1;
-        Interaction.alterLevelButton.innerHTML = '2. seviyeye geç';
+        Interaction.alterLevelButton.style.backgroundImage ="url(/assets/animations/butunler_aci/seviye_2.png)"
         Interaction.alterLevelButton.onclick = Interaction.enterLevel2;
         $(Interaction.questionDiv).remove();
 
@@ -115,7 +119,7 @@ var Interaction = {
 
     enterLevel2: function(){
         Interaction.level = 2;
-        Interaction.alterLevelButton.innerHTML = '1. seviyeye geç';
+        Interaction.alterLevelButton.style.backgroundImage ="url(/assets/animations/butunler_aci/seviye_1.png)"
         Interaction.alterLevelButton.onclick = Interaction.enterLevel1;
         Interaction.prepareNextQuestion();
 

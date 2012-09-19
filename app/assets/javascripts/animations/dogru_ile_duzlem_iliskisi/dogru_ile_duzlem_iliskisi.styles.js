@@ -1,5 +1,18 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+    surfaceStyle = {
+        strokeColor: "#4F9C4F",
+        strokeWidth: 2
+
+    };
+
+    surfaceStyleLine = {
+        strokeColor: "#4F9C4F",
+        strokeWidth: 2,
+        opacity:0
+    };
+
+    textStyle={
+        fillColor:"black",
+        opacity:0
+    };
 }

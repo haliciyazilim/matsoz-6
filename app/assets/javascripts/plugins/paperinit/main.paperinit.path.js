@@ -171,6 +171,16 @@ Main.paperInit.Path = function() {
 		polygon.closed=true;
 		return polygon;
 	}
+
+    Path.TwoSidedArrow = function(point1, point2, arrowHeadSize, angle) {
+        var group = new Group();
+        var arrow1 = new Path.OneSidedArrow(Util.centerOfPoints([point1,point2]),point1,arrowHeadSize,angle);
+        var arrow2 = new Path.OneSidedArrow(Util.centerOfPoints([point1,point2]),point2,arrowHeadSize,angle);
+        group.addChild(arrow1);
+        group.addChild(arrow2);
+        return group;
+    }
+
 	Path.OneSidedArrow = function(point1, point2, arrowHeadSize, angle) {
 		if (arrowHeadSize == null) {
 			arrowHeadSize = 3;
