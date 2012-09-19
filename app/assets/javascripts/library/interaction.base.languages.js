@@ -6,111 +6,38 @@
  * To change this template use File | Settings | File Templates.
  */
 function __Interaction_Base_Languages(){
-    Language.setText([
-        {
-            phrase:"status.true",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Congratulations!"
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Tebrikler!"
-                }
-            ]
+    Language.setText({
+        "status.true":{
+            TURKISH:"Tebrikler!",
+            ENGLISH:"Congratulations!"
         },
-        {
-            phrase:"status.false",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Wrong answer, try again."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Yanlış cevap, tekrar deneyiniz."
-                }
-            ]
+        "status.false":{
+            TURKISH:"Yanlış cevap, tekrar deneyiniz.",
+            ENGLISH:"Wrong answer, try again."
         },
-        {
-            phrase:"status.fail",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Wrong answer, the correct one is shown above."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Yanlış cevap, doğrusu yukarıda gösterilmiştir."
-                }
-            ]
+        "status.fail":{
+            TURKISH:"Yanlış cevap, doğrusu yukarıda gösterilmiştir.",
+            ENGLISH:"Wrong answer, the correct one is shown above."
         },
-        {
-            phrase:"status.emptyInput",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Please fill the box."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Lütfen kutucuğu doldurunuz."
-                }
-            ]
+        "status.emptyInput":{
+            TURKISH:"Lütfen kutucuğu doldurunuz.",
+            ENGLISH:"Please fill all the boxes."
         },
-        {
-            phrase:"status.emptyInputs",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Please fill all the boxes."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Lütfen tüm kutucukları doldurunuz."
-                }
-            ]
+        "status.emptyInputs":{
+            TURKISH:"Lütfen tüm kutucukları doldurunuz.",
+            ENGLISH:"Please fill all the boxes."
         },
-        {
-            phrase:"status.numberNumber",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Please enter a number."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Lütfen bir sayı giriniz."
-                }
-            ]
+        "status.numberNumber":{
+            TURKISH:"Lütfen bir sayı giriniz.",
+            ENGLISH:"Please enter a number."
         },
-        {
-            phrase:"status.numberNumbers",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Please enter numbers to boxes."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Lütfen kutucuklara sayı giriniz."
-                }
-            ]
+        "status.numberNumbers":{
+            TURKISH:"Lütfen kutucuklara sayı giriniz.",
+            ENGLISH:"Please enter numbers to boxes."
         },
-        {
-            phrase:"status.numberFloating",
-            texts:[
-                {
-                    language:Language.ENGLISH,
-                    meaning:"Please write floating numbers with dot."
-                },
-                {
-                    language:Language.TURKISH,
-                    meaning:"Lütfen ondalıklı sayıları virgülle yazınız."
-                }
-            ]
+        "status.numberFloating":{
+            TURKISH:"Lütfen ondalıklı sayıları virgülle yazınız.",
+            ENGLISH:"Please write floating numbers with dot."
         }
-
-    ]);
+    });
 }
