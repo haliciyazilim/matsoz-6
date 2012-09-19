@@ -148,11 +148,11 @@ Angle.prototype.redraw = function(pointOrAngle){
         var angleTextString="", typeTextString="";
         if(this.suplement){
             angleTextString =  this.angle + "° + " + (180 - this.angle) + "°" + " = 180°";
-            typeTextString = "Bütünler açı";
+            typeTextString = (this.suplement.isNeighbour?"Komşu ":"")+"Bütünler açı";
         }
         if(this.complement){
             angleTextString =  this.angle + "° + " + (90 - this.angle) + "°" + " = 90°";
-            typeTextString = "Tümler açı";
+            typeTextString = (this.complement.isNeighbour?"Komşu ":"")+"Tümler açı";
         }
         if(this.angleText)
             this.angleText.remove();
