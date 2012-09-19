@@ -12,13 +12,13 @@ var Interaction = {
             height:$(container).height()
         }
 
-        var resim1=[5,"/assets/animations/saymanin_temel_ilkesi/tisort_beyaz.png"];
-        var resim2=[12,"/assets/animations/saymanin_temel_ilkesi/tisort_kirmizi.png"];
-        var resim3=[19,"/assets/animations/saymanin_temel_ilkesi/tisort_mavi.png"];
-        var resim4=[27,"/assets/animations/saymanin_temel_ilkesi/tisort_mor.png"];
-        var resim5=[35,"/assets/animations/saymanin_temel_ilkesi/tisort_sari.png"];
-        var resim6=[43,"/assets/animations/saymanin_temel_ilkesi/tisort_sari.png"];
-        var resim7=[72,"/assets/animations/saymanin_temel_ilkesi/tisort_sari.png"];
+        var resim1=[5,"/assets/animations/aciklik/aciklik_5.jpg"];
+        var resim2=[12,"/assets/animations/aciklik/aciklik_12.jpg"];
+        var resim3=[19,"/assets/animations/aciklik/aciklik_19.jpg"];
+        var resim4=[27,"/assets/animations/aciklik/aciklik_27.jpg"];
+        var resim5=[35,"/assets/animations/aciklik/aciklik_35.jpg"];
+        var resim6=[43,"/assets/animations/aciklik/aciklik_43.jpg"];
+        var resim7=[72,"/assets/animations/aciklik/aciklik_72.jpg"];
 
 
 
@@ -32,8 +32,8 @@ var Interaction = {
             position:"absolute",
             width:"150px",
             height:"20px",
-            top:"50px",
-            left:"300px",
+            top:"90px",
+            left:"410px",
             fontSize:"20px"
 
         });
@@ -44,7 +44,7 @@ var Interaction = {
             position:"absolute",
             width:"250px",
             height:"20px",
-            top:"150px",
+            top:"190px",
             left:"300px",
             fontSize:"20px"
 
