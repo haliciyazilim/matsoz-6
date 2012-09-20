@@ -7,8 +7,10 @@ Main.paperInit.Point = function(){
 			);
 	};
 	
-	Point.prototype.showOnCanvas = function(){
-		var p = new Path.Circle(this,3);
+	Point.prototype.showOnCanvas = function(radius){
+        if(radius == undefined)
+            radius = 3;
+		var p = new Path.Circle(this,radius);
 		p.setStyle({fillColor:'#000',strokeWidth:2,strokeColor:'#fff'});
 		this.canvasPoint = p;
 		return p;
@@ -17,7 +19,7 @@ Main.paperInit.Point = function(){
 	Point.prototype.projectToLine = function(p1,p2){
 		var p_ = this.subtract(p2);
 		var p1_ = p1.subtract(p2);
-		var dot = p_.dot(p1_);;
+		var dot = p_.dot(p1_);
 		return p1_.multiply( dot /  p1_.dot(p1_)).add(p2);
 	};
 	

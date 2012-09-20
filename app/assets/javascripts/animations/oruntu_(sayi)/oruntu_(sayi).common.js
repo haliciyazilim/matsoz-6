@@ -21,25 +21,40 @@ NumberWithShape.prototype.draw = function(){
     this.removeShape();
     this.cubeArray = [];
     this.sqrt = Math.ceil(Math.sqrt(this.number))
-    for(var i=0; i < this.number; i++){
-        var position = this.position;
+    if(this.number == 3){
+        for(var i=0; i < this.number; i++){
+            this.cubeArray.push(new Path.Cube(
+                this.position.add(this.size*i,0),
+                this.size,
+                new Point(0.4,0.3)
+            ).set_style({strokeColor:this.strokeColor,fillColor:this.fillColor}));
+        }
+    }else{
+        for(var i=0; i < this.number; i++){
+            var position = this.position;
 
-        position = position.add(
-            this.size * Math.floor(i % this.sqrt),
-            -this.size * Math.floor(i / this.sqrt)
-        );
+            position = position.add(
+                this.size * Math.floor(i % this.sqrt),
+                -this.size * Math.floor(i / this.sqrt)
+            );
 
-        this.cubeArray.push(new Path.Cube(
-            position,
-            this.size,
-            new Point(0.4,0.3)
-        ).set_style({strokeColor:this.strokeColor,fillColor:this.fillColor}));
+            this.cubeArray.push(new Path.Cube(
+                position,
+                this.size,
+                new Point(0.4,0.3)
+            ).set_style({strokeColor:this.strokeColor,fillColor:this.fillColor}));
+        }
     }
+
     this.width = this.size * this.sqrt;
     if(this.number <=8)
         this.height = this.size * Math.ceil(this.number /2 );
     else
         this.height = this.size * 4;
+    if(this.number == 3){
+        this.width = 3 * this.size;
+        this.height = this.size;
+    }
     this.numberText = new PointText(this.position.add(this.width*0.5,this.size+28));
     this.numberText.justification = 'center';
     this.numberText.content = this.number;

@@ -3,64 +3,70 @@ var Animation = {
 	init:function(container){
 		Animation.container = container;
 
-        $(container).append("<div id='aciklama'>");
-        $(container).append("<div id='tanim1'>");
-        $(container).append("<div id='tanim2'>");
-
-        $("#aciklama").css({
-            width:"100%",
-            height:"20px",
+        $(Animation.container).append("<img id='resim' src='/assets/animations/cebirsel_ifade/baba_kiz.jpg'>");
+        $("#resim").css({
+            width:"123px",
+            height:"170px",
             position:"absolute",
             top:"30px",
-            left:"0px",
-            textAlign:"center",
-            fontSize:"18px"
+            left:"180px",
+            opacity:0
+        });
 
+        $(container).append("<div id='aciklama' class='metin'>");
+        $(container).append("<div id='tanim1' class='metin'>");
+        $(container).append("<div id='tanim2' class='metin'>");
 
-
-        }).html("Babasının yaşı kızın yaşının üç katından 2 yaş fazladır.");
-
-        $("#tanim1").append("<div class='ifade'></div><div class='sonuc'></div>");
-        $("#tanim2").append("<div class='ifade'></div><div class='sonuc'></div>");
+        $("#aciklama").css({
+            width:"450px",
+            height:"20px",
+            top:"45px",
+            opacity:0
+        }).html("Babasının yaşı<br /> <span id='kizinYasi'>kızın yaşının</span> <span id='ucKati'>üç katından</span> <span id='ikiYas'>2 yaş fazladır</span>.");
 
         $("#tanim1").css({
-            width:"320px",
+            width:"170px",
             height:"30px",
             position:"absolute",
-            top:"100px",
-            right:"0px",
-            fontSize:"20px",
-            float:"left"
+            top:"115px",
+            opacity:0
         });
-        $("#tanim1 .ifade").html("Kızın yaşı: ");
-        $("#tanim1 .sonuc").html("k olsun");
+        $("#tanim1").html("Kızın yaşı: <span id='k'>k</span> olsun");
+
 
         $("#tanim2").css({
-            width:"320px",
+            width:"200px",
             height:"30px",
             position:"absolute",
-            top:"150px",
-            right:"0px",
-            fontSize:"20px"
+            top:"165px",
+            opacity:0
         });
 
-        $("#tanim2 .ifade").html("Babasının yaşı: ");
-        $("#tanim2 .sonuc").html("3k + 2");
+        $("#tanim2").html("Babasının yaşı: <span id='ucK'>3k</span><span id='artiIki'> + 2</span>");
 
-        $(".ifade").css({
-            width:"150px",
-            float:"left",
-            textAlign:"right"
+        $(".metin").css({
+            left:"320px",
+            position:"absolute",
+            textAlign:"left",
+            fontSize:"16px",
+            color:"#000000"
         });
 
-        $(".sonuc").css({
-            width:"150px",
-            marginLeft:"10px",
-            float:"left"
-        });
+        //$(".kirmizi").css("color","red");
 
 
-        Main.animationFinished(1000);
+        $("#resim").delay(1000).animate({opacity:1},1000);
+        $("#aciklama").delay(2000).animate({opacity:1},1000);
+        $("#tanim1").delay(3000).animate({opacity:1},1000);
+        $("#tanim2").delay(4000).animate({opacity:1},1000);
+
+        $("#kizinYasi, #k").delay(5000).animate({color:"#ff0000"},1000).delay(2000).animate({color:"#000000"},1000);
+        $("#ucKati, #ucK").delay(10000).animate({color:"#ff0000"},1000).delay(2000).animate({color:"#000000"},1000);
+        $("#ikiYas, #artiIki").delay(15000).animate({color:"#ff0000"},1000).delay(2000).animate({color:"#000000"},1000);
+        $("#ucK").delay(1000).animate({color:"#ff0000"},1000).delay(2000).animate({color:"#000000"},1000);
+
+
+        Main.animationFinished(19000);
 
 
 		

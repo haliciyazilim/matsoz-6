@@ -4,7 +4,10 @@ var Interaction = {
         return 'paper';
     },
 	images:[
-        
+        {
+            id:'paper',
+            src:'/assets/animations/mavi_cizgili_kagit.jpg'
+        }
     ],
     init:function(container){
         Interaction.container = container;
@@ -22,6 +25,8 @@ var Interaction = {
         $('#again').css("opacity",0.4);
         $('#again').get(0).onclick = null;
 
+
+
         Interaction.clickk = 0;
         Interaction.letters = [];
         Interaction.letters[0] = "A";
@@ -38,7 +43,10 @@ var Interaction = {
         Interaction.rectangle = new Path.Rectangle(new Point(40.5,40.5),new Size(500,160));
         Interaction.rectangle.strokeColor = "black";
         Interaction.rectangle.fillColor = "white";
+        Interaction.rectangle.opacity = 0;
 
+        var pp = new Raster('paper');
+        pp.position = new Point(295,150);
         var tool = new Tool();
 
         tool.onMouseDown = function(event){

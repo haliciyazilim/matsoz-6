@@ -1,9 +1,19 @@
 function __Styles(){
-	strokeColor = "#41818a";
-    fillColor = "#a8dbe3";
+	strokeColor = "#9b763d";
+    fillColor = "#f2c885";
 
     lineStyle = {
         strokeWidth:2,
-        strokeColor:'#41818a'
-    }
+        strokeColor:strokeColor
+    };
+
+    circStyle = {
+        fillColor:fillColor,
+        strokeColor:strokeColor
+    };
+
+    fillStyle = {
+        fillColor:fillColor,
+        strokeColor:strokeColor
+    };
 }

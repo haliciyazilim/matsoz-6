@@ -51,6 +51,7 @@ var Animation = {
                 });
                 angle.setComplement(complementAngle)
                 angle.draw(false,5000);
+                Main.animationFinished(5000);
             }
 
         })
