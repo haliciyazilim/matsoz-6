@@ -12,6 +12,8 @@ animations/board_black.jpg: animations/board_black-3bd3680f557a1a351f69db06bc044
 animations/board_green.jpg: animations/board_green-f511768915a9f4126c69b8b9c08bcbc4.jpg
 animations/btn_gray_draw.png: animations/btn_gray_draw-cc1bb061ee6a242ca967318181cdbc38.png
 animations/btn_gray_expand.png: animations/btn_gray_expand-8c6fa1a1e3c4f2357fd80a369c06165f.png
+animations/butunler_aci/seviye_1.png: animations/butunler_aci/seviye_1-fdd7424c37c2f0523d65db481f09e0c9.png
+animations/butunler_aci/seviye_2.png: animations/butunler_aci/seviye_2-39d8f293d277771d22a2e260be7439d4.png
 animations/cebir/cebir_eski_yazi.png: animations/cebir/cebir_eski_yazi-2b76ac2c1e8a423112f3cf82c636a771.png
 animations/cebir/cebir_harezmi.png: animations/cebir/cebir_harezmi-6ed685e74f315beafef933cd2c3854c9.png
 animations/cebir/cebir_yeni_yazi.png: animations/cebir/cebir_yeni_yazi-f7a5f44c95c42158e4495263dcdf6c17.png
