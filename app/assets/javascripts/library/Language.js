@@ -14,6 +14,7 @@ var Language = {
     phrases:null,
     selectedLanguage:null,
     init:function(language){
+        console.log("I'm here");
         Language.phrases = Language[language];
         if(Language.phrases == undefined)
             throw "Specified language `" + language + "` is not supported";
@@ -43,18 +44,19 @@ var Language = {
         })
     *
     */
-    setText: function(node){
-        if(node instanceof Array){
-            for(var i=0;i<node.length;i++){
-                __convertNodeToLanguage(node[i]);
+    setText: function(nodes){
+        for (var phrase in nodes) {
+            if (nodes.hasOwnProperty(phrase)) {
+                __convertNodeToLanguage(phrase,nodes[phrase]);
             }
-        }else{
-            __convertNodeToLanguage(node);
         }
-
-        function __convertNodeToLanguage(node){
-            for(var i=0;i < node.texts.length;i++){
-                Language[node.texts[i].language][node.phrase] = node.texts[i].meaning;
+        function __convertNodeToLanguage(phrase,meanings){
+            for (var lang in meanings) {
+                if(meanings.hasOwnProperty(lang)) {
+                    if(Language[lang] == undefined)
+                        throw lang + " language is not supported";
+                    Language[Language[lang]][phrase] = meanings[lang];
+                }
             }
         }
     }

@@ -1,32 +1,39 @@
 function adamlariGetir(){
 
     var kisilerArray=Interaction.kisilerArray;
+    var kisilerEn=[73,69,78,81,79,92,87];
     for(var i=0; i<kisilerArray.length;i++){
         $(Interaction.container).append("<img id='"+kisilerArray[i][0]+"' class='kisiler' src='"+kisilerArray[i][1]+"'>");
+        $("#"+kisilerArray[i][0]).css("width",kisilerEn[i])
+
 
         if(i<4){
             $("#"+kisilerArray[i][0]).css({
-                left:i*60+20+"px",
+                left:i*90+20+"px",
                 bottom:"150px"
             });
         }
         else{
             $("#"+kisilerArray[i][0]).css({
-                left:(i-4)*60+50+"px",
+                left:(i-4)*90+20+"px",
                 bottom:"50px"
             });
         }
         Interaction.kisilerYasToplam+=kisilerArray[i][0];
 
+
+
     }
 
     $(".kisiler").css({
         position:"absolute",
-        width:"50px",
-        height:"100px",
+
+        height:"96px",
         cursor:"pointer"
 
     });
+
+
 
     $(".kisiler").click(
         function(){
@@ -55,13 +62,13 @@ function adamlariKaristir(){
     for(var i=0; i<kisilerArray.length;i++){
         if(i<4){
             $("#"+kisilerArray[karisikSira[i]][0]).css({
-                left:i*60+20+"px",
+                left:i*90+20+"px",
                 bottom:"150px"
             });
         }
         else{
             $("#"+kisilerArray[karisikSira[i]][0]).css({
-                left:(i-4)*60+50+"px",
+                left:(i-4)*90+20+"px",
                 bottom:"50px"
             });
         }
