@@ -201,71 +201,89 @@ var Animation = {
         twelvethLetter.strokeWidth = '1px';
         twelvethLetter.opacity = 0;
 
-        var firstText = new PointText(new Point(animHelper.FPoint.x+30,animHelper.FPoint.y-10));
+        var firstText = new PointText(new Point(animHelper.FPoint.x+30,animHelper.FPoint.y-30));
         firstText.justification = 'left';
-        firstText.content = 'AB ve CD paralel';
+        firstText.content = 'AB ve CD doğru';
         firstText.strokeWidth = '1px';
         firstText.opacity = 0;
 
-        var first2Text = new PointText(new Point(animHelper.FPoint.x+30,animHelper.FPoint.y+20));
+        var first2Text = new PointText(new Point(animHelper.FPoint.x+30,animHelper.FPoint.y-10));
         first2Text.justification = 'left';
-        first2Text.content = '[AB] // [CD]';
+        first2Text.content = 'parçaları paralel.';
         first2Text.strokeWidth = '1px';
         first2Text.opacity = 0;
 
-        var secondText = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y-30));
+        var first3Text = new PointText(new Point(animHelper.FPoint.x+30,animHelper.FPoint.y+20));
+        first3Text.justification = 'left';
+        first3Text.content = '[AB] // [CD]';
+        first3Text.strokeWidth = '1px';
+        first3Text.opacity = 0;
+
+        var secondText = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y-40));
         secondText.justification = 'left';
-        secondText.content = 'AB ve CD kesişiyor';
+        secondText.content = 'AB ve CD doğru';
         secondText.strokeWidth = '1px';
         secondText.opacity = 0;
 
-        var second2Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y));
+        var second2Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y-20));
         second2Text.justification = 'left';
-        second2Text.content = 'Aynı düzlemde';
+        second2Text.content = 'parçaları kesişiyor.';
         second2Text.strokeWidth = '1px';
         second2Text.opacity = 0;
 
-        var second3Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y+20));
+        var second3Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y+10));
         second3Text.justification = 'left';
-        second3Text.content = 'kesişmeyen doğrular';
+        second3Text.content = 'Aynı düzlemde';
         second3Text.strokeWidth = '1px';
         second3Text.opacity = 0;
 
-        var second4Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y+40));
+        var second4Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y+30));
         second4Text.justification = 'left';
-        second4Text.content = 'paraleldir';
+        second4Text.content = 'kesişmeyen doğrular';
         second4Text.strokeWidth = '1px';
         second4Text.opacity = 0;
 
-        var thirdText = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y-40));
+        var second5Text = new PointText(new Point(anim2Helper.F2Point.x+30,anim2Helper.F2Point.y+50));
+        second5Text.justification = 'left';
+        second5Text.content = 'paraleldir.';
+        second5Text.strokeWidth = '1px';
+        second5Text.opacity = 0;
+
+        var thirdText = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y-50));
         thirdText.justification = 'left';
         thirdText.content = 'AB ve CD';
         thirdText.strokeWidth = '1px';
         thirdText.opacity = 0;
 
-        var third2Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y-20));
+        var third2Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y-30));
         third2Text.justification = 'left';
-        third2Text.content = 'dik kesişiyor';
+        third2Text.content = 'doğru parçaları';
         third2Text.strokeWidth = '1px';
         third2Text.opacity = 0;
 
-        var third3Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y));
+        var third3Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y-10));
         third3Text.justification = 'left';
-        third3Text.content = '[AB] ┴ [CD]';
+        third3Text.content = 'dik kesişiyor.';
         third3Text.strokeWidth = '1px';
         third3Text.opacity = 0;
 
-        var third4Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y+30));
+        var third4Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y+15));
         third4Text.justification = 'left';
-        third4Text.content = 'Diklik, kesişmenin';
+        third4Text.content = '[AB] ┴ [CD]';
         third4Text.strokeWidth = '1px';
         third4Text.opacity = 0;
 
-        var third5Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y+50));
+        var third5Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y+40));
         third5Text.justification = 'left';
-        third5Text.content = 'özel bir durumudur';
+        third5Text.content = 'Diklik, kesişmenin';
         third5Text.strokeWidth = '1px';
         third5Text.opacity = 0;
+
+        var third6Text = new PointText(new Point(anim3Helper.F3Point.x+30,anim3Helper.F3Point.y+60));
+        third6Text.justification = 'left';
+        third6Text.content = 'özel bir durumudur.';
+        third6Text.strokeWidth = '1px';
+        third6Text.opacity = 0;
 
 
         Animation.rectanglePath.animate({
@@ -390,8 +408,8 @@ var Animation = {
             delay:firstOpen,
             update:function(){
                 if(this.rectAngle < Math.PI/2){
-                    rectFirstLine.strokeColor = "grey";
-                    rectFirstLine.dashArray = [2,3];
+                    rectFirstLine.strokeColor = markLineColor;
+                //    rectFirstLine.dashArray = [2,3];
                 }
                 if(Animation.rectanglePath){
                     Animation.rectanglePath.remove();
@@ -570,8 +588,8 @@ var Animation = {
             delay:secondOpen,
             update:function(){
                 if(this.rectAngle < Math.PI/2){
-                    rectSecondLine.strokeColor = "grey";
-                    rectSecondLine.dashArray = [2,3];
+                    rectSecondLine.strokeColor = markLineColor;
+                //    rectSecondLine.dashArray = [2,3];
                 }
                 if(Animation.rectanglePath){
                     Animation.rectanglePath.remove();
@@ -663,6 +681,15 @@ var Animation = {
         });
 
         first2Text.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:firstTextsStart,
+            animationType:'easeInOutQuad'
+        });
+
+        first3Text.animate({
             style:{
                 opacity:1
             },
@@ -768,8 +795,8 @@ var Animation = {
             delay:first2Open,
             update:function(){
                 if(this.rect2Angle < Math.PI*0.5){
-                    rect2FirstLine.strokeColor = "grey";
-                    rect2FirstLine.dashArray = [2,3];
+                    rect2FirstLine.strokeColor = markLineColor;
+                //    rect2FirstLine.dashArray = [2,3];
                 }
                 if(Animation.rectangle2Path){
                     Animation.rectangle2Path.remove();
@@ -931,8 +958,8 @@ var Animation = {
             update:function(){
 
                 if(this.rect2Angle < Math.PI*0.5){
-                    rect2SecondLine.strokeColor = "grey";
-                    rect2SecondLine.dashArray = [2,3];
+                    rect2SecondLine.strokeColor = markLineColor;
+                //    rect2SecondLine.dashArray = [2,3];
                 }
 
                 if(Animation.rectangle2Path){
@@ -1014,6 +1041,15 @@ var Animation = {
         });
 
         second4Text.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:firstTexts2Start,
+            animationType:'easeInOutQuad'
+        });
+
+        second5Text.animate({
             style:{
                 opacity:1
             },
@@ -1118,8 +1154,8 @@ var Animation = {
             delay:first3Open,
             update:function(){
                 if(this.rect3Angle < Math.PI/2){
-                    rect3FirstLine.strokeColor = "grey";
-                    rect3FirstLine.dashArray = [2,3];
+                    rect3FirstLine.strokeColor = markLineColor;
+                //   rect3FirstLine.dashArray = [2,3];
                 }
                 if(Animation.rectangle3Path){
                     Animation.rectangle3Path.remove();
@@ -1294,8 +1330,8 @@ var Animation = {
             delay:second3Open,
             update:function(){
                 if(this.rect3Angle < Math.PI/2){
-                    rect3SecondLine.strokeColor = "grey";
-                    rect3SecondLine.dashArray = [2,3];
+                    rect3SecondLine.strokeColor = markLineColor;
+                //    rect3SecondLine.dashArray = [2,3];
                 }
                 if(Animation.rectangle3Path){
                     Animation.rectangle3Path.remove();
@@ -1411,6 +1447,15 @@ var Animation = {
         });
 
         third5Text.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:firstTexts3Start,
+            animationType:'easeInOutQuad'
+        });
+
+        third6Text.animate({
             style:{
                 opacity:1
             },
