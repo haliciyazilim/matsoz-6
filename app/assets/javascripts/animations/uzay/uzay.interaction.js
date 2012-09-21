@@ -1,10 +1,8 @@
 var Interaction = {
-    
 	getFramework:function(){
         return 'paper';
     },
 	images:[
-        
     ],
     init:function(container){
         Interaction.container = container;
@@ -13,7 +11,6 @@ var Interaction = {
             width:$(container).width(),
             height:$(container).height()
         };
-
         Interaction.appendButton({
             bottom:"40px",
             right:"40px"
@@ -28,14 +25,16 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        Interaction.pause();
+        Interaction.resume(3000);
         Interaction.button.className = "next_button";
         Interaction.button.onclick = Interaction.prepareNextQuestion;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.createRectanglePrisim();
 //        Interaction.Shapes[Interaction.shapeIndex]();
-//        Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
+        Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
         /*<[[TEST*/
-            Interaction.playScenerio(Interaction.Scenarios[ 5 ]);
+//            Interaction.playScenerio(Interaction.Scenarios[ 9 ]);
         /*TEST]]>*/
         Interaction.shapeIndex = ++Interaction.shapeIndex % Interaction.Scenarios.length;
     },
@@ -58,7 +57,6 @@ var Interaction = {
                     break;
             }
             function point(p){
-//                var point  = p.from.showOnCanvas(5);
                 var point = Util.project(p.from,Interaction.matrix).showOnCanvas(5);
                 if(p.to){
                     for(var i=0;i<p.to.length;i++)
@@ -72,11 +70,41 @@ var Interaction = {
             function surface(scene){
                 var surface = new Surface(scene.points);
                 surface.shape = {
-                    strokeColor:"#000"
+                    strokeColor:"#000",
+                    fillColor:new RgbColor(1,1,1,0.5)
                 }
                 surface.project(Interaction.matrix);
-            }
+                var animHelper = new AnimationHelper({
+                    angle:0
+                });
 
+
+                if(scene.rotateX || scene.rotateY || scene.rotateZ){
+                    animHelper.animate({
+                        style:{angle:Math.PI * 2},
+                        duration:2000,
+                        delay:1500,
+                        init:function(){
+                            if(scene.rotateX)
+                                surface.pivotsX[0] = scene.rotateX;
+                            else if(scene.rotateY)
+                                surface.pivotsY[0] = scene.rotateY;
+                            else
+                                surface.pivotsZ[0] = scene.rotateZ;
+                        },
+                        update:function(){
+                            if(scene.rotateX)
+                                surface.rotationsX[0] = this.angle;
+                            else if(scene.rotateY)
+                                surface.rotationsY[0] = this.angle;
+                            else
+                                surface.rotationsZ[0] = this.angle;
+                            surface.project(Interaction.matrix)
+                        }
+                    });
+                }
+
+            }
             function line(scene){
                 var centerPoint = Util.centerOfPoints([
                     Util.project(scene.point1,Interaction.matrix),
@@ -87,13 +115,13 @@ var Interaction = {
                 point1.animate({
                     style:{position:Util.project(scene.point1,Interaction.matrix)},
                     duration:1000,
-                    delay:1000
+                    delay:100
                 });
                 var point2  = centerPoint.showOnCanvas(5);
                 point2.animate({
                     style:{position:Util.project(scene.point2,Interaction.matrix)},
                     duration:1000,
-                    delay:1000
+                    delay:100
                 });
                 var animHelper = new AnimationHelper({
                     line:null,
@@ -106,47 +134,44 @@ var Interaction = {
                         point2:Util.project(scene.point2,Interaction.matrix)
                     },
                     duration:1000,
-                    delay:1000,
+                    delay:100,
                     update:function(){
                         if(this.line)
                             this.line.remove();
                         this.line = new Path.Line(this.point1,this.point2);
                         this.line.set_style({strokeColor:"#000"});
-//                        this.line.insertBelow(Interaction.rectanglePrisim);
-                    },
-                    callback:function(){
-                        if(scene.rotateX || scene.rotateY || scene.rotateZ){
-                            var anim = new AnimationHelper({
-                                angle:0,
-                                line:this.line
-                            });
-                            anim.animate({
-                                style:{angle:Math.PI*2},
-                                duration:1000,
-                                delay:500,
-                                update:function(){
-                                    if(scene.rotateX){
-                                        var p1 = Util.project(scene.point1.getRotatedPointByX(this.angle), Interaction.matrix);
-                                        var p2 = Util.project(scene.point2.getRotatedPointByX(this.angle), Interaction.matrix);
-                                    }
-                                    else if(scene.rotateY){
-                                        var p1 = Util.project(scene.point1.getRotatedPointByY(this.angle), Interaction.matrix);
-                                        var p2 = Util.project(scene.point2.getRotatedPointByY(this.angle), Interaction.matrix);
-                                    }else{
-                                        var p1 = Util.project(scene.point1.getRotatedPointByY(this.angle), Interaction.matrix);
-                                        var p2 = Util.project(scene.point2.getRotatedPointByY(this.angle), Interaction.matrix);
-                                    }
-                                    this.line.remove();
-                                    this.line = new Path.Line(p1,p2);
-                                    this.line.set_style({strokeColor:"#000"});
-                                    point1.position = p1;
-                                    point2.position = p2;
-                                }
-                            })
-                        }
-
                     }
                 });
+                if(scene.rotateX || scene.rotateY || scene.rotateZ){
+                    var anim = new AnimationHelper({
+                        angle:0
+                    });
+                    anim.animate({
+                        style:{angle:Math.PI*2},
+                        duration:2000,
+                        delay:1500,
+                        update:function(){
+                            if(scene.rotateX){
+                                var p1 = Util.project(scene.point1.getRotatedPointByX(this.angle), Interaction.matrix);
+                                var p2 = Util.project(scene.point2.getRotatedPointByX(this.angle), Interaction.matrix);
+                            }
+                            else if(scene.rotateY){
+                                var p1 = Util.project(scene.point1.getRotatedPointByY(this.angle), Interaction.matrix);
+                                var p2 = Util.project(scene.point2.getRotatedPointByY(this.angle), Interaction.matrix);
+                            }else{
+                                var p1 = Util.project(scene.point1.getRotatedPointByY(this.angle), Interaction.matrix);
+                                var p2 = Util.project(scene.point2.getRotatedPointByY(this.angle), Interaction.matrix);
+                            }
+                            if(animHelper.line)
+                                animHelper.line.remove();
+                            animHelper.line = new Path.Line(p1,p2);
+                            animHelper.line.set_style({strokeColor:"#000"});
+                            point1.position = p1;
+                            point2.position = p2;
+                        }
+
+                    })
+                }
             }
         }
     },
@@ -175,8 +200,7 @@ var Interaction = {
                 {
                     type:"line",
                     point1: new Point3(-50,95,45),
-                    point2: new Point3(125,-45,36),
-                    rotateX: new Point3(100,0,0)
+                    point2: new Point3(125,-45,36)
                 }
             ],
             [
@@ -194,117 +218,120 @@ var Interaction = {
             [
                 {
                     type:"line",
-                    point1: new Point3(200,150,78),
-                    point2: new Point3(300,50,366)
+                    point1: new Point3(-120,50,30),
+                    point2: new Point3(120,-50,65)
                 },
                 {
                     type:"line",
-                    point1: new Point3(450,50,87),
-                    point2: new Point3(150,100,15)
+                    point1: new Point3(-120,-50,30),
+                    point2: new Point3(120,50,65)
                 }
             ],
             [
                 {
                     type:"surface",
                     points:[
-                        new Point3(-50,-50,20),
-                        new Point3(-50,50,20),
-                        new Point3(50,50,-20),
-                        new Point3(50,-50,-20)
+                        new Point3(-100,-50,-20),
+                        new Point3(-100,50,-20),
+                        new Point3(100,50,20),
+                        new Point3(100,-50,20)
+                    ]
+                }
+            ],
+            [
+                {
+                    type:"surface",
+                    points:[
+                        new Point3(-120,-50,-0),
+                        new Point3(-120,50,-0),
+                        new Point3(80,50,40),
+                        new Point3(80,-50,40)
                     ],
-                    rotateX: new Point3(0,0,0)
+                    rotateY:new Point3(0,0,0)
+                },
+                {
+                    type:"surface",
+                    points:[
+                        new Point3(-100,-50,-20),
+                        new Point3(-100,50,-20),
+                        new Point3(100,50,20),
+                        new Point3(100,-50,20)
+                    ],
+                    rotateY:new Point3(0,0,0)
+                }
+            ],
+            [
+                {
+                    type:"surface",
+                    points:[
+                        new Point3(-100,0,-50),
+                        new Point3(100,0,-50),
+                        new Point3(100,0,50),
+                        new Point3(-100,0,50)
+                    ],
+                    rotateX:new Point3(0,0,0)
+                },
+                {
+                    type:"surface",
+                    points:[
+                        new Point3(-100,-50,0),
+                        new Point3(-100,50,0),
+                        new Point3(100,50,0),
+                        new Point3(100,-50,0)
+                    ],
+                    rotateX:new Point3(0,0,0)
+                }
+            ],
+            [
+                {
+                    type:"surface",
+                    points:[
+                        new Point3(-100,0,-50),
+                        new Point3(100,0,-50),
+                        new Point3(100,0,50),
+                        new Point3(-100,0,50)
+                    ],
+                    rotateX:new Point3(0,0,0)
+                },
+                {
+                    type:"line",
+                    point1: new Point3(-80,-50,-30),
+                    point2: new Point3(80,-50,65),
+                    rotateX:new Point3(0,0,0)
+                }
+            ],
+            [
+                {
+                    type:"line",
+                    point1: new Point3(-80,-70,-30),
+                    point2: new Point3(80,70,30),
+                    rotateX:new Point3(0,0,0)
+                },
+                {
+                    type:"surface",
+                    points:[
+                        new Point3(-100,0,-50),
+                        new Point3(100,0,-50),
+                        new Point3(100,0,50),
+                        new Point3(-100,0,50)
+                    ],
+                    rotateX:new Point3(0,0,0)
                 }
             ]
         ];
     },
-
-//    Shapes:[
-//        function(){//one point
-//            Interaction.pause();
-//            var point  = new Point(200,150).showOnCanvas(5);
-//            point.animate({
-//                style:{position:point.position.add(100,0)},
-//                duration:1000,
-//                delay:1000,
-//                callback:Interaction.resume()
-//            });
-//        },
-//        function(){//two point
-//            var point1  = new Point(110,125).showOnCanvas(5);
-//            point1.animate({
-//                style:{position:point1.position.add(230,10)},
-//                duration:1000,
-//                delay:1000,
-//                callback:Interaction.resume()
-//            });
-//            var point2  = new Point(310,175).showOnCanvas(5);
-//            point2.animate({
-//                style:{position:point2.position.add(-50,-70)},
-//                duration:1000,
-//                delay:1000,
-//                callback:Interaction.resume()
-//            });
-//        },
-//        function(){//
-//            var point1  = new Point(250,125).showOnCanvas(5);
-//            point1.animate({
-//                style:{position:point1.position.add(50,50)},
-//                duration:1000,
-//                delay:1000,
-//                callback:Interaction.resume()
-//            });
-//            var point2  = new Point(250,125).showOnCanvas(5);
-//            point2.animate({
-//                style:{position:point2.position.add(-50,-50)},
-//                duration:1000,
-//                delay:1000,
-//                callback:Interaction.resume()
-//            });
-//            point1.insertBelow(Interaction.rectanglePrisim);
-//            point2.insertBelow(Interaction.rectanglePrisim);
-//            var animHelper = new AnimationHelper({
-//                line:null,
-//                point1:point1.position,
-//                point2:point2.position
-//            });
-//            animHelper.animate({
-//                style:{
-//                    point1:point1.position.add(50,50),
-//                    point2:point2.position.add(-50,-50)
-//                },
-//                duration:1000,
-//                delay:1000,
-//                update:function(){
-//                    if(this.line)
-//                        this.line.remove();
-//                    this.line = new Path.Line(this.point1,this.point2);
-//                    this.line.set_style({strokeColor:"#000"});
-//                    this.line.insertBelow(Interaction.rectanglePrisim);
-//                }
-//            });
-//        },
-//        function(){//
-//
-//        }
-//    ],
-
 	/*
 	*	this function is called inside Interaction.__checkAnswer() function
 	*	if this function returns false, check answer operation is cancelled
 	*/
 	preCheck : function(){
-
     },
 	isAnswerCorrect : function(value){
-
     },
 	onCorrectAnswer : function(){
-		
     },
 	onWrongAnswer : function(){
-		
     },
 	onFail : function(){
-		
     }
 }
