@@ -33,18 +33,59 @@ var Animation = {
 
         animHelper.animate({
             style:{
-                X:150
+                X:230
             },
             duration:5000,
             delay:lineStart,
             animationType:'linear',
             update:function(){
-                if(Animation.line){
-                    Animation.line.remove();
-                }
+                if(this.X < 150){
+                    if(Animation.line){
+                        Animation.line.remove();
+                    }
 
-                Animation.line = new Path.Line(new Point(379.5-this.X,80.5), new Point(381.5+this.X,80.5));
-                Animation.line.strokeColor = "black";
+                    Animation.line = new Path.Line(new Point(379.5-this.X,80.5), new Point(381.5+this.X,80.5));
+                    Animation.line.strokeColor = "black";
+                    Animation.line.strokeWidth = 3;
+                }
+                else{
+                    if(Animation.line3){
+                        Animation.line3.remove();
+                    }
+                    if(Animation.line4){
+                        Animation.line4.remove();
+                    }
+                    Animation.line3 = new Path.Line(new Point(230.5,80.5),new Point(379.5-this.X,80.5));
+                    Animation.line3.strokeColor = "black";
+                    Animation.line3.strokeWidth = 3;
+                    Animation.line3.opacity = 1;
+                    Animation.line3.insertAbove(dot1);
+
+                    Animation.line4 = new Path.Line(new Point(530.5,80.5), new Point(381.5+this.X,80.5));
+                    Animation.line4.strokeColor = "black";
+                    Animation.line4.strokeWidth = 3;
+                    Animation.line4.opacity = 1;
+                    Animation.line4.insertAbove(dot2);
+                }
+            },
+            callback:function(){
+                Animation.line3.animate({
+                    style:{
+                        opacity:0
+                    },
+                    duration:1000,
+                    delay:3000,
+                    animationType:'easeInOutQuad'
+                });
+
+                Animation.line4.animate({
+                    style:{
+                        opacity:0
+                    },
+                    duration:1000,
+                    delay:3000,
+                    animationType:'easeInOutQuad'
+                });
             }
         });
 
@@ -73,7 +114,7 @@ var Animation = {
             delay:dotStart,
             animationType:'easeInOutQuad'
         });
-
+        console.log("dotStart ",dotStart);
         var letters = Util.dom({parent:Animation.container, tag:'div', css:lettersStyle,
             html:'<span style="float:left">A</span> <span style="float:right">B</span><span style="position:relative;top:30px;">AB doğru parçası</span>&nbsp;&nbsp;&nbsp;<span style="position:relative;top:30px;">[AB]</span>'
         });

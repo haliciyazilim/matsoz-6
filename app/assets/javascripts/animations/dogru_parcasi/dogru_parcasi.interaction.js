@@ -17,7 +17,16 @@ var Interaction = {
             height:$(container).height()
         };
 
-        $(Interaction.container).append('<button id="again" class="repeat_button" style="position:absolute;bottom:20px;right:150px;"></button>');
+        $(Interaction.container).append('<button id="again" class="repeat_button" style="position:absolute;bottom:20px;right:90px;"></button>');
+
+        Interaction.appendStatus({
+            bottom:'20px',
+            right:'240px',
+            //    border:'1px solid',
+            width:'310px',
+            height:'26px',
+            textAlign:'center'
+        });
 
         Interaction.prepareNextQuestion();
     },
@@ -64,43 +73,50 @@ var Interaction = {
                 }
             }
             else if(Interaction.clickk == 1){
-                Interaction.secondPoint = event.downPoint;
-                if(Interaction.rectangle.hitTest(Interaction.secondPoint)){
-                    Interaction.clickk += 1;
-                    Interaction.path.add(event.downPoint);
+                if(Interaction.firstPoint.getDistance(event.downPoint) < 25){
+                    Interaction.setStatus('Lütfen daha uzak bir nokta belirleyiniz.',false);
+                }
+                else{
+                    Interaction.secondPoint = event.downPoint;
+                    if(Interaction.rectangle.hitTest(Interaction.secondPoint)){
+                        Interaction.clickk += 1;
+                        Interaction.path.add(event.downPoint);
 
-                    $('#again').css("opacity",1);
-                    $('#again').get(0).onclick = deleteAll;
+                        $('#again').css("opacity",1);
+                        $('#again').get(0).onclick = deleteAll;
 
-                    var myRand = Util.randomInteger(0,5);
-                    myRand *= 2;
+                        var myRand = Util.randomInteger(0,5);
+                        myRand *= 2;
 
-                    Interaction.circle2 = new Path.Circle(Interaction.secondPoint,6);
-                    Interaction.circle2.strokeColor = "black";
-                    Interaction.circle2.fillColor = "black";
+                        Interaction.circle2 = new Path.Circle(Interaction.secondPoint,6);
+                        Interaction.circle2.strokeColor = "black";
+                        Interaction.circle2.fillColor = "black";
 
-                    var myPoint1 = Interaction.firstPoint.findPointTo(Interaction.secondPoint,20);
-                    myPoint1 = myPoint1.getRotatedPoint(90,Interaction.firstPoint);
-                    var myPoint2 = Interaction.secondPoint.findPointTo(Interaction.firstPoint,20);
-                    myPoint2 = myPoint2.getRotatedPoint(-90,Interaction.secondPoint);
+                        var myPoint1 = Interaction.firstPoint.findPointTo(Interaction.secondPoint,20);
+                        myPoint1 = myPoint1.getRotatedPoint(90,Interaction.firstPoint);
+                        var myPoint2 = Interaction.secondPoint.findPointTo(Interaction.firstPoint,20);
+                        myPoint2 = myPoint2.getRotatedPoint(-90,Interaction.secondPoint);
 
-                    Interaction.text1 = new PointText(new Point(myPoint1.x, myPoint1.y+4));
-                    Interaction.text1.justification = 'center';
-                    Interaction.text1.fillColor = 'black';
-                    Interaction.text1.content = Interaction.letters[myRand];
-                    Interaction.text1.strokeWidth = '1px';
+                        Interaction.text1 = new PointText(new Point(myPoint1.x, myPoint1.y+4));
+                        Interaction.text1.justification = 'center';
+                        Interaction.text1.fillColor = 'black';
+                        Interaction.text1.content = Interaction.letters[myRand];
+                        Interaction.text1.strokeWidth = '1px';
 
-                    Interaction.text2 = new PointText(new Point(myPoint2.x, myPoint2.y+4));
-                    Interaction.text2.justification = 'center';
-                    Interaction.text2.fillColor = 'black';
-                    Interaction.text2.content = Interaction.letters[myRand+1];
-                    Interaction.text2.strokeWidth = '1px';
+                        Interaction.text2 = new PointText(new Point(myPoint2.x, myPoint2.y+4));
+                        Interaction.text2.justification = 'center';
+                        Interaction.text2.fillColor = 'black';
+                        Interaction.text2.content = Interaction.letters[myRand+1];
+                        Interaction.text2.strokeWidth = '1px';
 
-                    Interaction.text3 = new PointText(new Point(186.5,260.5));
-                    Interaction.text3.justification = 'center';
-                    Interaction.text3.fillColor = 'black';
-                    Interaction.text3.content = ""+Interaction.letters[myRand+0]+Interaction.letters[myRand+1]+" doğru parçası";
-                    Interaction.text3.strokeWidth = '1px';
+                        Interaction.text3 = new PointText(new Point(186.5,260.5));
+                        Interaction.text3.justification = 'center';
+                        Interaction.text3.fillColor = 'black';
+                        Interaction.text3.fontSize = 16;
+                        Interaction.text3.content = ""+Interaction.letters[myRand+0]+Interaction.letters[myRand+1]+" doğru parçası";
+
+                        Interaction.setStatus('');
+                    }
                 }
             }
             else{
