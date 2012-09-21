@@ -91,6 +91,7 @@ function soruCesidi2 (sayi,isaret){
     }
     if(this.isaret==true){
         $("#girdiler").append($("#girdi1")).append($("#girdi2"));
+
     }
     else{
         $("#girdiler").append("<div id='kesir'>");
@@ -325,7 +326,7 @@ function hataliCevap(){
             break;
 
         case 2:
-            if(Interaction.testSayaci==2){
+            if(Interaction.dogruCevap[1]==true){
                 for(var i=2; i<=3;i++){
                     $("#girdi"+(i-1)).val(Interaction.dogruCevap[i]);
                 }

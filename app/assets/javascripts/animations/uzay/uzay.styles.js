@@ -16,4 +16,8 @@ function __Styles(){
         fillColor:fillColor,
         strokeColor:strokeColor
     };
+
+    interactionRectanglePrisimStyle = {
+        strokeColor: "#000"
+    }
 }
