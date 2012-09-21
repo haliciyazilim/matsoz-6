@@ -19,107 +19,107 @@ var Animation = {
         var lettersStart = dotStart+1500;
 
 
-        Animation.line = new Path.Line(new Point(336.5,80.5), new Point(426.5,80.5));
+        Animation.line = new Path.Line(new Point(336.5,50.5), new Point(426.5,50.5));
         Animation.line.strokeColor = "black";
         Animation.line.opacity = 0;
         Animation.circleGroup = new Group();
 
         var firstGroup = new Group();
-        var firstC = new Path.Circle(new Point(381,79),18);
+        var firstC = new Path.Circle(new Point(381,49),18);
         firstC.fillColor = firstCircleColor;
         var firstS = new Raster('shadow');
-        firstS.position = new Point(381,79);
+        firstS.position = new Point(381,49);
         firstGroup.addChild(firstC);
         firstGroup.addChild(firstS);
         firstGroup.opacity = 0;
 
         var secondGroup = new Group();
-        var secondC = new Path.Circle(new Point(345,79),18);
+        var secondC = new Path.Circle(new Point(345,49),18);
         secondC.fillColor = secondCircleColor;
         var secondS = new Raster('shadow');
-        secondS.position = new Point(345,79);
+        secondS.position = new Point(345,49);
         secondGroup.addChild(secondC);
         secondGroup.addChild(secondS);
-        secondGroup.position = new Point(-20,79);
+        secondGroup.position = new Point(-20,49);
 
         var second2Group = new Group();
-        var second2C = new Path.Circle(new Point(417,79),18);
+        var second2C = new Path.Circle(new Point(417,49),18);
         second2C.fillColor = secondCircleColor;
         var second2S = new Raster('shadow');
-        second2S.position = new Point(417,79);
+        second2S.position = new Point(417,49);
         second2Group.addChild(second2C);
         second2Group.addChild(second2S);
-        second2Group.position = new Point(777,79);
+        second2Group.position = new Point(777,49);
 
         var thirdGroup = new Group();
-        var thirdC = new Path.Circle(new Point(309,79),18);
+        var thirdC = new Path.Circle(new Point(309,49),18);
         thirdC.fillColor = thirdCircleColor;
         var thirdS = new Raster('shadow');
-        thirdS.position = new Point(309,79);
+        thirdS.position = new Point(309,49);
         thirdGroup.addChild(thirdC);
         thirdGroup.addChild(thirdS);
-        thirdGroup.position = new Point(-20,79);
+        thirdGroup.position = new Point(-20,49);
 
         var third2Group = new Group();
-        var third2C = new Path.Circle(new Point(453,79),18);
+        var third2C = new Path.Circle(new Point(453,49),18);
         third2C.fillColor = thirdCircleColor;
         var third2S = new Raster('shadow');
-        third2S.position = new Point(453,79);
+        third2S.position = new Point(453,49);
         third2Group.addChild(third2C);
         third2Group.addChild(third2S);
-        third2Group.position = new Point(777,79);
+        third2Group.position = new Point(777,49);
 
         var fourthGroup = new Group();
-        var fourthC = new Path.Circle(new Point(273,79),18);
+        var fourthC = new Path.Circle(new Point(273,49),18);
         fourthC.fillColor = fourthCircleColor;
         var fourthS = new Raster('shadow');
-        fourthS.position = new Point(273,79);
+        fourthS.position = new Point(273,49);
         fourthGroup.addChild(fourthC);
         fourthGroup.addChild(fourthS);
-        fourthGroup.position = new Point(-20,79);
+        fourthGroup.position = new Point(-20,49);
 
         var fourth2Group = new Group();
-        var fourth2C = new Path.Circle(new Point(489,79),18);
+        var fourth2C = new Path.Circle(new Point(489,49),18);
         fourth2C.fillColor = fourthCircleColor;
         var fourth2S = new Raster('shadow');
-        fourth2S.position = new Point(489,79);
+        fourth2S.position = new Point(489,49);
         fourth2Group.addChild(fourth2C);
         fourth2Group.addChild(fourth2S);
-        fourth2Group.position = new Point(777,79);
+        fourth2Group.position = new Point(777,49);
 
         var fifthGroup = new Group();
-        var fifthC = new Path.Circle(new Point(237,79),18);
+        var fifthC = new Path.Circle(new Point(237,49),18);
         fifthC.fillColor = fifthCircleColor;
         var fifthS = new Raster('shadow');
-        fifthS.position = new Point(237,79);
+        fifthS.position = new Point(237,49);
         fifthGroup.addChild(fifthC);
         fifthGroup.addChild(fifthS);
-        fifthGroup.position = new Point(-20,79);
+        fifthGroup.position = new Point(-20,49);
 
         var fifth2Group = new Group();
-        var fifth2C = new Path.Circle(new Point(525,79),18);
+        var fifth2C = new Path.Circle(new Point(525,49),18);
         fifth2C.fillColor = fifthCircleColor;
         var fifth2S = new Raster('shadow');
-        fifth2S.position = new Point(525,79);
+        fifth2S.position = new Point(525,49);
         fifth2Group.addChild(fifth2C);
         fifth2Group.addChild(fifth2S);
-        fifth2Group.position = new Point(777,79);
+        fifth2Group.position = new Point(777,49);
 
-        var dot1 = new Path.Circle(new Point(237,80),6);
+        var dot1 = new Path.Circle(new Point(237,50),6);
         dot1.strokeColor = "black";
         dot1.fillColor = "black";
         dot1.opacity = 0;
 
-        var dot2 = new Path.Circle(new Point(525,80),6);
+        var dot2 = new Path.Circle(new Point(525,50),6);
         dot2.strokeColor = "black";
         dot2.fillColor = "black";
         dot2.opacity = 0;
 
         Animation.myLine = new Group();
-        var myLinee = new Path.OneSidedArrow(new Point(186.5,80.5),new Point(576.5,80.5),10,30);
+        var myLinee = new Path.OneSidedArrow(new Point(186.5,50.5),new Point(576.5,50.5),10,30);
         myLinee.strokeWidth = 3;
         Animation.myLine.addChild(myLinee);
-        var myLinee2 = new Path.OneSidedArrow(new Point(186.5,80.5),new Point(184.5,80.5),10,30);
+        var myLinee2 = new Path.OneSidedArrow(new Point(186.5,50.5),new Point(184.5,50.5),10,30);
         myLinee2.strokeWidth = 3;
         Animation.myLine.addChild(myLinee2);
         Animation.myLine.opacity = 0;
@@ -137,10 +137,15 @@ var Animation = {
         Animation.circleGroup.addChild(dot2);
 
         var letters = Util.dom({parent:Animation.container, tag:'div', css:lettersStyle,
-            html:'<span style="float:left">A</span> <span style="float:right">B</span><span style="position:relative;top:30px;">AB</span>&nbsp;&nbsp;&nbsp;<span style="position:relative;top:30px;">AB</span>'
+            html:'<span style="float:left">A</span> <span style="float:right">B</span>' +
+                '<span style="position:relative;top:30px;">AB</span>&nbsp;&nbsp;&nbsp;' +
+                '<span style="position:relative;top:30px;">AB</span>'
+        });
+        var letters2 = Util.dom({parent:Animation.container, tag:'div', css:letters2Style,
+            html:'<span>AB doğrusu</span>'
         });
 
-        var myArroww = new Path.Line(new Point(396,116),new Point(430,116));
+        var myArroww = new Path.Line(new Point(396,86),new Point(430,86));
         myArroww.strokeColor = "black";
         myArroww.strokeWidth = 2;
         myArroww.opacity = 0;
@@ -158,7 +163,7 @@ var Animation = {
             animationType:'linear',
             update:function(){
                 Animation.line.remove();
-                Animation.line = new Path.Line(new Point(334.5-this.X,80.5), new Point(424.5+this.X,80.5));
+                Animation.line = new Path.Line(new Point(334.5-this.X,50.5), new Point(424.5+this.X,50.5));
                 Animation.line.strokeColor = "black";
                 Animation.line.insertBelow(Animation.circleGroup);
                 Animation.line.insertBelow(Animation.myLine);
@@ -185,7 +190,7 @@ var Animation = {
 
         secondGroup.animate({
             style:{
-                position:new Point(345,79)
+                position:new Point(345,49)
             },
             duration:1000,
             delay:firstStart,
@@ -194,7 +199,7 @@ var Animation = {
 
         second2Group.animate({
             style:{
-                position:new Point(417,79)
+                position:new Point(417,49)
             },
             duration:1000,
             delay:firstStart+300,
@@ -203,7 +208,7 @@ var Animation = {
 
         thirdGroup.animate({
             style:{
-                position:new Point(309,79)
+                position:new Point(309,49)
             },
             duration:1000,
             delay:secondStart,
@@ -212,7 +217,7 @@ var Animation = {
 
         third2Group.animate({
             style:{
-                position:new Point(453,79)
+                position:new Point(453,49)
             },
             duration:1000,
             delay:secondStart+300,
@@ -221,7 +226,7 @@ var Animation = {
 
         fourthGroup.animate({
             style:{
-                position:new Point(273,79)
+                position:new Point(273,49)
             },
             duration:1000,
             delay:thirdStart,
@@ -230,7 +235,7 @@ var Animation = {
 
         fourth2Group.animate({
             style:{
-                position:new Point(489,79)
+                position:new Point(489,49)
             },
             duration:1000,
             delay:thirdStart+300,
@@ -239,7 +244,7 @@ var Animation = {
 
         fifthGroup.animate({
             style:{
-                position:new Point(237,79)
+                position:new Point(237,49)
             },
             duration:1000,
             delay:fourthStart,
@@ -248,7 +253,7 @@ var Animation = {
 
         fifth2Group.animate({
             style:{
-                position:new Point(525,79)
+                position:new Point(525,49)
             },
             duration:1000,
             delay:fourthStart+300,
@@ -368,7 +373,8 @@ var Animation = {
             delay:dotStart,
             animationType:'easeInOutQuad'
         });
-        $(letters).delay(lettersStart).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
+        $(letters).delay(lettersStart).animate({opacity:1},1000,'easeInOutQuad');
+        $(letters2).delay(lettersStart).animate({opacity:1},1000,'easeInOutQuad',function(){Main.animationFinished(1000);});
 
         myArroww.animate({
             style:{
