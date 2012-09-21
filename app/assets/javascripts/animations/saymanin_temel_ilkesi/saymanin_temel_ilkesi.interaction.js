@@ -6,7 +6,7 @@ var Interaction = {
 
     init:function(container){
 		Interaction.container = container;
-		Main.setObjective('Yandaki çocuğun 4 tişört 3 pantolon ve 2 ayakkabısından birer tanesine basarak çocuğun kaç farklı şekilde giyinebileceğini bulunuz.');
+		Main.setObjective('Yandaki çocuğun 4 tişört 3 pantolon ve 2 ayakkabısından birer tanesini seçerek çocuğun kaç farklı şekilde giyinebileceğini bulunuz.');
 		Interaction.paper = {
 			width:$(container).width(),
 			height:$(container).height()
