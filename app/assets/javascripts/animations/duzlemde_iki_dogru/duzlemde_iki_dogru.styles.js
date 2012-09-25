@@ -3,7 +3,7 @@ function __Styles(){
         fillColor:"#ffffec"
     };
     interactionLineStyle = {
-        strokeWidth:6,
+        strokeWidth:4,
         strokeCap:'round'
     };
     interactionLineSelectedStyle = {
