@@ -29,7 +29,7 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        Main.interactionProject.activeLayer.removeChildren();
         /*<[[TEST*/
             randomNumber = 0;
         /*TEST]]>*/

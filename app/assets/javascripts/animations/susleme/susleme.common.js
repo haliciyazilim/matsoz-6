@@ -14,16 +14,22 @@ var getNewPage = function(){
 
     switch(Interaction.myType){
         case 1:
-            shape11.shape.remove();
-            shape11 = null;
+            if(shape11){
+                shape11.shape.remove();
+                shape11 = null;
+            }
             break;
         case 2:
-            shape22.shape.remove();
-            shape22 = null;
+            if(shape22){
+                shape22.shape.remove();
+                shape22 = null;
+            }
             break;
         case 3:
-            shape33.shape.remove();
-            shape33 = null;
+            if(shape33){
+                shape33.shape.remove();
+                shape33 = null;
+            }
             break;
     }
     if(Interaction.pp){
