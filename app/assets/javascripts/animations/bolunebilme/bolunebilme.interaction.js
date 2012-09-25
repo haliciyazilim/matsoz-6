@@ -72,8 +72,10 @@ var Interaction = {
                         }
                     }
                 }
-            }
-            tool.activate();
+            };
+            tool.onMouseUp = function(event){
+
+            };
 
             Interaction.appendButton({
                 bottom: '20px',
