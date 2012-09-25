@@ -83,51 +83,102 @@ InteractiveGrids.CreateShape = function(type){
     }
     return points;
 }
-InteractiveGrids.AreShapesSimilar = function(shape1,shape2){
-    if(shape1.length != shape2.length )
+InteractiveGrids.AreShapesSimilar = function(points1,points2){
+    if(points1.length != points2.length )
         return false;
     else{
 
         var error = 0.00001;
-        for(var j=0;j<shape1.length+1;j++){
-            var isSimilar = true;
-            var ratio = undefined;
-//            console.log("**")
-            for(var i=0; i<shape1.length+1;i++ ){
-                var x = (i+j) % shape1.length;
-                var y = (x+1) % shape1.length;
-//                console.log(shape1[i%shape1.length].getDistance(shape1[(i+1)%shape1.length],true) , shape2[x].getDistance(shape2[y],true))
-                var  _ratio = shape1[i%shape1.length].getDistance(shape1[(i+1)%shape1.length],true) / shape2[x].getDistance(shape2[y],true)
-                if(ratio == undefined)
-                    ratio = _ratio;
-                if(ratio + error < _ratio || ratio - error > _ratio){
-                    isSimilar  = false;
-                }
-            }
-            if(isSimilar == true)
-                return true;
-        }
-//        console.log("--------------")
-        for(var j=0;j<shape1.length+1;j++){
-            var isSimilar = true;
-            var ratio = undefined;
-//            console.log("**")
-            for(var i=shape1.length+1; i>=0;i-- ){
-                var x = (i+j+shape1.length) % shape1.length;
-                var y = (x-1+shape1.length) % shape1.length;
-//                console.log(x,y)
-//                console.log(shape1[(i+shape1.length)%shape1.length].getDistance(shape1[(i-1+shape1.length)%shape1.length],true) , shape2[x].getDistance(shape2[y],true))
-                var  _ratio = shape1[(i+shape1.length)%shape1.length].getDistance(shape1[(i-1+shape1.length)%shape1.length],true) / shape2[x].getDistance(shape2[y],true)
-                if(ratio == undefined)
-                    ratio = _ratio;
-                if(ratio + error < _ratio || ratio - error > _ratio){
-                    isSimilar  = false;
-                }
-            }
-            if(isSimilar == true)
-                return true;
-        }
+        function extractShape(points){
+            var shape = [];
+            for(var i=0; i < points.length; i++){
 
+                var currentPoint = points[i];
+                var backPoint = points[(i-1+points.length) % points.length];
+                var frontPoint = points[(i+1) % points.length];
+                console.log((i-1+points.length) % points.length, (i+1) % points.length)
+                currentPoint.showOnCanvas();
+                new PointText(currentPoint).content = i;
+
+                var angle = Math.abs(
+                    Util.findAngle(currentPoint.x,currentPoint.y,frontPoint.x,frontPoint.y) -
+                    Util.findAngle(currentPoint.x,currentPoint.y,backPoint.x,backPoint.y)
+                )
+
+                shape.push([
+                    currentPoint.getDistance(frontPoint,true),
+                    currentPoint.getDistance(backPoint,true),
+                    Util.radianToDegree(angle)
+                ])
+            }
+            return shape;
+        }
+        var shape1 = extractShape(points1);
+        var shape2 = extractShape(points2);
+
+        var largestEdgeInShape1 = 0;
+        for(var i=0; i < shape1.length; i++)
+            if(largestEdgeInShape1 < shape1[i][0])
+                largestEdgeInShape1 = shape1[i][0];
+        var largestEdgeInShape2 = 0;
+        for(var i=0; i < shape2.length; i++)
+            if(largestEdgeInShape2 < shape2[i][0])
+                largestEdgeInShape2 = shape2[i][0];
+
+        var similarityRatio = largestEdgeInShape1 / largestEdgeInShape2 ;
+
+        var length = shape1.length;
+
+        //start comparing in the same direction
+        console.log("Comparison started")
+        for(var j= 0;j<length;j++){
+            var isSimilar = true;
+            for(var i=0; i<length;i++ ){
+                var x = (i+j+length) % length;
+                console.log(i,x);
+                if(shape1[i][2] == shape2[x][2]){ //angle
+                    console.log("same angle ");
+                    var currentRatio = shape1[i][0] / shape2[x][0];
+                    if(similarityRatio+error > currentRatio && similarityRatio-error  < currentRatio ){ // edges
+                        console.log("similar edges")
+                        continue;
+                    }else{
+                        isSimilar = false;
+//                        break;
+                    }
+                }
+                else{
+                    isSimilar = false;
+//                    break;
+                }
+            }
+            if(isSimilar == true)
+                return true;
+        }
+        console.log("reverse comparison is started")
+        for(var j= 0;j<length;j++){
+            var isSimilar = true;
+            for(var i=length- 1,x=j; i>=0;i--,x = (x+1)%length ){
+                console.log(i,x);
+                if(shape1[i][2] == shape2[x][2]){ //angle
+                    console.log("same angle ");
+                    var currentRatio = shape1[i][1] / shape2[x][0];
+                    if(similarityRatio+error > currentRatio && similarityRatio-error  < currentRatio ){ // edges
+                        console.log("similar edges")
+                        continue;
+                    }else{
+                        isSimilar = false;
+//                        break;
+                    }
+                }
+                else{
+                    isSimilar = false;
+//                    break;
+                }
+            }
+            if(isSimilar == true)
+                return true;
+        }
     }
     return false;
 }
