@@ -206,12 +206,12 @@ var Interaction = {
             [
                 {
                     type:"line",
-                    point1: new Point3(-50,95,45),
+                    point1: new Point3(-125,95,45),
                     point2: new Point3(125,-45,36)
                 },
                 {
                     type:"line",
-                    point1: new Point3(-50,125,100),
+                    point1: new Point3(-125,125,100),
                     point2: new Point3(125,-15,100)
                 }
             ],
