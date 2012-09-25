@@ -17,20 +17,21 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:"-40px",
-            right:"-40px",
-            opacity:0
+            bottom:"0px",
+            right:"10px"
         });
         Interaction.appendStatus({
-            bottom:"-50px",
-            right:"-150px",
-            opacity:0
+            bottom:"10px",
+            right:"150px",
+            lineHeight:'30px',
+            backgroundColor:'rgba(255,255,255,0.7)'
         })
         Interaction.createTool();
 
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(){
+        Interaction.button.style.opacity= 0 ;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.selectedLine1 = null;
         Interaction.selectedLine2 = null;
@@ -180,22 +181,7 @@ var Interaction = {
 	onCorrectAnswer : function(){
 		Interaction.selectedLine1.set_style(interactionLineCorrectStyle);
 		Interaction.selectedLine2.set_style(interactionLineCorrectStyle);
-        Interaction.pause();
-        var anim = new AnimationHelper({opacity:1});
-        anim.animate({
-            style:{opacity:0},
-            duration:1000,
-            delay:1000,
-            update:function(){
-                for(var i=0;i<Interaction.lines.length;i++)
-                    Interaction.lines[i].opacity = this.opacity;
-            },
-            callback:function(){
-                Interaction.resume();
-                Interaction.prepareNextQuestion();
-            }
-
-        });
+        Interaction.button.style.opacity = 1;
     },
 	onWrongAnswer : function(){
         var line1Color = Interaction.selectedLine1.strokeColor;
@@ -222,6 +208,7 @@ var Interaction = {
         });
     },
 	onFail : function(){
+        Interaction.setStatus("Yanlış cevap doğrusu yeşil renk ile gösterilmiştir.",false);
 		Interaction.selectedLine1.set_style(interactionLineWrongStyle);
 		Interaction.selectedLine2.set_style(interactionLineWrongStyle);
         Interaction.pause();
@@ -255,24 +242,9 @@ var Interaction = {
             callback:function(){
                 Interaction.selectedLine1.highlight();
                 Interaction.selectedLine2.highlight();
-
-            }
-        });
-        var anim = new AnimationHelper({opacity:1});
-        anim.animate({
-            style:{opacity:0},
-            duration:1000,
-            delay:5000,
-            update:function(){
-                for(var i=0;i<Interaction.lines.length;i++)
-                    Interaction.lines[i].opacity = this.opacity;
-            },
-            callback:function(){
                 Interaction.resume();
-                Interaction.prepareNextQuestion();
             }
-
         });
-
+        Interaction.button.style.opacity = 1;
     }
 }
