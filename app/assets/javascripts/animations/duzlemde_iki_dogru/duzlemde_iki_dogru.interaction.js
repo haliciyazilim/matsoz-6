@@ -1,10 +1,8 @@
 var Interaction = {
-    
 	getFramework:function(){
         return 'paper';
     },
 	images:[
-        
     ],
     PARALLEL:"paralel olan",
     ORTHOGONAL:"dik kesişen",
@@ -15,7 +13,6 @@ var Interaction = {
             width:$(container).width(),
             height:$(container).height()
         }
-
         Interaction.appendButton({
             bottom:"0px",
             right:"10px"
@@ -27,15 +24,13 @@ var Interaction = {
             backgroundColor:'rgba(255,255,255,0.7)'
         })
         Interaction.createTool();
-
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(){
-        Interaction.button.style.opacity= 0 ;
+        Interaction.button.style.display = 'none' ;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.selectedLine1 = null;
         Interaction.selectedLine2 = null;
-
         Interaction.questionType = Util.rand01() == 1 ? Interaction.PARALLEL : Interaction.ORTHOGONAL;
         /*<[[TEST*/
 //            Interaction.questionType = Interaction.PARALLEL;
@@ -159,7 +154,6 @@ var Interaction = {
                 }
                 else
                     return;
-//                event.item.selected = true;
                 event.item.highlight();
                 event.item.set_style(interactionLineSelectedStyle);
                 if(checkAnswer)
@@ -168,10 +162,8 @@ var Interaction = {
         }
     },
 	preCheck : function(){
-
     },
 	isAnswerCorrect : function(value){
-//        Interaction.questionType = Util.rand01() == 1 ? Interaction.PARALLEL : Interaction.ORTHOGONAL;
         if(Interaction.questionType == Interaction.PARALLEL){
             return Interaction.selectedLine1.isParallelTo(Interaction.selectedLine2);
         }else if(Interaction.questionType == Interaction.ORTHOGONAL){
@@ -181,7 +173,7 @@ var Interaction = {
 	onCorrectAnswer : function(){
 		Interaction.selectedLine1.set_style(interactionLineCorrectStyle);
 		Interaction.selectedLine2.set_style(interactionLineCorrectStyle);
-        Interaction.button.style.opacity = 1;
+        Interaction.button.style.display = 'block' ;
     },
 	onWrongAnswer : function(){
         var line1Color = Interaction.selectedLine1.strokeColor;
@@ -245,6 +237,6 @@ var Interaction = {
                 Interaction.resume();
             }
         });
-        Interaction.button.style.opacity = 1;
+        Interaction.button.style.display = 'block' ;
     }
 }
