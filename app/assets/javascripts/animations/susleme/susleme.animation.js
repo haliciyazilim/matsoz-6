@@ -9,7 +9,8 @@ var Animation = {
         var secondPieceSecondMove = secondPieceFirstMove+2000;
         var lastMoves = secondPieceSecondMove+2500;
         var decorStart = lastMoves+1500;
-        var animFinish = decorStart+14000;
+        var colorStart = decorStart+14000;
+        var animFinish = colorStart+14000;
 
         var animHelper = new AnimationHelper({
 
@@ -166,6 +167,7 @@ var Animation = {
         });
 
         var myId = -1;
+        var myGroup = new Group();
         for(var i = 0; i < 3; i++){
             for(var j = 0; j < 6; j++){
                 myId += 1;
@@ -185,14 +187,9 @@ var Animation = {
 
                 a.opacity = 0;
                 a.position = new Point(320.5+40*j,50+40*i);
-                if(myId2 % 2 == 0){
-                    a.strokeColor = animationFirstStrokeColor;
-                    a.fillColor = animationFirstFillColor;
-                }
-                else{
-                    a.strokeColor = animationSecondStrokeColor;
-                    a.fillColor = animationSecondFillColor;
-                }
+                a.strokeColor = new RgbColor(0,0,0);
+                a.fillColor = new RgbColor(1,1,1);
+                myGroup.addChild(a);
 
                 a.animate({
                     style:{
@@ -200,6 +197,49 @@ var Animation = {
                     },
                     duration:1000,
                     delay:decorStart+750*myId,
+                    animationType:'easeInOutQuad'
+                });
+            }
+        }
+
+        for(var i = 0; i < 18; i += 2){
+            if(i < 6 || i > 11){
+                myGroup.children[i].animate({
+                    style:{
+                        fillColor:new RgbColor(0.949,0.784,0.521),
+                        strokeColor:new RgbColor(0.451,0.462,0.239)
+                    },
+                    duration:1000,
+                    delay:colorStart+750*i,
+                    animationType:'easeInOutQuad'
+                });
+                myGroup.children[i+1].animate({
+                    style:{
+                        fillColor:new RgbColor(0.913,0.619,0.619),
+                        strokeColor:new RgbColor(0.611,0.309,0.309)
+                    },
+                    duration:1000,
+                    delay:colorStart+750*(i+1),
+                    animationType:'easeInOutQuad'
+                });
+            }
+            else{
+                myGroup.children[i].animate({
+                    style:{
+                        fillColor:new RgbColor(0.913,0.619,0.619),
+                        strokeColor:new RgbColor(0.611,0.309,0.309)
+                    },
+                    duration:1000,
+                    delay:colorStart+750*i,
+                    animationType:'easeInOutQuad'
+                });
+                myGroup.children[i+1].animate({
+                    style:{
+                        fillColor:new RgbColor(0.949,0.784,0.521),
+                        strokeColor:new RgbColor(0.451,0.462,0.239)
+                    },
+                    duration:1000,
+                    delay:colorStart+750*(i+1),
                     animationType:'easeInOutQuad'
                 });
             }
