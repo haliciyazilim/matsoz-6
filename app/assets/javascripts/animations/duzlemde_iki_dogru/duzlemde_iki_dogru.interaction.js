@@ -1,10 +1,8 @@
 var Interaction = {
-    
 	getFramework:function(){
         return 'paper';
     },
 	images:[
-        
     ],
     PARALLEL:"paralel olan",
     ORTHOGONAL:"dik kesişen",
@@ -15,26 +13,24 @@ var Interaction = {
             width:$(container).width(),
             height:$(container).height()
         }
-
         Interaction.appendButton({
-            bottom:"-40px",
-            right:"-40px",
-            opacity:0
+            bottom:"0px",
+            right:"10px"
         });
         Interaction.appendStatus({
-            bottom:"-50px",
-            right:"-150px",
-            opacity:0
+            bottom:"10px",
+            right:"150px",
+            lineHeight:'30px',
+            backgroundColor:'rgba(255,255,255,0.7)'
         })
         Interaction.createTool();
-
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(){
+        Interaction.button.style.display = 'none' ;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.selectedLine1 = null;
         Interaction.selectedLine2 = null;
-
         Interaction.questionType = Util.rand01() == 1 ? Interaction.PARALLEL : Interaction.ORTHOGONAL;
         /*<[[TEST*/
 //            Interaction.questionType = Interaction.PARALLEL;
@@ -122,6 +118,7 @@ var Interaction = {
                     path.strokeColor = new RgbColor(0.56,Math.random(),1);
                     break;
             }
+            path.strokeColor = new RgbColor(0.3,0.3,0.3,0.8);
             path.isParallelTo = function(other){
                 return Math.abs(Math.round(this.getDotProductWith(other)*1000000)) == 1000000;
             }
@@ -147,6 +144,7 @@ var Interaction = {
     },
     createTool:function(){
         var tool = new Tool();
+        tool.setHitTestOptions({ fill: true, stroke: true, segments: true, tolerance: 6 })
         tool.onMouseDown = function(event){
             if(event.item && event.item.className == "line" ){
                 var checkAnswer = false;
@@ -158,7 +156,6 @@ var Interaction = {
                 }
                 else
                     return;
-//                event.item.selected = true;
                 event.item.highlight();
                 event.item.set_style(interactionLineSelectedStyle);
                 if(checkAnswer)
@@ -167,10 +164,8 @@ var Interaction = {
         }
     },
 	preCheck : function(){
-
     },
 	isAnswerCorrect : function(value){
-//        Interaction.questionType = Util.rand01() == 1 ? Interaction.PARALLEL : Interaction.ORTHOGONAL;
         if(Interaction.questionType == Interaction.PARALLEL){
             return Interaction.selectedLine1.isParallelTo(Interaction.selectedLine2);
         }else if(Interaction.questionType == Interaction.ORTHOGONAL){
@@ -180,22 +175,7 @@ var Interaction = {
 	onCorrectAnswer : function(){
 		Interaction.selectedLine1.set_style(interactionLineCorrectStyle);
 		Interaction.selectedLine2.set_style(interactionLineCorrectStyle);
-        Interaction.pause();
-        var anim = new AnimationHelper({opacity:1});
-        anim.animate({
-            style:{opacity:0},
-            duration:1000,
-            delay:1000,
-            update:function(){
-                for(var i=0;i<Interaction.lines.length;i++)
-                    Interaction.lines[i].opacity = this.opacity;
-            },
-            callback:function(){
-                Interaction.resume();
-                Interaction.prepareNextQuestion();
-            }
-
-        });
+        Interaction.button.style.display = 'block' ;
     },
 	onWrongAnswer : function(){
         var line1Color = Interaction.selectedLine1.strokeColor;
@@ -222,6 +202,7 @@ var Interaction = {
         });
     },
 	onFail : function(){
+        Interaction.setStatus("Yanlış cevap doğrusu yeşil renk ile gösterilmiştir.",false);
 		Interaction.selectedLine1.set_style(interactionLineWrongStyle);
 		Interaction.selectedLine2.set_style(interactionLineWrongStyle);
         Interaction.pause();
@@ -255,24 +236,9 @@ var Interaction = {
             callback:function(){
                 Interaction.selectedLine1.highlight();
                 Interaction.selectedLine2.highlight();
-
-            }
-        });
-        var anim = new AnimationHelper({opacity:1});
-        anim.animate({
-            style:{opacity:0},
-            duration:1000,
-            delay:5000,
-            update:function(){
-                for(var i=0;i<Interaction.lines.length;i++)
-                    Interaction.lines[i].opacity = this.opacity;
-            },
-            callback:function(){
                 Interaction.resume();
-                Interaction.prepareNextQuestion();
             }
-
         });
-
+        Interaction.button.style.display = 'block' ;
     }
 }

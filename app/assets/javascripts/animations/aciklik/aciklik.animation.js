@@ -5,8 +5,8 @@ var Animation = {
 
         $(Animation.container).append("<img id='cocuklar' src='/assets/animations/aciklik/cocuklar.jpg'>");
         $("#cocuklar").css({
-            width:"365",
-            height:"170px",
+            width:"360",
+            height:"172px",
             position:"absolute",
             top:"20px",
             left:"5px",
@@ -17,10 +17,10 @@ var Animation = {
         $(Animation.container).append("<div id='beyaz'></div>");
         $("#beyaz").css({
             width:"70",
-            height:"170px",
+            height:"172px",
             position:"absolute",
             top:"20px",
-            left:"300px",
+            left:"290px",
             backgroundColor:"white",
             zIndex:"2",
             opacity:"0"

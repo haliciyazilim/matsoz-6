@@ -132,7 +132,10 @@ var Interaction = {
             else{
                 return false;
             }
-        }
+        };
+        tool.onMouseUp = function(event){
+
+        };
     },
 	preCheck : function(){
 
