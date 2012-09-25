@@ -11,21 +11,26 @@ var Animation = {
         istIzmOtobus:"/assets/animations/saymanin_temel_ilkesi/ist_izm_otobus.gif",
         istIzmUcak:"/assets/animations/saymanin_temel_ilkesi/ist_izm_ucak.gif",
         izmAnkOtobus:"/assets/animations/saymanin_temel_ilkesi/izm_ank_otobus.gif",
+        izmAnkTren:"/assets/animations/saymanin_temel_ilkesi/izm_ank_tren.gif",
         otobus:"/assets/animations/saymanin_temel_ilkesi/otobus.png",
         tren:"/assets/animations/saymanin_temel_ilkesi/tren.png",
         ucak:"/assets/animations/saymanin_temel_ilkesi/ucak.png",
         gemi:"/assets/animations/saymanin_temel_ilkesi/gemi.png"
         }
 
+
+
+
         $(Animation.container).append("<img id='haritaBos'  class='harita' src='"+resim.haritaBos+"'>");
-
-
+        $(Animation.container).append("<img id='haritaDolu'  class='harita' src='"+resim.harita+"'>");
+        $("#haritaDolu").css("opacity","0");
         $(".harita").css({
             position:"absolute",
             width:"387px",
             height:"170px",
             left:"6px",
-            top:"25px"
+            top:"25px",
+            zIndex:1
         });
 
 
@@ -78,6 +83,7 @@ var Animation = {
             height:"auto",
             left:"246px",
             top:"25px",
+            zIndex:2,
 
             padding:"10px",
             backgroundColor: "rgb(255, 255, 255)",
@@ -126,7 +132,7 @@ var Animation = {
             height:"auto",
             right:"6px",
             top:"30px",
-            fontSize:"13px",
+            fontSize:"13px"
 
 
 
@@ -143,6 +149,8 @@ var Animation = {
         }).html("İstanbul’dan, İzmir’e uğrayarak Ankara’ya 3 x 2 = 6 farklı araçla gidilebilir.");
 
 
+
+
         $("#soru, #sonuc, #istIzmirB, #istIzmirI .otobus, #istIzmirI .gemi, #istIzmirI .ucak, #izmirAnkaraB, #izmirAnkaraI .otobus, #izmirAnkaraI .tren, #tablo1").css("opacity","0");
         $("#istAnkaraB,").css("opacity","0");
 
@@ -154,20 +162,53 @@ var Animation = {
         //$("#istIzmirI .otobus").delay(1000).animate({opacity:1},1000);
 
 
-        setTimeout(function(){haritaGetir(resim.harita)},2000);
-        setTimeout(function(){haritaGetir(resim.istIzmGemi)},3000);
+        setTimeout(function(){$("#haritaDolu").animate({opacity:1},2000)});
 
-        setTimeout(function(){haritaGetir(resim.istIzmOtobus)},15000);
+        setTimeout(function(){
+            haritaGetir(resim.istIzmOtobus, "#istIzmirI .otobus");
+            $("#tablo1, #istIzmirB").animate({"opacity":"1"},1000);
 
-        function haritaGetir(src){
+        },3000);
 
-            $(Animation.container).append("<img class='harita' src='"+src+"'>");
+        setTimeout(function(){
+            haritaGetir(resim.istIzmGemi, "#istIzmirI .gemi")
+
+        },11000);
+
+        setTimeout(function(){
+            haritaGetir(resim.istIzmUcak, "#istIzmirI .ucak")
+
+        },22000);
+
+        setTimeout(function(){
+            haritaGetir(resim.izmAnkOtobus, "#izmirAnkaraI .otobus");
+            $("#izmirAnkaraB").animate({"opacity":"1"},1000);
+
+        },29000);
+
+        setTimeout(function(){
+            haritaGetir(resim.izmAnkTren, "#izmirAnkaraI .tren")
+
+        },37000);
+
+
+        function haritaGetir(src, id){
+
+            //$("#harita").attr("src",src);
+            if($("#harita"))
+                $("#harita").remove();
+
+
+            $(id).delay(500).animate({opacity:"1"},1000);
+
+            $(Animation.container).append("<img id='harita' class='harita' src='"+src+"'>");
             $(".harita").css({
                 position:"absolute",
                 width:"387px",
                 height:"170px",
                 left:"6px",
-                top:"25px"
+                top:"25px",
+                zIndex:1
 
             });
 

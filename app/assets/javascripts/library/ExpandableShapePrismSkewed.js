@@ -5,13 +5,13 @@ var ExpandableSkewedPrism = ExpandableShape.extend({
         width /= 2;
         height /= 2;
         length /= 2;
-        //skew=35;
+        //skew=0.5;
         this.setSurfaces({
             backSurface: new Surface([
                 new Point3(-width,  height, length),
                 new Point3( width,  height, length),
-                new Point3( width+skew, -height, length),
-                new Point3(-width+skew, -height, length)
+                new Point3( width+height*skew, -height, length),
+                new Point3(-width+height*skew, -height, length)
             ]),
             bottomSurface: new Surface([
                 new Point3(-width, height,  length),
@@ -20,26 +20,26 @@ var ExpandableSkewedPrism = ExpandableShape.extend({
                 new Point3(-width, height, -length)
             ]),
             leftSurface: new Surface([
-                new Point3(-width+skew, -height, -length),
-                new Point3(-width+skew, -height,  length),
+                new Point3(-width+height*skew, -height, -length),
+                new Point3(-width+height*skew, -height,  length),
                 new Point3(-width,  height,  length),
                 new Point3(-width,  height, -length)
             ]),
             rightSurface: new Surface([
                 new Point3(width,  height, -length),
                 new Point3(width,  height,  length),
-                new Point3(width+skew, -height,  length),
-                new Point3(width+skew, -height, -length)
+                new Point3(width+height*skew, -height,  length),
+                new Point3(width+height*skew, -height, -length)
             ]),
             topSurface: new Surface([
-                new Point3(-width+skew, -height, -length),
-                new Point3( width+skew, -height, -length),
-                new Point3( width+skew, -height,  length),
-                new Point3(-width+skew, -height,  length)
+                new Point3(-width+height*skew, -height, -length),
+                new Point3( width+height*skew, -height, -length),
+                new Point3( width+height*skew, -height,  length),
+                new Point3(-width+height*skew, -height,  length)
             ]),
             frontSurface: new Surface([
-                new Point3(-width+skew, -height, -length),
-                new Point3( width+skew, -height, -length),
+                new Point3(-width+height*skew, -height, -length),
+                new Point3( width+height*skew, -height, -length),
                 new Point3( width,  height, -length),
                 new Point3(-width,  height, -length)
             ])
