@@ -534,10 +534,10 @@ var Interaction = {
 
                                 if(Math.abs(line1.angle - line2.angle) < 0.01 || Math.abs(line1.angle - line2.angle) > Math.PI - 0.01){
                                     if(center1.getDistance(center2,true) < 400){
-                                        this.setPos(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y));
+                                        this.setPos(new Point(Math.floor(this.shape.position.add(center2.subtract(center1)).x)+0.5,this.shape.position.y));
                                         if(Math.abs(this.centerPoint.x-otherObject.centerPoint.x) < 0.01){
                                             if(!otherObject.shape.hitTest(new Point(this.shape.position.x,this.shape.position.add(center2.subtract(center1)).y))){
-                                                this.setPos(new Point(this.shape.position.x,this.shape.position.add(center2.subtract(center1)).y));
+                                                this.setPos(new Point(Math.floor(this.shape.position.x)+0.5,this.shape.position.add(center2.subtract(center1)).y));
                                             }
                                         }
                                     }
@@ -556,10 +556,10 @@ var Interaction = {
 
                                 if(Math.abs(line1.angle - line2.angle) < 0.01 || Math.abs(line1.angle - line2.angle) > Math.PI - 0.01){
                                     if(center1.getDistance(center2,true) < 400){
-                                        this.setPos(new Point(this.shape.position.x,this.shape.position.add(center2.subtract(center1)).y));
+                                        this.setPos(new Point(this.shape.position.x,Math.floor(this.shape.position.add(center2.subtract(center1)).y)+0.5));
                                         if(Math.abs(this.centerPoint.y-otherObject.centerPoint.y) < 0.01){
                                             if(!otherObject.shape.hitTest(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y))){
-                                                this.setPos(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y));
+                                                this.setPos(new Point(Math.floor(this.shape.position.add(center2.subtract(center1)).x)+0.5,this.shape.position.y));
                                             }
                                         }
                                     }
@@ -579,10 +579,10 @@ var Interaction = {
 
                             if(Math.abs(line1.angle - line2.angle) < 0.01 || Math.abs(line1.angle - line2.angle) > Math.PI - 0.01){
                                 if(center1.getDistance(center2,true) < 600){
-                                    this.setPos(new Point(this.shape.position.x,this.shape.position.add(center2.subtract(center1)).y));
+                                    this.setPos(new Point(this.shape.position.x,Math.floor(this.shape.position.add(center2.subtract(center1)).y)+0.5));
                                     if(Math.abs(this.centerPoint.y-otherObject.centerPoint.y) < 0.01){
                                         if(!otherObject.shape.hitTest(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y))){
-                                            this.setPos(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y));
+                                            this.setPos(new Point(Math.floor(this.shape.position.add(center2.subtract(center1)).x)+0.5,this.shape.position.y));
                                         }
                                     }
                                 }
@@ -601,10 +601,10 @@ var Interaction = {
 
                             if(Math.abs(line1.angle - line2.angle) < 0.01 || Math.abs(line1.angle - line2.angle) > Math.PI - 0.01){
                                 if(center1.getDistance(center2,true) < 600){
-                                    this.setPos(new Point(this.shape.position.x,this.shape.position.add(center2.subtract(center1)).y));
+                                    this.setPos(new Point(this.shape.position.x,Math.floor(this.shape.position.add(center2.subtract(center1)).y)+0.5));
                                     if(Math.abs(this.centerPoint.y-otherObject.centerPoint.y) < 0.01){
                                         if(!otherObject.shape.hitTest(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y))){
-                                            this.setPos(new Point(this.shape.position.add(center2.subtract(center1)).x,this.shape.position.y));
+                                            this.setPos(new Point(Math.floor(this.shape.position.add(center2.subtract(center1)).x)+0.5,this.shape.position.y));
                                         }
                                     }
                                 }
