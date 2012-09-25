@@ -1,4 +1,4 @@
-var ExpandablePrism = ExpandableShape.extend({
+var ExpandableTrianglePrism = ExpandableShape.extend({
     init: function(width, height, length, matrix) {
             this._super(matrix);
 
@@ -8,32 +8,32 @@ var ExpandablePrism = ExpandableShape.extend({
             this.setSurfaces({
                 backSurface: new Surface([
                     new Point3(-width,  height, length),
-                    new Point3( width,  height, length),
-                    new Point3( width, -height, length),
+                    new Point3( width,  height, -length),
+                    new Point3( width, -height, -length),
                     new Point3(-width, -height, length)
                     ]),
                 bottomSurface: new Surface([
                     new Point3(-width, height,  length),
-                    new Point3( width, height,  length),
+                    new Point3( 0, height,  0),
                     new Point3( width, height, -length),
                     new Point3(-width, height, -length)
                     ]),
                 leftSurface: new Surface([
-                    new Point3(-width, -height, -length),
-                    new Point3(-width, -height,  length),
-                    new Point3(-width,  height,  length),
-                    new Point3(-width,  height, -length)
+                    new Point3(-width,  height, length),
+                    new Point3( width,  height, -length),
+                    new Point3( width, -height, -length),
+                    new Point3(-width, -height, length)
                     ]),
                 rightSurface: new Surface([
-                    new Point3(width,  height, -length),
-                    new Point3(width,  height,  length),
-                    new Point3(width, -height,  length),
-                    new Point3(width, -height, -length)
+//                    new Point3(width,  height, -length),
+//                    new Point3(width,  height,  length),
+//                    new Point3(width, -height,  length),
+//                    new Point3(width, -height, -length)
                     ]),
                 topSurface: new Surface([
                     new Point3(-width, -height, -length),
                     new Point3( width, -height, -length),
-                    new Point3( width, -height,  length),
+                    new Point3( 0, -height,  0),
                     new Point3(-width, -height,  length)
                     ]),
                 frontSurface: new Surface([
