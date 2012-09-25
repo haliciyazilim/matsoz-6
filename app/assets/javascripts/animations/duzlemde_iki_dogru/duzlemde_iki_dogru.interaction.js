@@ -118,6 +118,7 @@ var Interaction = {
                     path.strokeColor = new RgbColor(0.56,Math.random(),1);
                     break;
             }
+            path.strokeColor = new RgbColor(0.3,0.3,0.3,0.8);
             path.isParallelTo = function(other){
                 return Math.abs(Math.round(this.getDotProductWith(other)*1000000)) == 1000000;
             }
@@ -143,6 +144,7 @@ var Interaction = {
     },
     createTool:function(){
         var tool = new Tool();
+        tool.setHitTestOptions({ fill: true, stroke: true, segments: true, tolerance: 6 })
         tool.onMouseDown = function(event){
             if(event.item && event.item.className == "line" ){
                 var checkAnswer = false;

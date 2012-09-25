@@ -1,4 +1,5 @@
 function InteractiveGrids(opt){
+    this.id = InteractiveGrids.GetId();
     this.size = opt.size;
     this.position = opt.position;
     this.style = opt.style;
@@ -20,7 +21,7 @@ function InteractiveGrids(opt){
             circle.set_style({
                 fillColor:new RgbColor(1,1,1,0)
             });
-            circle.class = "InteractiveGridCircles";
+            circle.class = "InteractiveGridCircles"+this.id;
         }
     return this;
 }
@@ -47,7 +48,7 @@ InteractiveGrids.prototype.createTool = function(){
     var tool = new Tool();
     var self = this;
     tool.onMouseDown = function(event){
-        if(event.item && event.item.class == "InteractiveGridCircles"){
+        if(event.item && event.item.class == "InteractiveGridCircles"+self.id){
             event.item.set_style({
 //                fillColor:"#f00"
             })
@@ -91,12 +92,12 @@ InteractiveGrids.AreShapesSimilar = function(shape1,shape2){
         for(var j=0;j<shape1.length+1;j++){
             var isSimilar = true;
             var ratio = undefined;
-            console.log("**")
+//            console.log("**")
             for(var i=0; i<shape1.length+1;i++ ){
                 var x = (i+j) % shape1.length;
                 var y = (x+1) % shape1.length;
-                console.log(shape1[i%shape1.length].getDistance(shape1[(i+1)%shape1.length],true) , shape2[x].getDistance(shape2[y],true))
-                var  _ratio = shape1[x].getDistance(shape1[y],true) / shape2[x].getDistance(shape2[y],true);
+//                console.log(shape1[i%shape1.length].getDistance(shape1[(i+1)%shape1.length],true) , shape2[x].getDistance(shape2[y],true))
+                var  _ratio = shape1[i%shape1.length].getDistance(shape1[(i+1)%shape1.length],true) / shape2[x].getDistance(shape2[y],true)
                 if(ratio == undefined)
                     ratio = _ratio;
                 if(ratio + error < _ratio || ratio - error > _ratio){
@@ -106,16 +107,17 @@ InteractiveGrids.AreShapesSimilar = function(shape1,shape2){
             if(isSimilar == true)
                 return true;
         }
-        console.log("--------------")
+//        console.log("--------------")
         for(var j=0;j<shape1.length+1;j++){
             var isSimilar = true;
             var ratio = undefined;
-            console.log("**")
+//            console.log("**")
             for(var i=shape1.length+1; i>=0;i-- ){
-                var x = (i+j) % shape1.length;
-                var y = (x-1) % shape1.length;
-                console.log(shape1[i%shape1.length].getDistance(shape1[(i-1)%shape1.length],true) , shape2[x].getDistance(shape2[y],true))
-                var  _ratio = shape1[x].getDistance(shape1[y],true) / shape2[x].getDistance(shape2[y],true);
+                var x = (i+j+shape1.length) % shape1.length;
+                var y = (x-1+shape1.length) % shape1.length;
+//                console.log(x,y)
+//                console.log(shape1[(i+shape1.length)%shape1.length].getDistance(shape1[(i-1+shape1.length)%shape1.length],true) , shape2[x].getDistance(shape2[y],true))
+                var  _ratio = shape1[(i+shape1.length)%shape1.length].getDistance(shape1[(i-1+shape1.length)%shape1.length],true) / shape2[x].getDistance(shape2[y],true)
                 if(ratio == undefined)
                     ratio = _ratio;
                 if(ratio + error < _ratio || ratio - error > _ratio){
@@ -128,4 +130,12 @@ InteractiveGrids.AreShapesSimilar = function(shape1,shape2){
 
     }
     return false;
+}
+InteractiveGrids.GetId = function(){
+    if(InteractiveGrids.order){
+        return InteractiveGrids.order++;
+    }else{
+        InteractiveGrids.order = 1;
+        return InteractiveGrids.GetId();
+    }
 }
