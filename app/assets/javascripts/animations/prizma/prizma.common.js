@@ -21,13 +21,22 @@ function ciz(){
     matrix2 = Util.createProjectionMatrixForObjectAt(300, 120);
     matrix3 = Util.createProjectionMatrixForObjectAt(450, 120);
 
+    koordinat=new Array();
+    koordinatBack=new Array();
+    koordinatFront=new Array();
+    koordinatLeft=new Array();
+    koordinatRight=new Array();
+
+    //k1,k2,k3,k4,k5,k6,k7,k8;
+
+
     //Küp
     /*matrix = Util.createProjectionMatrixForObjectAt(275, 120);
     shape=new ExpandablePrism(width,height,length,matrix);
     path = shape.project();
 */
     //Dik Kare Prizma
-    shapeDikKarePrizma=new ExpandablePrism(width,0,length,matrix2);
+    shapeDikKarePrizma=new ExpandablePrism(width,0,length,matrix);
 
     // Eğik Kare Prizma
     shapeEgikKare=new ExpandableSkewedPrism(width,0,length,0,matrix2);
@@ -41,11 +50,19 @@ function ciz(){
     // Eş kenar Prizma
     shapeEsKenar=new ExpandableEquilateralPrism(width,0,length,matrix2);
 
-    dondur(shapeParalelKenar,matrix,height);
-    //dondur(shapeEsKenar,matrix2,height);
-    dondur(shapeEgikKare,matrix2,height,skew);
-    //dondur(shapeDikKarePrizma,matrix2,height);
+    //Üçgen Prizma
+    shapeUcgen=new ExpandableTrianglePrism(width,0,length,matrix3)
+    //shapeUcgen.project();
+
+
+
+
+    //dondur(shapeParalelKenar,matrix,height);
+    dondur(shapeEsKenar,matrix2,height);
+    //dondur(shapeEgikKare,matrix2,height,skew);
+    //donukshape=dondur(shapeDikKarePrizma,matrix,height);
     //dondur(shapeDikdortgenPrizma,matrix3,height);
+    //dondur(shapeUcgen,matrix3,height);
 
     function dondur(shape,matrix,height,skew){
 
@@ -75,6 +92,9 @@ function ciz(){
             height: 0
         });
 
+        if(path)
+            path.remove();
+
         var path = shape.project();
 
         animationHelper.animate({
@@ -92,8 +112,28 @@ function ciz(){
                     shape.init(width,this.height,length,matrix);
 
                 path = shape.project();
+            },
+            callback:function(){
+                koordinatBack=shape.surfaces.backSurface.get2DPoints(matrix);
+                koordinatFront=shape.surfaces.frontSurface.get2DPoints(matrix);
+                koordinatLeft=shape.surfaces.leftSurface.get2DPoints(matrix);
+                koordinatRight=shape.surfaces.rightSurface.get2DPoints(matrix);
+
+                koordinat=[koordinatBack,koordinatFront];
+
+                renk=["black","yellow","red","green"]
+                for(var i=0; i<koordinat.length;i++){
+                    for(var j=0; j<4;j++){
+                        var point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),10);
+                        point.class="nokta";
+                        point.myId="nokta"+i+j;
+                        point.fillColor=renk[j];
+                    }
+                }
             }
         });
+
+        return path;
     }
 
 
@@ -103,10 +143,10 @@ function ciz(){
     shape3=new ExpandableShapeTetrahedron(width,matrix3);
     path3 = shape3.project();*/
 
-
-//    point= new Path.Circle(new Point(245.5,149.5),5);
-//    point.fillColor="red";
-
+    /*kordinat=shapeDikKarePrizma.surfaces.backSurface.get2DPoints(matrix)[0];
+    point= new Path.Circle(new Point(kordinat.x,kordinat.y),5);
+    point.fillColor="red";
+*/
 
 
 
