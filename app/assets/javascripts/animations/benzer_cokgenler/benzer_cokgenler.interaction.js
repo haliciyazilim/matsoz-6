@@ -15,20 +15,40 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:"40px",
+            bottom:"00px",
             right:"40px"
         });
         Interaction.appendStatus({
-            bottom:"50px",
+            bottom:"10px",
             right:"150px"
         })
         /*
         *	Initialize your interaction here
         */
-
+        Interaction.setRandomGenerator(16)
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+
+        /*<[[TEST*/
+            randomNumber = 0;
+        /*TEST]]>*/
+
+        Interaction.masterGrid = new InteractiveGrids({
+            position:new Point(10.5,10.5),
+            size:30,
+            style:{
+                strokeColor:'#000'
+            }
+        }).drawShape(InteractiveGrids.CreateShape(randomNumber));
+
+        Interaction.slaveGrid = new InteractiveGrids({
+            position:new Point(300.5,10.5),
+            size:18 + (randomNumber % 4) * 4,
+            style:{
+                strokeColor:'#666'
+            }
+        }).drawShape().createTool();
 
     },
 		
@@ -40,7 +60,7 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
-
+        return InteractiveGrids.AreShapesSimilar(Interaction.masterGrid.points,Interaction.slaveGrid.points);
     },
 	onCorrectAnswer : function(){
 		
