@@ -1,4 +1,4 @@
-function ciz(){
+function ciz(secim,matrixX,matrixY){
 
 //    surfaceStyle = {
 //        strokeColor: "#4F9C4F",
@@ -16,16 +16,20 @@ function ciz(){
 
     var skew=0.5;
 
+    if(!matrixX)
+        matrixX=300;
+    if(!matrixY)
+        matrixY=120;
 
     matrix = Util.createProjectionMatrixForObjectAt(100, 120);
-    matrix2 = Util.createProjectionMatrixForObjectAt(300, 120);
+    matrix2 = Util.createProjectionMatrixForObjectAt(matrixX, matrixY);
     matrix3 = Util.createProjectionMatrixForObjectAt(450, 120);
-
-    koordinat=new Array();
-    koordinatBack=new Array();
-    koordinatFront=new Array();
-    koordinatLeft=new Array();
-    koordinatRight=new Array();
+//
+//    koordinat=new Array();
+//    koordinatBack=new Array();
+//    koordinatFront=new Array();
+//    koordinatLeft=new Array();
+//    koordinatRight=new Array();
 
     //k1,k2,k3,k4,k5,k6,k7,k8;
 
@@ -35,30 +39,47 @@ function ciz(){
     shape=new ExpandablePrism(width,height,length,matrix);
     path = shape.project();
 */
-    //Dik Kare Prizma
-    shapeDikKarePrizma=new ExpandablePrism(width,0,length,matrix);
 
-    // Eğik Kare Prizma
-    shapeEgikKare=new ExpandableSkewedPrism(width,0,length,0,matrix2);
 
-    //Dik Kare Prizma
-    shapeDikdortgenPrizma=new ExpandableRectangularPrism(width,0,length,matrix3);
+    switch (secim){
 
-    // Paralel kenar Prizma
-    shapeParalelKenar=new ExpandableParallelogramPrism(width,0,length,matrix);
-
-    // Eş kenar Prizma
-    shapeEsKenar=new ExpandableEquilateralPrism(width,0,length,matrix2);
-
-    //Üçgen Prizma
-    shapeUcgen=new ExpandableTrianglePrism(width,0,length,matrix3)
-    //shapeUcgen.project();
+        case "dikKare":
+            //Dik Kare Prizma
+            shapeDikKarePrizma=new ExpandablePrism(width,0,length,matrix2);
+            dondur(shapeDikKarePrizma,matrix2,height);
+            break;
+        case "egikKare":
+            // Eğik Kare Prizma
+            shapeEgikKare=new ExpandableSkewedPrism(width,0,length,0,matrix2);
+            dondur(shapeEgikKare,matrix2,height,skew);
+            break;
+        case "dikdortgen":
+            //Dik Kare Prizma
+            shapeDikdortgenPrizma=new ExpandableRectangularPrism(width,0,length,matrix2);
+            dondur(shapeDikdortgenPrizma,matrix2,height);
+            break;
+        case "paralelKenar":
+            // Paralel kenar Prizma
+            shapeParalelKenar=new ExpandableParallelogramPrism(width,0,length,matrix2);
+            dondur(shapeParalelKenar,matrix2,height);
+            break;
+        case "esKenar":
+            // Eş kenar Prizma
+            shapeEsKenar=new ExpandableEquilateralPrism(width,0,length,matrix2);
+            dondur(shapeEsKenar,matrix2,height);
+            break;
+        case "ucgen":
+            //Üçgen Prizma
+            shapeUcgen=new ExpandableTrianglePrism(width,0,length,matrix2)
+            dondur(shapeUcgen,matrix2,height);
+            break;
+    }
 
 
 
 
     //dondur(shapeParalelKenar,matrix,height);
-    dondur(shapeEsKenar,matrix2,height);
+    //dondur(shapeEsKenar,matrix2,height);
     //dondur(shapeEgikKare,matrix2,height,skew);
     //donukshape=dondur(shapeDikKarePrizma,matrix,height);
     //dondur(shapeDikdortgenPrizma,matrix3,height);
@@ -96,7 +117,8 @@ function ciz(){
             path.remove();
 
         var path = shape.project();
-
+        Interaction.noktaArray=[];
+        Interaction.grup=new Group();
         animationHelper.animate({
             style: {
                 height: height
@@ -122,14 +144,23 @@ function ciz(){
                 koordinat=[koordinatBack,koordinatFront];
 
                 renk=["black","yellow","red","green"]
+                var point;
                 for(var i=0; i<koordinat.length;i++){
                     for(var j=0; j<4;j++){
-                        var point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),10);
+                        point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),5);
                         point.class="nokta";
                         point.myId="nokta"+i+j;
-                        point.fillColor=renk[j];
+                        point.name="nokta"+i+j;
+
+                       //Interaction.grup.addChild(point);
+                        //point.fillColor=renk[j];
+
+                        Interaction.noktaArray.push(point);
+
+
                     }
                 }
+                //$("."+point.class).css("cursor","pointer");
             }
         });
 
