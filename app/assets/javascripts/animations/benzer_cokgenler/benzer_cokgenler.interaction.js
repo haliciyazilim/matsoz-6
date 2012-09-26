@@ -25,13 +25,13 @@ var Interaction = {
         /*
         *	Initialize your interaction here
         */
-        Interaction.setRandomGenerator(16)
+        Interaction.setRandomGenerator(12)
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
         Main.interactionProject.activeLayer.removeChildren();
         /*<[[TEST*/
-            randomNumber = 0;
+//            randomNumber = 11;
         /*TEST]]>*/
 
         Interaction.masterGrid = new InteractiveGrids({
@@ -57,7 +57,10 @@ var Interaction = {
 	*	if this function returns false, check answer operation is cancelled
 	*/
 	preCheck : function(){
-
+        if(Interaction.slaveGrid.points.length < 3){
+            Interaction.setStatus("Lütfen bir şekil çiziniz","alert");
+            return false;
+        }
     },
 	isAnswerCorrect : function(value){
         return InteractiveGrids.AreShapesSimilar(Interaction.masterGrid.points,Interaction.slaveGrid.points);
