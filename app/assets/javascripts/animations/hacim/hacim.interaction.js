@@ -22,9 +22,22 @@ var Interaction = {
             bottom:"50px",
             right:"150px"
         })
-        /*
-        *	Initialize your interaction here
-        */
+
+        Interaction.appendInput({
+            position:'static'
+        });
+
+        Interaction.appendQuestion(
+            "H = ",
+            {
+                position:'absolute',
+                right:'50px',
+                top:'80px'
+            }
+        );
+        $(Interaction.questionDiv)
+            .append(Interaction.input)
+            .append(" cm<sup>3</sup>")
 
         Interaction.prepareNextQuestion();
     },
