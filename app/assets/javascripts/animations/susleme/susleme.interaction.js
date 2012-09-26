@@ -222,14 +222,14 @@ var Interaction = {
                         });
                         shape1.class = "drg"
                         shape1.children[1].myId2 = 1;
-                        Main.setObjective('Kare içindeki şekli sağa ya da yukarı sürükleyerek öteleyiniz.');
+                        Main.setObjective('Kare içindeki şekli sağa ya da yukarı sürükleyerek öteleyiniz. Daha sonra oluşan süslemeyi renklere boyayınız.');
                     }
                     else if(myId == 2){
                         shape1.remove();
                         shape3.remove();
                         shape2.class = "drg";
                         shape2.children[1].myId2 = 2;
-                        Main.setObjective('Kare içindeki şekli sağa sürükleyerek öteleyiniz.');
+                        Main.setObjective('Kare içindeki şekli sağa sürükleyerek öteleyiniz. Daha sonra oluşan süslemeyi renklere boyayınız.');
                     }
                     else if(myId == 3){
                         shape1.remove();
@@ -244,7 +244,7 @@ var Interaction = {
                         });
                         shape3.class = "drg";
                         shape3.children[1].myId2 = 3;
-                        Main.setObjective('Kare içindeki şekli sağa sürükleyerek öteleyiniz.');
+                        Main.setObjective('Kare içindeki şekli sağa sürükleyerek öteleyiniz. Daha sonra oluşan süslemeyi renklere boyayınız.');
                     }
 
                 }
