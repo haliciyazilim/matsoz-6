@@ -59,11 +59,12 @@ var Animation = {
                             zCube : 3,
                             shapeName : "Küpün"
                         });
+                        Main.animationFinished(5000);
+
                     }
                 });
             }
         });
-        Main.animationFinished(5000);
     },
     animateShape:function(opt){
         if(!opt.fillDelay)
