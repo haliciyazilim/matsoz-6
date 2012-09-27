@@ -55,6 +55,9 @@ var Interaction = {
                 case "surface":
                     surface(scenario[i]);
                     break;
+                case "dashedLine":
+                    dashedLine(scenario[i]);
+                    break;
             }
             function point(p){
                 var point = Util.project(p.from,Interaction.matrix).showOnCanvas(5);
@@ -70,8 +73,8 @@ var Interaction = {
             function surface(scene){
                 var surface = new Surface(scene.points);
                 surface.shape = {
-                    strokeColor:"#000",
-                    fillColor:new RgbColor(1,1,1,0.5)
+                    strokeColor:new RgbColor(65/255,129/255,138/255,0.5),
+                    fillColor:new RgbColor(168/255,219/255,227/255,0.5)
                 }
                 surface.project(Interaction.matrix);
                 var animHelper = new AnimationHelper({
@@ -117,12 +120,14 @@ var Interaction = {
                     duration:1000,
                     delay:100
                 });
+                point1.set_style({fillColor:"#41818"})
                 var point2  = centerPoint.showOnCanvas(5);
                 point2.animate({
                     style:{position:Util.project(scene.point2,Interaction.matrix)},
                     duration:1000,
                     delay:100
                 });
+                point2.set_style({fillColor:"#41818"})
                 var animHelper = new AnimationHelper({
                     line:null,
                     point1:centerPoint,
@@ -139,7 +144,10 @@ var Interaction = {
                         if(this.line)
                             this.line.remove();
                         this.line = new Path.Line(this.point1,this.point2);
-                        this.line.set_style({strokeColor:"#000"});
+                        this.line.set_style({
+                                strokeColor:"#41818A",
+                                strokeWidth:2
+                        });
                     }
                 });
                 if(scene.rotateX || scene.rotateY || scene.rotateZ){
@@ -165,13 +173,23 @@ var Interaction = {
                             if(animHelper.line)
                                 animHelper.line.remove();
                             animHelper.line = new Path.Line(p1,p2);
-                            animHelper.line.set_style({strokeColor:"#000"});
+                            animHelper.line.set_style({
+                                strokeColor:"#41818A",
+                                strokeWidth:2
+                            });
                             point1.position = p1;
                             point2.position = p2;
                         }
 
                     })
                 }
+            }
+            function dashedLine(scene){
+                this.line = new Path.Line(Util.project(scene.point1,Interaction.matrix),Util.project(scene.point2,Interaction.matrix));
+                this.line.set_style({
+                    strokeColor:new RgbColor(65/255,129/255,138/255,1),
+                    dashArray:[3,2]
+                });
             }
         }
     },
@@ -261,6 +279,12 @@ var Interaction = {
                 }
             ],
             [
+                {
+                    type:'dashedLine',
+                    point1:new Point3(100,0,0),
+                    point2:new Point3(-100,0,0),
+                    rotateX:new Point3(0,0,0)
+                },
                 {
                     type:"surface",
                     points:[

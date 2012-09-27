@@ -1,4 +1,4 @@
-function ciz(){
+function ciz(secim,matrixX,matrixY,amac,sira){
 
 //    surfaceStyle = {
 //        strokeColor: "#4F9C4F",
@@ -16,16 +16,24 @@ function ciz(){
 
     var skew=0.5;
 
+    if(!matrixX)
+        matrixX=300;
+    if(!matrixY)
+        matrixY=120;
+    if(!amac)
+        amac="";
+    if(!sira)
+        sira=0;
 
     matrix = Util.createProjectionMatrixForObjectAt(100, 120);
-    matrix2 = Util.createProjectionMatrixForObjectAt(300, 120);
+    matrix2 = Util.createProjectionMatrixForObjectAt(matrixX, matrixY);
     matrix3 = Util.createProjectionMatrixForObjectAt(450, 120);
-
-    koordinat=new Array();
-    koordinatBack=new Array();
-    koordinatFront=new Array();
-    koordinatLeft=new Array();
-    koordinatRight=new Array();
+//
+//    koordinat=new Array();
+//    koordinatBack=new Array();
+//    koordinatFront=new Array();
+//    koordinatLeft=new Array();
+//    koordinatRight=new Array();
 
     //k1,k2,k3,k4,k5,k6,k7,k8;
 
@@ -35,30 +43,47 @@ function ciz(){
     shape=new ExpandablePrism(width,height,length,matrix);
     path = shape.project();
 */
-    //Dik Kare Prizma
-    shapeDikKarePrizma=new ExpandablePrism(width,0,length,matrix);
 
-    // Eğik Kare Prizma
-    shapeEgikKare=new ExpandableSkewedPrism(width,0,length,0,matrix2);
 
-    //Dik Kare Prizma
-    shapeDikdortgenPrizma=new ExpandableRectangularPrism(width,0,length,matrix3);
+    switch (secim){
 
-    // Paralel kenar Prizma
-    shapeParalelKenar=new ExpandableParallelogramPrism(width,0,length,matrix);
-
-    // Eş kenar Prizma
-    shapeEsKenar=new ExpandableEquilateralPrism(width,0,length,matrix2);
-
-    //Üçgen Prizma
-    shapeUcgen=new ExpandableTrianglePrism(width,0,length,matrix3)
-    //shapeUcgen.project();
+        case "dikKare":
+            //Dik Kare Prizma
+            shapeDikKarePrizma=new ExpandablePrism(width,0,length,matrix2);
+            dondur(shapeDikKarePrizma,matrix2,height);
+            break;
+        case "egikKare":
+            // Eğik Kare Prizma
+            shapeEgikKare=new ExpandableSkewedPrism(width,0,length,0,matrix2);
+            dondur(shapeEgikKare,matrix2,height,skew);
+            break;
+        case "dikdortgen":
+            //Dik Kare Prizma
+            shapeDikdortgenPrizma=new ExpandableRectangularPrism(width,0,length,matrix2);
+            dondur(shapeDikdortgenPrizma,matrix2,height);
+            break;
+        case "paralelKenar":
+            // Paralel kenar Prizma
+            shapeParalelKenar=new ExpandableParallelogramPrism(width,0,length,matrix2);
+            dondur(shapeParalelKenar,matrix2,height);
+            break;
+        case "esKenar":
+            // Eş kenar Prizma
+            shapeEsKenar=new ExpandableEquilateralPrism(width,0,length,matrix2);
+            dondur(shapeEsKenar,matrix2,height);
+            break;
+        case "ucgen":
+            //Üçgen Prizma
+            shapeUcgen=new ExpandableTrianglePrism(width,0,length,matrix2)
+            dondur(shapeUcgen,matrix2,height);
+            break;
+    }
 
 
 
 
     //dondur(shapeParalelKenar,matrix,height);
-    dondur(shapeEsKenar,matrix2,height);
+    //dondur(shapeEsKenar,matrix2,height);
     //dondur(shapeEgikKare,matrix2,height,skew);
     //donukshape=dondur(shapeDikKarePrizma,matrix,height);
     //dondur(shapeDikdortgenPrizma,matrix3,height);
@@ -96,7 +121,8 @@ function ciz(){
             path.remove();
 
         var path = shape.project();
-
+        Interaction.noktaArray=[];
+        grup=new Group();
         animationHelper.animate({
             style: {
                 height: height
@@ -122,13 +148,25 @@ function ciz(){
                 koordinat=[koordinatBack,koordinatFront];
 
                 renk=["black","yellow","red","green"]
+                var point;
                 for(var i=0; i<koordinat.length;i++){
                     for(var j=0; j<4;j++){
-                        var point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),10);
+                        point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),5);
                         point.class="nokta";
                         point.myId="nokta"+i+j;
-                        point.fillColor=renk[j];
+                        point.name="nokta"+i+j;
+
+                        if(amac=="ornek")
+                            grup.addChild(point);
+                        //point.fillColor=renk[j];
+
+                        Interaction.noktaArray.push(point);
+
+
                     }
+                }
+                if(amac=="ornek"){
+                    ornekAnim(grup,"Dik kare prizma",0,sira);
                 }
             }
         });
@@ -148,6 +186,120 @@ function ciz(){
     point.fillColor="red";
 */
 
+
+
+}
+
+function ornekAnim(grup,metin,bekleme,sira){
+    var baslangicNoktasi=new Point(grup.children.nokta01.position.x,grup.children.nokta01.position.y)
+    var bitisNoktasi=new Point(grup.children.nokta10.position.x,grup.children.nokta10.position.y)
+
+    var baslangicNoktasi2=new Point(grup.children.nokta03.position.x,grup.children.nokta03.position.y)
+    var bitisNoktasi2=new Point(grup.children.nokta12.position.x,grup.children.nokta12.position.y)
+
+    var animationHelper=new AnimationHelper({
+        opacity:0
+    });
+
+    cizgi=new Path.Line(baslangicNoktasi,bitisNoktasi);
+    cizgi.strokeColor="red";
+    cizgi.opacity=0
+
+    cizgi2=new Path.Line(baslangicNoktasi2,bitisNoktasi2);
+    cizgi2.strokeColor="red";
+    cizgi2.opacity=0
+
+    var aciklama = new PointText(new Point(600, 80));
+    aciklama.fillColor = 'black';
+
+// Set the content of the text item:
+    switch (sira){
+        case 0:
+            aciklama.content = 'Dik kare prizma';
+            break;
+        case 2:
+            aciklama.content = 'Paralelkenar prizma';
+            break;
+        case 3:
+            aciklama.content = 'Dikdörtgenler prizması';
+            break;
+        case 4:
+            aciklama.content = 'Eşkenar dörtgen prizma';
+            break;
+
+    }
+    aciklama.opacity=0;
+
+
+    //$("#aciklama").html(metin).animate({opacity:0},500).animate({opacity:1},500);
+    animationHelper.animate({
+        style:{
+            opacity:1
+        },
+        duration:1000,
+        delay:bekleme+1000,
+
+        update:function(){
+
+            cizgi.opacity=animationHelper.opacity;
+            //$("#aciklama").css({opacity:1-animationHelper.opacity});
+            aciklama.opacity=animationHelper.opacity;
+        },
+        callback: function(){
+
+            animationHelper.opacity=0;
+
+            animationHelper.animate({
+                style:{
+                    opacity:1
+                },
+                duration:1000,
+                delay:1000,
+
+
+                update:function(){
+                    aciklama.content="2 cisim köşegeni"
+                    cizgi2.opacity=animationHelper.opacity;
+                    aciklama.opacity=animationHelper.opacity;
+                },
+                callback:function(){
+
+                    animationHelper.opacity=1;
+                    animationHelper.animate({
+                        style:{
+                            opacity:0
+                        },
+                        duration:1000,
+                        delay:2000,
+
+
+                        update:function(){
+                            if(sira!=5)
+                                Main.animationProject.activeLayer.opacity=animationHelper.opacity;
+
+
+                        },
+                        callback:function(){
+                            if(sira!=5)
+                                Main.animationProject.activeLayer.removeChildren();
+                            Main.animationProject.activeLayer.opacity=1;
+
+                            if(sira==0)
+                                ciz("egikKare",350,90,"ornek",2);
+                            else if(sira==2)
+                                ciz("paralelKenar",350,90,"ornek",3);
+                            else if(sira==3)
+                                ciz("dikdortgen",350,90,"ornek",4);
+                            else if(sira==4)
+                                ciz("esKenar",350,90,"ornek",5);
+
+                        }
+                    });
+
+                }
+            });
+        }
+    });
 
 
 }

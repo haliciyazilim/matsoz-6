@@ -64,9 +64,9 @@ var Animation = {
 
         $("#tablo2").append("<div id='istAnkaraI' class='icerik'>");
 
-        $("#tablo2 #istAnkaraI").append("<img id='ayrim1' class='otobus' src='"+resim.otobus+"'><img id='ayrim2' class='gemi' src='"+resim.otobus+"'><img id='ayrim3' class='otobus' src='"+resim.gemi+"'><img id='ayrim4' class='gemi' src='"+resim.tren+"'>" );
-        $("#tablo2 #istAnkaraI").append("<img id='ayrim5' class='otobus' src='"+resim.otobus+"'><img id='ayrim6' class='gemi' src='"+resim.tren+"'><img id='ayrim7' class='otobus' src='"+resim.ucak+"'><img id='ayrim8' class='gemi' src='"+resim.otobus+"'>" );
-        $("#tablo2 #istAnkaraI").append("<img id='ayrim9' class='otobus' src='"+resim.gemi+"'><img id='ayrim10' class='gemi' src='"+resim.otobus+"'><img id='ayrim11' class='otobus' src='"+resim.ucak+"'><img id='ayrim12' class='gemi' src='"+resim.tren+"'>" );
+        $("#tablo2 #istAnkaraI").append("<img id='ayrim1' class='otobus' src='"+resim.otobus+"'><img id='ayrim2' class='otobus' src='"+resim.otobus+"'><img id='ayrim3' class='gemi' src='"+resim.gemi+"'><img id='ayrim4' class='tren' src='"+resim.tren+"'>" );
+        $("#tablo2 #istAnkaraI").append("<img id='ayrim5' class='otobus' src='"+resim.otobus+"'><img id='ayrim6' class='tren' src='"+resim.tren+"'><img id='ayrim7' class='ucak' src='"+resim.ucak+"'><img id='ayrim8' class='otobus' src='"+resim.otobus+"'>" );
+        $("#tablo2 #istAnkaraI").append("<img id='ayrim9' class='gemi' src='"+resim.gemi+"'><img id='ayrim10' class='otobus' src='"+resim.otobus+"'><img id='ayrim11' class='ucak' src='"+resim.ucak+"'><img id='ayrim12' class='tren' src='"+resim.tren+"'>" );
 
 
 
@@ -190,6 +190,18 @@ var Animation = {
             haritaGetir(resim.izmAnkTren, "#izmirAnkaraI .tren")
 
         },37000);
+// İstanbul - İzmir - Ankara
+        setTimeout(function(){
+            haritaGetir(resim.istIzmOtobus, "#istAnkaraI #ayrim1");
+            $("#tablo2, #istAnkaraB").animate({"opacity":"1"},1000);
+
+        },48000);
+
+        setTimeout(function(){
+            haritaGetir(resim.izmAnkOtobus, "#istAnkaraI #ayrim2");
+            $("#izmirAnkaraB").animate({"opacity":"1"},1000);
+
+        },56000);
 
 
         function haritaGetir(src, id){
