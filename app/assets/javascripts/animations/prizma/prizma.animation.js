@@ -5,7 +5,7 @@ var Animation = {
         $(container).append("<div id='aciklama'>");
         $("#aciklama").css({
             position:"absolute",
-            width:"100px",
+            width:"120px",
             height:"20px",
             top:"0",
             bottom:"0",
@@ -14,17 +14,32 @@ var Animation = {
             opacity:"0"
         });
 
-        ciz("dikKare",350,90);
+        ciz("dikKare",350,90,"ornek");
+        //ciz("egikKare",350,90,"ornek",15000);
 
-        setTimeout(
-            function(){
-                $("#aciklama").html("Dik kare prizma").animate({opacity:1},1000);
-                var cizgi=new Path.Line(new Point(koordinat[0][0].x,koordinat[0][0].y),new Point(koordinat[1][1].x,koordinat[1][1].y));
-            }
+//        setTimeout(
+//            function(){
+//                //Main.animationProject.activeLayer.removeChildren();
+//                ciz("egikKare",350,90,"ornek");
+//            }
+//
+//            ,10000);
+//setTimeout(
+////            function(){
+////                //Main.animationProject.activeLayer.removeChildren();
+////                ciz("egikKare",350,90,"ornek");
+////            }
+////
+////            ,10000);
 
-            ,3000);
+//        cizgi=new Path.Line(new Point(270.5,149.5),new Point(332.5,87.5));
+//        //cizgi=new Path.Line(new Point(0,149.5),new Point(100,87.5));
+//        cizgi.strokeColor="red";
 
-        Main.animationFinished(3000);
+        Main.animationFinished(50000);
+
+
+
 
 
     }

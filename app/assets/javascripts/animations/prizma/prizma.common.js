@@ -1,4 +1,4 @@
-function ciz(secim,matrixX,matrixY){
+function ciz(secim,matrixX,matrixY,amac,sira){
 
 //    surfaceStyle = {
 //        strokeColor: "#4F9C4F",
@@ -20,6 +20,10 @@ function ciz(secim,matrixX,matrixY){
         matrixX=300;
     if(!matrixY)
         matrixY=120;
+    if(!amac)
+        amac="";
+    if(!sira)
+        sira=0;
 
     matrix = Util.createProjectionMatrixForObjectAt(100, 120);
     matrix2 = Util.createProjectionMatrixForObjectAt(matrixX, matrixY);
@@ -118,7 +122,7 @@ function ciz(secim,matrixX,matrixY){
 
         var path = shape.project();
         Interaction.noktaArray=[];
-        Interaction.grup=new Group();
+        grup=new Group();
         animationHelper.animate({
             style: {
                 height: height
@@ -152,7 +156,8 @@ function ciz(secim,matrixX,matrixY){
                         point.myId="nokta"+i+j;
                         point.name="nokta"+i+j;
 
-                       //Interaction.grup.addChild(point);
+                        if(amac=="ornek")
+                            grup.addChild(point);
                         //point.fillColor=renk[j];
 
                         Interaction.noktaArray.push(point);
@@ -160,7 +165,9 @@ function ciz(secim,matrixX,matrixY){
 
                     }
                 }
-                //$("."+point.class).css("cursor","pointer");
+                if(amac=="ornek"){
+                    ornekAnim(grup,"Dik kare prizma",0,sira);
+                }
             }
         });
 
@@ -179,6 +186,120 @@ function ciz(secim,matrixX,matrixY){
     point.fillColor="red";
 */
 
+
+
+}
+
+function ornekAnim(grup,metin,bekleme,sira){
+    var baslangicNoktasi=new Point(grup.children.nokta01.position.x,grup.children.nokta01.position.y)
+    var bitisNoktasi=new Point(grup.children.nokta10.position.x,grup.children.nokta10.position.y)
+
+    var baslangicNoktasi2=new Point(grup.children.nokta03.position.x,grup.children.nokta03.position.y)
+    var bitisNoktasi2=new Point(grup.children.nokta12.position.x,grup.children.nokta12.position.y)
+
+    var animationHelper=new AnimationHelper({
+        opacity:0
+    });
+
+    cizgi=new Path.Line(baslangicNoktasi,bitisNoktasi);
+    cizgi.strokeColor="red";
+    cizgi.opacity=0
+
+    cizgi2=new Path.Line(baslangicNoktasi2,bitisNoktasi2);
+    cizgi2.strokeColor="red";
+    cizgi2.opacity=0
+
+    var aciklama = new PointText(new Point(600, 80));
+    aciklama.fillColor = 'black';
+
+// Set the content of the text item:
+    switch (sira){
+        case 0:
+            aciklama.content = 'Dik kare prizma';
+            break;
+        case 2:
+            aciklama.content = 'Paralelkenar prizma';
+            break;
+        case 3:
+            aciklama.content = 'Dikdörtgenler prizması';
+            break;
+        case 4:
+            aciklama.content = 'Eşkenar dörtgen prizma';
+            break;
+
+    }
+    aciklama.opacity=0;
+
+
+    //$("#aciklama").html(metin).animate({opacity:0},500).animate({opacity:1},500);
+    animationHelper.animate({
+        style:{
+            opacity:1
+        },
+        duration:1000,
+        delay:bekleme+1000,
+
+        update:function(){
+
+            cizgi.opacity=animationHelper.opacity;
+            //$("#aciklama").css({opacity:1-animationHelper.opacity});
+            aciklama.opacity=animationHelper.opacity;
+        },
+        callback: function(){
+
+            animationHelper.opacity=0;
+
+            animationHelper.animate({
+                style:{
+                    opacity:1
+                },
+                duration:1000,
+                delay:1000,
+
+
+                update:function(){
+                    aciklama.content="2 cisim köşegeni"
+                    cizgi2.opacity=animationHelper.opacity;
+                    aciklama.opacity=animationHelper.opacity;
+                },
+                callback:function(){
+
+                    animationHelper.opacity=1;
+                    animationHelper.animate({
+                        style:{
+                            opacity:0
+                        },
+                        duration:1000,
+                        delay:2000,
+
+
+                        update:function(){
+                            if(sira!=5)
+                                Main.animationProject.activeLayer.opacity=animationHelper.opacity;
+
+
+                        },
+                        callback:function(){
+                            if(sira!=5)
+                                Main.animationProject.activeLayer.removeChildren();
+                            Main.animationProject.activeLayer.opacity=1;
+
+                            if(sira==0)
+                                ciz("egikKare",350,90,"ornek",2);
+                            else if(sira==2)
+                                ciz("paralelKenar",350,90,"ornek",3);
+                            else if(sira==3)
+                                ciz("dikdortgen",350,90,"ornek",4);
+                            else if(sira==4)
+                                ciz("esKenar",350,90,"ornek",5);
+
+                        }
+                    });
+
+                }
+            });
+        }
+    });
 
 
 }
