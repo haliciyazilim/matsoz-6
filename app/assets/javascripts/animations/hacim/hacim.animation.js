@@ -57,13 +57,13 @@ var Animation = {
                             xCube : 3,
                             yCube : 3,
                             zCube : 3,
-                            shapeName : "Küpün"
+                            shapeName : "Küpün",
+                            callback:Main.animationFinished
                         });
                     }
                 });
             }
         });
-        Main.animationFinished(5000);
     },
     animateShape:function(opt){
         if(!opt.fillDelay)

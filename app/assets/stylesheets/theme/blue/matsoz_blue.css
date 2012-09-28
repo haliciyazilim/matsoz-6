@@ -31,7 +31,7 @@ img {
 	text-align:left;
 	top: 0;
 	width:1280px;
-	height:768px;
+	height:752px;
 
 	background:url(ui_img/containerbg_left.jpg) no-repeat 50% 50% #2d3a46;
 	
@@ -46,9 +46,9 @@ img {
 ---------------------------------------*/
 #navigation {
 	width:400px;
-	height:768px;
+	height:748px;
 	left:0;
-	top:0;
+	top:-10px;
 	position:absolute;
 	
 /*	background:url(ui_img/blue_leather.png) repeat-y left top;*/
@@ -213,7 +213,7 @@ a.sozcuklink:hover, .sozcukselected {
 	width:857px;
 	height:726px;
 	left:400px;
-	top:20px;
+	top:12px;
 	position:relative;
 	
 	display:table;
