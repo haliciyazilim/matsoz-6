@@ -11,15 +11,17 @@ var Tangram = Class.extend({
         }
         this.strokeColor = strokeColor;
         this.fillColor = fillColor;
+        this.size = size;
         // big triangle1 points
         var point1 = new Point(myPoint.x,myPoint.y);
         var point2 = new Point(myPoint.x+size,myPoint.y);
         var point3 = new Point(myPoint.x+(size*0.5),myPoint.y+(size*0.5));
 
         // big triangle2 points
-        var point4 = new Point(myPoint.x,myPoint.y);
-        var point5 = new Point(myPoint.x+(size*0.5),myPoint.y+(size*0.5));
-        var point6 = new Point(myPoint.x,myPoint.y+size);
+        var point4 = new Point(myPoint.x,myPoint.y+size);
+        var point5 = new Point(myPoint.x,myPoint.y);
+        var point6 = new Point(myPoint.x+(size*0.5),myPoint.y+(size*0.5));
+
 
         // little triangle1 points
         var point7 = new Point(myPoint.x+(size*0.5),myPoint.y+(size*0.5));
@@ -39,8 +41,8 @@ var Tangram = Class.extend({
         var point17 = new Point(myPoint.x+(size*0.5),myPoint.y+size);
 
         // little triangle2 points
-        var point18 = new Point(myPoint.x,myPoint.y+size);
-        var point19 = new Point(myPoint.x+(size*0.25),myPoint.y+(size*0.75));
+        var point18 = new Point(myPoint.x+(size*0.25),myPoint.y+(size*0.75));
+        var point19 = new Point(myPoint.x,myPoint.y+size);
         var point20 = new Point(myPoint.x+(size*0.5),myPoint.y+size);
 
         // middle triangle points
@@ -49,14 +51,14 @@ var Tangram = Class.extend({
         var point23 = new Point(myPoint.x+size,myPoint.y+size);
 
         // animate points
-        animatePoints = [];
-        animatePoints[0] = new Point(-2,-3);
-        animatePoints[1] = new Point(-4,-1);
-        animatePoints[2] = new Point(1,-1);
-        animatePoints[3] = new Point(4,-4);
-        animatePoints[4] = new Point(-2,2);
-        animatePoints[5] = new Point(-4,4);
-        animatePoints[6] = new Point(3,2);
+        this.animatePoints = [];
+        this.animatePoints[0] = new Point(-2,-3);
+        this.animatePoints[1] = new Point(-4,-1);
+        this.animatePoints[2] = new Point(1,-1);
+        this.animatePoints[3] = new Point(4,-4);
+        this.animatePoints[4] = new Point(-2,2);
+        this.animatePoints[5] = new Point(-4,4);
+        this.animatePoints[6] = new Point(3,2);
 
         this.pieces = [];
 
@@ -164,92 +166,128 @@ var Tangram = Class.extend({
             var c5 = this.pieces[4].shape.position;
             var c6 = this.pieces[5].shape.position;
             var c7 = this.pieces[6].shape.position;
+            var self = this;
             animHelper1.animate({
                 style:{
-                    myPoint:new Point(animatePoints[0])
+                    myPoint:new Point(self.animatePoints[0])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b1.setPos(new Point(c1.add(this.myPoint)));
+                },
+                callback:function(){
+                    b1.originalPosition = b1.shape.position;
                 }
             });
             animHelper2.animate({
                 style:{
-                    myPoint:new Point(animatePoints[1])
+                    myPoint:new Point(self.animatePoints[1])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b2.setPos(new Point(c2.add(this.myPoint)));
+                },
+                callback:function(){
+                    b2.originalPosition = b2.shape.position;
                 }
             });
             animHelper3.animate({
                 style:{
-                    myPoint:new Point(animatePoints[2])
+                    myPoint:new Point(self.animatePoints[2])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b3.setPos(new Point(c3.add(this.myPoint)));
+                },
+                callback:function(){
+                    b3.originalPosition = b3.shape.position;
                 }
             });
             animHelper4.animate({
                 style:{
-                    myPoint:new Point(animatePoints[3])
+                    myPoint:new Point(self.animatePoints[3])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b4.setPos(new Point(c4.add(this.myPoint)));
+                },
+                callback:function(){
+                    b4.originalPosition = b4.shape.position;
                 }
             });
             animHelper5.animate({
                 style:{
-                    myPoint:new Point(animatePoints[4])
+                    myPoint:new Point(self.animatePoints[4])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b5.setPos(new Point(c5.add(this.myPoint)));
+                },
+                callback:function(){
+                    b5.originalPosition = b5.shape.position;
                 }
             });
             animHelper6.animate({
                 style:{
-                    myPoint:new Point(animatePoints[5])
+                    myPoint:new Point(self.animatePoints[5])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b6.setPos(new Point(c6.add(this.myPoint)));
+                },
+                callback:function(){
+                    b6.originalPosition = b6.shape.position;
                 }
             });
             animHelper7.animate({
                 style:{
-                    myPoint:new Point(animatePoints[6])
+                    myPoint:new Point(self.animatePoints[6])
                 },
                 duration:1000,
                 delay:delay,
                 animationType:'easeInOutQuad',
                 update:function(){
                     b7.setPos(new Point(c7.add(this.myPoint)));
+                },
+                callback:function(){
+                    b7.originalPosition = b7.shape.position;
                 }
             });
         }
     },
     flipPiece4:function(){
         var flipped = this.pieces[3].pointsArr;
+        var flipped2 = this.pieces[3].shape;
         var newPointsArray = [];
-        newPointsArray[0] = new Point(flipped[0].x,flipped[1].y);
-        newPointsArray[1] = new Point(flipped[1].x,flipped[0].y);
-        newPointsArray[2] = new Point(flipped[2].x,flipped[3].y);
-        newPointsArray[3] = new Point(flipped[3].x,flipped[2].y);
+
+        var originalAngle = this.pieces[3].originalAngle;
+        var originalPosition = this.pieces[3].originalPosition;
+        var isFlipped = this.pieces[3].isFlipped;
+//
+        var point0 = flipped[0].add((flipped2.position.x-flipped[0].x)*2,0);
+
+        var point1 = flipped[1].add((flipped2.position.x-flipped[1].x)*2,0);
+
+        var point2 = flipped[2].add((flipped2.position.x-flipped[2].x)*2,0);
+
+        var point3 = flipped[3].add((flipped2.position.x-flipped[3].x)*2,0);
+
+        newPointsArray[0] = new Point(point0);
+        newPointsArray[1] = new Point(point1);
+        newPointsArray[2] = new Point(point2);
+        newPointsArray[3] = new Point(point3);
 
         if(this.pieces[3]){
             this.pieces[3].shape.remove();
@@ -257,6 +295,9 @@ var Tangram = Class.extend({
         }
         this.pieces[3] = new MyShapes(newPointsArray,3,this.strokeColor,this.fillColor);
         this.pieces[3].shape.class = "draggable";
+        this.pieces[3].originalAngle = originalAngle;
+        this.pieces[3].originalPosition = originalPosition;
+        this.pieces[3].isFlipped = isFlipped;
     }
 });
 
@@ -286,6 +327,24 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
         this.drawShape(this.strokeColor,this.fillColor);
         this.shape.parentObject = this;
         this.computeLinesArray();
+        this.computeCurrentAngle();
+        this.centerPoint = Util.centerOfPoints(this.pointsArr);
+    };
+
+    this.computeOriginalAngle = function(){
+        var angle;
+        angle = Util.findAngle(this.pointsArr[0].x,this.pointsArr[0].y,this.centerPoint.x,this.centerPoint.y);
+        angle = Util.radianToDegree(angle);
+
+        this.originalAngle = angle;
+    };
+
+    this.computeCurrentAngle = function(){
+        var angle;
+        angle = Util.findAngle(this.pointsArr[0].x,this.pointsArr[0].y,this.centerPoint.x,this.centerPoint.y);
+        angle = Util.radianToDegree(angle);
+
+        this.currentAngle = angle;
     };
 
     this.drawShape = function(strokeColor,fillColor){
@@ -305,6 +364,9 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
 
     this.shape = this.drawShape(strokeColor,fillColor);
     this.shape.parentObject = this;
+    this.originalPosition = this.shape.position;
+    this.computeOriginalAngle();
+    this.computeCurrentAngle();
 
     this.setPos = function(newPosition){
         var difference = newPosition.subtract(this.shape.position);
@@ -314,6 +376,7 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
         this.shape.position = newPosition;
         this.centerPoint = Util.centerOfPoints(this.pointsArr);
         this.computeLinesArray();
+        this.computeCurrentAngle();
     };
 
     this.setRotation = function(angle){
@@ -324,6 +387,7 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
         this.shape.rotate(angle,this.centerPoint);
         this.centerPoint = Util.centerOfPoints(this.pointsArr);
         this.computeLinesArray();
+        this.computeCurrentAngle();
     };
 
     this.computeLinesArray = function(){
@@ -348,7 +412,32 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
 
     this.computeLinesArray();
 
-    this.trySnapTo = function(){
+    this.trySnapTo = function(otherObject){
+        if(this.centerPoint.getDistance(otherObject.centerPoint,true) > 1000){
+            return;
+        }
+        console.log("angle difference: ",(this.currentAngle-otherObject.currentAngle)%180);
+        console.log("distance: ",this.centerPoint.getDistance(otherObject.centerPoint,true));
+        if(this.myType == otherObject.myType){
+            if(this.myType == 4){
+                if((Math.abs(this.currentAngle - otherObject.currentAngle)%90) < 20){
+                    if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 400){
+                        console.log("snapped");
+                        this.setPos(otherObject.shape.position);
+                        this.setRotation(this.currentAngle-otherObject.currentAngle);
+                    }
+                }
+            }
+            else{
+                if((Math.abs(this.currentAngle - otherObject.currentAngle)%180) < 10){
+                    if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 300){
+                        console.log("snapped");
+                        this.setPos(otherObject.shape.position);
+                        this.setRotation(this.currentAngle-otherObject.currentAngle);
+                    }
+                }
+            }
+        }
 
     };
 };
@@ -384,4 +473,23 @@ function flipSelectedItem(){
     Interaction.rotatableItem.fillColor = interactionSelectedColors[Interaction.randomNumber];
     Interaction.rotatableItem.strokeColor = interactionSelectedColors[Interaction.randomNumber];
     Interaction.rotItems.class = "rotatable";
+    if(Interaction.tangram.pieces[3].isFlipped == 0){
+        Interaction.tangram.pieces[3].isFlipped = 1;
+    }
+    else{
+        Interaction.tangram.pieces[3].isFlipped = 0;
+    }
 };
+function generateTangramQuestions(){
+    TangramQuestions = [
+        [
+            {point:new Point(325.5,154.5),angle:162},
+            {point:new Point(356.5,124.5),angle:342},
+            {point:new Point(229.5,215.5),angle:315},
+            {point:new Point(281.5,206.5),angle:270},
+            {point:new Point(355.5,63.5),angle:0},
+            {point:new Point(374.5,254.5),angle:45},
+            {point:new Point(355.5,214.5),angle:117}
+        ]
+    ];
+}
