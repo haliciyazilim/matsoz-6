@@ -32,8 +32,8 @@ var Interaction = {
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.createRectanglePrisim();
 //        Interaction.Shapes[Interaction.shapeIndex]();
-//        Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
-        /*<[[TEST*/ Interaction.playScenerio(Interaction.Scenarios[ 9 ]); /*TEST]]>*/
+        Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
+//        /*<[[TEST*/ Interaction.playScenerio(Interaction.Scenarios[ 9 ]); /*TEST]]>*/
         Interaction.shapeIndex = ++Interaction.shapeIndex % Interaction.Scenarios.length;
     },
     createRectanglePrisim:function(){
