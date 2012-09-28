@@ -4,6 +4,8 @@ function InteractiveGrids(opt){
     this.position = opt.position;
     this.style = opt.style;
     this.points = [];
+    this.vertexes = [];
+    this.circles = [];
     for(var i=0; i<=8; i++){
         new Path.Line(
             this.position.add(0,this.size*i),
@@ -22,8 +24,29 @@ function InteractiveGrids(opt){
                 fillColor:new RgbColor(1,1,1,0)
             });
             circle.class = "InteractiveGridCircles"+this.id;
+            this.circles.push(circle);
         }
     return this;
+}
+
+
+InteractiveGrids.prototype.activateRemoveOnClick = function(){
+    this.removeOnClick = true;
+}
+
+
+InteractiveGrids.prototype.removeShape = function(){
+    this.path.remove();
+    for(var i=0;i < this.vertexes.length; i++)
+        this.vertexes[i].remove();
+    this.vertexes = [];
+    for(var i=0; i< this.points.length; i++){
+        this.points[i].class = "InteractiveGridCircles"+this.id;
+    }
+    this.path.remove();
+    this.disableDraw = false;
+    this.points = [];
+    this.createTool();
 }
 InteractiveGrids.prototype.drawShape = function(points){
     this.path = new Path();
@@ -33,12 +56,10 @@ InteractiveGrids.prototype.drawShape = function(points){
         strokeColor : '#f00'
     });
     if(points){
-//         = points;
         for(var i=0; i<points.length; i++){
-            var point =points[i].multiply(this.size,this.size).add(this.position);
+            var point = points[i].multiply(this.size,this.size).add(this.position);
             this.points.push(point);
             this.path.add(point);
-
         }
         this.path.closed = true;
     }
@@ -47,19 +68,31 @@ InteractiveGrids.prototype.drawShape = function(points){
 InteractiveGrids.prototype.createTool = function(){
     var tool = new Tool();
     var self = this;
+    this.disableDraw = false;
     tool.onMouseDown = function(event){
+        if(self.removeOnClick == true){
+            self.removeShape();
+            return;
+        }
+        if(self.disableDraw == true)
+            return;
         if(event.item && event.item.class == "InteractiveGridCircles"+self.id){
+
             event.item.set_style({
-//                fillColor:"#f00"
             })
+            self.vertexes.push(new Path.Circle(event.item.position,4).set_style({
+                fillColor:new RgbColor(0.2,0.2,0.2)
+            }))
             self.path.add(event.item.position);
             event.item.class = "SelectedGridCircles";
+            event.item.opacity =1 ;
             self.points.push(event.item.position);
             event.item.insertAbove(self.path);
         }
         else if(event.item && event.item.class == "SelectedGridCircles" && self.points.length > 2){
             self.path.closed = true;
-            this.remove();
+            self.disableDraw = true;
+//            this.remove();
         }
     }
     tool.activate();
@@ -180,7 +213,6 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
     if(points1.length != points2.length )
         return false;
     else{
-
         function extractShape(points){
             var shape = [];
             for(var i=0; i < points.length; i++){
@@ -188,9 +220,8 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
                 var currentPoint = points[i];
                 var backPoint = points[(i-1+points.length) % points.length];
                 var frontPoint = points[(i+1) % points.length];
-                currentPoint.showOnCanvas();
+//                currentPoint.showOnCanvas();
                 new PointText(currentPoint).content = i;
-
                 var angle = Math.abs(
                     Util.findAngle(currentPoint.x,currentPoint.y,frontPoint.x,frontPoint.y) -
                     Util.findAngle(currentPoint.x,currentPoint.y,backPoint.x,backPoint.y)
@@ -202,7 +233,8 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
                 shape.push([
                     currentPoint.getDistance(frontPoint,true),
                     currentPoint.getDistance(backPoint,true),
-                    angle
+                    angle,
+                    currentPoint
                 ])
             }
             return shape;
@@ -219,13 +251,10 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
                 largestEdgeInShape2 = shape2[i][0];
 
         var similarityRatio = largestEdgeInShape1 / largestEdgeInShape2 ;
-
         var error = 0.00001;
         var length = shape1.length;
 
         //start comparing in the same direction
-
-
         function compareShapes(shape1,shape2,reverse){
             for(var j= 0;j<=length;j++){
                 var isSimilar = true;
@@ -243,19 +272,21 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
                         isSimilar = false;
                     }
                 }
-                if(isSimilar == true)
+                if(isSimilar == true){
+                    InteractiveGrids.MoveShapeTo(shape1,shape2,j,reverse)
                     return true;
+                }
             }
         }
-        if(compareShapes(shape1,shape2,true)==true)
+        if(compareShapes(shape1,shape2,false)==true)
             return true;
+        if(compareShapes(shape1,shape2,true)==true)
             return true;
         shape1 = shape1.reverse();
         if(compareShapes(shape1,shape2,false)==true)
             return true;
         if(compareShapes(shape1,shape2,true)==true)
             return true;
-
     }
     return false;
 }
@@ -266,4 +297,40 @@ InteractiveGrids.GetId = function(){
         InteractiveGrids.order = 1;
         return InteractiveGrids.GetId();
     }
+}
+InteractiveGrids.MoveShapeTo = function(fromPoints,toPoints,toStartPoint,reverse){
+
+    if(fromPoints.length != toPoints.length)
+        return;
+    var shape;
+    var animHelper = new AnimationHelper({});
+    var style = {};
+    console.log("reverse: " + reverse)
+    for(var i=0;i<fromPoints.length;i++){
+        style["point"+i] = fromPoints[i][3];
+        animHelper["point"+i] = toPoints[(i+toStartPoint+toPoints.length-(reverse===true && toPoints.length > 3 ?0:0))%toPoints.length][3];
+    }
+    animHelper.animate({
+        style:style,
+        duration:2000,
+        animationType:'easeInEaseOut',
+        update:function(){
+            if(shape)
+                shape.remove();
+            shape = new Path();
+            for(var i=0;true;i++)
+                if(this["point"+i])
+                    shape.add(this["point"+i]);
+                else
+                    break;
+            shape.closed = true;
+            shape.strokeColor = "#000";
+            shape.strokeWidth = 2;
+        },
+        callback:function(){
+            Interaction.resume();
+        }
+    })
+
+
 }

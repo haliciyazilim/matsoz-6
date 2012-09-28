@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+        Main.setObjective('Yandaki çokgenin benzerini yandaki kareli bölgede oluşturup kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -29,9 +29,11 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        Interaction.trial++;
+
         Main.interactionProject.activeLayer.removeChildren();
         /*<[[TEST*/
-//            randomNumber = 11;
+//            randomNumber = 5;
         /*TEST]]>*/
 
         Interaction.masterGrid = new InteractiveGrids({
@@ -57,8 +59,8 @@ var Interaction = {
 	*	if this function returns false, check answer operation is cancelled
 	*/
 	preCheck : function(){
-        if(Interaction.slaveGrid.points.length < 3){
-            Interaction.setStatus("Lütfen bir şekil çiziniz","alert");
+        if(Interaction.slaveGrid.path.closed != true){
+            Interaction.setStatus("Lütfen bir kapalı şekil çiziniz","alert");
             return false;
         }
     },
@@ -66,12 +68,12 @@ var Interaction = {
         return InteractiveGrids.AreShapesSimilar(Interaction.masterGrid.points,Interaction.slaveGrid.points);
     },
 	onCorrectAnswer : function(){
-		
+		Interaction.pause();
     },
 	onWrongAnswer : function(){
-		
     },
 	onFail : function(){
+        Interaction.setStatus("Yanlış cevap.",false);
 		
     }
 }

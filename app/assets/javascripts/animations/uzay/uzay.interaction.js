@@ -32,10 +32,8 @@ var Interaction = {
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.createRectanglePrisim();
 //        Interaction.Shapes[Interaction.shapeIndex]();
-        Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
-        /*<[[TEST*/
-//            Interaction.playScenerio(Interaction.Scenarios[ 9 ]);
-        /*TEST]]>*/
+//        Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
+        /*<[[TEST*/ Interaction.playScenerio(Interaction.Scenarios[ 9 ]); /*TEST]]>*/
         Interaction.shapeIndex = ++Interaction.shapeIndex % Interaction.Scenarios.length;
     },
     createRectanglePrisim:function(){
@@ -330,6 +328,10 @@ var Interaction = {
                     point1: new Point3(-80,-70,-30),
                     point2: new Point3(80,70,30),
                     rotateX:new Point3(0,0,0)
+                },
+                {
+                    type:"point",
+                    from:new Point3(0,0,0)
                 },
                 {
                     type:"surface",

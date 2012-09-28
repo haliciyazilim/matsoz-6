@@ -10,8 +10,17 @@ var Animation = {
         istIzmGemi:"/assets/animations/saymanin_temel_ilkesi/ist_izm_gemi.gif",
         istIzmOtobus:"/assets/animations/saymanin_temel_ilkesi/ist_izm_otobus.gif",
         istIzmUcak:"/assets/animations/saymanin_temel_ilkesi/ist_izm_ucak.gif",
+
         izmAnkOtobus:"/assets/animations/saymanin_temel_ilkesi/izm_ank_otobus.gif",
         izmAnkTren:"/assets/animations/saymanin_temel_ilkesi/izm_ank_tren.gif",
+
+        istAnkOtoOto:"/assets/animations/saymanin_temel_ilkesi/istank_oto_oto.gif",
+        istAnkOtoTren:"/assets/animations/saymanin_temel_ilkesi/istank_oto_tren.gif",
+        istAnkGemiOto:"/assets/animations/saymanin_temel_ilkesi/istank_gemi_oto.gif",
+        istAnkGemiTren:"/assets/animations/saymanin_temel_ilkesi/istank_gemi_tren.gif",
+        istAnkUcakOto:"/assets/animations/saymanin_temel_ilkesi/istank_ucak_oto.gif",
+        istAnkUcakTren:"/assets/animations/saymanin_temel_ilkesi/istank_ucak_tren.gif",
+
         otobus:"/assets/animations/saymanin_temel_ilkesi/otobus.png",
         tren:"/assets/animations/saymanin_temel_ilkesi/tren.png",
         ucak:"/assets/animations/saymanin_temel_ilkesi/ucak.png",
@@ -64,18 +73,18 @@ var Animation = {
 
         $("#tablo2").append("<div id='istAnkaraI' class='icerik'>");
 
-        $("#tablo2 #istAnkaraI").append("<img id='ayrim1' class='otobus' src='"+resim.otobus+"'><img id='ayrim2' class='otobus' src='"+resim.otobus+"'><img id='ayrim3' class='gemi' src='"+resim.gemi+"'><img id='ayrim4' class='tren' src='"+resim.tren+"'>" );
-        $("#tablo2 #istAnkaraI").append("<img id='ayrim5' class='otobus' src='"+resim.otobus+"'><img id='ayrim6' class='tren' src='"+resim.tren+"'><img id='ayrim7' class='ucak' src='"+resim.ucak+"'><img id='ayrim8' class='otobus' src='"+resim.otobus+"'>" );
-        $("#tablo2 #istAnkaraI").append("<img id='ayrim9' class='gemi' src='"+resim.gemi+"'><img id='ayrim10' class='otobus' src='"+resim.otobus+"'><img id='ayrim11' class='ucak' src='"+resim.ucak+"'><img id='ayrim12' class='tren' src='"+resim.tren+"'>" );
+        $("#tablo2 #istAnkaraI").append("<img id='ayrim1' class='otobus' src='"+resim.otobus+"'><img id='ayrim2' class='otobus' src='"+resim.otobus+"'><img id='ayrim3' class='otobus' src='"+resim.otobus+"'><img id='ayrim4' class='tren' src='"+resim.tren+"'>" );
+        $("#tablo2 #istAnkaraI").append("<img id='ayrim5' class='gemi' src='"+resim.gemi+"'><img id='ayrim6' class='otbus' src='"+resim.otobus+"'><img id='ayrim7' class='gemi' src='"+resim.gemi+"'><img id='ayrim8' class='tren' src='"+resim.tren+"'>" );
+        $("#tablo2 #istAnkaraI").append("<img id='ayrim9' class='ucak' src='"+resim.ucak+"'><img id='ayrim10' class='otobus' src='"+resim.otobus+"'><img id='ayrim11' class='ucak' src='"+resim.ucak+"'><img id='ayrim12' class='tren' src='"+resim.tren+"'>" );
 
 
 
-        $("#ayrim2").css("padding-right","10px");
+        $("#ayrim2").css("padding-right","40px");
         $("#ayrim4").css("padding-right","10px");
         $("#ayrim6").css("padding-right","10px");
         $("#ayrim8").css("padding-right","25px");
-        $("#ayrim10").css("padding-right","42px");
-        $("#ayrim12").css("padding-right","10px");
+        $("#ayrim10").css("padding-right","35px");
+
 
         $("#tablo1").css({
             position:"absolute",
@@ -192,16 +201,33 @@ var Animation = {
         },37000);
 // İstanbul - İzmir - Ankara
         setTimeout(function(){
-            haritaGetir(resim.istIzmOtobus, "#istAnkaraI #ayrim1");
+            haritaGetir(resim.istAnkOtoOto, "#istAnkaraI #ayrim1, #istAnkaraI #ayrim2");
             $("#tablo2, #istAnkaraB").animate({"opacity":"1"},1000);
 
         },48000);
 
         setTimeout(function(){
-            haritaGetir(resim.izmAnkOtobus, "#istAnkaraI #ayrim2");
-            $("#izmirAnkaraB").animate({"opacity":"1"},1000);
-
+            haritaGetir(resim.istAnkOtoTren, "#istAnkaraI #ayrim3, #istAnkaraI #ayrim4");
         },56000);
+
+        setTimeout(function(){
+            haritaGetir(resim.istAnkGemiOto, "#istAnkaraI #ayrim5, #istAnkaraI #ayrim6");
+        },64000);
+
+        setTimeout(function(){
+            haritaGetir(resim.istAnkGemiTren, "#istAnkaraI #ayrim7, #istAnkaraI #ayrim8");
+        },72000);
+
+        setTimeout(function(){
+            haritaGetir(resim.istAnkUcakOto, "#istAnkaraI #ayrim9, #istAnkaraI #ayrim10");
+        },78000);
+
+        setTimeout(function(){
+            haritaGetir(resim.istAnkUcakTren, "#istAnkaraI #ayrim11, #istAnkaraI #ayrim12");
+        },84000);
+        setTimeout(function(){
+            $("#sonuc").animate({opacity:1},1000);
+        },90000);
 
 
         function haritaGetir(src, id){
@@ -234,7 +260,7 @@ var Animation = {
 
 
 
-        Main.animationFinished(1000);
+        Main.animationFinished(90000);
 		
 		}
 }
