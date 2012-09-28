@@ -58,7 +58,23 @@ var Animation = {
                             yCube : 3,
                             zCube : 3,
                             shapeName : "Küpün",
-                            callback:Main.animationFinished
+                            callback:function(){
+                                Main.animationProject.activeLayer.animate({
+                                    style:{opacity:0},
+                                    duration:500
+                                });
+                                $("div.hacim",Animation.container).animate({opacity:0},500,$("div.hacim",Animation.container).remove);
+                                $(Animation.container).append('<div id="calculation">H = a . b . c</div>');
+                                $('#calculation',Animation.container).css({
+                                    position:'absolute',
+                                    fontSize:'36px',
+                                    top:'50%',
+                                    left:'50%',
+                                    opacity:0,
+                                    marginLeft:'-92px',
+                                    marginTop:'-18px'
+                                }).delay(500).animate({opacity:1},500,Main.animationFinished)
+                            }
                         });
                     }
                 });
@@ -94,6 +110,7 @@ var Animation = {
                     cubes.push(new UnitCube(i,j,k));
         var div = document.createElement('div');
         div.className = "hacim"
+
         $(Animation.container).append(div);
         $(div)
             .css({
@@ -104,7 +121,9 @@ var Animation = {
                 textAlign:'center',
                 fontSize:'16px'
             })
-            .html(opt.shapeName + ' <br/> hacmi <br/> <span id="count" style="font-weight:bold"></span> birim küptür.')
+            .html(opt.shapeName + ' <br/> hacmi <br/> H = <span id="count" style="font-weight:bold">0</span> cm<sup>3</sup>' +
+            '<div id="calculate">'+opt.xCube+' . '+opt.yCube+'  . '+opt.zCube+' = '+ cubes.length+'</div>');
+        $('#calculate',div).css({opacity:0});
         Animation.countSpan = $('span#count',div).get(0);
         UnitCube.drawCubes(cubes,Animation.zeroPoint,Animation.a,Animation,animationCubeStyle);
         cubes[0].shape.insertBelow(Animation.rectPrizm.children[4]);
@@ -122,6 +141,7 @@ var Animation = {
                 }
             });
         }
+        $('#calculate',div).delay(opt.fillDelay+cubes.length*100).animate({opacity:1},500);
         AnimationManager.delay(opt.callback,cubes.length*100+3000+opt.fillDelay)
 
         new PointText(Animation.shapePosition.add(
