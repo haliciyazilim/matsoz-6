@@ -429,9 +429,8 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
                 }
             }
             else{
-                if((Math.abs(this.currentAngle - otherObject.currentAngle)%180) < 10){
-                    if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 300){
-                        console.log("snapped");
+                if(Math.abs(this.currentAngle - otherObject.currentAngle) < 20){
+                    if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 400){
                         this.setPos(otherObject.shape.position);
                         this.setRotation(this.currentAngle-otherObject.currentAngle);
                     }

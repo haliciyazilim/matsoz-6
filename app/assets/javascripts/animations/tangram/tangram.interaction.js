@@ -146,9 +146,11 @@ var Interaction = {
                             Interaction.rotatableItem = null;
                             $('#flip').css("opacity",0.4);
                             $('#flip').get(0).onclick = null;
+
                             for(var i = 0; i < Interaction.tangram.pieces.length; i++){
                                 this.item.insertAbove(Interaction.tangram.pieces[i].shape);
                             }
+
                         }
                     }
                     else{
