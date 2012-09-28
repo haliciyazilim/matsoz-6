@@ -191,26 +191,37 @@ function ciz(secim,matrixX,matrixY,amac,sira){
 }
 
 function ornekAnim(grup,metin,bekleme,sira){
-    var baslangicNoktasi=new Point(grup.children.nokta01.position.x,grup.children.nokta01.position.y)
-    var bitisNoktasi=new Point(grup.children.nokta10.position.x,grup.children.nokta10.position.y)
+    var baslangicNoktasi=new Point(grup.children.nokta03.position.x,grup.children.nokta03.position.y)
+    var bitisNoktasi=new Point(grup.children.nokta12.position.x,grup.children.nokta12.position.y)
 
-    var baslangicNoktasi2=new Point(grup.children.nokta03.position.x,grup.children.nokta03.position.y)
+    var baslangicNoktasi2=new Point(grup.children.nokta02.position.x,grup.children.nokta02.position.y)
     var bitisNoktasi2=new Point(grup.children.nokta12.position.x,grup.children.nokta12.position.y)
+
+    if(sira==5){
+        var baslangicNoktasi=new Point(grup.children.nokta03.position.x,grup.children.nokta03.position.y)
+        var bitisNoktasi=new Point(grup.children.nokta12.position.x,grup.children.nokta12.position.y)
+
+        var baslangicNoktasi2=new Point(grup.children.nokta03.position.x,grup.children.nokta03.position.y)
+        var bitisNoktasi2=new Point(grup.children.nokta13.position.x,grup.children.nokta13.position.y)
+    }
 
     var animationHelper=new AnimationHelper({
         opacity:0
     });
 
     cizgi=new Path.Line(baslangicNoktasi,bitisNoktasi);
-    cizgi.strokeColor="red";
+    cizgi.strokeColor="#d2a3a8";
     cizgi.opacity=0
 
     cizgi2=new Path.Line(baslangicNoktasi2,bitisNoktasi2);
-    cizgi2.strokeColor="red";
+    cizgi2.strokeColor="#000fff";
     cizgi2.opacity=0
 
-    var aciklama = new PointText(new Point(600, 80));
-    aciklama.fillColor = 'black';
+    var cisimT = new PointText(new Point(600, 80));
+    cisimT.fillColor = 'red';
+
+    var cisimK = new PointText(new Point(600, 110));
+    cisimK.fillColor = '#000fff';
 
 // Set the content of the text item:
     switch (sira){
@@ -228,10 +239,14 @@ function ornekAnim(grup,metin,bekleme,sira){
             break;
 
     }
-    aciklama.opacity=0;
+    cisimT.opacity=0;
+    cisimK.opacity=0;
 
 
     //$("#aciklama").html(metin).animate({opacity:0},500).animate({opacity:1},500);
+    cisimT.content="Cisim köşegeni";
+    cisimK.content="Yüzey köşegeni";
+
     animationHelper.animate({
         style:{
             opacity:1
@@ -243,7 +258,7 @@ function ornekAnim(grup,metin,bekleme,sira){
 
             cizgi.opacity=animationHelper.opacity;
             //$("#aciklama").css({opacity:1-animationHelper.opacity});
-            aciklama.opacity=animationHelper.opacity;
+            cisimT.opacity=animationHelper.opacity;
         },
         callback: function(){
 
@@ -258,9 +273,9 @@ function ornekAnim(grup,metin,bekleme,sira){
 
 
                 update:function(){
-                    aciklama.content="2 cisim köşegeni"
+
                     cizgi2.opacity=animationHelper.opacity;
-                    aciklama.opacity=animationHelper.opacity;
+                    cisimK.opacity=animationHelper.opacity;
                 },
                 callback:function(){
 
@@ -276,6 +291,8 @@ function ornekAnim(grup,metin,bekleme,sira){
                         update:function(){
                             if(sira!=5)
                                 Main.animationProject.activeLayer.opacity=animationHelper.opacity;
+                                cisimK.opacity=animationHelper.opacity;
+                                cisimT.opacity=animationHelper.opacity;
 
 
                         },

@@ -31,7 +31,7 @@ var Interaction = {
 
         Interaction.tisortlerStr=["sarı","kırmızı","mavi","mor"];
         Interaction.pantolonlarStr=["siyah","mavi","kahverengi"];
-        Interaction.ayakkabilarStr=["kahverengi","gri"];
+        Interaction.ayakkabilarStr=["kahverengi","siyah"];
 
         $(container).append("<img id='cocuk' src='"+Interaction.rCocuk+"'>");
 
