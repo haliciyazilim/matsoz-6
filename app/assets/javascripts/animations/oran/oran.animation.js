@@ -212,7 +212,7 @@ var Animation = {
                         $("#paydaS").css({borderTop:"black 2px solid",lineHeight:"35px", fontSize:"20px"}).html("152");
                         $("#sonucS").css({width:"40px", height:"100px", position:"absolute",right:"65px",top:"74px", opacity:0});
 
-                    $("#aciklama").html("Mehmet'in boyunun Can'ın boyuna oranı").delay(3000).animate({opacity:1},1000);
+                    $("#aciklama").html("Can'ın boyunun Mehmet'in boyuna oranı").delay(3000).animate({opacity:1},1000);
                     $("#kesir").delay(4000).animate({opacity:1},1000);
                     $("#sonuc").delay(5000).animate({opacity:1},1000);
                     $("#sonucS").delay(5500).animate({opacity:1},1000);
