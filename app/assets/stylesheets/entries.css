@@ -206,6 +206,14 @@ p.exampleHeader {
 	border:none;
 }
 
+.flip_button{
+    background-image:url(/assets/btn_flip.png);
+    background-color: #fff;
+    height:42px;
+    width:36px;
+    border:none;
+}
+
 .draw_button{
 	background-image:url(/assets/btn_gray_draw.png);
 	background-color: #fff;

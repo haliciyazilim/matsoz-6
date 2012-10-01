@@ -53,7 +53,7 @@ InteractiveGrids.prototype.drawShape = function(points){
     this.path.set_style(this.style).set_style({
         strokeWidth: 3,
         strokeCap : 'butt',
-        strokeColor : '#f00'
+        strokeColor : '#000'
     });
     if(points){
         for(var i=0; i<points.length; i++){
@@ -62,8 +62,29 @@ InteractiveGrids.prototype.drawShape = function(points){
             this.path.add(point);
         }
         this.path.closed = true;
+        this.appendVertexLetters();
     }
+
     return this;
+}
+InteractiveGrids.prototype.appendVertexLetters = function(){
+    this.vertexLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
+    if(this.vertexPointTexts)
+        for(var i=0;i < this.vertexPointTexts.length; i++)
+            this.vertexPointTexts[i].remove();
+    this.vertexPointTexts = [];
+    var centerPoint = Util.centerOfPoints(this.points);
+    for(var i=0; i< this.points.length ; i++){
+        var pointText = new PointText(this.points[i].findPointTo(centerPoint,-13).add(0,6));
+        pointText.content = this.vertexLetters.shift();
+        pointText.set_style({
+            fontSize:12,
+            justification:'center',
+            strokeWidth:2,
+            strokeColor:'#000'
+        })
+        this.vertexPointTexts.push(pointText);
+    }
 }
 InteractiveGrids.prototype.createTool = function(){
     var tool = new Tool();
@@ -81,15 +102,18 @@ InteractiveGrids.prototype.createTool = function(){
             event.item.set_style({
             })
             self.vertexes.push(new Path.Circle(event.item.position,4).set_style({
-                fillColor:new RgbColor(0.2,0.2,0.2)
+                fillColor:new RgbColor(0.2,0.2,0.2),
+                class:"SelectedGridCircles"+self.id
             }))
             self.path.add(event.item.position);
-            event.item.class = "SelectedGridCircles";
+            event.item.class = "SelectedGridCircles"+self.id;
             event.item.opacity =1 ;
             self.points.push(event.item.position);
             event.item.insertAbove(self.path);
+            self.appendVertexLetters();
+
         }
-        else if(event.item && event.item.class == "SelectedGridCircles" && self.points.length > 2){
+        else if(event.item && event.item.class == "SelectedGridCircles"+self.id && self.points.length > 2){
             self.path.closed = true;
             self.disableDraw = true;
 //            this.remove();
@@ -103,6 +127,7 @@ InteractiveGrids.CreateShape = function(type){
     var multiply = new Point(1,1);
     var add = new Point(0,0);
     switch(type){
+
         case 0: //cesitkenar ucgen
             points.push(new Point(1,0));
             points.push(new Point(0,2));
@@ -110,6 +135,7 @@ InteractiveGrids.CreateShape = function(type){
             multiply = new Point(Util.randomInteger(1,3) , Util.randomInteger(1,3));
             add = new Point(Util.randomInteger(1,3) , Util.randomInteger(1,3))
             break;
+
         case 1: //eskenar ucgen
             points.push(new Point(0,2));
             points.push(new Point(2,2));
@@ -118,6 +144,7 @@ InteractiveGrids.CreateShape = function(type){
             multiply = new Point(rand , rand);
             add = new Point(Util.randomInteger(1,5) , Util.randomInteger(1,5))
             break;
+
         case 2: //dik ucgen
             points.push(new Point(0,0));
             points.push(new Point(0,1));
@@ -125,6 +152,7 @@ InteractiveGrids.CreateShape = function(type){
             multiply = new Point(Util.randomInteger(1,5) , Util.randomInteger(1,5));
             add = new Point(Util.randomInteger(1,5) , Util.randomInteger(1,5))
             break;
+
         case 3: //dik ucgen
             points.push(new Point(1,1));
             points.push(new Point(1,0));
@@ -132,6 +160,7 @@ InteractiveGrids.CreateShape = function(type){
             multiply = new Point(Util.randomInteger(1,5) , Util.randomInteger(1,5));
             add = new Point(Util.randomInteger(1,5) , Util.randomInteger(1,5))
             break;
+
         case 4: //genis acili ucgen
             points.push(new Point(0,2));
             points.push(new Point(2,2));
@@ -139,6 +168,7 @@ InteractiveGrids.CreateShape = function(type){
             multiply = new Point(Util.randomInteger(1,3) , Util.randomInteger(1,3));
             add = new Point(Util.randomInteger(1,3) , Util.randomInteger(1,3))
             break;
+
         case 5://dikdortgen
             points.push(new Point(2,0));
             points.push(new Point(2,2));
@@ -172,7 +202,7 @@ InteractiveGrids.CreateShape = function(type){
             points.push(new Point(3,4));
             points.push(new Point(4,2));
             points.push(new Point(2,0));
-            add = new Point(Util.randomInteger(1,6) , Util.randomInteger(1,6))
+            add = new Point(Util.randomInteger(1,4) , Util.randomInteger(1,4))
             break;
 
         case 9:// cesitkenar besgen
@@ -209,7 +239,10 @@ InteractiveGrids.CreateShape = function(type){
     }
     return points;
 }
-InteractiveGrids.AreShapesSimilar = function(points1,points2){
+InteractiveGrids.AreShapesSame = function(points1,points2){
+    return InteractiveGrids.AreShapesSimilar(points1,points2,1);
+}
+InteractiveGrids.AreShapesSimilar = function(points1,points2,ratio){
     if(points1.length != points2.length )
         return false;
     else{
@@ -221,7 +254,7 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
                 var backPoint = points[(i-1+points.length) % points.length];
                 var frontPoint = points[(i+1) % points.length];
 //                currentPoint.showOnCanvas();
-                new PointText(currentPoint).content = i;
+//                new PointText(currentPoint).content = i;
                 var angle = Math.abs(
                     Util.findAngle(currentPoint.x,currentPoint.y,frontPoint.x,frontPoint.y) -
                     Util.findAngle(currentPoint.x,currentPoint.y,backPoint.x,backPoint.y)
@@ -250,7 +283,11 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
             if(largestEdgeInShape2 < shape2[i][0])
                 largestEdgeInShape2 = shape2[i][0];
 
-        var similarityRatio = largestEdgeInShape1 / largestEdgeInShape2 ;
+        var similarityRatio
+        if(ratio == undefined)
+            similarityRatio = largestEdgeInShape1 / largestEdgeInShape2 ;
+        else
+            similarityRatio = ratio;
         var error = 0.00001;
         var length = shape1.length;
 

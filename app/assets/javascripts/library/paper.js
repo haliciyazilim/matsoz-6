@@ -2167,15 +2167,26 @@ var Item = this.Item = Base.extend({
 		}
 	},
 
-	insertAbove: function(item) {
-		return item._parent && item._parent.insertChild(
-				item._index + 1, this);
-	},
+    insertAbove: function(item) {
+//		return item._parent && item._parent.insertChild(
+//				item._index + 1, this);
+        var index = item._index;
+        if(item._parent == this._parent && index > this._index){
+            index--;
+        }
+        return item._parent.insertChild(index, this);
+    },
 
-	insertBelow: function(item) {
-		return item._parent && item._parent.insertChild(
-				item._index - 1, this);
-	},
+    insertBelow: function(item) {
+//		return item._parent && item._parent.insertChild(
+//				item._index - 1, this);
+
+        var index = item._index;
+        if(item._parent == this._parent && index < this._index){
+            index++;
+        }
+        return item._parent.insertChild(index, this);
+    },
 
 	appendTop: function(item) {
 		return this.addChild(item);
