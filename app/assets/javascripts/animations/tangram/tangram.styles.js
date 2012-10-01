@@ -2,30 +2,31 @@ function __Styles(){
 
     tangramDefaultColor = new RgbColor(0,0,0);
 
+    animationDefaultColor = new RgbColor(0,0,0);
+
 	animationColors = [];
-    animationColors[0] = "#de5858";
-    animationColors[1] = "#58b6de";
-    animationColors[2] = "#4ace59";
-    animationColors[3] = "#4c59dc";
-    animationColors[4] = "#deba58";
-    animationColors[5] = "#d958de";
-    animationColors[6] = "#727272";
+
+    animationColors[0] = new RgbColor(0.871,0.345,0.345);
+    animationColors[1] = new RgbColor(0.345,0.713,0.871);
+    animationColors[2] = new RgbColor(0.290,0.807,0.349);
+    animationColors[3] = new RgbColor(0.298,0.349,0.862);
+    animationColors[4] = new RgbColor(0.871,0.729,0.345);
+    animationColors[5] = new RgbColor(0.851,0.345,0.871);
+    animationColors[6] = new RgbColor(0.447,0.447,0.447);
 
     interactionColors = [];
-    interactionColors[0] = "#de5858";
-    interactionColors[1] = "#58b6de";
-    interactionColors[2] = "#4ace59";
-    interactionColors[3] = "#4c59dc";
-    interactionColors[4] = "#deba58";
-    interactionColors[5] = "#d958de";
-    interactionColors[6] = "#727272";
+    interactionColors[0] = "#7c2f00";
+    interactionColors[1] = "#004f7c";
+    interactionColors[2] = "#78007c";
+    interactionColors[3] = "#553e00";
+    interactionColors[4] = "#355339";
 
     interactionSelectedColors = [];
-    interactionSelectedColors[0] = "#a64242";
-    interactionSelectedColors[1] = "#4288a6";
-    interactionSelectedColors[2] = "#379a43";
-    interactionSelectedColors[3] = "#3943a5";
-    interactionSelectedColors[4] = "#a68b42";
-    interactionSelectedColors[5] = "#a342a6";
-    interactionSelectedColors[6] = "#555555";
+    interactionSelectedColors[0] = "#632600";
+    interactionSelectedColors[1] = "#003f63";
+    interactionSelectedColors[2] = "#600063";
+    interactionSelectedColors[3] = "#443200";
+    interactionSelectedColors[4] = "#2a422e";
+
+    correctAnswerBorder = new RgbColor(0.764,0.584,0.352);
 }

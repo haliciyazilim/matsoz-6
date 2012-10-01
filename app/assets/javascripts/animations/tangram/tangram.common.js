@@ -297,7 +297,13 @@ var Tangram = Class.extend({
         this.pieces[3].shape.class = "draggable";
         this.pieces[3].originalAngle = originalAngle;
         this.pieces[3].originalPosition = originalPosition;
-        this.pieces[3].isFlipped = isFlipped;
+        if(isFlipped == 0){
+            this.pieces[3].isFlipped = 1;
+        }
+        else if(isFlipped == 1){
+            this.pieces[3].isFlipped = 0;
+        }
+
     }
 });
 
@@ -313,6 +319,7 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
     this.centerPoint = Util.centerOfPoints(this.pointsArr);
     this.strokeColor = strokeColor;
     this.fillColor = fillColor;
+    this.isFlipped = 0;
 
     this.updatePointsArr = function(newPointsArr){
         if(this.shape){
@@ -365,6 +372,7 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
     this.shape = this.drawShape(strokeColor,fillColor);
     this.shape.parentObject = this;
     this.originalPosition = this.shape.position;
+    this.shape.isSnapped = false;
     this.computeOriginalAngle();
     this.computeCurrentAngle();
 
@@ -416,23 +424,36 @@ function MyShapes(pointsArr,type,strokeColor,fillColor){
         if(this.centerPoint.getDistance(otherObject.centerPoint,true) > 1000){
             return;
         }
-        console.log("angle difference: ",(this.currentAngle-otherObject.currentAngle)%180);
-        console.log("distance: ",this.centerPoint.getDistance(otherObject.centerPoint,true));
         if(this.myType == otherObject.myType){
             if(this.myType == 4){
-                if((Math.abs(this.currentAngle - otherObject.currentAngle)%90) < 20){
+                if((Math.abs(this.currentAngle - otherObject.currentAngle)%90) < 20 || (Math.abs(this.currentAngle - otherObject.currentAngle)%90) > 70){
                     if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 400){
-                        console.log("snapped");
-                        this.setPos(otherObject.shape.position);
                         this.setRotation(this.currentAngle-otherObject.currentAngle);
+                        this.setPos(otherObject.shape.position);
+                        this.shape.isSnapped = true;
+                        console.log("snapped");
+                    }
+                }
+            }
+            else if(this.myType == 3){
+                if((Math.abs(this.currentAngle - otherObject.currentAngle)%180) < 20 || (Math.abs(this.currentAngle - otherObject.currentAngle)%180) > 160){
+                    if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 400){
+                        this.setRotation(this.currentAngle-otherObject.currentAngle);
+                        this.setPos(otherObject.shape.position);
+                        this.shape.isSnapped = true;
+                        console.log("snapped");
                     }
                 }
             }
             else{
-                if(Math.abs(this.currentAngle - otherObject.currentAngle) < 20){
-                    if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 400){
-                        this.setPos(otherObject.shape.position);
-                        this.setRotation(this.currentAngle-otherObject.currentAngle);
+                if(this.isFlipped == otherObject.isFlipped){
+                    if(Math.abs(this.currentAngle - otherObject.currentAngle) < 20 || Math.abs(this.currentAngle - otherObject.currentAngle) > 340){
+                        if(this.centerPoint.getDistance(otherObject.centerPoint,true) < 400){
+                            this.setRotation(this.currentAngle-otherObject.currentAngle);
+                            this.setPos(otherObject.shape.position);
+                            this.shape.isSnapped = true;
+                            console.log("snapped");
+                        }
                     }
                 }
             }
@@ -472,23 +493,230 @@ function flipSelectedItem(){
     Interaction.rotatableItem.fillColor = interactionSelectedColors[Interaction.randomNumber];
     Interaction.rotatableItem.strokeColor = interactionSelectedColors[Interaction.randomNumber];
     Interaction.rotItems.class = "rotatable";
-    if(Interaction.tangram.pieces[3].isFlipped == 0){
-        Interaction.tangram.pieces[3].isFlipped = 1;
+    if(Interaction.rotatableItem.isSnapped == true){
+        Interaction.rotatableItem.isSnapped = false;
     }
-    else{
-        Interaction.tangram.pieces[3].isFlipped = 0;
+    for(var i = 0; i < Interaction.questionTangram.pieces.length; i++){
+        Interaction.rotatableItem.parentObject.trySnapTo(Interaction.questionTangram.pieces[i]);
     }
+    if(Interaction.rotItems){
+        Interaction.rotItems.remove();
+    }
+    Interaction.rotItems = new Group();
+    for(var i = 0; i < Interaction.rotatableItem.parentObject.pointsArr.length; i++){
+        var myPos = Interaction.rotatableItem.parentObject.pointsArr[i].findPointTo(Interaction.rotatableItem.parentObject.centerPoint,-10);
+
+        var myAng = Util.findAngle(Interaction.rotatableItem.parentObject.pointsArr[i].x,Interaction.rotatableItem.parentObject.pointsArr[i].y,Interaction.rotatableItem.position.x,Interaction.rotatableItem.position.y);
+        myAng = Util.radianToDegree(myAng);
+        myAng = 225-myAng;
+
+        var rotArrow = new Raster('rotationArrow');
+        rotArrow.position = new Point(myPos);
+        rotArrow.rotate(myAng,myPos);
+
+        var circ = new Path.Circle(myPos,10);
+        circ.fillColor = "red";
+        circ.class = "rotatable";
+        circ.opacity = 0;
+
+        Interaction.rotItems.addChild(circ);
+        Interaction.rotItems.addChild(rotArrow);
+    }
+    Interaction.rotatableItem.fillColor = interactionSelectedColors[Interaction.randomNumber];
+    Interaction.rotatableItem.strokeColor = interactionSelectedColors[Interaction.randomNumber];
+    Interaction.rotItems.class = "rotatable";
 };
 function generateTangramQuestions(){
     TangramQuestions = [
         [
+            // question1
             {point:new Point(325.5,154.5),angle:162},
             {point:new Point(356.5,124.5),angle:342},
             {point:new Point(229.5,215.5),angle:315},
-            {point:new Point(281.5,206.5),angle:270},
+            {point:new Point(281.5,206.5),angle:270,flip:0},
             {point:new Point(355.5,63.5),angle:0},
             {point:new Point(374.5,254.5),angle:45},
             {point:new Point(355.5,214.5),angle:117}
+        ],
+        [
+            // question2
+            {point:new Point(353.5,228.5),angle:162},
+            {point:new Point(323.5,198.5),angle:72},
+            {point:new Point(252.5,116.5),angle:135},
+            {point:new Point(344.5,168.5),angle:0,flip:0},
+            {point:new Point(335.5,61.5),angle:48},
+            {point:new Point(293.5,98.5),angle:90},
+            {point:new Point(323.5,126.5),angle:252}
+        ],
+        [
+            // question3
+            {point:new Point(326.5,156.5),angle:252},
+            {point:new Point(326.5,216.5),angle:72},
+            {point:new Point(280.5,187.5),angle:0},
+            {point:new Point(296.5,125.5),angle:135,flip:1},
+            {point:new Point(355.5,74.5),angle:50},
+            {point:new Point(352.5,38.5),angle:275},
+            {point:new Point(326.5,246.5),angle:27}
+        ],
+        [
+            // question4
+            {point:new Point(315.5,178.5),angle:252},
+            {point:new Point(252.5,169.5),angle:207},
+            {point:new Point(375.5,73.5),angle:91},
+            {point:new Point(361.5,132.5),angle:315,flip:0},
+            {point:new Point(315.5,119.5),angle:0},
+            {point:new Point(360.5,89.5),angle:180},
+            {point:new Point(273.5,148.5),angle:161}
+        ],
+        [
+            // question5
+            {point:new Point(340.5,183.5),angle:167},
+            {point:new Point(307.5,156.5),angle:78},
+            {point:new Point(277.5,232.5),angle:90},
+            {point:new Point(322.5,232.5),angle:315,flip:1},
+            {point:new Point(253.5,196.5),angle:315},
+            {point:new Point(263.5,164.5),angle:136},
+            {point:new Point(313.5,95.5),angle:257}
+        ],
+        [
+            // question6
+            {point:new Point(310.5,231.5),angle:27},
+            {point:new Point(302.5,166.5),angle:72},
+            {point:new Point(258.5,76.5),angle:0},
+            {point:new Point(377.5,237.5),angle:135,flip:1},
+            {point:new Point(243.5,106.5),angle:0},
+            {point:new Point(227.5,76.5),angle:181},
+            {point:new Point(272.5,148.5),angle:252}
+        ],
+        [
+            // question7
+            {point:new Point(344.5,189.5),angle:342},
+            {point:new Point(306.5,223.5),angle:297},
+            {point:new Point(257.5,172.5),angle:180},
+            {point:new Point(287.5,97.5),angle:225,flip:1},
+            {point:new Point(272.5,142.5),angle:0},
+            {point:new Point(262.5,84.5),angle:135},
+            {point:new Point(285.5,202.5),angle:252}
+        ],
+        [
+            // question8
+            {point:new Point(285.5,183.5),angle:252},
+            {point:new Point(277.5,247.5),angle:297},
+            {point:new Point(330.5,182.5),angle:181},
+            {point:new Point(348.5,67.5),angle:290,flip:0},
+            {point:new Point(337.5,123.5),angle:315},
+            {point:new Point(330.5,211.5),angle:359},
+            {point:new Point(312.5,70.5),angle:257}
+        ],
+        [
+            // question9
+            {point:new Point(318.5,142.5),angle:297},
+            {point:new Point(360.5,185.5),angle:117},
+            {point:new Point(281.5,162.5),angle:0},
+            {point:new Point(319.5,63.5),angle:135,flip:1},
+            {point:new Point(275.5,100.5),angle:315},
+            {point:new Point(306.5,217.5),angle:0},
+            {point:new Point(352.5,218.5),angle:297}
+        ],
+        [
+            // question10
+            {point:new Point(351.5,248.5),angle:27},
+            {point:new Point(342.5,184.5),angle:72},
+            {point:new Point(387.5,239.5),angle:180},
+            {point:new Point(295.5,76.5),angle:340,flip:0},
+            {point:new Point(291.5,145.5),angle:45},
+            {point:new Point(301.5,216.5),angle:135},
+            {point:new Point(262.5,94.5),angle:297}
+        ],
+        [
+            // question11
+            {point:new Point(296.5,243.5),angle:27},
+            {point:new Point(338.5,243.5),angle:297},
+            {point:new Point(390.5,84.5),angle:135},
+            {point:new Point(319.5,160.5),angle:0,flip:0},
+            {point:new Point(317.5,63.5),angle:0},
+            {point:new Point(243.5,84.5),angle:45},
+            {point:new Point(316.5,94.5),angle:342}
+        ],
+        [
+            // question12
+            {point:new Point(326.5,194.5),angle:297},
+            {point:new Point(286.5,194.5),angle:27},
+            {point:new Point(409.5,230.5),angle:90},
+            {point:new Point(320.5,115.5),angle:225,flip:1},
+            {point:new Point(343.5,66.5),angle:329},
+            {point:new Point(208.5,225.5),angle:314},
+            {point:new Point(366.5,131.5),angle:297}
+        ],
+        [
+            // question13
+            {point:new Point(281.5,231.5),angle:162},
+            {point:new Point(311.5,201.5),angle:252},
+            {point:new Point(382.5,116.5),angle:45},
+            {point:new Point(291.5,169.5),angle:180,flip:1},
+            {point:new Point(292.5,61.5),angle:39},
+            {point:new Point(341.5,99.5),angle:90},
+            {point:new Point(312.5,127.5),angle:72}
+        ],
+        [
+            // question14
+            {point:new Point(309.5,117.5),angle:162},
+            {point:new Point(289.5,168.5),angle:207},
+            {point:new Point(253.5,224.5),angle:0},
+            {point:new Point(319.5,211.5),angle:315,flip:0},
+            {point:new Point(313.5,65.5),angle:310},
+            {point:new Point(335.5,241.5),angle:270},
+            {point:new Point(369.5,86.5),angle:27}
+        ],
+        [
+            // question15
+            {point:new Point(369.5,121.5),angle:317},
+            {point:new Point(329.5,136.5),angle:137},
+            {point:new Point(232.5,107.5),angle:245},
+            {point:new Point(351.5,196.5),angle:200,flip:0},
+            {point:new Point(384.5,64.5),angle:355},
+            {point:new Point(394.5,249.5),angle:65},
+            {point:new Point(279.5,146.5),angle:317}
+        ],
+        [
+            // question16
+            {point:new Point(247.5,157.5),angle:162},
+            {point:new Point(286.5,218.5),angle:342},
+            {point:new Point(361.5,78.5),angle:180},
+            {point:new Point(330.5,144.5),angle:315,flip:0},
+            {point:new Point(262.5,111.5),angle:30},
+            {point:new Point(420.5,203.5),angle:91},
+            {point:new Point(359.5,188.5),angle:162}
+        ],
+        [
+            // question17
+            {point:new Point(339.5,184.5),angle:118},
+            {point:new Point(339.5,142.5),angle:28},
+            {point:new Point(332.5,280.5),angle:134},
+            {point:new Point(298.5,111.5),angle:315,flip:1},
+            {point:new Point(354.5,58.5),angle:320},
+            {point:new Point(351.5,22.5),angle:275},
+            {point:new Point(331.5,218.5),angle:298}
+        ],
+        [
+            // question18
+            {point:new Point(321.5,93.5),angle:162},
+            {point:new Point(345.5,154.5),angle:342},
+            {point:new Point(232.5,152.5),angle:44},
+            {point:new Point(299.5,169.5),angle:225,flip:0},
+            {point:new Point(304.5,45.5),angle:323},
+            {point:new Point(396.5,248.5),angle:181},
+            {point:new Point(380.5,191.5),angle:252}
+        ],
+        [
+            // question19
+            {point:new Point(280.5,113.5),angle:162},
+            {point:new Point(324.5,97.5),angle:252},
+            {point:new Point(263.5,218.5),angle:315},
+            {point:new Point(367.5,190.5),angle:1,flip:0},
+            {point:new Point(269.5,60.5),angle:315},
+            {point:new Point(383.5,248.5),angle:45},
+            {point:new Point(315.5,177.5),angle:27}
         ]
     ];
 }

@@ -15,6 +15,78 @@ var Interaction = {
         {
             id:'tangram_1',
             src:'/assets/animations/tangram/tangram_01.png'
+        },
+        {
+            id:'tangram_2',
+            src:'/assets/animations/tangram/tangram_02.png'
+        },
+        {
+            id:'tangram_3',
+            src:'/assets/animations/tangram/tangram_03.png'
+        },
+        {
+            id:'tangram_4',
+            src:'/assets/animations/tangram/tangram_04.png'
+        },
+        {
+            id:'tangram_5',
+            src:'/assets/animations/tangram/tangram_05.png'
+        },
+        {
+            id:'tangram_6',
+            src:'/assets/animations/tangram/tangram_06.png'
+        },
+        {
+            id:'tangram_7',
+            src:'/assets/animations/tangram/tangram_07.png'
+        },
+        {
+            id:'tangram_8',
+            src:'/assets/animations/tangram/tangram_08.png'
+        },
+        {
+            id:'tangram_9',
+            src:'/assets/animations/tangram/tangram_09.png'
+        },
+        {
+            id:'tangram_10',
+            src:'/assets/animations/tangram/tangram_10.png'
+        },
+        {
+            id:'tangram_11',
+            src:'/assets/animations/tangram/tangram_11.png'
+        },
+        {
+            id:'tangram_12',
+            src:'/assets/animations/tangram/tangram_12.png'
+        },
+        {
+            id:'tangram_13',
+            src:'/assets/animations/tangram/tangram_13.png'
+        },
+        {
+            id:'tangram_14',
+            src:'/assets/animations/tangram/tangram_14.png'
+        },
+        {
+            id:'tangram_15',
+            src:'/assets/animations/tangram/tangram_15.png'
+        },
+        {
+            id:'tangram_16',
+            src:'/assets/animations/tangram/tangram_16.png'
+        },
+        {
+            id:'tangram_17',
+            src:'/assets/animations/tangram/tangram_17.png'
+        },
+        {
+            id:'tangram_18',
+            src:'/assets/animations/tangram/tangram_18.png'
+        },
+        {
+            id:'tangram_19',
+            src:'/assets/animations/tangram/tangram_19.png'
         }
         
     ],
@@ -46,12 +118,12 @@ var Interaction = {
 
         generateTangramQuestions();
 
-        Interaction.setRandomGenerator(7);
+        Interaction.setRandomGenerator(19);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
 
-        Interaction.randomNumber = randomNumber;
+        Interaction.randomNumber = Util.randomInteger(0,5);
 
         $('#flip').css("opacity",0.4);
         $('#flip').get(0).onclick = null;
@@ -60,8 +132,7 @@ var Interaction = {
             Interaction.questionPicture.remove();
         }
 
-        //Interaction.questionIndex = Util.randomInteger(0,18);
-        Interaction.questionIndex = 1;
+        Interaction.questionIndex = randomNumber+1;
         Interaction.questionPicture = new Raster('tangram_'+Interaction.questionIndex);
         Interaction.questionPicture.position = new Point(317.5,149.5);
 
@@ -76,6 +147,11 @@ var Interaction = {
         Interaction.questionTangram = new Tangram();
         Interaction.questionTangram.drawPieces(new Point(0,0),120,interactionColors[Interaction.randomNumber],interactionColors[Interaction.randomNumber]);
         for(var i = 0; i < 7; i++){
+            if(i == 3){
+                if(Interaction.currentQuestion[3].flip == 1){
+                    Interaction.questionTangram.flipPiece4();
+                }
+            }
             Interaction.questionTangram.pieces[i].setRotation(Interaction.questionTangram.pieces[i].currentAngle-Interaction.currentQuestion[i].angle);
             Interaction.questionTangram.pieces[i].setPos(Interaction.currentQuestion[i].point);
             Interaction.questionTangram.pieces[i].shape.opacity = 0;
@@ -100,27 +176,77 @@ var Interaction = {
 
         Interaction.tangram = new Tangram();
         Interaction.tangram.drawPieces(new Point(28.5,25.5),120,interactionColors[Interaction.randomNumber],interactionColors[Interaction.randomNumber]);
-        Interaction.tangram.animatePieces(2000);
-        Interaction.tangram.pieces[3].isFlipped = 0;
+        Interaction.tangram.animatePieces(750);
 
-
-
-        setTimeout('Interaction.createTool()',3000);
+        setTimeout('Interaction.createTool()',2000);
     },
 	preCheck : function(){
 
     },
 	isAnswerCorrect : function(value){
-
+        var noOfSnapped = 0;
+        for(var i = 0; i < Interaction.tangram.pieces.length; i++){
+            if(Interaction.tangram.pieces[i].shape.isSnapped == true){
+                noOfSnapped += 1;
+            }
+        }
+        if(noOfSnapped == Interaction.tangram.pieces.length){
+            return true;
+        }
+        else{
+            return false;
+        }
     },
 	onCorrectAnswer : function(){
-		
+        Interaction.pause();
+        if(Interaction.rotItems){
+            Interaction.rotItems.remove();
+        }
+        for(var i = 0; i < Interaction.tangram.pieces.length; i++){
+            Interaction.tangram.pieces[i].shape.opacity = 0;
+        }
+        for(var j = 0; j < Interaction.questionTangram.pieces.length; j++){
+            Interaction.questionTangram.pieces[j].shape.opacity = 1;
+            Interaction.questionTangram.pieces[j].shape.animate({
+                style:{
+                    strokeColor:correctAnswerBorder
+                },
+                duration:1000,
+                delay:500,
+                animationType:'easeInOutQuad',
+                callback:function(){
+                    Interaction.resume();
+                }
+            })
+        }
+
     },
 	onWrongAnswer : function(){
 		
     },
 	onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğrusu yanda gösterilmiştir!',false);
+        Interaction.pause();
+        if(Interaction.rotItems){
+            Interaction.rotItems.remove();
+        }
+        for(var i = 0; i < Interaction.tangram.pieces.length; i++){
+            Interaction.tangram.pieces[i].shape.opacity = 0;
+        }
+        for(var j = 0; j < Interaction.questionTangram.pieces.length; j++){
+            Interaction.questionTangram.pieces[j].shape.opacity = 1;
+            Interaction.questionTangram.pieces[j].shape.animate({
+                style:{
+                    strokeColor:correctAnswerBorder
+                },
+                duration:1000,
+                delay:500,
+                animationType:'easeInOutQuad',
+                callback:function(){
+                    Interaction.resume();
+                }
+            })
+        }
 		
     },
     createTool : function(){
@@ -200,6 +326,40 @@ var Interaction = {
         };
         tool.onMouseUp = function(event){
             if(this.item){
+                if(this.rotate == true){
+                    if(Interaction.rotatableItem.isSnapped == true){
+                        Interaction.rotatableItem.isSnapped = false;
+                    }
+                    for(var i = 0; i < Interaction.questionTangram.pieces.length; i++){
+                        Interaction.rotatableItem.parentObject.trySnapTo(Interaction.questionTangram.pieces[i]);
+                    }
+                    if(Interaction.rotItems){
+                        Interaction.rotItems.remove();
+                    }
+                    Interaction.rotItems = new Group();
+                    for(var i = 0; i < Interaction.rotatableItem.parentObject.pointsArr.length; i++){
+                        var myPos = Interaction.rotatableItem.parentObject.pointsArr[i].findPointTo(Interaction.rotatableItem.parentObject.centerPoint,-10);
+
+                        var myAng = Util.findAngle(Interaction.rotatableItem.parentObject.pointsArr[i].x,Interaction.rotatableItem.parentObject.pointsArr[i].y,Interaction.rotatableItem.position.x,Interaction.rotatableItem.position.y);
+                        myAng = Util.radianToDegree(myAng);
+                        myAng = 225-myAng;
+
+                        var rotArrow = new Raster('rotationArrow');
+                        rotArrow.position = new Point(myPos);
+                        rotArrow.rotate(myAng,myPos);
+
+                        var circ = new Path.Circle(myPos,10);
+                        circ.fillColor = "red";
+                        circ.class = "rotatable";
+                        circ.opacity = 0;
+
+                        Interaction.rotItems.addChild(circ);
+                        Interaction.rotItems.addChild(rotArrow);
+                    }
+                    Interaction.rotatableItem.fillColor = interactionSelectedColors[Interaction.randomNumber];
+                    Interaction.rotatableItem.strokeColor = interactionSelectedColors[Interaction.randomNumber];
+                    Interaction.rotItems.class = "rotatable";
+                }
                 if(this.item.class == "draggable"){
                     var noOfPoints = 0;
                     for(var i = 0; i < this.item.parentObject.pointsArr.length; i++){
@@ -212,6 +372,9 @@ var Interaction = {
                         if(this.item.parentObject.myType == 3){
                             $('#flip').css("opacity",1);
                             $('#flip').get(0).onclick = flipSelectedItem;
+                        }
+                        if(this.item.isSnapped == true){
+                            this.item.isSnapped = false;
                         }
                         for(var i = 0; i < 7; i++){
                             this.item.parentObject.trySnapTo(Interaction.questionTangram.pieces[i]);
@@ -265,10 +428,12 @@ var Interaction = {
                             this.item.parentObject.setRotation(this.item.parentObject.currentAngle-this.item.parentObject.originalAngle);
                             this.item.parentObject.setPos(this.item.parentObject.originalPosition);
                         }
+                        if(this.item.isSnapped == true){
+                            this.item.isSnapped = false;
+                        }
                     }
                 }
             }
-
             this.drag = false;
             this.item = null;
             this.rotate = false;
