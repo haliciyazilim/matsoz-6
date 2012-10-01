@@ -69,7 +69,8 @@ var Interaction = {
             Interaction.slaveGrid.removeShape();
             Interaction.slaveGrid.drawShape(Interaction.masterShape);
             Interaction.slaveGrid.path.strokeColor = "green";
-            InteractiveGrids.AreShapesSame(Interaction.masterGrid.points,Interaction.slaveGrid.points)
+            Interaction.slaveGrid.path.opacity = 0;
+            InteractiveGrids.AreShapesSame(Interaction.slaveGrid.points,Interaction.masterGrid.points)
         },2000);
 
     }
