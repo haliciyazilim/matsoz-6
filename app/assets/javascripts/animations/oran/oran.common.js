@@ -121,7 +121,7 @@ function ucgenCiz(){
 
     console.log("taban: "+tabanUzunlugu+" ,yukseklik: "+yukseklik);
 
-    var soruMetni="Üçgenin tabanının yüksekliğe oranı";
+    var soruMetni="Üçgenin tabanının yüksekliğine oranı";
 
     var bilgiler=[soruMetni,tabanUzunlugu,yukseklik];
 
@@ -198,7 +198,7 @@ function paralelKenarCiz(){
 
     console.log("taban: "+taban+" ,yukseklik: "+yukseklik);
 
-    var soruMetni="Paralel kenarın tabanının yükseklineğe oranı";
+    var soruMetni="Paralel kenarın tabanının yüksekliğine oranı";
 
     var bilgiler=[soruMetni,taban/10,yukseklik/10];
 
