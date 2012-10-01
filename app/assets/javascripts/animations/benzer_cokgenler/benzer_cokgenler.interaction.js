@@ -34,15 +34,15 @@ var Interaction = {
         /*TEST]]>*/
         Interaction.masterShape = InteractiveGrids.CreateShape(randomNumber);
         Interaction.masterGrid = new InteractiveGrids({
-            position:new Point(10.5,10.5),
-            size:30,
+            position:new Point(10.5,23.5),
+            size:27,
             style:{
                 strokeColor:'#000'
             }
         }).drawShape(Interaction.masterShape);
         Interaction.slaveGrid = new InteractiveGrids({
-            position:new Point(300.5,10.5),
-            size:18 + (randomNumber % 4) * 4,
+            position:new Point(300.5,23.5),
+            size:15 + (randomNumber % 4) * 4,
             style:{
                 strokeColor:'#666'
             }
@@ -56,6 +56,7 @@ var Interaction = {
         }
     },
 	isAnswerCorrect : function(value){
+        Interaction.slaveGrid.path.strokeColor = "green";
         return InteractiveGrids.AreShapesSimilar(Interaction.masterGrid.points,Interaction.slaveGrid.points);
     },
 	onCorrectAnswer : function(){
@@ -66,12 +67,14 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus("Yanlış cevap.",false);
+        Interaction.slaveGrid.path.strokeColor = "red";
         Interaction.pause();
         AnimationManager.delay(function(){
             Interaction.slaveGrid.removeShape();
             Interaction.slaveGrid.drawShape(Interaction.masterShape);
+            Interaction.slaveGrid.path.strokeColor = "green";
             InteractiveGrids.AreShapesSimilar(Interaction.masterGrid.points,Interaction.slaveGrid.points)
-        },1000);
+        },2000);
 
     }
 }

@@ -53,7 +53,7 @@ InteractiveGrids.prototype.drawShape = function(points){
     this.path.set_style(this.style).set_style({
         strokeWidth: 3,
         strokeCap : 'butt',
-        strokeColor : '#f00'
+        strokeColor : '#000'
     });
     if(points){
         for(var i=0; i<points.length; i++){
@@ -75,7 +75,7 @@ InteractiveGrids.prototype.appendVertexLetters = function(){
     this.vertexPointTexts = [];
     var centerPoint = Util.centerOfPoints(this.points);
     for(var i=0; i< this.points.length ; i++){
-        var pointText = new PointText(this.points[i].findPointTo(centerPoint,-15).add(3,6));
+        var pointText = new PointText(this.points[i].findPointTo(centerPoint,-13).add(0,6));
         pointText.content = this.vertexLetters.shift();
         pointText.set_style({
             fontSize:12,
@@ -202,7 +202,7 @@ InteractiveGrids.CreateShape = function(type){
             points.push(new Point(3,4));
             points.push(new Point(4,2));
             points.push(new Point(2,0));
-            add = new Point(Util.randomInteger(1,6) , Util.randomInteger(1,6))
+            add = new Point(Util.randomInteger(1,4) , Util.randomInteger(1,4))
             break;
 
         case 9:// cesitkenar besgen
@@ -239,7 +239,10 @@ InteractiveGrids.CreateShape = function(type){
     }
     return points;
 }
-InteractiveGrids.AreShapesSimilar = function(points1,points2){
+InteractiveGrids.AreShapesSame = function(points1,points2){
+    return InteractiveGrids.AreShapesSimilar(points1,points2,1);
+}
+InteractiveGrids.AreShapesSimilar = function(points1,points2,ratio){
     if(points1.length != points2.length )
         return false;
     else{
@@ -280,7 +283,11 @@ InteractiveGrids.AreShapesSimilar = function(points1,points2){
             if(largestEdgeInShape2 < shape2[i][0])
                 largestEdgeInShape2 = shape2[i][0];
 
-        var similarityRatio = largestEdgeInShape1 / largestEdgeInShape2 ;
+        var similarityRatio
+        if(ratio == undefined)
+            similarityRatio = largestEdgeInShape1 / largestEdgeInShape2 ;
+        else
+            similarityRatio = ratio;
         var error = 0.00001;
         var length = shape1.length;
 
