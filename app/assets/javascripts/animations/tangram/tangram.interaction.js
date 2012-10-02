@@ -252,7 +252,7 @@ var Interaction = {
     createTool : function(){
         var tool = new Tool();
         tool.onMouseDown = function(event){
-            console.log("onMouseDown");
+//            console.log("onMouseDown");
             if(event.item){
                 this.item = event.item;
                 if(this.item.class == "rotatable"){
@@ -312,7 +312,7 @@ var Interaction = {
         };
         tool.onMouseDrag = function(event){
             if(this.drag == true){
-                console.log("onMouseDrag inside drag=true");
+//                console.log("onMouseDrag inside drag=true");
                 var newPosition = new Point(this.firstPosition.add(this.totalDelta).add(event.delta));
                 this.item.parentObject.setPos(newPosition);
                 this.totalDelta = this.totalDelta.add(event.delta);
@@ -330,7 +330,7 @@ var Interaction = {
             }
         };
         tool.onMouseUp = function(event){
-            console.log("onMouseUp");
+//            console.log("onMouseUp");
             if(this.item){
                 if(this.rotate == true){
                     if(Interaction.rotatableItem){
