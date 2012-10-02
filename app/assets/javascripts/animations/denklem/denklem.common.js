@@ -226,6 +226,18 @@ var Weight = function(opt){
             raster = new Raster('weight_x');
             this.value = opt.value;
             break;
+        case '1kg':
+            raster = new Raster('1kg');
+            this.value = 1;
+            break;
+        case '2kg':
+            raster = new Raster('2kg');
+            this.value = 2;
+            break;
+        case 'elma':
+            raster = new Raster('elma');
+            this.value = 0.75;
+            break;
     }
     this.raster = raster;
     this.raster.weight = this;

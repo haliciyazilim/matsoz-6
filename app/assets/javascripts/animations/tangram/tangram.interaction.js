@@ -252,6 +252,7 @@ var Interaction = {
     createTool : function(){
         var tool = new Tool();
         tool.onMouseDown = function(event){
+//            console.log("onMouseDown");
             if(event.item){
                 this.item = event.item;
                 if(this.item.class == "rotatable"){
@@ -273,9 +274,9 @@ var Interaction = {
                             $('#flip').css("opacity",0.4);
                             $('#flip').get(0).onclick = null;
 
-                            for(var i = 0; i < Interaction.tangram.pieces.length; i++){
-                                this.item.insertAbove(Interaction.tangram.pieces[i].shape);
-                            }
+//                            for(var i = 0; i < Interaction.tangram.pieces.length; i++){
+//                                this.item.insertAbove(Interaction.tangram.pieces[i].shape);
+//                            }
 
                         }
                     }
@@ -306,8 +307,12 @@ var Interaction = {
                 }
             }
         };
+        tool.onMouseMove = function(event){
+
+        };
         tool.onMouseDrag = function(event){
             if(this.drag == true){
+//                console.log("onMouseDrag inside drag=true");
                 var newPosition = new Point(this.firstPosition.add(this.totalDelta).add(event.delta));
                 this.item.parentObject.setPos(newPosition);
                 this.totalDelta = this.totalDelta.add(event.delta);
@@ -325,40 +330,43 @@ var Interaction = {
             }
         };
         tool.onMouseUp = function(event){
+//            console.log("onMouseUp");
             if(this.item){
                 if(this.rotate == true){
-                    if(Interaction.rotatableItem.isSnapped == true){
-                        Interaction.rotatableItem.isSnapped = false;
-                    }
-                    for(var i = 0; i < Interaction.questionTangram.pieces.length; i++){
-                        Interaction.rotatableItem.parentObject.trySnapTo(Interaction.questionTangram.pieces[i]);
-                    }
-                    if(Interaction.rotItems){
-                        Interaction.rotItems.remove();
-                    }
-                    Interaction.rotItems = new Group();
-                    for(var i = 0; i < Interaction.rotatableItem.parentObject.pointsArr.length; i++){
-                        var myPos = Interaction.rotatableItem.parentObject.pointsArr[i].findPointTo(Interaction.rotatableItem.parentObject.centerPoint,-10);
+                    if(Interaction.rotatableItem){
+                        if(Interaction.rotatableItem.isSnapped == true){
+                            Interaction.rotatableItem.isSnapped = false;
+                        }
+                        for(var i = 0; i < Interaction.questionTangram.pieces.length; i++){
+                            Interaction.rotatableItem.parentObject.trySnapTo(Interaction.questionTangram.pieces[i]);
+                        }
+                        if(Interaction.rotItems){
+                            Interaction.rotItems.remove();
+                        }
+                        Interaction.rotItems = new Group();
+                        for(var i = 0; i < Interaction.rotatableItem.parentObject.pointsArr.length; i++){
+                            var myPos = Interaction.rotatableItem.parentObject.pointsArr[i].findPointTo(Interaction.rotatableItem.parentObject.centerPoint,-10);
 
-                        var myAng = Util.findAngle(Interaction.rotatableItem.parentObject.pointsArr[i].x,Interaction.rotatableItem.parentObject.pointsArr[i].y,Interaction.rotatableItem.position.x,Interaction.rotatableItem.position.y);
-                        myAng = Util.radianToDegree(myAng);
-                        myAng = 225-myAng;
+                            var myAng = Util.findAngle(Interaction.rotatableItem.parentObject.pointsArr[i].x,Interaction.rotatableItem.parentObject.pointsArr[i].y,Interaction.rotatableItem.position.x,Interaction.rotatableItem.position.y);
+                            myAng = Util.radianToDegree(myAng);
+                            myAng = 225-myAng;
 
-                        var rotArrow = new Raster('rotationArrow');
-                        rotArrow.position = new Point(myPos);
-                        rotArrow.rotate(myAng,myPos);
+                            var rotArrow = new Raster('rotationArrow');
+                            rotArrow.position = new Point(myPos);
+                            rotArrow.rotate(myAng,myPos);
 
-                        var circ = new Path.Circle(myPos,10);
-                        circ.fillColor = "red";
-                        circ.class = "rotatable";
-                        circ.opacity = 0;
+                            var circ = new Path.Circle(myPos,10);
+                            circ.fillColor = "red";
+                            circ.class = "rotatable";
+                            circ.opacity = 0;
 
-                        Interaction.rotItems.addChild(circ);
-                        Interaction.rotItems.addChild(rotArrow);
+                            Interaction.rotItems.addChild(circ);
+                            Interaction.rotItems.addChild(rotArrow);
+                        }
+                        Interaction.rotatableItem.fillColor = interactionSelectedColors[Interaction.randomNumber];
+                        Interaction.rotatableItem.strokeColor = interactionSelectedColors[Interaction.randomNumber];
+                        Interaction.rotItems.class = "rotatable";
                     }
-                    Interaction.rotatableItem.fillColor = interactionSelectedColors[Interaction.randomNumber];
-                    Interaction.rotatableItem.strokeColor = interactionSelectedColors[Interaction.randomNumber];
-                    Interaction.rotItems.class = "rotatable";
                 }
                 if(this.item.class == "draggable"){
                     var noOfPoints = 0;
@@ -438,5 +446,7 @@ var Interaction = {
             this.item = null;
             this.rotate = false;
         };
+
+        tool.activate();
     }
 }
