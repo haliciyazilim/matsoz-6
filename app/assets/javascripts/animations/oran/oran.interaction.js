@@ -83,7 +83,7 @@ var Interaction = {
             fontSize:"20px",
             opacity:1
 
-        },true, true);
+        },true, false);
         Interaction.input.id="girdi";
         $("#girdi").attr("maxLength","5");
 
@@ -97,7 +97,6 @@ var Interaction = {
     },
 	nextQuestion: function(randomNumber){
 
-        $("#kesirD, #sonucD").css("opacity","0");
 
 
         Main.interactionProject.activeLayer.removeChildren();
@@ -137,6 +136,9 @@ var Interaction = {
 
 
         $("#soru").html(Interaction.soru[0]);
+        $("#kesirD").delay(500).animate({opacity:0},1000)
+        $("#sonucD").animate({opacity:0},1000)
+
     },
 		
 	/*
