@@ -112,10 +112,5 @@ var Animation = {
             },
             animationType:'easeIn'
         });
-
-
     }
-
-
-
 }
