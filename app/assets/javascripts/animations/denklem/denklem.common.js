@@ -236,7 +236,7 @@ var Weight = function(opt){
             break;
         case 'elma':
             raster = new Raster('elma');
-            this.value = 1;
+            this.value = 0.75;
             break;
     }
     this.raster = raster;

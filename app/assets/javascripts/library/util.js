@@ -473,7 +473,19 @@ var Util = {
 
         for (result = result.replace('.', options.point); regex.test(result) && options.group; result=result.replace(regex, '$1'+options.group+'$2')) {};
         return (num < 0 ? '-' : '') + options.prefix + result + options.suffix;
+    },
+
+    round: function(number, interval){
+        if(interval <= 0)
+            throw "interval must be a positive number";
+        if(interval == undefined)
+            interval = 1;
+        if(number % interval >= interval/2)
+            return Math.ceil(number/interval)*interval;
+        else
+            return Math.floor(number/interval)*interval;
     }
+
 };
 
 String.prototype.reverse = function() {

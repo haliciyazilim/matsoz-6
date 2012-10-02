@@ -14,7 +14,7 @@ var Language = {
     phrases:null,
     selectedLanguage:null,
     init:function(language){
-        console.log("I'm here");
+//        console.log("I'm here");
         Language.phrases = Language[language];
         if(Language.phrases == undefined)
             throw "Specified language `" + language + "` is not supported";
