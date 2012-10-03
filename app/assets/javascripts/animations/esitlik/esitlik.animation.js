@@ -46,9 +46,9 @@ var Animation = {
             callback:function(){
                 Animation.scales.removeWeight(weight);
                 Animation.scales.calculateWeights();
+                Main.animationFinished(2000);
                 }
         })
-
 //        Animation.moveAnApple(4000);
 //        Animation.putWeight1kg(5500);
     },

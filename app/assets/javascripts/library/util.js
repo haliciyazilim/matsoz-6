@@ -484,6 +484,31 @@ var Util = {
             return Math.ceil(number/interval)*interval;
         else
             return Math.floor(number/interval)*interval;
+    },
+
+    numberToString:function(number){
+        switch(number){
+            case 0:
+                return 'sıfır';
+            case 1:
+                return 'bir';
+            case 2:
+                return 'iki';
+            case 3:
+                return 'üç';
+            case 4:
+                return 'dört';
+            case 5:
+                return 'beş';
+            case 6:
+                return 'altı';
+            case 7:
+                return 'yedi';
+            case 8:
+                return 'sekiz';
+            case 9:
+                return 'dokuz';
+        }
     }
 
 };

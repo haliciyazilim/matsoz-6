@@ -4,25 +4,25 @@ function convertUnits(quantity,initialUnit,convertedUnit){
     var result;
 
     switch(initialUnit){
-        case "kilometer":
+        case "kiloliter":
             middleValue = quantity*1000;
             break;
-        case "hectometer":
+        case "hectoliter":
             middleValue = quantity*100;
             break;
-        case "decameter":
+        case "decaliter":
             middleValue = quantity*10;
             break;
-        case "meter":
+        case "liter":
             middleValue = quantity;
             break;
-        case "decimeter":
+        case "deciliter":
             middleValue = quantity*0.1;
             break;
-        case "centimeter":
+        case "centiliter":
             middleValue = quantity*0.01;
             break;
-        case "millimeter":
+        case "milliliter":
             middleValue = quantity*0.001;
             break;
         default:
@@ -30,25 +30,25 @@ function convertUnits(quantity,initialUnit,convertedUnit){
     }
 
     switch(convertedUnit){
-        case "kilometer":
+        case "kiloliter":
             result = middleValue*0.001;
             break;
-        case "hectometer":
+        case "hectoliter":
             result = middleValue*0.01;
             break;
-        case "decameter":
+        case "decaliter":
             result = middleValue*0.1;
             break;
-        case "meter":
+        case "liter":
             result = middleValue;
             break;
-        case "decimeter":
+        case "deciliter":
             result  = middleValue*10;
             break;
-        case "centimeter":
+        case "centiliter":
             result = middleValue*100;
             break;
-        case "millimeter":
+        case "milliliter":
             result = middleValue*1000;
             break;
         default:
@@ -126,31 +126,31 @@ function convertInitials(abbr){
     var long;
 
     switch(abbr){
-        case "km":
-            long = "kilometer";
+        case "kL":
+            long = "kiloliter";
             break;
-        case "hm":
-            long = "hectometer";
+        case "hL":
+            long = "hectoliter";
             break;
-        case "dam":
-            long = "decameter";
+        case "daL":
+            long = "decaliter";
             break;
-        case "m":
-            long = "meter";
+        case "L":
+            long = "liter";
             break;
-        case "dm":
-            long = "decimeter";
+        case "dL":
+            long = "deciliter";
             break;
-        case "cm":
-            long = "centimeter";
+        case "cL":
+            long = "centiliter";
             break;
-        case "mm":
-            long = "millimeter";
+        case "mL":
+            long = "milliliter";
             break;
     }
 
     return long;
 }
 
-questionUnitsArray = ["km","hm","dam","m","dm","cm","mm"];
-answerUnitsArray = ["km","hm","dam","m","dm","cm","mm"];
+questionUnitsArray = ["kL","hL","daL","L","dL","cL","mL"];
+answerUnitsArray = ["kL","hL","daL","L","dL","cL","mL"];

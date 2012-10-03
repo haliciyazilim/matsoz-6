@@ -1,13 +1,13 @@
 function __Styles(){
     animStrokeColors = "#000000";
 
-    meterColor = "#ff0000";
-    decimeterColor = "#ff6666";
-    centimeterColor = "#ff9999";
-    millimeterColor = "#ffcccc";
-    decameterColor = "#990000";
-    hectometerColor = "#66000";
-    kilometerColor = "#33000";
+    literColor = "#0072ff";
+    deciliterColor = "#66aaff";
+    centiliterColor = "#99c7ff";
+    milliliterColor = "#cce3ff";
+    decaliterColor = "#0055bf";
+    hectoliterColor = "#00397f";
+    kiloliterColor = "#002e66";
 
     questionDivStyle = {
         position:'absolute',
@@ -17,4 +17,4 @@ function __Styles(){
         height:'60px',
         fontSize:'24px'
     }
-};
+}

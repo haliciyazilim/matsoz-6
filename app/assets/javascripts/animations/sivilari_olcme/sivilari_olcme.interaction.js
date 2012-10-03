@@ -1,14 +1,14 @@
 var Interaction = {
-    
-	getFramework:function(){
+
+    getFramework:function(){
         return 'paper';
     },
-	images:[
-        
+    images:[
+
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki uzunlukları istenen ölçü birimine çeviriniz ve kontrol ediniz.');
+        Main.setObjective('Yandaki sıvı miktarlarını istenen ölçü birimine çeviriniz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -41,7 +41,7 @@ var Interaction = {
         $(Interaction.questionDiv).append(Interaction.input);
         Interaction.prepareNextQuestion();
     },
-	nextQuestion: function(randomNumber){
+    nextQuestion: function(randomNumber){
         $(Interaction.input).css("color","black");
 
         generateQuestion();
@@ -56,29 +56,29 @@ var Interaction = {
         Interaction.answer = convertUnits(Interaction.question,convertInitials(Interaction.questionUnit),convertInitials(Interaction.answerUnit));
         Interaction.answer = Math.floor(Interaction.answer*100000)/100000;
     },
-	preCheck : function(){
+    preCheck : function(){
 
     },
-	isAnswerCorrect : function(value){
+    isAnswerCorrect : function(value){
         var checkedValue = value;
         if(checkedValue.indexOf(",") != -1){
             checkedValue = checkedValue.replace(",",".");
         }
         return checkedValue == Interaction.answer;
     },
-	onCorrectAnswer : function(){
-		
+    onCorrectAnswer : function(){
+
     },
-	onWrongAnswer : function(){
-		
+    onWrongAnswer : function(){
+
     },
-	onFail : function(){
+    onFail : function(){
         var answer;
         answer = ""+Interaction.answer;
         if(answer.indexOf(".") != -1){
             answer = answer.replace(".",",");
         }
-		Interaction.setStatus("Yanlış cevap, doğrusu yukarıda gösterilmiştir!",false);
+        Interaction.setStatus("Yanlış cevap, doğrusu yukarıda gösterilmiştir!",false);
         Interaction.input.value = answer;
         $(Interaction.input).css("color","green");
     }

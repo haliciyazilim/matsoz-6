@@ -4,52 +4,52 @@ function convertUnits(quantity,initialUnit,convertedUnit){
     var result;
 
     switch(initialUnit){
-        case "kilometer":
-            middleValue = quantity*1000;
+        case "kilometersquare":
+            middleValue = quantity*1000000;
             break;
-        case "hectometer":
+        case "hectometersquare":
+            middleValue = quantity*10000;
+            break;
+        case "decametersquare":
             middleValue = quantity*100;
             break;
-        case "decameter":
-            middleValue = quantity*10;
-            break;
-        case "meter":
+        case "metersquare":
             middleValue = quantity;
             break;
-        case "decimeter":
-            middleValue = quantity*0.1;
-            break;
-        case "centimeter":
+        case "decimetersquare":
             middleValue = quantity*0.01;
             break;
-        case "millimeter":
-            middleValue = quantity*0.001;
+        case "centimetersquare":
+            middleValue = quantity*0.0001;
+            break;
+        case "millimetersquare":
+            middleValue = quantity*0.000001;
             break;
         default:
             throw("unsupported initial unit type");
     }
 
     switch(convertedUnit){
-        case "kilometer":
-            result = middleValue*0.001;
+        case "kilometersquare":
+            result = middleValue*0.000001;
             break;
-        case "hectometer":
+        case "hectometersquare":
+            result = middleValue*0.0001;
+            break;
+        case "decametersquare":
             result = middleValue*0.01;
             break;
-        case "decameter":
-            result = middleValue*0.1;
-            break;
-        case "meter":
+        case "metersquare":
             result = middleValue;
             break;
-        case "decimeter":
-            result  = middleValue*10;
+        case "decimetersquare":
+            result  = middleValue*100;
             break;
-        case "centimeter":
-            result = middleValue*100;
+        case "centimetersquare":
+            result = middleValue*10000;
             break;
-        case "millimeter":
-            result = middleValue*1000;
+        case "millimetersquare":
+            result = middleValue*1000000;
             break;
         default:
             throw("unsupported converted unit type");
@@ -66,7 +66,7 @@ function generateQuestion(){
     questionIndex = Util.randomInteger(0,7);
     switch(questionIndex){
         case 0:
-            factor = Util.randomInteger(0,3);
+            factor = Util.randomInteger(0,4);
             quantity = Util.randomInteger(1,100);
             quantity = quantity / Math.pow(10,factor);
             answerIndex = Util.randomInteger(1,5);
@@ -74,7 +74,7 @@ function generateQuestion(){
             answerUnit = answerUnitsArray[answerIndex];
             break;
         case 1:
-            factor = Util.randomInteger(0,3);
+            factor = Util.randomInteger(0,4);
             quantity = Util.randomInteger(1,100);
             quantity = quantity / Math.pow(10,factor);
             answerIndex = Util.randomInteger(0,5,[1]);
@@ -82,7 +82,7 @@ function generateQuestion(){
             answerUnit = answerUnitsArray[answerIndex];
             break;
         case 2:
-            factor = Util.randomInteger(0,3);
+            factor = Util.randomInteger(0,4);
             quantity = Util.randomInteger(1,100);
             quantity = quantity / Math.pow(10,factor);
             answerIndex = Util.randomInteger(0,6,[2]);
@@ -90,7 +90,7 @@ function generateQuestion(){
             answerUnit = answerUnitsArray[answerIndex];
             break;
         case 3:
-            factor = Util.randomInteger(0,2);
+            factor = Util.randomInteger(0,4);
             quantity = Util.randomInteger(1,100);
             quantity = quantity / Math.pow(10,factor);
             answerIndex = Util.randomInteger(0,7,[3]);
@@ -127,25 +127,25 @@ function convertInitials(abbr){
 
     switch(abbr){
         case "km":
-            long = "kilometer";
+            long = "kilometersquare";
             break;
         case "hm":
-            long = "hectometer";
+            long = "hectometersquare";
             break;
         case "dam":
-            long = "decameter";
+            long = "decametersquare";
             break;
         case "m":
-            long = "meter";
+            long = "metersquare";
             break;
         case "dm":
-            long = "decimeter";
+            long = "decimetersquare";
             break;
         case "cm":
-            long = "centimeter";
+            long = "centimetersquare";
             break;
         case "mm":
-            long = "millimeter";
+            long = "millimetersquare";
             break;
     }
 
