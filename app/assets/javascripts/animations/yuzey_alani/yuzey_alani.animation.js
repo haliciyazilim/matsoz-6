@@ -21,7 +21,7 @@ var Animation = {
             },
             {
                 points: [new Point(0,1), new Point(0,6), new Point(1,6), new Point(1,1)],
-                area: 
+                area: 4
             }
             [new Point(1,1), new Point(1,6), new Point(4,6), new Point(4,1)],
             [new Point(4,1), new Point(4,6), new Point(5,6), new Point(5,1)],
