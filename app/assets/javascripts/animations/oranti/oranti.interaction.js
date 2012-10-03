@@ -21,8 +21,11 @@ Interaction = {
         $(container).append("<div id='soru'>");
         $("#soru").css({
             position:"absolute",
-            width:"100%",
+            width:"490px",
             top:"35px",
+            left:"0px",
+            right:"0px",
+            margin:"auto",
             textAlign:"center",
             fontSize:"20px",
             opacity:1
@@ -30,7 +33,7 @@ Interaction = {
 
         Interaction.appendInput({
             position:"absolute",
-            width:"70px",
+            width:"50px",
             height:"50px",
             right:"0",
             top:"100px",

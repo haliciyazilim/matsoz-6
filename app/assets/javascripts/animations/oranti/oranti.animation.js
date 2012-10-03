@@ -27,29 +27,35 @@ var Animation = {
                 $("#sutun"+i).css({lineHeight:"40px", textAlign:"center"});
             }
 
+            if(i<5)
+                $("#sutun"+i).css({backgroundColor:"#BFE8EF"});
+            else
+                $("#sutun"+i).css({backgroundColor:"#D9F1F5"});
+
+
         }
 
         $("#tablo").css({
             width:"225px",
-            height:"102px",
+            height:"82px",
             position:"absolute",
             left:"235px",
             top:"65px",
-            border:"solid 1px black",
+            border:"solid 1px white",
             borderTop:"none",
             borderRight:"none",
-            fontSize:"20px",
+
             opacity:0
         });
 
         $(".sutunlar").css({
             width:"40px",
-            height:"50px",
-            borderRight:"solid black 1px",
-            borderTop:"solid black 1px",
+            height:"40px",
+            borderRight:"solid white 1px",
+            borderTop:"solid white 1px",
             float:"left"
         });
-        $("#sutun0,#sutun5").css({width:"60px"});
+        $("#sutun0,#sutun5").css({width:"60px", lineHeight:"18px",fontWeight:"bold"});
 
         $(container).append("<div id='islemKesirUst' class='islemKesirler'>");
         $("#islemKesirUst").append("<div class='kesirler'><div class='oPay'>1</div><div class='oPayda'>5</div></div>");
@@ -146,7 +152,7 @@ var Animation = {
         $("#islemKesirAlt").delay(4000).animate({opacity:1},1000);
         $("#islemEsitlikAlt").delay(5000).animate({opacity:1},1000);
 
-
+        Main.animationFinished(6000);
 
     }
 }
