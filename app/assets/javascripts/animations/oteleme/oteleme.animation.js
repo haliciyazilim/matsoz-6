@@ -1,9 +1,9 @@
 var Animation = {
     images:[
-        {
-            id:'deneme',
-            src:'/assets/deneme.jpg'
-        }
+//        {
+//            id:'deneme',
+//            src:'/assets/deneme.jpg'
+//        }
     ],
 	init:function(container){
         Animation.container = container;
