@@ -31,7 +31,30 @@ InteractiveGrids.prototype.isPathVerticalOverflowed = function(){
         return true;
     return false;
 }
+InteractiveGrids.prototype.setPathPosition = function(point){
+    this.path.position = this.position.add(point.multiply(this.size,this.size));
+}
+InteractiveGrids.prototype.animateToNewPosition = function(opt){
+    if(!opt.delay)
+        opt.delay = 0;
+    if(!opt.speed)
+        opt.speed = 1;
+    var oldPosition = this.path.position;
+    var newPosition = opt.position.multiply(this.size,this.size).add(this.position);
+    this.path.animate({
+        style:{
+            position:newPosition
+        },
+        duration:oldPosition.getDistance(newPosition) * 10 / opt.speed,
+        delay:opt.delay,
+        callback:opt.callback,
+        animationType:'easeInEaseOut'
+    })
+}
 InteractiveGrids.prototype.appendVertexLetters = function(){}
+InteractiveGrids.prototype.getPathPosition = function(){
+    return this.path.position.subtract(this.position).divide(this.size,this.size);
+}
 InteractiveGrids.prototype.createTool = function(){
     var snapTolerance = 3;
     var tool = new Tool();
