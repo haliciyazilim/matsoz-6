@@ -1,1 +1,0 @@
-function __Styles(){OppositeAngles.letterTextStyle={fontSize:14}};
