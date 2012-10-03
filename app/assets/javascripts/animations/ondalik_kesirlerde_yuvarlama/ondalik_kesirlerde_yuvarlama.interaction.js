@@ -94,7 +94,7 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
-        var istenen=Interaction.soru[3];
+        istenen=Interaction.soru[3];
 
         sonKisim=Interaction.gelenSayi.toString().charAt(Interaction.gelenSayi.length-(istenen-1));
         if(sonKisim<5){
@@ -132,13 +132,26 @@ var Interaction = {
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
 
+        var gosterilenSayi=Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak});
+        var olusanSayi=Util.format(Interaction.dogruCevap,{places:Interaction.virguldenSonraBasamak-1});
 
-
-        $("#sayi").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak}));
-        $("#sonuc").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak})+" <img src='/assets/animations/ondalik_kesirlerde_yuvarlama/sag_ok.png'  /> "+Util.format(Interaction.dogruCevap,{places:Interaction.virguldenSonraBasamak-1}))
-        if(sonKisim<5){
-
+        if(istenen==3 && Interaction.virguldenSonraBasamak==3){
+            olusanSayi=Util.format(Interaction.dogruCevap,{places:1});
+            alert();
         }
+
+
+
+        if(sonKisim<5){
+            $("#olcum").html(sonKisim+" < 5");
+        }
+        else if(sonKisim==5)
+            $("#olcum").html(sonKisim+" ≥ 5");
+        else
+            $("#olcum").html(sonKisim+" > 5");
+
+        $("#sayi").html(gosterilenSayi);
+        $("#sonuc").html(gosterilenSayi+" <img src='/assets/animations/ondalik_kesirlerde_yuvarlama/sag_ok.png'  /> "+olusanSayi);
 
         $("#cevap img").css({display:"inline-block"});
         $("#sayi, #sonuc, #olcum").animate({opacity:1},1000);
