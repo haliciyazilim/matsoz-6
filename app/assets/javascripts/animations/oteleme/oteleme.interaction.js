@@ -22,13 +22,19 @@ var Interaction = {
             bottom:"50px",
             right:"150px"
         })
-        /*
-        *	Initialize your interaction here
-        */
 
+        Interaction.setRandomGenerator(1)
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        Interaction.shape = InteractiveGrids.CreateShape(randomNumber)
+        Interaction.grids = new InteractiveGrids({
+            position:new Point(100.5,23.5),
+            size:30,
+            style:{
+                strokeColor:'#999'
+            }
+        }).drawShape(Interaction.shape).createTool();
 
     },
 		
