@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -21,10 +21,32 @@ var Interaction = {
             height:"50px",
             left:"150px",
             top:"100px",
+            fontSize:"20px",
+            lineHeight:"55px",
+            textAlign:"right",
+            opacity:1
+        });
+
+        $(container).append("<div id='cevap'><div id='sayi'>33,67</div><div id='olcum'>7>5</div><div id='sonuc'></div></div>");
+        $("#cevap").css({
+            position:"absolute",
+            width:"600px",
+            height:"50px",
+            left:"0",
+            right:"0",
+            margin:"auto",
+            top:"180px",
             textAlign:"center",
             fontSize:"20px",
             opacity:1
+
         });
+        $("#cevap div").css({float:"left",width:"200px"});
+
+        $("#sayi, #sonuc, #olcum").css("opacity","0");
+
+
+
 
         Interaction.appendInput({
             position:"absolute",
@@ -53,6 +75,14 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        Interaction.soru=sayiOlustur();
+        var istenenKisim=Interaction.soru[1];
+        Interaction.virguldenSonraBasamak=Interaction.soru[2];
+        Interaction.gelenSayi=Interaction.soru[0]
+        Main.setObjective("Yandaki ondalık kesri <b>"+istenenKisim+"</b> basamağına göre yuvarlayınız ve kontrol ediniz.");
+        $("#soru").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak})+" = ");
+
+        $("#sayi, #sonuc, #olcum").animate({opacity:0},1000);
 
     },
 		
@@ -64,6 +94,33 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
+        var istenen=Interaction.soru[3];
+
+        sonKisim=Interaction.gelenSayi.toString().charAt(Interaction.gelenSayi.length-(istenen-1));
+        if(sonKisim<5){
+            Interaction.dogruCevap=Interaction.gelenSayi.toString().substr(0,Interaction.gelenSayi.length-(istenen-1))
+        }
+        else{
+            degisecekRakam=Interaction.gelenSayi.toString().charAt(Interaction.gelenSayi.length-istenen);
+            console.log("değişecek rakam: "+degisecekRakam);
+            degisenRakam=parseInt(degisecekRakam,10)+1;
+            console.log("değişen rakam: "+degisecekRakam);
+
+            Interaction.dogruCevap=Interaction.gelenSayi.toString().substr(0,Interaction.gelenSayi.length-istenen);
+            Interaction.dogruCevap=Interaction.dogruCevap+degisenRakam;
+
+        }
+
+        var gelenSayiArray=value.split(",");
+        if(gelenSayiArray.length==2)
+            Interaction.gelenCevap=gelenSayiArray[0]+"."+gelenSayiArray[1];
+        else
+            Interaction.gelenCevap=gelenSayiArray[0];
+
+        if(parseFloat(Interaction.dogruCevap)==parseFloat(Interaction.gelenCevap))
+            return true;
+
+
 
     },
 	onCorrectAnswer : function(){
@@ -73,6 +130,19 @@ var Interaction = {
 		
     },
 	onFail : function(){
+        Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
+
+
+
+        $("#sayi").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak}));
+        $("#sonuc").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak})+" <img src='/assets/animations/ondalik_kesirlerde_yuvarlama/sag_ok.png'  /> "+Util.format(Interaction.dogruCevap,{places:Interaction.virguldenSonraBasamak-1}))
+        if(sonKisim<5){
+
+        }
+
+        $("#cevap img").css({display:"inline-block"});
+        $("#sayi, #sonuc, #olcum").animate({opacity:1},1000);
+
 		
     }
 }
