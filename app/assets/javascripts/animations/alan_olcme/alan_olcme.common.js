@@ -25,6 +25,15 @@ function convertUnits(quantity,initialUnit,convertedUnit){
         case "millimetersquare":
             middleValue = quantity*0.000001;
             break;
+        case "ar":
+            middleValue = quantity*100;
+            break;
+        case "dekar":
+            middleValue = quantity*1000;
+            break;
+        case "hektar":
+            middleValue = quantity*10000;
+            break;
         default:
             throw("unsupported initial unit type");
     }
@@ -63,7 +72,7 @@ function generateQuestion(){
     var questionIndex, answerIndex, quantity;
     var factor;
 
-    questionIndex = Util.randomInteger(0,7);
+    questionIndex = Util.randomInteger(0,13);
     switch(questionIndex){
         case 0:
             factor = Util.randomInteger(0,4);
@@ -113,6 +122,42 @@ function generateQuestion(){
             quantity = Util.randomInteger(1,100);
             answerIndex = Util.randomInteger(3,7,[6]);
             questionUnit = questionUnitsArray[questionIndex];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 7:
+            quantity = Util.randomInteger(1,100);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[questionIndex];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 8:
+            quantity = Util.randomInteger(1,100);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[questionIndex];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 9:
+            quantity = Util.randomInteger(1,100);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[questionIndex];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 10:
+            quantity = Util.randomInteger(1,100);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[0];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 11:
+            quantity = Util.randomInteger(1,100);
+            answerIndex = 5;
+            questionUnit = questionUnitsArray[3];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 12:
+            quantity = Util.randomInteger(1,100);
+            answerIndex = 6;
+            questionUnit = questionUnitsArray[5];
             answerUnit = answerUnitsArray[answerIndex];
             break;
     }
