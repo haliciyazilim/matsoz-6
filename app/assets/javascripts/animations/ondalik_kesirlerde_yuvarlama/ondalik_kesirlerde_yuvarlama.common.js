@@ -20,7 +20,7 @@ sayiOlustur=function(){
 
     var soruSecimi=Math.floor(Math.random()*10);
     //soruSecimi=6;
-    if(soruSecimi<5){
+    if(soruSecimi<4){
         sayi=sayi.toFixed(2);
         virguldenSonra=2
         metin="onda birler";
@@ -29,7 +29,7 @@ sayiOlustur=function(){
     else{
         var soruSecimi=Math.floor(Math.random()*10);
         //soruSecimi=6;
-        if(soruSecimi<5){
+        if(soruSecimi<4){
             sayi=sayi.toFixed(3);
             virguldenSonra=3
             metin="onda birler";
