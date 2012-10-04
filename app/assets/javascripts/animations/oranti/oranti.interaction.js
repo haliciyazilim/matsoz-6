@@ -100,26 +100,15 @@ Interaction = {
         $("#dogruCevap").animate({opacity:"0"},1000);
         $("input").css("color","black");
 
-        var simdikiSoruId = Interaction.soruIdArray[Interaction.sira];
-        Interaction.simdikiSoru=sorular[simdikiSoruId];
-        Interaction.soruMetni = Interaction.simdikiSoru[0];
-
-        Interaction.ilkBagimsiz=Interaction.simdikiSoru[2]*Math.floor(Math.random()*4+1);
-        Interaction.ilkBagimli=Interaction.simdikiSoru[3]*Math.floor(Math.random()*4+1);
-        Interaction.ikinciBagimsiz=Interaction.simdikiSoru[4]*Math.floor(Math.random()*4+1);
-        Interaction.ikinciBagimli=Interaction.simdikiSoru[5]*Math.floor(Math.random()*4+1);
-
-
-        Interaction.soruMetni=Interaction.soruMetni.replace("ilkBagimsiz",Interaction.ilkBagimsiz);
-        Interaction.soruMetni=Interaction.soruMetni.replace("ilkBagimli",Interaction.ilkBagimli);
-        Interaction.soruMetni=Interaction.soruMetni.replace("ikinciBagimsiz",Interaction.ikinciBagimsiz);
-        Interaction.soruMetni=Interaction.soruMetni.replace("ikinciBagimli",Interaction.ikinciBagimli);
+        yeniSoru();
 
         $("#soru").html(Interaction.soruMetni);
 
         Interaction.sira++;
-        if(Interaction.sira==Interaction.sorular.length-1)
+        if(Interaction.sira==sorular.length-1)
             Interaction.sira=0;
+
+        //kontrol();
 
 
 
@@ -133,39 +122,7 @@ Interaction = {
 
     },
     isAnswerCorrect:function (value) {
-        if(Interaction.simdikiSoru.length>6){
-            var donusturmeDegeri=Interaction.simdikiSoru[8];
-            var donusturulecekDegerId=Interaction.simdikiSoru[9]
 
-            switch (donusturulecekDegerId){
-                case 1:
-                    Interaction.ilkBagimsiz=Interaction.ilkBagimsiz*donusturmeDegeri;
-                    break;
-                case 2:
-                    Interaction.ilkBagimli=Interaction.ilkBagimli*donusturmeDegeri;
-                    break;
-                case 3:
-                    Interaction.ikinciBagimsiz=Interaction.ikinciBagimsiz*donusturmeDegeri;
-                    break;
-                case 4:
-                    Interaction.ikinciBagimli=Interaction.ikinciBagimli*donusturmeDegeri;
-                    break;
-            }
-        }
-
-
-        if(Interaction.ilkBagimsiz==0)
-            Interaction.sonuc=Interaction.ikinciBagimsiz*Interaction.ilkBagimli/Interaction.ikinciBagimli;
-        else if(Interaction.ilkBagimli==0)
-            Interaction.sonuc=Interaction.ikinciBagimli*Interaction.ilkBagimsiz/Interaction.ikinciBagimsiz;
-        else if(Interaction.ikinciBagimsiz==0)
-            Interaction.sonuc=Interaction.ikinciBagimli*Interaction.ilkBagimsiz/Interaction.ilkBagimli;
-        else if(Interaction.ikinciBagimli==0)
-            Interaction.sonuc=Interaction.ikinciBagimsiz*Interaction.ilkBagimli/Interaction.ilkBagimsiz;
-
-        var sorgu=Interaction.sonuc.toString().indexOf(".");
-        if(sorgu>0)
-            Interaction.sonuc=Interaction.sonuc.toFixed(3)
 
         if(Interaction.sonuc==value)
             return true;
