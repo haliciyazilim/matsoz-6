@@ -7,6 +7,10 @@ var Animation = {
         {
             id:'bottom_arrow',
             src:'/assets/animations/uzunluklari_olcme/alt_ok.png'
+        },
+        {
+            id:'ruler',
+            src:'/assets/animations/uzunluklari_olcme/uzunluklariolcme_cetvel.png'
         }
     ],
 	init:function(container){
@@ -21,9 +25,9 @@ var Animation = {
         var hectometerPoint = new Point(80.5,40.5);
         var kilometerPoint = new Point(60.5,20.5);
 
-        var kmPoint = new Point(460.5,60.5);
+        var kmPoint = new Point(460.5,40.5);
 
-        var lastTextPoint = new Point(600.5,130.5);
+        var lastTextPoint = new Point(600.5,144.5);
 
         var animStart = 0;
         var meterStart = animStart+1000;
@@ -34,7 +38,9 @@ var Animation = {
         var hectometerStart = decameterStart+1000;
         var kilometerStart = hectometerStart+1000;
 
-        var kmTextStart = kilometerStart+2000;
+        var rulerStart = kilometerStart+1500;
+
+        var kmTextStart = rulerStart+1500;
         var hmTextStart = kmTextStart+500;
         var damTextStart = hmTextStart+500;
         var mTextStart = damTextStart+500;
@@ -243,6 +249,10 @@ var Animation = {
         kilometerGroup.addChild(kilometerText1);
         kilometerGroup.addChild(kilometerText2);
         kilometerGroup.opacity = 0;
+
+        var ruler = new Raster('ruler');
+        ruler.position = new Point(588,106);
+        ruler.opacity = 0;
 
         // km
         var kmText = new PointText(kmPoint);
@@ -494,6 +504,15 @@ var Animation = {
             },
             duration:1000,
             delay:kilometerStart,
+            animationType:'easeInOutQuad'
+        });
+
+        ruler.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:rulerStart,
             animationType:'easeInOutQuad'
         });
 

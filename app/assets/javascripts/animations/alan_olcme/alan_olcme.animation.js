@@ -7,6 +7,10 @@ var Animation = {
         {
             id:'bottom_arrow',
             src:'/assets/animations/uzunluklari_olcme/alt_ok.png'
+        },
+        {
+            id:'ticker',
+            src:'/assets/animations/alan_olcme/alanolcme_ticker.gif'
         }
     ],
     init:function(container){
@@ -39,7 +43,9 @@ var Animation = {
         var hectometerSquareStart = decameterSquareStart+1000;
         var kilometerSquareStart = hectometerSquareStart+1000;
 
-        var kmTextStart = kilometerSquareStart+2000;
+        var tickerStart = kilometerSquareStart+1500;
+
+        var kmTextStart = tickerStart+1500;
         var hmTextStart = kmTextStart+500;
         var damTextStart = hmTextStart+500;
         var mTextStart = damTextStart+500;
@@ -271,6 +277,15 @@ var Animation = {
         kilometerSquareGroup.addChild(kilometerSquareText1);
         kilometerSquareGroup.addChild(kilometerSquareText2);
         kilometerSquareGroup.opacity = 0;
+
+        var ticker = $('#ticker');
+        $(Animation.container).append(ticker);
+        $(ticker).css({
+            position:'absolute',
+            top:'26px',
+            left:'470px',
+            opacity:0
+        });
 
         // km
         var kmText = new PointText(kmPoint);
@@ -560,6 +575,8 @@ var Animation = {
             delay:kilometerSquareStart,
             animationType:'easeInOutQuad'
         });
+
+        $(ticker).delay(tickerStart).animate({opacity:1},1000,'easeInOutQuad');
 
         kmText.animate({
             style:{

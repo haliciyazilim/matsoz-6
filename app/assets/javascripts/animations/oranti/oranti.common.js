@@ -19,7 +19,7 @@ sorular=[
     ["ilkBagimsiz dakikada ilkBagimli sayfa okuyan Metin ikinciBagimli sayfalık bir kitabı kaç dakikada okur?","dakika",2,1,0,120],
     ["Bir matbaada ilkBagimsiz dakikada ilkBagimli kitap basıldığına göre ikinciBagimsiz saatte kaç kitap basılır?","kitap",10,40,1,0,"saat","dakika",60,3],
     ["ilkBagimsiz kilosu ilkBagimli lira olan domatesten ikinciBagimli liraya kaç kilo domates alınır?","kilo",1,2,0,10],
-    ["ilkBagimsiz günde ilkBagimli ton eşya gönderen kargo firması ikinciBagimsiz ayda kaç ton eşya gönderir?","ton",1,20,1,0,"ay","gün",30,3],
+    ["ilkBagimsiz günde ilkBagimli ton eşya gönderen kargo firması ikinciBagimsiz haftada kaç ton eşya gönderir?","ton",1,20,1,0,"hafta","gün",7,3],
     ["ilkBagimsiz dakikada ilkBagimli çiçek diken bahçıvan ikinciBagimli çiçeği kaç dakikada diker?","dakika",3,1,0,12],
     ["ilkBagimsiz dakikada ilkBagimli çiçek diken bahçıvan ikinciBagimsiz dakikada kaç çiçek diker?","çiçek",3,1,36,0],
     ["ilkBagimsiz km'lik yolu ilkBagimli saatte giden bir otomobil ikinciBagimsiz km'lik yolu kaç saatte gider?","saat",60,1,120,0],
@@ -29,5 +29,59 @@ sorular=[
 
 ];
 
+yeniSoru=function(){
+    var simdikiSoruId = Interaction.soruIdArray[Interaction.sira];
+    Interaction.simdikiSoru=sorular[simdikiSoruId];
+    Interaction.soruMetni = Interaction.simdikiSoru[0];
+    randomSayiGetir();
+    function randomSayiGetir(){
+        Interaction.ilkBagimsiz=Interaction.simdikiSoru[2]*Math.floor(Math.random()*4+1);
+        Interaction.ilkBagimli=Interaction.simdikiSoru[3]*Math.floor(Math.random()*4+1);
+        Interaction.ikinciBagimsiz=Interaction.simdikiSoru[4]*Math.floor(Math.random()*4+1);
+        Interaction.ikinciBagimli=Interaction.simdikiSoru[5]*Math.floor(Math.random()*4+1);
+        if(Interaction.ilkBagimsiz==Interaction.ikinciBagimsiz || Interaction.ilkBagimli==Interaction.ikinciBagimli)
+        randomSayiGetir();
+    }
 
+    Interaction.soruMetni=Interaction.soruMetni.replace("ilkBagimsiz",Interaction.ilkBagimsiz);
+    Interaction.soruMetni=Interaction.soruMetni.replace("ilkBagimli",Interaction.ilkBagimli);
+    Interaction.soruMetni=Interaction.soruMetni.replace("ikinciBagimsiz",Interaction.ikinciBagimsiz);
+    Interaction.soruMetni=Interaction.soruMetni.replace("ikinciBagimli",Interaction.ikinciBagimli);
+    kontrol();
+}
+kontrol=function(){
+    if(Interaction.simdikiSoru.length>6){
+        var donusturmeDegeri=Interaction.simdikiSoru[8];
+        var donusturulecekDegerId=Interaction.simdikiSoru[9]
+
+        switch (donusturulecekDegerId){
+            case 1:
+                Interaction.ilkBagimsiz=Interaction.ilkBagimsiz*donusturmeDegeri;
+                break;
+            case 2:
+                Interaction.ilkBagimli=Interaction.ilkBagimli*donusturmeDegeri;
+                break;
+            case 3:
+                Interaction.ikinciBagimsiz=Interaction.ikinciBagimsiz*donusturmeDegeri;
+                break;
+            case 4:
+                Interaction.ikinciBagimli=Interaction.ikinciBagimli*donusturmeDegeri;
+                break;
+        }
+    }
+
+
+    if(Interaction.ilkBagimsiz==0)
+        Interaction.sonuc=Interaction.ikinciBagimsiz*Interaction.ilkBagimli/Interaction.ikinciBagimli;
+    else if(Interaction.ilkBagimli==0)
+        Interaction.sonuc=Interaction.ikinciBagimli*Interaction.ilkBagimsiz/Interaction.ikinciBagimsiz;
+    else if(Interaction.ikinciBagimsiz==0)
+        Interaction.sonuc=Interaction.ikinciBagimli*Interaction.ilkBagimsiz/Interaction.ilkBagimli;
+    else if(Interaction.ikinciBagimli==0)
+        Interaction.sonuc=Interaction.ikinciBagimsiz*Interaction.ilkBagimli/Interaction.ilkBagimsiz;
+
+    var sorgu=Util.isInteger(Interaction.sonuc);
+    if(sorgu==false)
+        yeniSoru();
+}
 

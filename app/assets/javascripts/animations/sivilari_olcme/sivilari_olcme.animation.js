@@ -7,6 +7,10 @@ var Animation = {
         {
             id:'bottom_arrow',
             src:'/assets/animations/uzunluklari_olcme/alt_ok.png'
+        },
+        {
+            id:'pitcher',
+            src:'/assets/animations/sivilari_olcme/sivilariolcme_litre.jpg'
         }
     ],
     init:function(container){
@@ -26,7 +30,8 @@ var Animation = {
         var lastTextPoint = new Point(600.5,130.5);
 
         var animStart = 0;
-        var literStart = animStart+1000;
+        var pitcherStart = animStart+1000;
+        var literStart = pitcherStart+1500;
         var deciliterStart = literStart+1000;
         var centiliterStart = deciliterStart+1000;
         var milliliterStart = centiliterStart+1000;
@@ -57,6 +62,10 @@ var Animation = {
         var bottom1Start = bottom2Start+750;
 
         var lastTextStart = bottom1Start+1500;
+
+        var pitcher = new Raster('pitcher');
+        pitcher.position = new Point(60,130);
+        pitcher.opacity = 0;
 
         // liter Group
         var literGroup = new Group();
@@ -433,6 +442,15 @@ var Animation = {
         lastText2.fillColor = "#069";
         lastText2.fontSize = 12;
         lastText2.opacity = 0;
+
+        pitcher.animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:pitcherStart,
+            animationType:'easeInOutQuad'
+        });
 
         literGroup.animate({
             style:{
