@@ -63,7 +63,7 @@ function generateQuestion(){
     var questionIndex, answerIndex, quantity;
     var factor;
 
-    questionIndex = Util.randomInteger(0,7);
+    questionIndex = Util.randomInteger(0,12);
     switch(questionIndex){
         case 0:
             factor = Util.randomInteger(0,3);
@@ -113,6 +113,46 @@ function generateQuestion(){
             quantity = Util.randomInteger(1,100);
             answerIndex = Util.randomInteger(3,7,[6]);
             questionUnit = questionUnitsArray[questionIndex];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 7:
+            factor = Util.randomInteger(0,2);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 5;
+            questionUnit = questionUnitsArray[3];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 8:
+            factor = Util.randomInteger(0,2);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 5;
+            questionUnit = questionUnitsArray[3];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 9:
+            factor = Util.randomInteger(0,2);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 6;
+            questionUnit = questionUnitsArray[3];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 10:
+            factor = Util.randomInteger(0,2);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 6;
+            questionUnit = questionUnitsArray[5];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 11:
+            factor = Util.randomInteger(0,1);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[5];
             answerUnit = answerUnitsArray[answerIndex];
             break;
     }

@@ -54,17 +54,35 @@ var Interaction = {
         $('#answerUnit').html(Interaction.answerUnit);
 
         Interaction.answer = convertUnits(Interaction.question,convertInitials(Interaction.questionUnit),convertInitials(Interaction.answerUnit));
-        Interaction.answer = Math.floor(Interaction.answer*100000)/100000;
+
     },
     preCheck : function(){
 
     },
     isAnswerCorrect : function(value){
-        var checkedValue = value;
-        if(checkedValue.indexOf(",") != -1){
-            checkedValue = checkedValue.replace(",",".");
+        var lastPart = "";
+        var flag = 1;
+        var checkedValue = Util.numberTurkishFloating(Interaction.answer,6);
+        var parts = checkedValue.split(",");
+        if(parts.length != 1){
+            lastPart = parts[1];
+            for(var i = lastPart.length-1; i>=0; i--){
+                if(lastPart[i] == "0" && flag == 1){
+                    lastPart = lastPart.slice(0,i);
+                }
+                else{
+                    flag = 0;
+                }
+            }
         }
-        return checkedValue == Interaction.answer;
+        if(lastPart.length > 0){
+            checkedValue = ""+parts[0]+","+lastPart;
+        }
+        else{
+            checkedValue = parts[0];
+        }
+        Interaction.checkedValue = checkedValue;
+        return parseFloat(checkedValue.replace(",",".")) == parseFloat(value.replace(",","."));
     },
     onCorrectAnswer : function(){
 
@@ -73,13 +91,8 @@ var Interaction = {
 
     },
     onFail : function(){
-        var answer;
-        answer = ""+Interaction.answer;
-        if(answer.indexOf(".") != -1){
-            answer = answer.replace(".",",");
-        }
         Interaction.setStatus("Yanlış cevap, doğrusu yukarıda gösterilmiştir!",false);
-        Interaction.input.value = answer;
+        Interaction.input.value = Interaction.checkedValue;
         $(Interaction.input).css("color","green");
     }
 }
