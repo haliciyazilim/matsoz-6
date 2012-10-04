@@ -128,18 +128,23 @@ var Util = {
             return ""+Math.floor(number+0.5);
         }
         var decimalDividend = Math.pow(10,decimal);
+
+        number += 1;
+
         number = number * decimalDividend;
         number+=0.5;
         number = Math.floor(number);
 
         var base = Math.floor(number/decimalDividend);
-        var float  = number % decimalDividend;
+        var float = "" + (number % decimalDividend + decimalDividend);
+        float = float.substring(1,float.length);
+
         if(float == 0){
             float = "";
             for(var i=0;i<decimal;i++)
                 float += "0";
         }
-        return base + ","+float;
+        return (base-1) + ","+float;
     },
     rand01: function(){
         return Math.floor(Math.random()*2);
