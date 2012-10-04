@@ -5,10 +5,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
 
     switch(initialUnit){
         case "kilometer":
-            middleValue = quantity*10*10*10;
+            middleValue = quantity*1000;
             break;
         case "hectometer":
-            middleValue = quantity*10*10;
+            middleValue = quantity*100;
             break;
         case "decameter":
             middleValue = quantity*10;
@@ -20,10 +20,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
             middleValue = quantity*0.1;
             break;
         case "centimeter":
-            middleValue = quantity*0.1*0.1;
+            middleValue = quantity*0.01;
             break;
         case "millimeter":
-            middleValue = quantity*0.1*0.1*0.1;
+            middleValue = quantity*0.001;
             break;
         default:
             throw("unsupported initial unit type");
@@ -31,10 +31,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
 
     switch(convertedUnit){
         case "kilometer":
-            result = middleValue*0.1*0.1*0.1;
+            result = middleValue*0.001;
             break;
         case "hectometer":
-            result = middleValue*0.1*0.1;
+            result = middleValue*0.01;
             break;
         case "decameter":
             result = middleValue*0.1;
@@ -46,10 +46,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
             result  = middleValue*10;
             break;
         case "centimeter":
-            result = middleValue*10*10;
+            result = middleValue*100;
             break;
         case "millimeter":
-            result = middleValue*10*10*10;
+            result = middleValue*1000;
             break;
         default:
             throw("unsupported converted unit type");
@@ -63,7 +63,7 @@ function generateQuestion(){
     var questionIndex, answerIndex, quantity;
     var factor;
 
-    questionIndex = Util.randomInteger(0,7);
+    questionIndex = Util.randomInteger(0,12);
     switch(questionIndex){
         case 0:
             factor = Util.randomInteger(0,3);
@@ -113,6 +113,46 @@ function generateQuestion(){
             quantity = Util.randomInteger(1,100);
             answerIndex = Util.randomInteger(3,7,[6]);
             questionUnit = questionUnitsArray[questionIndex];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 7:
+            factor = Util.randomInteger(1,3);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[0];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 8:
+            factor = Util.randomInteger(0,3);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 5;
+            questionUnit = questionUnitsArray[3];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 9:
+            factor = Util.randomInteger(0,3);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 6;
+            questionUnit = questionUnitsArray[3];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 10:
+            factor = Util.randomInteger(0,3);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[0];
+            answerUnit = answerUnitsArray[answerIndex];
+            break;
+        case 11:
+            factor = Util.randomInteger(1,3);
+            quantity = Util.randomInteger(1,100);
+            quantity = quantity / Math.pow(10,factor);
+            answerIndex = 3;
+            questionUnit = questionUnitsArray[0];
             answerUnit = answerUnitsArray[answerIndex];
             break;
     }
