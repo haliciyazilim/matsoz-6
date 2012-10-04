@@ -5,10 +5,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
 
     switch(initialUnit){
         case "kilometer":
-            middleValue = quantity*1000;
+            middleValue = quantity*10*10*10;
             break;
         case "hectometer":
-            middleValue = quantity*100;
+            middleValue = quantity*10*10;
             break;
         case "decameter":
             middleValue = quantity*10;
@@ -20,10 +20,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
             middleValue = quantity*0.1;
             break;
         case "centimeter":
-            middleValue = quantity*0.01;
+            middleValue = quantity*0.1*0.1;
             break;
         case "millimeter":
-            middleValue = quantity*0.001;
+            middleValue = quantity*0.1*0.1*0.1;
             break;
         default:
             throw("unsupported initial unit type");
@@ -31,10 +31,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
 
     switch(convertedUnit){
         case "kilometer":
-            result = middleValue*0.001;
+            result = middleValue*0.1*0.1*0.1;
             break;
         case "hectometer":
-            result = middleValue*0.01;
+            result = middleValue*0.1*0.1;
             break;
         case "decameter":
             result = middleValue*0.1;
@@ -46,10 +46,10 @@ function convertUnits(quantity,initialUnit,convertedUnit){
             result  = middleValue*10;
             break;
         case "centimeter":
-            result = middleValue*100;
+            result = middleValue*10*10;
             break;
         case "millimeter":
-            result = middleValue*1000;
+            result = middleValue*10*10*10;
             break;
         default:
             throw("unsupported converted unit type");

@@ -147,10 +147,19 @@ function convertInitials(abbr){
         case "mm":
             long = "millimetersquare";
             break;
+        case "a":
+            long = "ar";
+            break;
+        case "daa":
+            long = "dekar";
+            break;
+        case "ha":
+            long = "hektar";
+            break;
     }
 
     return long;
 }
 
-questionUnitsArray = ["km","hm","dam","m","dm","cm","mm"];
+questionUnitsArray = ["km","hm","dam","m","dm","cm","mm","a","daa","ha"];
 answerUnitsArray = ["km","hm","dam","m","dm","cm","mm"];

@@ -21,9 +21,9 @@ var Animation = {
         var hectometerPoint = new Point(80.5,40.5);
         var kilometerPoint = new Point(60.5,20.5);
 
-        var kmPoint = new Point(460.5,60.5);
+        var kmPoint = new Point(460.5,40.5);
 
-        var lastTextPoint = new Point(600.5,130.5);
+        var lastTextPoint = new Point(600.5,144.5);
 
         var animStart = 0;
         var meterStart = animStart+1000;

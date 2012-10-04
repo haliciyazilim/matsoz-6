@@ -54,17 +54,43 @@ var Interaction = {
         $('#answerUnit').html(Interaction.answerUnit);
 
         Interaction.answer = convertUnits(Interaction.question,convertInitials(Interaction.questionUnit),convertInitials(Interaction.answerUnit));
+
         Interaction.answer = Math.floor(Interaction.answer*100000)/100000;
+
     },
 	preCheck : function(){
 
     },
 	isAnswerCorrect : function(value){
-        var checkedValue = value;
-        if(checkedValue.indexOf(",") != -1){
-            checkedValue = checkedValue.replace(",",".");
+//        var checkedValue = value;
+//        if(checkedValue.indexOf(",") != -1){
+//            checkedValue = checkedValue.replace(",",".");
+//        }
+//        return checkedValue == Interaction.answer;
+        var lastPart = "";
+        var checkedValue = Util.numberTurkishFloating(Interaction.answer,6);
+        var parts = checkedValue.split(",");
+        if(parts.length != 1){
+            lastPart = parts[1];
+            for(var i = parts[1].length-1; i>=0; i--){
+                if(parts[1][i] == 0){
+                    lastPart = lastPart.replace(lastPart[i],"");
+                }
+                else{
+                    break;
+                }
+            }
         }
-        return checkedValue == Interaction.answer;
+        if(lastPart.length > 0){
+            checkedValue = parts[0]+","+lastPart;
+        }
+        else{
+            checkedValue = parts[0];
+        }
+        console.log("checkedValue: "+checkedValue);
+        console.log("value: "+value);
+        Interaction.checkedValue = checkedValue;
+        return checkedValue == value;
     },
 	onCorrectAnswer : function(){
 		
@@ -73,13 +99,8 @@ var Interaction = {
 		
     },
 	onFail : function(){
-        var answer;
-        answer = ""+Interaction.answer;
-        if(answer.indexOf(".") != -1){
-            answer = answer.replace(".",",");
-        }
 		Interaction.setStatus("Yanlış cevap, doğrusu yukarıda gösterilmiştir!",false);
-        Interaction.input.value = answer;
+        Interaction.input.value = Interaction.checkedValue;
         $(Interaction.input).css("color","green");
     }
 }
