@@ -3,10 +3,13 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
-        var resim={zemin:"/assets/animations/oranti/bisiklet.jpg"};
+        var resim={
+            bisiklet:"/assets/animations/oranti/bisiklet.jpg",
+            ok:"/assets/animations/oranti/capraz_ok.png"
+        };
         var tabloIcerik=["Süre (Saat)",1,2,3,4,"Alınan Yol",5,10,15,""];
 
-        $(container).append("<img id='bisiklet' src='"+resim.zemin+"'>");
+        $(container).append("<img id='bisiklet' src='"+resim.bisiklet+"'>");
         $("#bisiklet").css({
             width:"247px",
             height:"170px",
@@ -58,9 +61,9 @@ var Animation = {
         $("#sutun0,#sutun5").css({width:"60px", lineHeight:"18px",fontWeight:"bold"});
 
         $(container).append("<div id='islemKesirUst' class='islemKesirler'>");
-        $("#islemKesirUst").append("<div class='kesirler'><div class='oPay'>1</div><div class='oPayda'>5</div></div>");
+        $("#islemKesirUst").append("<div class='kesirler'><div class='oPay'>1</div><div class='oPayda'>2</div></div>");
         $("#islemKesirUst").append("<div class='esitlik'> = </div>");
-        $("#islemKesirUst").append("<div class='kesirler'><div class='oPay'>5</div><div class='oPayda'>20</div></div>");
+        $("#islemKesirUst").append("<div class='kesirler'><div class='oPay'>5</div><div class='oPayda'>10</div></div>");
 
         $(container).append("<div id='islemKesirAlt' class='islemKesirler'>");
         $("#islemKesirAlt").append("<div class='kesirler'><div class='oPay'>1</div><div class='oPayda'>4</div></div>");
@@ -69,6 +72,39 @@ var Animation = {
 
         $(container).append("<div id='islemEsitlikUst' class='islemEsitlik'><div class='ust' id='ustUst'>1.10 = 5.2</div><div class='alt' id='ustAlt'>10 = 10</div></div>");
         $(container).append("<div id='islemEsitlikAlt' class='islemEsitlik'><div class='ust'>1.? = 5.4</div><div class='alt' id='altAlt'>? = 20</div></div>");
+
+        $(container).append("<img id='okUst' src='"+resim.ok+"'>");
+        $("#okUst").css({
+            width:"30px",
+            height:"30px",
+            position:"absolute",
+            left:"525px",
+            top:"65px",
+            opacity:0
+        });
+
+        $(container).append("<img id='okAlt' src='"+resim.ok+"'>");
+        $("#okAlt").css({
+            width:"30px",
+            height:"30px",
+            position:"absolute",
+            left:"525px",
+            top:"140px",
+            opacity:0
+        });
+
+        $(container).append("<div id='ucan'>");
+        $("#ucan").css({
+            width:"22px",
+            height:"20px",
+            position:"absolute",
+            top:"160px",
+            left:"703px",
+            fontSize:"20px",
+            color:"red",
+            opacity:0
+
+        }).html(20);
 
         $(".islemEsitlik").css({
             width:"200px",
@@ -148,11 +184,14 @@ var Animation = {
         $("#bisiklet").animate({opacity:1},1000);
         $("#tablo").delay(1000).animate({opacity:1},1000);
         $("#islemKesirUst").delay(2000).animate({opacity:1},1000);
-        $("#islemEsitlikUst").delay(3000).animate({opacity:1},1000);
-        $("#islemKesirAlt").delay(4000).animate({opacity:1},1000);
-        $("#islemEsitlikAlt").delay(5000).animate({opacity:1},1000);
+        $("#okUst").delay(3000).animate({opacity:1},1000);
+        $("#islemEsitlikUst").delay(4000).animate({opacity:1},1000);
+        $("#islemKesirAlt").delay(5000).animate({opacity:1},1000);
+        $("#okAlt").delay(6000).animate({opacity:1},1000);
+        $("#islemEsitlikAlt").delay(7000).animate({opacity:1},1000);
+        $("#ucan").delay(8000).animate({opacity:1},1000).animate({top:"118px",left:"430px"},3000);
 
-        Main.animationFinished(6000);
+        Main.animationFinished(12000);
 
     }
 }
