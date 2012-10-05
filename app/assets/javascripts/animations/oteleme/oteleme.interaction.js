@@ -33,11 +33,11 @@ var Interaction = {
             fontWeight:'bold'
         });
 
-        Interaction.setRandomGenerator(1)
+        Interaction.setRandomGenerator(11)
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        Interaction.trial++;
+//        Interaction.trial++;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.shape = InteractiveGrids.CreateShape(randomNumber)
         Interaction.grids = new InteractiveGrids({
@@ -76,6 +76,7 @@ var Interaction = {
         return Interaction.command.equals(Interaction.grids.getPathPosition().subtract(Interaction.initialPathPosition));
     },
 	onCorrectAnswer : function(){
+        Interaction.grids.path.set_style(interactionPathCorrectStyle);
 		
     },
 	onWrongAnswer : function(){
@@ -83,11 +84,29 @@ var Interaction = {
     },
 	onFail : function(){
 		Interaction.pause();
-        Interaction.grids.animateToNewPosition({
-            position:Interaction.command.add(Interaction.initialPathPosition),
-            callback:Interaction.resume,
-            delay:2000
+        Interaction.grids.path.animate({
+            style:interactionPathWrongStyle,
+            duration:1000,
+            callback:function(){
+                Interaction.grids.drawShape(Interaction.shape,false);
+                Interaction.grids.path.set_style({opacity:0})
+                Interaction.grids.path.set_style(interactionPathCorrectStyle);
+                Interaction.grids.path.animate({style:{opacity:1},duration:500});
+                Interaction.grids.animateToNewPosition({
+                    position:Interaction.initialPathPosition.add(Interaction.command.multiply(1,0)),
+                    callback:function(){
+                        Interaction.grids.animateToNewPosition({
+                            position:Interaction.initialPathPosition.add(Interaction.command.multiply(1,1)),
+                            callback:Interaction.resume,
+                            speed:0.8
+                        });
+                    },
+                    speed:0.8,
+                    delay:1000
+                });
+            }
         });
+
         Interaction.setStatus('Yanlış cevap. Şekil olması gerektiği noktaya taşınacaktır.',false)
     },
     generateAndShowCommand:function(){

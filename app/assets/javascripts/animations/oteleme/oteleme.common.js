@@ -1,16 +1,20 @@
 InteractiveGrids.prototype._drawShape = InteractiveGrids.prototype.drawShape
-InteractiveGrids.prototype.drawShape = function(points){
-    this._drawShape(points);
-    this.shadowPath = this.path;
-    this.path = null
-    this.shadowPath.set_style({
-        fillColor:new RgbColor(0.7,0.7,0.7,0.5),
-        strokeColor:new RgbColor(0.3,0.3,0.3,0.5)
-    });
+InteractiveGrids.prototype.drawShape = function(points,drawShadow){
+    if(drawShadow == undefined)
+        drawShadow = true;
+    if(drawShadow == true){
+        this._drawShape(points);
+        this.shadowPath = this.path;
+        this.path = null
+        this.shadowPath.set_style({
+            fillColor:new RgbColor(0.7,0.7,0.7,0.3),
+            strokeColor:new RgbColor(0.3,0.3,0.3,0.3)
+        });
+    }
     this._drawShape(points);
     this.path.class = "draggable";
     this.path.set_style({
-        fillColor:new RgbColor(Math.random(),Math.random(),Math.random(),0.8),
+        fillColor:new RgbColor(Math.random()-0.1,Math.random()-0.1,Math.random()+0.1,0.8),
         strokeColor:new RgbColor(0.4,0.4,0.4,1)
     });
     return this;

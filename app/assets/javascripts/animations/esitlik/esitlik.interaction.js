@@ -59,12 +59,20 @@ var Interaction = {
         Interaction.scales = new Scales({
             position:new Point(250,115)
         });
+        var length = Util.randomInteger(1,5);
+
         Interaction.scales.callOnEqual(Interaction.onEqual);
         Interaction.scales.callBeforeAnimate(function(){
             Interaction.setStatus('');
         })
         Interaction.generateWeights();
-
+        for(var i=0; i<length;i++){
+            var weight = new Weight({
+                type:Util.randomInteger(1,5)
+            });
+            Interaction.scales.addWeightToLeft(weight);
+        }
+        Interaction.scales.calculateWeights();
     },
 		
 	/*
@@ -165,7 +173,7 @@ var Interaction = {
         tool.onMouseUp = function(event){
             if(!Interaction.isPaused()){
                 if(this.drag == true){
-                    if(Interaction.scales.insideLeft(event.point)){
+                    /*if(Interaction.scales.insideLeft(event.point)){
                         if(this.item.weight.owner == null){
                             if(Interaction.scales.addWeightToLeft(this.item.weight,true) === false){
                                 Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);
@@ -181,7 +189,8 @@ var Interaction = {
                             })
                         }
                     }
-                    else if(Interaction.scales.insideRight(event.point)){
+                    else */
+                    if(Interaction.scales.insideRight(event.point)){
                         if(this.item.weight.owner == null){
                             if(Interaction.scales.addWeightToRight(this.item.weight,true) === false){
                                 Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);

@@ -105,6 +105,9 @@ var Interaction = {
 
         Interaction.siradakiSoru=Interaction.soruNo[Interaction.sira];
 
+        //test
+        //Interaction.siradakiSoru=2;
+
         switch (Interaction.siradakiSoru){
             case 0:
                 Interaction.soru=dikdortgenCiz();
@@ -180,19 +183,25 @@ var Interaction = {
 
         console.log(value);
         var degerBoluk=value.split(",");
-        virguldenSonra=0;
+
         if(degerBoluk[1]){
         Interaction.girilenDeger=parseFloat(degerBoluk[0]+"."+degerBoluk[1]);
-        //console.log(girilenDeger+"=="+sonuc);
+        console.log(Interaction.girilenDeger+"=if="+sonuc);
         Interaction.virguldenSonra=degerBoluk[1].length;
-        Interaction.sonuc=sonuc.toFixed(virguldenSonra);
+        Interaction.sonuc=sonuc.toFixed(Interaction.virguldenSonra);
+
         }
         else{
             Interaction.girilenDeger=parseInt(degerBoluk[0],10);
             Interaction.sonuc=sonuc;
+
+            console.log(Interaction.girilenDeger+"=else="+sonuc+", "+Interaction.sonuc+", virgülden sonra: "+Interaction.virguldenSonra);
         }
-        if(Interaction.girilenDeger==Interaction.sonuc)
+        if(Interaction.girilenDeger==Interaction.sonuc){
             return true;
+        }
+        else
+            Interaction.sonuc=sonuc;
 
     },
 	onCorrectAnswer : function(){
@@ -203,12 +212,18 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
-        console.log(Interaction.sonuc);
-        var sonucArray=Interaction.sonuc.toString().split(".");
-        if(sonucArray[1])
-            var basamakDegeri=sonucArray.length;
-        else
+
+        console.log(Interaction.sonuc+", "+Interaction.virguldenSonra);
+
+        var sonucKontrol=Util.isInteger(Interaction.sonuc)
+
+        if(sonucKontrol==false){
+            var sonucArray=Interaction.sonuc.toString().split(".");
+            var basamakDegeri=sonucArray[1].length>3?3:sonucArray[1].length;
+        }
+        else{
             var basamakDegeri=0;
+        }
 
         console.log(Util.format(Interaction.sonuc,{places:basamakDegeri}));
         $("#sonucD").html("&nbsp; = "+Util.format(Interaction.sonuc,{places:basamakDegeri}));
