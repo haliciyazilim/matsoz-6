@@ -72,10 +72,15 @@ var Interaction = {
             right:"150px"
         });
 
+
+        siraArray=Util.getShuffledArray(3);
+        sira=0;
+
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        Interaction.soru=sayiOlustur();
+        var simdikiSira=siraArray[sira];
+        Interaction.soru=sayiOlustur(simdikiSira);
         var istenenKisim=Interaction.soru[1];
         Interaction.virguldenSonraBasamak=Interaction.soru[2];
         Interaction.gelenSayi=Interaction.soru[0]
@@ -83,6 +88,10 @@ var Interaction = {
         $("#soru").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak})+" = ");
 
         $("#sayi, #sonuc, #olcum").animate({opacity:0},1000);
+
+        sira++;
+        if(sira==3)
+            sira=0;
 
     },
 		
