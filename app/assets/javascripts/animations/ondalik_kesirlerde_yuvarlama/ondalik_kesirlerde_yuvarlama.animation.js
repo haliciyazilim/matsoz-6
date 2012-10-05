@@ -177,6 +177,6 @@ var Animation = {
             }
         });
 
-        Main.animationFinished(12000);
+        Main.animationFinished(17000);
     }
 }
