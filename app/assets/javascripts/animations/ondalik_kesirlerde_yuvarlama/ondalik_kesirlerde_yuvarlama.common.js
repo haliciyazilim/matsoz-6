@@ -1,4 +1,4 @@
-sayiOlustur=function(){
+sayiOlustur=function(sira){
     var sayi=0;
     var kontrol=0;
 
@@ -18,26 +18,23 @@ sayiOlustur=function(){
     var metin="";
     var istenen=0;
 
-    var soruSecimi=Math.floor(Math.random()*10);
+    var soruSecimi=sira;
     //soruSecimi=6;
-    if(soruSecimi<4){
-        sayi=sayi.toFixed(2);
-        virguldenSonra=2
-        metin="onda birler";
-        istenen=2;
-    }
-    else{
-        var soruSecimi=Math.floor(Math.random()*10);
-        //soruSecimi=6;
-        if(soruSecimi<4){
+
+    switch (soruSecimi){
+        case 0:
+            sayi=sayi.toFixed(2);
+            virguldenSonra=2
+            metin="onda birler";
+            istenen=2;
+            break;
+        case 1:
             sayi=sayi.toFixed(3);
             virguldenSonra=3
             metin="onda birler";
             istenen=3;
-
-        }
-        else{
-            //sayi=3.894;
+            break;
+        case 2:
             sayi=sayi.toFixed(3);
             virguldenSonra=3
             metin="yüzde birler";
@@ -50,11 +47,9 @@ sayiOlustur=function(){
                 sayi=sayi.toFixed(3);
                 console.log("girdim: "+sayi)
             }
-
-
-
-        }
+            break;
     }
+
 
     var soru=[sayi,metin,virguldenSonra,istenen];
 
