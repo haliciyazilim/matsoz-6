@@ -190,7 +190,7 @@ var RationalNumber = Class.extend({
 
         var line = fontSize+4;
         var height = (2*line)+1;
-        var width = height+16;
+        var width = height+6;
         var width2 = Math.round(width * 0.56);
         var width3 = width - width2;
         var lineWidth = width2;
