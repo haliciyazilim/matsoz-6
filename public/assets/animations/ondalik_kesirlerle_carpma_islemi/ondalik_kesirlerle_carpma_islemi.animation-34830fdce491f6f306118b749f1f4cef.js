@@ -1,0 +1,1 @@
+var Animation={images:[],init:function(e){Animation.container=e,$(e).append("<div id='ornek'>"),$("#ornek").css("width","120px").css("height","130px").css("margin","auto").css("position","absolute").css("left","290px").css("top","10px");var t=new LongMultiplication(15,7,"ornek",30);t.doldur(),t.basla(1e3,1e3),Main.animationFinished(47e3)}};
