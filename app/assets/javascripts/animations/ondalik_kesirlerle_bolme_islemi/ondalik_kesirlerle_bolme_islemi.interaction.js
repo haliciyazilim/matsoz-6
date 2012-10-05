@@ -26,23 +26,17 @@ var Interaction = {
             opacity:1
         });
 
-        $(container).append("<div id='cevap'><div id='sayi'>33,67</div><div id='olcum'>7>5</div><div id='sonuc'></div></div>");
+        $(container).append("<div id='cevap'>");
         $("#cevap").css({
             position:"absolute",
-            width:"600px",
-            height:"50px",
-            left:"0",
-            right:"0",
-            margin:"auto",
-            top:"180px",
+            width:"100%",
+            top:"170px",
+            left:"20px",
+
+
             textAlign:"center",
-            fontSize:"20px",
-            opacity:1
-
+            fontSize:"20px"
         });
-        $("#cevap div").css({float:"left",width:"200px"});
-
-        $("#sayi, #sonuc, #olcum").css("opacity","0");
 
 
 
@@ -76,6 +70,7 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        $("#cevap").html("");
         var kontrol=0;
 
         while(kontrol==0){
@@ -120,6 +115,11 @@ var Interaction = {
 		
     },
 	onFail : function(){
+        Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
+
+        bolmeIslemi(soru[0],soru[1],"cevap",20);
+
+
 		
     }
 }

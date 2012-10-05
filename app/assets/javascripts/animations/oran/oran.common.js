@@ -145,6 +145,10 @@ function paralelKenarCiz(){
     while(taban%2!=0)
         taban=Math.floor(Math.random()*10+5);
 
+    // test
+    //yukseklik=14;
+    //taban=6;
+
     yukseklik=yukseklik*10;
     taban=taban*10;
 

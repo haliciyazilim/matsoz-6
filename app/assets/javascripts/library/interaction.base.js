@@ -71,7 +71,7 @@ function InteractionBase(){
 				class:'status'
 			})
 			.css({
-				position:'absolute',
+				position:'absolute'
 			});
 		$(Interaction.status).css(css);
 	};
@@ -198,10 +198,10 @@ function InteractionBase(){
 		$(Interaction.container).append(Interaction.button);
 		$(Interaction.button)
 			.attr({
-				'class':'control_button',					
+				'class':'control_button'
 			})
 			.css({
-				position:'absolute',
+				position:'absolute'
 				
 			});
 		$(Interaction.button).css(css);

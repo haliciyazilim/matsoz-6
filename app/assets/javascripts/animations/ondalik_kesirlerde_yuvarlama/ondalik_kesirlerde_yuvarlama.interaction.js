@@ -72,10 +72,15 @@ var Interaction = {
             right:"150px"
         });
 
+
+        siraArray=Util.getShuffledArray(3);
+        sira=0;
+
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        Interaction.soru=sayiOlustur();
+        var simdikiSira=siraArray[sira];
+        Interaction.soru=sayiOlustur(simdikiSira);
         var istenenKisim=Interaction.soru[1];
         Interaction.virguldenSonraBasamak=Interaction.soru[2];
         Interaction.gelenSayi=Interaction.soru[0]
@@ -83,6 +88,10 @@ var Interaction = {
         $("#soru").html(Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak})+" = ");
 
         $("#sayi, #sonuc, #olcum").animate({opacity:0},1000);
+
+        sira++;
+        if(sira==3)
+            sira=0;
 
     },
 		
@@ -131,13 +140,15 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
+        Interaction.pause();
+
 
         var gosterilenSayi=Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak});
         var olusanSayi=Util.format(Interaction.dogruCevap,{places:Interaction.virguldenSonraBasamak-1});
 
         if(istenen==3 && Interaction.virguldenSonraBasamak==3){
             olusanSayi=Util.format(Interaction.dogruCevap,{places:1});
-            alert();
+
         }
 
 
@@ -154,7 +165,7 @@ var Interaction = {
         $("#sonuc").html(gosterilenSayi+" <img src='/assets/animations/ondalik_kesirlerde_yuvarlama/sag_ok.png'  /> "+olusanSayi);
 
         $("#cevap img").css({display:"inline-block"});
-        $("#sayi, #sonuc, #olcum").animate({opacity:1},1000);
+        $("#sayi, #sonuc, #olcum").animate({opacity:1},1000,function(){Interaction.resume();});
 
 		
     }
