@@ -43,9 +43,7 @@ var Animation = {
         var hectometerSquareStart = decameterSquareStart+1000;
         var kilometerSquareStart = hectometerSquareStart+1000;
 
-        var tickerStart = kilometerSquareStart+1500;
-
-        var kmTextStart = tickerStart+1500;
+        var kmTextStart = kilometerSquareStart+1500;
         var hmTextStart = kmTextStart+500;
         var damTextStart = hmTextStart+500;
         var mTextStart = damTextStart+500;
@@ -68,6 +66,8 @@ var Animation = {
         var bottom1Start = bottom2Start+750;
 
         var lastTextStart = bottom1Start+1500;
+
+        var tickerStart = lastTextStart+1500;
 
         var mySquare = new Path.Rectangle(mySquarePoint,mySize2);
         mySquare.strokeColor = meterSquareColor;
@@ -576,8 +576,6 @@ var Animation = {
             animationType:'easeInOutQuad'
         });
 
-        $(ticker).delay(tickerStart).animate({opacity:1},1000,'easeInOutQuad');
-
         kmText.animate({
             style:{
                 opacity:1
@@ -872,10 +870,9 @@ var Animation = {
             },
             duration:1000,
             delay:lastTextStart,
-            animationType:'easeInOutQuad',
-            callback:function(){
-                Main.animationFinished(1000);
-            }
+            animationType:'easeInOutQuad'
         });
+
+        $(ticker).delay(tickerStart).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000)});
     }
 }
