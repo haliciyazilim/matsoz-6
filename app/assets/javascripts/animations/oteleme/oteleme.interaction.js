@@ -88,7 +88,7 @@ var Interaction = {
             style:interactionPathWrongStyle,
             duration:1000,
             callback:function(){
-                Interaction.grids.drawShape(Interaction.shape);
+                Interaction.grids.drawShape(Interaction.shape,false);
                 Interaction.grids.path.set_style({opacity:0})
                 Interaction.grids.path.set_style(interactionPathCorrectStyle);
                 Interaction.grids.path.animate({style:{opacity:1},duration:500});
