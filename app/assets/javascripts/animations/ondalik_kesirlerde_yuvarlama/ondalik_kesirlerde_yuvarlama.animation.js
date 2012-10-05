@@ -161,12 +161,12 @@ var Animation = {
                 opacity:1
             },
             delay: 4000,
-            duration: 3000*3.5,
+            duration: 3000*1.5,
             update: function(){
                 Interaction.solaOk.remove();
                 Interaction.solaOk = new Path.OneSidedArrow(new Point(pieceLength*12-10, sayiDogrusuTop+20), new Point(this.okPosition, sayiDogrusuTop+20), 10, 30);
                 Interaction.solaOk.strokeColor="blue";
-                Interaction.solaOk.opacity=this.opacity*5;
+                Interaction.solaOk.opacity=this.opacity*10;
 
 
 
@@ -177,6 +177,6 @@ var Animation = {
             }
         });
 
-        Main.animationFinished(17000);
+        Main.animationFinished(12000);
     }
 }

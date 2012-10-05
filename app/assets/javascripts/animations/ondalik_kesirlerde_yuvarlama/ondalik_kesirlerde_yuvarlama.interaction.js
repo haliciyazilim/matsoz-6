@@ -140,13 +140,15 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
+        Interaction.pause();
+
 
         var gosterilenSayi=Util.format(Interaction.gelenSayi,{places:Interaction.virguldenSonraBasamak});
         var olusanSayi=Util.format(Interaction.dogruCevap,{places:Interaction.virguldenSonraBasamak-1});
 
         if(istenen==3 && Interaction.virguldenSonraBasamak==3){
             olusanSayi=Util.format(Interaction.dogruCevap,{places:1});
-            alert();
+
         }
 
 
@@ -163,7 +165,7 @@ var Interaction = {
         $("#sonuc").html(gosterilenSayi+" <img src='/assets/animations/ondalik_kesirlerde_yuvarlama/sag_ok.png'  /> "+olusanSayi);
 
         $("#cevap img").css({display:"inline-block"});
-        $("#sayi, #sonuc, #olcum").animate({opacity:1},1000);
+        $("#sayi, #sonuc, #olcum").animate({opacity:1},1000,function(){Interaction.resume();});
 
 		
     }
