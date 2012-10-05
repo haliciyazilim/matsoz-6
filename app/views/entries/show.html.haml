@@ -19,42 +19,39 @@
 #container
   #navigation
     .navlinktasiyici
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_1", :data=>{:letter => 'a'}}Aa
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_1", :data=>{:letter => 'b'}}Bb
+      - letters = []
+      - @word_list.keys.each do |key|
+        - if @word_list[key].length != 0
+          - letters << key
 
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'c'}}Cc
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'ç'}}Çç
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'd'}}Dd
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'e'}}Ee
-      
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'f'}}Ff
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'g'}}Gg
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'h'}}Hh
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'ı'}}Iı
-      
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'i'}}İi
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'j'}}Jj
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'k'}}Kk
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'l'}}Ll
-      
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'm'}}Mm
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'n'}}Nn
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'o'}}Oo
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'ö'}}Öö
-      
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 'p'}}Pp
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'r'}}Rr
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 's'}}Ss
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'ş'}}Şş
-      
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_2", :data=>{:letter => 't'}}Tt
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_2", :data=>{:letter => 'u'}}Uu
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_3", :data=>{:letter => 'ü'}}Üü
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_3", :data=>{:letter => 'v'}}Vv
-      
-      %a{:href=>'#', :class=>"navlink navposition harf_sol_4", :data=>{:letter => 'y'}}Yy
-      %a{:href=>'#', :class=>"navlink navposition harf_sag_4", :data=>{:letter => 'z'}}Zz
-      
+      - index = 0
+      - letters.each do |letter|
+        - if index == 0
+          - piece = 'harf_sol_1'
+        - elsif index == 1
+          - piece = 'harf_sag_1'
+        - elsif index == letters.length - 1
+          - if index % 2 == 0
+            - piece = 'harf_sol_4'
+          - else
+            - piece = 'harf_sag_4'
+        - elsif index == letters.length - 2
+          - if index % 2 == 0
+            - piece = 'harf_sol_4'
+          - else
+            - piece = 'harf_sag_2'
+        - elsif index % 4 == 2
+          - piece = 'harf_sol_2'
+        - elsif index % 4 == 3
+          - piece = 'harf_sag_2'
+        - elsif index % 4 == 0
+          - piece = 'harf_sol_2'
+        - elsif index % 4 == 1
+          - piece = 'harf_sag_2'
+
+        = link_to letter.to_upcase_turkish + letter, '#', {:class => 'navlink navposition ' + piece, :data=>{:letter => letter}}
+        - index = index + 1
+
       
     #liste.sozcuktasiyici
       - @all_entries.each do |entry|
