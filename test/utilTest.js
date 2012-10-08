@@ -8,6 +8,13 @@ utilTest.prototype.testIsInteger = function(){
     assertEquals(false, Util.isInteger("0.5"));
     assertEquals(false, Util.isInteger(0.4));
     assertEquals(true, Util.isInteger(0.0));
+    assertEquals(false, Util.isInteger("45."));
+    assertEquals(false, Util.isInteger("45.a"));
+    assertEquals(true, Util.isInteger("45.0"));
+    assertEquals(true, Util.isInteger("45.000000000000000"));
+    assertEquals(false, Util.isInteger("45.0000000000000s"));
+    assertEquals(false, Util.isInteger("45.00000000000001"));
+    assertEquals(true, Util.isInteger("-777.00"));
 };
 
 utilTest.prototype.testIsNumber = function(){
@@ -136,3 +143,13 @@ utilTest.prototype.testNumberTurkishFloating = function(){
     assertEquals("3,33333",Util.numberTurkishFloating(3.333333333,5));
     assertEquals("6,667",Util.numberTurkishFloating(6.66666,3));
 }
+
+utilTest.prototype.testRound = function(){
+    assertEquals(5,Util.round(3,5));
+    assertEquals(10,Util.round(10,2));
+    assertEquals(3,Util.round(1.5,3));
+    assertEquals(-2,Util.round(-1,2));
+    assertEquals(0,Util.round(-0.5,2));
+}
+
+

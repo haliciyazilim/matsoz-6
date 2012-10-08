@@ -2,7 +2,7 @@
 var Util = {
 
     isInteger: function (value) {
-        var intRegex = /^\s*-?\s*\d+\s*$/;
+        var intRegex = /^\s*-?\s*\d+\s*(.0+)?$/;
         return intRegex.test(value);
         //	return value == Math.floor(value)
     },
@@ -485,10 +485,12 @@ var Util = {
             throw "interval must be a positive number";
         if(interval == undefined)
             interval = 1;
+        var sign = number >= 0 ? 1 : -1;
+        number = Math.abs(number);
         if(number % interval >= interval/2)
-            return Math.ceil(number/interval)*interval;
+            return sign * Math.ceil(number/interval)*interval;
         else
-            return Math.floor(number/interval)*interval;
+            return sign * Math.floor(number/interval)*interval;
     },
 
     numberToString:function(number){
