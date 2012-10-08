@@ -3,10 +3,21 @@ function __Styles(){
 
     questionDivStyle = {
         position:'absolute',
-        top:'50px',
+        top:'40px',
         left:'120px',
         width:'300px',
         height:'60px',
-        fontSize:'24px',
-    }
+        fontSize:'24px'
+    };
+
+    answerDivStyle = {
+        position:'absolute',
+        top:'130px',
+        left:'105px',
+        width:'400px',
+        height:'80px',
+        fontSize:'18px',
+    //    border:'1px solid',
+        color:'#069'
+    };
 }
