@@ -105,7 +105,7 @@ Scales2.prototype.calculateWeights = function(){
 //    console.log("calculateWeights Left: ",totalLeftWeights," Right: ",totalRightWeights);
 
     var duration = 7000 / (Math.abs(totalLeftWeights-totalRightWeights)+1);
-    totalLeftWeights+=0.3;totalRightWeights+=0.3; // escape from zero values
+    totalLeftWeights+=2;totalRightWeights+=2; // escape from zero values
     var angle = 30;
     this.animationType = "easeOutBounce";
     if(totalLeftWeights < totalRightWeights){
@@ -123,11 +123,15 @@ Scales2.prototype.calculateWeights = function(){
 
     }
 //    console.log("Angle: ",angle," Duration: ",duration);
-    if(this.angle != angle)
+    if(this.angle != angle){
+//        Interaction.pause();
         this.animateToAngle(angle,duration);
+
+    }
 
 }
 Scales2.prototype.animateToAngle = function(angle,duration){
+//    Interaction.pause();
     if(duration == undefined)
         duration = 1000;
     this._angle =this.angle;
@@ -141,9 +145,11 @@ Scales2.prototype.animateToAngle = function(angle,duration){
             this.setAngle(this._angle);
         },
         callback:function(){
-            Interaction.resume();
+
             if(this.angle == 0 && this.onEqual)
                 this.onEqual();
+            else
+                Interaction.resume();
         }
     })
 }

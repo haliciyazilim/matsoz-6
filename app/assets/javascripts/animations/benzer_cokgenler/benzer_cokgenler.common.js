@@ -1,23 +1,36 @@
 function InteractiveGrids(opt){
     this.id = InteractiveGrids.GetId();
+
+    if (opt.rows) {
+        this.rows = opt.rows;
+    } else {
+        this.rows = 8;
+    }
+
+    if (opt.cols) {
+        this.cols = opt.cols;
+    } else {
+        this.cols = 8;
+    }
+
     this.size = opt.size;
     this.position = opt.position;
     this.style = opt.style;
     this.points = [];
     this.vertexes = [];
     this.circles = [];
-    for(var i=0; i<=8; i++){
+    for(var i=0; i<=this.rows; i++){
         new Path.Line(
             this.position.add(0,this.size*i),
-            this.position.add(this.size*8,this.size*i)
+            this.position.add(this.size*this.rows,this.size*i)
         ).set_style(this.style);
         new Path.Line(
             this.position.add(this.size*i,0),
-            this.position.add(this.size*i,this.size*8)
+            this.position.add(this.size*i,this.size*this.cols)
         ).set_style(this.style);
     }
-    for(var i=0;i<=8;i++)
-        for(var j=0;j<=8;j++){
+    for(var i=0;i<=this.rows;i++)
+        for(var j=0;j<=this.cols;j++){
             var point = this.position.add(this.size*i,this.size*j);
             var circle = new Path.Circle(point,this.size*0.3);
             circle.set_style({

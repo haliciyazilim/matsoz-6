@@ -215,7 +215,7 @@ var Animation = {
                     $("#aciklama").html("Can'ın boyunun Mehmet'in boyuna oranı").delay(3000).animate({opacity:1},1000);
                     $("#kesir").delay(4000).animate({opacity:1},1000);
                     $("#sonuc").delay(5000).animate({opacity:1},1000);
-                    $("#sonucS").delay(5500).animate({opacity:1},1000);
+                    $("#sonucS").delay(5500).animate({opacity:1},1000,function(){Main.animationFinished();});
 
                 }
 
@@ -229,7 +229,7 @@ var Animation = {
 
 
 
-        Main.animationFinished(15500);
+
 
 
 
