@@ -70,7 +70,7 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        $("#cevap").html("");
+        $("#cevap").html("").css("color","black");
         var kontrol=0;
 
         while(kontrol==0){
@@ -112,6 +112,7 @@ var Interaction = {
     },
 	onCorrectAnswer : function(){
         bolmeIslemi(soru[0],soru[1],"cevap",20);
+        $("#cevap").css("color","green");
 
         Interaction.pause();
         setTimeout(function(){Interaction.resume()},6000);
@@ -122,6 +123,7 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
+        $("#cevap").css("color","red");
 
         bolmeIslemi(soru[0],soru[1],"cevap",20);
 
