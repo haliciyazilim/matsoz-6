@@ -11,7 +11,7 @@ var Interaction = {
 
 
 
-        Main.setObjective('Yanda verilen şekle göre istenen oranını bulunuz ve kontrol ediniz.');
+        Main.setObjective('Yanda verilen şekle göre istenen oranı bulunuz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -108,23 +108,9 @@ var Interaction = {
         //test
         //Interaction.siradakiSoru=2;
 
-        switch (Interaction.siradakiSoru){
-            case 0:
-                Interaction.soru=dikdortgenCiz();
-                break;
+        yeniSoru(Interaction.siradakiSoru);
 
-            case 1:
-                Interaction.soru=ucgenCiz();
-                break;
 
-            case 2:
-                Interaction.soru=paralelKenarCiz();
-                break;
-
-            case 3:
-                Interaction.soru=yamukCiz();
-                break;
-        }
 
         Interaction.sira++;
 
@@ -156,27 +142,10 @@ var Interaction = {
         var deger2=Interaction.soru[2];
         var sonuc=0;
 
-        if(Interaction.siradakiSoru==0){
-            if(deger1>deger2){
+         sonuc=deger1/deger2;
+         $("#payD").html(deger1+" cm");
+         $("#paydaD").html(deger2+" cm");
 
-                sonuc=deger1/deger2;
-                $("#payD").html(deger1+" cm");
-                $("#paydaD").html(deger2+" cm");
-
-
-            }
-            else{
-                sonuc=deger2/deger1;
-                $("#payD").html(deger2+" cm");
-                $("#paydaD").html(deger1+" cm");
-
-            }
-        }
-        else{
-            sonuc=deger1/deger2;
-            $("#payD").html(deger1+" cm");
-            $("#paydaD").html(deger2+" cm");
-        }
 
 
 

@@ -49,13 +49,13 @@ var Interaction = {
             width:'420px',
             textAlign:'center',
             left:'35px',
-            lineHeight:'30px'
+            lineHeight:'27px'
         })
         Interaction.createTool();
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        Main.interactionProject.activeLayer.removeChildren();
         Interaction.scales = new Scales({
             position:new Point(250,115)
         });
@@ -72,7 +72,11 @@ var Interaction = {
             });
             Interaction.scales.addWeightToLeft(weight);
         }
-        Interaction.scales.calculateWeights();
+        AnimationManager.delay(
+            function(){
+                Interaction.scales.calculateWeights()
+            },1000
+        );
     },
 		
 	/*
@@ -95,10 +99,11 @@ var Interaction = {
 		
     },
     onEqual : function(){
+        Interaction.pause();
         if(Interaction.scales.leftWeights.length == 0)
             return;
 
-        var equationHTML = "";
+        var equationHTML = '<span style="color:green">Tebrikler!</span><br/>';
         var totalLeftWeight = 0;
         var totalRightWeight = 0;
         for(var i=0;i<Interaction.scales.leftWeights.length;i++){
@@ -123,6 +128,22 @@ var Interaction = {
                 .delay(1000*i)
                 .animate({opacity:1},1000)
         }
+
+        AnimationManager.delay(
+            function(){
+                Interaction.resume();
+                Main.interactionProject.activeLayer.animate({
+                    style:{opacity:0},
+                    duration:500,
+                    callback:function(){
+                        Main.interactionProject.activeLayer.removeChildren();
+                        Interaction.setStatus('');
+                        Interaction.prepareNextQuestion();
+                        Main.interactionProject.activeLayer.set_style({opacity:1});
+                    }
+                })
+            },(totalLength+5)*1000
+        );
 
     },
     generateWeights: function(){
@@ -165,7 +186,6 @@ var Interaction = {
                 return;
             if(this.drag == true){
                 console.log(this.item);
-
                 this.totalDelta = this.totalDelta.add(event.delta);
                 this.item.position = this.firstPosition.add(this.totalDelta);
             }
@@ -209,7 +229,6 @@ var Interaction = {
                         Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);
                         Interaction.scales.removeWeight(this.item.weight,true);
                         this.item.remove();
-
                     }
                     this.item.opacity = 1;
                 }

@@ -37,7 +37,12 @@ function dikdortgenCiz(){
 
     var soruMetni="Dikdörtgenin uzun kenarının kısa kenarına oranı";
 
-    var bilgiler=[soruMetni,a,b];
+    if(a>b)
+        var bilgiler=[soruMetni,a,b];
+    else
+        var bilgiler=[soruMetni,b,a];
+
+
 
     //bilgiler.sort();
     console.log(bilgiler);
@@ -310,5 +315,64 @@ function yamukCiz(){
     yardimCizgiD= new Path.Line(new Point(200,00),new Point(200,200))
     yardimCizgiD.strokeWidth=1;
     yardimCizgiD.strokeColor="red"*/
+
+}
+
+function yeniSoru(siradakiSoru){
+    var soru;
+
+    switch (siradakiSoru){
+        case 0:
+            soru=dikdortgenCiz();
+            console.log("Dikdortgen");
+            console.log(soru);
+            break;
+
+        case 1:
+            soru=ucgenCiz();
+            console.log("Üçgen");
+            console.log(soru);
+            break;
+
+        case 2:
+            soru=paralelKenarCiz();
+            console.log("Paralel Kenar");
+            console.log(soru);
+            break;
+
+        case 3:
+            soru=yamukCiz();
+            console.log("Yamuk");
+            console.log(soru);
+            break;
+    }
+    kontrol(soru);
+
+}
+
+function kontrol(soru){
+    console.log("Kontrol")
+    console.log(soru)
+
+    var sonuc=soru[1]/soru[2];
+    var sonucArray=sonuc.toString().split(".");
+    console.log(soru[1]+", "+soru[2]);
+    if(sonucArray[1]){
+        if(sonucArray[1].length>2){
+            Main.interactionProject.activeLayer.removeChildren();
+            yeniSoru(Interaction.siradakiSoru);
+            console.log("tekrar");
+        }
+        else{
+            Interaction.soru=soru;
+            console.log("Kontrol SOru")
+            console.log(Interaction.soru)
+        }
+    }
+    else{
+        Interaction.soru=soru;
+        console.log("Kontrol SOru")
+        console.log(Interaction.soru)
+    }
 
 }
