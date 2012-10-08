@@ -1,11 +1,15 @@
 soruGetir=function(){
-    var bolum=Math.random()*10;
-    var bolen=Math.random()*10;
+    var bolum=Math.random()*100;
+    var bolen=Math.random()*100;
 
     bolum=bolum.toFixed(2);
     bolen=bolen.toFixed(2);
 
     var gidecekler=[bolum,bolen];
+
+    console.log("Bolüm: "+bolum);
+    console.log("Bolen: "+bolen);
+
 
     return gidecekler;
 }
@@ -16,7 +20,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
     this.div=div;
     this.fontSize=fontSize || 16;
 
-    $("#"+this.div).css("width",29*this.fontSize+"px")
+    $("#"+this.div).css("width",35*this.fontSize+"px")
 
     $("#"+this.div).append("<div id='"+this.div+"Gosterim1' class='bolumler'></div> <div id='"+this.div+"e1' class='isaretler esittir'> = </div>" +
                             "<div id='"+this.div+"Gosterim2' class='bolumler'></div><div id='"+this.div+"e2' class='isaretler esittir'> = </div>" +
@@ -25,9 +29,9 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
                             "<div id='"+this.div+"Gosterim5' class='bolumler'></div>");
 
     //1. kısım
-    $("#"+this.div+"Gosterim1").append("<div id='"+this.div+"gosterim1Bolum' class='sayilar'></div>" +
+    $("#"+this.div+"Gosterim1").append("<div id='"+this.div+"gosterim1Bolum' class='sayilar bolum'></div>" +
                                        "<div id='"+this.div+"gosterim1Isaret' class='isaretler'> : </div>" +
-                                       "<div id='"+this.div+"gosterim1Bolen' class='sayilar'></div>");
+                                       "<div id='"+this.div+"gosterim1Bolen' class='sayilar bolen'></div>");
 
     $("#"+this.div+"gosterim1Bolum").append("<div id='"+this.div+"gosterim1BolumPay' class='pay'></div><div id='"+this.div+"gosterim1BolumPayda' class='payda'></div>");
     $("#"+this.div+"gosterim1Bolen").append("<div id='"+this.div+"gosterim1BolenPay' class='pay'></div><div id='"+this.div+"gosterim1BolenPayda' class='payda'></div>");
@@ -67,7 +71,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
     //stiller
     $(".bolumler").css({
 
-        width:5*this.fontSize+"px",
+        width:6*this.fontSize+"px",
         height:2.5*this.fontSize+"px",
         textAlign:"center",
         fontSize:this.fontSize+"px",
@@ -75,9 +79,10 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
     });
 
     $(".sayilar").css({
-        width:2*this.fontSize+"px",
+        width:2.5*this.fontSize+"px",
         height:2.5*this.fontSize+"px",
-        float:"left"
+        float:"left",
+
     });
 
     $(".isaretler").css({
@@ -86,10 +91,25 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
         float:"left"
     });
 
+    $(".bolum").css({
+        textAlign:"right"
+    });
+
+    $(".bolen").css({
+        textAlign:"left"
+    });
+
+    
+
     // birinci kısmı dolduruyoruz.
 
     var bolum1Pay=this.bolum;
     var bolen1Pay=this.bolen;
+
+    console.log("Sayılar: "+bolum1Pay+", "+bolen1Pay);
+    console.log("isInteger: "+Util.isInteger(bolum1Pay)+", "+Util.isInteger(bolen1Pay));
+
+
 
     var bolum1PayVirguldenSonra;
     var bolum1PayGosterim;
@@ -99,7 +119,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
         bolum1PayGosterim=Util.format(bolum1Pay,{places:bolum1PayVirguldenSonra});
     }
     else
-    bolum1PayGosterim=bolum1Pay;
+        bolum1PayGosterim=bolum1Pay;
 
     var bolen1PayVirguldenSonra;
     var bolen1PayGosterim;
@@ -129,7 +149,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
         var payda=Math.pow(10,bolumOndalikKisim.length);
         var pay=this.bolum * payda;
 
-        $("#"+this.div+"gosterim2BolumPay").html(pay);
+        $("#"+this.div+"gosterim2BolumPay").html(parseInt(pay,10));
         $("#"+this.div+"gosterim2BolumPayda").css({borderTop:"solid black 2px"}).html(payda);
     }
     else{
@@ -140,7 +160,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
        var payda=Math.pow(10,bolenOndalikKisim.length);
        var pay=this.bolen * payda;
 
-       $("#"+this.div+"gosterim2BolenPay").html(pay);
+       $("#"+this.div+"gosterim2BolenPay").html(parseInt(pay,10));
        $("#"+this.div+"gosterim2BolenPayda").css({borderTop:"solid black 2px"}).html(payda);
    }
     else{
@@ -219,12 +239,27 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
     // aynı olanlar siliniyor
     console.log(bolen3Pay+" . "+bolen2Pay+" . "+bolum3Pay+" . "+bolum2Pay);
     if(bolen3Pay==bolen2Pay &&bolum3Pay==bolum2Pay){
-        $("#"+this.div+"Gosterim3, #"+this.div+"e3").html("").css("width","0px");
+        //$("#"+this.div+"Gosterim3, #"+this.div+"e3").html("").css("width","0px");
+        $("#"+this.div+"Gosterim3, #"+this.div+"e3").remove();
         console.log("EVET");
     }
 
 
     $("#"+this.div+"gosterim5Sonuc").html(sonuc);
+
+    for(var i=1;i<5;i++){
+        if($("#"+this.div+"gosterim"+i+"BolumPayda").html()!=""){
+            $("#"+this.div+"gosterim"+i+"Bolum").css({
+                marginTop:"-10px"
+            });
+        }
+
+        if($("#"+this.div+"gosterim"+i+"BolenPayda").html()!=""){
+            $("#"+this.div+"gosterim"+i+"Bolen").css({
+                marginTop:"-10px"
+            });
+        }
+    }
 
     // Gösteri
     $("#"+this.div+"Gosterim1, "+
