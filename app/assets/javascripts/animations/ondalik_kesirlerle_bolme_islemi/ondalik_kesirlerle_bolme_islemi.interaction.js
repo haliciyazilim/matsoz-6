@@ -16,9 +16,9 @@ var Interaction = {
         $(container).append("<div id='soru'>");
         $("#soru").css({
             position:"absolute",
-            width:"120px",
+            width:"140px",
             height:"50px",
-            left:"130px",
+            left:"110px",
             top:"100px",
             fontSize:"20px",
             lineHeight:"55px",
@@ -30,7 +30,7 @@ var Interaction = {
         $("#cevap").css({
             position:"absolute",
             width:"100%",
-            top:"170px",
+            top:"180px",
             left:"20px",
 
 
@@ -79,7 +79,8 @@ var Interaction = {
             var sonuc=soru[0]/soru[1];
             var sonucArray=sonuc.toString().split(".");
 
-            if(sonucArray[1].length<3)
+
+            if(sonucArray[1] && sonucArray[1].length<3)
                 kontrol=1;
 
             console.log(soru[0]+", "+soru[1]+", "+sonuc);
@@ -109,6 +110,10 @@ var Interaction = {
 
     },
 	onCorrectAnswer : function(){
+        bolmeIslemi(soru[0],soru[1],"cevap",20);
+
+        Interaction.pause();
+        setTimeout(function(){Interaction.resume()},6000);
 		
     },
 	onWrongAnswer : function(){
@@ -118,6 +123,9 @@ var Interaction = {
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
 
         bolmeIslemi(soru[0],soru[1],"cevap",20);
+
+        Interaction.pause();
+        setTimeout(function(){Interaction.resume()},6000);
 
 
 		
