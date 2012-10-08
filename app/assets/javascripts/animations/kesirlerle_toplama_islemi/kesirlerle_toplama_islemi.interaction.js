@@ -28,7 +28,7 @@ var Interaction = {
 
         Interaction.appendInput({
             position:'absolute',
-            top:'-8px',
+            top:'-9px',
             left:'202px',
             height:'32px',
             width:'42px',
@@ -45,11 +45,11 @@ var Interaction = {
         });
 
         Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle,
-            html:'<div id="firstFracDiv" style="position:absolute;top:0px;left:0px;width:50px;height:60px;"></div>' +
-                '<span id="intPlus" style="position:absolute;top:20px;left:75px;">+</span>' +
-                '</div><div id="secondFracDiv" style="position:absolute;top:0px;left:96px;width:50px;height:60px;"></div>' +
-                '<span id="intEq" style="position:absolute;top:20px;left:170px;">=</span>' +
-                '<div id="answerLine" style="position:absolute;top:30px;left:200px;width:48px;height:1px;border-top:1px solid;padding:0"></div>'
+            html:'<div id="firstFracDiv" style="position:absolute;top:0px;left:0px;width:65px;height:60px;"></div>' +
+                '<span id="intPlus" style="position:absolute;top:18px;left:75px;">+</span>' +
+                '</div><div id="secondFracDiv" style="position:absolute;top:0px;left:96px;width:65px;height:60px;"></div>' +
+                '<span id="intEq" style="position:absolute;top:18px;left:170px;">=</span>' +
+                '<div id="answerLine" style="position:absolute;top:29px;left:200px;width:48px;height:1px;border-top:2px solid;padding:0"></div>'
         });
 
         $(Interaction.inputs[0]).attr("max-length",3);
@@ -66,13 +66,40 @@ var Interaction = {
         $('#firstFracDiv').html('');
         $('#secondFracDiv').html('');
 
-        Interaction.firstFrac = new RationalNumber({factor:1,nominator:1,denominator:3});
-        Interaction.secondFrac = new RationalNumber({factor:1,nominator:1,denominator:2});
+        var digit1 = Util.randomDigit();
+        var digit2 = Util.randomDigit();
+        var nom1, nom2, denom1, denom2,factor1,factor2;
+
+        if(digit1 && digit2){
+            Interaction.firstFrac = new RationalNumber({factor:1,integer:factor1,nominator:nom1,denominator:denom1});
+            Interaction.secondFrac = new RationalNumber({factor:1,integer:factor2,nominator:nom2,denominator:denom2});
+        }
+        else if(digit1 && !digit2){
+            Interaction.firstFrac = new RationalNumber({factor:1,integer:factor1,nominator:nom1,denominator:denom1});
+            Interaction.secondFrac = new RationalNumber({factor:1,nominator:nom2,denominator:denom2});
+        }
+//        else if(!digit1 && )
+
 
         Interaction.firstH = Interaction.firstFrac.toHTML(24);
-        $(Interaction.firstH).css("border","1px solid");
+        $(Interaction.firstH).css("right","0px");
         Interaction.secondH = Interaction.secondFrac.toHTML(24);
-        $(Interaction.secondH).css("border","1px solid");
+        $(Interaction.secondH).css("left","0px");
+
+        if(Interaction.secondFrac.integer){
+            $('#intEq').css("left","170px");
+            $('#answerLine').css("left","196px");
+            $(Interaction.inputs[0]).css("left","198px");
+            $(Interaction.inputs[1]).css("left","198px");
+            $(Interaction.questionDiv).css("left","140px");
+        }
+        else{
+            $('#intEq').css("left","140px");
+            $('#answerLine').css("left","164px");
+            $(Interaction.inputs[0]).css("left","166px");
+            $(Interaction.inputs[1]).css("left","166px");
+            $(Interaction.questionDiv).css("left","150px")
+        }
 
         $('#firstFracDiv').append(Interaction.firstH);
         $('#secondFracDiv').append(Interaction.secondH);

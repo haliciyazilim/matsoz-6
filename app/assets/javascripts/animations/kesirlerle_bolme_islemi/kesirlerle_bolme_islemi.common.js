@@ -215,6 +215,15 @@ var RationalNumber = Class.extend({
             lineHeight:lineStr
         };
 
+        var myCss2 = {
+            position:'absolute',
+            padding:0,
+            margin:0,
+            width:width2Str,
+            fontSize:fontStr,
+            lineHeight:lineStr
+        };
+
         var intStyle = {
             width:width3Str,
             height:heightStr,
@@ -246,36 +255,54 @@ var RationalNumber = Class.extend({
             lineHeight:lineStr
         };
 
-        var html = Util.dom({tag:'div', css:myCss,
+        if(this.integer){
+
+            var html = Util.dom({tag:'div', css:myCss,
+                html:'<div class="frac">' +
+                        '<div class="int"></div>' +
+                        '<div class="nom"></div>' +
+                        '<div class="line"></div>' +
+                        '<div class="denom"></div>' +
+                    '</div>'
+            });
+            var integer;
+
+            if(this.integer){
+                integer = this.factor * this.integer;
+            }
+            else{
+                if(this.factor == -1){
+                    integer = "-";
+                }
+                else{
+                    integer = "";
+                }
+            }
+
+            $('.int',html).html(integer);
+            $('.int',html).css(intStyle);
+            $('.nom',html).html(this.nominator);
+            $('.nom',html).css(nomStyle);
+            $('.denom',html).html(this.denominator);
+            $('.denom',html).css(denomStyle);
+            $('.line',html).css(lineStyle);
+        }
+        else{
+            var html = Util.dom({tag:'div', css:myCss2,
             html:'<div class="frac">' +
-                    '<div class="int"></div>' +
                     '<div class="nom"></div>' +
                     '<div class="line"></div>' +
                     '<div class="denom"></div>' +
                 '</div>'
-        });
+            });
 
-        var integer;
-        if(this.integer){
-            integer = this.factor * this.integer;
+            $('.nom',html).html(this.nominator);
+            $('.nom',html).css(nomStyle);
+            $('.denom',html).html(this.denominator);
+            $('.denom',html).css(denomStyle);
+            $('.line',html).css(lineStyle);
+
         }
-        else{
-            if(this.factor == -1){
-                integer = "-";
-            }
-            else{
-                integer = "";
-            }
-        }
-
-        $('.int',html).html(integer);
-        $('.int',html).css(intStyle);
-        $('.nom',html).html(this.nominator);
-        $('.nom',html).css(nomStyle);
-        $('.denom',html).html(this.denominator);
-        $('.denom',html).css(denomStyle);
-        $('.line',html).css(lineStyle);
-
         return html;
 
     },
