@@ -71,6 +71,7 @@ var Interaction = {
     },
 	nextQuestion: function(randomNumber){
         $("#cevap").html("");
+        $("input").css("color","black");
         var kontrol=0;
 
         while(kontrol==0){
@@ -87,9 +88,10 @@ var Interaction = {
         }
 
 
+        var bolum=Util.isInteger(soru[0])?parseInt(soru[0],10):Util.format(soru[0],{places:2})
+        var bolen=Util.isInteger(soru[1])?parseInt(soru[1],10):Util.format(soru[1],{places:2})
 
-
-        $("#soru").html(Util.format(soru[0],{places:2})+" : "+Util.format(soru[1],{places:2})+" = ");
+        $("#soru").html(bolum+" : "+bolen+" = ");
 
     },
 		
@@ -111,6 +113,7 @@ var Interaction = {
     },
 	onCorrectAnswer : function(){
         bolmeIslemi(soru[0],soru[1],"cevap",20);
+        $("input #cevap").css("color","green");
 
         Interaction.pause();
         setTimeout(function(){Interaction.resume()},6000);
@@ -121,6 +124,8 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
+        $("input").css("color","red");
+        $("#cevap").css("color","green").css("border-color","green");
 
         bolmeIslemi(soru[0],soru[1],"cevap",20);
 

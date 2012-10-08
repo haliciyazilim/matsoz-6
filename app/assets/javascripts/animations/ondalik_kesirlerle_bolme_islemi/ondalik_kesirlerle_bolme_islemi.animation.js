@@ -54,5 +54,7 @@ var Animation = {
         setTimeout(function(){bolmeIslemi(0.12,0.3,"islem3",20)},13000);
         //bolmeIslemi(1.2,0.3,"islem2",20);
         //bolmeIslemi(0.12,0.3,"islem3",20);
+
+        Main.animationFinished(20000);
     }
 }
