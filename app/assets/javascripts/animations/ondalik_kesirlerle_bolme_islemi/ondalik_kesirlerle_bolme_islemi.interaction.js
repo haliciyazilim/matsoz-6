@@ -87,9 +87,10 @@ var Interaction = {
         }
 
 
+        var bolum=Util.isInteger(soru[0])?parseInt(soru[0],10):Util.format(soru[0],{places:2})
+        var bolen=Util.isInteger(soru[1])?parseInt(soru[1],10):Util.format(soru[1],{places:2})
 
-
-        $("#soru").html(Util.format(soru[0],{places:2})+" : "+Util.format(soru[1],{places:2})+" = ");
+        $("#soru").html(bolum+" : "+bolen+" = ");
 
     },
 		
