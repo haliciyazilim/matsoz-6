@@ -8,6 +8,13 @@ utilTest.prototype.testIsInteger = function(){
     assertEquals(false, Util.isInteger("0.5"));
     assertEquals(false, Util.isInteger(0.4));
     assertEquals(true, Util.isInteger(0.0));
+    assertEquals(false, Util.isInteger("45."));
+    assertEquals(false, Util.isInteger("45.a"));
+    assertEquals(true, Util.isInteger("45.0"));
+    assertEquals(true, Util.isInteger("45.000000000000000"));
+    assertEquals(false, Util.isInteger("45.0000000000000s"));
+    assertEquals(false, Util.isInteger("45.00000000000001"));
+    assertEquals(true, Util.isInteger("-777.00"));
 };
 
 utilTest.prototype.testIsNumber = function(){
