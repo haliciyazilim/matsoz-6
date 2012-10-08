@@ -119,7 +119,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
         bolum1PayGosterim=Util.format(bolum1Pay,{places:bolum1PayVirguldenSonra});
     }
     else
-        bolum1PayGosterim=bolum1Pay;
+        bolum1PayGosterim=parseInt(bolum1Pay,10);
 
     var bolen1PayVirguldenSonra;
     var bolen1PayGosterim;
@@ -130,7 +130,7 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
         bolen1PayGosterim=Util.format(bolen1Pay,{places:bolen1PayVirguldenSonra});
     }
     else
-        bolen1PayGosterim=bolen1Pay;
+        bolen1PayGosterim=parseInt(bolen1Pay,10);
 
     $("#"+this.div+"gosterim1BolumPay").html(bolum1PayGosterim);
     $("#"+this.div+"gosterim1BolenPay").html(bolen1PayGosterim);
