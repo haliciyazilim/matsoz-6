@@ -125,7 +125,7 @@ var Interaction = {
 	onFail : function(){
         Interaction.setStatus('Cevabın yanlış; doğrusu yukarıdadır.',false);
         $("input").css("color","red");
-        $("#cevap").css("color","green").css("border-color","green");
+
 
         bolmeIslemi(soru[0],soru[1],"cevap",20);
 
