@@ -125,6 +125,7 @@ var Animation = {
         });
         Interaction.sagaOk = new Path.OneSidedArrow(new Point(pieceLength*12, sayiDogrusuTop+20), new Point( sagaOkHelper.okPosition+6, sayiDogrusuTop+20), 10, 30);
         Interaction.sagaOk.strokeColor="blue";
+        Interaction.sagaOk.fillColor="blue"
         Interaction.sagaOk.opacity=0;
 
 
@@ -139,6 +140,7 @@ var Animation = {
                 Interaction.sagaOk.remove();
                 Interaction.sagaOk = new Path.OneSidedArrow(new Point(pieceLength*12, sayiDogrusuTop+20), new Point(this.okPosition, sayiDogrusuTop+20), 10, 30);
                 Interaction.sagaOk.strokeColor="blue";
+                Interaction.sagaOk.fillColor="blue"
                 Interaction.sagaOk.opacity=this.opacity*10;
 
 
@@ -152,6 +154,7 @@ var Animation = {
         });
         Interaction.solaOk = new Path.OneSidedArrow(new Point(pieceLength*12-10, sayiDogrusuTop+20), new Point( solaOkHelper.okPosition-11, sayiDogrusuTop+20), 10, 30);
         Interaction.solaOk.strokeColor="blue";
+        Interaction.solaOk.fillColor="blue"
         Interaction.solaOk.opacity=0;
 
 
@@ -166,6 +169,7 @@ var Animation = {
                 Interaction.solaOk.remove();
                 Interaction.solaOk = new Path.OneSidedArrow(new Point(pieceLength*12-10, sayiDogrusuTop+20), new Point(this.okPosition, sayiDogrusuTop+20), 10, 30);
                 Interaction.solaOk.strokeColor="blue";
+                Interaction.SolaOk.fillColor="blue"
                 Interaction.solaOk.opacity=this.opacity*10;
 
 
