@@ -150,7 +150,10 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
         var pay=this.bolum * payda;
 
         $("#"+this.div+"gosterim2BolumPay").html(parseInt(pay,10));
-        $("#"+this.div+"gosterim2BolumPayda").css({borderTop:"solid black 2px"}).html(payda);
+        if(this.div=="cevap")
+            $("#"+this.div+"gosterim2BolumPayda").css({borderTop:"solid green 2px"}).html(payda);
+        else
+            $("#"+this.div+"gosterim2BolumPayda").css({borderTop:"solid black 2px"}).html(payda);
     }
     else{
         $("#"+this.div+"gosterim2BolumPay").html(this.bolum);
@@ -161,7 +164,10 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
        var pay=this.bolen * payda;
 
        $("#"+this.div+"gosterim2BolenPay").html(parseInt(pay,10));
-       $("#"+this.div+"gosterim2BolenPayda").css({borderTop:"solid black 2px"}).html(payda);
+       if(this.div=="cevap")
+        $("#"+this.div+"gosterim2BolenPayda").css({borderTop:"solid green 2px"}).html(payda);
+       else
+           $("#"+this.div+"gosterim2BolenPayda").css({borderTop:"solid black 2px"}).html(payda);
    }
     else{
         $("#"+this.div+"gosterim2BolenPay").html(this.bolen);
@@ -212,7 +218,10 @@ bolmeIslemi=function(bolum,bolen,div,fontSize){
        $("#"+this.div+"gosterim3BolenPayda").html(bolen2Payda);
    }
 
-    $("#"+this.div+"gosterim3BolenPayda, #"+this.div+"gosterim3BolumPayda").css({borderTop:"solid black 2px"});
+    if(this.div=="cevap")
+        $("#"+this.div+"gosterim3BolenPayda, #"+this.div+"gosterim3BolumPayda").css({borderTop:"solid green 2px"});
+    else
+        $("#"+this.div+"gosterim3BolenPayda, #"+this.div+"gosterim3BolumPayda").css({borderTop:"solid black 2px"});
 
 
 

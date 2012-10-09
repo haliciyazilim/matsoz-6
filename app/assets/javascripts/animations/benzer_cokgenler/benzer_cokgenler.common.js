@@ -1,23 +1,38 @@
 function InteractiveGrids(opt){
     this.id = InteractiveGrids.GetId();
+
+    if (opt.rows) {
+        this.rows = opt.rows;
+    } else {
+        this.rows = 8;
+    }
+
+    if (opt.cols) {
+        this.cols = opt.cols;
+    } else {
+        this.cols = 8;
+    }
+
+    this.vertexLetters = opt.vertexLetters;
+
     this.size = opt.size;
     this.position = opt.position;
     this.style = opt.style;
     this.points = [];
     this.vertexes = [];
     this.circles = [];
-    for(var i=0; i<=8; i++){
+    for(var i=0; i<=this.rows; i++){
         new Path.Line(
             this.position.add(0,this.size*i),
-            this.position.add(this.size*8,this.size*i)
+            this.position.add(this.size*this.rows,this.size*i)
         ).set_style(this.style);
         new Path.Line(
             this.position.add(this.size*i,0),
-            this.position.add(this.size*i,this.size*8)
+            this.position.add(this.size*i,this.size*this.cols)
         ).set_style(this.style);
     }
-    for(var i=0;i<=8;i++)
-        for(var j=0;j<=8;j++){
+    for(var i=0;i<=this.rows;i++)
+        for(var j=0;j<=this.cols;j++){
             var point = this.position.add(this.size*i,this.size*j);
             var circle = new Path.Circle(point,this.size*0.3);
             circle.set_style({
@@ -67,8 +82,28 @@ InteractiveGrids.prototype.drawShape = function(points){
 
     return this;
 }
+
+InteractiveGrids.prototype.undo  = function(){
+    if(this.path.closed == true){
+        this.path.closed = false;
+        this.disableDraw = false;
+        return;
+    }
+    this.path.removeSegment(this.path.segments.length-1);
+    this.points.pop();
+    this.appendVertexLetters();
+    var circle = this.vertexes.pop()
+        circle.baseCircle.class = "InteractiveGridCircles"+this.id;
+        circle.remove();
+
+}
+
 InteractiveGrids.prototype.appendVertexLetters = function(){
-    this.vertexLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
+    if(this.vertexLetters == undefined)
+        return;
+    var vertexLetters = [];
+    for(var i=0; i<this.vertexLetters.length; i++)
+        vertexLetters.push(this.vertexLetters[i]);
     if(this.vertexPointTexts)
         for(var i=0;i < this.vertexPointTexts.length; i++)
             this.vertexPointTexts[i].remove();
@@ -76,7 +111,7 @@ InteractiveGrids.prototype.appendVertexLetters = function(){
     var centerPoint = Util.centerOfPoints(this.points);
     for(var i=0; i< this.points.length ; i++){
         var pointText = new PointText(this.points[i].findPointTo(centerPoint,-13).add(0,6));
-        pointText.content = this.vertexLetters.shift();
+        pointText.content = vertexLetters.shift();
         pointText.set_style({
             fontSize:12,
             justification:'center',
@@ -101,10 +136,12 @@ InteractiveGrids.prototype.createTool = function(){
 
             event.item.set_style({
             })
-            self.vertexes.push(new Path.Circle(event.item.position,4).set_style({
+            var circle = new Path.Circle(event.item.position,4).set_style({
                 fillColor:new RgbColor(0.2,0.2,0.2),
                 class:"SelectedGridCircles"+self.id
-            }))
+            });
+            circle.baseCircle = event.item;
+            self.vertexes.push(circle)
             self.path.add(event.item.position);
             event.item.class = "SelectedGridCircles"+self.id;
             event.item.opacity =1 ;
