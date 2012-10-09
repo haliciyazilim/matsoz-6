@@ -190,7 +190,7 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
                         .css("z-index","5");
                         //.css("opacity","0");
                     
-                    var sonuc=carpim1F*carpim2F;
+                    var sonuc=parseFloat(carpim1F*carpim2F).toFixed(carpim1VirguldenSonraBasamak+carpim2VirguldenSonraBasamak);
                     var sonucArray=sonuc.toString().split(".");
                     sonuc=sonucArray[0]+sonucArray[1];
                     for(var j=sonuc.toString().length;j>=1;j--){
@@ -254,7 +254,7 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
         $(this.div+ " .virgul").css("position","absolute").css("height",this.fontSize*30/30).html(",");
         $(this.div+" #virgul1").css("top","1px");
         $(this.div+" #virgul2").css("top","1px");
-        $(this.div+" #virgul3").css("top","1px")//.css("opacity","0");
+        $(this.div+" #virgul3").css("top","1px").css("opacity","0");
 
         switch (carpim1VirguldenSonraBasamak){
             case 1:
@@ -274,7 +274,7 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
                 break
         }
 
-        var virgulToplam=carpim1VirguldenSonraBasamak+carpim2VirguldenSonraBasamak;
+        virgulToplam=carpim1VirguldenSonraBasamak+carpim2VirguldenSonraBasamak;
         switch (virgulToplam){
             case 1:
                 $(this.div+" #virgul3").css("right",this.fontSize*14/30)
@@ -538,7 +538,7 @@ this.basla=function(hizB,hizA){
                 //$("#"+div+" #elde3Basamak"+toplama3Sayac).animate({color:sayilarFadeInRenk},hizA).delay(hizB).animate({color:sayilarFadeOutRenk},hizA);
         }
         
-        var sonuc=carpim1F*carpim2F;
+        var sonuc=parseFloat(carpim1F*carpim2F).toFixed(virgulToplam);
         var sonucArray=sonuc.toString().split(".");
         sonuc=sonucArray[0]+sonucArray[1];
 
@@ -547,9 +547,17 @@ this.basla=function(hizB,hizA){
             var basamak=sonuc.toString().charAt(sonuc.toString().length-t);
             $("#"+div+" #toplamaSonucBasamak"+t).html(basamak);
             $("#"+div+" #toplamaSonucBasamak"+t).delay(2000*t).animate({opacity:"1"},hizA);
+            console.log("sonuc L: "+sonuc.toString().length+" t: "+t);
+            if(t==sonuc.toString().length){
+
+                console.log("virgülün açılması lazım "+div );
+                $("#"+div+" #virgul3").delay(2000*t+1000).animate({opacity:"1"},1000);
+            }
         
         
-    }
+        }
+
+
         
     }
     
