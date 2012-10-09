@@ -13,6 +13,8 @@ function InteractiveGrids(opt){
         this.cols = 8;
     }
 
+    this.vertexLetters = opt.vertexLetters;
+
     this.size = opt.size;
     this.position = opt.position;
     this.style = opt.style;
@@ -80,8 +82,28 @@ InteractiveGrids.prototype.drawShape = function(points){
 
     return this;
 }
+
+InteractiveGrids.prototype.undo  = function(){
+    if(this.path.closed == true){
+        this.path.closed = false;
+        this.disableDraw = false;
+        return;
+    }
+    this.path.removeSegment(this.path.segments.length-1);
+    this.points.pop();
+    this.appendVertexLetters();
+    var circle = this.vertexes.pop()
+        circle.baseCircle.class = "InteractiveGridCircles"+this.id;
+        circle.remove();
+
+}
+
 InteractiveGrids.prototype.appendVertexLetters = function(){
-    this.vertexLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
+    if(this.vertexLetters == undefined)
+        return;
+    var vertexLetters = [];
+    for(var i=0; i<this.vertexLetters.length; i++)
+        vertexLetters.push(this.vertexLetters[i]);
     if(this.vertexPointTexts)
         for(var i=0;i < this.vertexPointTexts.length; i++)
             this.vertexPointTexts[i].remove();
@@ -89,7 +111,7 @@ InteractiveGrids.prototype.appendVertexLetters = function(){
     var centerPoint = Util.centerOfPoints(this.points);
     for(var i=0; i< this.points.length ; i++){
         var pointText = new PointText(this.points[i].findPointTo(centerPoint,-13).add(0,6));
-        pointText.content = this.vertexLetters.shift();
+        pointText.content = vertexLetters.shift();
         pointText.set_style({
             fontSize:12,
             justification:'center',
@@ -114,10 +136,12 @@ InteractiveGrids.prototype.createTool = function(){
 
             event.item.set_style({
             })
-            self.vertexes.push(new Path.Circle(event.item.position,4).set_style({
+            var circle = new Path.Circle(event.item.position,4).set_style({
                 fillColor:new RgbColor(0.2,0.2,0.2),
                 class:"SelectedGridCircles"+self.id
-            }))
+            });
+            circle.baseCircle = event.item;
+            self.vertexes.push(circle)
             self.path.add(event.item.position);
             event.item.class = "SelectedGridCircles"+self.id;
             event.item.opacity =1 ;
