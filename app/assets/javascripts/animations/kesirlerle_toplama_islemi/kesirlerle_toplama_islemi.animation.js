@@ -14,7 +14,9 @@ var Animation = {
         var flyStart = rect3Start+2000;
         var numAxisStart = flyStart+5000;
         var bigDotsStart = numAxisStart+1000;
-        var smallDotsStart = bigDotsStart+2000;
+        var firstDotStart = bigDotsStart+2000;
+
+        var smallDotsStart = firstDotStart+2000;
         var execStart = smallDotsStart+2000;
 
         var rect4 = new Path.SegmentedRectangle(140.5, 10.5, 75, 50, 1, 1, 1, rectFillColor);
@@ -82,9 +84,9 @@ var Animation = {
             var smallDot = new Path.Circle(new Point(280.5+(70*i), 164.5), 3);
             smallDot.strokeColor = "black";
             smallDot.fillColor = "black";
+            smallDot.opacity = 0;
             smallDots.addChild(smallDot);
         }
-        smallDots.opacity = 0;
 
         var arcGroup = new Group();
         var arc = new Path.Arc(new Point(434, 140), new Point(490, 130), new Point(546, 140));
@@ -358,8 +360,8 @@ var Animation = {
             .css("height", "16px");
 
         $('#frac222').css("opacity", 0);
-        $('#frac222').delay(execStart).animate({opacity: 1}, 1000,'easeInOutQuad')
-            .delay(3000).animate({opacity: 0}, 1000,'easeInOutQuad');
+        $('#frac222').delay(firstDotStart).animate({opacity: 1}, 1000,'easeInOutQuad')
+            .delay(1000).animate({opacity: 0}, 1000,'easeInOutQuad');
 
         $(container).append('<div id="frac333"><div id="nom333">3</div><div id="line333"></div><div id="denom333">6</div></div>');
 
@@ -384,8 +386,8 @@ var Animation = {
             .css("height", "16px");
 
         $('#frac333').css("opacity", 0);
-        $('#frac333').delay(execStart+4000).animate({opacity: 1}, 1000,'easeInOutQuad')
-            .delay(2000).animate({opacity: 0}, 0,'easeInOutQuad');
+        $('#frac333').delay(smallDotsStart).animate({opacity: 1}, 1000,'easeInOutQuad')
+            .delay(2000).animate({opacity: 0}, 1000,'easeInOutQuad');
 
         $(Animation.container).append('<div id="frac3333"><div id="nom3333">3</div><div id="line3333"></div><div id="denom3333">6</div></div>');
 
@@ -409,7 +411,7 @@ var Animation = {
             .css("height", "16px");
 
         $('#frac3333').css("opacity", 0);
-        $('#frac3333').delay(execStart+7000).animate({opacity: 1}, 0,'easeInOutQuad');
+        $('#frac3333').delay(smallDotsStart+3000).animate({opacity: 1}, 0,'easeInOutQuad');
 
         $(container).append('<div id="frac444"><div id="nom444">5</div><div id="line444"></div><div id="denom444">6</div></div>');
 
@@ -771,7 +773,43 @@ var Animation = {
             animationType:'easeInOutQuad'
         });
 
-        smallDots.animate({
+        smallDots.children[2].animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:firstDotStart,
+            animationType:'easeInOutQuad'
+        });
+
+        smallDots.children[0].animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:smallDotsStart,
+            animationType:'easeInOutQuad'
+        });
+
+        smallDots.children[1].animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:smallDotsStart,
+            animationType:'easeInOutQuad'
+        });
+
+        smallDots.children[3].animate({
+            style:{
+                opacity:1
+            },
+            duration:1000,
+            delay:smallDotsStart,
+            animationType:'easeInOutQuad'
+        });
+
+        smallDots.children[4].animate({
             style:{
                 opacity:1
             },
