@@ -66,12 +66,23 @@ var Interaction = {
             Interaction.setStatus('');
         })
         Interaction.generateWeights();
-        for(var i=0; i<length;i++){
-            var weight = new Weight({
-                type:Util.randomInteger(1,5)
-            });
-            Interaction.scales.addWeightToLeft(weight);
-        }
+        do
+            for(var i=0; i<length;i++){
+                var weight = new Weight({
+                    type:Util.randomInteger(1,5)
+                });
+                Interaction.scales.addWeightToLeft(weight);
+            }
+        while(Interaction.scales.getTotalOfLeftWeights() < 3 || Interaction.scales.getTotalOfLeftWeights() > 12)
+
+        var disabledWeight = Interaction.weights[Interaction.scales.leftWeights[Util.randomInteger(0,Interaction.scales.leftWeights.length)].value-1];
+        disabledWeight.raster.set_style({
+            opacity:0.5,
+            class:'disabled'
+        });
+        disabledWeight.class = 'disabled';
+
+
         AnimationManager.delay(
             function(){
                 Interaction.scales.calculateWeights()
@@ -170,8 +181,11 @@ var Interaction = {
                         this.item.class = "draggable_weight";
                         Interaction.weights.push(this.item.weight);
                     }
+                    else if(raster.class == 'disabled')
+                        return;
                     else
                         this.item = raster;
+
                     this.item.opacity = 0.8;
                     this.drag = true;
                     this.firstPosition = this.item.position;

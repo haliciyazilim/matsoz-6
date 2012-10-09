@@ -19,7 +19,7 @@ var Interaction = {
             right:'150px',
             width:'370px',
             height:'26px',
-            textAlign:'center',
+            textAlign:'center'
         //    border:'1px solid'
         });
         Interaction.appendButton({
@@ -115,6 +115,7 @@ var Interaction = {
         }
 
         Interaction.answer = Interaction.firstFrac.addition(Interaction.secondFrac);
+        Interaction.answer.convertToCompoundForm();
 
 
         Interaction.firstH = Interaction.firstFrac.toHTML(24);

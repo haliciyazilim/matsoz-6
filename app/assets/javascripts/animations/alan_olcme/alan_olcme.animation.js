@@ -279,12 +279,12 @@ var Animation = {
         kilometerSquareGroup.opacity = 0;
 
         var ticker = $('#ticker');
-        $(Animation.container).append(ticker);
+    //    $(Animation.container).append(ticker);
         $(ticker).css({
             position:'absolute',
             top:'26px',
             left:'470px',
-            opacity:0
+            opacity:1
         });
 
         // km
@@ -873,6 +873,8 @@ var Animation = {
             animationType:'easeInOutQuad'
         });
 
-        $(ticker).delay(tickerStart).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000)});
+        setTimeout('$(Animation.container).append(ticker);',tickerStart);
+
+   //     $(ticker).delay(tickerStart).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000)});
     }
 }

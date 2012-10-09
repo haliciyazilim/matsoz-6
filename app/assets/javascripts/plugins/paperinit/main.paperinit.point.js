@@ -51,4 +51,12 @@ Main.paperInit.Point = function(){
 		_p = _p.add(p);
 		return _p;		
 	}
+    Point.prototype.scale = function(ratio,center){
+        if(center == undefined)
+            center = this;
+        var point = this.subtract(center);
+        point = point.multiply(ratio,ratio);
+        point = point.add(center);
+        return point;
+    }
 }

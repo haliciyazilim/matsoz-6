@@ -2472,10 +2472,10 @@ var Item = this.Item = Base.extend({
 			if (!item._visible || item._opacity == 0)
 				return;
 
-			var tempCanvas, parentCtx;
+			var tempCanvas, parentCtx, itemOffset;
 			if (item._blendMode !== 'normal'
 					|| item._opacity < 1
-					&& !((item._segments || item._content) && (!item.getFillColor()
+					&& !((item._segments) && (!item.getFillColor()
 							|| !item.getStrokeColor()))) {
 				var bounds = item.getStrokeBounds() || item.getBounds();
 				if (!bounds.width || !bounds.height)
@@ -5775,6 +5775,34 @@ var PointText = this.PointText = TextItem.extend({
 		}
 		ctx.restore();
 	}
+}, new function() {
+    var context = null;
+
+    return {
+        _getBounds: function(type, type2, args) {
+            var matrix = args[0];
+            if (!context)
+                context = CanvasProvider.getCanvas(
+                    Size.create(1, 1)).getContext('2d');
+            var justification = this.getJustification(),
+                x = 0;
+            context.font = this.characterStyle.fontSize + 'px ' + this.characterStyle.font;
+            var width = context.measureText(this.content).width;
+            if (justification !== 'left')
+                x -= width / (justification === 'center' ? 2: 1);
+            var leading = this.characterStyle.fontSize * 1.2;
+
+            var count = 1,
+                bounds = Rectangle.create(x,
+                    count ? leading / 4 + (count - 1) * leading : 0,
+                    width, -count * leading);
+
+            matrix = matrix ? matrix.clone().concatenate(this._matrix)
+                : this._matrix;
+
+            return matrix._transformBounds(bounds, bounds);
+        }
+    };
 });
 
 var Style = Item.extend({
