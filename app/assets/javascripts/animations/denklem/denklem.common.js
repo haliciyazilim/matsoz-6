@@ -75,6 +75,12 @@ Scales.prototype.calculateRightWeightPositions = function(){
         locatedRightWidth += this.rightWeights[i].raster.width;
     }
 }
+Scales.prototype.getTotalOfLeftWeights = function(){
+    var total = 0;
+    for(var i=0; i< this.leftWeights.length ; i++)
+        total += this.leftWeights[i].value;
+    return total;
+}
 Scales.prototype.addWeightToLeft = function(weight,calculate){
     if(this.leftWeights.length >= 4)
         return false;
