@@ -5,8 +5,8 @@ function __Styles(){
         left:'190px',
         height:'60px',
         width:'230px',
-        fontSize:'16px'
-    //    border:'1px solid'
+        fontSize:'16px',
+        opacity:0
     };
 
     firstSolutionCss = {
@@ -16,7 +16,6 @@ function __Styles(){
         height:'50px',
         width:'220px',
         fontSize:'16px'
-    //    border:'1px solid'
     };
 
     secondTextCss = {
@@ -25,8 +24,8 @@ function __Styles(){
         left:'480px',
         height:'30px',
         width:'200px',
-        fontSize:'16px'
-    //    border:'1px solid'
+        fontSize:'16px',
+        opacity:0
     };
 
     secondSolutionCss = {
@@ -41,5 +40,5 @@ function __Styles(){
     circFillColor = "#e99e9e";
 
     rectFillColor = "#e99e9e";
-    rectFillColor2 = "#9c4f4f"
+    rectFillColor2 = "#9c4f4f";
 }
