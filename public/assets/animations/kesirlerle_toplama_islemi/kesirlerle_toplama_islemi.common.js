@@ -1,1 +1,1 @@
-function generateQuestion(){};
+;
