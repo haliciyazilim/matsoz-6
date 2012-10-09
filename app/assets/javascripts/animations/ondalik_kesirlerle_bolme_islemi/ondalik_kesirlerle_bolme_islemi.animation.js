@@ -49,11 +49,12 @@ var Animation = {
             opacity:1
         });
 
-        setTimeout(function(){bolmeIslemi(12.00,0.3,"islem1",20)},1000);
+        setTimeout(function(){bolmeIslemi(12.00,0.3,"islem1",20);},1000);
         setTimeout(function(){bolmeIslemi(1.2,0.3,"islem2",20)},7000);
         setTimeout(function(){bolmeIslemi(0.12,0.3,"islem3",20)},13000);
         //bolmeIslemi(1.2,0.3,"islem2",20);
         //bolmeIslemi(0.12,0.3,"islem3",20);
+
 
         Main.animationFinished(20000);
     }
