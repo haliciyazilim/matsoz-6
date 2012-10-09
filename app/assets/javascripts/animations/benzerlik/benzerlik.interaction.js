@@ -42,7 +42,10 @@ var Interaction = {
                 Interaction.cornerPoints[i].remove();
         Interaction.button.className = 'next_button';
         Interaction.button.onclick = Interaction.prepareNextQuestion;
-        var points = InteractiveGrids.CreateShape(randomNumber);
+        /*<[[TEST*/
+            randomNumber = 18;
+        /*TEST]]>*/
+        var points = Interaction.generateShape(randomNumber);
         var path = new Path();
 
         for(var i=0;i<points.length;i++){
@@ -151,5 +154,100 @@ var Interaction = {
 
         tool.activate();
         Interaction.tool = tool;
+    },
+
+    generateShape:function(type){
+        if(type < 11){
+            return InteractiveGrids.CreateShape(type);
+        }
+        var points = [];
+        switch(type){
+            case 11:
+                points.push(new Point(0,0));
+                points.push(new Point(0,1));
+                points.push(new Point(0,2));
+                points.push(new Point(0,3));
+                points.push(new Point(0,4));
+                points.push(new Point(1,4));
+                points.push(new Point(2,4));
+                points.push(new Point(3,4));
+                points.push(new Point(4,4));
+                points.push(new Point(4,2));
+                points.push(new Point(2,2));
+                points.push(new Point(2,0));
+                break;
+            case 12:
+                points.push(new Point(3,0));
+                points.push(new Point(4,2));
+                points.push(new Point(6,2));
+                points.push(new Point(4.3,3));
+                points.push(new Point(5,5));
+                points.push(new Point(3,3.8));
+                points.push(new Point(1,5));
+                points.push(new Point(1.6,3));
+                points.push(new Point(0,2));
+                points.push(new Point(2,2));
+                break;
+            case 13:
+                points.push(new Point(0,1));
+                points.push(new Point(0,3));
+                points.push(new Point(3,3));
+                points.push(new Point(3,4));
+                points.push(new Point(5,2));
+                points.push(new Point(3,0));
+                points.push(new Point(3,1));
+                break;
+            case 14:
+                points.push(new Point(1,0));
+                points.push(new Point(0,2));
+                points.push(new Point(1,4));
+                points.push(new Point(2,2));
+                break;
+            case 15:
+                points.push(new Point(2,0));
+                points.push(new Point(0,2));
+                points.push(new Point(0,4));
+                points.push(new Point(4,4));
+                points.push(new Point(4,2));
+                break;
+            case 16:
+                points.push(new Point(0,0));
+                points.push(new Point(1,0));
+                points.push(new Point(2,0));
+                points.push(new Point(3,0));
+                points.push(new Point(3,1));
+                points.push(new Point(2,1));
+                points.push(new Point(2,2));
+                points.push(new Point(1,2));
+                points.push(new Point(1,1));
+                points.push(new Point(0,1));
+                break;
+            case 17:
+                points.push(new Point(0,0));
+                points.push(new Point(1,0));
+                points.push(new Point(2,0));
+                points.push(new Point(2,1));
+                points.push(new Point(3,1));
+                points.push(new Point(3,2));
+                points.push(new Point(2,2));
+                points.push(new Point(1,2));
+                points.push(new Point(1,1));
+                points.push(new Point(0,1));
+                break;
+            case 18:
+                points.push(new Point(0,1));
+                points.push(new Point(0,2));
+                points.push(new Point(1,2));
+                points.push(new Point(2,2));
+                points.push(new Point(3,2));
+                points.push(new Point(3,1));
+                points.push(new Point(3,0));
+                points.push(new Point(2,0));
+                points.push(new Point(2,1));
+                points.push(new Point(1,1));
+                break;
+
+        }
+        return points;
     }
 }
