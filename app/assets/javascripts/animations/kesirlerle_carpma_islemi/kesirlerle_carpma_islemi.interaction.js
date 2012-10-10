@@ -8,23 +8,24 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+        Main.setObjective('Yanda verilen dikdörtgenin alanını bulunuz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
-        }
+        };
 
-        Interaction.appendButton({
-            bottom:"40px",
-            right:"40px"
-        });
         Interaction.appendStatus({
-            bottom:"50px",
-            right:"150px"
-        })
-        /*
-        *	Initialize your interaction here
-        */
+            bottom:'30px',
+            right:'150px',
+            width:'370px',
+            height:'26px',
+            textAlign:'center'
+            //    border:'1px solid'
+        });
+        Interaction.appendButton({
+            bottom:'30px',
+            right:'30px'
+        });
 
         Interaction.prepareNextQuestion();
     },
