@@ -875,6 +875,6 @@ var Animation = {
 
         setTimeout('$(Animation.container).append(ticker);',tickerStart);
 
-   //     $(ticker).delay(tickerStart).animate({opacity:1},1000,'easeInOutQuad', function(){Main.animationFinished(1000)});
+        Main.animationFinished(tickerStart+2000);
     }
 }
