@@ -41,4 +41,27 @@ function __Styles(){
 
     rectFillColor = "#e99e9e";
     rectFillColor2 = "#9c4f4f";
+
+    interactionRectStrokeColor = "#41818a";
+    interactionRectFillColor = "#a8dbe3";
+
+    firstFracStyle = {
+        position:'absolute',
+        top:'165px',
+        left:'80px',
+        width:'100px',
+        height:'60px',
+        border:'1px solid',
+        fontSize:'24px'
+    };
+
+    secondFracStyle = {
+        position:'absolute',
+        top:'70px',
+        left:'240px',
+        width:'100px',
+        height:'60px',
+        border:'1px solid',
+        fontSize:'24px'
+    };
 }
