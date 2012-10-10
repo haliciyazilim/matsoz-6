@@ -1,6 +1,7 @@
 function DecimalMultiplication(carpim1, carpim2, div, fontSize){
     this.carpim1=carpim1;
     this.carpim2=carpim2;
+
     this.div="#"+div;
     this.fontSize=fontSize;
 
@@ -23,12 +24,18 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
         carpim1VirguldenSonraBasamak=carpim1Array[1].length;
         console.log("Util Çarpim1: "+this.carpim1)
     }
+    else{
+        this.carpim1=parseInt( this.carpim1,10);
+        carpim1=parseInt( carpim1,10);
+    }
+
     if(Util.isInteger(this.carpim2)==false){
         var carpim2Array=this.carpim2.toString().split(".");
         this.carpim2=carpim2Array[0]+""+carpim2Array[1];
         carpim2=carpim2Array[0]+""+carpim2Array[1];
         carpim2VirguldenSonraBasamak=carpim2Array[1].length;
     }
+
 
 
 
@@ -264,12 +271,16 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
         $(this.div+" #virgul3").css("top","1px").css("opacity","0");
 
         switch (carpim1VirguldenSonraBasamak){
+
             case 1:
                 $(this.div+" #virgul1").css("right",this.fontSize*14/30)
                 break
             case 2:
                 $(this.div+" #virgul1").css("right",this.fontSize*32/30)
                 break
+            default :
+                $(this.div+" #virgul1").css("right",this.fontSize*0/30).html("");
+                break;
         }
 
         switch (carpim2VirguldenSonraBasamak){
