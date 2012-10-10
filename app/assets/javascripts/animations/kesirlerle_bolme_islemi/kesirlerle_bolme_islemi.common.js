@@ -122,7 +122,7 @@ var RationalNumber = Class.extend({
         this.convertToComplexForm();
         otherRationalNumber.convertToComplexForm();
 
-        multiplication.simplification();
+    //    multiplication.simplification();
         return multiplication;
     },
     division:function(otherRationalNumber){
