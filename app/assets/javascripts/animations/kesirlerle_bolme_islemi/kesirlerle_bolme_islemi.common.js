@@ -109,9 +109,16 @@ var RationalNumber = Class.extend({
     },
     multiplication:function(otherRationalNumber){
         var factor1, nom1, denom1;
-
-        this.convertToCompoundForm();
-        otherRationalNumber.convertToCompoundForm();
+        var flag1 = 0;
+        var flag2 = 0;
+        if(this.type == RationalNumber.COMPLEX){
+            this.convertToCompoundForm();
+            flag1 = 1;
+        }
+        if(otherRationalNumber.type == RationalNumber.COMPLEX){
+            otherRationalNumber.convertToCompoundForm();
+            flag2 = 1;
+        }
 
         factor1 = this.factor * otherRationalNumber.factor;
         nom1 = this.nominator * otherRationalNumber.nominator;
@@ -119,8 +126,12 @@ var RationalNumber = Class.extend({
 
         var multiplication = new RationalNumber({factor:factor1,nominator:nom1,denominator:denom1});
 
-        this.convertToComplexForm();
-        otherRationalNumber.convertToComplexForm();
+        if(flag1 == 1){
+            this.convertToComplexForm();
+        }
+        if(flag2 == 1){
+            otherRationalNumber.convertToComplexForm();
+        }
 
     //    multiplication.simplification();
         return multiplication;
@@ -134,7 +145,7 @@ var RationalNumber = Class.extend({
 
         otherRationalNumber.multiplicationInvert();
 
-        division.simplification();
+    //    division.simplification();
         return division;
     },
     convertToComplexForm:function(){
