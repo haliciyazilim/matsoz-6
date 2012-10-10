@@ -165,14 +165,14 @@ var Interaction = {
     },
     showAnswer : function(){
         Interaction.answerDiv = Util.dom({parent:Interaction.container, tag:'div', css:answerDivStyle,
-            html:'<div id="sf1" style="position:absolute;top:20px;left:20px;width:40px;height:42px;padding:0;margin:0;line-height:20px;">' +
+            html:'<div id="sf1" style="color:black;position:absolute;top:20px;left:20px;width:40px;height:42px;padding:0;margin:0;line-height:20px;">' +
                 '<div id="sint1" style="width:20px;height:42px;text-align:center;float:left;line-height:42px;"></div>' +
                 '<div id="snom1" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
                 '<div id="sline1" style="height:1px;width:20px;border-top:2px solid;padding:0;float:left;"></div>' +
                 '<div id="sdenom1" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
                 '</div>' +
-                '<span id="t1" style="position:absolute;top:32px;left:66px;">•</span>' +
-                '<div id="sf2" style="position:absolute;top:20px;left:72px;width:40px;height:42px;padding:0;margin:0;line-height:20px;">' +
+                '<span id="t1" style="color:black;position:absolute;top:32px;left:66px;">•</span>' +
+                '<div id="sf2" style="color:black;position:absolute;top:20px;left:72px;width:40px;height:42px;padding:0;margin:0;line-height:20px;">' +
                 '<div id="sint2" style="width:20px;height:42px;text-align:center;float:left;line-height:42px;"></div>' +
                 '<div id="snom2" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
                 '<div id="sline2" style="height:1px;width:20px;border-top:2px solid;padding:0;float:left;"></div>' +
