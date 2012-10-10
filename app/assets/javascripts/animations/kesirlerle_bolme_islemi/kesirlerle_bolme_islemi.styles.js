@@ -20,4 +20,50 @@ function __Styles(){
 //        border:'1px solid',
         color:'#069'
     };
+
+    firstShapeStrokeColor = "#9b763d";
+    firstShapeFillColor = "#f2c885";
+
+    secondShapeLastColor = "#4f9c4f";
+    secondShapeFillColor = "#9ee9a5";
+
+    firstTextStyle = {
+        position:'absolute',
+        top:'40px',
+        left:'100px',
+        width:'240px',
+        height:'40px',
+    //    border:'1px solid',
+        fontSize:'16px'
+    };
+
+    firstSolutionStyle = {
+        position:'absolute',
+        top:'120px',
+        left:'146px',
+        width:'150px',
+        height:'40px',
+    //    border:'1px solid',
+        fontSize:'16px'
+    };
+
+    secondTextStyle = {
+        position:'absolute',
+        top:'30px',
+        left:'450px',
+        width:'240px',
+        height:'40px',
+//        border:'1px solid',
+        fontSize:'16px'
+    };
+
+    secondSolutionStyle = {
+        position:'absolute',
+        top:'130px',
+        left:'470px',
+        width:'150px',
+        height:'40px',
+//        border:'1px solid',
+        fontSize:'16px'
+    };
 }
