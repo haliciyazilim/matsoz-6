@@ -134,7 +134,8 @@ var Animation = {
         $(".kademe1,.kademe2, .kademe3, .kademe4, .kademe5, #virgulK1, #virgulK2, #virgulK3, #virgulK4, #virgulK5").css({opacity:0});
 
         var islem=new DecimalMultiplication(0.7,1.5,"ornek",30);
-        //var islem=new LongMultiplication(178,172,"ornek");
+//        var islem=new DecimalMultiplication(90,1.5,"ornek",30);
+
 
         setTimeout(function(){islem.doldur(); islem.basla(1000,1000);},1000);
 
