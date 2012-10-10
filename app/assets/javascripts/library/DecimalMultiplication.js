@@ -11,7 +11,9 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
         this.fontSize=30;
     var oran=this.fontSize*40/30;
 
-
+    carpim1VirguldenSonraBasamak=0;
+    carpim2VirguldenSonraBasamak=0;
+    
     if(Util.isInteger(this.carpim1)==false){
 
         console.log("Util Çarpim1: "+this.carpim1)
@@ -83,11 +85,16 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
 
 
         // carpim2'nin konumunu ayarlıyoruz.
-        var virgulFarki=carpim1VirguldenSonraBasamak-carpim2VirguldenSonraBasamak;
+        virgulFarki=carpim1VirguldenSonraBasamak-carpim2VirguldenSonraBasamak;
         if(virgulFarki>0){
             $(this.div+" #carpim2")
                 .css("right",this.fontSize*18/30)
         }
+        else if(virgulFarki<0){
+            $(this.div+" #carpim1")
+                .css("right",this.fontSize*18/30)
+        }
+
 	
        /*
        $(this.div,container).append("<div id='sonuc' class='carpilan'>");
@@ -280,7 +287,7 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
                 $(this.div+" #virgul3").css("right",this.fontSize*14/30)
                 break
             case 2:
-                $(this.div+" #virgul3").css("right",this.fontSize*32/30)
+                $(this.div+" #virgul3").css("right",this.fontSize*30/30)
                 break
             case 3:
                 $(this.div+" #virgul3").css("right",this.fontSize*46/30)
