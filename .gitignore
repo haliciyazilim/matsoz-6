@@ -25,3 +25,5 @@
 /nbproject/private/
 
 /app/assets/javascripts/development.js
+
+.DS_Store

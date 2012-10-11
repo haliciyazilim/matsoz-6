@@ -69,6 +69,7 @@ var Interaction = {
         var lastPart = "";
         var flag = 1;
         var checkedValue = Util.numberTurkishFloating(Interaction.answer,10);
+        var checkedInt;
         var parts = checkedValue.split(",");
         if(parts.length != 1){
             lastPart = parts[1];
@@ -83,11 +84,14 @@ var Interaction = {
         }
         if(lastPart.length > 0){
             checkedValue = ""+parts[0]+","+lastPart;
+            checkedInt = ""+parts[0]+"."+lastPart;
         }
         else{
             checkedValue = parts[0];
+            checkedInt = parts[0];
         }
         Interaction.checkedValue = checkedValue;
+        Interaction.checkedInt = parseFloat(checkedInt);
         return parseFloat(checkedValue.replace(",",".")) == parseFloat(value.replace(",","."));
     },
     onCorrectAnswer : function(){
@@ -98,7 +102,12 @@ var Interaction = {
     },
     onFail : function(){
         Interaction.setStatus("Yanlış cevap, doğrusu yukarıda gösterilmiştir!",false);
-        Interaction.input.value = Interaction.checkedValue;
+        if(Interaction.checkedInt >= 1000){
+            Interaction.input.value = Util.format(Interaction.checkedValue);
+        }
+        else{
+            Interaction.input.value = Interaction.checkedValue;
+        }
         $(Interaction.input).css("color","green");
     }
 }
