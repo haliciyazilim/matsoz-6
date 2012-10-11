@@ -125,7 +125,7 @@ var Animation = {
 
 
 
-
+        Main.animationFinished(4500);
 
 
 
