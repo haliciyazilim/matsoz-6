@@ -34,7 +34,8 @@ function __Styles(){
         width:'240px',
         height:'40px',
     //    border:'1px solid',
-        fontSize:'16px'
+        fontSize:'16px',
+        opacity:0
     };
 
     firstSolutionStyle = {
@@ -54,7 +55,8 @@ function __Styles(){
         width:'240px',
         height:'40px',
 //        border:'1px solid',
-        fontSize:'16px'
+        fontSize:'16px',
+        opacity:0
     };
 
     secondSolutionStyle = {
