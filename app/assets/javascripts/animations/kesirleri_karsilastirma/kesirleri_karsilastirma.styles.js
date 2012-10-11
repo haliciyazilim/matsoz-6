@@ -6,7 +6,17 @@ function __Styles(){
     fractionsDivStyle = {
         position:'absolute',
         top:'30px',
-        left:'313px',
+        left:'150px',
+        height:'40px',
+        width:'180px',
+//        border:'1px solid',
+        fontSize:'16px'
+    };
+
+    equalizedFractionsDivStyle = {
+        position:'absolute',
+        top:'30px',
+        left:'470px',
         height:'40px',
         width:'180px',
 //        border:'1px solid',
