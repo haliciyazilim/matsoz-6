@@ -21,15 +21,16 @@ function InteractiveGrids(opt){
     this.points = [];
     this.vertexes = [];
     this.circles = [];
+    this.lines = [];
     for(var i=0; i<=this.rows; i++){
-        new Path.Line(
+        this.lines.push(new Path.Line(
             this.position.add(0,this.size*i),
             this.position.add(this.size*this.rows,this.size*i)
-        ).set_style(this.style);
-        new Path.Line(
+        ).set_style(this.style));
+        this.lines.push(new Path.Line(
             this.position.add(this.size*i,0),
             this.position.add(this.size*i,this.size*this.cols)
-        ).set_style(this.style);
+        ).set_style(this.style));
     }
     for(var i=0;i<=this.rows;i++)
         for(var j=0;j<=this.cols;j++){
