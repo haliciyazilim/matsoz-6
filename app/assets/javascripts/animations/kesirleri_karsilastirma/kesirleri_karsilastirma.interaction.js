@@ -344,10 +344,10 @@ var Interaction = {
                 .css("opacity", 0)
 
             if(Interaction.qType == 0){
-                Main.setObjective('Yandaki kesirleri <span style="color:red;">büyükten küçüğe</span> sıralayınız. Bunun için kesirleri sağa ya da sola kaydırıp diğer kesirlerle yerlerini değiştirebilirsiniz. Daha sonra aralarına küçük (<) ya da büyük (>) işaretlerinden birini sürükleyerek sıralamayı tamamlayabilirsiniz.');
+                Main.setObjective('Yandaki kesirleri <span style="color:red;font-weight:bold;">büyükten küçüğe</span> sıralayınız. Bunun için kesirleri sağa ya da sola kaydırıp diğer kesirlerle yerlerini değiştirebilirsiniz. Daha sonra aralarına küçük (<) ya da büyük (>) işaretlerinden birini sürükleyerek sıralamayı tamamlayabilirsiniz.');
             }
             else{
-                Main.setObjective('Yandaki kesirleri <span style="color:red;">küçükten büyüğe</span> sıralayınız. Bunun için kesirleri sağa ya da sola kaydırıp diğer kesirlerle yerlerini değiştirebilirsiniz. Daha sonra aralarına küçük (<) ya da büyük (>) işaretlerinden birini sürükleyerek sıralamayı tamamlayabilirsiniz.');
+                Main.setObjective('Yandaki kesirleri <span style="color:red;font-weight:bold;">küçükten büyüğe</span> sıralayınız. Bunun için kesirleri sağa ya da sola kaydırıp diğer kesirlerle yerlerini değiştirebilirsiniz. Daha sonra aralarına küçük (<) ya da büyük (>) işaretlerinden birini sürükleyerek sıralamayı tamamlayabilirsiniz.');
             }
         }
 
