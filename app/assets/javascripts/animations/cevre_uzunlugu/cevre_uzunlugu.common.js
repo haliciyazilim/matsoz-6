@@ -133,25 +133,43 @@ SekilL=function(){
             ortaNokta=new Point();
             ortaNokta.y=ab/2;
             ortaNokta.x=bc/2;
+
+            a=new Point(0,0);
+            b=new Point(0,ab);
+            c=new Point(bc,ab);
+            d=new Point(bc,ab-cd);
+            e=new Point(bc-de,ab-cd);
+            f=new Point(bc-de,0);
+
+            break;
+
+        case 90:
+            ab=Math.floor(Math.random()*5+2)*10;
+            bc=Math.floor(Math.random()*20+10)*10;
+            cd=Math.floor(Math.random()*9+9)*10;
+            de=Math.floor(Math.random()*5+2)*10;
+            ef=cd-ab;
+            fa=bc-de;
+
+            ortaNokta=new Point();
+            ortaNokta.y=cd/2;
+            ortaNokta.x=bc/2;
+
+            a=new Point(0,cd-ab);
+            b=new Point(0,cd);
+            c=new Point(bc,cd);
+            d=new Point(cd,0);
+            e=new Point(fa,0);
+            f=new Point(fa,ef);
+
             break;
     }
 
 
-//    a=new Point(0,0);
-//    b=new Point(0,ab);
-//    c=new Point(bc,ab);
-//    d=new Point(bc,ab-cd);
-//    e=new Point(bc-de,ab-cd);
-//    f=new Point(bc-de,0);
 
-//    var noktalar = [a,b,c,d,e,f];
-    var noktalar=[new Point(0,0),
-    new Point(0,ab),
-    new Point(bc,ab),
-    new Point(bc,ab-cd),
-    new Point(bc-de,ab-cd),
-    new Point(bc-de,0)]
-    console.log(noktalar)
+
+    var noktalar = [a,b,c,d,e,f];
+
 
     var interactionCenterPoint = new Point(220,110);
 
