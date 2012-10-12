@@ -116,13 +116,15 @@ var ExpandableShape = Class.extend({
 	},
 	
 	project: function() {
+        var group = new Group();
 		for (var key in this.surfaces) {
 			if (this.surfaces.hasOwnProperty(key)) {
 				if (this.surfaces[key] instanceof Surface) {
-					this.surfaces[key].project(this.matrix);
+					group.addChild(this.surfaces[key].project(this.matrix));
 				}	
 			}
 		}
+        return group;
 	},
 	
 	rotateSurfaceX: function(surface, angle, center, asynch) {
