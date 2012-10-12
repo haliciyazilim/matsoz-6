@@ -10,7 +10,8 @@ function __Styles(){
         height:'40px',
         width:'180px',
 //        border:'1px solid',
-        fontSize:'16px'
+        fontSize:'16px',
+        opacity:0
     };
 
     equalizedFractionsDivStyle = {
@@ -21,5 +22,24 @@ function __Styles(){
         width:'180px',
 //        border:'1px solid',
         fontSize:'16px'
+    };
+
+    fractionsOnAxisDivStyle = {
+        position:'absolute',
+        top:'152px',
+        left:'244px',
+        height:'40px',
+        width:'380px',
+//        border:'1px solid',
+        fontSize:'16px'
+    };
+
+    informationsDivStyle = {
+        position:'absolute',
+        top:'70px',
+        left:'100px',
+        width:'540px',
+        height:'60px',
+//        border:'1px solid'
     };
 }
