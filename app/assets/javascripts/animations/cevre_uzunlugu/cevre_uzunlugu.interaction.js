@@ -15,13 +15,13 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:"40px",
+            bottom:"10px",
             right:"40px"
         });
 
         Interaction.appendStatus({
-            bottom:"50px",
-            right:"150px"
+            bottom:"20px",
+            right:"200px"
         });
 
         $(container).append("<div id='soru'>");
@@ -41,10 +41,12 @@ var Interaction = {
         $(container).append("<div id='cevap'>");
         $("#cevap").css({
             position:"absolute",
-            width:"135px",
-            height:"50px",
-            right:"11px",
-            top:"130px",
+            width:"420px",
+            height:"25px",
+            right:"0px",
+            left:"0px",
+            bottom:"50px",
+            margin:"auto",
             opacity:0,
             fontSize:"20px",
             textAlign:"center",
@@ -105,8 +107,8 @@ var Interaction = {
         var lineX=new Path.Line(new Point(10,10),new Point(10,210));
         lineX.strokeColor="black";
 
-        soru=new Dikdortgen();
-
+//        soru=new Dikdortgen();
+        soru= new SekilL();
     },
 		
 	/*

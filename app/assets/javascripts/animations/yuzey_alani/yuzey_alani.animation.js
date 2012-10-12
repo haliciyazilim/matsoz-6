@@ -3,16 +3,20 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
+        var square = new Path.Rectangle(new Point(180.5, 8.5), new Point(200.5,28.5));
+        square.strokeColor = '#999';
+        var text1 = new PointText(new Point(176, 40));
+        text1.content = "1 cm²";
+        text1.characterStyle.fontSize = 8;
+        var text2 = new PointText(new Point(204, 22));
+        text2.content = "1 cm²";
+        text2.characterStyle.fontSize = 8;
 
         var matrix = Util.createProjectionMatrixForObjectAt(100,90);
 
         var prism = new ExpandablePrism(60, 80, 40, matrix);
-
-        prism.project();
-
-
-//        Interaction.masterShape = InteractiveGrids.CreateShape(randomNumber);
-
+        var cube = new ExpandablePrism(40, 40, 40, matrix);
+        var squarePrism = new ExpandablePrism(40, 80, 40, matrix);
 
         var prismSurfaces = [
             {
@@ -95,6 +99,21 @@ var Animation = {
             }
         ];
 
+        var shapes = [
+            {
+                shape: prism,
+                surfaces: prismSurfaces
+            },
+            {
+                shape: cube,
+                surfaces: cubeSurfaces
+            },
+            {
+                shape: squarePrism,
+                surfaces: squarePrismSurfaces
+            }
+        ]
+
 
         InteractiveGrids.prototype.appendVertexLetters = function(){};
         var grid = new InteractiveGrids({
@@ -107,58 +126,122 @@ var Animation = {
             }
         });
 
-        var shape1 = new Group();
-        var shape1Calculations = new Group();
-        var shape1Areas = new Group();
+        var shapes3D = [];
+        var shapeGroups = [];
+        var shapeCalculations = [];
+        var shapeAreas = [];
 
-        for (var i = 0; i < 6; i++) {
-            grid.drawShape(squarePrismSurfaces[i].points);
+        var totalDelay = -2000;
 
-            shape1.addChild(grid.path);
-            shape1Calculations.addChild(writeAreaCalculation(squarePrismSurfaces[i], grid));
-            shape1Areas.addChild(writeArea(squarePrismSurfaces[i], grid));
+        for (var i = 0; i < 3; i++) {
+            shapeGroups[i] = new Group();
+            shapeCalculations[i] = new Group();
+            shapeAreas[i] = new Group();
+
+            for (var j = 0; j < 6; j++) {
+                grid.drawShape(shapes[i].surfaces[j].points);
+
+                shapeGroups[i].addChild(grid.path);
+                shapeCalculations[i].addChild(writeAreaCalculation(shapes[i].surfaces[j], grid));
+                shapeAreas[i].addChild(writeArea(shapes[i].surfaces[j], grid));
+            }
+
+            shapes3D[i] = shapes[i].shape.project();
+
+            shapes3D[i].opacity = 0;
+
+            shapeGroups[i].set_style(style);
+
+            shapeGroups[i].opacity = 0;
+            shapeCalculations[i].opacity = 0;
+            shapeAreas[i].opacity = 0;
+
+            shapes3D[i].animate({
+                style: {
+                    opacity: 1
+                },
+                duration: 1000,
+                delay: totalDelay += 2000,
+                animationType: 'easeInEaseOut'
+            });
+
+            shapeGroups[i].animate({
+                style: {
+                    opacity: 1
+                },
+                duration: 1000,
+                delay: totalDelay += 2000,
+                animationType: 'easeInEaseOut'
+            });
+
+            shapeCalculations[i].animate({
+                style: {
+                    opacity: 1
+                },
+                duration: 1000,
+                delay: totalDelay += 2000,
+                animationType: 'easeInEaseOut'
+            });
+
+            shapeCalculations[i].animate({
+                style: {
+                    opacity: 0
+                },
+                duration: 1000,
+                delay: totalDelay += 2000,
+                animationType: 'easeInEaseOut',
+                callback: function() {
+                    this.remove();
+                }
+            });
+
+            shapeAreas[i].animate({
+                style: {
+                    opacity: 1
+                },
+                duration: 1000,
+                delay: totalDelay,
+                animationType: 'easeInEaseOut'
+            });
+
+            if (i < 2) {
+                shapes3D[i].animate({
+                    style: {
+                        opacity: 0
+                    },
+                    duration: 1000,
+                    delay: totalDelay += 2000,
+                    animationType: 'easeInEaseOut',
+                    callback: function() {
+                        this.remove();
+                    }
+                });
+
+                shapeGroups[i].animate({
+                    style: {
+                        opacity: 0
+                    },
+                    duration: 1000,
+                    delay: totalDelay,
+                    animationType: 'easeInEaseOut',
+                    callback: function() {
+                        this.remove();
+                    }
+                });
+
+                shapeAreas[i].animate({
+                    style: {
+                        opacity: 0
+                    },
+                    duration: 1000,
+                    delay: totalDelay,
+                    animationType: 'easeInEaseOut',
+                    callback: function() {
+                        this.remove();
+                        Main.animationFinished();
+                    }
+                });
+            }
         }
-
-        shape1.set_style(style);
-
-        shape1.opacity = 0;
-        shape1Calculations.opacity = 0;
-        shape1Areas.opacity = 0;
-
-        shape1.animate({
-            style: {
-                opacity: 1
-            },
-            duration: 1000,
-            delay: 2000,
-            animationType: 'easeInEaseOut'
-        });
-
-        shape1Calculations.animate({
-            style: {
-                opacity: 1
-            },
-            duration: 1000,
-            delay: 4000,
-            animationType: 'easeInEaseOut'
-        });
-
-        shape1Calculations.animate({
-            style: {
-                opacity: 0
-            },
-            duration: 1000,
-            delay: 6000,
-            animationType: 'easeInEaseOut'
-        });
-
-        shape1Areas.animate({
-            style: {
-                opacity: 1
-            },
-            duration: 1000,
-            delay: 6000,
-            animationType: 'easeInEaseOut'
-        });
     }
 }
