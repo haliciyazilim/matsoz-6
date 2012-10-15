@@ -75,4 +75,13 @@ function __Styles(){
         //    border:'1px solid',
         color:'#069'
     };
+
+    questionDivStyle = {
+        position:'absolute',
+        top:'40px',
+        left:'120px',
+        width:'300px',
+        height:'60px',
+        fontSize:'24px'
+    };
 }
