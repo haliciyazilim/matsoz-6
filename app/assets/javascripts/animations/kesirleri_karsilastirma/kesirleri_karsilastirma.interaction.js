@@ -423,7 +423,6 @@ var Interaction = {
 
     },
     onCorrectAnswer : function(){
-        console.log("entered onCorrectAnswer");
         for(var i = 0; i < Interaction.numOfFracs; i++){
             if(Interaction.userAnswerArr[i] == Interaction.answerIdsArray[i])
                 $("#"+Interaction.userAnswerArr[i]).css("color", "green");
@@ -443,7 +442,6 @@ var Interaction = {
             Interaction.nom2[i] = Interaction.nom[i]*(Interaction.lcm/Interaction.denom[i]);
             Interaction.denom2[i] = Interaction.lcm;
         }
-        console.log("before getNumeriacalAxis");
         Interaction.GetNumericalAxis(Interaction.lcm);
     },
     onWrongAnswer : function(){
