@@ -1,1 +1,0 @@
-var Animation={images:[],init:function(e){Animation.container=e,Main.animationFinished(1e3)}};
