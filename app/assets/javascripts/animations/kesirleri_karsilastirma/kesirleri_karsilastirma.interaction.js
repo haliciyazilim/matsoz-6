@@ -366,6 +366,7 @@ var Interaction = {
 
     },
     isAnswerCorrect : function(value){
+
         Interaction.userAnswerArr = [];
         if(Interaction.qType == 1){
             Interaction.frac = [];
@@ -416,12 +417,34 @@ var Interaction = {
             $('#sortingDiv img').draggable("disable");
             return true;
         }
-        else
+        else{
             return false;
+        }
 
     },
     onCorrectAnswer : function(){
+        console.log("entered onCorrectAnswer");
+        for(var i = 0; i < Interaction.numOfFracs; i++){
+            if(Interaction.userAnswerArr[i] == Interaction.answerIdsArray[i])
+                $("#"+Interaction.userAnswerArr[i]).css("color", "green");
+            else
+                $("#"+Interaction.userAnswerArr[i]).css("color", "red");
+        }
+        Interaction.nom2 = [];
+        Interaction.denom2 = [];
+        $(Interaction.sortingUl).sortable({disabled: true});
 
+        if(Interaction.numOfFracs == 5)
+            Interaction.lcm = Util.lcm(Interaction.denom[0], Util.lcm(Interaction.denom[1],Interaction.denom[2],Interaction.denom[3],Interaction.denom[4]));
+        else
+            Interaction.lcm = Util.lcm(Interaction.denom[0],Interaction.denom[1],Interaction.denom[2],Interaction.denom[3])
+
+        for(var i = 0; i < Interaction.numOfFracs; i++){
+            Interaction.nom2[i] = Interaction.nom[i]*(Interaction.lcm/Interaction.denom[i]);
+            Interaction.denom2[i] = Interaction.lcm;
+        }
+        console.log("before getNumeriacalAxis");
+        Interaction.GetNumericalAxis(Interaction.lcm);
     },
     onWrongAnswer : function(){
 
