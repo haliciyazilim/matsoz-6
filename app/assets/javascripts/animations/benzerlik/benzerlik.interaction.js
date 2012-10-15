@@ -24,14 +24,14 @@ var Interaction = {
         });
         Interaction.size = 30;
         Interaction.referencePoint = new Point(10,10);
-        Interaction.boundary = new Path.Rectangle(Interaction.referencePoint,new Size(400,250));
+        Interaction.boundary = new Path.Rectangle(Interaction.referencePoint,new Size(400,270));
         Interaction.boundary.set_style(interactionBoundaryStyle);
         Interaction.centerPoint = new Point(
             Interaction.boundary.bounds.x + Interaction.boundary.bounds.width*0.5,
             Interaction.boundary.bounds.y + Interaction.boundary.bounds.height*0.5
         )
         Interaction.createTool();
-        Interaction.setRandomGenerator(11);
+        Interaction.setRandomGenerator(19);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -43,7 +43,7 @@ var Interaction = {
         Interaction.button.className = 'next_button';
         Interaction.button.onclick = Interaction.prepareNextQuestion;
         /*<[[TEST*/
-            randomNumber = 18;
+//            randomNumber = 18;
         /*TEST]]>*/
         var points = Interaction.generateShape(randomNumber);
         var path = new Path();
@@ -60,8 +60,6 @@ var Interaction = {
         Interaction.path.centerPoint = Util.centerOfPoints(points);
         var differenceToInteractionCenterPoint = Interaction.centerPoint.subtract(Interaction.path.centerPoint);
         Interaction.path.position = Interaction.path.position.add(differenceToInteractionCenterPoint);
-
-
 //        Interaction.pathBounds = new Path.Rectangle(Interaction.path.bounds);
 //        Interaction.pathBounds.set_style(interactionPathBoundsStyle);
 //        Interaction.path.insertAbove(Interaction.pathBounds);

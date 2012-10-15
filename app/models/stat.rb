@@ -7,7 +7,7 @@ class Stat < ActiveRecord::Base
   attr_accessible :date, :accepted, :delivered, :finished, :started, :rejected, :unscheduled
   
   def Stat.total
-    83
+    81
   end
   
   def received
