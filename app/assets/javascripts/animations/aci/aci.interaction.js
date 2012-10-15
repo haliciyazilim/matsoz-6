@@ -42,18 +42,19 @@ var Interaction = {
         var myCenterPoint = new Point(200,200);
         var circ1 = new Path.Circle(myCenterPoint,6);
         circ1.fillColor = 'black';
-        var referencePoint = new Point(myCenterPoint.x,myCenterPoint.y-80);
+        var referencePoint = new Point(myCenterPoint.x,myCenterPoint.y-120);
         var point1 = referencePoint.getRotatedPoint(-myAngle/2,myCenterPoint);
         var point2 = referencePoint.getRotatedPoint(myAngle/2,myCenterPoint);
         var circ2 = new Path.Circle(point1,6);
         circ2.fillColor = 'black';
-        var circ3 = new Path.Circle(point1,6);
+        var circ3 = new Path.Circle(point2,6);
         circ3.fillColor = 'black';
         Interaction.angle = new Path();
         Interaction.angle.moveTo(point1);
         Interaction.angle.lineTo(myCenterPoint);
         Interaction.angle.lineTo(point2);
         Interaction.angle.strokeColor = 'black';
+        Interaction.angle.strokeWidth = 2;
     },
 	preCheck : function(){
 
