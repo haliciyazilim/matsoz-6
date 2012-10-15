@@ -4,6 +4,18 @@ var Interaction = {
         return 'paper';
     },
 	images:[
+        {
+            id:'compass_left_leg',
+            src:'/assets/animations/compass_left_leg.png'
+        },
+        {
+            id:'compass_knuckle',
+            src:'/assets/animations/compass_knuckle.png'
+        },
+        {
+            id:'compass_right_leg',
+            src:'/assets/animations/compass_right_leg.png'
+        }
         
     ],
     init:function(container){
@@ -17,13 +29,32 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        if(Interaction.angle){
+            Interaction.angle.remove();
+        }
+        if(Interaction.compass){
+            Interaction.compass.remove();
+        }
+        Interaction.br = 12;
+        Interaction.step2 = false;
+        initCompass(new Point(440,140));
+        var myAngle = Util.randomInteger(30,141);
+        var myCenterPoint = new Point(200,200);
+        var circ1 = new Path.Circle(myCenterPoint,6);
+        circ1.fillColor = 'black';
+        var referencePoint = new Point(myCenterPoint.x,myCenterPoint.y-80);
+        var point1 = referencePoint.getRotatedPoint(-myAngle/2,myCenterPoint);
+        var point2 = referencePoint.getRotatedPoint(myAngle/2,myCenterPoint);
+        var circ2 = new Path.Circle(point1,6);
+        circ2.fillColor = 'black';
+        var circ3 = new Path.Circle(point1,6);
+        circ3.fillColor = 'black';
+        Interaction.angle = new Path();
+        Interaction.angle.moveTo(point1);
+        Interaction.angle.lineTo(myCenterPoint);
+        Interaction.angle.lineTo(point2);
+        Interaction.angle.strokeColor = 'black';
     },
-		
-	/*
-	*	this function is called inside Interaction.__checkAnswer() function
-	*	if this function returns false, check answer operation is cancelled
-	*/
 	preCheck : function(){
 
     },
