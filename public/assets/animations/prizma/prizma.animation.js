@@ -1,0 +1,1 @@
+var Animation={images:[],init:function(e){Animation.container=e,$(e).append("<div id='aciklama'>"),$("#aciklama").css({position:"absolute",width:"120px",height:"20px",top:"0",bottom:"0",right:"100px",margin:"auto",opacity:"0"}),ciz("dikKare",350,90,"ornek"),Main.animationFinished(5e4)}};
