@@ -1,0 +1,1 @@
+var Animation={images:[{id:"deneme",src:"/assets/deneme.jpg"}],init:function(e){Animation.container=e,Main.animationFinished()}};
