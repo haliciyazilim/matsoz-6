@@ -8,14 +8,14 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yanda verilen dikdörtgenin alanını bulunuz ve kontrol ediniz.');
+        Main.setObjective('Yanda verilen çarpma işleminin sonucunu bulunuz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
         };
 
         Interaction.appendStatus({
-            bottom:'20px',
+            bottom:'30px',
             right:'150px',
             width:'370px',
             height:'26px',
@@ -23,29 +23,14 @@ var Interaction = {
             //    border:'1px solid'
         });
         Interaction.appendButton({
-            bottom:'20px',
+            bottom:'30px',
             right:'30px'
         });
 
-        Interaction.questionRectangle = new Path.Rectangle(new Point(40,20), new Size(120,90));
-        Interaction.questionRectangle.strokeColor = interactionRectStrokeColor;
-        Interaction.questionRectangle.strokeWidth = 2;
-        Interaction.questionRectangle.fillColor = interactionRectFillColor;
-
-        var firstFrac = Util.dom({parent:Interaction.container, tag:'div', css:firstFracStyle,
-            html:'<div id="fracc1" style="position:absolute;top:0px;left:0px;width:65px;height:60px;"></div>' +
-                '<span id="unit1" style="position:absolute;top:14px;left:72px;">cm</span>'
-        });
-
-        var secondFrac = Util.dom({parent:Interaction.container, tag:'div', css:secondFracStyle,
-            html:'<div id="fracc2" style="position:absolute;top:0px;left:0px;width:65px;height:60px;"></div>' +
-                '<span id="unit2" style="position:absolute;top:14px;left:72px;">cm</span>'
-        });
-
         Interaction.appendInput({
             position:'absolute',
-            top:'30px',
-            left:'432px',
+            top:'-9px',
+            left:'202px',
             height:'32px',
             width:'42px',
             fontSize:'22px'
@@ -53,21 +38,26 @@ var Interaction = {
 
         Interaction.appendInput({
             position:'absolute',
-            top:'76px',
-            left:'432px',
+            top:'35px',
+            left:'202px',
             height:'32px',
             width:'42px',
             fontSize:'22px'
         });
 
-        $(Interaction.container).append('<div id="ansLine" style="position:absolute;top:69px;left:430px;height:1px;width:48px;border-top:2px solid;padding:0;margin:0;"></div>' +
-            '<span id="answerUn" style="position:absolute;top:60px;left:490px;font-size:20px;">cm²</span>');
+        Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle,
+            html:'<div id="firstFracDiv" style="position:absolute;top:0px;left:0px;width:65px;height:60px;"></div>' +
+                '<span id="intPlus" style="position:absolute;top:17px;left:76px;font-weight:bold;">•</span>' +
+                '</div><div id="secondFracDiv" style="position:absolute;top:0px;left:96px;width:65px;height:60px;"></div>' +
+                '<span id="intEq" style="position:absolute;top:18px;left:170px;">=</span>' +
+                '<div id="answerLine" style="position:absolute;top:29px;left:200px;width:48px;height:1px;border-top:2px solid;padding:0"></div>'
+        });
 
         $(Interaction.inputs[0]).attr("max-length",3);
         $(Interaction.inputs[1]).attr("max-length",3);
 
-        $(Interaction.container).append(Interaction.inputs[0]);
-        $(Interaction.container).append(Interaction.inputs[1]);
+        $(Interaction.questionDiv).append(Interaction.inputs[0]);
+        $(Interaction.questionDiv).append(Interaction.inputs[1]);
 
         Interaction.prepareNextQuestion();
     },
@@ -77,8 +67,8 @@ var Interaction = {
             $(Interaction.answerDiv).remove();
         }
 
-        $('#fracc1').html('');
-        $('#fracc2').html('');
+        $('#firstFracDiv').html('');
+        $('#secondFracDiv').html('');
 
         $(Interaction.inputs[0]).css("color","black");
         $(Interaction.inputs[1]).css("color","black");
@@ -129,10 +119,25 @@ var Interaction = {
         Interaction.firstH = Interaction.firstFrac.toHTML(20);
         $(Interaction.firstH).css("right","0px");
         Interaction.secondH = Interaction.secondFrac.toHTML(20);
-        $(Interaction.secondH).css("right","0px");
+        $(Interaction.secondH).css("left","0px");
 
-        $('#fracc1').append(Interaction.firstH);
-        $('#fracc2').append(Interaction.secondH);
+        if(Interaction.secondFrac.integer){
+            $('#intEq').css("left","170px");
+            $('#answerLine').css("left","196px");
+            $(Interaction.inputs[0]).css("left","198px");
+            $(Interaction.inputs[1]).css("left","198px");
+            $(Interaction.questionDiv).css("left","140px");
+        }
+        else{
+            $('#intEq').css("left","140px");
+            $('#answerLine').css("left","164px");
+            $(Interaction.inputs[0]).css("left","166px");
+            $(Interaction.inputs[1]).css("left","166px");
+            $(Interaction.questionDiv).css("left","150px")
+        }
+
+        $('#firstFracDiv').append(Interaction.firstH);
+        $('#secondFracDiv').append(Interaction.secondH);
     },
 	preCheck : function(){
 
