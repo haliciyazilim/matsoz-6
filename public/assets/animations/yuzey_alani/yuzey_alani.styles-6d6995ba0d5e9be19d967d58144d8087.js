@@ -1,1 +1,0 @@
-function __Styles(){fillColor=new RgbColor(.75,.91,.94,.7),strokeColor="#255b63",strokeWidth=1,style={fillColor:fillColor,strokeColor:strokeColor,strokeWidth:strokeWidth}};
