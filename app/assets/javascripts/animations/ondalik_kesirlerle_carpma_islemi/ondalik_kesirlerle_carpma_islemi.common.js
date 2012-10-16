@@ -3,10 +3,14 @@ function carpma(){
     carpim1OndalikSecim=Math.floor(Math.random()*100);
     carpan1=Math.floor(Math.random()*1000);
     carpan1=carpim1OndalikSecim<50?carpan1/10:carpan1/100;
-    console.log(carpan1);
 
     carpan2=(Math.random()*10).toFixed(1);
 
+
+    carpan1=36.9;
+    carpan2=4.3;
+
+    console.log(carpan1);
     console.log(carpan2);
 
     carpan1Array=0;
@@ -16,15 +20,20 @@ function carpma(){
         carpan1Array=carpan1.toString().split(".");
         carpan1VirguldenSonra=carpan1Array[1].length;
     }
-    else
+    else{
+        carpan1Array=[carpan1];
         carpan1VirguldenSonra=0;
+    }
 
     if(Util.isInteger(carpan2)==false){
         carpan2Array=carpan2.toString().split(".");
         carpan2VirguldenSonra=carpan2Array[1].length;
     }
-    else
+    else{
+        carpan2=parseInt(carpan2,10);
+        carpan2Array=[carpan2];
         carpan2VirguldenSonra=0;
+    }
 
 
     var virgulFark=carpan1VirguldenSonra-carpan2VirguldenSonra;
@@ -55,13 +64,15 @@ function carpma(){
         .html("x");
 
 
-    var carpan1Str=Util.isInteger(carpan1)==false?carpan1Array[0]+""+carpan1Array[1]:parseInt(carpan1,10);
-    var carpan2Str=Util.isInteger(carpan2)==false?carpan2Array[0]+""+carpan2Array[1]:parseInt(carpan2,10);
+    carpan1Str=Util.isInteger(carpan1)==false?carpan1Array[0]+""+carpan1Array[1]:parseInt(carpan1,10);
+    carpan2Str=Util.isInteger(carpan2)==false?carpan2Array[0]+""+carpan2Array[1]:parseInt(carpan2,10);
 
-    console.log(carpan1Str+","+carpan2Str);
+    console.log("çarpanlar: "+carpan1Str+","+carpan2Str);
 
+    carpan1Str=carpan1Str.toString();
+    carpan2Str=carpan2Str.toString();
 
-    var icerik= new Array();
+    icerik= new Array();
     for (var i=0; i<=carpan2Str.length; i++){
         icerik[i]=carpan1Str*carpan2Str.charAt(carpan2Str.length-i);
 
@@ -119,7 +130,7 @@ function carpma(){
         $("#soru",container).append(input);
 
 
-        if(i==(carpan2Str.length-1)){
+        if(i==(carpan2Str.length-1) &&carpan2Str.length>1){
             $("#soru",container).append("<div id='toplamaIsareti'>");
             $("#toplamaIsareti").css("width",120+i*20+"px")
                 .css("text-align","left")
