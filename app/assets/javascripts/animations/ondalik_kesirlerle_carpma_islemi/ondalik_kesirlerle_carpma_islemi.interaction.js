@@ -39,7 +39,7 @@ var Interaction = {
             .css("top","0px")
             .css("font-size","20px")
             .css("opacity","0");
-        //.css("border","solid 1px black");
+
 
 
         Interaction.appendButton({
@@ -75,45 +75,75 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(values){
-        girdi1=$("#soru #sonuc1").html();
-        girdi2=$("#soru #sonuc2").html();
-        girdiToplam=$("#soru #sonucToplam").html();
 
-        cevap1=values[0];
-        cevap2=values[1];
-        cevap3=values[2];
+        if(carpan2Str.length>1){
+            girdi1=$("#soru #sonuc1").html();
+            girdi2=$("#soru #sonuc2").html();
+            girdiToplam=$("#soru #sonucToplam").html();
+
+            cevap1=values[0];
+            cevap2=values[1];
+            cevap3=values[2];
 
 
-        cevap3Array=cevap3.split(",");
+            cevap3Array=cevap3.split(",");
 
-        if(cevap3Array[0])
-            cevap3=cevap3Array[0]+"."+cevap3Array[1];
+            if(cevap3Array[0])
+                cevap3=cevap3Array[0]+"."+cevap3Array[1];
 
-        console.log(cevap1+", "+cevap2+", "+cevap3);
-        console.log(girdi1+", "+girdi2+", "+girdiToplam);
+            console.log(cevap1+", "+cevap2+", "+cevap3);
+            console.log(girdi1+", "+girdi2+", "+girdiToplam);
 
-        yanlislar=[];
-        if(cevap1==girdi1 && cevap2==girdi2 && cevap3==girdiToplam)
-            return true;
-        else{
-            if(cevap1!=girdi1)
-                yanlislar.push(1);
-            if(cevap2!=girdi2)
-                yanlislar.push(2);
-            if(cevap3!=girdiToplam)
-                yanlislar.push(3);
+            yanlislar=[];
+            if(cevap1==girdi1 && cevap2==girdi2 && cevap3==girdiToplam)
+                return true;
+            else{
+                if(cevap1!=girdi1)
+                    yanlislar.push(1);
+                if(cevap2!=girdi2)
+                    yanlislar.push(2);
+                if(cevap3!=girdiToplam)
+                    yanlislar.push(3);
+            }
         }
 
+        else  if(carpan2Str.length==1){
+            girdi1=carpan1*carpan2;
+
+            cevap1=values;
+
+
+
+            cevap1Array=cevap1.split(",");
+
+            if(cevap1Array[0])
+                cevap1=cevap1Array[0]+"."+cevap1Array[1];
+
+            console.log(cevap1);
+            console.log(girdi1);
+
+            yanlislar=[];
+            if(cevap1==girdi1)
+                return true;
+            else{
+                if(cevap1!=girdi1)
+                    yanlislar.push(1);
+            }
+        }
 
     },
 	onCorrectAnswer : function(){
         Interaction.pause();
+        $("input[type='button']").css({opacity:0.5})
+        $("#cevap").animate({opacity:1, right:"150px"},1000);
+        $("#soru").animate({opacity:1, right:"200px"},1000);
         var islem=new DecimalMultiplication(carpan1,carpan2,"cevap",30);
         //var islem=new LongMultiplication(178,172,"ornek");
         islem.doldur();
         islem.basla(1000,1000);
+        var bitirmeSuresi=carpan2Str.length==1?10000:35000;
 
-        setTimeout(function(){Interaction.resume();},39000);
+        setTimeout(function(){Interaction.resume(); $("input[type='button']").css({opacity:1});},bitirmeSuresi);
 		
     },
 	onWrongAnswer : function(){
@@ -121,6 +151,8 @@ var Interaction = {
     },
 	onFail : function(){
         Interaction.pause();
+        $("input[type='button']").css({opacity:0.5})
+
         $("#soru input").css("color","green");
         for(var i=0; i<yanlislar.length;i++){
             var yesillenecek=yanlislar[i];
@@ -137,8 +169,11 @@ var Interaction = {
         //var islem=new LongMultiplication(178,172,"ornek");
         islem.doldur();
         islem.basla(1000,1000);
+        var bitirmeSuresi=carpan2Str.length==1?10000:35000;
 
-        setTimeout(function(){Interaction.resume();},39000);
+
+
+        setTimeout(function(){Interaction.resume(); $("input[type='button']").css({opacity:1});},bitirmeSuresi);
 		
     }
 }
