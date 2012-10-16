@@ -1,0 +1,1 @@
+var Shape=Class.extend({init:function(){this.vertexes=[],this.edges=[]},drawShape:function(e){var t=new Path},removeShape:function(){}}),Vertex=Class.extend({init:function(){this.id=Vertex.GetId()},isEqual:function(e){return this.id==e.id}});Vertex.GetId=function(){return Vertex._id==undefined&&(Vertex._id=1),Vertex._id++};var Edge=Class.extend({init:function(e){}});

@@ -1,0 +1,1 @@
+var writeArea=function(e){var t=new Point(0,0);for(var n=0;n<e.points.length;n++)t.add(e.points[n]),console.log(t)};
