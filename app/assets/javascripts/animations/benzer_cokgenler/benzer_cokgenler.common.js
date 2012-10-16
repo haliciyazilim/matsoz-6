@@ -22,16 +22,17 @@ function InteractiveGrids(opt){
     this.vertexes = [];
     this.circles = [];
     this.lines = [];
-    for(var i=0; i<=this.rows; i++){
+    for(var i=0; i<=this.rows; i++)
         this.lines.push(new Path.Line(
             this.position.add(0,this.size*i),
-            this.position.add(this.size*this.rows,this.size*i)
+            this.position.add(this.size*this.cols,this.size*i)
         ).set_style(this.style));
+    for(var i=0; i<=this.cols;i++)
         this.lines.push(new Path.Line(
             this.position.add(this.size*i,0),
-            this.position.add(this.size*i,this.size*this.cols)
+            this.position.add(this.size*i,this.size*this.rows)
         ).set_style(this.style));
-    }
+
     for(var i=0;i<=this.rows;i++)
         for(var j=0;j<=this.cols;j++){
             var point = this.position.add(this.size*i,this.size*j);
@@ -154,7 +155,6 @@ InteractiveGrids.prototype.createTool = function(){
         else if(event.item && event.item.class == "SelectedGridCircles"+self.id && self.points.length > 2){
             self.path.closed = true;
             self.disableDraw = true;
-//            this.remove();
         }
     }
     tool.activate();
