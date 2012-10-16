@@ -222,6 +222,14 @@ p.exampleHeader {
 	border:none;
 }
 
+.draw_text_button{
+    background-image:url(/assets/btn_gray_draw_text.png);
+    background-color: #fff;
+    height:31px;
+    width:55px;
+    border:none;
+}
+
 .play_button{
 	background-image:url(/assets/btn_play.png);
 	background-color: #fff;
