@@ -14,9 +14,9 @@ var Animation = {
 
         var matrix = Util.createProjectionMatrixForObjectAt(100,90);
 
-        var prism = new ExpandablePrism(60, 80, 40, matrix);
-        var cube = new ExpandablePrism(40, 40, 40, matrix);
-        var squarePrism = new ExpandablePrism(40, 80, 40, matrix);
+        var prism = new Prism(3, 4, 2, matrix);
+        var cube = new Prism(2, 2, 2, matrix);
+        var squarePrism = new Prism(2, 4, 2, matrix);
 
         var prismSurfaces = [
             {
@@ -147,7 +147,7 @@ var Animation = {
             }
 
             shapes3D[i] = shapes[i].shape.project();
-
+            shapes3D[i].addChild(shapes[i].shape.showDimensions());
             shapes3D[i].opacity = 0;
 
             shapeGroups[i].set_style(style);
@@ -204,6 +204,28 @@ var Animation = {
                 animationType: 'easeInEaseOut'
             });
 
+            var areaSteps = shapes[i].shape.areaCalculationSteps();
+            var startPoint = new Point(520, 50);
+            var increment = new Point(0, 20);
+            var areaStepsGroup = new Group();
+
+            for (var ii = 0; ii < areaSteps.length; ii++) {
+                var text = new PointText(startPoint);
+                text.content = areaSteps[ii];
+                areaStepsGroup.addChild(text);
+                text.opacity = 0;
+                text.animate({
+                    style: {
+                        opacity: 1
+                    },
+                    duration: 1000,
+                    delay: totalDelay += 1000,
+                    animationType: 'easeInEaseOut'
+                });
+
+                startPoint = startPoint.add(increment);
+            }
+
             if (i < 2) {
                 shapes3D[i].animate({
                     style: {
@@ -238,7 +260,18 @@ var Animation = {
                     animationType: 'easeInEaseOut',
                     callback: function() {
                         this.remove();
-                        Main.animationFinished();
+                    }
+                });
+
+                areaStepsGroup.animate({
+                    style: {
+                        opacity: 0
+                    },
+                    duration: 1000,
+                    delay: totalDelay,
+                    animationType: 'easeInEaseOut',
+                    callback: function() {
+                        this.remove();
                     }
                 });
             }

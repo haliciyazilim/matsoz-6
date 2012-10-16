@@ -26,7 +26,7 @@ function drawCompass(dx){
     if(dx == null || dx == undefined){
         dx = 0;
     }
-    if(Interaction.compass.d + dx > Interaction.br*9 ||
+    if(Interaction.compass.d + dx > Interaction.br*6 ||
         Interaction.compass.d + dx < Interaction.br*3) {
         return;
     }
