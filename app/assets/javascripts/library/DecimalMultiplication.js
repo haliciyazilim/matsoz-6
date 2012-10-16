@@ -95,7 +95,7 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
         virgulFarki=carpim1VirguldenSonraBasamak-carpim2VirguldenSonraBasamak;
         if(virgulFarki>0){
             $(this.div+" #carpim2")
-                .css("right",this.fontSize*18/30)
+                .css("right",this.fontSize*virgulFarki*18/30)
         }
         else if(virgulFarki<0){
             $(this.div+" #carpim1")
@@ -270,6 +270,10 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
         $(this.div+" #virgul2").css("top","1px");
         $(this.div+" #virgul3").css("top","1px").css("opacity","0");
 
+        if(carpim2.toString().length==1)
+            $(this.div+" #virgul2").css("opacity","0");
+
+
         switch (carpim1VirguldenSonraBasamak){
 
             case 1:
@@ -304,6 +308,12 @@ function DecimalMultiplication(carpim1, carpim2, div, fontSize){
                 $(this.div+" #virgul3").css("right",this.fontSize*46/30)
                 break
         }
+
+        virgulFark=carpim1VirguldenSonraBasamak-carpim2VirguldenSonraBasamak;
+        if(Util.isInteger(carpim2)==true)
+            $(this.div +"#carpim2").css("margin-right",virgulFark*20+3);
+        else
+            $(this.div +"#carpim2").css("margin-right",virgulFark*20);
     }
 
 this.basla=function(hizB,hizA){
@@ -482,32 +492,38 @@ this.basla=function(hizB,hizA){
 
         zamanCizgisi+=sayac;
             console.log("zamanCizgisi: "+zamanCizgisi);
-          
 
         $("#"+div+" #ikinciBasamak"+i).delay(sayac-hizA*2).animate({color:sayilarFadeOutRenk},hizA);
-        if(i==1){
-            i++;
-            setTimeout(function(){yanmaTekDongu(i);},zamanCizgisi);
-            
-        }
-        else if(i==2){
-            i++;
-            if(Interaction.carpim2BasamakSayisi==3)
+        if(carpim2.length>1){
+
+            if(i==1){
+                i++;
                 setTimeout(function(){yanmaTekDongu(i);},zamanCizgisi);
+
+            }
+            else if(i==2){
+                i++;
+                if(Interaction.carpim2BasamakSayisi==3)
+                    setTimeout(function(){yanmaTekDongu(i);},zamanCizgisi);
+                else{
+                    console.log("girdim");
+                    $("#"+div+" #isaretToplama").delay(zamanCizgisi).animate({opacity:"1"},hizA);
+                    setTimeout(function(){toplama(zamanCizgisi);},zamanCizgisi);
+                }
+            }
+
+
             else{
                 console.log("girdim");
                 $("#"+div+" #isaretToplama").delay(zamanCizgisi).animate({opacity:"1"},hizA);
                 setTimeout(function(){toplama(zamanCizgisi);},zamanCizgisi);
+
+
             }
         }
-        
-        
         else{
-            console.log("girdim");
-            $("#"+div+" #isaretToplama").delay(zamanCizgisi).animate({opacity:"1"},hizA);
-            setTimeout(function(){toplama(zamanCizgisi);},zamanCizgisi);
-            
-            
+            console.log("virgülün açılması lazım "+div );
+            $("#"+div+" #virgul3").css({top:-35}).delay(zamanCizgisi).animate({opacity:"1"},1000);
         }
         
     }
