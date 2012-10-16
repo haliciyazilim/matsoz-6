@@ -45,15 +45,16 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-        var numbers = new LinearPattern(1,Util.randomInteger(0,3),4).numbers;
+        var numbers = new LinearPattern(1,0/*Util.randomInteger(0,3)*/,4).numbers;
         console.log(numbers);
         var totalWidth = 1;
+        var patternName;
         for(var i=0; i < numbers.length; i++){
             var pattern;
             switch(randomNumber){
                 default:
+                    patternName = 'TriangleShapePattern';
                     pattern = new TriangleShapePattern({position:new Point(0,1)});
-
             }
             pattern.number = numbers[i];
             pattern.position = pattern.position.add(new Point(totalWidth,0));
@@ -63,7 +64,7 @@ var Interaction = {
             else
                 Interaction.correctAnswer = pattern;
         }
-
+        Interaction.inputGrids.createTool(patternName);
 
     },
 		
@@ -74,8 +75,10 @@ var Interaction = {
 	preCheck : function(){
 
     },
-	isAnswerCorrect : function(value){
-
+	isAnswerCorrect : function(){
+        if(Interaction.inputGrids.getInputPattern().isEqual(Interaction.correctAnswer))
+            return true;
+        return false;
     },
 	onCorrectAnswer : function(){
 		
@@ -85,8 +88,5 @@ var Interaction = {
     },
 	onFail : function(){
 		
-    },
-    createTool:function(){
-
     }
 }

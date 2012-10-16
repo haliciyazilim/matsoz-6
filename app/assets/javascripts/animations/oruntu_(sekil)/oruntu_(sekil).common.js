@@ -22,7 +22,7 @@ var ShapePattern = Class.extend({
             equalsFlag.push(false);
         for(var i=0 ; i <length; i++)
             for(var j=0; j < length ;j++)
-                if(this.shapePoints[i].equals(other.shapePoints[i]))
+                if(this.shapePoints[i].equals(other.shapePoints[j]))
                     equalsFlag[i] = true;
         this.generateShapePoints();
         other.generateShapePoints();
@@ -55,27 +55,88 @@ InteractiveGrids.prototype.drawPattern = function(pattern){
     pattern.generateShapePoints();
     for(var i=0; i<pattern.shapePoints.length; i++){
         absolutePoints.push(
-            pattern.shapePoints[i]
-                .multiply(1,-1)
-                .add(0,this.rows-1)
-                .multiply(this.size,this.size)
-                .add(this.position)
+            this.extractAbsolutePointFromGridPoint(
+                pattern.shapePoints[i]
+                    .multiply(1,-1)
+                    .add(0,this.rows-1)
+            )
         );
-
     }
-//    console.log(absolutePoints);
     for(var i=0; i < absolutePoints.length ;i++){
         pattern.drawAPiece(absolutePoints[i],this.size);
     }
 }
+InteractiveGrids.prototype.createTool = function(patternName){
+    var tool = new Tool();
+    var pattern = new window[patternName]({});
+    var inputPoints = [];
+    var self = this;
+    tool.onMouseDown = function(event){
+        var gridPoint = self.extractGridPointFromAbsolutePoint(event.point);
+        for(var i=0;i < inputPoints.length; i++)
+            if(inputPoints[i].equals(gridPoint)){
+                gridPoint = false;
+                break;
+            }
+        if(gridPoint  != false){
+            inputPoints.push(gridPoint);
+            pattern.drawAPiece(self.extractAbsolutePointFromGridPoint(gridPoint),self.size);
+        }
+    }
+    this.inputPattern = pattern;
+    this.inputPoints = inputPoints;
+}
+InteractiveGrids.prototype.getInputPattern = function(){
+    this.inputPattern.shapePoints = [];
+    for(var i=0; i<this.inputPoints.length; i++)
+        this.inputPattern.shapePoints[i] = this.inputPoints[i].subtract(0,this.rows).multiply(1,-1);
+    var minX = this.inputPattern.shapePoints[0].x,minY = this.inputPattern.shapePoints[0].y;
+    for(var i=1; i<this.inputPoints.length; i++)
+        if(minX > this.inputPattern.shapePoints[i].x)
+            minX = this.inputPattern.shapePoints[i].x;
+    for(var i=1; i<this.inputPoints.length; i++)
+        if(minY > this.inputPattern.shapePoints[i].y)
+            minY = this.inputPattern.shapePoints[i].y;
+    for(var i=0; i<this.inputPoints.length; i++)
+        this.inputPattern.shapePoints[i] = this.inputPattern.shapePoints[i].subtract(minX,minY);
 
+    this.inputPattern.generateShapePoints = function(){
+        return this.shapePoints;
+    }
+    return this.inputPattern;
+}
+
+InteractiveGrids.prototype.extractAbsolutePointFromGridPoint = function(gridPoint){
+    return gridPoint
+        .multiply(this.size,this.size)
+        .add(this.position)
+}
+InteractiveGrids.prototype.extractGridPointFromAbsolutePoint = function(absolutePoint){
+    absolutePoint = absolutePoint.subtract(this.position);
+//    console.log(absolutePoint.x,this.size)
+    var gridPoint = new Point(
+        Util.floor(absolutePoint.x,this.size),
+        Util.floor(absolutePoint.y,this.size)
+    ).divide(this.size,this.size)
+//    console.log(gridPoint);
+    if(gridPoint.x >= this.cols)
+        return false;
+    if(gridPoint.x < 0)
+        return false;
+    if(gridPoint.y >= this.rows)
+        return false;
+    if(gridPoint.y < 0)
+        return false;
+    return gridPoint;
+}
 
 var TriangleShapePattern = ShapePattern.extend({
     init:function(opt){
         this._super(opt);
         this.patternStyle = {
             strokeColor:'dark',
-            fillColor:'red'
+            fillColor:'red',
+            opacity:0.8
         }
     },
     generateShapePoints:function(relativePoints){
@@ -105,4 +166,4 @@ var TriangleShapePattern = ShapePattern.extend({
         path.set_style(this.patternStyle);
         return path;
     }
-})
+});
