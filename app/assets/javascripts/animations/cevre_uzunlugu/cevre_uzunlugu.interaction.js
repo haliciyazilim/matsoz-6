@@ -93,22 +93,52 @@ var Interaction = {
 
 
 
-
+        Interaction.soruArray=Util.getShuffledArray(5);
+        Interaction.soruSirasi=0;
 
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        $("input").css({color:"black"});
+
         Main.interactionProject.activeLayer.removeChildren();
         $("#cevap").animate({opacity:0},1000);
 
-        var lineY=new Path.Line(new Point(10,210),new Point(430,210));
+        /*var lineY=new Path.Line(new Point(10,210),new Point(430,210));
         lineY.strokeColor="black";
 
         var lineX=new Path.Line(new Point(10,10),new Point(10,210));
-        lineX.strokeColor="black";
+        lineX.strokeColor="black";*/
+
+        var simdikiSoru=Interaction.soruArray[Interaction.soruSirasi];
+
+        switch (simdikiSoru){
+            case 0:
+                soru=new Dikdortgen();
+                break;
+            case 1:
+                soru= new SekilL1();
+                break;
+            case 2:
+                soru= new SekilL2();
+                break;
+            case 3:
+                soru= new SekilL3();
+                break;
+            case 4:
+                soru= new SekilL4();
+                break;
+        }
+        Interaction.soruSirasi++;
+        if(Interaction.soruSirasi==5)
+            Interaction.soruSirasi=0;
+
 
 //        soru=new Dikdortgen();
-        soru= new SekilL();
+//        soru= new SekilL1();
+//        soru= new SekilL2();
+//        soru= new SekilL3();
+//        soru= new SekilL4();
     },
 		
 	/*
@@ -119,11 +149,13 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
+
         if(soru.cevap==value)
             return true
 
     },
 	onCorrectAnswer : function(){
+        $("input").css({color:"green"});
         soru.cevapGoster();
         soru.yazilariGoster();
 		
@@ -132,6 +164,8 @@ var Interaction = {
 		
     },
 	onFail : function(){
+        $("input").css({color:"red"});
+        Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.',false);
         soru.yazilariGoster();
         soru.cevapGoster();
 
