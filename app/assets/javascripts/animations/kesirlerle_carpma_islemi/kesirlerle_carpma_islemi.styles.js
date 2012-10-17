@@ -68,7 +68,7 @@ function __Styles(){
     answerDivStyle = {
         position:'absolute',
         top:'150px',
-        left:'145px',
+        left:'135px',
         width:'400px',
         height:'80px',
         fontSize:'18px',
