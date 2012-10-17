@@ -390,7 +390,7 @@ var Interaction = {
         else{
             Interaction.frac = [];
             Interaction.sortedFrac = [];
-            Interaction.answerIdStr = "greaterThanActive"
+            Interaction.answerIdStr = "greaterThanActive";
 
             Interaction.answerIdsArray = [];
             for(var i = 0; i < Interaction.numOfFracs; i++){
@@ -450,18 +450,68 @@ var Interaction = {
     onFail : function(){
         Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
 
+        Interaction.pause();
+        var firstLeftStr = "";
+        var secondLeftStr = "";
+        var thirdLeftStr = "";
+
+        switch (Interaction.userAnswerArr[0]){
+            case Interaction.answerIdsArray[0]:
+                firstLeftStr = "0px";
+                break;
+            case Interaction.answerIdsArray[1]:
+                firstLeftStr = "106px";
+                break;
+            case Interaction.answerIdsArray[2]:
+                firstLeftStr = "212px";
+                break;
+        }
+
+        switch (Interaction.userAnswerArr[1]){
+            case Interaction.answerIdsArray[0]:
+                secondLeftStr = "-106px";
+                break;
+            case Interaction.answerIdsArray[1]:
+                secondLeftStr = "0px";
+                break;
+            case Interaction.answerIdsArray[2]:
+                secondLeftStr = "106px";
+                break;
+        }
+
+        switch (Interaction.userAnswerArr[2]){
+            case Interaction.answerIdsArray[0]:
+                thirdLeftStr = "-212px";
+                break;
+            case Interaction.answerIdsArray[1]:
+                thirdLeftStr = "-106px";
+                break;
+            case Interaction.answerIdsArray[2]:
+                thirdLeftStr = "0px";
+                break;
+        }
+
+        $('#'+Interaction.userAnswerArr[0]).css("position","relative");
+        $('#'+Interaction.userAnswerArr[1]).css("position","relative");
+        $('#'+Interaction.userAnswerArr[2]).css("position","relative");
+
+        $('#'+Interaction.userAnswerArr[0]).delay(1000).animate({left:firstLeftStr},2000,'easeInOutQuad');
+        $('#'+Interaction.userAnswerArr[1]).delay(1250).animate({left:secondLeftStr},2000,'easeInOutQuad');
+        $('#'+Interaction.userAnswerArr[2]).delay(1500).animate({left:thirdLeftStr},2000,'easeInOutQuad');
+
         if(Interaction.dropped != Interaction.answerIdStr){
-            Interaction.pause();
             Interaction.clone2 = [];
             $("."+Interaction.oldActiveStr).css("opacity", 0);
             Interaction.answerId = Interaction.answerIdStr.replace("Active", "Hover");
-            $("#"+Interaction.oldActiveStr.replace("Active", "")).css("opacity", 1)
-            $("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 0)
+            $("#"+Interaction.oldActiveStr.replace("Active", "")).css("opacity", 1);
+
+
+            setTimeout('$("#"+Interaction.answerId.replace("Hover", "")).css("opacity", 0);',3500);
 
             for(var i = 0; i < Interaction.numOfFracs - 1; i++){
                 Interaction.clone2[i] = $("#"+Interaction.answerId).clone();
                 Interaction.clone2[i].attr('class', 'flying');
-                Interaction.clone2[i].attr('id', i)
+                Interaction.clone2[i].attr('id', i);
 
                 var ansTop = $(Interaction.sortingDiv).position().top;
                 var ansLeft = $(Interaction.sortingDiv).position().left;
@@ -477,17 +527,16 @@ var Interaction = {
                 $(Interaction.clone2[i]).css("position", "absolute")
                     .css("top", ansTop)
                     .css("left", ansLeft)
-                    .css("opacity", 0)
+                    .css("opacity", 0);
 
                 $(Interaction.container).append(Interaction.clone2[i]);
-                $(Interaction.clone2[i]).delay(0).animate(
+                $(Interaction.clone2[i]).delay(3500).animate(
                     {opacity:200, top:flyTop, left:flyLeft},
                     1500,
                     'easeInOutQuad',
                     function(){
                         $(this).remove();
                         $("."+Interaction.answerIdStr).css("opacity", 1);
-                        Interaction.resume(500);
                     }
                 );
             }
@@ -511,7 +560,7 @@ var Interaction = {
         if(Interaction.numOfFracs == 5)
             Interaction.lcm = Util.lcm(Interaction.denom[0], Util.lcm(Interaction.denom[1],Interaction.denom[2],Interaction.denom[3],Interaction.denom[4]));
         else
-            Interaction.lcm = Util.lcm(Interaction.denom[0],Interaction.denom[1],Interaction.denom[2],Interaction.denom[3])
+            Interaction.lcm = Util.lcm(Interaction.denom[0],Interaction.denom[1],Interaction.denom[2],Interaction.denom[3]);
 
         for(var i = 0; i < Interaction.numOfFracs; i++){
             Interaction.nom2[i] = Interaction.nom[i]*(Interaction.lcm/Interaction.denom[i]);
@@ -519,6 +568,8 @@ var Interaction = {
         }
 
         Interaction.GetNumericalAxis(Interaction.lcm);
+
+        Interaction.resume(4000);
     },
 
     GetNumericalAxis : function(piece){
