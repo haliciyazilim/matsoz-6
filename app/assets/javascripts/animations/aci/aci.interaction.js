@@ -82,7 +82,7 @@ var Interaction = {
         Interaction.step2 = false;
         initCompass(new Point(440.5,160.5));
         Interaction.myAngle = Util.randomInteger(50,121);
-        Interaction.myCenterPoint = new Point(200.5,180.5);
+        Interaction.myCenterPoint = new Point(200.5,205.5);
         Interaction.referencePoint = new Point(Interaction.myCenterPoint.x,Interaction.myCenterPoint.y-120);
         Interaction.point1 = Interaction.referencePoint.getRotatedPoint(-Interaction.myAngle/2,Interaction.myCenterPoint);
         Interaction.point2 = Interaction.referencePoint.getRotatedPoint(Interaction.myAngle/2,Interaction.myCenterPoint);
