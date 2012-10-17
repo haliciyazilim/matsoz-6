@@ -178,10 +178,10 @@ var Interaction = {
                 '</div>' +
                 '<span id="t1" style="color:black;position:absolute;top:32px;left:66px;">•</span>' +
                 '<div id="sf2" style="color:black;position:absolute;top:20px;left:72px;width:40px;height:42px;padding:0;margin:0;line-height:20px;">' +
-                '<div id="sint2" style="width:20px;height:42px;text-align:center;float:left;line-height:42px;"></div>' +
-                '<div id="snom2" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
-                '<div id="sline2" style="height:1px;width:20px;border-top:2px solid;padding:0;float:left;"></div>' +
-                '<div id="sdenom2" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
+                    '<div id="sint2" style="width:20px;height:42px;text-align:center;float:left;line-height:42px;"></div>' +
+                    '<div id="snom2" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
+                    '<div id="sline2" style="height:1px;width:20px;border-top:2px solid;padding:0;float:left;"></div>' +
+                    '<div id="sdenom2" style="text-align:center;width:20px;height:20px;float:left;"></div>' +
                 '</div>' +
                 '<span id="ee1" style="position:absolute;top:33px;left:118px;">=</span>' +
                 '<div id="sf3" style="position:absolute;top:20px;left:134px;width:60px;height:42px;padding:0;margin:0;line-height:20px;">' +
@@ -191,10 +191,17 @@ var Interaction = {
                 '</div>' +
                 '<span id="ee2" style="position:absolute;top:33px;left:200px;">=</span>' +
                 '<div id="ff" style="position:absolute;top:20px;left:216px;width:30px;height:42px;padding:0;margin:0;line-height:20px;">' +
-                '<div id="fnom" style="text-align:center;width:30px;height:20px;float:left;"></div>' +
-                '<div id="fline" style="height:1px;width:30px;border-top:2px solid;padding:0;float:left;"></div>' +
-                '<div id="fdenom" style="text-align:center;width:30px;height:20px;float:left;"></div>' +
-                '</div>'
+                    '<div id="fnom" style="text-align:center;width:30px;height:20px;float:left;"></div>' +
+                    '<div id="fline" style="height:1px;width:30px;border-top:2px solid;padding:0;float:left;"></div>' +
+                    '<div id="fdenom" style="text-align:center;width:30px;height:20px;float:left;"></div>' +
+                '</div>' +
+                '<span id="ee3" style="position:absolute;top:33px;left:256px;"></span>' +
+                '<div id="ff2" style="position:absolute;top:20px;left:272px;width:30px:height:42px;paddong:0;margin:0;line-height:20px;">' +
+                    '<div id="f2nom" style="text-align:center;width:30px;"></div>' +
+                    '<div id="f2line" style="height:1px;width:30px;border-top:2px solid;padding:0;"></div>' +
+                    '<div id="f2denom" style="text-align:center;width:30px;"></div>' +
+                '</div> ' +
+                '<span id="ff3" style="position:absolute;top:32px;left:272px;"></span>'
         });
 
         if(Interaction.secondFrac.integer){
@@ -239,5 +246,22 @@ var Interaction = {
 
         $('#fnom').html(Interaction.answer.nominator);
         $('#fdenom').html(Interaction.answer.denominator);
+
+        if(Util.gcd(Interaction.answer.denominator,Interaction.answer.nominator) != 1){
+            if(Interaction.answer.nominator % Interaction.answer.denominator == 0){
+                $('#ff3').html(Interaction.answer.nominator/Interaction.answer.denominator);
+                $('#f2line').css("border-top","none");
+            }
+            else{
+                Interaction.answer.simplification();
+                $('#f2nom').html(Interaction.answer.nominator);
+                $('#f2denom').html(Interaction.answer.denominator);
+            }
+            $('#ee3').html('=');
+            $(Interaction.answerDiv).css("left","110px");
+        }
+        else{
+            $('#f2line').css("border-top","none");
+        }
     }
 }
