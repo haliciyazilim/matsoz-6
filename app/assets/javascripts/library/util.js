@@ -492,6 +492,15 @@ var Util = {
         else
             return sign * Math.floor(number/interval)*interval;
     },
+    floor: function(number,interval){
+        if(interval <= 0)
+            throw "interval must be a positive number";
+        if(interval == undefined)
+            interval = 1;
+        var sign = number >= 0 ? 1 : -1;
+        number = Math.abs(number);
+        return sign * Math.floor(number/interval)*interval;
+    },
 
     numberToString:function(number){
         switch(number){
