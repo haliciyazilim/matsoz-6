@@ -126,6 +126,8 @@ SekilL1=function(){
     bc=parseInt(Math.floor(Math.random()*20+10)*10,10);
     cd=parseInt(Math.floor(Math.random()*5+2)*10,10);
     de=parseInt(Math.floor(Math.random()*7+3)*10,10);
+    ef=ab-cd;
+    fa=bc-de;
 
     ortaNokta=new Point();
     ortaNokta.y=ab/2;
@@ -143,7 +145,7 @@ SekilL1=function(){
     var noktalar = [a,b,c,d,e,f];
 
 
-    var interactionCenterPoint = new Point(220,110);
+    var interactionCenterPoint = new Point(220,120);
 
     var ortaNokta=Util.centerOfPoints(noktalar);
 
@@ -196,7 +198,7 @@ SekilL1=function(){
             dText.fillColor="black";
 
             // e
-            ef=path.segments[4].point.y-path.segments[5].point.y;
+            //ef=path.segments[4].point.y-path.segments[5].point.y;
             var eX=path.segments[5].point.x+5;
             var eY=path.segments[5].point.y+ef/2;
             var eText=new PointText(eX,eY);
@@ -205,7 +207,7 @@ SekilL1=function(){
             eText.fillColor="black";
 
             // f
-            fa=path.segments[5].point.x-path.segments[0].point.x;
+            //fa=path.segments[5].point.x-path.segments[0].point.x;
             var fX=path.segments[0].point.x+fa/2;
             var fY=path.segments[0].point.y-5;
             var fText=new PointText(fX,fY);
