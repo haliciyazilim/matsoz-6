@@ -149,6 +149,7 @@ animations/oran/yelkovan.png: animations/oran/yelkovan-3744e48125681ad6928087d9e
 animations/oran/zemin.jpg: animations/oran/zemin-1198c0f71e076dfe3654e14649269600.jpg
 animations/oranti/bisiklet.jpg: animations/oranti/bisiklet-59c67a3673e2e71d4cc144db9d44788e.jpg
 animations/oranti/capraz_ok.png: animations/oranti/capraz_ok-bf1a7d93dcdbedcc968b9ce7cb86d61c.png
+animations/oruntu_(sekil)/question_mark.png: animations/oruntu_(sekil)/question_mark-93956a580a6ba4aa31f87b115c140738.png
 animations/saymanin_temel_ilkesi/ayakkabi_beyaz.png: animations/saymanin_temel_ilkesi/ayakkabi_beyaz-e39ddf2cb0428b6bf65878259834e519.png
 animations/saymanin_temel_ilkesi/ayakkabi_kahve.png: animations/saymanin_temel_ilkesi/ayakkabi_kahve-f91d9e120c6736ee02b9fb03c84a4f61.png
 animations/saymanin_temel_ilkesi/ayakkabi_siyah.png: animations/saymanin_temel_ilkesi/ayakkabi_siyah-9a35b15c92e4af8b6fea8c775e90c637.png
@@ -664,8 +665,8 @@ animations/yuzde/yuzde.includes.js: animations/yuzde/yuzde.includes-d1f219930d55
 animations/yuzde/yuzde.interaction.js: animations/yuzde/yuzde.interaction-2dfae9eef04626081e2d160fb484ae0a.js
 animations/yuzde/yuzde.styles.js: animations/yuzde/yuzde.styles-a32f596de2f776a278dad54ea20449f8.js
 animations/yuzey_alani/yuzey_alani.animation.js: animations/yuzey_alani/yuzey_alani.animation-fdfb45cc56ef7f8e56b3b16a95d0dd24.js
-animations/yuzey_alani/yuzey_alani.common.js: animations/yuzey_alani/yuzey_alani.common-700916dae0c08ad62f0cf63e941ee772.js
-animations/yuzey_alani/yuzey_alani.includes.js: animations/yuzey_alani/yuzey_alani.includes-af721ad1aaeaee27c1577c5b55d92e1a.js
+animations/yuzey_alani/yuzey_alani.common.js: animations/yuzey_alani/yuzey_alani.common-f7f2a8e28ef7f0786d9c110a5f4f0bef.js
+animations/yuzey_alani/yuzey_alani.includes.js: animations/yuzey_alani/yuzey_alani.includes-2215ba64bdf83ce113d057a5d21dc92c.js
 animations/yuzey_alani/yuzey_alani.interaction.js: animations/yuzey_alani/yuzey_alani.interaction-1bb6e6f7bf2ab8505dbdeb319d6e6c52.js
 animations/yuzey_alani/yuzey_alani.languages.js: animations/yuzey_alani/yuzey_alani.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/yuzey_alani/yuzey_alani.styles.js: animations/yuzey_alani/yuzey_alani.styles-6d6995ba0d5e9be19d967d58144d8087.js
