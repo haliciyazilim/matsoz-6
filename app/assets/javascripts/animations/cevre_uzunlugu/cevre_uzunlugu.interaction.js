@@ -115,18 +115,23 @@ var Interaction = {
         switch (simdikiSoru){
             case 0:
                 soru=new Dikdortgen();
+                console.log("Dikdörtgen")
                 break;
             case 1:
                 soru= new SekilL1();
+                console.log("ŞekilL1")
                 break;
             case 2:
                 soru= new SekilL2();
+                console.log("ŞekilL2")
                 break;
             case 3:
                 soru= new SekilL3();
+                console.log("ŞekilL3")
                 break;
             case 4:
                 soru= new SekilL4();
+                console.log("ŞekilL4")
                 break;
         }
         Interaction.soruSirasi++;
