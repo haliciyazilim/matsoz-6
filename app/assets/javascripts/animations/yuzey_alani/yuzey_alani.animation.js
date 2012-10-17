@@ -119,8 +119,8 @@ var Animation = {
         var grid = new InteractiveGrids({
             position:new Point(250.5,8.5),
             size:20,
-            rows: 12,
-            cols: 8,
+            rows: 8,
+            cols: 12,
             style:{
                 strokeColor:'#999'
             }

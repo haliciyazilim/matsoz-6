@@ -118,6 +118,88 @@ var Prism = ExpandableShape.extend({
         }
 
         return steps;
+    },
+    drawExpandedShape: function() {
+        var group = new Group();
+
+        var length = this.length * 16;
+        var width = this.width * 16;
+        var height = this.height * 16;
+
+        var points = [
+            [
+                new Point(0, length),
+                new Point(length, length),
+                new Point(length, length+height),
+                new Point(0, length+height)
+            ],
+            [
+                new Point(length, length),
+                new Point(length + width, length),
+                new Point(length + width, length+height),
+                new Point(length, length+height)
+            ],
+            [
+                new Point(length + width, length),
+                new Point(2*length + width, length),
+                new Point(2*length + width, length+height),
+                new Point(length + width, length+height)
+            ],
+            [
+                new Point(2*length + width, length),
+                new Point(2*length + 2*width, length),
+                new Point(2*length + 2*width, length+height),
+                new Point(2*length + width, length+height)
+            ],
+            [
+                new Point(length, 0),
+                new Point(length + width, 0),
+                new Point(length + width, length),
+                new Point(length, length)
+            ],
+            [
+                new Point(length, length+height),
+                new Point(length + width, length+height),
+                new Point(length + width, 2*length+height),
+                new Point(length, 2*length+height)
+            ]
+        ]
+
+        for (var i = 0; i < points.length; i++) {
+            var surf = new Path();
+
+            for (var j = 0; j < points[i].length; j++) {
+                surf.add(points[i][j]);
+            }
+
+            surf.closed = true;
+
+            group.addChild(surf);
+        }
+
+        return group;
+    },
+    drawAreaCalculations: function() {
+        var group = new Group();
+
+        var length = this.length * 16;
+        var width = this.width * 16;
+        var height = this.height * 16;
+
+        var text = new PointText(length/2, length + height/2+4);
+        text.content = this.length + '.' + this.height;
+        text.justification = 'center';
+
+        group.addChild(text);
+
+        text = new PointText(length + width/2, length + height/2+4);
+        text.content = this.width + '.' + this.height;
+        text.justification = 'center';
+
+        group.addChild(text);
+
+
+        return group;
     }
 });// var Prisim
 
