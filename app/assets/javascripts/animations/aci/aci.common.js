@@ -26,9 +26,13 @@ function drawCompass(dx){
     if(dx == null || dx == undefined){
         dx = 0;
     }
-    if(Interaction.compass.d + dx > Interaction.br*6 ||
-        Interaction.compass.d + dx < Interaction.br*3) {
+    if(Interaction.compass.d + dx > Interaction.br*7 ||
+        Interaction.compass.d + dx < Interaction.br*2) {
         return;
     }
     Interaction.compass.changeDelta(dx);
+}
+function drawRuler(rulerPoint){
+    Interaction.ruler = new Raster('ruler');
+    Interaction.ruler.position = new Point(rulerPoint.x,rulerPoint.y+20);
 }
