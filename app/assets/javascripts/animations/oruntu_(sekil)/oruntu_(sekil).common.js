@@ -8,6 +8,8 @@ var ShapePattern = Class.extend({
             this.number = opt.number;
         if(opt.pieceType)
             this.pieceType = opt.pieceType;
+        if(opt.pieceStyle)
+            this.pieceStyle = opt.pieceStyle;
 
 
     },
@@ -57,7 +59,21 @@ var ShapePattern = Class.extend({
         return max;
     }
 });
-
+InteractiveGrids.prototype.cleanGrids = function(duration,delay){
+    for(var i=0; i<this.pieces.length;i++)
+        if(duration == undefined)
+            this.pieces[i].remove();
+        else
+            this.pieces[i].animate({
+                style:{opacity:0},
+                duration:duration,
+                delay:delay,
+                callback:function(){
+                    this.remove();
+                }
+            })
+    this.pieces = [];
+}
 InteractiveGrids.prototype.drawPattern = function(pattern){
     var absolutePoints = [];
     pattern.generateShapePoints();
@@ -70,9 +86,11 @@ InteractiveGrids.prototype.drawPattern = function(pattern){
             )
         );
     }
+    var pieces = [];
     for(var i=0; i < absolutePoints.length ;i++){
-        pattern.drawAPiece(absolutePoints[i],this.size);
+        pieces.push(pattern.drawAPiece(absolutePoints[i],this.size));
     }
+    return pieces;
 }
 InteractiveGrids.prototype.createTool = function(patternName){
     var tool = new Tool();
@@ -178,6 +196,133 @@ var TriangleShapePattern = ShapePattern.extend({
     }
 });
 
+
+var DoubleXShapePattern = ShapePattern.extend({
+    init:function(opt){
+        this._super(opt);
+
+    },
+    generateShapePoints:function(relativePoints){
+        if(relativePoints == undefined)
+            relativePoints = false;
+        this.shapePoints = [];
+        switch(this.number){
+            case 4:
+                this.shapePoints.push( new Point(-3, 2) )
+                this.shapePoints.push( new Point(-3,-2) )
+                this.shapePoints.push( new Point( 3,-2) )
+                this.shapePoints.push( new Point( 3, 2) )
+                this.shapePoints.push( new Point(-2,-3) )
+                this.shapePoints.push( new Point(-2, 3) )
+                this.shapePoints.push( new Point( 2, 3) )
+                this.shapePoints.push( new Point( 2,-3) )
+            case 3:
+                this.shapePoints.push( new Point( 2,-1) )
+                this.shapePoints.push( new Point(-2,-1) )
+                this.shapePoints.push( new Point(-2, 1) )
+                this.shapePoints.push( new Point( 2, 1) )
+                this.shapePoints.push( new Point( 1, 2) )
+                this.shapePoints.push( new Point( 1,-2) )
+                this.shapePoints.push( new Point(-1,-2) )
+                this.shapePoints.push( new Point(-1, 2) )
+            case 2:
+                this.shapePoints.push( new Point(-1, 0) )
+                this.shapePoints.push( new Point( 1, 0) )
+                this.shapePoints.push( new Point( 0, 1) )
+                this.shapePoints.push( new Point( 0,-1) )
+            case 1:
+                this.shapePoints.push( new Point( 0, 0) )
+
+        }
+        for(var i=0;i < this.shapePoints.length; i++)
+            this.shapePoints[i] = this.shapePoints[i].add(this.number-1,0);
+        if(!relativePoints)
+            for(var i=0;i<this.shapePoints.length;i++)
+                this.shapePoints[i] = this.shapePoints[i].add(this.position)
+        else{
+            //calculate shape relative grid points
+            var minX = this.shapePoints[0].x,minY = this.shapePoints[0].y;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minX > this.shapePoints[i].x)
+                    minX = this.shapePoints[i].x;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minY > this.shapePoints[i].y)
+                    minY = this.shapePoints[i].y;
+            for(var i=0; i<this.shapePoints.length; i++)
+                this.shapePoints[i] = this.shapePoints[i].subtract(minX,minY);
+
+
+        }
+    },
+    getWidth:function(){
+        return  this.number < 2 ? 3 : this.number*2-1;
+    }
+})
+
+
+var XPlusShapePattern = ShapePattern.extend({
+    init:function(opt){
+        this._super(opt);
+
+    },
+    generateShapePoints:function(relativePoints){
+        if(relativePoints == undefined)
+            relativePoints = false;
+        this.shapePoints = [
+            new Point(1,1),
+            new Point(-1,1),
+            new Point(-1,-1),
+            new Point(1,-1),
+        ];
+        for(var i=0; i<this.number; i++){
+            for(var j=0;i > 0 && j<4 || j == 0 && i==j;j++){
+                var point = new Point(i,i);
+                var a, b;
+                switch(j%4){
+                    case 0:
+                        a = 0;
+                        b = -1;
+                        break;
+                    case 1:
+                        a = 1;
+                        b = 0;
+                        break;
+                    case 2:
+                        a = -1;
+                        b = 0;
+                        break;
+                    case 3:
+                        a = 0;
+                        b = 1;
+                        break;
+                }
+                this.shapePoints.push(point.multiply(a,b));
+            }
+        }
+        for(var i=0;i < this.shapePoints.length; i++)
+            this.shapePoints[i] = this.shapePoints[i].add(this.number-1,0);
+        if(!relativePoints)
+            for(var i=0;i<this.shapePoints.length;i++)
+                this.shapePoints[i] = this.shapePoints[i].add(this.position)
+        else{
+            //calculate shape relative grid points
+            var minX = this.shapePoints[0].x,minY = this.shapePoints[0].y;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minX > this.shapePoints[i].x)
+                    minX = this.shapePoints[i].x;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minY > this.shapePoints[i].y)
+                    minY = this.shapePoints[i].y;
+            for(var i=0; i<this.shapePoints.length; i++)
+                this.shapePoints[i] = this.shapePoints[i].subtract(minX,minY);
+
+
+        }
+    },
+    getWidth:function(){
+        return  this.number < 2 ? 3 : this.number*2-1;
+    }
+})
 var PlusShapePattern = ShapePattern.extend({
     init:function(opt){
         this._super(opt);
@@ -286,6 +431,92 @@ var QuestionMarkPattern = ShapePattern.extend({
 
 });
 
+var TShapePattern = ShapePattern.extend({
+    init:function(opt){
+        this._super(opt);
+    },
+    getWidth:function(){
+        return this.number*2-1;
+    },
+    generateShapePoints:function(relativePoints){
+        if(relativePoints == undefined)
+            relativePoints = false;
+        this.shapePoints = [];
+        switch(this.number){
+            case 4:
+                this.shapePoints.push( new Point(-3, 0) )
+                this.shapePoints.push( new Point( 3, 0) )
+                this.shapePoints.push( new Point( 0, 3) )
+            case 3:
+                this.shapePoints.push( new Point(-2, 0) )
+                this.shapePoints.push( new Point( 2, 0) )
+                this.shapePoints.push( new Point( 0, 2) )
+            case 2:
+                this.shapePoints.push( new Point(-1, 0) )
+                this.shapePoints.push( new Point( 1, 0) )
+                this.shapePoints.push( new Point( 0, 1) )
+            case 1:
+                this.shapePoints.push( new Point( 0, 0) )
+
+        }
+        if(!relativePoints)
+            for(var i=0;i<this.shapePoints.length;i++)
+                this.shapePoints[i] = this.shapePoints[i].add(this.position)
+        else{
+            //calculate shape relative grid points
+            var minX = this.shapePoints[0].x,minY = this.shapePoints[0].y;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minX > this.shapePoints[i].x)
+                    minX = this.shapePoints[i].x;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minY > this.shapePoints[i].y)
+                    minY = this.shapePoints[i].y;
+            for(var i=0; i<this.shapePoints.length; i++)
+                this.shapePoints[i] = this.shapePoints[i].subtract(minX,minY);
+
+
+        }
+    }
+})
+
+var NumberPattern = ShapePattern.extend({
+    init:function(opt){
+        this._super(opt);
+    },
+    generateShapePoints:function(relativePoints){
+        if(relativePoints == undefined)
+            relativePoints = false;
+        this.shapePoints = [ new Point (0,0) ];
+
+        if(!relativePoints)
+            for(var i=0;i<this.shapePoints.length;i++)
+                this.shapePoints[i] = this.shapePoints[i].add(this.position)
+        else{
+            //calculate shape relative grid points
+            var minX = this.shapePoints[0].x,minY = this.shapePoints[0].y;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minX > this.shapePoints[i].x)
+                    minX = this.shapePoints[i].x;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minY > this.shapePoints[i].y)
+                    minY = this.shapePoints[i].y;
+            for(var i=0; i<this.shapePoints.length; i++)
+                this.shapePoints[i] = this.shapePoints[i].subtract(minX,minY);
+        }
+    },
+    drawAPiece:function(upperLeftPosition,gridSize){
+        var text = new PointText(new Point(0,0));
+        text.content = (this.number-1)*3+1;
+        text.set_style({
+            fontSize:gridSize,
+            justification:'center'
+        });
+        text.position = text.position.add(upperLeftPosition).add(gridSize*0.5,gridSize);
+        return text;
+    },
+
+})
+
 var XShapePattern = ShapePattern.extend({
     init:function(opt){
         this._super(opt);
@@ -350,6 +581,9 @@ var XShapePattern = ShapePattern.extend({
 var PieceFactory = function(opt){
     var path = new Path();
     var gridSize = opt.gridSize;
+    /*<[[TEST*/
+//        opt.type = 5;
+    /*TEST]]>*/
     switch(opt.type){
         case 0:
             var points = [
@@ -382,6 +616,22 @@ var PieceFactory = function(opt){
                 new Point(gridSize,gridSize*0.5-0.5),
                 new Point(gridSize*0.5,gridSize-0.5),
                 new Point(0,gridSize*0.5-0.5)
+            ];
+            break;
+        case 4:
+            var points = [
+                new Point(gridSize*0.5,0),
+                new Point(0,gridSize),
+                new Point(gridSize,gridSize)
+            ];
+            break;
+        case 5:
+            var points = [
+                new Point(gridSize*0.5,0),
+                new Point(0,gridSize*0.4),
+                new Point(gridSize*0.2,gridSize),
+                new Point(gridSize*0.8,gridSize),
+                new Point(gridSize,gridSize*0.4)
             ];
             break;
     }
