@@ -122,9 +122,9 @@ var Prism = ExpandableShape.extend({
     drawExpandedShape: function() {
         var group = new Group();
 
-        var length = this.length * 16;
-        var width = this.width * 16;
-        var height = this.height * 16;
+        var length = this.length * 18;
+        var width = this.width * 18;
+        var height = this.height * 18;
 
         var points = [
             [
@@ -182,22 +182,123 @@ var Prism = ExpandableShape.extend({
     drawAreaCalculations: function() {
         var group = new Group();
 
-        var length = this.length * 16;
-        var width = this.width * 16;
-        var height = this.height * 16;
+        var length = this.length * 18;
+        var width = this.width * 18;
+        var height = this.height * 18;
 
         var text = new PointText(length/2, length + height/2+4);
         text.content = this.length + '.' + this.height;
         text.justification = 'center';
-
         group.addChild(text);
 
         text = new PointText(length + width/2, length + height/2+4);
         text.content = this.width + '.' + this.height;
         text.justification = 'center';
-
         group.addChild(text);
 
+        var text = new PointText(length + width + length/2, length + height/2+4);
+        text.content = this.length + '.' + this.height;
+        text.justification = 'center';
+        group.addChild(text);
+
+        text = new PointText(2*length + width + width/2, length + height/2+4);
+        text.content = this.width + '.' + this.height;
+        text.justification = 'center';
+        group.addChild(text);
+
+        text = new PointText(length + width/2, length/2+4);
+        text.content = this.width + '.' + this.length;
+        text.justification = 'center';
+        group.addChild(text);
+
+        text = new PointText(length + width/2, length + height + length/2+4);
+        text.content = this.width + '.' + this.length;
+        text.justification = 'center';
+        group.addChild(text);
+
+        return group;
+    },
+    drawAreas: function() {
+        var group = new Group();
+
+        var length = this.length * 18;
+        var width = this.width * 18
+        var height = this.height * 18;
+
+        var text = new PointText(length/2, length + height/2+4);
+        text.content = this.length * this.height + ' cm²';
+        text.justification = 'center';
+        text.characterStyle.fontSize = 8;
+        group.addChild(text);
+
+        text = new PointText(length + width/2, length + height/2+4);
+        text.content = this.width * this.height + ' cm²';
+        text.justification = 'center';
+        text.characterStyle.fontSize = 8;
+        group.addChild(text);
+
+        var text = new PointText(length + width + length/2, length + height/2+4);
+        text.content = this.length * this.height + ' cm²';
+        text.justification = 'center';
+        text.characterStyle.fontSize = 8;
+        group.addChild(text);
+
+        text = new PointText(2*length + width + width/2, length + height/2+4);
+        text.content = this.width * this.height + ' cm²';
+        text.justification = 'center';
+        text.characterStyle.fontSize = 8;
+        group.addChild(text);
+
+        text = new PointText(length + width/2, length/2+4);
+        text.content = this.width * this.length + ' cm²';
+        text.justification = 'center';
+        text.characterStyle.fontSize = 8;
+        group.addChild(text);
+
+        text = new PointText(length + width/2, length + height + length/2+4);
+        text.content = this.width * this.length + ' cm²';
+        text.justification = 'center';
+        text.characterStyle.fontSize = 8;
+        group.addChild(text);
+
+        return group;
+    },
+    drawAreaSums: function() {
+        var group = new Group();
+
+        var length = this.length * 18;
+        var width = this.width * 18
+        var height = this.height * 18;
+
+        var numbers = [
+            this.width * this.length,
+            this.width * this.length,
+            this.length * this.height,
+            this.length * this.height,
+            this.width * this.height,
+            this.width * this.height
+        ]
+
+        var total = numbers[0];
+
+        var text = new PointText(0, 0);
+
+        text.content = 'A = ' + numbers[0] + ' cm²';
+
+        for (var i = 1; i < numbers.length; i++) {
+            text.content = text.content + ' + ' + numbers[i] + ' cm²';
+            total += numbers[i];
+        }
+
+        text.justification = 'right';
+//        text.characterStyle.fontSize = 12;
+        group.addChild(text);
+
+        var text = new PointText(0, 20);
+        text.content = '= ' + total + ' cm²';
+        text.justification = 'right';
+//        text.characterStyle.fontSize = 12;
+        group.addChild(text);
 
         return group;
     }

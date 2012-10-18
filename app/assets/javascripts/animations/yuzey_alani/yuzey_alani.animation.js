@@ -122,7 +122,7 @@ var Animation = {
             rows: 8,
             cols: 12,
             style:{
-                strokeColor:'#999'
+                strokeColor:gridColor
             }
         });
 
@@ -147,10 +147,11 @@ var Animation = {
             }
 
             shapes3D[i] = shapes[i].shape.project();
+            shapes3D[i].set_style(styles[i]);
             shapes3D[i].addChild(shapes[i].shape.showDimensions());
             shapes3D[i].opacity = 0;
 
-            shapeGroups[i].set_style(style);
+            shapeGroups[i].set_style(styles[i]);
 
             shapeGroups[i].opacity = 0;
             shapeCalculations[i].opacity = 0;
@@ -188,7 +189,7 @@ var Animation = {
                     opacity: 0
                 },
                 duration: 1000,
-                delay: totalDelay += 2000,
+                delay: totalDelay += 4000,
                 animationType: 'easeInEaseOut',
                 callback: function() {
                     this.remove();
@@ -203,6 +204,8 @@ var Animation = {
                 delay: totalDelay,
                 animationType: 'easeInEaseOut'
             });
+
+            totalDelay += 2000;
 
             var areaSteps = shapes[i].shape.areaCalculationSteps();
             var startPoint = new Point(520, 50);
@@ -219,7 +222,7 @@ var Animation = {
                         opacity: 1
                     },
                     duration: 1000,
-                    delay: totalDelay += 1000,
+                    delay: totalDelay += 3000,
                     animationType: 'easeInEaseOut'
                 });
 
@@ -232,7 +235,7 @@ var Animation = {
                         opacity: 0
                     },
                     duration: 1000,
-                    delay: totalDelay += 2000,
+                    delay: totalDelay += 6000,
                     animationType: 'easeInEaseOut',
                     callback: function() {
                         this.remove();
