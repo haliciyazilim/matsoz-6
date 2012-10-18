@@ -2,7 +2,6 @@ var Animation = {
     images:[],
 	init:function(container){
         Animation.container = container;
-        Main.animationFinished();
         Animation.grids = new InteractiveGrids({
             position:new Point(50.5,10.5),
             size:22,
