@@ -57,7 +57,7 @@ var Animation = {
                 pieces[j].animate({
                     style:{opacity:1},
                     duration:1000,
-                    delay:1500*i
+                    delay:1500*i+1000-(100*j)
                 });
             }
         }
