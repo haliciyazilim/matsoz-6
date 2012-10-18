@@ -57,7 +57,21 @@ var ShapePattern = Class.extend({
         return max;
     }
 });
-
+InteractiveGrids.prototype.cleanGrids = function(duration,delay){
+    for(var i=0; i<this.pieces.length;i++)
+        if(duration == undefined)
+            this.pieces[i].remove();
+        else
+            this.pieces[i].animate({
+                style:{opacity:0},
+                duration:duration,
+                delay:delay,
+                callback:function(){
+                    this.remove();
+                }
+            })
+    this.pieces = [];
+}
 InteractiveGrids.prototype.drawPattern = function(pattern){
     var absolutePoints = [];
     pattern.generateShapePoints();
@@ -477,6 +491,9 @@ var XShapePattern = ShapePattern.extend({
 var PieceFactory = function(opt){
     var path = new Path();
     var gridSize = opt.gridSize;
+    /*<[[TEST*/
+        opt.type = 5;
+    /*TEST]]>*/
     switch(opt.type){
         case 0:
             var points = [
@@ -509,6 +526,22 @@ var PieceFactory = function(opt){
                 new Point(gridSize,gridSize*0.5-0.5),
                 new Point(gridSize*0.5,gridSize-0.5),
                 new Point(0,gridSize*0.5-0.5)
+            ];
+            break;
+        case 4:
+            var points = [
+                new Point(gridSize*0.5,0),
+                new Point(0,gridSize),
+                new Point(gridSize,gridSize)
+            ];
+            break;
+        case 5:
+            var points = [
+                new Point(gridSize*0.5,0),
+                new Point(0,gridSize*0.4),
+                new Point(gridSize*0.2,gridSize),
+                new Point(gridSize*0.8,gridSize),
+                new Point(gridSize,gridSize*0.4)
             ];
             break;
     }
