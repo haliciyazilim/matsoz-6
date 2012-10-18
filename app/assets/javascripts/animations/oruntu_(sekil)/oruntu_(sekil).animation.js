@@ -62,7 +62,7 @@ var Animation = {
             }
         }
 
-        Main.animationFinished(patterns.length * 1500)
+        Main.animationFinished(patterns.length * 2000)
 
 
 
