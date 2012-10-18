@@ -3,6 +3,8 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
+
+        var legendGroup = new Group();
         var square = new Path.Rectangle(new Point(180.5, 8.5), new Point(200.5,28.5));
         square.strokeColor = '#999';
         var text1 = new PointText(new Point(176, 40));
@@ -11,6 +13,21 @@ var Animation = {
         var text2 = new PointText(new Point(204, 22));
         text2.content = "1 cm²";
         text2.characterStyle.fontSize = 8;
+
+        legendGroup.addChild(square);
+        legendGroup.addChild(text1);
+        legendGroup.addChild(text2);
+
+        legendGroup.opacity = 0;
+
+        legendGroup.animate({
+            style: {
+                opacity: 1
+            },
+            duration: 1000,
+            delay: 4000,
+            animationType: 'easeInEaseOut'
+        })
 
         var matrix = Util.createProjectionMatrixForObjectAt(100,90);
 
@@ -126,12 +143,34 @@ var Animation = {
             }
         });
 
+        for (var g = 0; g < grid.lines.length; g++) {
+            grid.lines[g].opacity = 0;
+        }
+
+        var gridHelper = new AnimationHelper({
+            opacity: 0
+        });
+
+        gridHelper.animate({
+            style: {
+                opacity: 1
+            },
+            duration: 1000,
+            delay: 2000,
+            animationType: 'easeInEaseOut',
+            update: function () {
+                for (var g = 0; g < grid.lines.length; g++) {
+                    grid.lines[g].opacity = this.opacity;
+                }
+            }
+        })
+
         var shapes3D = [];
         var shapeGroups = [];
         var shapeCalculations = [];
         var shapeAreas = [];
 
-        var totalDelay = -2000;
+        var totalDelay = 4000;
 
         for (var i = 0; i < 3; i++) {
             shapeGroups[i] = new Group();
@@ -205,7 +244,7 @@ var Animation = {
                 animationType: 'easeInEaseOut'
             });
 
-            totalDelay += 2000;
+//            totalDelay += 2000;
 
             var areaSteps = shapes[i].shape.areaCalculationSteps();
             var startPoint = new Point(520, 50);
