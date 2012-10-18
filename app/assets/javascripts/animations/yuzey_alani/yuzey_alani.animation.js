@@ -318,5 +318,6 @@ var Animation = {
                 });
             }
         }
+        Main.animationFinished(totalDelay + 1000);
     }
 }
