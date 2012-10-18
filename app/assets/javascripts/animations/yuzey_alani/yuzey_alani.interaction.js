@@ -87,6 +87,15 @@ var Interaction = {
         Interaction.prismGroup.addChild(prism.project());
         Interaction.prismGroup.addChild(prism.showDimensions());
 
+        Interaction.expandedShape = prism.drawExpandedShape();
+        Interaction.expandedShape.set_style(style);
+        Interaction.expandedShape.addChild(prism.drawAreaCalculations());
+        Interaction.expandedShape.position = new Point(160.5, 120.5);
+
+
+        Interaction.answerGroup.addChild(Interaction.expandedShape);
+
+
     },
 		
 	/*
