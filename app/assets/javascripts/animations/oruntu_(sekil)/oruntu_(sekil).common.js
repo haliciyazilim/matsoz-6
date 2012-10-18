@@ -492,7 +492,7 @@ var PieceFactory = function(opt){
     var path = new Path();
     var gridSize = opt.gridSize;
     /*<[[TEST*/
-        opt.type = 5;
+//        opt.type = 5;
     /*TEST]]>*/
     switch(opt.type){
         case 0:

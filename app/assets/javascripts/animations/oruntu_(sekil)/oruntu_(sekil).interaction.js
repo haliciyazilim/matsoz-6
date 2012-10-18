@@ -54,11 +54,10 @@ var Interaction = {
         var totalWidth = 1;
         var patternName;
         var answer = Util.randomInteger(0,numbers.length);
-
-        Interaction.pieceType = Util.randomInteger(0,4);
         var r = Math.random()*0.5;
         var g = Math.random()*0.5;
         var b = Math.random()*0.5;
+        Interaction.pieceType = Util.randomInteger(0,6);
         Interaction.pieceStyle = {
             fillColor: new RgbColor(r,g,b),
             strokeColor: new RgbColor(r*0.5,g*0.5,b*0.5)
