@@ -8,6 +8,8 @@ var ShapePattern = Class.extend({
             this.number = opt.number;
         if(opt.pieceType)
             this.pieceType = opt.pieceType;
+        if(opt.pieceStyle)
+            this.pieceStyle = opt.pieceStyle;
 
 
     },
@@ -84,9 +86,11 @@ InteractiveGrids.prototype.drawPattern = function(pattern){
             )
         );
     }
+    var pieces = [];
     for(var i=0; i < absolutePoints.length ;i++){
-        pattern.drawAPiece(absolutePoints[i],this.size);
+        pieces.push(pattern.drawAPiece(absolutePoints[i],this.size));
     }
+    return pieces;
 }
 InteractiveGrids.prototype.createTool = function(patternName){
     var tool = new Tool();
@@ -426,6 +430,92 @@ var QuestionMarkPattern = ShapePattern.extend({
     }
 
 });
+
+var TShapePattern = ShapePattern.extend({
+    init:function(opt){
+        this._super(opt);
+    },
+    getWidth:function(){
+        return this.number*2-1;
+    },
+    generateShapePoints:function(relativePoints){
+        if(relativePoints == undefined)
+            relativePoints = false;
+        this.shapePoints = [];
+        switch(this.number){
+            case 4:
+                this.shapePoints.push( new Point(-3, 0) )
+                this.shapePoints.push( new Point( 3, 0) )
+                this.shapePoints.push( new Point( 0, 3) )
+            case 3:
+                this.shapePoints.push( new Point(-2, 0) )
+                this.shapePoints.push( new Point( 2, 0) )
+                this.shapePoints.push( new Point( 0, 2) )
+            case 2:
+                this.shapePoints.push( new Point(-1, 0) )
+                this.shapePoints.push( new Point( 1, 0) )
+                this.shapePoints.push( new Point( 0, 1) )
+            case 1:
+                this.shapePoints.push( new Point( 0, 0) )
+
+        }
+        if(!relativePoints)
+            for(var i=0;i<this.shapePoints.length;i++)
+                this.shapePoints[i] = this.shapePoints[i].add(this.position)
+        else{
+            //calculate shape relative grid points
+            var minX = this.shapePoints[0].x,minY = this.shapePoints[0].y;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minX > this.shapePoints[i].x)
+                    minX = this.shapePoints[i].x;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minY > this.shapePoints[i].y)
+                    minY = this.shapePoints[i].y;
+            for(var i=0; i<this.shapePoints.length; i++)
+                this.shapePoints[i] = this.shapePoints[i].subtract(minX,minY);
+
+
+        }
+    }
+})
+
+var NumberPattern = ShapePattern.extend({
+    init:function(opt){
+        this._super(opt);
+    },
+    generateShapePoints:function(relativePoints){
+        if(relativePoints == undefined)
+            relativePoints = false;
+        this.shapePoints = [ new Point (0,0) ];
+
+        if(!relativePoints)
+            for(var i=0;i<this.shapePoints.length;i++)
+                this.shapePoints[i] = this.shapePoints[i].add(this.position)
+        else{
+            //calculate shape relative grid points
+            var minX = this.shapePoints[0].x,minY = this.shapePoints[0].y;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minX > this.shapePoints[i].x)
+                    minX = this.shapePoints[i].x;
+            for(var i=1; i<this.shapePoints.length; i++)
+                if(minY > this.shapePoints[i].y)
+                    minY = this.shapePoints[i].y;
+            for(var i=0; i<this.shapePoints.length; i++)
+                this.shapePoints[i] = this.shapePoints[i].subtract(minX,minY);
+        }
+    },
+    drawAPiece:function(upperLeftPosition,gridSize){
+        var text = new PointText(new Point(0,0));
+        text.content = (this.number-1)*3+1;
+        text.set_style({
+            fontSize:gridSize,
+            justification:'center'
+        });
+        text.position = text.position.add(upperLeftPosition).add(gridSize*0.5,gridSize);
+        return text;
+    },
+
+})
 
 var XShapePattern = ShapePattern.extend({
     init:function(opt){
