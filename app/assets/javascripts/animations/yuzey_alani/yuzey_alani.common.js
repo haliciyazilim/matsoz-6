@@ -297,6 +297,7 @@ var Prism = ExpandableShape.extend({
         var text = new PointText(0, 20);
         text.content = '= ' + total + ' cm²';
         text.justification = 'right';
+        text.fillColor = 'green';
 //        text.characterStyle.fontSize = 12;
         group.addChild(text);
 
