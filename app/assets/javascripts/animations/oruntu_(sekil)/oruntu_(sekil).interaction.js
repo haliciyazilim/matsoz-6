@@ -54,9 +54,7 @@ var Interaction = {
         var totalWidth = 1;
         var patternName;
         var answer = Util.randomInteger(0,numbers.length);
-        /*<[[TEST*/
-//            randomNumber = 3;
-        /*TEST]]>*/
+
         Interaction.pieceType = Util.randomInteger(0,4);
         var r = Math.random()*0.5;
         var g = Math.random()*0.5;
@@ -66,6 +64,9 @@ var Interaction = {
             strokeColor: new RgbColor(r*0.5,g*0.5,b*0.5)
         }
         var questionMarkHeight = 0;
+        /*<[[TEST*/
+            randomNumber = 5;
+        /*TEST]]>*/
         for(var i=0; i < numbers.length; i++){
             var pattern;
             switch(randomNumber){
@@ -88,6 +89,14 @@ var Interaction = {
                     pattern = new PlusShapePattern({position:new Point(0,4)});
                     questionMarkHeight = -1.8;
                     break;
+                case 4:
+                    patternName = 'XPlusShapePattern';
+                    pattern = new XPlusShapePattern({position:new Point(0,4)});
+                    questionMarkHeight = -1.8;
+                case 5:
+                    patternName = 'DoubleXShapePattern';
+                    pattern = new DoubleXShapePattern({position:new Point(0,4)});
+                    questionMarkHeight = -1.8;
             }
             pattern.number = numbers[i];
             pattern.pieceType = Interaction.pieceType;
@@ -137,6 +146,8 @@ var Interaction = {
 		
     },
 	onFail : function(){
-		
+        var pattern = Interaction.correctAnswer;
+        pattern.position = pattern.position.multiply(0,1).add(1,0);
+		Interaction.inputGrids.drawPattern(pattern)
     }
 }
