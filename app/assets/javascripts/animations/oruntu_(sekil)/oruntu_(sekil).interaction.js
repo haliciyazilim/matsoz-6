@@ -26,7 +26,7 @@ var Interaction = {
             right:"150px"
         });
 
-        Interaction.setRandomGenerator(4);
+        Interaction.setRandomGenerator(6);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -54,18 +54,17 @@ var Interaction = {
         var totalWidth = 1;
         var patternName;
         var answer = Util.randomInteger(0,numbers.length);
-
-        Interaction.pieceType = Util.randomInteger(0,4);
         var r = Math.random()*0.5;
         var g = Math.random()*0.5;
         var b = Math.random()*0.5;
+        Interaction.pieceType = Util.randomInteger(0,6);
         Interaction.pieceStyle = {
             fillColor: new RgbColor(r,g,b),
             strokeColor: new RgbColor(r*0.5,g*0.5,b*0.5)
         }
         var questionMarkHeight = 0;
         /*<[[TEST*/
-            randomNumber = 5;
+//            randomNumber = 5;
         /*TEST]]>*/
         for(var i=0; i < numbers.length; i++){
             var pattern;
@@ -93,10 +92,12 @@ var Interaction = {
                     patternName = 'XPlusShapePattern';
                     pattern = new XPlusShapePattern({position:new Point(0,4)});
                     questionMarkHeight = -1.8;
+                    break;
                 case 5:
                     patternName = 'DoubleXShapePattern';
                     pattern = new DoubleXShapePattern({position:new Point(0,4)});
                     questionMarkHeight = -1.8;
+                    break;
             }
             pattern.number = numbers[i];
             pattern.pieceType = Interaction.pieceType;
@@ -146,8 +147,15 @@ var Interaction = {
 		
     },
 	onFail : function(){
-        var pattern = Interaction.correctAnswer;
-        pattern.position = pattern.position.multiply(0,1).add(1,0);
-		Interaction.inputGrids.drawPattern(pattern)
+        Interaction.setStatus('Yanlis cevap. Dogrusu girdi kisminda gozukecektir.','alert');
+        Interaction.pause();
+        Interaction.inputGrids.cleanGrids(700,1000);
+        AnimationManager.delay(function(){
+            var pattern = Interaction.correctAnswer;
+            pattern.position = pattern.position.multiply(0,1).add(1,0);
+            Interaction.inputGrids.drawPattern(pattern);
+            Interaction.resume();
+        },2000)
+
     }
 }
