@@ -42,7 +42,7 @@ var Animation = {
             }
         })
 
-        setTimeout(function(){ankaraHarita.play()},2000);
+        setTimeout(function(){ankaraHarita.play(14)},3000);
 //        Animation.animateAnkaraDogrusal();
 
     },

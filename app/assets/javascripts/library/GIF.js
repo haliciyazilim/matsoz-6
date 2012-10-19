@@ -6,7 +6,8 @@ var GIF = function(opt){
         width:opt.width+'px',
         height:opt.height+'px',
         backgroundImage:'url('+opt.src+')',
-        backgroundPosition:'0px 0px'
+        backgroundPosition:'0px 0px',
+        backgroundRepeat:'no-repeat'
     });
     this.animHelper = new AnimationHelper({
         position:0,
