@@ -6,12 +6,8 @@ var Animation = {
     var resimler={
         animasyon:"/assets/animations/eslik/animasyon.gif",
         animasyonSonFrame:"/assets/animations/eslik/animasyon_son_frame.gif",
-        kagit:"/assets/animations/eslik/kagit.png"
-    };
 
-        kagit= new Image();
-        kagit.src=resimler.kagit;
-        kagit.id="kagit";
+    };
 
         gosteri= new Image();
         gosteri.src=resimler.animasyon;
@@ -23,27 +19,20 @@ var Animation = {
         sonFrame.id="sonFrame";
         //sonFrame.class="animasyon";
 
-        $(Animation.container).append(kagit);
+
         $(Animation.container).append(gosteri);
         $(Animation.container).append(sonFrame);
 
         $("#gosteri, #sonFrame").addClass("animasyon");
 
-        $("#kagit").css({
-            position:"absolute",
-            width:"89px",
-            height:"124px",
-            left:"50px",
-            top:"0",
-            bottom:"0",
-            margin:"auto"
-        });
+
 
         $(".animasyon").css({
             position:"absolute",
-            width:"540px",
+            width:"750px",
             height:"170px",
-            right:"50px",
+            right:"0",
+            left:"0",
             top:"0",
             bottom:"0",
             margin:"auto"
@@ -53,7 +42,7 @@ var Animation = {
 
         //setTimeout(function(){$("#gosteri").remove(); Main.animationFinished()},10000);
 
-        setTimeout(function(){$("#gosteri").css("opacity","0").attr("src",sonFrame.src);  Main.animationFinished()},10000);
+        setTimeout(function(){$("#gosteri").css("opacity","0").attr("src",sonFrame.src);  Main.animationFinished()},12000);
 
     }
 }
