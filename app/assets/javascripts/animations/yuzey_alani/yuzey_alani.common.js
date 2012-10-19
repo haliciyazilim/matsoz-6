@@ -103,7 +103,7 @@ var Prism = ExpandableShape.extend({
             +this.width+'.'+this.height+') + 2('
             +this.length+'.'+this.width+')] cm²');
 
-        steps.push('= ' + this.length*this.height*this.width+' cm²');
+        steps.push('= ' + (2*this.length*this.height+2*this.length*this.width+2*this.height*this.width) + ' cm²');
 
         switch(type) {
             case 0:
