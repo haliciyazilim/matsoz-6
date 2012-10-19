@@ -228,7 +228,7 @@ var Animation = {
                     opacity: 0
                 },
                 duration: 1000,
-                delay: totalDelay += 4000,
+                delay: totalDelay += 2000,
                 animationType: 'easeInEaseOut',
                 callback: function() {
                     this.remove();
@@ -261,7 +261,7 @@ var Animation = {
                         opacity: 1
                     },
                     duration: 1000,
-                    delay: totalDelay += 3000,
+                    delay: totalDelay += 2000,
                     animationType: 'easeInEaseOut'
                 });
 
@@ -274,7 +274,7 @@ var Animation = {
                         opacity: 0
                     },
                     duration: 1000,
-                    delay: totalDelay += 6000,
+                    delay: totalDelay += 4000,
                     animationType: 'easeInEaseOut',
                     callback: function() {
                         this.remove();
@@ -318,5 +318,6 @@ var Animation = {
                 });
             }
         }
+        Main.animationFinished(totalDelay + 1000);
     }
 }

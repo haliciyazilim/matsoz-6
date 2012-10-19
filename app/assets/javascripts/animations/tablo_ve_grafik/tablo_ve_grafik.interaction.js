@@ -23,6 +23,21 @@ var Interaction = {
             height:"30px",
 //            border:"1px solid"
         });
+//        var xLabels = ["P.tesi","Sali", "Cuma"];
+//        var yLabels = ["10","8","6","4","2","0"];
+        var xLabels = ["", ""];
+        var yLabels = ["","","","","","0"];
+        var data = [];
+        var chart = {
+            xAxisName: "Zaman",
+            xAxisUnit: "Gün",
+            yAxisName: "Satis fiyati",
+            yAxisUnit: "TL",
+            xLabels: xLabels,
+            yLabels: yLabels,
+            data: data
+        };
+        columnGraph(new Point(100,50),chart.xLabels.length*60,120,chart);
 
         Interaction.prepareNextQuestion();
     },
