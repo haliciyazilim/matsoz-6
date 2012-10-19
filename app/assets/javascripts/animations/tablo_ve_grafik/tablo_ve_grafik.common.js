@@ -1,4 +1,4 @@
-function columnGraph(point,width,height,chart,style){
+function columnGraph(point,width,height,chart,style,duration,delay){
 
     if(style == undefined){
         style = {
@@ -90,14 +90,14 @@ function columnGraph(point,width,height,chart,style){
     group.addChild(yAxis);
 
     // Axis Labels
-    var text = new PointText(new Point(xStart+width+20, yStart+height));
+    var text = new PointText(new Point(xStart+width+20, yStart+height+4));
     text.justification = 'left';
     text.fillColor = 'black';
     text.content = chart.xAxisName;
     group.addChild(text);
 
     if (chart.xAxisUnit) {
-        var text = new PointText(new Point(xStart+width+20, yStart+height+16));
+        var text = new PointText(new Point(xStart+width+20, yStart+height+20));
         text.justification = 'left';
         text.fillColor = 'black';
         text.content = '(' + chart.xAxisUnit + ')';
@@ -109,7 +109,7 @@ function columnGraph(point,width,height,chart,style){
         offset = 0;
     }
 
-    var text = new PointText(new Point(xStart-30,yStart-32));
+    var text = new PointText(new Point(xStart-16,yStart-26));
     text.justification = 'center';
     text.fillColor = 'black';
     text.content = chart.yAxisName;
@@ -123,12 +123,43 @@ function columnGraph(point,width,height,chart,style){
         group.addChild(text);
     }
 
+    var myHelper = [];
+    // animHelpers
+    for(var i = 0; i < chart.data.length; i++){
+        myHelper[i] = new AnimationHelper({
+            index:i,
+            X:0
+        });
+    }
+
     // data columns
     var rect;
+    var rects = [];
     for(index = 0; index < chart.data.length; index++){
-        rect = new Path.Rectangle(new Point((xStep*index)+xStart+xOffset,yStart+height-chart.data[index]*10-1),new Size(20,chart.data[index]*10));
-        rect.fillColor = colors[index];
-        group.addChild(rect);
+        console.log(duration);
+        console.log(delay);
+        myHelper[index].index = index;
+        myHelper[index].animate({
+            style:{
+                X:chart.data[index]*10
+            },
+            duration:duration,
+            delay:delay+this.index*(duration*0.3),
+            animationType:'easeInOutQuad',
+            update:function(){
+                if(rects[this.index]){
+                    rects[this.index].remove();
+                }
+                rects[this.index] = new Path.Rectangle(new Point((xStep*this.index)+xStart+xOffset,yStart+height-this.X-1), new Size(20,this.X));
+                rects[this.index].fillColor = colors[this.index];
+            },
+            callback:function(){
+                group.addChild(rects[this.index]);
+            }
+        });
+//        rect = new Path.Rectangle(new Point((xStep*index)+xStart+xOffset,yStart+height-chart.data[index]*10-1),new Size(20,chart.data[index]*10));
+//        rect.fillColor = colors[index];
+//        group.addChild(rect);
     }
 
     group.getXYCoordinate = function(x, y) {
