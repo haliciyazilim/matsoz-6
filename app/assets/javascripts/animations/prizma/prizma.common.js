@@ -131,7 +131,12 @@ function ciz(secim,matrixX,matrixY,amac,sira){
             delay: 3000,
             animationType: 'easeInEaseOut',
             update: function () {
-                Main.animationProject.activeLayer.removeChildren();
+
+                if(amac=="ornek")
+                    Main.animationProject.activeLayer.removeChildren();
+                else
+                    Main.interactionProject.activeLayer.removeChildren();
+
                 if(skew)
                     shape.init(width,this.height,length,skew,matrix);
                 else
