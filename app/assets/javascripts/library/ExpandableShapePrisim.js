@@ -94,7 +94,7 @@ var ExpandablePrism = ExpandableShape.extend({
                             opacity:0
                         });
                         a.animate({
-                            style:{opacity:1}, 
+                            style:{opacity:1},
                             duration:0,//delay,
                             delay:delay*i,
                             update:function(){

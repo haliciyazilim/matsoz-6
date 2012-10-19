@@ -15,6 +15,10 @@ var Interaction = {
         {
             id:'compass_right_leg',
             src:'/assets/animations/compass_right_leg.png'
+        },
+        {
+            id:'ruler',
+            src:'/assets/animations/ruler.png'
         }
         
     ],
@@ -32,7 +36,7 @@ var Interaction = {
         $('#drawBtn').css({
             position:'absolute',
             top:'210px',
-            left:'460px',
+            left:'440px',
             width:'55px',
             height:'32px'
         });
@@ -80,12 +84,14 @@ var Interaction = {
         }
         Interaction.br = 12;
         Interaction.step2 = false;
-        initCompass(new Point(440.5,160.5));
-        Interaction.myAngle = Util.randomInteger(50,121);
-        Interaction.myCenterPoint = new Point(200.5,180.5);
+        initCompass(new Point(420.5,140.5));
+        Interaction.myAngle = Util.randomInteger(30,141);
+        Interaction.myCenterPoint = new Point(200.5,205.5);
         Interaction.referencePoint = new Point(Interaction.myCenterPoint.x,Interaction.myCenterPoint.y-120);
         Interaction.point1 = Interaction.referencePoint.getRotatedPoint(-Interaction.myAngle/2,Interaction.myCenterPoint);
         Interaction.point2 = Interaction.referencePoint.getRotatedPoint(Interaction.myAngle/2,Interaction.myCenterPoint);
+
+        drawRuler(new Point(500.5,150.5));
 
         Interaction.angle = new Group();
 
@@ -150,6 +156,9 @@ var Interaction = {
 
         if(Interaction.compass){
             Interaction.compass.remove();
+        }
+        if(Interaction.ruler){
+            Interaction.ruler.remove();
         }
 
         Interaction.arcGroup = new Group();

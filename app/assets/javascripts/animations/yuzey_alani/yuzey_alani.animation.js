@@ -3,6 +3,8 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
 
+
+        var legendGroup = new Group();
         var square = new Path.Rectangle(new Point(180.5, 8.5), new Point(200.5,28.5));
         square.strokeColor = '#999';
         var text1 = new PointText(new Point(176, 40));
@@ -12,11 +14,26 @@ var Animation = {
         text2.content = "1 cm²";
         text2.characterStyle.fontSize = 8;
 
+        legendGroup.addChild(square);
+        legendGroup.addChild(text1);
+        legendGroup.addChild(text2);
+
+        legendGroup.opacity = 0;
+
+        legendGroup.animate({
+            style: {
+                opacity: 1
+            },
+            duration: 1000,
+            delay: 4000,
+            animationType: 'easeInEaseOut'
+        })
+
         var matrix = Util.createProjectionMatrixForObjectAt(100,90);
 
-        var prism = new ExpandablePrism(60, 80, 40, matrix);
-        var cube = new ExpandablePrism(40, 40, 40, matrix);
-        var squarePrism = new ExpandablePrism(40, 80, 40, matrix);
+        var prism = new Prism(3, 4, 2, matrix);
+        var cube = new Prism(2, 2, 2, matrix);
+        var squarePrism = new Prism(2, 4, 2, matrix);
 
         var prismSurfaces = [
             {
@@ -119,19 +136,41 @@ var Animation = {
         var grid = new InteractiveGrids({
             position:new Point(250.5,8.5),
             size:20,
-            rows: 12,
-            cols: 8,
+            rows: 8,
+            cols: 12,
             style:{
-                strokeColor:'#999'
+                strokeColor:gridColor
             }
         });
+
+        for (var g = 0; g < grid.lines.length; g++) {
+            grid.lines[g].opacity = 0;
+        }
+
+        var gridHelper = new AnimationHelper({
+            opacity: 0
+        });
+
+        gridHelper.animate({
+            style: {
+                opacity: 1
+            },
+            duration: 1000,
+            delay: 2000,
+            animationType: 'easeInEaseOut',
+            update: function () {
+                for (var g = 0; g < grid.lines.length; g++) {
+                    grid.lines[g].opacity = this.opacity;
+                }
+            }
+        })
 
         var shapes3D = [];
         var shapeGroups = [];
         var shapeCalculations = [];
         var shapeAreas = [];
 
-        var totalDelay = -2000;
+        var totalDelay = 4000;
 
         for (var i = 0; i < 3; i++) {
             shapeGroups[i] = new Group();
@@ -147,10 +186,11 @@ var Animation = {
             }
 
             shapes3D[i] = shapes[i].shape.project();
-
+            shapes3D[i].set_style(styles[i]);
+            shapes3D[i].addChild(shapes[i].shape.showDimensions());
             shapes3D[i].opacity = 0;
 
-            shapeGroups[i].set_style(style);
+            shapeGroups[i].set_style(styles[i]);
 
             shapeGroups[i].opacity = 0;
             shapeCalculations[i].opacity = 0;
@@ -188,7 +228,7 @@ var Animation = {
                     opacity: 0
                 },
                 duration: 1000,
-                delay: totalDelay += 2000,
+                delay: totalDelay += 4000,
                 animationType: 'easeInEaseOut',
                 callback: function() {
                     this.remove();
@@ -204,13 +244,37 @@ var Animation = {
                 animationType: 'easeInEaseOut'
             });
 
+//            totalDelay += 2000;
+
+            var areaSteps = shapes[i].shape.areaCalculationSteps();
+            var startPoint = new Point(520, 50);
+            var increment = new Point(0, 20);
+            var areaStepsGroup = new Group();
+
+            for (var ii = 0; ii < areaSteps.length; ii++) {
+                var text = new PointText(startPoint);
+                text.content = areaSteps[ii];
+                areaStepsGroup.addChild(text);
+                text.opacity = 0;
+                text.animate({
+                    style: {
+                        opacity: 1
+                    },
+                    duration: 1000,
+                    delay: totalDelay += 3000,
+                    animationType: 'easeInEaseOut'
+                });
+
+                startPoint = startPoint.add(increment);
+            }
+
             if (i < 2) {
                 shapes3D[i].animate({
                     style: {
                         opacity: 0
                     },
                     duration: 1000,
-                    delay: totalDelay += 2000,
+                    delay: totalDelay += 6000,
                     animationType: 'easeInEaseOut',
                     callback: function() {
                         this.remove();
@@ -238,7 +302,18 @@ var Animation = {
                     animationType: 'easeInEaseOut',
                     callback: function() {
                         this.remove();
-                        Main.animationFinished();
+                    }
+                });
+
+                areaStepsGroup.animate({
+                    style: {
+                        opacity: 0
+                    },
+                    duration: 1000,
+                    delay: totalDelay,
+                    animationType: 'easeInEaseOut',
+                    callback: function() {
+                        this.remove();
                     }
                 });
             }
