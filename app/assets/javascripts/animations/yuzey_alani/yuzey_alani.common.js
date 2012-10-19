@@ -189,32 +189,40 @@ var Prism = ExpandableShape.extend({
         var text = new PointText(length/2, length + height/2+4);
         text.content = this.length + '.' + this.height;
         text.justification = 'center';
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(length + width/2, length + height/2+4);
         text.content = this.width + '.' + this.height;
         text.justification = 'center';
+        text.fillColor = 'white';
         group.addChild(text);
 
         var text = new PointText(length + width + length/2, length + height/2+4);
         text.content = this.length + '.' + this.height;
         text.justification = 'center';
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(2*length + width + width/2, length + height/2+4);
         text.content = this.width + '.' + this.height;
         text.justification = 'center';
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(length + width/2, length/2+4);
         text.content = this.width + '.' + this.length;
         text.justification = 'center';
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(length + width/2, length + height + length/2+4);
         text.content = this.width + '.' + this.length;
         text.justification = 'center';
+        text.fillColor = 'white';
         group.addChild(text);
+
+        group.fillColor = 'white';
 
         return group;
     },
@@ -229,36 +237,42 @@ var Prism = ExpandableShape.extend({
         text.content = this.length * this.height + ' cm²';
         text.justification = 'center';
         text.characterStyle.fontSize = 8;
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(length + width/2, length + height/2+4);
         text.content = this.width * this.height + ' cm²';
         text.justification = 'center';
         text.characterStyle.fontSize = 8;
+        text.fillColor = 'white';
         group.addChild(text);
 
         var text = new PointText(length + width + length/2, length + height/2+4);
         text.content = this.length * this.height + ' cm²';
         text.justification = 'center';
         text.characterStyle.fontSize = 8;
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(2*length + width + width/2, length + height/2+4);
         text.content = this.width * this.height + ' cm²';
         text.justification = 'center';
         text.characterStyle.fontSize = 8;
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(length + width/2, length/2+4);
         text.content = this.width * this.length + ' cm²';
         text.justification = 'center';
         text.characterStyle.fontSize = 8;
+        text.fillColor = 'white';
         group.addChild(text);
 
         text = new PointText(length + width/2, length + height + length/2+4);
         text.content = this.width * this.length + ' cm²';
         text.justification = 'center';
         text.characterStyle.fontSize = 8;
+        text.fillColor = 'white';
         group.addChild(text);
 
         return group;
@@ -319,6 +333,7 @@ var writeAreaCalculation = function (surface, grid) {
     var text = new PointText(point);
     text.content = surface.area[0] + "." + surface.area[1];
     text.justification = 'center';
+    text.fillColor = 'white';
 
     return text;
 }
@@ -337,6 +352,7 @@ var writeArea = function (surface, grid) {
     var text = new PointText(point);
     text.content = surface.area[0] * surface.area[1] + " cm²";
     text.justification = 'center';
+    text.fillColor = 'white';
 
     return text;
 }
