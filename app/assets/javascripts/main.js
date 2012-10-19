@@ -46,6 +46,7 @@ Main.startAnimation = function(){
 		View._focused = animationView;
 		Animation.init(Main.animation);
     }
+    Main.startInteraction();
     try{
         if(__START_INTERACTION_IMMEDIATELY === true)
             Main.animationFinished();
@@ -53,7 +54,7 @@ Main.startAnimation = function(){
     catch(e){
     }    
 }
-Main.animationFinished = function(delay){
+/*Main.animationFinished = function(delay){
 	if (delay == undefined) {
 		delay = 100;
 	}
@@ -71,6 +72,30 @@ Main.animationFinished = function(delay){
 	        Main.startInteraction();
 		}, delay);
 	}
+}*/
+
+Main.animationFinished = function(delay){
+    if (delay == undefined) {
+        delay = 100;
+    }
+    if(Main.animationFinished.called == true)
+        return;
+    if(isNaN(delay) || delay == 0){
+        Main.animationFinished.called = true;
+        Main.disposeInteractionSkipSlider();
+    }
+    else {
+        setTimeout(function(){
+            if(Main.animationFinished.called == true)
+                return;
+            Main.animationFinished.called = true;
+            Main.disposeInteractionSkipSlider();
+        }, delay);
+    }
+}
+
+Main.disposeInteractionSkipSlider = function(){
+    $('#interaction_cover').animate({opacity:0},500,function(){$(this).remove()});
 }
 
 Main.startInteraction = function(){
@@ -78,7 +103,7 @@ Main.startInteraction = function(){
         interactionReady = true;
     } else {
         Main.interactionProject.activate();
-		View._focused = interactionView;
+        View._focused = interactionView;
         initializeRunLoop();
         Interaction.init(Main.interaction);
     }
@@ -94,6 +119,7 @@ Main.animateDefinition = function(){
 Main.init = function(){
 	Main.initializeNavigation();
 //	Main.initializeSoundManager();
+    Main.createInteractionSkipSlider();
 	
 	Main.interaction = $('.etkilesimalan').get(0);
 	Main.animation = $('.ornek').get(0);
@@ -273,5 +299,125 @@ Main.initializeNavigation = function() {
 Main.setObjective = function(str){
 	Main.objective.innerHTML = str;
 };
+
+
+Main.createInteractionSkipSlider = function(){
+    var div = document.createElement('div');
+    $('#container').append(div);
+    $(div).css({
+        position:'absolute',
+        paddingLeft:'-1px',
+        top:'331px',
+        left:'438px',
+        width:'790px',
+        height:'302px',
+        borderRadius:'6px',
+        border:'1px solid rgba(255,255,255,0.1)',
+        overflow:'hidden',
+        backgroundImage:'url(/assets/skip_screen.png)',
+        backgroundRepeat:'no-repeat',
+        backgroundPosition:'-100px -9px',
+        '-moz-user-select': '-moz-none',
+        '-khtml-user-select': 'none',
+        '-webkit-user-select': 'none',
+        '-ms-user-select': 'none',
+        'user-select': 'none'
+    });
+    div.id = 'interaction_cover';
+
+    var isDragging = false;
+    var isDraggable = true;
+    var startPosition = 0;
+    var down = function(event){
+        event.preventDefault();
+        console.log(event)
+        if(isDraggable != true)
+            return;
+        isDragging = true;
+        startPosition = event.pageX;
+        return false;
+    }
+    var drag = function(event){
+        event.preventDefault();
+        if(isDragging==true){
+            var change = event.pageX - startPosition;
+            change = change < 0 ? '0':change;
+            $(div).css({
+                backgroundPosition:(change-100)+'px -9px'
+            });
+        }
+        return false;
+    }
+    var up = function(event){
+        event.preventDefault();
+        if(isDragging == false)
+            return;
+        isDragging = false;
+        var change = event.pageX - startPosition;
+        change = change < 0 ? '0':change;
+        console.log('[up] change: '+change,event)
+        if(change > 100){
+            isDraggable = false;
+            var animHelper = new AnimationHelper({
+                change:change
+            });
+            animHelper.animate({
+                style:{change:800},
+                duration:250,
+                animationType:'easeIn',
+                update:function(){
+                    $(div).css({backgroundPosition:(this.change-100)+'px -9px'});
+                },
+                callback:function(){
+                    $(div).animate({opacity:0},250,function(){$(this).remove()});
+                }
+            })
+        }
+        else{
+            isDraggable = false;
+            var animHelper = new AnimationHelper({
+                change:change
+            });
+            animHelper.animate({
+                style:{change:0},
+                duration:100,
+                animationType:'easeIn',
+                update:function(){
+                    $(div).css({backgroundPosition:(this.change-100)+'px -9px'});
+                },
+                callback:function(){
+                    isDraggable = true;
+                }
+            })
+        }
+        return false;
+    }
+    $(div).mousedown(down);
+    $(div).mousemove(drag);
+    $(div).mouseup(up);
+    $(div).mouseout(up);
+    $(div).bind('touchmove',function(event){
+        try{
+            event.pageX = event.originalEvent.touches[0].pageX;
+        }
+        catch(e){}
+        drag(event);
+    });
+    $(div).bind('touchstart',function(event){
+        try{
+            event.pageX = event.originalEvent.touches[0].pageX;
+        }
+        catch(e){}
+        down(event);
+    });
+    $(div).bind('touchend',function(event){
+        try{
+            event.pageX = event.originalEvent.changedTouches[0].pageX;
+        }
+        catch(e){}
+        up(event);
+    });
+
+}
 
 Main();
