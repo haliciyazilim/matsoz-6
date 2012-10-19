@@ -443,11 +443,6 @@ animations/degisme_ozelligi/degisme_ozelligi.common.js: animations/degisme_ozell
 animations/degisme_ozelligi/degisme_ozelligi.includes.js: animations/degisme_ozelligi/degisme_ozelligi.includes-8e2978b192a0157e0083206bad5913f4.js
 animations/degisme_ozelligi/degisme_ozelligi.interaction.js: animations/degisme_ozelligi/degisme_ozelligi.interaction-b587950a3c1a23eb6dc591e69fb1787f.js
 animations/degisme_ozelligi/degisme_ozelligi.styles.js: animations/degisme_ozelligi/degisme_ozelligi.styles-dfb258574c4d5a695a086f7e277087c9.js
-animations/deneme/deneme.animation.js: animations/deneme/deneme.animation-bba16a61acc0ce12c7442fa3f1ce9fe6.js
-animations/deneme/deneme.common.js: animations/deneme/deneme.common-71c9eaf3c06bffedf041f8d52c511254.js
-animations/deneme/deneme.includes.js: animations/deneme/deneme.includes-e946c3cb7d7b090d3628bad828d2be5c.js
-animations/deneme/deneme.interaction.js: animations/deneme/deneme.interaction-20933b77a103c9cd20efddde7d7a3827.js
-animations/deneme/deneme.styles.js: animations/deneme/deneme.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
 animations/denklem/denklem.animation.js: animations/denklem/denklem.animation-2b1fc8cf39c5498e28f583a1fb3988f8.js
 animations/denklem/denklem.common.js: animations/denklem/denklem.common-663b8ba87eb7f2f9936f097299d99ef0.js
 animations/denklem/denklem.includes.js: animations/denklem/denklem.includes-2e595731d60ee8f5da28c12eb5d23309.js
@@ -469,9 +464,9 @@ animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.includes.js: anim
 animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.interaction.js: animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.interaction-fbc625cbd221abf4484d505392db016a.js
 animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.languages.js: animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.styles.js: animations/dogru_ile_duzlem_iliskisi/dogru_ile_duzlem_iliskisi.styles-8ca2612d48b991c305fb9882b3404877.js
-animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.animation.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.animation-1d89159cff66b01a8924c8fd03ea47b7.js
+animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.animation.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.animation-5ef6914ba8f76bc52646ab4da9ac38b7.js
 animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.common.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.common-71c9eaf3c06bffedf041f8d52c511254.js
-animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.includes.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.includes-f106fa1a72c43d8818c9453a97d63397.js
+animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.includes.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.includes-3d55818ae3a1dca7efae19c0b2a4b8b5.js
 animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.interaction.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.interaction-0f0ea0a98abb974a7d91dd8f516919cf.js
 animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.styles.js: animations/dogru_ile_nokta_iliskisi/dogru_ile_nokta_iliskisi.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
 animations/dogru_parcasi/dogru_parcasi.animation.js: animations/dogru_parcasi/dogru_parcasi.animation-911e9af5763f22466664c921994411d7.js
@@ -503,8 +498,8 @@ animations/es_cokgenler/es_cokgenler.interaction.js: animations/es_cokgenler/es_
 animations/es_cokgenler/es_cokgenler.languages.js: animations/es_cokgenler/es_cokgenler.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/es_cokgenler/es_cokgenler.styles.js: animations/es_cokgenler/es_cokgenler.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
 animations/es_kupler/es_kupler.animation.js: animations/es_kupler/es_kupler.animation-bba16a61acc0ce12c7442fa3f1ce9fe6.js
-animations/es_kupler/es_kupler.common.js: animations/es_kupler/es_kupler.common-71c9eaf3c06bffedf041f8d52c511254.js
-animations/es_kupler/es_kupler.includes.js: animations/es_kupler/es_kupler.includes-d4a0f7dc90361675f235a972db4646a1.js
+animations/es_kupler/es_kupler.common.js: animations/es_kupler/es_kupler.common-0b8c5a9a14659e6f40465382169099de.js
+animations/es_kupler/es_kupler.includes.js: animations/es_kupler/es_kupler.includes-9e198fb433ae66ec06837be6c57796b4.js
 animations/es_kupler/es_kupler.interaction.js: animations/es_kupler/es_kupler.interaction-8998f319582a531bac606bfefec351a3.js
 animations/es_kupler/es_kupler.languages.js: animations/es_kupler/es_kupler.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/es_kupler/es_kupler.styles.js: animations/es_kupler/es_kupler.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
@@ -686,8 +681,8 @@ animations/oteleme/oteleme.interaction.js: animations/oteleme/oteleme.interactio
 animations/oteleme/oteleme.languages.js: animations/oteleme/oteleme.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/oteleme/oteleme.styles.js: animations/oteleme/oteleme.styles-0b394a36ad976ebb85895ab0fe62920f.js
 animations/prizma/prizma.animation.js: animations/prizma/prizma.animation-a50981da48a1539483e1c87353b587ec.js
-animations/prizma/prizma.common.js: animations/prizma/prizma.common-14ed15305930f53e27d15fc51b27fc1d.js
-animations/prizma/prizma.includes.js: animations/prizma/prizma.includes-69c39687e97f0402a349c7aac30e82c8.js
+animations/prizma/prizma.common.js: animations/prizma/prizma.common-b8fde6e6bddcc90969d113b6313d2d87.js
+animations/prizma/prizma.includes.js: animations/prizma/prizma.includes-6cf6f80181728082e977efd0b2c036e0.js
 animations/prizma/prizma.interaction.js: animations/prizma/prizma.interaction-e873d15c5711415bdbc22177164f24f8.js
 animations/prizma/prizma.languages.js: animations/prizma/prizma.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/prizma/prizma.styles.js: animations/prizma/prizma.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
@@ -780,7 +775,7 @@ animations/yuzey_alani/yuzey_alani.interaction.js: animations/yuzey_alani/yuzey_
 animations/yuzey_alani/yuzey_alani.languages.js: animations/yuzey_alani/yuzey_alani.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/yuzey_alani/yuzey_alani.styles.js: animations/yuzey_alani/yuzey_alani.styles-409e6f3d39f8f44ff0b90fe94b4a5187.js
 application.js: application-363316399c9b02b9eb98cd1b13517abd.js
-main.js: main-f33dfee449c7f58cf121b70ea66969bb.js
+main.js: main-760a9f01a69ad532b343f12f3dd45a75.js
 processFiles.sh: processFiles-a4eca39e2c4ee455b6d7c46521a387d9.sh
 stats/highcharts.js: stats/highcharts-a43fc1c32afb198c70856451d082285f.js
 stats/stats.js: stats/stats-a974163dde4cdbd47af90af02a3fd408.js
