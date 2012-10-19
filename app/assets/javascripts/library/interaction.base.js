@@ -6,7 +6,7 @@ function InteractionBase(){
     if(window['__Languages'] !== undefined){
         __Languages();
     }
-
+    Interaction.__disableAutoInputFocus = false;
 	Interaction.inputs = [];
 	Interaction.__isPaused = false;
 	Interaction.__inputVersion = 0;
@@ -245,17 +245,24 @@ function InteractionBase(){
 			Interaction.button.onclick = Interaction.__checkAnswer;
 		}
 		Interaction.trial = 0;
-		
+
 		if(Interaction.__randomGenerator)
 			Interaction.nextQuestion(Interaction.__randomGenerator.nextNumber());	
 		else
 			Interaction.nextQuestion();
-		
-		try{
-			Interaction.inputs[0].focus();
-		}
-		catch(e){}
+        try{
+            if(Interaction.__disableAutoInputFocus == false){
+                Interaction.inputs[0].focus();
+            }
+        }
+        catch(e){}
 	};
+    Interaction.disableAutoFocus = function(){
+        Interaction.__disableAutoInputFocus = true;
+    };
+    Interaction.enableAutoFocus = function(){
+        Interaction.__disableAutoInputFocus = false;
+    };
 	Interaction.__checkAnswer = function(){
 		if(typeof Interaction.pause == 'function' && Interaction.isPaused() || Interaction.pause == true)
 			return;
