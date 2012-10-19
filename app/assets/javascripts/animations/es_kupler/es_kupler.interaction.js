@@ -8,23 +8,34 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('');
+        Main.setObjective('Yandaki eş küplerle oluşturulmuş şeklin istenen yönde görünümünü kareli bölgeye çiziniz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
         }
 
         Interaction.appendButton({
-            bottom:"40px",
+            bottom:"15px",
             right:"40px"
         });
         Interaction.appendStatus({
-            bottom:"50px",
+            bottom:"25px",
             right:"150px"
+        });
+        Interaction.grids = new InteractiveGrids({
+            position:new Point(332.5,15.5),
+            size:27,
+            style:{
+                strokeColor:'#AAA'
+            },
+            pieceType:2,
+            pieceStyle:{
+                strokeWidth:2,
+                strokeColor:'#000'
+            }
         })
-        /*
-        *	Initialize your interaction here
-        */
+
+        Interaction.grids.createTool("ShapePattern");
 
         Interaction.prepareNextQuestion();
     },
