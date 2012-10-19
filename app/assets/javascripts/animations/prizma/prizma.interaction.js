@@ -59,7 +59,11 @@ var Interaction = {
         Interaction.tiklama=onMouseDown;
         tool.onMouseDown=Interaction.tiklama;
         tool.onMouseUp=onMouseUp;
-        tool.onMouseMove=onMouseMove;
+
+        if( navigator.platform.indexOf("Win") >-1 || navigator.platform.indexOf("Mac") >-1 || navigator.platform.indexOf("Linux") >-1){
+            if( navigator.platform != 'Linux armv6l' && navigator.platform != 'Linux armv7l')
+                tool.onMouseMove=onMouseMove;
+        }
 
 
 
