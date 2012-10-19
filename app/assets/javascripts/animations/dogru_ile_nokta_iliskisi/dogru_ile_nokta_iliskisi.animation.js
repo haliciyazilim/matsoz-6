@@ -27,7 +27,23 @@ var Animation = {
     ],
 	init:function(container){
         Animation.container = container;
-        Animation.animateAnkaraDogrusal();
+        var ankaraHarita = new GIF({
+            src:'/assets/animations/dogru_ile_nokta_iliskisi/eslik.jpg',
+            width:750,
+            height:170,
+            parent:container,
+            count:101,
+            css:{
+                position:"absolute",
+                top:'50%',
+                left:'50%',
+                marginLeft:'-375px',
+                marginTop:'-85px'
+            }
+        })
+
+        setTimeout(function(){ankaraHarita.play()},2000);
+//        Animation.animateAnkaraDogrusal();
 
     },
     animateAnkaraDogrusal:function(){
@@ -40,31 +56,11 @@ var Animation = {
             marginTop:'-85px'
         });
         AnimationManager.delay(function(){
-//            $(Animation.container).append($('#ankara_dogrusal'));
             $('#ankara_dogrusal').get(0).src = '/assets/animations/dogru_ile_nokta_iliskisi/ankara_dogrusal.gif';
-
-
-//            $('#ankara_dogrusal_start').remove();
-//            $('#ankara_dogrusal').css({
-//                position:"absolute",
-//                top:'50%',
-//                left:'50%',
-//                marginLeft:'-125px',
-//                marginTop:'-85px'
-//            })
             $('#ankara_dogrusal').delay(6000).animate({marginLeft:'-325px'},1000,function(){
                 Animation.animateHalatDogrusal();
                 $('#ankara_dogrusal').get(0).src = '/assets/animations/dogru_ile_nokta_iliskisi/ankara_dogrusal_end.png';
 
-//                $(Animation.container).append($('#ankara_dogrusal'));
-//                $('#ankara_dogrusal').css({
-//                    position:"absolute",
-//                    top:'50%',
-//                    left:'50%',
-//                    marginLeft:'-325px',
-//                    marginTop:'-85px'
-//                });
-//                $('#ankara_dogrusal').remove()
                 });
         },100);
     },
@@ -78,30 +74,11 @@ var Animation = {
             marginTop:'-85px'
         })
         setTimeout(function(){
-//            console.log('append halat_dogrusal')
-//            $(Animation.container).append($('#halat_dogrusal'));
             $('#halat_dogrusal').get(0).src = '/assets/animations/dogru_ile_nokta_iliskisi/halat_dogrusal.gif';
 
-//            $('#halat_dogrusal').remove();
-//            $('#halat_dogrusal').css({
-//                position:"absolute",
-//                top:'50%',
-//                left:'50%',
-//                marginLeft:'60px',
-//                marginTop:'-85px'
-//            });
             AnimationManager.delay(function(){
-//                $(Animation.container).append($('#halat_dogrusal'));
                 $('#halat_dogrusal').get(0).src = '/assets/animations/dogru_ile_nokta_iliskisi/halat_dogrusal_end.png';
 
-//                $('#halat_dogrusal').remove();
-//                $('#halat_dogrusal').css({
-//                    position:"absolute",
-//                    top:'50%',
-//                    left:'50%',
-//                    marginLeft:'60px',
-//                    marginTop:'-85px'
-//                })
             },6000);
 
         },1);
@@ -110,3 +87,4 @@ var Animation = {
     }
 
 }
+
