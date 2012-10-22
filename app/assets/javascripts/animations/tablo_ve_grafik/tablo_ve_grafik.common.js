@@ -1,4 +1,8 @@
-function columnGraph(point,width,height,chart,style,duration,delay){
+function columnGraph(point,width,height,chart,style,duration,delay,step){
+
+    if(step == undefined){
+        step = duration*0.3;
+    }
 
     if(style == undefined){
         style = {
@@ -142,7 +146,7 @@ function columnGraph(point,width,height,chart,style,duration,delay){
                 X:chart.data[index]*10
             },
             duration:duration,
-            delay:delay+this.index*(duration*0.3),
+            delay:delay+this.index*step,
             animationType:'easeInOutQuad',
             update:function(){
                 if(rects[this.index]){
@@ -155,9 +159,6 @@ function columnGraph(point,width,height,chart,style,duration,delay){
                 group.addChild(rects[this.index]);
             }
         });
-//        rect = new Path.Rectangle(new Point((xStep*index)+xStart+xOffset,yStart+height-chart.data[index]*10-1),new Size(20,chart.data[index]*10));
-//        rect.fillColor = colors[index];
-//        group.addChild(rect);
     }
 
     group.getXYCoordinate = function(x, y) {

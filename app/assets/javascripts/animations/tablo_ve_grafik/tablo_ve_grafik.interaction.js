@@ -157,7 +157,7 @@ var Interaction = {
             yLabels: yLabels,
             data: data
         };
-        Interaction.emptyGroup = columnGraph(new Point(270,80),chart.xLabels.length*50,120,chart,undefined,10000,10000);
+        Interaction.emptyGroup = columnGraph(new Point(270,80),chart.xLabels.length*50,120,chart);
 
         enableInputsBox();
         Interaction.inputs[0].focus();
@@ -174,7 +174,7 @@ var Interaction = {
             Interaction.setStatus('Lütfen tablo başlığını giriniz.',false);
         }
         else if(Interaction.inputs[1].value == '' || Interaction.inputs[2].value == ''){
-            Interaction.setStatus('Lütfen grafiğin eksen başlıklarını doldurunuz.',false);
+            Interaction.setStatus('Lütfen eksen başlıklarını doldurunuz.',false);
         }
         else if(Interaction.inputs[3].value == '' || Interaction.inputs[5].value == ''){
             Interaction.setStatus('Lütfen en az iki sütunu doldurunuz.',false);
