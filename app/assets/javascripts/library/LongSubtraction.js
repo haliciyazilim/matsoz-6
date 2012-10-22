@@ -6,7 +6,6 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
         
         this.ilk=cikan1.toString();
         this.ikinci=cikan2.toString();
-        
         this.floatKontrolu=this.ilk.indexOf(".");
         if (this.floatKontrolu==-1){
 
@@ -201,7 +200,7 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
 		
 
 		
-		this.basla=function(hizB,hizA){
+		this.basla=function(hizB,hizA,callback){
 			this.hizB=hizB;
 			this.hizA=hizA;
 
@@ -431,7 +430,7 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
 				}
                                 
                                 if(i==uzunSayi)
-                                    $(this.div +" #virgul3").delay(sayac+this.hizB).animate({opacity:"1"},1000)
+                                    $(this.div +" #virgul3").delay(sayac+this.hizB).animate({opacity:"1"},1000,callback)
 			}
 			console.log("selma");
 			for(var i=5; i>0;i--){

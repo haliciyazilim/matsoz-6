@@ -27,8 +27,8 @@ var Interaction = {
         Interaction.appendInput({
             position:'absolute',
             top:'20px',
-            left:'400px',
-            width:'150px',
+            left:'10px',
+            width:'220px',
             height:'30px',
             fontSize:'12px',
             color:'#757575'
@@ -54,7 +54,41 @@ var Interaction = {
             }
 
         };
-        $(Interaction.input).attr('maxLength',30);
+        $(Interaction.input).attr('maxLength',50);
+        var leftStr = '';
+        var topStr = '';
+        var myIndex;
+        for(var t = 0; t < 2; t++){
+            var left = 10+t*110;
+            leftStr = ''+left+'px';
+            for(var y = 0; y < 5; y++){
+                myIndex = t*5+y;
+                var top = 50+y*30;
+                topStr = ''+top+'px';
+                if(y == 0){
+                    Interaction.appendInput({
+                        position:'absolute',
+                        top:topStr,
+                        left:leftStr,
+                        width:'110px',
+                        height:'30px',
+                        fontSize:'12px',
+                        backgroundColor:'#d9d9d9'
+                    },false,false);
+                }
+                else{
+                    Interaction.appendInput({
+                        position:'absolute',
+                        top:topStr,
+                        left:leftStr,
+                        width:'110px',
+                        height:'30px',
+                        fontSize:'12px'
+                    },false,false);
+                }
+                $(Interaction.inputs[myIndex+1]).attr("maxLength",20);
+            }
+        }
 
         var xLabels = ["Pazartesi","Sali", "Carsamba","Persembe"];
         var yLabels = ["10","8","6","4","2","0"];
@@ -73,7 +107,7 @@ var Interaction = {
             yLabels: yLabels,
             data: data
         };
-        columnGraph(new Point(40,50),chart.xLabels.length*50,120,chart,undefined,1000,1000);
+        columnGraph(new Point(280,80),chart.xLabels.length*50,120,chart,undefined,1000,1000);
 
         Interaction.disableAutoFocus();
 
