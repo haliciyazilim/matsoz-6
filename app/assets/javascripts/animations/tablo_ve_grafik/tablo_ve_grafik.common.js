@@ -1,4 +1,8 @@
-function columnGraph(point,width,height,chart,style,duration,delay){
+function columnGraph(point,width,height,chart,style,duration,delay,step){
+
+    if(step == undefined){
+        step = duration*0.3;
+    }
 
     if(style == undefined){
         style = {
@@ -90,7 +94,7 @@ function columnGraph(point,width,height,chart,style,duration,delay){
     group.addChild(yAxis);
 
     // Axis Labels
-    var text = new PointText(new Point(xStart+width+20, yStart+height+4));
+    var text = new PointText(new Point(xStart+width+14, yStart+height+4));
     text.justification = 'left';
     text.fillColor = 'black';
     text.content = chart.xAxisName;
@@ -109,8 +113,8 @@ function columnGraph(point,width,height,chart,style,duration,delay){
         offset = 0;
     }
 
-    var text = new PointText(new Point(xStart-16,yStart-26));
-    text.justification = 'center';
+    var text = new PointText(new Point(xStart-26,yStart-26));
+    text.justification = 'left';
     text.fillColor = 'black';
     text.content = chart.yAxisName;
     group.addChild(text);
@@ -136,15 +140,13 @@ function columnGraph(point,width,height,chart,style,duration,delay){
     var rect;
     var rects = [];
     for(index = 0; index < chart.data.length; index++){
-        console.log(duration);
-        console.log(delay);
         myHelper[index].index = index;
         myHelper[index].animate({
             style:{
                 X:chart.data[index]*10
             },
             duration:duration,
-            delay:delay+this.index*(duration*0.3),
+            delay:delay+this.index*step,
             animationType:'easeInOutQuad',
             update:function(){
                 if(rects[this.index]){
@@ -157,9 +159,6 @@ function columnGraph(point,width,height,chart,style,duration,delay){
                 group.addChild(rects[this.index]);
             }
         });
-//        rect = new Path.Rectangle(new Point((xStep*index)+xStart+xOffset,yStart+height-chart.data[index]*10-1),new Size(20,chart.data[index]*10));
-//        rect.fillColor = colors[index];
-//        group.addChild(rect);
     }
 
     group.getXYCoordinate = function(x, y) {
@@ -167,4 +166,86 @@ function columnGraph(point,width,height,chart,style,duration,delay){
     };
 
     return group;
+};
+function drawColumnGraph(){
+    var xLabels = [];
+    var xlabel1 = ""+Interaction.inputs[3].value;
+    var xlabel2 = ""+Interaction.inputs[5].value;
+    xLabels.push(xlabel1);
+    xLabels.push(xlabel2);
+    if(Interaction.inputs[7].value != ""){
+        var xlabel3 = ""+Interaction.inputs[7].value;
+        xLabels.push(xlabel3);
+    }
+    if(Interaction.inputs[9].value != ""){
+        var xlabel4 = ""+Interaction.inputs[9].value;
+        xLabels.push(xlabel4);
+    }
+    var yLabels = ["10","8","6","4","2","0"];
+    var xAxisName = Interaction.inputs[1].value;
+    var yAxisName = Interaction.inputs[2].value;
+    var data = [];
+    data.push(parseInt(Interaction.inputs[4].value));
+    data.push(parseInt(Interaction.inputs[6].value));
+    if(Interaction.inputs[8].value != ""){
+        data.push(parseInt(Interaction.inputs[8].value));
+    }
+    if(Interaction.inputs[10].value != ""){
+        data.push(parseInt(Interaction.inputs[10].value));
+    }
+    var xGridLabelStyle = {
+        justification:'right',
+        rotation:-90
+    }
+    var chart = {
+        xAxisName:xAxisName,
+        yAxisName:yAxisName,
+        xGridLabelStyle:xGridLabelStyle,
+        xLabels:xLabels,
+        yLabels:yLabels,
+        data:data
+    };
+    if(Interaction.emptyGroup){
+        Interaction.emptyGroup.remove();
+    }
+    if(data.length == 2){
+        var graphPoint = new Point(330,80);
+        var titleTextPoint = new Point(400,30);
+    }
+    else if(data.length == 3){
+        var graphPoint = new Point(300,80);
+        var titleTextPoint = new Point(395,30);
+    }
+    else if(data.length == 4){
+        var graphPoint = new Point(270,80);
+        var titleTextPoint = new Point(390,30);
+    }
+    Interaction.graphGroup = columnGraph(graphPoint,chart.xLabels.length*50,120,chart,undefined,1000,1000);
+
+    Interaction.titleText = new PointText(titleTextPoint);
+    Interaction.titleText.justification = 'center';
+    Interaction.titleText.fontSize = 14;
+    Interaction.titleText.fillColor = "#006e7d";
+    Interaction.titleText.content = Interaction.inputs[0].value;
+
+    $('#repeatBtn').css("opacity",1);
+    $('#repeatBtn').get(0).onclick = Interaction.nextQuestion;
+
+    $('#graphBtn').css("opacity",0.4);
+    $('#graphBtn').get(0).onclick = null;
+
+    disableInputsBox();
+};
+function disableInputsBox(){
+    $(Interaction.inputs).each(function(index, element) {
+        $(this).get(0).onkeydown = function(event){
+            if(event.keyCode != 13)
+                return false;
+        }
+    });
+}
+function enableInputsBox(){
+    $(Interaction.inputs).each(function(index, element) {
+        $(this).get(0).onkeydown = null;
+    });
 }

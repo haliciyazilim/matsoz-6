@@ -12,7 +12,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki şekil örüntüsünde soru isaretinin yerinde olusmasi gereken şekli, mavi izgaralarda gerekli karelere basarak olusturunuz.');
+        Main.setObjective('Yandaki şekil örüntüsünde soru işaretinin yerinde olusmasi gereken şekli, yandaki mavi kareli bölgede gerekli karelere basarak oluşturunuz');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()

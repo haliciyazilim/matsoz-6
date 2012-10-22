@@ -1,12 +1,11 @@
 function LongSubtraction(cikan1, cikan2, div, fontSize){
-	
+	    console.log("Ç1: "+cikan1+", "+"Ç2: "+cikan2);
         this.fontSize=fontSize || 30;
         
         console.log(this.fontSize);
         
         this.ilk=cikan1.toString();
         this.ikinci=cikan2.toString();
-        
         this.floatKontrolu=this.ilk.indexOf(".");
         if (this.floatKontrolu==-1){
 
@@ -19,7 +18,12 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
             var kesikIkinci=this.ikinci.split(".");
             console.log(kesikIlk);
             console.log(kesikIkinci);
-            
+
+            if(!kesikIlk[1])
+                kesikIlk[1]="00";
+            if(!kesikIkinci[1])
+                kesikIkinci[1]="00";
+
             if(kesikIlk[1].length<kesikIkinci[1].length)
                 kesikIlk[1]=kesikIlk[1]+"0";
             else if(kesikIlk[1].length>kesikIkinci[1].length)
@@ -201,7 +205,7 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
 		
 
 		
-		this.basla=function(hizB,hizA){
+		this.basla=function(hizB,hizA,callback){
 			this.hizB=hizB;
 			this.hizA=hizA;
 
@@ -431,7 +435,7 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
 				}
                                 
                                 if(i==uzunSayi)
-                                    $(this.div +" #virgul3").delay(sayac+this.hizB).animate({opacity:"1"},1000)
+                                    $(this.div +" #virgul3").delay(sayac+this.hizB).animate({opacity:"1"},1000,callback)
 			}
 			console.log("selma");
 			for(var i=5; i>0;i--){
