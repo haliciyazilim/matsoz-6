@@ -1,5 +1,5 @@
 function LongSubtraction(cikan1, cikan2, div, fontSize){
-	
+	    console.log("Ç1: "+cikan1+", "+"Ç2: "+cikan2);
         this.fontSize=fontSize || 30;
         
         console.log(this.fontSize);
@@ -18,7 +18,12 @@ function LongSubtraction(cikan1, cikan2, div, fontSize){
             var kesikIkinci=this.ikinci.split(".");
             console.log(kesikIlk);
             console.log(kesikIkinci);
-            
+
+            if(!kesikIlk[1])
+                kesikIlk[1]="00";
+            if(!kesikIkinci[1])
+                kesikIkinci[1]="00";
+
             if(kesikIlk[1].length<kesikIkinci[1].length)
                 kesikIlk[1]=kesikIlk[1]+"0";
             else if(kesikIlk[1].length>kesikIkinci[1].length)
