@@ -32,6 +32,8 @@ GIF.prototype.play = function(fps){
             var dT = new Date().getTime() - this.time; // delta time
             var modulerNumber = Math.floor(GIF.MAX_ALLOWED_IMAGE_WIDTH / this.width);
             var currentIndex = Math.floor(dT / waveLength);
+            if(currentIndex >= this.count)
+                currentIndex = this.count-1;
             var x = (currentIndex % modulerNumber) * this.width;
             var y = Math.floor(currentIndex / modulerNumber) * this.height;
             $(this.div).css({

@@ -1,29 +1,13 @@
 var Animation = {
     images:[
-//        {
-//            id:'ankara_dogrusal',
-//            src:'/assets/animations/dogru_ile_nokta_iliskisi/ankara_dogrusal.gif'
-//        },
-//        {
-//            id:'halat_dogrusal',
-//            src:'/assets/animations/dogru_ile_nokta_iliskisi/halat_dogrusal.gif'
-//        },
         {
             id:'ankara_dogrusal',
             src:'/assets/animations/dogru_ile_nokta_iliskisi/ankara_dogrusal_start.png'
         },
-//        {
-//            id:'ankara_dogrusal_end',
-//            src:'/assets/animations/dogru_ile_nokta_iliskisi/ankara_dogrusal_end.png'
-//        },
         {
             id:'halat_dogrusal',
             src:'/assets/animations/dogru_ile_nokta_iliskisi/halat_dogrusal_start.png'
-        },
-//        {
-//            id:'halat_dogrusal_end',
-//            src:'/assets/animations/dogru_ile_nokta_iliskisi/halat_dogrusal_end.png'
-//        }
+        }
     ],
 	init:function(container){
         Animation.container = container;
@@ -40,11 +24,8 @@ var Animation = {
                 marginLeft:'-375px',
                 marginTop:'-85px'
             }
-        })
-
+        });
         setTimeout(function(){ankaraHarita.play(14)},3000);
-//        Animation.animateAnkaraDogrusal();
-
     },
     animateAnkaraDogrusal:function(){
         $(Animation.container).append($('#ankara_dogrusal'));
@@ -82,7 +63,6 @@ var Animation = {
             },6000);
 
         },1);
-
         Main.animationFinished(4500);
     }
 

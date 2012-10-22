@@ -2478,10 +2478,7 @@ var Item = this.Item = Base.extend({
 					&& !((item._segments) && (!item.getFillColor()
 							|| !item.getStrokeColor()))) {
 				var bounds = item.getStrokeBounds() || item.getBounds();
-                bounds.x = bounds.x - bounds.width*0.4;
-                bounds.width = bounds.width*1.8;
-                bounds.y = bounds.y - bounds.height*0.4;
-                bounds.height = bounds.height * 1.8;
+
 				if (!bounds.width || !bounds.height)
 					return;
 
@@ -5804,7 +5801,14 @@ var PointText = this.PointText = TextItem.extend({
             matrix = matrix ? matrix.clone().concatenate(this._matrix)
                 : this._matrix;
 
-            return matrix._transformBounds(bounds, bounds);
+            var b = matrix._transformBounds(bounds, bounds);
+
+            b.x = b.x - b.width*0.4;
+            b.width = b.width*1.8;
+            b.y = b.y - b.height*0.4;
+            b.height = b.height * 1.8;
+
+            return b;
         }
     };
 });
