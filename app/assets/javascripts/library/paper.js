@@ -2478,10 +2478,10 @@ var Item = this.Item = Base.extend({
 					&& !((item._segments) && (!item.getFillColor()
 							|| !item.getStrokeColor()))) {
 				var bounds = item.getStrokeBounds() || item.getBounds();
-                bounds.width = bounds.width*1.5;
-                bounds.x = bounds.x - bounds.width*0.1;
-                bounds.y = bounds.y - bounds.height*0.2;
-                bounds.height = bounds.height * 1.4;
+                bounds.x = bounds.x - bounds.width*0.4;
+                bounds.width = bounds.width*1.8;
+                bounds.y = bounds.y - bounds.height*0.4;
+                bounds.height = bounds.height * 1.8;
 				if (!bounds.width || !bounds.height)
 					return;
 

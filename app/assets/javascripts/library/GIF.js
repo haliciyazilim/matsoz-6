@@ -6,7 +6,8 @@ var GIF = function(opt){
         width:opt.width+'px',
         height:opt.height+'px',
         backgroundImage:'url('+opt.src+')',
-        backgroundPosition:'0px 0px'
+        backgroundPosition:'0px 0px',
+        backgroundRepeat:'no-repeat'
     });
     this.animHelper = new AnimationHelper({
         position:0,
@@ -31,6 +32,8 @@ GIF.prototype.play = function(fps){
             var dT = new Date().getTime() - this.time; // delta time
             var modulerNumber = Math.floor(GIF.MAX_ALLOWED_IMAGE_WIDTH / this.width);
             var currentIndex = Math.floor(dT / waveLength);
+            if(currentIndex >= this.count)
+                currentIndex = this.count-1;
             var x = (currentIndex % modulerNumber) * this.width;
             var y = Math.floor(currentIndex / modulerNumber) * this.height;
             $(this.div).css({
