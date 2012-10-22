@@ -24,7 +24,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki MNK açısının açıortayını çiziniz. Önce pergelin sivri ucunu açının köşesine yerleştirip bir yay çiziniz. Yayın açının kollarını kestiği noktalardan pergelin açıklığını bozmadan yaylar çiziniz ve kesiştikleri noktayı açının köşesi ile birleştiriniz.');
+        Main.setObjective('Yandaki MNK açısının açıortayının çizilmesi için önce pergelin açıklığını cetvel üzerinde ayarlayarak "ÇİZ" butonuna basınız. Daha sonra pergelin sivri ucu açının köşesine yerleşip bir yay çizilecek. Yayın açının kollarını kestiği noktalardan pergelin açıklığı bozulmadan yaylar çizilecek.  Bu iki yayın kesiştiği nokta açının köşesi ile birleştiğinde açıortay elde edilecek.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
