@@ -278,6 +278,13 @@ p.exampleHeader {
     width:88px;
     border:none;
 }
+.repeat_button_small{
+    background-image:url(/assets/btn_gray_repeat.png);
+    background-color: transparent;
+    height:30px;
+    width:95px;
+    border:none;
+}
 
 
 .status_field {
