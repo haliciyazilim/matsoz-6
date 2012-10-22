@@ -271,6 +271,13 @@ p.exampleHeader {
     width:82px;
     border:none;
 }
+.chart_button{
+    background-image:url(/assets/btn_gray_chart.png);
+    background-color: transparent;
+    height:30px;
+    width:88px;
+    border:none;
+}
 
 
 .status_field {
