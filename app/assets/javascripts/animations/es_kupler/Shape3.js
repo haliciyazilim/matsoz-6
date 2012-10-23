@@ -22,15 +22,16 @@ var Shape3 = Class.extend({
         this.draw(this.zeroPoint);
     },
     draw:function(zeroPoint){
-        if(this.drawedShape)
-            this.drawedShape.remove();
         this.zeroPoint = zeroPoint;
-        this.drawedShape = new Group();
+
+        var matrix = Shape3.CreateProjectionMatrixForObjectAt(zeroPoint.x,zeroPoint.y);
 
         //sort points
         this.points.sort(Shape3.SortFunction);
 
         //draw cubes
+        this.cubes = [];
+
         for(var i=0; i<this.points.length;i++){
 
 //            this.drawedShape.addChild(
@@ -41,19 +42,22 @@ var Shape3 = Class.extend({
 //                ).set_style(this.style)
 //            )
 
-            var point = zeroPoint.add( this.convertPoint3ToPoint( this.points[i] ) );
-            new ExpandablePrism(this.a,this.a,this.a,Util.createProjectionMatrixForObjectAt(point.x,point.y)).project();
+            var cube = new ExpandablePrism(this.a,this.a,this.a,matrix);
+            cube.transform(this.points[i].multiply(new Point3(this.a,-this.a,-this.a)));
+            cube.project();
+            this.cubes.push(cube);
         }
+
     },
-    convertPoint3ToPoint:function(point3){
-        return new Point(
-            ( point3.x * this.a ) + 0.5,
-            (-point3.y * this.a ) + 0.5
-        ).add(
-            (-point3.z * this.a * this.dX ),
-            ( point3.z * this.a * this.dY )
-        );
-    },
+//    convertPoint3ToPoint:function(point3){
+//        return new Point(
+//            ( point3.x * this.a ) + 0.5,
+//            (-point3.y * this.a ) + 0.5
+//        ).add(
+//            (-point3.z * this.a * this.dX ),
+//            ( point3.z * this.a * this.dY )
+//        );
+//    },
     rotateByY:function(clockwise){
         for(var i=0; i<this.points.length; i++){
             var temp = this.points[i].x;
@@ -73,6 +77,24 @@ var Shape3 = Class.extend({
             var temp = this.points[i].y;
             this.points[i].y = (clockwise?-1:1) * this.points[i].x;
             this.points[i].x = (clockwise?1:-1) * temp;
+        }
+    },
+    setRotationX:function(angle){
+        for(var i=0;i<this.cubes.length;i++){
+            this.cubes[i].setRotationX(angle);
+            this.cubes[i].project();
+        }
+    },
+    setRotationY:function(angle){
+        for(var i=0;i<this.cubes.length;i++){
+            this.cubes[i].setRotationY(angle);
+            this.cubes[i].project();
+        }
+    },
+    setRotationZ:function(angle){
+        for(var i=0;i<this.cubes.length;i++){
+            this.cubes[i].setRotationZ(angle);
+            this.cubes[i].project();
         }
     },
     showLeftSide:function(){
@@ -96,27 +118,103 @@ var Shape3 = Class.extend({
         this.rotateByY();
         this.redraw();
     },
-    flatten:function(duration,delay){
-        var animHelper = new AnimationHelper({
-            dX:this.dX,
-            dY:this.dY
+    showCorrectSide:function(side){
+        var rotationAmount = (Math.PI/4);
+        switch(side){
+            case Shape3.LeftSide:
+                rotationAmount *= -1;
+                break;
+            case Shape3.RightSide:
+                rotationAmount *= 1;
+                break;
+            case Shape3.DownSide:
+                rotationAmount *= -1;
+                break;
+            case Shape3.UpSide:
+                rotationAmount *= 1;
+                break;
+            case Shape3.BackSide:
+                rotationAmount *= -2;
+                break;
+        }
+        var helper1 = new AnimationHelper({
+            rotation: 0
         });
-        this._old_dX = this.dX;
-        this._old_dY = this.dY;
-        var self = this;
-        animHelper.animate({
-            style:{
-                dX:0,
-                dY:0
-            },
-            duration:duration,
-            delay:delay,
+        helper1.animate({
+            style:{rotation:-Math.PI/2},
+            duration:1000,
+            delay:500,
             update:function(){
-                self.dX = this.dX;
-                self.dY = this.dY;
-                self.redraw();
+                Interaction.shape.setRotationY(this.rotation);
+            },
+            callback:function(){
+                Interaction.shape.removeCubes();
+                this.rotation = -this.rotation;
+                Interaction.shape.showBackSide();
+                Interaction.shape.setRotationY(this.rotation);
+                this.animate({
+                    style:{rotation:0},
+                    duration:1000,
+                    update:function(){
+                        Interaction.shape.setRotationY(this.rotation);
+                    },
+                    callback: function() {
+                        Interaction.shape.flatten(1000,500);
+                    }
+                })
             }
         });
+    },
+//    flatten:function(duration,delay){
+//        var animHelper = new AnimationHelper({
+//            dX:this.dX,
+//            dY:this.dY
+//        });
+//        this._old_dX = this.dX;
+//        this._old_dY = this.dY;
+//        var self = this;
+//        animHelper.animate({
+//            style:{
+//                dX:0,
+//                dY:0
+//            },
+//            duration:duration,
+//            delay:delay,
+//            update:function(){
+//                self.dX = this.dX;
+//                self.dY = this.dY;
+//                self.redraw();
+//            }
+//        });
+//    },
+    flatten:function(duration,delay){
+        var animationHelper = new AnimationHelper({
+            zFactor: 3
+        })
+        var self = this;
+        animationHelper.animate({
+            style: {
+                zFactor: 0
+            },
+            duration: duration,
+            delay: delay,
+            animationType:'easeInEaseOut',
+            update: function() {
+                console.log(this.zFactor)
+                var matrix = Shape3.CreateProjectionMatrixForObjectAt (self.zeroPoint.x,self.zeroPoint.y,this.zFactor);
+                for(var i=0;i<self.cubes.length;i++){
+                    self.cubes[i].matrix = matrix;
+                    self.cubes[i].project();
+                }
+            }
+        })
+
+    },
+    removeCubes:function(){
+        if(this.cubes)
+            for(var i=0; i< this.cubes.length; i++){
+                this.cubes[i].remove();
+            }
     }
 
 });
@@ -160,3 +258,10 @@ Shape3.CreateProjectionMatrixForObjectAt = function(x, y, zFactor) {
         0, 0,    0,  1
     ];
 };
+
+Shape3.FrontSide = "Front";
+Shape3.DownSide = "Down";
+Shape3.UpSide = "Up";
+Shape3.LeftSide = "Left";
+Shape3.RightSide = "Right";
+Shape3.BackSide = "Back";

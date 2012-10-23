@@ -48,6 +48,13 @@ var Interaction = {
         Interaction.grids.createTool("ShapePattern");
         Interaction.shape = Shape3.Generate(randomNumber);
         Interaction.shape.draw(new Point(150,200));
+
+
+
+
+
+
+
     },
 		
 	/*
