@@ -230,11 +230,11 @@ function drawColumnGraph(){
     }
     else if(data.length == 3){
         var graphPoint = new Point(300,80);
-        var titleTextPoint = new Point(395,30);
+        var titleTextPoint = new Point(400,30);
     }
     else if(data.length == 4){
         var graphPoint = new Point(270,80);
-        var titleTextPoint = new Point(390,30);
+        var titleTextPoint = new Point(400,30);
     }
     Interaction.graphGroup = columnGraph(graphPoint,chart.xLabels.length*50,120,chart,undefined,1000,1000);
 
