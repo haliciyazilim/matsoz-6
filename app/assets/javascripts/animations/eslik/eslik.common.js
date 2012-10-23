@@ -1,5 +1,5 @@
 soruResimleri={
-    soruAdedi:3,
+    soruAdedi:5,
     soru1R1:"/assets/animations/eslik/eslik_1_alt_1.png",
     soru1R2:"/assets/animations/eslik/eslik_1_alt_2.png",
     soru1R3:"/assets/animations/eslik/eslik_1_alt_3.png",
@@ -19,7 +19,21 @@ soruResimleri={
     soru3R3:"/assets/animations/eslik/eslik_3_alt_3.png",
     soru3RC:"/assets/animations/eslik/eslik_3_Cevap.png",
     soru3RS:"/assets/animations/eslik/eslik_3_Soru.png",
-    soru3DD:180
+    soru3DD:180,
+
+    soru4R1:"/assets/animations/eslik/eslik_4_alt_1.png",
+    soru4R2:"/assets/animations/eslik/eslik_4_alt_2.png",
+    soru4R3:"/assets/animations/eslik/eslik_4_alt_3.png",
+    soru4RC:"/assets/animations/eslik/eslik_4_Cevap.png",
+    soru4RS:"/assets/animations/eslik/eslik_4_Soru.png",
+    soru4DD:180,
+
+    soru5R1:"/assets/animations/eslik/eslik_5_alt_1.png",
+    soru5R2:"/assets/animations/eslik/eslik_5_alt_2.png",
+    soru5R3:"/assets/animations/eslik/eslik_5_alt_3.png",
+    soru5RC:"/assets/animations/eslik/eslik_5_Cevap.png",
+    soru5RS:"/assets/animations/eslik/eslik_5_Soru.png",
+    soru5DD:180
 
 
 
