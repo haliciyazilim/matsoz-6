@@ -1,7 +1,11 @@
-function columnGraph(point,width,height,chart,style,duration,delay,step){
+function columnGraph(point,width,height,chart,style,duration,delay,step,notRot){
 
     if(step == undefined){
         step = duration*0.3;
+    }
+
+    if(notRot == undefined){
+        notRot = 0;
     }
 
     if(style == undefined){
@@ -50,23 +54,35 @@ function columnGraph(point,width,height,chart,style,duration,delay,step){
     }
 
     // Grid Labels
-    for(index = 0; index < numOfXPoints; index++){
-        var xOffset = 10;
-        var yOffset = 15;
-
-        if(xGridLabelStyle.rotation == 90){
-            xOffset = 2.5 + 5;
-            yOffset = 5.5;
+    if(notRot == 1){
+        for(var k = 0; k < numOfXPoints; k++){
+            var text = new PointText(new Point(xStart+k*xStep+18, yStart+height+16));
+            text.set_style(xGridLabelStyle);
+            text.justification = 'center';
+            text.fillColor = style.textColor;
+            text.content = chart.xLabels[k];
+            group.addChild(text);
         }
+    }
+    else{
+        for(index = 0; index < numOfXPoints; index++){
+            var xOffset = 10;
+            var yOffset = 15;
 
-        var text = new PointText(new Point(xStart+index*xStep+xOffset+10, yStart+height+16));
-        text.set_style(xGridLabelStyle);
-        text.fillColor = style.textColor;
-        text.content = chart.xLabels[index];
-        if(xGridLabelStyle.rotation){
-            text.rotate(xGridLabelStyle.rotation);
+            if(xGridLabelStyle.rotation == 90){
+                xOffset = 2.5 + 5;
+                yOffset = 5.5;
+            }
+
+            var text = new PointText(new Point(xStart+index*xStep+xOffset+10, yStart+height+16));
+            text.set_style(xGridLabelStyle);
+            text.fillColor = style.textColor;
+            text.content = chart.xLabels[index];
+            if(xGridLabelStyle.rotation){
+                text.rotate(xGridLabelStyle.rotation);
+            }
+            group.addChild(text);
         }
-        group.addChild(text);
     }
 
     for(index = 0; index < numOfYPoints; index++){

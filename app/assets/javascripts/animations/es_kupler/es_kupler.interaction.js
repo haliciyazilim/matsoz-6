@@ -33,14 +33,19 @@ var Interaction = {
                 strokeWidth:2,
                 strokeColor:'#000'
             }
-        })
+        });
+
 
         Interaction.grids.createTool("ShapePattern");
 
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        /*<[[TEST*/
+            randomNumber  = 0;
+        /*TEST]]>*/
+        Interaction.shape = Shape3.Generate(randomNumber);
+        Interaction.shape.draw(new Point(100,100))
     },
 		
 	/*
