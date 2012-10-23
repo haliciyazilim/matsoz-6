@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki prizmaların cisim köşegenlerini belirleyiniz. Bunun için ilgili köşelere basmanız gerekecek.');
+        Main.setObjective('Yandaki şeklin eşini bulunuz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -137,7 +137,26 @@ var Interaction = {
                 var dogruCevap=soruResimleri.soru3RC;
                 var donusDerecesi=soruResimleri.soru3DD;
                 break;
-
+            case 3:
+                var soru=soruResimleri.soru4RS;
+                var seceneklerArray=[
+                    soruResimleri.soru4R1,
+                    soruResimleri.soru4R2,
+                    soruResimleri.soru4R3,
+                    soruResimleri.soru4RC];
+                var dogruCevap=soruResimleri.soru4RC;
+                var donusDerecesi=soruResimleri.soru4DD;
+                break;
+            case 4:
+                var soru=soruResimleri.soru5RS;
+                var seceneklerArray=[
+                    soruResimleri.soru5R1,
+                    soruResimleri.soru5R2,
+                    soruResimleri.soru5R3,
+                    soruResimleri.soru5RC];
+                var dogruCevap=soruResimleri.soru5RC;
+                var donusDerecesi=soruResimleri.soru5DD;
+                break;
 
 
         }

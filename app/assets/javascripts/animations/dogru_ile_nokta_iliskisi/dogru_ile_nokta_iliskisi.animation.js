@@ -25,7 +25,7 @@ var Animation = {
                 marginTop:'-85px'
             }
         });
-        setTimeout(function(){ankaraHarita.play(14)},3000);
+        setTimeout(function(){ankaraHarita.play(25)},2000);
     },
     animateAnkaraDogrusal:function(){
         $(Animation.container).append($('#ankara_dogrusal'));
