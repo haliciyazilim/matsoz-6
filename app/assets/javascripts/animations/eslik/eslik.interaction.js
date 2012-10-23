@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki prizmaların cisim köşegenlerini belirleyiniz. Bunun için ilgili köşelere basmanız gerekecek.');
+        Main.setObjective('Yandaki şeklin eşini bulunuz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()

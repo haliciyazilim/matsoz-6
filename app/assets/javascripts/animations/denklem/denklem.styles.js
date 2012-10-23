@@ -1,5 +1,4 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+	ilkRenk="#000000";
+    degisenRenk="#ff0000"
 }
