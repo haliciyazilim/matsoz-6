@@ -41,8 +41,7 @@ var ShapePattern = Class.extend({
             type:this.pieceType,
             upperLeftPosition:upperLeftPosition,
             gridSize:gridSize,
-            style:this.pieceStyle,
-            disableLayers:true
+            style:this.pieceStyle
         });
     },
     getWidth:function(){
@@ -643,7 +642,9 @@ var PieceFactory = function(opt){
             path.add(points[i])
     var pathCenter = Util.centerOfPoints(points);
     var layers = new Group();
-    if(opt.disableLayers != true){
+    console.log(opt.disableLayers)
+    if(opt.disableLayers == undefined){
+        console.log("I'm here");
         for(var i=1;i<=points.length;i++){
             var layer = new Path();
             layer.add(pathCenter);
