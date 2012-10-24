@@ -18,7 +18,11 @@ var Surface = function (points) {
 		this.pivotsZ = [];
 		this.rotationsZ = [];
 	}
-	
+	this.remove = function(){
+        if (this.projectedSurface) {
+            this.projectedSurface.remove();
+        }
+    }
     this.project = function(matrix) {
         if (this.projectedSurface) {
             this.projectedSurface.remove();
@@ -104,6 +108,18 @@ var ExpandableShape = Class.extend({
 			}
 		}
 	},
+    transform: function(point3){
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    for (var i = 0; i < this.surfaces[key].points.length; i++) {
+                        this.surfaces[key].points[i] = this.surfaces[key].points[i].add(point3);
+                    }
+                }
+            }
+        }
+    },
+
 	
 	clearRotations: function() {
 		for (var key in this.surfaces) {
@@ -114,6 +130,55 @@ var ExpandableShape = Class.extend({
 			}
 		}
 	},
+
+    setRotationX: function(angle, center) {
+        if (!center) {
+            center = new Point3(0,0,0);
+        }
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    this.surfaces[key].pivotsX[0] = center;
+                    this.surfaces[key].rotationsX[0] = angle;
+                }
+            }
+        }
+    },
+    setRotationY: function(angle, center) {
+        if (!center) {
+            center = new Point3(0,0,0);
+        }
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    this.surfaces[key].pivotsY[0] = center;
+                    this.surfaces[key].rotationsY[0] = angle;
+                }
+            }
+        }
+    },
+    remove:function(){
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    this.surfaces[key].remove();
+                }
+            }
+        }
+    },
+    setRotationZ: function(angle, center) {
+        if (!center) {
+            center = new Point3(0,0,0);
+        }
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    this.surfaces[key].pivotsZ[0] = center;
+                    this.surfaces[key].rotationsZ[0] = angle;
+                }
+            }
+        }
+    },
 	
 	project: function() {
         var group = new Group();
