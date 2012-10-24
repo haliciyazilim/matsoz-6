@@ -18,7 +18,11 @@ var Surface = function (points) {
 		this.pivotsZ = [];
 		this.rotationsZ = [];
 	}
-	
+	this.remove = function(){
+        if (this.projectedSurface) {
+            this.projectedSurface.remove();
+        }
+    }
     this.project = function(matrix) {
         if (this.projectedSurface) {
             this.projectedSurface.remove();
@@ -104,6 +108,18 @@ var ExpandableShape = Class.extend({
 			}
 		}
 	},
+    transform: function(point3){
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    for (var i = 0; i < this.surfaces[key].points.length; i++) {
+                        this.surfaces[key].points[i] = this.surfaces[key].points[i].add(point3);
+                    }
+                }
+            }
+        }
+    },
+
 	
 	clearRotations: function() {
 		for (var key in this.surfaces) {
@@ -137,6 +153,15 @@ var ExpandableShape = Class.extend({
                 if (this.surfaces[key] instanceof Surface) {
                     this.surfaces[key].pivotsY[0] = center;
                     this.surfaces[key].rotationsY[0] = angle;
+                }
+            }
+        }
+    },
+    remove:function(){
+        for (var key in this.surfaces) {
+            if (this.surfaces.hasOwnProperty(key)) {
+                if (this.surfaces[key] instanceof Surface) {
+                    this.surfaces[key].remove();
                 }
             }
         }

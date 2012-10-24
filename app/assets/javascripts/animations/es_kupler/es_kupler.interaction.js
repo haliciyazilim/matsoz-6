@@ -22,6 +22,15 @@ var Interaction = {
             bottom:"25px",
             right:"150px"
         });
+
+
+        Interaction.prepareNextQuestion();
+    },
+	nextQuestion: function(randomNumber){
+        /*<[[TEST*/
+            randomNumber  = 0;
+        /*TEST]]>*/
+        Main.interactionProject.activeLayer.removeChildren();
         Interaction.grids = new InteractiveGrids({
             position:new Point(332.5,15.5),
             size:27,
@@ -37,15 +46,15 @@ var Interaction = {
 
 
         Interaction.grids.createTool("ShapePattern");
-
-        Interaction.prepareNextQuestion();
-    },
-	nextQuestion: function(randomNumber){
-        /*<[[TEST*/
-            randomNumber  = 0;
-        /*TEST]]>*/
         Interaction.shape = Shape3.Generate(randomNumber);
-        Interaction.shape.draw(new Point(100,100))
+        Interaction.shape.draw(new Point(150,200));
+
+
+
+
+
+
+
     },
 		
 	/*

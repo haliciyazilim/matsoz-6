@@ -39,7 +39,21 @@ Point3.prototype.swapXZ = function() {
 		this.x
 	);
 }
-
+Point3.prototype.multiply = function(point){
+    if(point instanceof Point3){
+        return new Point3(
+            this.x*point.x,
+            this.y*point.y,
+            this.z*point.z
+        );
+    }
+    else if(!isNaN(point)){
+        return this.multiply(new Point3(point,point,point));
+    }
+    else{
+        throw "wrong argument! must be a Point3 or number";
+    }
+}
 Point3.prototype.normalize = function(){
 	return this.setLength(1);
 }
