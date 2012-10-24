@@ -225,16 +225,28 @@ function drawColumnGraph(){
         Interaction.emptyGroup.remove();
     }
     if(data.length == 2){
-        var graphPoint = new Point(330,80);
-        var titleTextPoint = new Point(400,30);
+        var graphPoint = new Point(330,90);
+        var titleTextPoint = new Point(400,45);
+        $('#graph').css({
+            opacity:1,
+            left:'330px'
+        });
     }
     else if(data.length == 3){
-        var graphPoint = new Point(300,80);
-        var titleTextPoint = new Point(400,30);
+        var graphPoint = new Point(300,90);
+        var titleTextPoint = new Point(400,45);
+        $('#graph').css({
+            opacity:1,
+            left:'300px'
+        });
     }
     else if(data.length == 4){
-        var graphPoint = new Point(270,80);
-        var titleTextPoint = new Point(400,30);
+        var graphPoint = new Point(270,90);
+        var titleTextPoint = new Point(400,45);
+        $('#graph').css({
+            opacity:1,
+            left:'270px'
+        });
     }
     Interaction.graphGroup = columnGraph(graphPoint,chart.xLabels.length*50,120,chart,undefined,1000,1000);
 
