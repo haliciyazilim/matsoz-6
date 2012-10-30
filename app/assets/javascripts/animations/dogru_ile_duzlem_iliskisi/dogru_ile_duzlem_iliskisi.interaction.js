@@ -15,16 +15,32 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:"40px",
+            bottom:"20px",
             right:"40px"
         });
         Interaction.appendStatus({
-            bottom:"50px",
+            bottom:"30px",
             right:"150px"
         })
 
+        var fonResmi=new Image();
+        fonResmi.src="/assets/animations/dogru_ile_duzlem_iliskisi/dogru_duzlem_etkilesim.png";
+        fonResmi.id="fonResmi";
+
+        $(container).append(fonResmi);
+        $("#fonResmi").css({
+            position:"absolute",
+            left:"0px",
+            right:"0px",
+            top:"0px",
+            margin:"auto",
+            zIndex:"-1"
+
+
+        });
+
         dogrular();
-        console.log(onDuvarA.position.x)
+
 
         Interaction.soru=0;
         Interaction.prepareNextQuestion();
@@ -35,11 +51,11 @@ var Interaction = {
 
         Interaction.soru++;
         if(Interaction.soru%2==0){
-            Main.setObjective('Yandaki resimde evin sarı renkli duvarı ile <b>kesişen</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.');
+            Main.setObjective('Yandaki resimde evin mavi renkli duvarı ile <b>kesişen</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.');
             soru="kesisen";
         }
         else{
-            Main.setObjective('Yandaki resimde evin sarı renkli duvarına <b>paralel</b> olan tüm doğru parçalarını bulunuz ve kontrol ediniz.');
+            Main.setObjective('Yandaki resimde evin mavi renkli duvarına <b>paralel</b> olan tüm doğru parçalarını bulunuz ve kontrol ediniz.');
             soru="paralel";
         }
 
@@ -99,7 +115,7 @@ var Interaction = {
         if(soru=="paralel"){
             for(var i=0; i<dogrularArray.length;i++){
                 if(dogrularArray[i].class=="paralel")
-                    dogrularArray[i].strokeColor="yellow";
+                    dogrularArray[i].strokeColor="blue";
             }
             console.log("ONFAIL soru paralel")
             for(var i=0; i<Interaction.seciliId.length;i++){
@@ -113,7 +129,7 @@ var Interaction = {
         else if(soru=="kesisen"){
             for(var i=0; i<dogrularArray.length;i++){
                 if(dogrularArray[i].class=="kesisen")
-                    dogrularArray[i].strokeColor="yellow";
+                    dogrularArray[i].strokeColor="blue";
             }
             console.log("ONFAIL soru kesisen")
             for(var i=0; i<Interaction.seciliId.length;i++){

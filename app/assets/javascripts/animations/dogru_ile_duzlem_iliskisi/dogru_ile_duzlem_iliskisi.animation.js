@@ -167,3 +167,5 @@ var Animation = {
 
     }
 }
+
+Main.animationFinished(28000);
