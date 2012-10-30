@@ -63,6 +63,18 @@ var dShape3 = Shape3.extend({
     }
 });
 
+var AnimationShape = Shape3.extend({
+    init:function(opt){
+        this._super(opt);
+        this.points.push( new Point3( 0, 0, 0 ) );
+        this.points.push( new Point3(-1, 0, 0 ) );
+        this.points.push( new Point3( 1, 0, 0 ) );
+        this.points.push( new Point3(-1, 1, 0 ) );
+        this.points.push( new Point3( 1, 1, 0 ) );
+        this.points.push( new Point3( 1, 2, 0 ) );
+        this.style = animationShapeStyle;
+    }
+})
 
 
 ShapePattern.prototype.drawAPiece = function(upperLeftPosition,gridSize){
