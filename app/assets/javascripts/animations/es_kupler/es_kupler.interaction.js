@@ -3,6 +3,12 @@ var Interaction = {
 	getFramework:function(){
         return 'paper';
     },
+    FRONT:'onden',
+    BACK:'arkadan',
+    RIGHT:'sagdan',
+    LEFT:'soldan',
+    DOWN:'alttan',
+    UP:'ustten',
 	images:[
         
     ],
@@ -23,13 +29,34 @@ var Interaction = {
             right:"150px"
         });
 
-
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
         /*<[[TEST*/
             randomNumber  = 0;
         /*TEST]]>*/
+        var askedSide = null;
+        switch(randomNumber){
+            case 0:
+                askedSide = Shape3.FrontSide;
+                break;
+            case 1:
+                askedSide = Shape3.BackSide;
+                break;
+            case 2:
+                askedSide = Shape3.LeftSide;
+                break;
+            case 3:
+                askedSide = Shape3.RightSide;
+                break;
+            case 4:
+                askedSide = Shape3.UpSide;
+                break;
+            case 5:
+                askedSide = Shape3.DownSide;
+                break;
+        }
+        Interaction.askedSide = askedSide;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.grids = new InteractiveGrids({
             position:new Point(332.5,15.5),
@@ -44,16 +71,9 @@ var Interaction = {
             }
         });
 
-
         Interaction.grids.createTool("ShapePattern");
         Interaction.shape = Shape3.Generate(randomNumber);
         Interaction.shape.draw(new Point(150,200));
-
-
-
-
-
-
 
     },
 		
@@ -65,6 +85,17 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
+
+        var points = Interaction.grids.getInputPattern().generateShapePoints();
+
+        for(var i=0;i<points.length;i++){
+            console.log(points[i].x,points[i].y);
+        }
+        points.normalizePoints();
+        console.log('abc');
+        for(var i=0;i<points.length;i++){
+            console.log(points[i].x,points[i].y);
+        }
 
     },
 	onCorrectAnswer : function(){

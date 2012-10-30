@@ -1,5 +1,13 @@
 
-
+Shape3.Generate = function(type){
+    var shape;
+    switch(type){
+        case 0:
+            shape = new TShape3();
+            break;
+    }
+    return shape;
+}
 
 var TShape3 = Shape3.extend({
     init:function(opt){
