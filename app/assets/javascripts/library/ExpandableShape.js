@@ -91,7 +91,8 @@ var ExpandableShape = Class.extend({
 	init: function(matrix) {
 		this.matrix = matrix;
 		this.animate = Item.prototype.animate;
-		
+		this.set_style = Item.prototype.set_style;
+
 		this.fillColor = new RgbColor(0.75, 0.91, 0.94, 0.7);
 	    this.strokeColor = "#255b63";
 	    this.strokeWidth = 1;

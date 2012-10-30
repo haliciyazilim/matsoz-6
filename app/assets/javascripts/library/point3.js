@@ -79,7 +79,9 @@ Point3.prototype.scale = function(scale) {
 	
 	return this;
 }
-
+Point3.prototype.clone = function(){
+    return new Point3(this.x,this.y,this.z);
+}
 Point3.prototype.cross = function(other){
 	return new Point3(
 		this.y*other.z - this.z*other.y,
