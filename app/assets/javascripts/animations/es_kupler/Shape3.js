@@ -13,10 +13,7 @@ var Shape3 = Class.extend({
         this.h = 30;
         this.a = 30;
         this.dX = 0.4;
-        this.style = {
-            strokeColor:'#687',
-            fillColor:new RgbColor(0.6,0.8,0.7,0.90)
-        }
+        this.style = interactionShapeStyle;
     },
     redraw:function(){
         this.removeCubes();
