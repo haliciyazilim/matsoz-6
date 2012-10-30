@@ -35,12 +35,12 @@ var Interaction = {
             fontWeight:'bold'
 
         })
-        Interaction.setRandomGenerator(6);
+        Interaction.setRandomGenerator(3);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
         /*<[[TEST*/
-            randomNumber  = 0;
+//            randomNumber  = 2;
         /*TEST]]>*/
         var askedSide = null;
         switch(Util.randomInteger(0,6)){
