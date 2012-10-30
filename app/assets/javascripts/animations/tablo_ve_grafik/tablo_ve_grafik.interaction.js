@@ -161,6 +161,7 @@ var Interaction = {
             yLabels: yLabels,
             data: data
         };
+        // 
         Interaction.emptyGroup = columnGraph(new Point(270,90),chart.xLabels.length*50,120,chart);
 
         enableInputsBox();
