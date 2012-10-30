@@ -19,6 +19,7 @@ var Shape3 = Class.extend({
         }
     },
     redraw:function(){
+        this.removeCubes();
         this.draw(this.zeroPoint);
     },
     draw:function(zeroPoint){
@@ -97,27 +98,79 @@ var Shape3 = Class.extend({
             this.cubes[i].project();
         }
     },
-    showLeftSide:function(){
+    showLeftSide:function(redraw){
         this.rotateByY(false);
-        this.redraw();
+        if(redraw)
+            this.redraw();
     },
-    showRightSide:function(){
+    showRightSide:function(redraw){
         this.rotateByY(true);
-        this.redraw();
+        if(redraw)
+            this.redraw();
     },
-    showUpSide:function(){
+    showUpSide:function(redraw){
         this.rotateByX(true);
-        this.redraw();
+        if(redraw)
+            this.redraw();
     },
-    showDownSide:function(){
+    showDownSide:function(redraw){
         this.rotateByX(false);
-        this.redraw();
+        if(redraw)
+            this.redraw();
     },
-    showBackSide:function(){
+    showBackSide:function(redraw){
         this.rotateByY();
         this.rotateByY();
-        this.redraw();
+        if(redraw)
+            this.redraw();
     },
+    showSide: function(side,redraw){
+        switch(side){
+            case Shape3.LeftSide:
+                this.showLeftSide(redraw);
+                break;
+            case Shape3.RightSide:
+                this.showRightSide(redraw);
+                break;
+            case Shape3.DownSide:
+                this.showDownSide(redraw);
+                break;
+            case Shape3.UpSide:
+                this.showUpSide(redraw);
+                break;
+            case Shape3.BackSide:
+                this.showBackSide(redraw);
+                break;
+        }
+    },
+    getMinimizedFlattedPoints:function(forSide){
+        var tempPoint3s = [];
+        for(var i=0; i < this.points.length; i++)
+            tempPoint3s.push(this.points[i]);
+        this.showSide(forSide);
+        var flattedPoints = [];
+        for(var i=0; i< this.points.length; i++){
+            flattedPoints.push( new Point(this.points[i].x,this.points[i].y) );
+        }
+        var minimizedFlattedPoints = [];
+        for(var i=0; i< flattedPoints.length ; i++){
+            var exists = false;
+            for(var j=0; j<minimizedFlattedPoints.length;j++){
+                if(flattedPoints[i].equals(minimizedFlattedPoints[j]) == true){
+                    exists = true;
+                }
+            }
+            if(exists === false){
+                minimizedFlattedPoints.push(flattedPoints[i]);
+            }
+        }
+        this.points = tempPoint3s;
+        return minimizedFlattedPoints;
+    },
+
+    /*
+    * function is NOT COMPLETED!!!!
+    */
     showCorrectSide:function(side){
         var rotationAmount = (Math.PI/4);
         switch(side){
@@ -150,7 +203,7 @@ var Shape3 = Class.extend({
             callback:function(){
                 Interaction.shape.removeCubes();
                 this.rotation = -this.rotation;
-                Interaction.shape.showBackSide();
+                Interaction.shape.showBackSide(true);
                 Interaction.shape.setRotationY(this.rotation);
                 this.animate({
                     style:{rotation:0},
@@ -219,15 +272,7 @@ var Shape3 = Class.extend({
 
 });
 
-Shape3.Generate = function(type){
-    var shape;
-    switch(type){
-        case 0:
-            shape = new TShape3();
-            break;
-    }
-    return shape;
-}
+
 Shape3.SortFunction = function(a,b){
     if(a.z > b.z)
         return 1;
@@ -265,3 +310,17 @@ Shape3.UpSide = "Up";
 Shape3.LeftSide = "Left";
 Shape3.RightSide = "Right";
 Shape3.BackSide = "Back";
+
+Array.prototype.normalizePoints = function(){
+    //calculate shape relative grid points
+    var minX = this[0].x,minY = this[0].y;
+    for(var i=1; i<this.length; i++)
+        if(minX > this[i].x)
+            minX = this[i].x;
+    for(var i=1; i<this.length; i++)
+        if(minY > this[i].y)
+            minY = this[i].y;
+    for(var i=0; i<this.length; i++)
+        this[i] = this[i].subtract(minX,minY);
+    return this;
+}
