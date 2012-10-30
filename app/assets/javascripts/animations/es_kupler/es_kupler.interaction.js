@@ -28,7 +28,14 @@ var Interaction = {
             bottom:"25px",
             right:"150px"
         });
+        Interaction.appendQuestion('<span id="side"></span>',{
+            position:'absolute',
+            left:'120px',
+            top:'20px',
+            fontWeight:'bold'
 
+        })
+        Interaction.setRandomGenerator(6);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -36,7 +43,7 @@ var Interaction = {
             randomNumber  = 0;
         /*TEST]]>*/
         var askedSide = null;
-        switch(randomNumber){
+        switch(Util.randomInteger(0,6)){
             case 0:
                 askedSide = Shape3.FrontSide;
                 break;
@@ -56,6 +63,9 @@ var Interaction = {
                 askedSide = Shape3.DownSide;
                 break;
         }
+        Interaction.setQuestionParams({
+            id:'side',html:askedSide
+        })
         Interaction.askedSide = askedSide;
         Main.interactionProject.activeLayer.removeChildren();
         Interaction.grids = new InteractiveGrids({
@@ -86,25 +96,24 @@ var Interaction = {
     },
 	isAnswerCorrect : function(value){
 
-        var points = Interaction.grids.getInputPattern().generateShapePoints();
+        var inputPoints = Interaction.grids.getInputPattern().generateShapePoints();
+        var correctPoints = Interaction.shape.getMinimizedFlattedPoints(Interaction.askedSide).normalizePoints();
 
-        for(var i=0;i<points.length;i++){
-            console.log(points[i].x,points[i].y);
-        }
-        points.normalizePoints();
-        console.log('abc');
-        for(var i=0;i<points.length;i++){
-            console.log(points[i].x,points[i].y);
-        }
+        return inputPoints.equals(correctPoints);
 
     },
 	onCorrectAnswer : function(){
-		
+        Interaction.showCorrectAnswer();
     },
 	onWrongAnswer : function(){
 		
     },
 	onFail : function(){
-		
+        Interaction.setStatus('Yanlış cevap. Doğrusu şekil üzerinde gösterilecektir.',false);
+		Interaction.showCorrectAnswer();
+    },
+    showCorrectAnswer:function(){
+        Interaction.pause();
+        Interaction.shape.showCorrectSide(Interaction.askedSide);
     }
 }

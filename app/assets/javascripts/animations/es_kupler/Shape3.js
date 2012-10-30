@@ -146,7 +146,7 @@ var Shape3 = Class.extend({
     getMinimizedFlattedPoints:function(forSide){
         var tempPoint3s = [];
         for(var i=0; i < this.points.length; i++)
-            tempPoint3s.push(this.points[i]);
+            tempPoint3s.push(this.points[i].clone());
         this.showSide(forSide);
         var flattedPoints = [];
         for(var i=0; i< this.points.length; i++){
@@ -173,46 +173,56 @@ var Shape3 = Class.extend({
     */
     showCorrectSide:function(side){
         var rotationAmount = (Math.PI/4);
+        var axis = null;
         switch(side){
             case Shape3.LeftSide:
                 rotationAmount *= -1;
+                axis = 'Y';
                 break;
             case Shape3.RightSide:
                 rotationAmount *= 1;
+                axis = 'Y';
                 break;
             case Shape3.DownSide:
                 rotationAmount *= -1;
+                axis = 'X';
                 break;
             case Shape3.UpSide:
                 rotationAmount *= 1;
+                axis = 'X';
                 break;
             case Shape3.BackSide:
                 rotationAmount *= -2;
+                axis = 'Y'
                 break;
+            default:
+                this.flatten(1000,500);
+                return;
         }
         var helper1 = new AnimationHelper({
             rotation: 0
         });
+        var self = this;
         helper1.animate({
-            style:{rotation:-Math.PI/2},
+            style:{rotation:rotationAmount},
             duration:1000,
-            delay:500,
+            delay:1000,
             update:function(){
-                Interaction.shape.setRotationY(this.rotation);
+                self['setRotation'+axis](this.rotation);
             },
             callback:function(){
-                Interaction.shape.removeCubes();
+                self.removeCubes();
                 this.rotation = -this.rotation;
-                Interaction.shape.showBackSide(true);
-                Interaction.shape.setRotationY(this.rotation);
+                self.showSide(side,true);
+                self['setRotation'+axis](this.rotation);
                 this.animate({
                     style:{rotation:0},
                     duration:1000,
                     update:function(){
-                        Interaction.shape.setRotationY(this.rotation);
+                        self['setRotation'+axis](this.rotation);
                     },
                     callback: function() {
-                        Interaction.shape.flatten(1000,500);
+                        self.flatten(1000,500);
                     }
                 })
             }
@@ -259,6 +269,9 @@ var Shape3 = Class.extend({
                     self.cubes[i].matrix = matrix;
                     self.cubes[i].project();
                 }
+            },
+            callback:function(){
+                Interaction.resume();
             }
         })
 
@@ -304,12 +317,12 @@ Shape3.CreateProjectionMatrixForObjectAt = function(x, y, zFactor) {
     ];
 };
 
-Shape3.FrontSide = "Front";
-Shape3.DownSide = "Down";
-Shape3.UpSide = "Up";
-Shape3.LeftSide = "Left";
-Shape3.RightSide = "Right";
-Shape3.BackSide = "Back";
+Shape3.FrontSide = "önden";
+Shape3.DownSide = "alttan";
+Shape3.UpSide = "üstten";
+Shape3.LeftSide = "soldan";
+Shape3.RightSide = "sağdan";
+Shape3.BackSide = "arkadan";
 
 Array.prototype.normalizePoints = function(){
     //calculate shape relative grid points
@@ -323,4 +336,21 @@ Array.prototype.normalizePoints = function(){
     for(var i=0; i<this.length; i++)
         this[i] = this[i].subtract(minX,minY);
     return this;
+}
+
+Array.prototype.equals = function(other){
+    if(this.length != other.length)
+        return false;
+    var length = this.length;
+    var equalsFlag = [];
+    for(var i=0; i < length; i++)
+        equalsFlag.push(false);
+    for(var i=0 ; i <length; i++)
+        for(var j=0; j < length ;j++)
+            if(this[i].equals(other[j]))
+                equalsFlag[i] = true;
+    for(var i=0;i<length;i++)
+        if(equalsFlag[i] == false)
+            return false;
+    return true;
 }
