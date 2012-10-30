@@ -32,30 +32,16 @@ var Shape3 = Class.extend({
 
         for(var i=0; i<this.points.length;i++){
 
-//            this.drawedShape.addChild(
-//                new Path.Cube(
-//                    zeroPoint.add(this.convertPoint3ToPoint(this.points[i])),
-//                    this.a,
-//                    new Point(this.dX,this.dY)
-//                ).set_style(this.style)
-//            )
 
             var cube = new ExpandablePrism(this.a,this.a,this.a,matrix);
+            cube.set_style(this.style);
             cube.transform(this.points[i].multiply(new Point3(this.a,-this.a,-this.a)));
             cube.project();
             this.cubes.push(cube);
         }
 
     },
-//    convertPoint3ToPoint:function(point3){
-//        return new Point(
-//            ( point3.x * this.a ) + 0.5,
-//            (-point3.y * this.a ) + 0.5
-//        ).add(
-//            (-point3.z * this.a * this.dX ),
-//            ( point3.z * this.a * this.dY )
-//        );
-//    },
+
     rotateByY:function(clockwise){
         for(var i=0; i<this.points.length; i++){
             var temp = this.points[i].x;
