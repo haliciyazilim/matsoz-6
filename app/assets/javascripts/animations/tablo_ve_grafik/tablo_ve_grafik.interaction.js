@@ -16,7 +16,9 @@ var Interaction = {
             height:$(container).height()
         };
 
-        $(Interaction.container).append('<button id="graphBtn" class="chart_button"></button>' +
+        $(Interaction.container).append('<span id="table" style="position:absolute;top:31px;left:10px;font-size:12px;">Tablo:</span>' +
+            '<span id="graph" style="position:absolute;top:14px;left:270px;opacity:0;">Grafik:</span>' +
+            ' <button id="graphBtn" class="chart_button"></button>' +
             '<button id="repeatBtn" class="repeat_button_small"></button>');
 
         $('#graphBtn').css({
@@ -43,8 +45,8 @@ var Interaction = {
         Interaction.appendInput({
             position:'absolute',
             top:'20px',
-            left:'10px',
-            width:'220px',
+            left:'47px',
+            width:'183px',
             height:'30px',
             fontSize:'12px',
             color:'#757575'
@@ -78,7 +80,7 @@ var Interaction = {
             }
 
         };
-        $(Interaction.input).attr('maxLength',50);
+        $(Interaction.input).attr('maxLength',28);
         var leftStr = '';
         var topStr = '';
         var myIndex;
@@ -140,6 +142,8 @@ var Interaction = {
             Interaction.emptyGroup.remove();
         }
 
+        $('#graph').css("opacity",0);
+
         var xLabels = ["","", "",""];
         var yLabels = ["","","","","","0"];
         var data = [];
@@ -157,7 +161,7 @@ var Interaction = {
             yLabels: yLabels,
             data: data
         };
-        Interaction.emptyGroup = columnGraph(new Point(270,80),chart.xLabels.length*50,120,chart);
+        Interaction.emptyGroup = columnGraph(new Point(270,90),chart.xLabels.length*50,120,chart);
 
         enableInputsBox();
         Interaction.inputs[0].focus();
@@ -188,6 +192,12 @@ var Interaction = {
         else if(Interaction.inputs[6].value < 0 || Interaction.inputs[6].value > 10){
             Interaction.setStatus('Lütfen y sütununa 0 ile 10 arasında tam sayı giriniz.',false);
         }
+        else if(Interaction.inputs[7].value == '' && Interaction.inputs[8].value != ''){
+            Interaction.setStatus('Lütfen x eksenini eksiksiz doldurunuz.',false);
+        }
+        else if(Interaction.inputs[9].value == '' && Interaction.inputs[10].value != ''){
+            Interaction.setStatus('Lütfen x eksenini eksiksiz doldurunuz.',false);
+        }
         else if(Interaction.inputs[7].value != ''){
             if(!Util.isInteger(Interaction.inputs[8].value) || Interaction.inputs[8].value < 0 || Interaction.inputs[8].value > 10){
                 Interaction.setStatus('Lütfen y sütununa 0 ile 10 arasında tam sayı giriniz.',false);
@@ -208,6 +218,7 @@ var Interaction = {
                 }
             }
         }
+
         else{
             Interaction.setStatus('');
             drawColumnGraph();

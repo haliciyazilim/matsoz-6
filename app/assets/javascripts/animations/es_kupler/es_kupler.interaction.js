@@ -3,6 +3,12 @@ var Interaction = {
 	getFramework:function(){
         return 'paper';
     },
+    FRONT:'onden',
+    BACK:'arkadan',
+    RIGHT:'sagdan',
+    LEFT:'soldan',
+    DOWN:'alttan',
+    UP:'ustten',
 	images:[
         
     ],
@@ -22,6 +28,46 @@ var Interaction = {
             bottom:"25px",
             right:"150px"
         });
+        Interaction.appendQuestion('<span id="side"></span>',{
+            position:'absolute',
+            left:'120px',
+            top:'20px',
+            fontWeight:'bold'
+
+        })
+        Interaction.setRandomGenerator(3);
+        Interaction.prepareNextQuestion();
+    },
+	nextQuestion: function(randomNumber){
+        /*<[[TEST*/
+//            randomNumber  = 2;
+        /*TEST]]>*/
+        var askedSide = null;
+        switch(Util.randomInteger(0,6)){
+            case 0:
+                askedSide = Shape3.FrontSide;
+                break;
+            case 1:
+                askedSide = Shape3.BackSide;
+                break;
+            case 2:
+                askedSide = Shape3.LeftSide;
+                break;
+            case 3:
+                askedSide = Shape3.RightSide;
+                break;
+            case 4:
+                askedSide = Shape3.UpSide;
+                break;
+            case 5:
+                askedSide = Shape3.DownSide;
+                break;
+        }
+        Interaction.setQuestionParams({
+            id:'side',html:askedSide
+        })
+        Interaction.askedSide = askedSide;
+        Main.interactionProject.activeLayer.removeChildren();
         Interaction.grids = new InteractiveGrids({
             position:new Point(332.5,15.5),
             size:27,
@@ -35,17 +81,10 @@ var Interaction = {
             }
         });
 
-
         Interaction.grids.createTool("ShapePattern");
-
-        Interaction.prepareNextQuestion();
-    },
-	nextQuestion: function(randomNumber){
-        /*<[[TEST*/
-            randomNumber  = 0;
-        /*TEST]]>*/
         Interaction.shape = Shape3.Generate(randomNumber);
-        Interaction.shape.draw(new Point(100,100))
+        Interaction.shape.draw(new Point(150,200));
+
     },
 		
 	/*
@@ -57,14 +96,24 @@ var Interaction = {
     },
 	isAnswerCorrect : function(value){
 
+        var inputPoints = Interaction.grids.getInputPattern().generateShapePoints();
+        var correctPoints = Interaction.shape.getMinimizedFlattedPoints(Interaction.askedSide).normalizePoints();
+
+        return inputPoints.equals(correctPoints);
+
     },
 	onCorrectAnswer : function(){
-		
+        Interaction.showCorrectAnswer();
     },
 	onWrongAnswer : function(){
 		
     },
 	onFail : function(){
-		
+        Interaction.setStatus('Yanlış cevap. Doğrusu şekil üzerinde gösterilecektir.',false);
+		Interaction.showCorrectAnswer();
+    },
+    showCorrectAnswer:function(){
+        Interaction.pause();
+        Interaction.shape.showCorrectSide(Interaction.askedSide);
     }
 }

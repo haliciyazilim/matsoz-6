@@ -14,8 +14,7 @@ var ShapePattern = Class.extend({
 
     },
     generateShapePoints:function(){
-        this.shapePoints = [];
-        throw 'This method should be implemented';
+        this.shapePoints = [new Point(0,0)];
     },
     isEqual:function(other){
         this.generateShapePoints(true);
@@ -585,14 +584,6 @@ var PieceFactory = function(opt){
 //        opt.type = 5;
     /*TEST]]>*/
     switch(opt.type){
-        case 0:
-            var points = [
-                new Point(0,0),
-                new Point(0,gridSize),
-                new Point(gridSize,gridSize),
-                new Point(gridSize,0)
-            ];
-            break;
         case 1:
             var points = [
                 new Point(0,gridSize*0.5),
@@ -634,6 +625,15 @@ var PieceFactory = function(opt){
                 new Point(gridSize,gridSize*0.4)
             ];
             break;
+        case 0:
+        default:
+            var points = [
+                new Point(0,0),
+                new Point(0,gridSize),
+                new Point(gridSize,gridSize),
+                new Point(gridSize,0)
+            ]
+            break;
     }
 
     path.closed = true;
@@ -641,20 +641,35 @@ var PieceFactory = function(opt){
     for(var i=0;i<points.length;i++)
             path.add(points[i])
     var pathCenter = Util.centerOfPoints(points);
-    for(var i=1;i<=points.length;i++){
-        var layer = new Path();
-        layer.add(pathCenter);
-        layer.add(points[(i-1)]);
-        layer.add(points[i%points.length]);
-        layer.closed = true;
-        layer.set_style({
-            strokeColor:new RgbColor(0,0,0,0),
-            fillColor:'#fff',
-            opacity:Math.abs(i - points.length*0.5-0.25)/points.length
-        });
-        layer.position = layer.position.add(opt.upperLeftPosition);
+    var layers = new Group();
+    console.log(opt.disableLayers)
+    if(opt.disableLayers == undefined){
+        console.log("I'm here");
+        for(var i=1;i<=points.length;i++){
+            var layer = new Path();
+            layer.add(pathCenter);
+            layer.add(points[(i-1)]);
+            layer.add(points[i%points.length]);
+            layer.closed = true;
+            layer.set_style({
+                strokeColor:new RgbColor(0,0,0,0),
+                fillColor:'#fff',
+                opacity:Math.abs(i - points.length*0.5-0.25)/points.length
+            });
+            layer.position = layer.position.add(opt.upperLeftPosition);
+            layers.addChild(layer);
+        }
     }
     path.position = path.position.add(opt.upperLeftPosition);
-    path.set_style(opt.style);
-    return path;
+    if(opt.style)
+        path.set_style(opt.style);
+    else
+        path.set_style({
+            strokeColor:'#000',
+            fillColor:'#aaa'
+        })
+    var group =  new Group();
+    group.addChild(path);
+    group.addChild(layers);
+    return group;
 }
