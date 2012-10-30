@@ -1606,6 +1606,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			
 			var rect = new Path.Rectangle(new Point(left, top), new Size(right-left, bottom - top));
 			rect.strokeColor = 'blue';
+            elementGroup.addChild(rect);
 			
 			left = Math.floor((left - topLeftPoint.x) / granularity);
 			right = Math.floor((right - topLeftPoint.x) / granularity);
@@ -1649,7 +1650,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (oval1.hitTest(point) && !oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-	console.log("First part: " + (endTime-start_time));
+//	console.log("First part: " + (endTime-start_time));
 	
 	var start_time = Date.now();	
 	// var rr = new Path.Rectangle(intersectionBoundingBox);
@@ -1661,7 +1662,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (oval1.hitTest(point) && oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-	console.log("Second part: " + (endTime-start_time));
+//	console.log("Second part: " + (endTime-start_time));
 	var start_time = Date.now();
 	// var rr2 = new Path.Rectangle(bb2);
 	// rr2.strokeColor = 'blue';
@@ -1672,7 +1673,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (!oval1.hitTest(point) && oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-	console.log("Third part: " + (endTime-start_time));
+//	console.log("Third part: " + (endTime-start_time));
 	
 	vennDiagram1.addChild(elementsGroup1);
 	vennDiagram1.addChild(elementsGroup2);
