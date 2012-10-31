@@ -41,6 +41,12 @@ var Shape3 = Class.extend({
         }
 
     },
+    setOpacity:function(opacity){
+        for(var i=0; i<this.cubes.length;i++){
+            this.cubes[i].set_style({opacity:opacity});
+            this.cubes[i].project();
+        }
+    },
 
     rotateByY:function(clockwise){
         for(var i=0; i<this.points.length; i++){

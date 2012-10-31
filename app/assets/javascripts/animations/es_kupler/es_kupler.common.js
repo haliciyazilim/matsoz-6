@@ -11,6 +11,15 @@ Shape3.Generate = function(type){
         case 2:
             shape = new dShape3();
             break;
+        case 3:
+            shape = new ManivelaShape3();
+            break;
+        case 4:
+            shape = new ForkShape3();
+            break
+        case 5:
+            shape = new PlusShape3();
+            break;
     }
     return shape;
 }
@@ -62,6 +71,53 @@ var dShape3 = Shape3.extend({
         }
     }
 });
+
+var ManivelaShape3 = Shape3.extend({
+    init:function(opt){
+        this._super(opt);
+        this.points.push( new Point3( 0, 0, 0 ) );
+        this.points.push( new Point3(-1, 0, 0 ) );
+        this.points.push( new Point3( 1, 0, 0 ) );
+
+        this.points.push( new Point3( 1, 1, 0 ) );
+        this.points.push( new Point3( 1, 1,-1 ) );
+
+        this.points.push( new Point3(-1,-1, 0 ) );
+        this.points.push( new Point3(-1,-1, 1 ) );
+
+    }
+})
+var ForkShape3 = Shape3.extend({
+    init:function(opt){
+        this._super(opt);
+        this.points.push( new Point3( 0, 0, 0 ) );
+        this.points.push( new Point3(-1, 0, 0 ) );
+        this.points.push( new Point3( 1, 0, 0 ) );
+
+        this.points.push( new Point3( 1, 1, 0 ) );
+        this.points.push( new Point3( 1, 1,-1 ) );
+
+        this.points.push( new Point3(-1, 1, 0 ) );
+        this.points.push( new Point3(-1, 1,-1 ) );
+
+        this.points.push( new Point3( 0, 0, 1 ) );
+
+    }
+})
+
+var PlusShape3 = Shape3.extend({
+    init:function(opt){
+        this._super(opt);
+        this.points.push( new Point3( 0, 0, 0 ) );
+        this.points.push( new Point3( 1, 0, 0 ) );
+        this.points.push( new Point3( 0, 1, 0 ) );
+        this.points.push( new Point3( 0, 0, 1 ) );
+        this.points.push( new Point3(-1, 0, 0 ) );
+        this.points.push( new Point3( 0,-1, 0 ) );
+        this.points.push( new Point3( 0, 0,-1 ) );
+
+    }
+})
 
 var AnimationShape = Shape3.extend({
     init:function(opt){
