@@ -39,12 +39,12 @@ var Interaction = {
 
         var set1 = new Set({
             type: Set.ELEMENTS,
-            elements: [1, 2, 3, 4]
+            elements: [1,2,3,4,5,6,7]
         })
 
         var set2 = new Set({
             type: Set.ELEMENTS,
-            elements: [3, 4, 5, 6]
+            elements: [4,5,6,7,8]
         })
 
         Interaction.sets = Set.drawSets(container, new Point(100, 100),[set1, set2],['A', 'B']);

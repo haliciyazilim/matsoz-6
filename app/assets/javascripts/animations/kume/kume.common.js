@@ -1548,13 +1548,19 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		for (var j = 0; j < vennSize.height/granularity; j++) {
 			for (var i = 0; i < vennSize.width/granularity; i++) {
 				var tempPoint = new Point(topLeftPoint.x + i*granularity, topLeftPoint.y + j*granularity);
-			
+
+
 				if (!isAvailable(tempPoint)) {
-					// tempPoint.showOnCanvas();
-					excludingArray.push(j * Math.floor(vennSize.width/granularity) + i);
-				}
+//					tempPoint.showOnCanvas();
+					excludingArray.push(j * Math.ceil(vennSize.width/granularity) + i);
+				} else {
+//                    console.log(i,j,j * Math.ceil(vennSize.width/granularity) + i);
+                }
+
 			}
 		}
+
+//        console.log(excludingArray)
 		
 		for (var i = 0; i < noOfElements; i++) {
 			// var point;
@@ -1573,18 +1579,18 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			catch (err) {
 				retry = true;
 			}
+//
+//			console.log(randomPoint % Math.ceil(vennSize.width/granularity), Math.floor(granularity * randomPoint / vennSize.width), randomPoint);
+			var point = new Point(topLeftPoint.x + (randomPoint % Math.ceil(vennSize.width/granularity)) * granularity, topLeftPoint.y + Math.floor(granularity * randomPoint / vennSize.width) * granularity);
+
+//			if (point.y < 0) {
+//				console.log(point.y, topLeftPoint.y);
+//			}
 			
 			
-			var point = new Point(topLeftPoint.x + (randomPoint % Math.floor(vennSize.width/granularity)) * granularity, topLeftPoint.y + Math.floor(granularity * randomPoint / vennSize.width) * granularity);
-			
-			if (point.y < 0) {
-				console.log(point.y, topLeftPoint.y);
-			}
-			
-			
-			// point = point.add(Util.randomInteger(0, granularity), -Util.randomInteger(0, granularity));
-			// var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
-			var text = new PointText(point);
+//			point = point.add(Util.randomInteger(0, granularity), -Util.randomInteger(0, granularity));
+			var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
+//			var text = new PointText(point);
 			text.set_style({
 				fontSize: fontSize
 			})
@@ -1598,15 +1604,15 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			// this.vennDiagram.addChild(rect);
 			
 			elementLocations.push(point);
-			
+
 			var left = point.x - elementSize.width;
 			var right = point.x + elementSize.width;
 			var top = point.y - elementSize.height;
 			var bottom = point.y + elementSize.height;
 			
-			var rect = new Path.Rectangle(new Point(left, top), new Size(right-left, bottom - top));
-			rect.strokeColor = 'blue';
-            elementGroup.addChild(rect);
+//			var rect = new Path.Rectangle(new Point(left, top), new Size(right-left, bottom - top));
+//			rect.strokeColor = 'blue';
+//            elementGroup.addChild(rect);
 			
 			left = Math.floor((left - topLeftPoint.x) / granularity);
 			right = Math.floor((right - topLeftPoint.x) / granularity);
@@ -1616,7 +1622,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			for (x = left; x <= right; x++) {
 				for (y = top; y <= bottom; y++) {
 					if (x >= 0 && y >= 0) {
-						excludingArray.push(y * Math.floor(vennSize.width/granularity) + x);
+						excludingArray.push(y * Math.ceil(vennSize.width/granularity) + x);
 					}
 				}
 			}
