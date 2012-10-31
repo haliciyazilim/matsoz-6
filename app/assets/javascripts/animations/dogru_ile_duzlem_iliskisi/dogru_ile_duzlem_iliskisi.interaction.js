@@ -39,6 +39,40 @@ var Interaction = {
 
         });
 
+        $(container).append("<div id='sayacMetinUst'>");
+        $("#sayacMetinUst").css({
+            position:"absolute",
+            width:"145px",
+            height:"20px",
+            right:"20px",
+            top:"20px",
+            textAlign:"center"
+        }).html("Tüm kesişen doğrulara");
+
+        $(container).append("<div id='sayac'>");
+        $("#sayac").css({
+            position:"absolute",
+            width:"145px",
+            height:"20px",
+            right:"20px",
+            top:"40px",
+            fontSize:"20px",
+            textAlign:"center",
+            fontWeight:"bold"
+        });
+
+        $(container).append("<div id='sayacMetinAlt'>");
+        $("#sayacMetinAlt").css({
+            position:"absolute",
+            width:"145px",
+            height:"20px",
+            right:"20px",
+            top:"60px",
+
+            textAlign:"center"
+        }).html("doğru parçası kaldı.");
+
+        soru="paralel";
         dogrular();
 
 
@@ -47,18 +81,20 @@ var Interaction = {
     },
 	nextQuestion: function(randomNumber){
         Main.interactionProject.activeLayer.removeChildren();
-        dogrular();
+
 
         Interaction.soru++;
         if(Interaction.soru%2==0){
             Main.setObjective('Yandaki resimde evin mavi renkli duvarı ile <b>kesişen</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.');
             soru="kesisen";
+            $("#sayac").html(kesisen);
         }
         else{
             Main.setObjective('Yandaki resimde evin mavi renkli duvarına <b>paralel</b> olan tüm doğru parçalarını bulunuz ve kontrol ediniz.');
             soru="paralel";
+            $("#sayac").html(paralel);
         }
-
+        dogrular();
 
 
     },
@@ -75,7 +111,7 @@ var Interaction = {
 
     },
 	isAnswerCorrect : function(value){
-        var dogruMu=true;
+       /* var dogruMu=true;
         if(soru=="paralel" && Interaction.seciliClass.length==paralel){
             for(var i=0; i<Interaction.seciliClass.length;i++){
                 if(Interaction.seciliClass[i]!="paralel"){
@@ -102,6 +138,11 @@ var Interaction = {
             if(dogruMu==true){
                 return true;
             }
+        }*/
+
+        if(sayac==0)
+        {
+            return true;
         }
 
     },
