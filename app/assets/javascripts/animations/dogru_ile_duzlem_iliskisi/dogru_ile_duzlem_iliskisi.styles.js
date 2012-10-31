@@ -1,18 +1,35 @@
 function __Styles(){
     surfaceStyle = {
-        strokeColor: "#4F9C4F",
-        strokeWidth: 2
-
+        fillColor: "f2c885",
+        strokeWidth: 2,
+        opacity:0.8
     };
 
     surfaceStyleLine = {
-        strokeColor: "#4F9C4F",
+        strokeColor: "#8b5400",
+
         strokeWidth: 2,
-        opacity:0
+        //opacity:0
     };
 
     textStyle={
         fillColor:"black",
         opacity:0
     };
+
+    noktaStyle = {
+        strokeColor: "#8b5400",
+        strokeWidth: 5
+    };
+
+    circleStyle={
+        strokeColor: "#8b5400",
+        fillColor: "#8b5400"
+    }
+
+    dikmeStyle={
+        strokeColor: "#8b5400",
+        fillColor: "#8b5400"
+    }
+
 }

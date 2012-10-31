@@ -294,6 +294,7 @@ dogrular=function(){
 
 
 
+
     tool=new Tool();
     tool.distanceThreshold = 200;
     tool.onMouseDown=onMouseDown;
@@ -315,17 +316,22 @@ dogrular=function(){
 
     Interaction.seciliId=[];
     Interaction.seciliClass=[];
+    sayac=soru=="paralel"?paralel:kesisen;
+    console.log("SAYAÇ: "+sayac);
 
     function onMouseDown(event) {
 
 
 
-        var hitResult = project.hitTest(event.point, hitOptions);
+       var hitResult = project.hitTest(event.point, hitOptions);
+
+
+
 
 
         if(hitResult){
             if(event.item.class=="paralel" || event.item.class=="kesisen"){
-                if(event.item.strokeWidth==2){
+                if(event.item.strokeWidth==2 & soru==event.item.class){
                     console.log("IF: "+event.item.name+","+event.item.opacity)
                     //event.item.opacity=0.5;
                     event.item.style=seciliStyle;
@@ -336,8 +342,17 @@ dogrular=function(){
                     Interaction.seciliClass.push(event.item.class)
                     console.log(Interaction.seciliId);
                     console.log(Interaction.seciliClass);
+
+                    sayac--;
+                    $("#sayac").html(sayac);
+                    Interaction.setStatus('',false);
+
+                    if(sayac==0)
+                    {
+                        Interaction.__checkAnswer();
+                    }
                 }
-                else if(event.item.strokeWidth==4){
+                /*else if(event.item.strokeWidth==4 & soru==event.item.class){
                     console.log("IF ELSE: "+event.item.name+","+event.item.opacity)
                     //event.item.opacity=1;
                     //console.log(hitResult.item);
@@ -352,9 +367,16 @@ dogrular=function(){
                     Interaction.seciliClass.splice(yer,1);
                     console.log(Interaction.seciliId);
                     console.log(Interaction.seciliClass);
-                }
+                }*/
+
+
                 else{
-                    console.log("ELSE: "+event.item.name+","+event.item.opacity)
+                    console.log("yanlış");
+                    console.log("ELSE: "+event.item.name+","+event.item.opacity);
+
+                    Interaction.setStatus('Seçtiğiniz doğru parçası yanlış.',false);
+
+
                 }
 
             }
