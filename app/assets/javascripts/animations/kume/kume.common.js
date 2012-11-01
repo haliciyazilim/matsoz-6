@@ -1025,13 +1025,13 @@ Set.randomGenerator = function(type, length){
             break;
         }
         case 21:{   // Set.SMALLER_THAN_GREATER_THAN_ODD
-            var randNum1 = Util.randomInteger(0,8);
+            var randNum1 = Util.randomInteger(0,7);
             var randNum2 = Util.randomInteger(randNum1+3, 10);
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD, value1:randNum1, value2:randNum2});
             break;
         }
         case 22:{   // Set.SMALLER_THAN_GREATER_THAN_EVEN
-            var randNum1 = Util.randomInteger(0,8);
+            var randNum1 = Util.randomInteger(0,7);
             var randNum2 = Util.randomInteger(randNum1+3, 10);
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN, value1:randNum1, value2:randNum2});
             break;
