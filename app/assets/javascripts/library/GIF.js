@@ -15,7 +15,8 @@ var GIF = function(opt){
         height:opt.height,
         div:div,
         count:this.count
-    })
+    });
+    this.div = div;
     if(opt.css)
         $(div).css(opt.css)
     this.div;
