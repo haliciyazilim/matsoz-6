@@ -32,4 +32,19 @@ function __Styles(){
         fillColor: "#8b5400"
     }
 
+
+    // uygualama
+
+    dogruStyle={
+        strokeColor:new RgbColor(1,0.5,0,0),
+        strokeWidth:2
+
+    }
+
+    seciliStyle={
+        strokeColor:new RgbColor(0,0,0,0.5),
+        strokeWidth:4
+
+    }
+
 }

@@ -1,19 +1,5 @@
 dogrular=function(){
 
-    dogruStyle={
-        strokeColor:new RgbColor(1,0.5,0,0),
-        strokeWidth:2
-
-    }
-
-    seciliStyle={
-        strokeColor:new RgbColor(0,0,0,1),
-        strokeWidth:4
-
-    }
-
-
-
     dogrularArray=[];
 
     //cati
@@ -178,6 +164,7 @@ dogrular=function(){
     pencere2A=new Path.Line(pencere2AX,pencere2AY);
     pencere2A.style=dogruStyle;
     pencere2A.class="paralel";
+
     pencere2A.name="pencere2A";
     dogrularArray.push(pencere2A);
 
@@ -352,7 +339,7 @@ dogrular=function(){
                         Interaction.__checkAnswer();
                     }
                 }
-                /*else if(event.item.strokeWidth==4 & soru==event.item.class){
+                else if(event.item.strokeWidth==4 & soru==event.item.class){
                     console.log("IF ELSE: "+event.item.name+","+event.item.opacity)
                     //event.item.opacity=1;
                     //console.log(hitResult.item);
@@ -367,7 +354,10 @@ dogrular=function(){
                     Interaction.seciliClass.splice(yer,1);
                     console.log(Interaction.seciliId);
                     console.log(Interaction.seciliClass);
-                }*/
+                    sayac++;
+                    $("#sayac").html(sayac);
+                    Interaction.setStatus('',false);
+                }
 
 
                 else{
@@ -375,7 +365,7 @@ dogrular=function(){
                     console.log("ELSE: "+event.item.name+","+event.item.opacity);
 
                     Interaction.setStatus('Seçtiğiniz doğru parçası yanlış.',false);
-
+                    yanlisSecim(event.item);
 
                 }
 
@@ -419,4 +409,18 @@ dogrular=function(){
     }
 
 
+}
+
+yanlisSecim=function(sekil){
+    bekleme=1000;
+    islem=500;
+    sekil.strokeColor="red";
+    sekil.animate({
+        style:{
+            strokeColor:new RgbColor(1,0.5,0,0)
+        },
+        delay:bekleme,
+        duration:islem
+    });
+    $(Interaction.status).delay(bekleme).animate({opacity:0},islem,function(){$(Interaction.status).html("").css("opacity","1")});
 }
