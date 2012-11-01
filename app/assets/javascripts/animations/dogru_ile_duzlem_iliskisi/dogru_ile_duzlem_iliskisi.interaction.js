@@ -16,8 +16,10 @@ var Interaction = {
 
         Interaction.appendButton({
             bottom:"20px",
-            right:"40px"
+            right:"40px",
+
         });
+        $("input").attr("disabled","disabled");
         Interaction.appendStatus({
             bottom:"30px",
             right:"150px"
@@ -80,7 +82,10 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+
         Main.interactionProject.activeLayer.removeChildren();
+        $("input").css("opacity","0").attr("disabled","disabled");
+
 
 
         Interaction.soru++;
@@ -142,6 +147,7 @@ var Interaction = {
 
         if(sayac==0)
         {
+            $("input").css("opacity","1").removeAttr("disabled");
             return true;
         }
 
