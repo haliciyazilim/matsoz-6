@@ -1335,7 +1335,10 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		throw "Only one or two sets are supported for drawing sets";
 	}
 
+    var singleSet = false;
+
 	if (sets.length == 1) {
+        singleSet = true;
 		sets[1] = sets[0];
         letters[1] = letters[0];
 	}
@@ -1360,7 +1363,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	if (set1DifferenceSet2.elements.length == 0 && set2DifferenceSet1.elements.length == 0) {
 		var separation = 0;	
 		
-		var vennSize1 = new Size(noOfElements1*10*1.8 + 110, 128);	
+		var vennSize1 = new Size(noOfElements1*10*1.8 + 110, 128);
 		var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
 		var textPoint1 = new Point(vennBoundingBox1.x+vennBoundingBox1.width*0.1, vennBoundingBox1.y+vennBoundingBox1.height*0.1);
 		
@@ -1373,13 +1376,15 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		var bb2 = new Rectangle();
 		
 		elementsSize2 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
-		if (elementsSize2.width < 36) {
-			elementsSize2.width = 36;
+		if (elementsSize2.width < 32) {
+			elementsSize2.width = 32;
 		}
 
-		if (elementsSize2.height < 30) {
-			elementsSize2.height = 30;
+		if (elementsSize2.height < 22) {
+			elementsSize2.height = 22;
 		}
+
+        console.log(elementsSize2);
 	} else if (set1DifferenceSet2.elements.length == 0) {
 		var separation = -20;	
 		
@@ -1490,13 +1495,15 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	})
 	text.content = letters[0];
 	vennDiagram1.addChild(text);
-	
-	text = new PointText(textPoint2);
-	text.set_style({
-		fontSize: 14
-	})
-	text.content = letters[1];
-	vennDiagram2.addChild(text);
+
+    if (!singleSet) {
+        text = new PointText(textPoint2);
+        text.set_style({
+            fontSize: 14
+        })
+        text.content = letters[1];
+        vennDiagram2.addChild(text);
+    }
 		
 		
 	var drawElements = function (elements, boundingBox, elementSize, hitTest, fontSize) {
@@ -1560,8 +1567,12 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 
 			var point = new Point(topLeftPoint.x + (randomPoint % Math.ceil(vennSize.width/granularity)) * granularity, topLeftPoint.y + Math.floor(granularity * randomPoint / vennSize.width) * granularity);
 
+//
+//            rect = new Path.Rectangle(point, new Size(elementSize.width,-elementSize.height));
+//            rect.strokeColor = 'black';
+////            this.vennDiagram.addChild(rect);
 
-			var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
+            var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
 			text.set_style({
 				fontSize: fontSize
 			})
@@ -1582,7 +1593,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			right = Math.floor((right - topLeftPoint.x) / granularity);
 			top = Math.floor((top - topLeftPoint.y) / granularity);
 			bottom = Math.floor((bottom - topLeftPoint.y) / granularity);
-			
+
 			for (x = left; x <= right; x++) {
 				for (y = top; y <= bottom; y++) {
 					if (x >= 0 && y >= 0) {
@@ -1604,7 +1615,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (oval1.hitTest(point) && !oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-	
+
 	var start_time = Date.now();
 	var elementsGroup2 = drawElements(intersection.elements,
 		 		intersectionBoundingBox,
@@ -1613,27 +1624,41 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (oval1.hitTest(point) && oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-	var start_time = Date.now();
-	var elementsGroup3 = drawElements(set2DifferenceSet1.elements,
-		 		bb2,
-		 		elementsSize3,
-		 function(point) {
-			return (!oval1.hitTest(point) && oval2.hitTest(point));
-	});
-	var endTime = Date.now();
-	
+
+
+    if (!singleSet) {
+	    var start_time = Date.now();
+	    var elementsGroup3 = drawElements(set2DifferenceSet1.elements,
+		 	    	bb2,
+		     		elementsSize3,
+	    	 function(point) {
+    			return (!oval1.hitTest(point) && oval2.hitTest(point));
+	    });
+	    var endTime = Date.now();
+    }
+
 	vennDiagram1.addChild(elementsGroup1);
 	vennDiagram1.addChild(elementsGroup2);
-	var elementsGroup2Clone = elementsGroup2.clone();
-	vennDiagram2.addChild(elementsGroup2Clone);
-	vennDiagram2.addChild(elementsGroup3);
 
-	return {
-		set1: vennDiagram1,
-		set2: vennDiagram2,
-        intersect: elementsGroup2,
-        intersectClone : elementsGroup2Clone
-	}
+    if (!singleSet) {
+        var elementsGroup2Clone = elementsGroup2.clone();
+	    vennDiagram2.addChild(elementsGroup2Clone);
+	    vennDiagram2.addChild(elementsGroup3);
+
+        return {
+            set1: vennDiagram1,
+            set2: vennDiagram2,
+            intersect: elementsGroup2,
+            intersectClone : elementsGroup2Clone
+        }
+    } else {
+        return {
+            set1: vennDiagram1,
+            intersect: elementsGroup2
+        }
+    }
+
+
 
 
 };
