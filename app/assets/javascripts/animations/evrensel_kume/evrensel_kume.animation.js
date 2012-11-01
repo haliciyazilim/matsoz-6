@@ -48,7 +48,7 @@ var Animation = {
         Animation.showSetB(2000);
         Animation.showSetC(3500);
         Animation.showUniversalSet(5000);
-        Main.animationFinished(6000)
+        Main.animationFinished(6500)
 
     },
 
