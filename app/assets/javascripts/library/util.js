@@ -154,23 +154,31 @@ var Util = {
         var excludingArray = [];
         if (excluding != undefined && excluding != null) {
 			if (preprocessed === true) {
-				
+				excludingArray = excluding;
 			} else {
+	            excluding.sort(function(a,b){return a-b});
+	
+				var index = 0;
+				
 	            for (var i = 0; i < excluding.length; i++) {
 	                var num = excluding[i];
-	                if (Util.isInteger(num) && num < end && num >= start) {
-	                    if (excludingArray.indexOf(num) === -1) {
+					
+					if (Util.isInteger(num) && num < end && num >= start) {
+	                    if (excludingArray[index-1] != num) {
 	                        excludingArray.push(num);
+							index++;
 	                    }
 	                }
 	            }
-
-	            excludingArray.sort(function(a,b){return a-b});
 			}
 
             end -= excludingArray.length;
         }
-
+		
+		if (end <= start) {
+			throw "Impossible random number";
+		}
+		
         var randNum = Math.floor(Math.random()*(end-start)+start)
 
         for (var i = 0; i < excludingArray.length; i++) {
