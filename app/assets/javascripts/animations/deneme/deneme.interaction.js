@@ -47,7 +47,7 @@ var Interaction = {
             elements: [4,5,6,7,8]
         })
 
-        Interaction.sets = Set.drawSets(container, new Point(100, 100),[set1, set2],['A', 'B']);
+        Interaction.sets = Set.drawSets(container, new Point(100, 100),[set1],['A']);
     },
 		
 	/*

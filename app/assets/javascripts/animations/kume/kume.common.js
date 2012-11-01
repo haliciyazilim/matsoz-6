@@ -1334,11 +1334,12 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	if (sets.length > 2) {
 		throw "Only one or two sets are supported for drawing sets";
 	}
-	
+
 	if (sets.length == 1) {
-		return sets[0].drawVennDiagram(container, topLeftPoint, letters[0]);
+		sets[1] = sets[0];
+        letters[1] = letters[0];
 	}
-	
+
 	var vennDiagram1 = new Group();
 	var vennDiagram2 = new Group();
 	
@@ -1523,15 +1524,6 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 				if (!hitTest(corners[i])) {
 					return false;
 				}
-				
-				// for (var j = 0; j < elementLocations.length; j++) {
-				// 					var otherRect = new Rectangle(new Point(elementLocations[j].x, elementLocations[j].y - elementSize.height),
-				// 													elementSize);
-				// 													
-				// 					if (otherRect.contains(corners[i])) {
-				// 						return false;
-				// 					}
-				// 				}
 			}
 			
 			return true;
@@ -1551,27 +1543,13 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 
 
 				if (!isAvailable(tempPoint)) {
-//					tempPoint.showOnCanvas();
 					excludingArray.push(j * Math.ceil(vennSize.width/granularity) + i);
-				} else {
-//                    console.log(i,j,j * Math.ceil(vennSize.width/granularity) + i);
-                }
+				}
 
 			}
 		}
 
-//        console.log(excludingArray)
-		
 		for (var i = 0; i < noOfElements; i++) {
-			// var point;
-			
-			// var trials = 0;
-			// do {
-			// 	point = new Point(Util.randomInteger(topLeftPoint.x/5, (topLeftPoint.x + vennSize.width)/5)*5,
-			// 	 				Util.randomInteger(topLeftPoint.y/5, (topLeftPoint.y+ vennSize.height)/5)*5);
-			// 	
-			// 	trials++;
-			// } while (!isAvailable(point) && trials < noOfElements*50);
 			var retry = false;
 			try {
 				var randomPoint = Util.randomInteger(0, Math.floor(vennSize.width * vennSize.height / granularity / granularity), excludingArray);
@@ -1579,18 +1557,11 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			catch (err) {
 				retry = true;
 			}
-//
-//			console.log(randomPoint % Math.ceil(vennSize.width/granularity), Math.floor(granularity * randomPoint / vennSize.width), randomPoint);
+
 			var point = new Point(topLeftPoint.x + (randomPoint % Math.ceil(vennSize.width/granularity)) * granularity, topLeftPoint.y + Math.floor(granularity * randomPoint / vennSize.width) * granularity);
 
-//			if (point.y < 0) {
-//				console.log(point.y, topLeftPoint.y);
-//			}
-			
-			
-//			point = point.add(Util.randomInteger(0, granularity), -Util.randomInteger(0, granularity));
+
 			var text = new PointText(point.add(elementSize.width/2 - 6, -elementSize.height/2 + 8));
-//			var text = new PointText(point);
 			text.set_style({
 				fontSize: fontSize
 			})
@@ -1599,21 +1570,14 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			elementGroup.addChild(text);
 			
 			var index = Math.floor((point.y - topLeftPoint.y)/granularity);
-			// rect = new Path.Rectangle(point, new Size(elementBoxSize.width,-elementBoxSize.height));
-			// rect.strokeColor = 'black';
-			// this.vennDiagram.addChild(rect);
-			
+
 			elementLocations.push(point);
 
 			var left = point.x - elementSize.width;
 			var right = point.x + elementSize.width;
 			var top = point.y - elementSize.height;
 			var bottom = point.y + elementSize.height;
-			
-//			var rect = new Path.Rectangle(new Point(left, top), new Size(right-left, bottom - top));
-//			rect.strokeColor = 'blue';
-//            elementGroup.addChild(rect);
-			
+
 			left = Math.floor((left - topLeftPoint.x) / granularity);
 			right = Math.floor((right - topLeftPoint.x) / granularity);
 			top = Math.floor((top - topLeftPoint.y) / granularity);
@@ -1626,29 +1590,13 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 					}
 				}
 			}
-			
-			if (retry) {
-				console.log("retry!");
-				// elementGroup.remove();
-				// elementGroup = new Group();
-				// elementLocations = [];
-				// i = -1;	
-			}
-			
-			// if (trials == noOfElements*50) {
-			// 				elementGroup.remove();
-			// 				elementGroup = new Group();
-			// 				elementLocations = [];
-			// 				i = -1;
-			// 			}
 		}
 		
 		return elementGroup;
 	}
 	
 	var start_time = Date.now();
-	// var rr1 = new Path.Rectangle(bb1);
-	// rr1.strokeColor = 'red';
+
 	var elementsGroup1 = drawElements(set1DifferenceSet2.elements,
 		 		bb1,
 		 		elementsSize1,
@@ -1656,11 +1604,8 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (oval1.hitTest(point) && !oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-//	console.log("First part: " + (endTime-start_time));
 	
-	var start_time = Date.now();	
-	// var rr = new Path.Rectangle(intersectionBoundingBox);
-	// rr.strokeColor = 'green';
+	var start_time = Date.now();
 	var elementsGroup2 = drawElements(intersection.elements,
 		 		intersectionBoundingBox,
 		 		elementsSize2,
@@ -1668,10 +1613,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (oval1.hitTest(point) && oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-//	console.log("Second part: " + (endTime-start_time));
 	var start_time = Date.now();
-	// var rr2 = new Path.Rectangle(bb2);
-	// rr2.strokeColor = 'blue';
 	var elementsGroup3 = drawElements(set2DifferenceSet1.elements,
 		 		bb2,
 		 		elementsSize3,
@@ -1679,7 +1621,6 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			return (!oval1.hitTest(point) && oval2.hitTest(point));
 	});
 	var endTime = Date.now();
-//	console.log("Third part: " + (endTime-start_time));
 	
 	vennDiagram1.addChild(elementsGroup1);
 	vennDiagram1.addChild(elementsGroup2);
