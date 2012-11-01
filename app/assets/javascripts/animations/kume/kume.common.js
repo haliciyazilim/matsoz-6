@@ -655,37 +655,26 @@ var Set = Class.extend({
 		
 		var vennSize = new Size(this.elements.length*10*1.8 + 110, /*this.elements.length*6 +*/ 128);
 		
-		var vennBoundingBox = new Rectangle(topLeftPoint, vennSize);		
+		var vennBoundingBox = new Rectangle(topLeftPoint, vennSize);
+        var letter = new PointText(topLeftPoint.add(5,20));
+        letter.content = setLetter;
+        letter.set_style({fontSize:13});
+        this.letter = letter;
 		var oval = Path.Oval(vennBoundingBox);
 		oval.strokeColor = 'black';
 		oval.fillColor = new RgbColor(1, 1, 1, 0);
-		
-		// var rect = new Path.Rectangle(vennBoundingBox);
-		// rect.strokeColor = 'black';
-
-		// var availablePoints = [];
-			// 	
-			// for (var i = 0; i < size.width; i++) {
-			// 	for (var j = 0; j < size.height; j++) {
-			// 		if ()
-			// 	}
-			// }
-			// 
-
-		// var elementBoxSize = new Size(30, 24);
+		this.oval = oval;
 		var elementBoxSize = new Size(vennSize.width/(noOfElements+0.8), vennSize.height/(noOfElements+0.8))
-		// elementsSize = new Size(0,0);
-		if (elementBoxSize.width < 44) {
-			elementBoxSize.width = 44;
-		}
 
-		if (elementBoxSize.height < 30) {
+		if (elementBoxSize.width < 44)
+			elementBoxSize.width = 44;
+
+		if (elementBoxSize.height < 30)
 			elementBoxSize.height = 30;
-		}		
 		
 		var elementLocations = [];
 		
-		isAvailable = function (point) {
+		var isAvailable = function (point) {
 			var point2 = point.add(elementBoxSize.width, -elementBoxSize.height);
 			var point3 = point.add(elementBoxSize.width, 0);
 			var point4 = point.add(0, -elementBoxSize.height);						
@@ -713,14 +702,11 @@ var Set = Class.extend({
 					}
 				}
 			}
-			
 			return true;
 		}
 		
 		for (var i = 0; i < noOfElements; i++) {
 			var point;
-			
-			
 			var trials = 0;
 			do {
 				point = new Point(Util.randomInteger(topLeftPoint.x/5, (topLeftPoint.x + vennSize.width)/5)*5,
@@ -734,15 +720,8 @@ var Set = Class.extend({
 				fontSize: 14
 			})
 			text.content = "."+this.elements[i];
-			
 			this.vennDiagram.addChild(text);
-			
-			// rect = new Path.Rectangle(point, new Size(elementBoxSize.width,-elementBoxSize.height));
-			// rect.strokeColor = 'black';
-			// this.vennDiagram.addChild(rect);
-			
 			elementLocations.push(point);
-			
 			if (trials == noOfElements*20) {
 				this.removeVennDiagram();
 				this.vennDiagram = new Group();
