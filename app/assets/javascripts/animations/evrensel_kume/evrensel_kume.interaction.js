@@ -41,10 +41,6 @@ var Interaction = {
 
         Interaction.setStatus(Interaction.universalSet.getDefinitionString("E"));
 
-        Interaction.set1.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(50,40),"A")
-        Interaction.set2.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(250,40),"B")
-        Interaction.set3.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(145,120))
-
 
         Interaction.rect = new Path.Rectangle(Interaction.referencePoint.add(20,30),new Size(450,220));
         Interaction.rect.set_style({
@@ -70,27 +66,33 @@ var Interaction = {
             duration:1000,
             delay:1500
         });
+
+
+//        Interaction.set1.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(50,40),"A")
+//        Interaction.set2.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(250,40),"B")
+//        Interaction.set3.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(145,120))
+        Set.drawSets(Interaction,Interaction.referencePoint.add(50,40),[Interaction.set1,Interaction.set2],['A','B'])
         for(var i=1;i<=3;i++){
-            Interaction['set'+i].vennDiagram.set_style({opacity:0});
-            Interaction['set'+i].vennDiagram.animate({
-                style:{opacity:1},
-                duration:1000,
-                delay:2000
-            });
-            Interaction['set'+i].oval.set_style({opacity:0});
-            Interaction['set'+i].letter.opacity = 0;
+//            Interaction['set'+i].vennDiagram.set_style({opacity:0});
+//            Interaction['set'+i].vennDiagram.animate({
+//                style:{opacity:1},
+//                duration:1000,
+//                delay:2000
+//            });
+//            Interaction['set'+i].oval.set_style({opacity:0});
+//            Interaction['set'+i].letter.opacity = 0;
             if(i==3)
                 continue;
-            Interaction['set'+i].oval.animate({
-                style:{opacity:1},
-                duration:1000,
-                delay:4000
-            });
-            Interaction['set'+i].letter.animate({
-                style:{opacity:1},
-                duration:1000,
-                delay:5000
-            });
+//            Interaction['set'+i].oval.animate({
+//                style:{opacity:1},
+//                duration:1000,
+//                delay:4000
+//            });
+//            Interaction['set'+i].letter.animate({
+//                style:{opacity:1},
+//                duration:1000,
+//                delay:5000
+//            });
             Interaction.resume(5000);
         }
     },
