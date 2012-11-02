@@ -1310,8 +1310,6 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	var set1 = sets[0];
 	var set2 = sets[1];
 
-    set1.vennDiagram = vennDiagram1;
-    set2.vennDiagram = vennDiagram2;
 
 	var set1DifferenceSet2 = set1.getDifference(set2);
     var set2DifferenceSet1 = set2.getDifference(set1);
@@ -1447,13 +1445,13 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	oval1.strokeColor = 'black';
 	oval1.fillColor = new RgbColor(1, 1, 1, 0);
 	vennDiagram1.addChild(oval1)
-    set1.oval = oval1;
+//    set1.oval = oval1;
 
 	var oval2 = Path.Oval(vennBoundingBox2);
 	oval2.strokeColor = 'black';
 	oval2.fillColor = new RgbColor(1, 1, 1, 0);
 	vennDiagram2.addChild(oval2);
-	set2.oval = oval2;
+//	set2.oval = oval2;
 
 	var text = new PointText(textPoint1);
 	text.set_style({
@@ -1625,6 +1623,8 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
     }
 
 
+//    set1.vennDiagram = vennDiagram1;
+//    set2.vennDiagram = vennDiagram2;
 
 
 };
