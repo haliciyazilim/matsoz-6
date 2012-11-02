@@ -23,7 +23,7 @@ var Interaction = {
             fontSize:'22px',
             fontWeight:'normal'
         })
-        Interaction.referencePoint = new Point(0,30);
+        Interaction.referencePoint = new Point(0,20);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -41,12 +41,8 @@ var Interaction = {
 
         Interaction.setStatus(Interaction.universalSet.getDefinitionString("E"));
 
-        Interaction.set1.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(50,40),"A")
-        Interaction.set2.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(250,40),"B")
-        Interaction.set3.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(145,120))
 
-
-        Interaction.rect = new Path.Rectangle(Interaction.referencePoint.add(20,30),new Size(450,220));
+        Interaction.rect = new Path.Rectangle(Interaction.referencePoint.add(20,30),new Size(450,240));
         Interaction.rect.set_style({
             strokeColor:'#000',
             strokeWidth:2,
@@ -70,29 +66,45 @@ var Interaction = {
             duration:1000,
             delay:1500
         });
+
+
+//        Interaction.set1.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(50,40),"A")
+//        Interaction.set2.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(250,40),"B")
+//        Interaction.set3.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(145,120))
+        Set.drawSets(Interaction,Interaction.referencePoint.add(50,35),[Interaction.set1,Interaction.set2],['A','B']).intersectClone.removeChildren();
+
+        Set.drawSets(Interaction,Interaction.referencePoint.add(145,150),[Interaction.set3],['C'])
         for(var i=1;i<=3;i++){
-            Interaction['set'+i].vennDiagram.set_style({opacity:0});
-            Interaction['set'+i].vennDiagram.animate({
+            Interaction['set'+i].vennDiagram.children[0].set_style({opacity:0});
+            Interaction['set'+i].vennDiagram.children[1].set_style({opacity:0});
+            Interaction['set'+i].vennDiagram.children[2].set_style({opacity:0});
+            Interaction['set'+i].vennDiagram.children[3].set_style({opacity:0});
+            if(i!=3){
+                Interaction['set'+i].vennDiagram.children[0].animate({
+                    style:{opacity:1},
+                    duration:1000,
+                    delay:3000+1000*i
+                });
+                Interaction['set'+i].vennDiagram.children[1].animate({
+                    style:{opacity:1},
+                    duration:1000,
+                    delay:3000+1000*i
+                });
+            }
+            Interaction['set'+i].vennDiagram.children[2].animate({
                 style:{opacity:1},
                 duration:1000,
                 delay:2000
             });
-            Interaction['set'+i].oval.set_style({opacity:0});
-            Interaction['set'+i].letter.opacity = 0;
-            if(i==3)
-                continue;
-            Interaction['set'+i].oval.animate({
+            Interaction['set'+i].vennDiagram.children[3].animate({
                 style:{opacity:1},
                 duration:1000,
-                delay:4000
+                delay:2000
             });
-            Interaction['set'+i].letter.animate({
-                style:{opacity:1},
-                duration:1000,
-                delay:5000
-            });
-            Interaction.resume(5000);
+
+
         }
+        Interaction.resume(5000);
     },
 
     generateSets:function(){
@@ -100,7 +112,7 @@ var Interaction = {
             Interaction.universalSet = Set.randomGenerator();
         while(Interaction.universalSet.elements.length < 6 || Interaction.universalSet.elements.length > 10)
         Interaction.set1lastIndex = Util.randomInteger(2,Interaction.universalSet.elements.length-3);
-        Interaction.set2lastIndex = Util.randomInteger(Interaction.set1lastIndex+1,Interaction.universalSet.elements.length);
+        Interaction.set2lastIndex = Util.randomInteger(Interaction.universalSet.elements.length-3,Interaction.universalSet.elements.length);
         Interaction.set3lastIndex = Interaction.universalSet.elements.length;
         Interaction.set1 = new Set({
             type:Set.ELEMENTS,
@@ -108,7 +120,7 @@ var Interaction = {
         });
         Interaction.set2 = new Set({
             type:Set.ELEMENTS,
-            elements:Interaction.universalSet.elements.slice(Interaction.set1lastIndex,Interaction.set2lastIndex)
+            elements:Interaction.universalSet.elements.slice(Util.randomInteger(-2,1) + Interaction.set1lastIndex,Interaction.set2lastIndex)
         });
         Interaction.set3 = new Set({
             type:Set.ELEMENTS,

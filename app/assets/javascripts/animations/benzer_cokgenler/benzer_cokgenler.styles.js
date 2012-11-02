@@ -1,5 +1,4 @@
 function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
+	pantographShapesFillColor = "#f2c885";
+    pantographShapesStrokeColor = "#9b763d";
 }
