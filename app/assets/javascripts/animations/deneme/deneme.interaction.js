@@ -39,7 +39,7 @@ var Interaction = {
 
         var set1 = new Set({
             type: Set.ELEMENTS,
-            elements: [1,2,3,4,5,6,7]
+            elements: [1,2]
         })
 
         var set2 = new Set({
