@@ -729,7 +729,7 @@ var Set = Class.extend({
 				i = -1;
 			}
 		}
-    },
+    }
 });
 
 
@@ -1025,13 +1025,13 @@ Set.randomGenerator = function(type, length){
             break;
         }
         case 21:{   // Set.SMALLER_THAN_GREATER_THAN_ODD
-            var randNum1 = Util.randomInteger(0,8);
+            var randNum1 = Util.randomInteger(0,7);
             var randNum2 = Util.randomInteger(randNum1+3, 10);
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_ODD, value1:randNum1, value2:randNum2});
             break;
         }
         case 22:{   // Set.SMALLER_THAN_GREATER_THAN_EVEN
-            var randNum1 = Util.randomInteger(0,8);
+            var randNum1 = Util.randomInteger(0,7);
             var randNum2 = Util.randomInteger(randNum1+3, 10);
             set = new Set({type:Set.SMALLER_THAN_GREATER_THAN_DIGIT_EVEN, value1:randNum1, value2:randNum2});
             break;
@@ -1109,7 +1109,7 @@ Set.animateDifferenceSets = function(opt){
         },
         duration: 1000,
         delay: 1000,
-        animationType: 'easeInEaseOut',
+        animationType: 'easeInEaseOut'
     });
     sets.set2.children[0].animate({
         style:{
@@ -1132,6 +1132,7 @@ Set.animateDifferenceSets = function(opt){
                     if(opt.callback)
                         opt.callback();
                     sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
+                    sets.set1.children[1].position = sets.set1.children[1].position.add(-20,0);
                 }
             })
 
@@ -1308,8 +1309,13 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	
 	var set1 = sets[0];
 	var set2 = sets[1];
-	
-	var set1DifferenceSet2 = set1.getDifference(set2);
+
+    set1.vennDiagram = vennDiagram1;
+    if(!singleSet)
+        set2.vennDiagram = vennDiagram2;
+
+
+    var set1DifferenceSet2 = set1.getDifference(set2);
     var set2DifferenceSet1 = set2.getDifference(set1);
     var intersection = set1.getIntersection(set2);
 
@@ -1335,7 +1341,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		intersectionBoundingBox = vennBoundingBox1;
 		var bb2 = new Rectangle();
 		
-		elementsSize2 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
+		elementsSize2 = new Size(vennSize1.width/(noOfElements1+1.8), vennSize1.height/(noOfElements1+1.8))
 		if (elementsSize2.width < 32) {
 			elementsSize2.width = 32;
 		}
@@ -1405,22 +1411,22 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		intersectionBoundingBox = new Rectangle();
 		var bb2 = vennBoundingBox2;
 		
-		elementsSize1 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
-		if (elementsSize1.width < 36) {
-			elementsSize1.width = 36;
+		elementsSize1 = new Size(vennSize1.width/(noOfElements1+1.8), vennSize1.height/(noOfElements1+1.8))
+		if (elementsSize1.width < 32) {
+			elementsSize1.width = 32;
 		}
 
-		if (elementsSize1.height < 24) {
-			elementsSize1.height = 24;
+		if (elementsSize1.height < 22) {
+			elementsSize1.height = 22;
 		}		
 		
-		elementsSize3 = new Size(vennSize2.width/(noOfElements2+0.8), vennSize2.height/(noOfElements2+0.8))
-		if (elementsSize3.width < 36) {
-			elementsSize3.width = 36;
+		elementsSize3 = new Size(vennSize2.width/(noOfElements2+1.8), vennSize2.height/(noOfElements2+1.8))
+		if (elementsSize3.width < 32) {
+			elementsSize3.width = 32;
 		}
 
-		if (elementsSize3.height < 24) {
-			elementsSize3.height = 24;
+		if (elementsSize3.height < 22) {
+			elementsSize3.height = 22;
 		}		
 		
 	} else {
@@ -1444,11 +1450,13 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	oval1.fillColor = new RgbColor(1, 1, 1, 0);
 	vennDiagram1.addChild(oval1)
 
-	var oval2 = Path.Oval(vennBoundingBox2);
-	oval2.strokeColor = 'black';
-	oval2.fillColor = new RgbColor(1, 1, 1, 0);
-	vennDiagram2.addChild(oval2);
-		
+    var oval2 = Path.Oval(vennBoundingBox2);
+    oval2.strokeColor = 'black';
+    oval2.fillColor = new RgbColor(1, 1, 1, 0);
+    vennDiagram2.addChild(oval2);
+    if(singleSet)
+        oval2.opacity = 0;
+
 	var text = new PointText(textPoint1);
 	text.set_style({
 		fontSize: 14
@@ -1567,12 +1575,12 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	}
 	
 	var start_time = Date.now();
-
+    var hitTestOptions = { fill: true, stroke: false, segments: true, tolerance: -15 }
 	var elementsGroup1 = drawElements(set1DifferenceSet2.elements,
 		 		bb1,
 		 		elementsSize1,
 		 function(point) {
-			return (oval1.hitTest(point) && !oval2.hitTest(point));
+			return (oval1.hitTest(point,hitTestOptions) && !oval2.hitTest(point,hitTestOptions));
 	});
 	var endTime = Date.now();
 
@@ -1581,7 +1589,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		 		intersectionBoundingBox,
 		 		elementsSize2,
 		 function(point) {
-			return (oval1.hitTest(point) && oval2.hitTest(point));
+			return (oval1.hitTest(point,hitTestOptions) && oval2.hitTest(point,hitTestOptions));
 	});
 	var endTime = Date.now();
 
@@ -1592,7 +1600,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		 	    	bb2,
 		     		elementsSize3,
 	    	 function(point) {
-    			return (!oval1.hitTest(point) && oval2.hitTest(point));
+    			return (!oval1.hitTest(point,hitTestOptions) && oval2.hitTest(point,hitTestOptions));
 	    });
 	    var endTime = Date.now();
     }

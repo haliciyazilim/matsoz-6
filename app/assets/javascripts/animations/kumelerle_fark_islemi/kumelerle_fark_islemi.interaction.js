@@ -59,7 +59,7 @@ var Interaction = {
                 width:'2.5 ex',
                 height:'30px'
 
-            },false,inputCount==0);
+            },false,inputCount==0 || inputCount==1);
             input.maxLength = 2;
             $(Interaction.answerSetDiv)
                 .append(i>1?',':'')
@@ -75,7 +75,7 @@ var Interaction = {
         while(Interaction.set1.elements.length > 10)
         do
             Interaction.set2 = Interaction.set1.getRandomIntersectingSet();
-        while(Interaction.set1.getDifference(Interaction.set2).elements.length > 6)
+        while(Interaction.set2.elements.length > 10 || Interaction.set1.getDifference(Interaction.set2).elements.length > 6)
         var isSet1DefinitionString = Util.rand01() == 1;
         var isSet2DefinitionString = Util.rand01() == 1;
         if(Interaction.set1.isEqualSet(Interaction.set2))
@@ -131,6 +131,21 @@ var Interaction = {
             sets:[Interaction.set1, Interaction.set2],
             letters:['A', 'B'],
             callback:Interaction.resume
-        })
+        });
+        $(Interaction.inputs).each(function(){
+            $(this).css({color:'red'});
+        });
+        setTimeout(function(){
+            if(Interaction._set.elements.length == 0 ){
+                Interaction.input.value = '';
+            }
+            else{
+                for(var i=0; i < Interaction._set.elements.length; i++){
+                    Interaction.inputs[i].value = Interaction._set.elements[i];
+                    $(Interaction.inputs[i]).css({color:'green'});
+                }
+            }
+
+        },4000)
     }
 }

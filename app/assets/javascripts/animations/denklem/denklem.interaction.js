@@ -90,75 +90,106 @@ var Interaction = {
         var leftScale = [];
         var rightScale = [];
         /*<[[TEST*/
-//            randomNumber = 0;
+            randomNumber = 3;
         /*TEST]]>*/
         var equationString = "";
         var variableCharacter = "";
         var correctAnswer;
         switch (randomNumber){
             case 0:
-                var a = Util.rand01()+1;
-                var b = Util.rand01()+1;
+                var a = Util.randomInteger(0,4)+1;
+                var b = Util.randomInteger(0,4)+1;
                 leftScale   = [ {type:"x",value:a},{type:b} ];
-                rightScale  = [ {type:a+b} ];
-                equationString = "x + "+b+" = "+(a+b);
+                rightScale  = [ {type:a},{type:b} ];
+                equationString = "x + "+b+" = "+a+" + "+b;
                 variableCharacter = "x";
                 correctAnswer = a;
                 break;
             case 1:
-                var a = Util.randomInteger(1,5);
-                leftScale   = [ {type:"a",value:4},{type:a} ];
-                rightScale  = [ {type:1},{type:3},{type:a} ];
-                equationString = "a + "+a+" = 1 + 3 + "+a;
-                variableCharacter = "a";
-                correctAnswer = 4;
+                var a = Util.randomInteger(0,4)+1;
+                var b = Util.randomInteger(0,2)+1;
+                var c = Util.randomInteger(0,2)+1;
+                leftScale   = [ {type:"x",value:a},{type:b+c} ];
+                rightScale  = [ {type:a},{type:b},{type:c} ];
+                equationString = "x + "+(b+c)+" = "+a+" + "+b+" + "+c;
+                variableCharacter = "x";
+                correctAnswer = a;
                 break;
             case 2:
-                var a = Util.randomInteger(1,4);
-                var b = Util.randomInteger(1,5);
-                leftScale   = [ {type:"m",value:5},{type:a},{type:b} ];
-                rightScale  = [ {type:4},{type:a+1},{type:b} ];
-                equationString = "m + "+a+" + "+b+" = 4 + "+(a+1)+" + "+b;
-                variableCharacter = "m";
-                correctAnswer = 5;
+                var a = Util.randomInteger(0,4)+1;
+                var b = Util.randomInteger(0,4)+1;
+                var c = Util.randomInteger(0,4)+1;
+                leftScale   = [ {type:"x",value:a},{type:b},{type:c} ];
+                rightScale  = [ {type:a},{type:b},{type:c} ];
+                equationString = "x + "+(b+" + "+c)+" = "+a+" + "+b+" + "+c;
+                variableCharacter = "x";
+                correctAnswer = a;
                 break;
             case 3:
-                var a = Util.randomInteger(1,4);
-                var b = Util.randomInteger(1,4);
-                leftScale   = [ {type:"x",value:2},{type:a+1},{type:b} ];
-                rightScale  = [ {type:a},{type:b},{type:3} ];
-                equationString = "x + "+(a+1)+" + "+b+" = "+a+" + "+b+" + 3";
+                var a = Util.randomInteger(0,4)+1;
+                var b = Util.randomInteger(0,4)+1;
+                var c = Util.randomInteger(0,4)+1;
+                var d = Util.randomInteger(0,4)+1;
+                leftScale   = [ {type:"x",value:a},{type:b},{type:c},{type:d} ];
+                rightScale  = [ {type:a},{type:b},{type:c},{type:d} ];
+                equationString = "x + "+(b+" + "+c)+" + "+d+" = "+a+" + "+b+" + "+c+" + "+d;
                 variableCharacter = "x";
-                correctAnswer = 2;
+                correctAnswer = a;
                 break;
-            case 4:
-                leftScale   = [ {type:"a",value:1} ,{type:"a",value:1},{type:2} ];
-                rightScale  = [ {type:1},{type:1},{type:1},{type:1} ];
-                equationString = "2a + 2 = 1 + 1 + 1 + 1";
-                variableCharacter = "a";
-                correctAnswer = 1;
-                break;
-            case 5:
-                leftScale   = [ {type:"x",value:8},{type:1},{type:1} ];
-                rightScale  = [ {type:1},{type:2},{type:3},{type:4} ];
-                equationString = "x + 1 + 1 = 1 + 2 + 3 + 4";
-                variableCharacter = "x";
-                correctAnswer = 8;
-                break;
-            case 6:
-                leftScale   = [ {type:"x",value:6},{type:1},{type:4},{type:3}];
-                rightScale  = [ {type:4},{type:2},{type:4},{type:4} ];
-                equationString = "x + 1 + 4 + 3 = 4 + 2 + 4 + 4";
-                variableCharacter = "x";
-                correctAnswer = 6;
-                break;
-            case 7:
-                leftScale   = [ {type:"x",value:5},{type:2},{type:1},{type:1} ];
-                rightScale  = [ {type:2},{type:3},{type:1},{type:3} ];
-                equationString = "x + 2 + 1 + 1 = 2 + 3 + 1 + 3";
-                variableCharacter = "x";
-                correctAnswer = 5;
-                break;
+//            case 1:
+//                var a = Util.randomInteger(1,5);
+//                leftScale   = [ {type:"a",value:4},{type:a} ];
+//                rightScale  = [ {type:1},{type:3},{type:a} ];
+//                equationString = "a + "+a+" = 1 + 3 + "+a;
+//                variableCharacter = "a";
+//                correctAnswer = 4;
+//                break;
+//            case 2:
+//                var a = Util.randomInteger(1,4);
+//                var b = Util.randomInteger(1,5);
+//                leftScale   = [ {type:"m",value:5},{type:a},{type:b} ];
+//                rightScale  = [ {type:4},{type:a+1},{type:b} ];
+//                equationString = "m + "+a+" + "+b+" = 4 + "+(a+1)+" + "+b;
+//                variableCharacter = "m";
+//                correctAnswer = 5;
+//                break;
+//            case 3:
+//                var a = Util.randomInteger(1,4);
+//                var b = Util.randomInteger(1,4);
+//                leftScale   = [ {type:"x",value:2},{type:a+1},{type:b} ];
+//                rightScale  = [ {type:a},{type:b},{type:3} ];
+//                equationString = "x + "+(a+1)+" + "+b+" = "+a+" + "+b+" + 3";
+//                variableCharacter = "x";
+//                correctAnswer = 2;
+//                break;
+//            case 4:
+//                leftScale   = [ {type:"a",value:1} ,{type:"a",value:1},{type:2} ];
+//                rightScale  = [ {type:1},{type:1},{type:1},{type:1} ];
+//                equationString = "2a + 2 = 1 + 1 + 1 + 1";
+//                variableCharacter = "a";
+//                correctAnswer = 1;
+//                break;
+//            case 5:
+//                leftScale   = [ {type:"x",value:8},{type:1},{type:1} ];
+//                rightScale  = [ {type:1},{type:2},{type:3},{type:4} ];
+//                equationString = "x + 1 + 1 = 1 + 2 + 3 + 4";
+//                variableCharacter = "x";
+//                correctAnswer = 8;
+//                break;
+//            case 6:
+//                leftScale   = [ {type:"x",value:6},{type:1},{type:4},{type:3}];
+//                rightScale  = [ {type:4},{type:2},{type:4},{type:4} ];
+//                equationString = "x + 1 + 4 + 3 = 4 + 2 + 4 + 4";
+//                variableCharacter = "x";
+//                correctAnswer = 6;
+//                break;
+//            case 7:
+//                leftScale   = [ {type:"x",value:5},{type:2},{type:1},{type:1} ];
+//                rightScale  = [ {type:2},{type:3},{type:1},{type:3} ];
+//                equationString = "x + 2 + 1 + 1 = 2 + 3 + 1 + 3";
+//                variableCharacter = "x";
+//                correctAnswer = 5;
+//                break;
         }
         Interaction.correctAnswer = correctAnswer;
 //        var leftScaleShuffledIndex = Util.getShuffledArray(leftScale.length);
