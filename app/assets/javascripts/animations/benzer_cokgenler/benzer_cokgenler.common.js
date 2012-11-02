@@ -406,6 +406,87 @@ InteractiveGrids.MoveShapeTo = function(fromPoints,toPoints,toStartPoint,reverse
             Interaction.resume();
         }
     })
+};
 
+function PantographShapes(pointsArr,halfLength) {
+    this.pointsArr = [];
 
+    for(var i = 0; i < pointsArr.length; i++) {
+        this.pointsArr[i] = pointsArr[i];
+    }
+
+    this.centerPoint = Util.centerOfPoints(this.pointsArr);
+
+    this.drawShape = function(){
+        var shapeGroup = new Group();
+        var a = new Path();
+        a.moveTo(this.pointsArr[0].x,this.pointsArr[0].y-halfLength);
+        a.lineTo(this.pointsArr[1].x,this.pointsArr[1].y-halfLength);
+        a.lineTo(this.pointsArr[1].x,this.pointsArr[1].y+halfLength);
+        a.lineTo(this.pointsArr[1].x,this.pointsArr[0].y+halfLength);
+        a.lineTo(this.pointsArr[0].x,this.pointsArr[0].y-halfLength);
+        a.closed = true;
+        a.strokeColor = pantographShapesStrokeColor;
+        a.fillColor = pantographShapesFillColor;
+        a.strokeCap = 'round';
+        this.centerPoint = Util.centerOfPoints(this.pointsArr);
+
+        var firstCenter = Util.centerOfPoints([this.pointsArr[0],this.pointsArr[3]]);
+        firstCenter = firstCenter.findPointTo(this.centerPoint,7);
+
+        var firstCirc = new Path.Circle(firstCenter,2);
+        firstCirc.fillColor = '#333';
+
+        var secondCenter = Util.centerOfPoints([this.pointsArr[1],this.pointsArr[2]]);
+        secondCenter = secondCenter.findPointTo(this.centerPoint,7);
+
+        var secondCirc = new Path.Circle(secondCenter,2);
+        secondCirc.fillColor = '#333';
+
+        shapeGroup.addChild(a);
+        shapeGroup.addChild(firstCirc);
+        shapeGroup.addChild(secondCirc);
+
+        return shapeGroup;
+    };
+
+    this.shape = this.drawShape();
+    this.shape.parentObject = this;
+
+    this.setPos = function(newPosition) {
+        var difference = newPosition.subtract(this.shape.position);
+        for(var i = 0; i < this.pointsArr.length; i++) {
+            this.pointsArr[i] = this.pointsArr[i].add(difference);
+        }
+        this.shape.position = newPosition;
+        this.centerPoint = Util.centerOfPoints(this.pointsArr);
+        this.computeCurrentAngle();
+    };
+
+    this.computeOriginalAngle = function(){
+        var angle;
+        angle = Util.findAngle(this.pointsArr[0].x,this.pointsArr[0].y,this.centerPoint.x,this.centerPoint.y);
+        angle = Util.radianToDegree(angle);
+
+        this.originalAngle = angle;
+    };
+    this.computeCurrentAngle = function(){
+        var angle;
+        angle = Util.findAngle(this.pointsArr[0].x,this.pointsArr[0].y,this.centerPoint.x,this.centerPoint.y);
+        angle = Util.radianToDegree(angle);
+
+        this.currentAngle = angle;
+    };
+    this.computeOriginalAngle();
+    this.computeCurrentAngle();
+
+    this.setRotation = function(angle) {
+        for(var i = 0; i < this.pointsArr.length; i++) {
+            this.pointsArr[i] = this.pointsArr[i].getRotatedPoint(angle,this.centerPoint);
+        }
+        this.shape.rotate(angle,this.centerPoint);
+        this.centerPoint = Util.centerOfPoints(this.pointsArr);
+        this.computeCurrentAngle();
+    };
+    return this;
 }
