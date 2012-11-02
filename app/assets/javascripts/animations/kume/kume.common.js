@@ -1132,6 +1132,7 @@ Set.animateDifferenceSets = function(opt){
                     if(opt.callback)
                         opt.callback();
                     sets.set1.children[1].content = opt.letters[0] + " \\ " + opt.letters[1];
+                    sets.set1.children[1].position = sets.set1.children[1].position.add(-20,0);
                 }
             })
 
