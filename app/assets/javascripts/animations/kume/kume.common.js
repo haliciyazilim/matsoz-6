@@ -1310,8 +1310,12 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	var set1 = sets[0];
 	var set2 = sets[1];
 
+    set1.vennDiagram = vennDiagram1;
+    if(!singleSet)
+        set2.vennDiagram = vennDiagram2;
 
-	var set1DifferenceSet2 = set1.getDifference(set2);
+
+    var set1DifferenceSet2 = set1.getDifference(set2);
     var set2DifferenceSet1 = set2.getDifference(set1);
     var intersection = set1.getIntersection(set2);
 
@@ -1445,13 +1449,13 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	oval1.strokeColor = 'black';
 	oval1.fillColor = new RgbColor(1, 1, 1, 0);
 	vennDiagram1.addChild(oval1)
-//    set1.oval = oval1;
 
-	var oval2 = Path.Oval(vennBoundingBox2);
-	oval2.strokeColor = 'black';
-	oval2.fillColor = new RgbColor(1, 1, 1, 0);
-	vennDiagram2.addChild(oval2);
-//	set2.oval = oval2;
+    var oval2 = Path.Oval(vennBoundingBox2);
+    oval2.strokeColor = 'black';
+    oval2.fillColor = new RgbColor(1, 1, 1, 0);
+    vennDiagram2.addChild(oval2);
+    if(singleSet)
+        oval2.opacity = 0;
 
 	var text = new PointText(textPoint1);
 	text.set_style({
@@ -1571,12 +1575,12 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 	}
 	
 	var start_time = Date.now();
-
+    var hitTestOptions = { fill: true, stroke: false, segments: true, tolerance: -15 }
 	var elementsGroup1 = drawElements(set1DifferenceSet2.elements,
 		 		bb1,
 		 		elementsSize1,
 		 function(point) {
-			return (oval1.hitTest(point) && !oval2.hitTest(point));
+			return (oval1.hitTest(point,hitTestOptions) && !oval2.hitTest(point,hitTestOptions));
 	});
 	var endTime = Date.now();
 
@@ -1585,7 +1589,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		 		intersectionBoundingBox,
 		 		elementsSize2,
 		 function(point) {
-			return (oval1.hitTest(point) && oval2.hitTest(point));
+			return (oval1.hitTest(point,hitTestOptions) && oval2.hitTest(point,hitTestOptions));
 	});
 	var endTime = Date.now();
 
@@ -1596,7 +1600,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		 	    	bb2,
 		     		elementsSize3,
 	    	 function(point) {
-    			return (!oval1.hitTest(point) && oval2.hitTest(point));
+    			return (!oval1.hitTest(point,hitTestOptions) && oval2.hitTest(point,hitTestOptions));
 	    });
 	    var endTime = Date.now();
     }
@@ -1623,8 +1627,6 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
     }
 
 
-//    set1.vennDiagram = vennDiagram1;
-//    set2.vennDiagram = vennDiagram2;
 
 
 };
