@@ -1339,7 +1339,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		intersectionBoundingBox = vennBoundingBox1;
 		var bb2 = new Rectangle();
 		
-		elementsSize2 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
+		elementsSize2 = new Size(vennSize1.width/(noOfElements1+1.2), vennSize1.height/(noOfElements1+1.2))
 		if (elementsSize2.width < 32) {
 			elementsSize2.width = 32;
 		}
@@ -1409,22 +1409,22 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 		intersectionBoundingBox = new Rectangle();
 		var bb2 = vennBoundingBox2;
 		
-		elementsSize1 = new Size(vennSize1.width/(noOfElements1+0.8), vennSize1.height/(noOfElements1+0.8))
-		if (elementsSize1.width < 36) {
-			elementsSize1.width = 36;
+		elementsSize1 = new Size(vennSize1.width/(noOfElements1+1.2), vennSize1.height/(noOfElements1+1.2))
+		if (elementsSize1.width < 32) {
+			elementsSize1.width = 32;
 		}
 
-		if (elementsSize1.height < 24) {
-			elementsSize1.height = 24;
+		if (elementsSize1.height < 22) {
+			elementsSize1.height = 22;
 		}		
 		
-		elementsSize3 = new Size(vennSize2.width/(noOfElements2+0.8), vennSize2.height/(noOfElements2+0.8))
-		if (elementsSize3.width < 36) {
-			elementsSize3.width = 36;
+		elementsSize3 = new Size(vennSize2.width/(noOfElements2+1.2), vennSize2.height/(noOfElements2+1.2))
+		if (elementsSize3.width < 32) {
+			elementsSize3.width = 32;
 		}
 
-		if (elementsSize3.height < 24) {
-			elementsSize3.height = 24;
+		if (elementsSize3.height < 22) {
+			elementsSize3.height = 22;
 		}		
 		
 	} else {
