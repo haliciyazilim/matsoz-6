@@ -611,4 +611,27 @@ Main.paperInit.Path = function() {
 		return frag;
 
 	}
+
+    Path.TwoPointRectangle = function(point1,point2,height){
+        if(height == undefined)
+            height = 6;
+        var points = []
+
+        points.push(point1.findPointTo(point2,height*0.5).getRotatedPoint(-90,point1));
+        points.push(point2.findPointTo(point1,height*0.5).getRotatedPoint( 90,point2));
+        points.push(point2.findPointTo(point1,height*0.5).getRotatedPoint(-90,point2));
+        points.push(point1.findPointTo(point2,height*0.5).getRotatedPoint( 90,point1));
+
+        return Path.DrawPoints(points);
+    }
+
+    Path.DrawPoints = function(points,isClosed){
+        if(isClosed == undefined)
+            isClosed = true;
+        var path = new Path();
+        for(var i=0;i < points.length; i++)
+            path.add(points[i]);
+        path.closed = isClosed;
+        return path;
+    }
 }

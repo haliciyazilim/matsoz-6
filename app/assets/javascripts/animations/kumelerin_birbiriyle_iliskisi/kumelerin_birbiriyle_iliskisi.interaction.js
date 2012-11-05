@@ -157,6 +157,22 @@ var Interaction = {
         $('.image-container',Interaction.clickedOption).css({
             backgroundPosition:'-64px 0px'
         });
+        var correctAnswers = [];
+        if(Interaction.set1.isEqualSet(Interaction.set2))
+            correctAnswers.push(0);
+        if(Interaction.set1.isSubsetOf(Interaction.set2) || Interaction.set2.isSubsetOf(Interaction.set1))
+            correctAnswers.push(1);
+        if(Interaction.set1.isDisjointWith(Interaction.set2))
+            correctAnswers.push(2);
+        if(Interaction.set1.isIntersectingWith(Interaction.set2))
+            correctAnswers.push(3);
+
+        for(var i=0;i<correctAnswers.length;i++){
+            $('.image-container',Interaction.options[correctAnswers[i]]).css({
+                backgroundPosition:'-64px 0px'
+            });
+            $(Interaction.options[correctAnswers[i]]).css(trueOptionStyle);
+        }
     },
 	onWrongAnswer : function(){
 		

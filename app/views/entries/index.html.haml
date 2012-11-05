@@ -1,10 +1,68 @@
 
 - content_for(:head) do
   %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, user-scalable=yes'}
+  = javascript_include_tag 'main.js'
+  = javascript_include_tag 'splash.js'
+  = stylesheet_link_tag 'theme/blue/matsoz_blue.css'
+  = stylesheet_link_tag 'theme/blue/matsoz_splash.css'
+  = stylesheet_link_tag 'theme/bes/matsoz_bes.css'
+  :javascript
+    var wordList = #{@word_list.to_json};
+    var currentLetter = 'a';
+#container
+  -##words_list
+  -#  - @all_entries.each do |entry|
+  -#    %p= link_to entry.word, entry_path(entry)
+  .navlinktasiyici
+    - letters = []
+    - @word_list.keys.each do |key|
+      - if @word_list[key].length != 0
+        - letters << key
 
-#content
-  #words_list
+    - index = 0
+    - letters.each do |letter|
+      - if index == 0
+        - piece = 'harf_sol_1'
+      - elsif index == 1
+        - piece = 'harf_sag_1'
+      - elsif index == letters.length - 1
+        - if index % 2 == 0
+          - piece = 'harf_sol_4'
+        - else
+          - piece = 'harf_sag_4'
+      - elsif index == letters.length - 2
+        - if index % 2 == 0
+          - piece = 'harf_sol_4'
+        - else
+          - piece = 'harf_sag_2'
+      - elsif index % 4 == 2
+        - piece = 'harf_sol_2'
+      - elsif index % 4 == 3
+        - piece = 'harf_sag_2'
+      - elsif index % 4 == 0
+        - piece = 'harf_sol_2'
+      - elsif index % 4 == 1
+        - piece = 'harf_sag_2'
+
+      = link_to letter.to_upcase_turkish + letter, '#', {:class => 'navlink navposition ' + piece, :data=>{:letter => letter}, :onclick=>'return false'}
+      - index = index + 1
+  %div.sozcuktasiyici
     - @all_entries.each do |entry|
-      %p= link_to entry.word, entry_path(entry)
-      
-= link_to 'Create new entry',  new_entry_path
+      - if @exporting
+        - if entry == @entry
+          %a{:href => entry.id.to_s + ".html", :class => 'sozcuklink sozcukselected'} #{entry.word}
+        - else
+          %a{:href => entry.id.to_s + ".html", :class => 'sozcuklink'} #{entry.word}
+      - else
+        - if entry == @entry
+          = link_to entry.word, entry_path(entry), {:class => 'sozcuklink sozcukselected'}
+        - else
+          = link_to entry.word, entry_path(entry), {:class => 'sozcuklink'}
+  .matsoz_logo
+    =image_tag("theme/blue/ui_img/matsoz5_logo.png")
+  .halici_logo
+    =image_tag("theme/blue/ui_img/splash_halici_logo.png")
+  .meb_logo
+    =image_tag("theme/blue/ui_img/splash_meb_logo.png")
+
+-#= link_to 'Create new entry',  new_entry_path

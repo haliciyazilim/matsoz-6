@@ -71,15 +71,17 @@ var Interaction = {
 //        Interaction.set1.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(50,40),"A")
 //        Interaction.set2.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(250,40),"B")
 //        Interaction.set3.drawVennDiagram(Interaction.container,Interaction.referencePoint.add(145,120))
-        Set.drawSets(Interaction,Interaction.referencePoint.add(50,35),[Interaction.set1,Interaction.set2],['A','B']).intersectClone.removeChildren();
 
-        Set.drawSets(Interaction,Interaction.referencePoint.add(145,150),[Interaction.set3],['C'])
+        Set.drawSets(Interaction,Interaction.referencePoint.add(50,35),[Interaction.set1,Interaction.set2],['A','B']).intersectClone.removeChildren();
+        Set.drawSets(Interaction,Interaction.referencePoint.add(145,150),[Interaction.set3],['C']);
+
+        var drawOneSet = Util.rand01()==0;
         for(var i=1;i<=3;i++){
             Interaction['set'+i].vennDiagram.children[0].set_style({opacity:0});
             Interaction['set'+i].vennDiagram.children[1].set_style({opacity:0});
             Interaction['set'+i].vennDiagram.children[2].set_style({opacity:0});
             Interaction['set'+i].vennDiagram.children[3].set_style({opacity:0});
-            if(i!=3){
+            if(i!=3 && drawOneSet == false || i == 1 && drawOneSet == true){
                 Interaction['set'+i].vennDiagram.children[0].animate({
                     style:{opacity:1},
                     duration:1000,
