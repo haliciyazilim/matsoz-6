@@ -82,6 +82,7 @@ var Interaction = {
         Interaction.scales = new Scales({
             position:new Point(180,115)
         });
+        Interaction.createTool();
         Interaction.setRandomGenerator(3);
         Interaction.prepareNextQuestion();
     },
@@ -192,13 +193,25 @@ var Interaction = {
 //                break;
         }
         Interaction.correctAnswer = correctAnswer;
+        Interaction.weights = [];
 //        var leftScaleShuffledIndex = Util.getShuffledArray(leftScale.length);
-        for(var i=0;i<leftScale.length;i++)
-            Interaction.scales.addWeightToLeft(new Weight(leftScale[i]));
+        for(var i=0;i<leftScale.length;i++){
+            var weight = new Weight(leftScale[i]);
+            if(i == 0)
+                weight.raster.class = 'disabled';
+            Interaction.scales.addWeightToLeft(weight);
+            Interaction.weights.push(weight);
+        }
 
 //        var rightScaleShuffledIndex = Util.getShuffledArray(rightScale.length);
-        for(var i=0;i<rightScale.length;i++)
-            Interaction.scales.addWeightToRight(new Weight(rightScale[i]));
+        for(var i=0;i<rightScale.length;i++){
+            var weight = new Weight(rightScale[i]);
+            if(i == 0)
+                weight.raster.class = 'disabled';
+            Interaction.scales.addWeightToRight(weight);
+            Interaction.weights.push(weight);
+
+        }
 
         Interaction.setQuestionParams([
             {
@@ -232,5 +245,74 @@ var Interaction = {
 	onFail : function(){
         Interaction.setStatus("Yanlış. Doğru cevap "+Interaction.correctAnswer + " olacaktı.",false);
 
+    },
+    createTool : function(){
+        var tool = new Tool();
+        tool.onMouseDown = function(event){
+            if(Interaction.isPaused())
+                return;
+            for(var i = 0; i < Interaction.weights.length; i++){
+                var raster = Interaction.weights[i].raster;
+                if(raster.bounds.contains(event.point)){
+                    if(raster.class == "static_weight"){
+                        this.item = raster.weight.clone().raster;
+                        this.item.class = "draggable_weight";
+                        Interaction.weights.push(this.item.weight);
+                    }
+                    else if(raster.class == 'disabled')
+                        return;
+                    else
+                        this.item = raster;
+
+                    this.item.opacity = 0.8;
+                    this.drag = true;
+                    this.firstPosition = this.item.position;
+                    this.totalDelta = new Point(0,0);
+                    return;
+                }
+            }
+
+        }
+        tool.onMouseDrag = function(event){
+            if(Interaction.isPaused())
+                return;
+            if(this.drag == true){
+                console.log(this.item);
+                this.totalDelta = this.totalDelta.add(event.delta);
+                this.item.position = this.firstPosition.add(this.totalDelta);
+            }
+        }
+        tool.onMouseUp = function(event){
+            if(!Interaction.isPaused()){
+                if(this.drag == true){
+                    if(Interaction.scales.insideRight(event.point)){
+                        if(this.item.weight.owner == null){
+                            if(Interaction.scales.addWeightToRight(this.item.weight,true) === false){
+                                Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);
+                                this.item.remove();
+                            }
+                        }else{//revert to first position
+                            Interaction.pause();
+                            this.item.animate({
+                                style:{position:this.firstPosition},
+                                duration:this.item.position.getDistance(this.firstPosition)*2,
+                                callback:Interaction.resume
+                            })
+                        }
+                    }
+                    else{
+                        Interaction.weights.splice(Interaction.weights.indexOf(this.item.weight),1);
+                        Interaction.scales.removeWeight(this.item.weight,true);
+                        this.item.remove();
+                    }
+                    this.item.opacity = 1;
+                }
+            }
+            this.item = null;
+            this.drag = false;
+            this.firstPosition = null;
+            this.totalDelta = null;
+        }
+        tool.activate();
     }
 }
