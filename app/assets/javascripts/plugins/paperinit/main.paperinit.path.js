@@ -612,11 +612,14 @@ Main.paperInit.Path = function() {
 
 	}
 
-    Path.TwoPointRectangle = function(point1,point2,height){
+    Path.TwoPointRectangle = function(point1,point2,height,margin){
         if(height == undefined)
             height = 6;
-        var points = []
-
+        if(margin == undefined)
+            margin = height*0.5;
+        point1 = point1.findPointTo(point2,-margin);
+        point2 = point2.findPointTo(point1,-margin);
+        var points = [];
         points.push(point1.findPointTo(point2,height*0.5).getRotatedPoint(-90,point1));
         points.push(point2.findPointTo(point1,height*0.5).getRotatedPoint( 90,point2));
         points.push(point2.findPointTo(point1,height*0.5).getRotatedPoint(-90,point2));

@@ -15,11 +15,11 @@ var Interaction = {
             height:$(container).height()
         }
         Interaction.appendButton({
-            bottom:"00px",
+            bottom:"10px",
             right:"40px"
         });
         Interaction.appendStatus({
-            bottom:"10px",
+            bottom:"20px",
             right:"150px"
         });
         Interaction.undoButton = Util.dom({
@@ -31,7 +31,7 @@ var Interaction = {
         $(Interaction.undoButton).css({
             position:'absolute',
             bottom:'70px',
-            right:'0px',
+            right:'10px',
             backgroundImage:'url(/assets/btn_gray_undo_text.png)',
             width:'57px',
             height:'32px'

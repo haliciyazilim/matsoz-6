@@ -402,7 +402,7 @@ function ornek8(){
     var right=50;
     var top=20;
     var denklem="A ∩ B ∩ C";
-    var izah="Kümeler kesişebilir.";
+    var izah="Üç küme kesişebilir.";
     kumeA.src=aResimleri.ornek8A;
     $(kumeA).css({
         left:left+"px",
@@ -472,7 +472,7 @@ function sonPerde(){
     $("#sonPerde5").html("A = B= C <p>Üç küme eşit olabilir.");
     $("#sonPerde6").html("A ∩ B  B ∩ C <p>Kümelerden biri diğerleri ile kesişebilir diğer iki küme ayrıktır.");
     $("#sonPerde7").html("C ⊂ B ⊂ A <p>Üç küme biri diğerinin o da öbürünün alt kümesi olabilir.");
-    $("#sonPerde8").html("A ∩ B ∩ C <p>Kümeler kesişebilir.");
+    $("#sonPerde8").html("A ∩ B ∩ C <p>Üç küme kesişebilir.");
 
     $("#sonPerde").animate({opacity:1},1000,function(){Main.animationFinished()});
 }

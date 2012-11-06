@@ -5,7 +5,7 @@
   = javascript_include_tag 'splash.js'
   = stylesheet_link_tag 'theme/blue/matsoz_blue.css'
   = stylesheet_link_tag 'theme/blue/matsoz_splash.css'
-  = stylesheet_link_tag 'theme/bes/matsoz_bes.css'
+  = stylesheet_link_tag 'theme/alti/matsoz_alti.css'
   :javascript
     var wordList = #{@word_list.to_json};
     var currentLetter = 'a';
@@ -59,7 +59,7 @@
         - else
           = link_to entry.word, entry_path(entry), {:class => 'sozcuklink'}
   .matsoz_logo
-    =image_tag("theme/blue/ui_img/matsoz5_logo.png")
+    =image_tag("theme/blue/ui_img/matsoz6_logo.png")
   .halici_logo
     =image_tag("theme/blue/ui_img/splash_halici_logo.png")
   .meb_logo
