@@ -3,46 +3,84 @@ var Animation = {
 	init:function(container){
         Animation.container = container;
         Main.animationFinished();
-//
-//        var rect = Path.TwoPointRectangle(new Point(30,40), new Point(230,70));
-//        rect.set_style({
-//            strokeColor:'#000'
-//        })
+
         var pantograph = new Pantograph({
-            position:new Point(200,150)
+            position:new Point(200,160)
         })
         pantograph.draw();
-        pantograph.animate({
-            style:{aPosition:new Point(300,80)},
-            duration:2000,
-            update:function(){
-                this.redraw();
-            },
-            callback:function(){
-                Animation.anim1();
-            }
-        });
-
+        pantograph.setA(pantograph.referencePoint.add(110,-75));
         Animation.pantograph = pantograph;
+        console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
+        Path.DrawPoints([
+            new Point(236.663, 135.0025 ),
+            new Point(269.993, 135.0025),
+            new Point(279.992, 160),
+            new Point(229.997, 160)
+        ]).set_style({
+                strokeColor:'#000'
+            });
+        Animation.path = new Path();
+        Animation.path.add(Animation.pantograph.aPosition);
+        Animation.path.set_style({
+            strokeColor:'#000'
+        })
+        AnimationManager.delay(Animation.anim1,1000);
     },
     anim1:function(){
         Animation.pantograph.animate({
             style:{aPosition:Animation.pantograph.aPosition.add(100,0)},
             duration:2000,
+            init:function(){
+            },
             update:function(){
                 this.redraw();
+                Animation.path.add(this.aPosition);
             },
             callback:function(){
+                console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
                 Animation.anim2();
             }
         });
     },
     anim2:function(){
         Animation.pantograph.animate({
-            style:{aPosition:Animation.pantograph.aPosition.add(50,75)},
+            style:{aPosition:Animation.pantograph.aPosition.add(30,75)},
             duration:2000,
             update:function(){
                 this.redraw();
+                Animation.path.add(this.aPosition);
+            },
+            callback:function(){
+                console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
+                Animation.anim3();
+            }
+        });
+    },
+    anim3:function(){
+        Animation.pantograph.animate({
+            style:{aPosition:Animation.pantograph.aPosition.add(-150,0)},
+            duration:2000,
+            update:function(){
+                this.redraw();
+                Animation.path.add(this.aPosition);
+            },
+            callback:function(){
+                console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
+                Animation.anim4();
+            }
+        });
+    },
+    anim4:function(){
+        Animation.pantograph.animate({
+            style:{aPosition:Animation.pantograph.aPosition.add(20,-75)},
+            duration:2000,
+            update:function(){
+                this.redraw();
+                Animation.path.add(this.aPosition);
+            },
+            callback:function(){
+                console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
+                Main.animationFinished();
             }
         });
     }
