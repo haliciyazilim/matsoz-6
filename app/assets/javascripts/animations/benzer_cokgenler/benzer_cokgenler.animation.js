@@ -39,7 +39,8 @@ var Animation = {
             callback:function(){
                 console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
                 Animation.anim2();
-            }
+            },
+            animationType:'easeInEaseOut'
         });
     },
     anim2:function(){
@@ -53,7 +54,8 @@ var Animation = {
             callback:function(){
                 console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
                 Animation.anim3();
-            }
+            },
+            animationType:'easeInEaseOut'
         });
     },
     anim3:function(){
@@ -67,7 +69,8 @@ var Animation = {
             callback:function(){
                 console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
                 Animation.anim4();
-            }
+            },
+            animationType:'easeInEaseOut'
         });
     },
     anim4:function(){
@@ -81,7 +84,8 @@ var Animation = {
             callback:function(){
                 console.log(Animation.pantograph.armsCommonPoint.x,Animation.pantograph.armsCommonPoint.y);
                 Main.animationFinished();
-            }
+            },
+            animationType:'easeInEaseOut'
         });
     }
 }
