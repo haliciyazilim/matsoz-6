@@ -114,6 +114,9 @@ Main.init = function(){
     Main.objective = $('.mavikontrol').get(0);
     //Main.InteractionContainer.appendChild(Main.ObjectiveContainer);
 
+    //Set the curent language
+    Language.init(Language.TURKISH);
+
     var framework;
     if (typeof(Interaction.getFramework) == "function") {
         framework = Interaction.getFramework();
