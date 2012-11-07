@@ -795,8 +795,8 @@ Set.turkishLetters[28] = "z";
 
 Set.wordsArray = [];
 
-Set.wordsArray[0] = "elma";
-Set.wordsArray[1] = "matematik";
+Set.wordsArray[0] = "portakal";
+Set.wordsArray[1] = "türkçe";
 Set.wordsArray[2] = "bilgisayar";
 Set.wordsArray[3] = "okul";
 Set.wordsArray[4] = "sınıf";
