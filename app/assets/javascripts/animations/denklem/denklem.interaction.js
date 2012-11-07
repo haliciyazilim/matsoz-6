@@ -51,7 +51,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki terazide oluşan denklemi çözerek bilinmeyeni bulunuz ve kontrol ediniz.');
+        Main.setObjective('Yandaki denklemi, terazinin sol ve sağ kefelerinden kütleleri karşılıklı sürükleyip çıkararak bilinmeyeni bulunuz, kutuya yazınız ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -83,7 +83,7 @@ var Interaction = {
             position:new Point(180,115)
         });
         Interaction.createTool();
-        Interaction.setRandomGenerator(3);
+        Interaction.setRandomGenerator(5);
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -91,7 +91,7 @@ var Interaction = {
         var leftScale = [];
         var rightScale = [];
         /*<[[TEST*/
-            randomNumber = 3;
+//            randomNumber = 4;
         /*TEST]]>*/
         var equationString = "";
         var variableCharacter = "";
@@ -134,6 +134,16 @@ var Interaction = {
                 leftScale   = [ {type:"x",value:a},{type:b},{type:c},{type:d} ];
                 rightScale  = [ {type:a},{type:b},{type:c},{type:d} ];
                 equationString = "x + "+(b+" + "+c)+" + "+d+" = "+a+" + "+b+" + "+c+" + "+d;
+                variableCharacter = "x";
+                correctAnswer = a;
+                break;
+            case 4:
+                var a = Util.randomInteger(1,4)+1;
+                var b = Util.randomInteger(0,4)+1;
+                var c = Util.randomInteger(0,4)+1;
+                leftScale   = [ {type:"x",value:a},{type:b},{type:c} ];
+                rightScale  = [ {type:a-1},{type:1},{type:b},{type:c} ];
+                equationString = "x + "+(b+" + "+c)+" = "+(a-1)+" + "+(1)+" + "+b+" + "+c;
                 variableCharacter = "x";
                 correctAnswer = a;
                 break;
