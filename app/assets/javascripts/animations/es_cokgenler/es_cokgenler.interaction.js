@@ -14,13 +14,29 @@ var Interaction = {
             height:$(container).height()
         }
         Interaction.appendButton({
-            bottom:"00px",
+            bottom:"10px",
             right:"40px"
         });
         Interaction.appendStatus({
-            bottom:"10px",
+            bottom:"20px",
             right:"150px"
+        });
+
+        Interaction.undoButton = Util.dom({
+            parent:container,
+            tag:'input'
+        });
+        Interaction.undoButton.setAttribute('class','next_button');
+        Interaction.undoButton.setAttribute('type','button');
+        $(Interaction.undoButton).css({
+            position:'absolute',
+            bottom:'70px',
+            right:'10px',
+            backgroundImage:'url(/assets/btn_gray_undo_text.png)',
+            width:'57px',
+            height:'32px'
         })
+        Interaction.undoButton.onclick = Interaction.undo;
 
         Interaction.setRandomGenerator(12)
         Interaction.prepareNextQuestion();
@@ -73,5 +89,8 @@ var Interaction = {
             InteractiveGrids.AreShapesSame(Interaction.slaveGrid.points,Interaction.masterGrid.points)
         },2000);
 
+    },
+    undo:function(){
+        Interaction.slaveGrid.undo();
     }
 }
