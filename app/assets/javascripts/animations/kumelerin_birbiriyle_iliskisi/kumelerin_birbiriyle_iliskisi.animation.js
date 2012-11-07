@@ -427,8 +427,8 @@ function ornek8(){
     $(kumeC).delay(500).animate({opacity:1},500);
     $(kumeA).delay(bekleme).animate({left:"238px"},islem);
     $(kumeC).delay(bekleme).animate({right:"346px",top:"79px"},islem);
-    $("#denklem").css({width:"320",left:"465px",bottom:"100px"}).delay(bekleme+islem+1000).animate({opacity:1},1000).html("A ∩ B  B ∩ C");
-    $("#aciklama").css({width:"320",left:"465px",bottom:"50px"}).delay(bekleme+islem+2000).animate({opacity:1},1000).html("Kümelerden biri diğerleri ile kesişebilir diğer iki küme ayrıktır.");
+    $("#denklem").css({width:"320",left:"465px",bottom:"100px"}).delay(bekleme+islem+1000).animate({opacity:1},1000).html(denklem);
+    $("#aciklama").css({width:"320",left:"465px",bottom:"50px"}).delay(bekleme+islem+2000).animate({opacity:1},1000).html(izah);
 
     setTimeout(function(){kapat()},bekleme+islem+4000);
     setTimeout(function(){sonPerde()},bekleme+islem+6000);
