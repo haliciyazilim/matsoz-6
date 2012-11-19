@@ -49,7 +49,7 @@ var Interaction = {
             right:"20px",
             top:"20px",
             textAlign:"center"
-        }).html("Tüm kesişen doğrulara");
+        }).html("Bulmanız gereken");
 
         $(container).append("<div id='sayac'>");
         $("#sayac").css({
@@ -74,11 +74,19 @@ var Interaction = {
             textAlign:"center"
         }).html("doğru parçası kaldı.");
 
-        soru="paralel";
-        dogrular();
+        duzlemArray=["maviDuvar","cati","sariDuvar"];
+        dogruArray=["kesişen","paralel"];
+        dogru="";
+        duzlem="";
+        soruMetin="";
 
 
+        soruDuzlemRandomArray=Util.getShuffledArray(3);
+
+        soruDuzlem=0;
         Interaction.soru=0;
+
+        //dogrular();
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
@@ -86,20 +94,49 @@ var Interaction = {
         Main.interactionProject.activeLayer.removeChildren();
         $("input").css("opacity","0").attr("disabled","disabled");
 
+        soruDuzlem=soruDuzlemRandomArray[Interaction.soru];
+        switch (soruDuzlem){
+            case 0:
+                duzlem="mavi renkli duvarı";
+                break;
+            case 1:
+                duzlem="çatısı";
+                break;
+            case 2:
+                duzlem="sarı renkli duvarı";
+
+                break;
+        }
 
 
-        Interaction.soru++;
         if(Interaction.soru%2==0){
-            Main.setObjective('Yandaki resimde evin mavi renkli duvarı ile <b>kesişen</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.');
-            soru="kesisen";
+            dogru=dogruArray[0];
+
+
+        }
+        else{
+
+            dogru=dogruArray[1];
+
+        }
+        soruMetin= "Yandaki resimde evin <b>"+duzlem+"</b> ile <b>"+dogru+"</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.";
+        Main.setObjective(soruMetin);
+        dogrular();
+        if(Interaction.soru%2==0){
+
             $("#sayac").html(kesisen);
         }
         else{
-            Main.setObjective('Yandaki resimde evin mavi renkli duvarına <b>paralel</b> olan tüm doğru parçalarını bulunuz ve kontrol ediniz.');
-            soru="paralel";
+
+
             $("#sayac").html(paralel);
         }
-        dogrular();
+
+
+        if(Interaction.soru==2)
+            Interaction.soru=0;
+        else
+            Interaction.soru++;
 
 
     },
@@ -173,14 +210,14 @@ var Interaction = {
                     Interaction.seciliId[i].strokeColor="red";
             }
         }
-        else if(soru=="kesisen"){
+        else if(soru=="kesişen"){
             for(var i=0; i<dogrularArray.length;i++){
-                if(dogrularArray[i].class=="kesisen")
+                if(dogrularArray[i].class=="kesişen")
                     dogrularArray[i].strokeColor="blue";
             }
-            console.log("ONFAIL soru kesisen")
+            console.log("ONFAIL soru kesişen")
             for(var i=0; i<Interaction.seciliId.length;i++){
-                if(Interaction.seciliId[i].class=="kesisen"){
+                if(Interaction.seciliId[i].class=="kesişen"){
                     Interaction.seciliId[i].strokeColor="green";
                 }
                 else
