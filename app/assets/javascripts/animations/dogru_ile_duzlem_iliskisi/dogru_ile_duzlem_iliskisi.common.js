@@ -409,7 +409,7 @@ dogrular=function(){
                     event.item.style=seciliStyle;
                     //console.log(hitResult.item);
                     console.log(event.item.name);
-                    console.log(event.item.class);
+                    console.log("Class"+event.item.class);
 
                     Interaction.seciliId.push(event.item)
                     Interaction.seciliClass.push(event.item.class)
@@ -474,7 +474,7 @@ dogrular=function(){
             if(event.item){
                 if(event.item.class=="paralel" || event.item.class=="kesişen"){
                     //hitResult.item.selected = true;
-                    console.log(hitResult.item);
+                    //console.log(hitResult.item);
                     $(Interaction.container).css("cursor","pointer");
                 }
                 else{
@@ -508,3 +508,35 @@ yanlisSecim=function(sekil){
     });
     $(Interaction.status).delay(bekleme).animate({opacity:0},islem,function(){$(Interaction.status).html("").css("opacity","1")});
 }
+/*
+
+ goster=function(){
+ if(soru=="paralel"){
+ for(var i=0; i<dogrularArray.length;i++){
+ if(dogrularArray[i].class=="paralel")
+ dogrularArray[i].strokeColor="blue";
+ }
+ console.log("ONFAIL soru paralel")
+ for(var i=0; i<Interaction.seciliId.length;i++){
+ if(Interaction.seciliId[i].class=="paralel"){
+ Interaction.seciliId[i].strokeColor="green";
+ }
+ else
+ Interaction.seciliId[i].strokeColor="red";
+ }
+ }
+ else if(soru=="kesişen"){
+ for(var i=0; i<dogrularArray.length;i++){
+ if(dogrularArray[i].class=="kesişen")
+ dogrularArray[i].strokeColor="blue";
+ }
+ console.log("ONFAIL soru kesişen")
+ for(var i=0; i<Interaction.seciliId.length;i++){
+ if(Interaction.seciliId[i].class=="kesişen"){
+ Interaction.seciliId[i].strokeColor="green";
+ }
+ else
+ Interaction.seciliId[i].strokeColor="red";
+ }
+ }
+ }*/

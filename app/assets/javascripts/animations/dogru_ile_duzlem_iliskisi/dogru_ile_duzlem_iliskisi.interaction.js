@@ -74,6 +74,7 @@ var Interaction = {
             textAlign:"center"
         }).html("doğru parçası kaldı.");
 
+
         duzlemArray=["maviDuvar","cati","sariDuvar"];
         dogruArray=["kesişen","paralel"];
         dogru="";
@@ -85,6 +86,20 @@ var Interaction = {
 
         soruDuzlem=0;
         Interaction.soru=0;
+
+        $(container).append("<img src='/assets/animations/dogru_ile_duzlem_iliskisi/btn_gray_cevapgoster.png' id='goster'>");
+        $("#goster").css({
+            position:"absolute",
+            //width:"145px",
+            //height:"20px",
+            left:"20px",
+            top:"245px",
+            textAlign:"center",
+            opacity:"1"
+
+        });
+
+        gosterBasilimi=0;
 
         //dogrular();
         Interaction.prepareNextQuestion();
@@ -133,6 +148,40 @@ var Interaction = {
         }
 
 
+        $("#goster").click(function(){
+            if(dogru=="paralel"){
+                for(var i=0; i<dogrularArray.length;i++){
+                    if(dogrularArray[i].class=="paralel")
+                        dogrularArray[i].strokeColor="blue";
+                }
+                console.log("ONFAIL soru paralel")
+                for(var i=0; i<Interaction.seciliId.length;i++){
+                    if(Interaction.seciliId[i].class=="paralel"){
+                        Interaction.seciliId[i].strokeColor="green";
+                    }
+                    else
+                        Interaction.seciliId[i].strokeColor="red";
+                }
+            }
+            else if(dogru=="kesişen"){
+                for(var i=0; i<dogrularArray.length;i++){
+                    if(dogrularArray[i].class=="kesişen")
+                        dogrularArray[i].strokeColor="blue";
+                }
+                console.log("ONFAIL soru kesişen")
+                for(var i=0; i<Interaction.seciliId.length;i++){
+                    if(Interaction.seciliId[i].class=="kesişen"){
+                        Interaction.seciliId[i].strokeColor="green";
+                    }
+                    else
+                        Interaction.seciliId[i].strokeColor="red";
+                }
+            }
+            gosterBasilimi=1;
+            Interaction.__checkAnswer();
+            //$("input").css("opacity","1").removeAttr("disabled");
+        });
+
         if(Interaction.soru==2)
             Interaction.soru=0;
         else
@@ -147,8 +196,11 @@ var Interaction = {
 	*/
 	preCheck : function(){
         if(Interaction.seciliId.length==0){
+            if(gosterBasilimi==1)
+                return true;
+            else
             Interaction.setStatus('Lütfen doğruları seçiniz.',false);
-            return false;
+                return false;
         }
 
     },
@@ -181,10 +233,14 @@ var Interaction = {
                 return true;
             }
         }*/
+        if(gosterBasilimi==1)
+            sayac=0;
 
         if(sayac==0)
         {
             $("input").css("opacity","1").removeAttr("disabled");
+            $("#sayac").html("0");
+            tool.onMouseDown=null;
             return true;
         }
 
@@ -196,34 +252,7 @@ var Interaction = {
 		
     },
 	onFail : function(){
-        if(soru=="paralel"){
-            for(var i=0; i<dogrularArray.length;i++){
-                if(dogrularArray[i].class=="paralel")
-                    dogrularArray[i].strokeColor="blue";
-            }
-            console.log("ONFAIL soru paralel")
-            for(var i=0; i<Interaction.seciliId.length;i++){
-                if(Interaction.seciliId[i].class=="paralel"){
-                    Interaction.seciliId[i].strokeColor="green";
-                }
-                else
-                    Interaction.seciliId[i].strokeColor="red";
-            }
-        }
-        else if(soru=="kesişen"){
-            for(var i=0; i<dogrularArray.length;i++){
-                if(dogrularArray[i].class=="kesişen")
-                    dogrularArray[i].strokeColor="blue";
-            }
-            console.log("ONFAIL soru kesişen")
-            for(var i=0; i<Interaction.seciliId.length;i++){
-                if(Interaction.seciliId[i].class=="kesişen"){
-                    Interaction.seciliId[i].strokeColor="green";
-                }
-                else
-                    Interaction.seciliId[i].strokeColor="red";
-            }
-        }
+        goster();
 		
     }
 }
