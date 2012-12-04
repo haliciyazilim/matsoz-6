@@ -1,10 +1,10 @@
 var Interaction = {
-    
-	getFramework:function(){
-			return 'paper';
-		},
-	images:[
-        
+
+    getFramework:function(){
+        return 'paper';
+    },
+    images:[
+
     ],
     init:function(container){
         Interaction.container = container;
@@ -20,7 +20,7 @@ var Interaction = {
             width:'340px',
             height:'26px',
             textAlign:'center',
-        //    border:'1px solid'
+            //    border:'1px solid'
         });
         Interaction.appendButton({
             bottom:'10px',
@@ -30,7 +30,7 @@ var Interaction = {
         Interaction.setRandomGenerator(3);
         Interaction.prepareNextQuestion();
     },
-	nextQuestion: function(randomNumber){
+    nextQuestion: function(randomNumber){
 
         Interaction.randomNumber = randomNumber;
         Interaction.flushInputs();
@@ -170,10 +170,10 @@ var Interaction = {
         }
         $('#answer').html(answerStr);
     },
-	preCheck : function(){
-		
+    preCheck : function(){
+
     },
-	isAnswerCorrect : function(value){
+    isAnswerCorrect : function(value){
         if(Interaction.randomNumber == 0){
             return Interaction.base == value;
         }
@@ -183,19 +183,19 @@ var Interaction = {
         else{
             return Interaction.answer == value;
         }
-		
+
     },
-	onCorrectAnswer : function(){
-		$(Interaction.answerDiv).css("opacity",1);
+    onCorrectAnswer : function(){
+        $(Interaction.answerDiv).css("opacity",1);
         $(Interaction.input).css("color","green");
     },
-	onWrongAnswer : function(){
-		
+    onWrongAnswer : function(){
+
     },
-	onFail : function(){
+    onFail : function(){
         Interaction.setStatus('Olmadı! Doğru cevap yukarıda gösterilmiştir!',false);
         $(Interaction.answerDiv).css("opacity",1);
         $(Interaction.input).css("color","red");
-		
+
     }
 }
