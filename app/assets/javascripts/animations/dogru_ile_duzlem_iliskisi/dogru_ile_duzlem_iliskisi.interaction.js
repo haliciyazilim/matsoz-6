@@ -105,7 +105,7 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        Interaction.trial++;
         Main.interactionProject.activeLayer.removeChildren();
         $("input").css("opacity","0").attr("disabled","disabled");
 
@@ -147,12 +147,13 @@ var Interaction = {
             $("#sayac").html(paralel);
         }
 
-
+        gosterBasilimi=0;
         $("#goster").click(function(){
             if(dogru=="paralel"){
                 for(var i=0; i<dogrularArray.length;i++){
                     if(dogrularArray[i].class=="paralel")
-                        dogrularArray[i].strokeColor="blue";
+                        dogrularArray[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
                 }
                 console.log("ONFAIL soru paralel")
                 for(var i=0; i<Interaction.seciliId.length;i++){
@@ -161,12 +162,14 @@ var Interaction = {
                     }
                     else
                         Interaction.seciliId[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
                 }
             }
             else if(dogru=="kesişen"){
                 for(var i=0; i<dogrularArray.length;i++){
                     if(dogrularArray[i].class=="kesişen")
-                        dogrularArray[i].strokeColor="blue";
+                        dogrularArray[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
                 }
                 console.log("ONFAIL soru kesişen")
                 for(var i=0; i<Interaction.seciliId.length;i++){
@@ -175,6 +178,7 @@ var Interaction = {
                     }
                     else
                         Interaction.seciliId[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
                 }
             }
             gosterBasilimi=1;
@@ -236,12 +240,18 @@ var Interaction = {
         if(gosterBasilimi==1)
             sayac=0;
 
-        if(sayac==0)
+        if(sayac==0 && gosterBasilimi==0)
         {
             $("input").css("opacity","1").removeAttr("disabled");
             $("#sayac").html("0");
             tool.onMouseDown=null;
             return true;
+        }
+        else{
+            $("input").css("opacity","1").removeAttr("disabled");
+            $("#sayac").html("0");
+            tool.onMouseDown=null;
+            return false;
         }
 
     },
@@ -249,10 +259,11 @@ var Interaction = {
 		
     },
 	onWrongAnswer : function(){
-		
+
     },
 	onFail : function(){
-        goster();
-		
+        //goster();
+
+        Interaction.setStatus('Cevaplar yukarıda gösterilmiştir.',false);
     }
 }
