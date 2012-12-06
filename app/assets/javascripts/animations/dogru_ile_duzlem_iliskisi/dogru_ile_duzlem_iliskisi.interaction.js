@@ -49,7 +49,7 @@ var Interaction = {
             right:"20px",
             top:"20px",
             textAlign:"center"
-        }).html("Tüm kesişen doğrulara");
+        }).html("Bulmanız gereken");
 
         $(container).append("<div id='sayac'>");
         $("#sayac").css({
@@ -74,32 +74,122 @@ var Interaction = {
             textAlign:"center"
         }).html("doğru parçası kaldı.");
 
-        soru="paralel";
-        dogrular();
+
+        duzlemArray=["maviDuvar","cati","sariDuvar"];
+        dogruArray=["kesişen","paralel"];
+        dogru="";
+        duzlem="";
+        soruMetin="";
 
 
+        soruDuzlemRandomArray=Util.getShuffledArray(3);
+
+        soruDuzlem=0;
         Interaction.soru=0;
+
+        $(container).append("<img src='/assets/animations/dogru_ile_duzlem_iliskisi/btn_gray_cevapgoster.png' id='goster'>");
+        $("#goster").css({
+            position:"absolute",
+            //width:"145px",
+            //height:"20px",
+            left:"20px",
+            top:"245px",
+            textAlign:"center",
+            opacity:"1"
+
+        });
+
+        gosterBasilimi=0;
+
+        //dogrular();
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
-
+        Interaction.trial++;
         Main.interactionProject.activeLayer.removeChildren();
         $("input").css("opacity","0").attr("disabled","disabled");
 
+        soruDuzlem=soruDuzlemRandomArray[Interaction.soru];
+        switch (soruDuzlem){
+            case 0:
+                duzlem="mavi renkli duvarı";
+                break;
+            case 1:
+                duzlem="çatısı";
+                break;
+            case 2:
+                duzlem="sarı renkli duvarı";
+
+                break;
+        }
 
 
-        Interaction.soru++;
         if(Interaction.soru%2==0){
-            Main.setObjective('Yandaki resimde evin mavi renkli duvarı ile <b>kesişen</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.');
-            soru="kesisen";
+            dogru=dogruArray[0];
+
+
+        }
+        else{
+
+            dogru=dogruArray[1];
+
+        }
+        soruMetin= "Yandaki resimde evin <b>"+duzlem+"</b> ile <b>"+dogru+"</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.";
+        Main.setObjective(soruMetin);
+        dogrular();
+        if(Interaction.soru%2==0){
+
             $("#sayac").html(kesisen);
         }
         else{
-            Main.setObjective('Yandaki resimde evin mavi renkli duvarına <b>paralel</b> olan tüm doğru parçalarını bulunuz ve kontrol ediniz.');
-            soru="paralel";
+
+
             $("#sayac").html(paralel);
         }
-        dogrular();
+
+        gosterBasilimi=0;
+        $("#goster").click(function(){
+            if(dogru=="paralel"){
+                for(var i=0; i<dogrularArray.length;i++){
+                    if(dogrularArray[i].class=="paralel")
+                        dogrularArray[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
+                }
+                console.log("ONFAIL soru paralel")
+                for(var i=0; i<Interaction.seciliId.length;i++){
+                    if(Interaction.seciliId[i].class=="paralel"){
+                        Interaction.seciliId[i].strokeColor="green";
+                    }
+                    else
+                        Interaction.seciliId[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
+                }
+            }
+            else if(dogru=="kesişen"){
+                for(var i=0; i<dogrularArray.length;i++){
+                    if(dogrularArray[i].class=="kesişen")
+                        dogrularArray[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
+                }
+                console.log("ONFAIL soru kesişen")
+                for(var i=0; i<Interaction.seciliId.length;i++){
+                    if(Interaction.seciliId[i].class=="kesişen"){
+                        Interaction.seciliId[i].strokeColor="green";
+                    }
+                    else
+                        Interaction.seciliId[i].strokeColor="red";
+                    dogrularArray[i].strokeWidth=4;
+                }
+            }
+            gosterBasilimi=1;
+            Interaction.__checkAnswer();
+            //$("input").css("opacity","1").removeAttr("disabled");
+        });
+
+        if(Interaction.soru==2)
+            Interaction.soru=0;
+        else
+            Interaction.soru++;
 
 
     },
@@ -110,8 +200,11 @@ var Interaction = {
 	*/
 	preCheck : function(){
         if(Interaction.seciliId.length==0){
+            if(gosterBasilimi==1)
+                return true;
+            else
             Interaction.setStatus('Lütfen doğruları seçiniz.',false);
-            return false;
+                return false;
         }
 
     },
@@ -144,11 +237,21 @@ var Interaction = {
                 return true;
             }
         }*/
+        if(gosterBasilimi==1)
+            sayac=0;
 
-        if(sayac==0)
+        if(sayac==0 && gosterBasilimi==0)
         {
             $("input").css("opacity","1").removeAttr("disabled");
+            $("#sayac").html("0");
+            tool.onMouseDown=null;
             return true;
+        }
+        else{
+            $("input").css("opacity","1").removeAttr("disabled");
+            $("#sayac").html("0");
+            tool.onMouseDown=null;
+            return false;
         }
 
     },
@@ -156,37 +259,11 @@ var Interaction = {
 		
     },
 	onWrongAnswer : function(){
-		
+
     },
 	onFail : function(){
-        if(soru=="paralel"){
-            for(var i=0; i<dogrularArray.length;i++){
-                if(dogrularArray[i].class=="paralel")
-                    dogrularArray[i].strokeColor="blue";
-            }
-            console.log("ONFAIL soru paralel")
-            for(var i=0; i<Interaction.seciliId.length;i++){
-                if(Interaction.seciliId[i].class=="paralel"){
-                    Interaction.seciliId[i].strokeColor="green";
-                }
-                else
-                    Interaction.seciliId[i].strokeColor="red";
-            }
-        }
-        else if(soru=="kesisen"){
-            for(var i=0; i<dogrularArray.length;i++){
-                if(dogrularArray[i].class=="kesisen")
-                    dogrularArray[i].strokeColor="blue";
-            }
-            console.log("ONFAIL soru kesisen")
-            for(var i=0; i<Interaction.seciliId.length;i++){
-                if(Interaction.seciliId[i].class=="kesisen"){
-                    Interaction.seciliId[i].strokeColor="green";
-                }
-                else
-                    Interaction.seciliId[i].strokeColor="red";
-            }
-        }
-		
+        //goster();
+
+        Interaction.setStatus('Cevaplar yukarıda gösterilmiştir.',false);
     }
 }

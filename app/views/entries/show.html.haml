@@ -1,6 +1,5 @@
 
 - content_for(:head) do
-  %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, user-scalable=no'}
   %meta{'http-equiv'=>'Content-Type', 'content' => 'text/html; charset=UTF-8'}
   = javascript_include_tag 'main.js'
   = stylesheet_link_tag 'theme/blue/matsoz_blue.css'
@@ -13,13 +12,20 @@
   - if Rails.env.development?
     = javascript_include_tag 'development.js'
 
+  - if @exporting
+    :javascript
+      var exportedPage = true;
+  - else
+    :javascript
+      var exportedPage = false;
+
   :javascript
     var wordList = #{@word_list.to_json};
     var currentLetter = '#{@current_letter}';
 
 #container
   %div.matsoz_logo
-    %img{:src=>'/assets/theme/alti/logo_alti.png', :width=>'269', :height=>'77'}
+    %img{:src=>'/assets/theme/alti/logo_alti.png'}
   .navlinktasiyici
     - letters = []
     - @word_list.keys.each do |key|
@@ -84,7 +90,10 @@
       %div.simgebg
         = image_tag('theme/blue/ui_img/simge_bg.png', {:width => 139, :height => 143, :style => "position:absolute; top: 0px; left: 0px;"})
         %div.simge
-          = image_tag(@entry.thumbnail.url, {:style => "position:absolute; top: 0px; left: 0px;"})
+          - if @exporting
+            = image_tag('/assets/symbols/' + @entry.id.to_s + '.png', {:style => "position:absolute; top: 0px; left: 0px;"})
+          - else
+            = image_tag(@entry.thumbnail.url, {:style => "position:absolute; top: 0px; left: 0px;"})
     %strong.name
       = @entry.word + ": "
     - @chunks.each do |chunk|
@@ -93,7 +102,10 @@
           - if key != nil
             =key.gsub(' ', "\n")
         - else
-          = link_to key, entry_path(value)
+          - if @exporting
+            %a{:href => value.id.to_s + ".html"} #{key}
+          - else
+            = link_to key, entry_path(value)
     %div.additional_info
       - if @entry.additionalInfo
         %em

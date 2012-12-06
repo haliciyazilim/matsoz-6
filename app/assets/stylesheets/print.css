@@ -1,0 +1,31 @@
+@media print{
+
+    #main{
+        visibility: hidden;
+    }
+    .tanim{
+        visibility: visible;
+        float:left;
+        position: absolute;
+        width: auto;
+        height:100px;
+        top:50px;
+        left:0px;
+       
+        font-size: 20px;
+    }
+    .simgebg{
+        visibility: hidden;
+    }
+    .simge{
+        visibility: visible;
+        display: block;
+        float: left;
+        position: relative;
+        width: 128px;
+        height:134px;
+        top:-30px;
+        left:0px;
+
+    }
+}
