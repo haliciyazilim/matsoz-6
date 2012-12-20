@@ -29,10 +29,22 @@ var Main = function(){
         }
         catch(e){
             console.log('Interaction is not defined');
-
         }
     });
 
+}
+
+Main.platform = {
+    MOBILE:'Mobile',
+    DESKTOP:'Desktop'
+}
+
+Main.getCurrentPlatform = function(){
+    var userAgent = navigator.userAgent;
+    if(userAgent.indexOf("Mobile") > 0)
+        return Main.platform.MOBILE;
+    else
+        return Main.platform.DESKTOP;
 }
 
 Main.config = {
