@@ -43,7 +43,7 @@ var Interaction = {
         }
 
 
-        $("input").css("margin","0 auto").css("margin-top","3px");
+        $("input").attr("style","margin: auto !important").css("margin-top","3px");
         $(".madde").css({
             width:"148px",
             height:"40px",
