@@ -457,8 +457,8 @@ animations/carpanlarini_bulma/carpanlarini_bulma.interaction.js: animations/carp
 animations/carpanlarini_bulma/carpanlarini_bulma.styles.js: animations/carpanlarini_bulma/carpanlarini_bulma.styles-a94eb9baa17463b5803cd8651f173c07.js
 animations/cebir/cebir.animation.js: animations/cebir/cebir.animation-78e1c37b20e2f7e8d65c5263476e7158.js
 animations/cebir/cebir.common.js: animations/cebir/cebir.common-71c9eaf3c06bffedf041f8d52c511254.js
-animations/cebir/cebir.includes.js: animations/cebir/cebir.includes-246290cbbadd47d92f0e9c24b5db933a.js
-animations/cebir/cebir.interaction.js: animations/cebir/cebir.interaction-1839082b5fbf0e681c3c18f7499980f0.js
+animations/cebir/cebir.includes.js: animations/cebir/cebir.includes-5f9109a49b976a6297ea231ecc762f9a.js
+animations/cebir/cebir.interaction.js: animations/cebir/cebir.interaction-605ff179e32b4ad72df13c22a0e2ec70.js
 animations/cebir/cebir.styles.js: animations/cebir/cebir.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
 animations/cebirsel_ifade/cebirsel_ifade.animation.js: animations/cebirsel_ifade/cebirsel_ifade.animation-9af7bb937f695deff5c409c6956d62a9.js
 animations/cebirsel_ifade/cebirsel_ifade.common.js: animations/cebirsel_ifade/cebirsel_ifade.common-3548b2741e584957e40f0ceaa0f96413.js
@@ -561,8 +561,8 @@ animations/esitlik/esitlik.interaction.js: animations/esitlik/esitlik.interactio
 animations/esitlik/esitlik.styles.js: animations/esitlik/esitlik.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
 animations/eslik/eslik.animation.js: animations/eslik/eslik.animation-03f118ef4a7462805f4ea6c2814f8483.js
 animations/eslik/eslik.common.js: animations/eslik/eslik.common-8c9094e151ff151890be2722fc639a61.js
-animations/eslik/eslik.includes.js: animations/eslik/eslik.includes-64e74a15d4a2df21970ff24fc22838b4.js
-animations/eslik/eslik.interaction.js: animations/eslik/eslik.interaction-670ed3c47917e0f99a50c0955f55f08a.js
+animations/eslik/eslik.includes.js: animations/eslik/eslik.includes-78ae8c35e716410d3934ac974ee8e2db.js
+animations/eslik/eslik.interaction.js: animations/eslik/eslik.interaction-ed470430541b55028c337039485ef9a9.js
 animations/eslik/eslik.languages.js: animations/eslik/eslik.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/eslik/eslik.styles.js: animations/eslik/eslik.styles-2c9bd05a770a5f8648f0eec941fd9b31.js
 animations/etkisiz_eleman/etkisiz_eleman.animation.js: animations/etkisiz_eleman/etkisiz_eleman.animation-af1e92eb064f3d3f2b69f40e0e466b58.js
@@ -821,7 +821,7 @@ animations/yuzey_alani/yuzey_alani.interaction.js: animations/yuzey_alani/yuzey_
 animations/yuzey_alani/yuzey_alani.languages.js: animations/yuzey_alani/yuzey_alani.languages-0e0176a6c3304524cf9db77e47668cd2.js
 animations/yuzey_alani/yuzey_alani.styles.js: animations/yuzey_alani/yuzey_alani.styles-409e6f3d39f8f44ff0b90fe94b4a5187.js
 application.js: application-363316399c9b02b9eb98cd1b13517abd.js
-main.js: main-891165e2736df8848a38e3594656ef2b.js
+main.js: main-66b73ec0d05a3ec8327c3597a526bda6.js
 processFiles.sh: processFiles-a4eca39e2c4ee455b6d7c46521a387d9.sh
 splash.js: splash-5a5b77c7cb3facc17b6bf51b9c1a5e28.js
 stats/highcharts.js: stats/highcharts-a43fc1c32afb198c70856451d082285f.js
@@ -854,6 +854,7 @@ theme/alti/logo_alti.png: theme/alti/logo_alti-c6bf7d51deda89957d2127aa11a592f5.
 theme/alti/matsoz_alti.css: theme/alti/matsoz_alti-0dfc5dadbfb42a2ab90aa086270f4e82.css
 theme/alti/ornek.png: theme/alti/ornek-327b0769174056e5e06bb94cbfd0cbf3.png
 theme/blue/matsoz_blue.css: theme/blue/matsoz_blue-ff63660494b130d0276dda87a3a6cfaf.css
+theme/blue/matsoz_dialog.css: theme/blue/matsoz_dialog-47f58506c8fdf9771919c1e0e51d633a.css
 theme/blue/matsoz_splash.css: theme/blue/matsoz_splash-d3d8e0cead3b7d78491f7c999d89e221.css
 theme/blue/ui_img/FULL_SCREEN.jpg: theme/blue/ui_img/FULL_SCREEN-c07c15b2a1436f693c55f63a65e78229.jpg
 theme/blue/ui_img/accept.png: theme/blue/ui_img/accept-aa46783eaacf42039619629139ff6087.png
