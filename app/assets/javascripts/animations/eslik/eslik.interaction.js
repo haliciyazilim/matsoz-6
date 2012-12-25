@@ -86,16 +86,34 @@ var Interaction = {
 
         Interaction.sorularArray=Util.getShuffledArray(soruResimleri.soruAdedi);
         Interaction.soruSirasi=0;
+
+
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+        cevirme=Math.floor(Math.random()*3);
 
+        switch (cevirme){
+            case 0:
+                Interaction.cevirmeDerecesi=0;
+                break;
+            case 1:
+                Interaction.cevirmeDerecesi=-90;
+                break;
+            case 2:
+                Interaction.cevirmeDerecesi=90;
+                break;
+        }
+
+
+
+        console.log("ÇEvrim: "+Interaction.cevirmeDerecesi);
         $("#soru")
-            .css("transform","rotate(0deg)")
-            .css("-webkit-transform","rotate(0deg)")
-            .css("-ms-transform","rotate(0deg)")
-            .css("-moz-transform","rotate(0deg)")
-            .css("-o-transform","rotate(0deg)");
+            .css("transform","rotate("+Interaction.cevirmeDerecesi+"deg)")
+            .css("-webkit-transform","rotate("+Interaction.cevirmeDerecesi+"deg)")
+            .css("-ms-transform","rotate("+Interaction.cevirmeDerecesi+"deg)")
+            .css("-moz-transform","rotate("+Interaction.cevirmeDerecesi+"deg)")
+            .css("-o-transform","rotate("+Interaction.cevirmeDerecesi+"deg)");
 
         $("#secenekler img").css({
             border:"none",
