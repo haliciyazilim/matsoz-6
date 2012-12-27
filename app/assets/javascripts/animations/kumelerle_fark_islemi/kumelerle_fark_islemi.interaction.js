@@ -15,11 +15,11 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:'0px',
+            bottom:'10px',
             right:'40px'
         });
         Interaction.appendStatus({
-            bottom:'10px',
+            bottom:'20px',
             right:'150px'
         });
         Interaction.set1Div = Util.dom({
