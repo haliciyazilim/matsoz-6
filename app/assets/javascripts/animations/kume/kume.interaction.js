@@ -827,45 +827,56 @@ var Interaction = {
                     }
                 }
                 else{
-                    var myArr = [];
-                    for(var i = 0; i < Interaction.length; i++){
-                        myArr[i] = Interaction.inputs[i].value;
-                    }
-                    if(Interaction.checkAnswers(myArr)){
-                        Interaction.setStatus('Tebrikler!',true);
-                        for(var i = 0; i < Interaction.length; i++){
-                            $(Interaction.inputs[i]).css("color","green");
-                            Interaction.inputs[i].readOnly = true;
-                            setTimeout(function(){
-                                $(Interaction.inputs).each(function(){
-                                    this.blur();
-                                })
-
-                            }, 100);
+                    var isAllSet = 1;
+                    for(var k = 0; k < Interaction.length; k++){
+                        if(Interaction.inputs[k].value == ""){
+                            isAllSet = 0;
                         }
-                        Interaction.vennDiagram.opacity = 1;
-                        $('#vennElements').css("opacity", 1);
+                    }
+                    if(isAllSet == 0){
+                        Interaction.setStatus('Lütfen tüm kutucukları doldurunuz.', false);
                     }
                     else{
-                        Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                        var myArr = [];
                         for(var i = 0; i < Interaction.length; i++){
-                            Interaction.inputs[i].value = Interaction.questionSet.elements[i];
-                            $(Interaction.inputs[i]).css("color", "green");
-                            Interaction.inputs[i].readOnly = true;
-                            setTimeout(function(){
-                                $(Interaction.inputs).each(function(){
-                                    this.blur();
-                                })
-
-                            }, 100);
+                            myArr[i] = Interaction.inputs[i].value;
                         }
-                        Interaction.vennDiagram.opacity = 1;
-                        $('#vennElements').css("opacity", 1);
+                        if(Interaction.checkAnswers(myArr)){
+                            Interaction.setStatus('Tebrikler!',true);
+                            for(var i = 0; i < Interaction.length; i++){
+                                $(Interaction.inputs[i]).css("color","green");
+                                Interaction.inputs[i].readOnly = true;
+                                setTimeout(function(){
+                                    $(Interaction.inputs).each(function(){
+                                        this.blur();
+                                    })
 
+                                }, 100);
+                            }
+                            Interaction.vennDiagram.opacity = 1;
+                            $('#vennElements').css("opacity", 1);
+                        }
+                        else{
+                            Interaction.setStatus('Yanlış cevap, doğrusu yukarıda gösterilmiştir.', false);
+                            for(var i = 0; i < Interaction.length; i++){
+                                Interaction.inputs[i].value = Interaction.questionSet.elements[i];
+                                $(Interaction.inputs[i]).css("color", "green");
+                                Interaction.inputs[i].readOnly = true;
+                                setTimeout(function(){
+                                    $(Interaction.inputs).each(function(){
+                                        this.blur();
+                                    })
+
+                                }, 100);
+                            }
+                            Interaction.vennDiagram.opacity = 1;
+                            $('#vennElements').css("opacity", 1);
+
+                        }
+                        Interaction.myTrial += 1;
+                        Interaction.animateDots();
+                        setTimeout('$(Interaction.secondQuestionDiv).css("opacity", 1);$("#question21").css("opacity", 1);$(Interaction.sortingDiv).css("opacity", 1);Interaction.setStatus("")', 2600);
                     }
-                    Interaction.myTrial += 1;
-                    Interaction.animateDots();
-                    setTimeout('$(Interaction.secondQuestionDiv).css("opacity", 1);$("#question21").css("opacity", 1);$(Interaction.sortingDiv).css("opacity", 1);Interaction.setStatus("")', 2600);
                     return false;
                 }
             }
