@@ -19,7 +19,10 @@ var Interaction = {
             right:"40px",
             opacity:0
 
+
         });
+
+        //$("input").attr("disabled",true);
         Interaction.appendStatus({
             bottom:"50px",
             right:"150px"
@@ -149,7 +152,7 @@ var Interaction = {
                                     ikinciTiklama.opacity=0;
                                     dogru=0;
                                     tool.onMouseDown=null;
-                                    $(".next_button").css("opacity","1");
+                                    $(".next_button").css("opacity","1").attr("disabled",false);
 
 
                                 }
@@ -169,7 +172,7 @@ var Interaction = {
                                 if(hata==2){
                                     tool.onMouseDown=null;
                                     Interaction.setStatus('Bulamadın; cisim köşegenleri yukarıda belirtilmiştir.',false);
-                                    $(".next_button").css("opacity","1");
+                                    $(".next_button").css("opacity","1").attr("disabled",false);
                                     hata=0;
 
                                     if(Interaction.dogruNoktalar.indexOf("nokta00")==-1){
@@ -190,7 +193,7 @@ var Interaction = {
                                     }
                                 }
                                 else{
-                                    Interaction.setStatus('Bu cisim köşegeni değil; lütfen tekrar deneyin.',false);
+                                    Interaction.setStatus('Bu cisim köşegeni değil; lütfen tekrar deneyin.',false)
                                 }
                             }
 
@@ -259,7 +262,7 @@ var Interaction = {
         Main.interactionProject.activeLayer.removeChildren();
         tool.onMouseDown=Interaction.tiklama;
 
-        $(".next_button").css("opacity","0");
+        $(".next_button").css("opacity","0").attr("disabled",true);;
         var cizilecek=sekiller[sayi[sira]];
         //var cizilecek=sekiller[0];
         ciz(cizilecek);

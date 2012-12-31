@@ -170,19 +170,18 @@ function InteractionBase(){
 					Interaction.button.click();
 			})
 			.css({
-				width:(parseInt($(input).css('font-size'),10)*(maxLength*0.5+0.5))+"px",
-				height:(parseInt($(input).css('font-size'),10)*1.2)+"px"
+                fontSize:'16px'
 			});
-			
-		if (css) {
-			$(input).css(css)
-			.css({
-				width:(parseInt($(input).css('font-size'),10)*(maxLength*0.5+0.5))+"px",
-				height:(parseInt($(input).css('font-size'),10)*1.2)+"px"
-			});
-		}
-			
-		return input;
+
+        if (css)
+			$(input).css(css);
+
+        $(input).css({
+            width:(parseInt($(input).css('font-size'),10)*(maxLength*0.5+0.5))+"px",
+            height:(parseInt($(input).css('font-size'),10)*1.7)+"px"
+        });
+
+        return input;
 	};
 	
 	Interaction.flushInputs = function(){

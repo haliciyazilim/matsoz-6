@@ -73,10 +73,10 @@ var Interaction = {
             marginLeft:"10px",
             float:"left",
             clear:"none",
-            cursor:"pointer",
+            cursor:"pointer"
 
         });
-        Interaction.verilenCevap="";
+        Interaction.verilenCevap=null;
         $("#secenekler img").mousedown(function(){
             $("#secenekler img").css("opacity","0.5");
             $(this).css("opacity","1");
@@ -91,6 +91,9 @@ var Interaction = {
         Interaction.prepareNextQuestion();
     },
 	nextQuestion: function(randomNumber){
+
+        Interaction.verilenCevap=null;
+
         cevirme=Math.floor(Math.random()*3);
 
         switch (cevirme){
@@ -198,7 +201,10 @@ var Interaction = {
 		
 
 	preCheck : function(){
-
+        if(Interaction.verilenCevap==null){
+            Interaction.setStatus('Lütfen bir seçim yapınız.',false);
+            return false;
+        }
     },
 	isAnswerCorrect : function(value){
         var verilenCevap=$("#"+Interaction.verilenCevap).attr("src");
