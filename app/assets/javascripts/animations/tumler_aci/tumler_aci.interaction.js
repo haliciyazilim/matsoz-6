@@ -6,9 +6,11 @@ var Interaction = {
     images:[
 
     ],
+    objective1:'Yandaki ilk açının kırmızı kolunu hareket ettirerek tümleri olan açının ölçüsündeki değişimi görebilirsiniz.',
+    objective2:'Yandaki açının tümler açısını bulunuz.',
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki ilk açının kollarını hareket ettirerek tümleyeni olan açının ölçüsündeki değişimi görebilirsiniz.');
+        Main.setObjective(Interaction.objective1);
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
@@ -114,6 +116,7 @@ var Interaction = {
         Interaction.alterLevelButton.onclick = Interaction.enterLevel2;
         $(Interaction.questionDiv).remove();
 
+        Main.setObjective(Interaction.objective1);
         Interaction.prepareNextQuestion();
     },
 
@@ -121,6 +124,7 @@ var Interaction = {
         Interaction.level = 2;
         Interaction.alterLevelButton.style.backgroundImage ="url(/assets/animations/butunler_aci/seviye_1.png)"
         Interaction.alterLevelButton.onclick = Interaction.enterLevel1;
+        Main.setObjective(Interaction.objective2);
         Interaction.prepareNextQuestion();
 
     },

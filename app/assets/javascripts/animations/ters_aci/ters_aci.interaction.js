@@ -8,7 +8,7 @@ var Interaction = {
     ],
     init:function(container){
 			Interaction.container = container;
-			Main.setObjective('Yandaki şekilde doğruları hareket ettirerek oluşan ters açıların durumunu gözlemleyiniz.');
+			Main.setObjective('Yandaki şekilde AB doğrusunu hareket ettirerek oluşan ters açıların durumunu gözlemleyiniz.');
 			Interaction.paper = {
 				width:$(container).width(),
 				height:$(container).height()
