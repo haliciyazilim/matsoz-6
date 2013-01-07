@@ -159,7 +159,7 @@ function InteractionBase(){
 		}
 		else 	
 			input.setAttribute('isNumber','false');
-		if(Main.getCurrentPlatform() == Main.platform.MOBILE)
+		if(isNumber == true && Main.getCurrentPlatform() == Main.platform.MOBILE)
             input.setAttribute('type','number');
         else
             input.setAttribute('type','text');
@@ -176,13 +176,13 @@ function InteractionBase(){
                 fontSize:'16px'
 			});
 
-        if (css)
-			$(input).css(css);
-
         $(input).css({
             width:(parseInt($(input).css('font-size'),10)*(maxLength*0.5+0.5))+"px",
             height:(parseInt($(input).css('font-size'),10)*1.7)+"px"
         });
+
+        if (css)
+			$(input).css(css);
 
         return input;
 	};

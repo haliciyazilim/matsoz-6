@@ -56,7 +56,7 @@ var Interaction = {
                 left:'130px',
                 width:'40px',
                 height:'30px',
-                fontSize:'30px'
+                fontSize:'27px'
             });
             $(Interaction.input).attr('maxlength', '2');
 
@@ -89,7 +89,7 @@ var Interaction = {
                 left:'160px',
                 width:'25px',
                 height:'22px',
-                fontSize:'20px'
+                fontSize:'18px'
             });
             $(Interaction.input).attr('maxlength', '2');
 
@@ -123,7 +123,7 @@ var Interaction = {
                 left:'144px',
                 width:'178px',
                 height:'30px',
-                fontSize:'30px'
+                fontSize:'27px'
             });
             $(Interaction.input).attr('maxlength', '10');
 
