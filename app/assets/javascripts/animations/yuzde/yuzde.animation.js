@@ -55,7 +55,7 @@ var Animation = {
         $(firstNode).css({
             position:'absolute',
             top:'9px',
-            left:'-26px',
+            left:'10px',
             opacity:0
         });
 
@@ -66,7 +66,7 @@ var Animation = {
             position:'absolute',
             width:'64px',
             top:'9px',
-            left:'126px',
+            left:'152px',
             opacity:0
         });
         $('.nom',secondNode).css({
@@ -85,7 +85,7 @@ var Animation = {
         $(thirdNode).css({
             position:'absolute',
             top:'9px',
-            left:'-26px',
+            left:'10px',
             opacity:0
         });
 
@@ -96,7 +96,7 @@ var Animation = {
             position:'absolute',
             width:'66px',
             top:'9px',
-            left:'126px',
+            left:'152px',
             opacity:0
         });
         $('.nom',fourthNode).css({
@@ -116,7 +116,7 @@ var Animation = {
             position:'absolute',
             width:'66px',
             top:'9px',
-            left:'-20px',
+            left:'10px',
             opacity:0
         });
         $('.nom',fifthNode).css({
@@ -136,7 +136,7 @@ var Animation = {
             position:'absolute',
             width:'66px',
             top:'9px',
-            left:'130px',
+            left:'158px',
             opacity:0
         });
         $('.nom',sixthNode).css({

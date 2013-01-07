@@ -54,7 +54,7 @@ var Interaction = {
                 position:'absolute',
                 top:'24px',
                 left:'130px',
-                width:'20px',
+                width:'40px',
                 height:'30px',
                 fontSize:'27px'
             });
