@@ -16,8 +16,8 @@ var Interaction = {
             height:$(container).height()
         }
         Interaction.appendButton({
-            bottom:'50px',
-            right:'40px'
+            bottom:'60px',
+            right:'10px'
         });
         Interaction.appendStatus({
             bottom:'60px',
@@ -28,8 +28,8 @@ var Interaction = {
             parent:Interaction.container,
             css:{
                 position:'absolute',
-                bottom:'5px',
-                right:'40px',
+                bottom:'10px',
+                right:'10px',
                 width:'105px',
                 height:'42px',
                 border:0,
