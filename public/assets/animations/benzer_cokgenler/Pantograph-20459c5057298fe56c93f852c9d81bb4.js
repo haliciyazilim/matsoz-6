@@ -1,8 +1,0 @@
-/**
- * Created with JetBrains WebStorm.
- * User: yeguzel
- * Date: 05.11.2012
- * Time: 06:20
- * To change this template use File | Settings | File Templates.
- */
-var Pantograph=Class.extend({init:function(e){this.animate=Item.prototype.animate,e.legHeight==undefined&&(e.legHeight=150),this.referencePoint=e.position,this.legHeight=e.legHeight,this.aPosition=this.referencePoint.add(this.legHeight*1.5,0)},draw:function(){var e=this.referencePoint.getDistance(this.aPosition,!0),t=Math.acos(1-e/(2*Math.pow(this.legHeight,2))),n=(Math.PI-t)*.5,r=this.referencePoint.findPointTo(this.aPosition,this.legHeight).getRotatedPoint(-Util.radianToDegree(n),this.referencePoint),i=new Path.TwoPointRectangle(this.referencePoint,r);i.set_style({strokeColor:"#000"});var s=new Path.TwoPointRectangle(this.aPosition,r);s.set_style({strokeColor:"#000"});var o=this.referencePoint.findPointTo(r,33.33,!0),u=r.findPointTo(this.aPosition,33.33,!0),a=this.referencePoint.findPointTo(this.aPosition,33.33,!0),f=new Path.TwoPointRectangle(o,a),l=new Path.TwoPointRectangle(u,a);f.set_style({strokeColor:"#000"}),l.set_style({strokeColor:"#000"}),this.rightLeg=s,this.leftLeg=i,this.leftArm=f,this.rightArm=l},redraw:function(){this.rightLeg&&this.rightLeg.remove(),this.leftLeg&&this.leftLeg.remove(),this.rightArm&&this.rightArm.remove(),this.leftArm&&this.leftArm.remove(),this.draw()},setA:function(e){this.aPosition=e,this.redraw()}});

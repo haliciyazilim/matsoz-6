@@ -1,1 +1,0 @@
-var Animation={images:[],init:function(e){Animation.container=e;var t=new Group;for(var n=0;n<2;n++)for(var r=0;r<7;r++){var i=new Path.Rectangle(new Point(100.5+80*n,20.5+20*r),new Size(80,20));i.strokeColor="black",r==0&&(i.fillColor="grey"),t.addChild(i)}}};
