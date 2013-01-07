@@ -159,7 +159,10 @@ function InteractionBase(){
 		}
 		else 	
 			input.setAttribute('isNumber','false');
-		input.setAttribute('type','text');
+		if(Main.getCurrentPlatform() == Main.platform.MOBILE)
+            input.setAttribute('type','number');
+        else
+            input.setAttribute('type','text');
 		$(input)
 			.attr({
 				'class':'input',
@@ -244,6 +247,11 @@ function InteractionBase(){
 			Interaction.button.onclick = Interaction.__checkAnswer;
 		}
 		Interaction.trial = 0;
+
+        if(Main.getCurrentPlatform() == Main.platform.MOBILE)
+            Interaction.disableAutoFocus();
+        else if(Main.getCurrentPlatform() == Main.platform.DESKTOP)
+            Interaction.enableAutoFocus();
 
 		if(Interaction.__randomGenerator)
 			Interaction.nextQuestion(Interaction.__randomGenerator.nextNumber());	
