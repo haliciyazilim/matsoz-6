@@ -316,27 +316,29 @@ p.exampleHeader {
 	font-weight:bold;
 }
 
-.input[type="text"]{
+.input[type="text"], .input[type="number"]{
 	width:35px;
 	height:30px;
 	font-size:16px;
 	text-align:center;
 	font-weight:bold;
+    padding:0px;
+    margin:0px;
 }
-.input[type="text"]:focus{
+.input[type="text"]:focus, .input[type="number"]:focus{
 	-moz-box-shadow: 0px 0px 10px #f55;
 	-webkit-box-shadow: 0px 0px 10px #f55;
 	box-shadow: 0px 0px 10px #f55;
 }
-.input_user_answer_correct[type="text"]{
+.input_user_answer_correct[type="text"],.input_user_answer_correct[type="number"]{
 	color: green;
 }
 
-.input_user_answer_wrong[type="text"]{
+.input_user_answer_wrong[type="text"], .input_user_answer_wrong[type="number"]{
 	color: red;
 }
 
-.input_correct_answer[type="text"]{
+.input_correct_answer[type="text"], .input_correct_answer[type="number"]{
 	color :green;
 }
 
