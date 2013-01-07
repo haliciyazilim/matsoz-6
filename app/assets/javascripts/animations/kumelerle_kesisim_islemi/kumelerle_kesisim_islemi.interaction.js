@@ -15,8 +15,8 @@ var Interaction = {
         }
 
         Interaction.appendButton({
-            bottom:'00px',
-            right:'40px'
+            bottom:'15px',
+            right:'15px'
         });
         Interaction.appendStatus({
             bottom:'10px',
