@@ -273,7 +273,7 @@ function InteractionBase(){
 
     Interaction._removeFocusFromInputs = function(){
         for(var i=0;i<Interaction.inputs.length;i++){
-            Interaction.inputs[0].blur();
+            Interaction.inputs[i].blur();
         }
     }
     Interaction.disableAutoFocus = function(){
