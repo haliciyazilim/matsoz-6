@@ -264,10 +264,18 @@ function InteractionBase(){
         try{
             if(Interaction.__disableAutoInputFocus == false){
                 Interaction.inputs[0].focus();
+            }else{
+                Interaction._removeFocusFromInputs();
             }
         }
         catch(e){}
 	};
+
+    Interaction._removeFocusFromInputs = function(){
+        for(var i=0;i<Interaction.inputs.length;i++){
+            Interaction.inputs[i].blur();
+        }
+    }
     Interaction.disableAutoFocus = function(){
         Interaction.__disableAutoInputFocus = true;
     };

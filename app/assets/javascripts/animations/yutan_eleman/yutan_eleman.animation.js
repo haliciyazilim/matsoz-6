@@ -18,7 +18,7 @@ var Animation = {
                 '<span id="eq6" style="opacity:0;position:absolute;top:40px;left:0px;">0 x 46 = 0</span>' +
                 '<span id="eq7" style="opacity:0;position:absolute;top:0px;left:0px;">a x <span style="color:red;">0</span> = <span style="color:red;">0</span></span>' +
                 '<span id="eq8" style="opacity:0;position:absolute;top:40px;left:0px;"><span style="color:red;">0</span> x a = <span style="color:red;">0</span></span>' +
-                '<span id="lastText" style="opacity:0;position:absolute;width:220px;top:100px;left:-40px;">yutan eleman <span style="color:red;">0</span></span>'
+                '<span id="lastText" style="opacity:0;position:absolute;width:240px;top:100px;left:-46px;">yutan eleman <span style="color:red;">0</span></span>'
         });
 
         $('#eq1').delay(animStart).animate({opacity:1},1000,'easeInOutQuad').delay(2500).animate({opacity:0},1000,'easeInOutQuad');
