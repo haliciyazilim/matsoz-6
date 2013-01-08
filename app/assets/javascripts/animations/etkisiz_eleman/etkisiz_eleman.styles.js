@@ -25,7 +25,7 @@ function __Styles(){
         position:'absolute',
         top:'60px',
         left:'160px',
-        width:'200px',
+        width:'240px',
         height:'60px',
         fontSize:'32px'
     };
