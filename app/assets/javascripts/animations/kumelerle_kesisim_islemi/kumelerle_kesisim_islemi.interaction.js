@@ -72,13 +72,14 @@ var Interaction = {
         var set1String,set2String;
         do
             Interaction.set1 = Set.randomGenerator();
-        while(Interaction.set1.elements.length > 10 ||
+        while(Interaction.set1.elements.length > 9 ||
             Interaction.set1.elements.length < 3)
         do{
             Interaction.set2 = Interaction.set1.getRandomIntersectingSet();
             console.log(Interaction.set1,Interaction.set2);
         }
         while(
+            Interaction.set2.elements.length > 9 ||
             Interaction.set1.getDifference(Interaction.set2).elements.length > 6 ||
             Interaction.set1.getDifference(Interaction.set2).elements.length ==0 ||
             Interaction.set2.getDifference(Interaction.set1).elements.length ==0 )
