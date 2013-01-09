@@ -1,5 +1,10 @@
 var Animation = {
-    images:[],
+    images:[
+        {
+            id:'cember',
+            src:'/assets/animations/cember.png'
+        }
+    ],
 	init:function(container){
         Animation.container = container;
         var animStart = 1000;
@@ -24,6 +29,9 @@ var Animation = {
             left:'20px',
             width:'600px',
             height:'40px',
+            padding:'0px',
+            margin:'0px',
+            border:'1px solid'
         });
 
         $('#firstDiv').html('<div id="title1">36\'nın bölenleri</div><div id="eq1"></div>');
@@ -40,9 +48,18 @@ var Animation = {
             left:'180px',
             width:'460px',
             height:'24px',
+            padding:'0px',
+            margin:'0px'
         });
         $('#eq1').html('<span id="s1">1, </span><span id="s2">2, </span><span id="s3">3, </span><span id="s4">4, </span><span id="s5">6, </span>' +
             '<span id="s6">9, </span><span id="s7">12, </span><span id="s8">18, </span><span id="s9">36</span>');
+
+        $('#eq1').append($('#cember'));
+        $('cember'),css({
+            position:'absolute',
+            top:'10px',
+            left:'100px'
+        });
 
         $('#secondDiv').css({
             position:'absolute',
@@ -95,30 +112,32 @@ var Animation = {
         $('#d2').delay(4000).animate({color:animColor}, 1000, 'easeInOutQuad');
         $('#d4').delay(2500).animate({color:animColor}, 1000, 'easeInOutQuad');
 
-        var circ1 = new Path.Circle(new Point(458, 46), 14);
-        circ1.strokeColor = "red";
-        circ1.opacity = 0;
 
-        var circ2 = new Path.Circle(new Point(412, 136), 14);
-        circ2.strokeColor = "red";
-        circ2.opacity = 0;
 
-        circ1.animate({
-            style:{
-                opacity: 1,
-            },
-            delay: 19500,
-            duration: 1000,
-            animationType: 'easeInOutQuad'
-        });
-
-        circ2.animate({
-            style:{
-                opacity: 1,
-            },
-            delay: 19500,
-            duration: 1000,
-            animationType: 'easeInOutQuad'
-        });
+//        var circ1 = new Path.Circle(new Point(458, 46), 14);
+//        circ1.strokeColor = "red";
+//        circ1.opacity = 0;
+//
+//        var circ2 = new Path.Circle(new Point(412, 136), 14);
+//        circ2.strokeColor = "red";
+//        circ2.opacity = 0;
+//
+//        circ1.animate({
+//            style:{
+//                opacity: 1,
+//            },
+//            delay: 19500,
+//            duration: 1000,
+//            animationType: 'easeInOutQuad'
+//        });
+//
+//        circ2.animate({
+//            style:{
+//                opacity: 1,
+//            },
+//            delay: 19500,
+//            duration: 1000,
+//            animationType: 'easeInOutQuad'
+//        });
     }
 }
