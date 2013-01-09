@@ -7,9 +7,9 @@ function __Styles(){
 
     counterColor = "#a8dbe3";
 
-    animationRectFillColor = "e99e9e";
-    animationRectStrokeColor = "9c4f4f"
+    animationRectFillColor = "#e99e9e";
+    animationRectStrokeColor = "#9c4f4f"
 
-    animationRectFillColor2 = "f2c885";
-    animationRectStrokeColor2 = "9b763d"
+    animationRectFillColor2 = "#f2c885";
+    animationRectStrokeColor2 = "#9b763d"
 }

@@ -202,7 +202,7 @@ var RationalNumber = Class.extend({
         var line = fontSize+4;
         var height = (2*line)+1;
         var width = height+6;
-        var width2 = Math.round(width * 0.56);
+        var width2 = Math.round(width * 0.6);
         var width3 = width - width2;
         var lineWidth = width2;
         var intHeight = 2*line;
@@ -238,8 +238,7 @@ var RationalNumber = Class.extend({
         var intStyle = {
             width:width3Str,
             height:heightStr,
-            textAlign:'right',
-            paddingRight:'4px',
+            textAlign:'center',
             boxSizing:'border-box',
             float:'left',
             lineHeight:intHeightStr

@@ -1,5 +1,14 @@
 var Animation = {
-    images:[],
+    images:[
+        {
+            id:'cember',
+            src:'/assets/animations/cember.png'
+        },
+        {
+            id:'cember2',
+            src:'/assets/animations/cember.png'
+        }
+    ],
 	init:function(container){
         Animation.container = container;
         var animStart = 1000;
@@ -24,6 +33,9 @@ var Animation = {
             left:'20px',
             width:'600px',
             height:'40px',
+            padding:'0px',
+            margin:'0px'
+//            border:'1px solid'
         });
 
         $('#firstDiv').html('<div id="title1">36\'nın bölenleri</div><div id="eq1"></div>');
@@ -40,16 +52,39 @@ var Animation = {
             left:'180px',
             width:'460px',
             height:'24px',
+            padding:'0px',
+            margin:'0px'
         });
-        $('#eq1').html('<span id="s1">1, </span><span id="s2">2, </span><span id="s3">3, </span><span id="s4">4, </span><span id="s5">6, </span>' +
-            '<span id="s6">9, </span><span id="s7">12, </span><span id="s8">18, </span><span id="s9">36</span>');
+        var myArray = ["1","2","3","4","6","9","12","18","36"];
+        for(var i = 0; i < 9; i++){
+            var myId = i+1;
+            var myIdStr = "s"+myId;
+            var value = myArray[i];
+            var width = value.length > 1 ? 32: 25;
+            var widthStr = ""+width+"px";
+            if(value == "36"){
+                $("#eq1").append('<div id="'+myIdStr+'" style="position:relative;float:left;width:'+widthStr+';">'+value+'</div>');
+            }
+            else{
+                $("#eq1").append('<div id="'+myIdStr+'" style="position:relative;float:left;width:'+widthStr+';">'+value+',</div>');
+            }
+        }
+
+        $('#s6').append($('#cember'));
+        $('#cember').css({
+            position:'absolute',
+            top:'-4px',
+            left:'-5px',
+            opacity:0
+        });
+        $('#cember').delay(19500).animate({opacity:1}, 1000, 'easeInOutQuad');
 
         $('#secondDiv').css({
             position:'absolute',
             top:'100px',
             left:'20px',
             width:'600px',
-            height:'40px',
+            height:'40px'
         });
         $('#secondDiv').html('<div id="title2">45\'in bölenleri</div><div id="eq2"></div>');
         $('#title2').css({
@@ -65,8 +100,32 @@ var Animation = {
             left:'180px',
             width:'460px',
             height:'24px',
+            padding:'0px',
+            margin:'0px'
         });
-        $('#eq2').html('<span id="d1">1, </span><span id="d2">3, </span><span id="d3">5, </span><span id="d4">9, </span><span id="d5">15, </span><span id="d6">45</span>');
+        var myArray2 = ["1","3","5","9","15","45"];
+        for(var i = 0; i < 6; i++){
+            var myId2 = i+1;
+            var myIdStr2 = "d"+myId2;
+            var value2 = myArray2[i];
+            var width2 = value2.length > 1 ? 32: 25;
+            var widthStr2 = ""+width2+"px";
+            if(value2 == "45"){
+                $("#eq2").append('<div id="'+myIdStr2+'" style="position:relative;float:left;width:'+widthStr2+';">'+value2+'</div>');
+            }
+            else{
+                $("#eq2").append('<div id="'+myIdStr2+'" style="position:relative;float:left;width:'+widthStr2+';">'+value2+',</div>');
+            }
+        }
+
+        $('#d4').append($('#cember2'));
+        $('#cember2').css({
+            position:'absolute',
+            top:'-4px',
+            left:'-5px',
+            opacity:0
+        });
+        $('#cember2').delay(19500).animate({opacity:1}, 1000, 'easeInOutQuad');
 
         $('#thirdDiv').css({
             position:'absolute',
@@ -94,31 +153,5 @@ var Animation = {
         $('#d1').delay(4750).animate({color:animColor}, 1000, 'easeInOutQuad');
         $('#d2').delay(4000).animate({color:animColor}, 1000, 'easeInOutQuad');
         $('#d4').delay(2500).animate({color:animColor}, 1000, 'easeInOutQuad');
-
-        var circ1 = new Path.Circle(new Point(458, 46), 14);
-        circ1.strokeColor = "red";
-        circ1.opacity = 0;
-
-        var circ2 = new Path.Circle(new Point(412, 136), 14);
-        circ2.strokeColor = "red";
-        circ2.opacity = 0;
-
-        circ1.animate({
-            style:{
-                opacity: 1,
-            },
-            delay: 19500,
-            duration: 1000,
-            animationType: 'easeInOutQuad'
-        });
-
-        circ2.animate({
-            style:{
-                opacity: 1,
-            },
-            delay: 19500,
-            duration: 1000,
-            animationType: 'easeInOutQuad'
-        });
     }
 }

@@ -85,11 +85,6 @@ var Interaction = {
             nom2 = Util.randomInteger(1,10);
         } while(nom2 == denom2 || nom2 % denom2 == 0);
 
-        console.log("nom1: ",nom1);
-        console.log("denom1: ",denom1);
-        console.log("nom2: ",nom2);
-        console.log("denom2: ",denom2);
-
         Interaction.firstFrac = new RationalNumber({factor:1,nominator:nom1,denominator:denom1});
         Interaction.secondFrac = new RationalNumber({factor:1,nominator:nom2,denominator:denom2});
 
