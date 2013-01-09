@@ -76,7 +76,7 @@ var Animation = {
         $('#s4').append($('#cember'));
         $('#cember').css({
             position:'absolute',
-            top:'-4px',
+            top:'-5px',
             left:'-4px',
             opacity:0
         });
@@ -130,7 +130,7 @@ var Animation = {
         $('#d3').append($('#cember2'));
         $('#cember2').css({
             position:'absolute',
-            top:'-4px',
+            top:'-5px',
             left:'-4px',
             opacity:0
         });
