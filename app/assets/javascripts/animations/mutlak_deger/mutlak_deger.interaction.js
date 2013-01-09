@@ -61,7 +61,7 @@ var Interaction = {
             fontSize: '20px'
             
             
-        },false);
+        },true,false);
         Interaction.input.id="girdi";
         
         
