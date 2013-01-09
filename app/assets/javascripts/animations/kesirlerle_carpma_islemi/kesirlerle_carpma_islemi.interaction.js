@@ -46,9 +46,9 @@ var Interaction = {
         });
 
         Interaction.questionDiv = Util.dom({parent:Interaction.container, tag:'div', css:questionDivStyle,
-            html:'<div id="firstFracDiv" style="position:absolute;top:0px;left:0px;width:65px;height:60px;"></div>' +
+            html:'<div id="firstFracDiv" style="position:absolute;top:3px;left:0px;width:65px;height:60px;"></div>' +
                 '<span id="intPlus" style="position:absolute;top:17px;left:76px;font-weight:bold;">•</span>' +
-                '</div><div id="secondFracDiv" style="position:absolute;top:0px;left:96px;width:65px;height:60px;"></div>' +
+                '</div><div id="secondFracDiv" style="position:absolute;top:3px;left:96px;width:65px;height:60px;"></div>' +
                 '<span id="intEq" style="position:absolute;top:18px;left:170px;">=</span>' +
                 '<div id="answerLine" style="position:absolute;top:29px;left:200px;width:48px;height:1px;border-top:2px solid;padding:0"></div>'
         });
