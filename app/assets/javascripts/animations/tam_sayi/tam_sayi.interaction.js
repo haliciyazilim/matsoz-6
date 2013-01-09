@@ -127,7 +127,7 @@ var Interaction = {
             right:"0",
             left:"0"
 
-        },false, true);
+        }, true,true);
         Interaction.input.id="girdi";
         $("#girdi").attr("maxLength","2");
 
@@ -216,7 +216,8 @@ var Interaction = {
             });
         }
         else{
-            $(".noktalar").unbind('mouseover').unbind('mouseout').unbind('click')
+            $(".noktalar").unbind('mouseover').unbind('mouseout').unbind('click');
+
            
         }
             

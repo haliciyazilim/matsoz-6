@@ -34,7 +34,7 @@ var Interaction = {
                     textAlign: 'center',
                     fontSize: '20px'
 
-                },false,false);
+                },true,false);
 //                Interaction.inputs[i-1].id="girdi"+i;
 //                $("#sag"+i).html($("#girdi"+i));
                 $("#sag"+i).append(input);
