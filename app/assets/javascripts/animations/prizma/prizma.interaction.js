@@ -262,7 +262,8 @@ var Interaction = {
         Main.interactionProject.activeLayer.removeChildren();
         tool.onMouseDown=Interaction.tiklama;
 
-        $(".next_button").css("opacity","0").attr("disabled",true);;
+        $(".next_button").css("opacity","0").attr("disabled",true);
+
         var cizilecek=sekiller[sayi[sira]];
         //var cizilecek=sekiller[0];
         ciz(cizilecek);
@@ -272,8 +273,8 @@ var Interaction = {
 
         if(cizilecek=="ucgen"){
             tool.onMouseDown=null;
-            $(".next_button").css("opacity","1");
             Interaction.setStatus('Üçgen prizmanın cisim köşegeni yoktur.',true);
+            setTimeout(function(){$(".next_button").css("opacity","1").attr("disabled",false)},5000);
         }
 
        //ciz("dikKare");
