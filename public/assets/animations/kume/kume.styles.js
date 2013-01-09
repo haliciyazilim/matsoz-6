@@ -1,4 +1,1 @@
-function __Styles(){
-
-}
-;
+function __Styles(){};

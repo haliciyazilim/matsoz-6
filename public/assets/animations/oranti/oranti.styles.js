@@ -1,6 +1,1 @@
-function __Styles(){
-	/*
-	* write your styles here without using 'var' definer
-	*/
-}
-;
+function __Styles(){};

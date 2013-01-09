@@ -1,5 +1,1 @@
-function __Styles(){
-    answerDivColor = "#069";
-    animColor = "#ff0000";
-}
-;
+function __Styles(){answerDivColor="#069",animColor="#ff0000"};

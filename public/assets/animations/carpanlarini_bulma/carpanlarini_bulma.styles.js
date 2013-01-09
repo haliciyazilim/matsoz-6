@@ -1,5 +1,1 @@
-function __Styles(){
-    animationEqsColor = "green";
-    wholeFactorsColor = "#069"
-}
-;
+function __Styles(){animationEqsColor="green",wholeFactorsColor="#069"};

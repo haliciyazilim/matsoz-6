@@ -1,5 +1,1 @@
-function __Styles(){
-    animTop=50;
-    animLeft=384;
-}
-;
+function __Styles(){animTop=50,animLeft=384};

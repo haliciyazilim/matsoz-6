@@ -1,5 +1,1 @@
-function __Styles(){
-    inputBoxColor = "black";
-    inputBoxAnswerColor = "green";
-}
-;
+function __Styles(){inputBoxColor="black",inputBoxAnswerColor="green"};

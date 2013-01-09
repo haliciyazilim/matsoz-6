@@ -1,4 +1,1 @@
-function __Languages(){
-
-}
-;
+function __Languages(){};
