@@ -4,7 +4,7 @@ function __Styles(){
         top:'40px',
         left:'190px',
         height:'60px',
-        width:'230px',
+        width:'240px',
         fontSize:'16px',
         opacity:0
     };

@@ -1,5 +1,14 @@
 var Animation = {
-    images:[],
+    images:[
+        {
+            id:'cember',
+            src:'/assets/animations/cember_big.png'
+        },
+        {
+            id:'cember2',
+            src:'/assets/animations/cember_big.png'
+        }
+    ],
 	init:function(container){
         Animation.container = container;
 
@@ -23,8 +32,10 @@ var Animation = {
             position:'absolute',
             top:'10px',
             left:'20px',
-            width:'600px',
+            width:'630px',
             height:'40px',
+            padding:'0px',
+            margin:'0px'
         });
 
         $('#firstDiv').html('<div id="title1">3\'ün katları</div><div id="eq1"></div>');
@@ -39,19 +50,46 @@ var Animation = {
             position:'absolute',
             top:'10px',
             left:'130px',
-            width:'460px',
+            width:'490px',
             height:'24px',
+            padding:'0px',
+            margin:'0px'
         });
-        $('#eq1').html('<span id="s1">3, </span><span id="s2">6, </span><span id="s3">9, </span><span id="s4">12, </span><span id="s5">15, </span>' +
-            '<span id="s6">18, </span><span id="s7">21, </span><span id="s8">24, </span><span id="s9">27, </span><span id="s10">30, </span>' +
-            '<span id="s11">33, </span><span id="s12">36, </span><span id="s13">39, ...</span>');
+        var myArray = ["3","6","9","12","15","18","21","24","27","30","33","36","39"];
+        for(var i = 0; i < 13; i++){
+            var myId = i+1;
+            var myIdStr = "s"+myId;
+            var value = myArray[i];
+            var width = value.length > 1 ? 32: 25;
+            if(value == 39){
+                width = 60;
+            }
+            var widthStr = ""+width+"px";
+            if(value == "39"){
+                $("#eq1").append('<div id="'+myIdStr+'" style="position:relative;float:left;width:'+widthStr+';">'+value+', ...</div>');
+            }
+            else{
+                $("#eq1").append('<div id="'+myIdStr+'" style="position:relative;float:left;width:'+widthStr+';">'+value+',</div>');
+            }
+        }
+
+        $('#s4').append($('#cember'));
+        $('#cember').css({
+            position:'absolute',
+            top:'-5px',
+            left:'-4px',
+            opacity:0
+        });
+        $('#cember').delay(26500).animate({opacity:1}, 1000, 'easeInOutQuad');
 
         $('#secondDiv').css({
             position:'absolute',
             top:'100px',
             left:'20px',
-            width:'600px',
+            width:'630px',
             height:'40px',
+            padding:'0px',
+            margin:'0px'
         });
         $('#secondDiv').html('<div id="title2">4\'ün katları</div><div id="eq2"></div>');
         $('#title2').css({
@@ -65,12 +103,38 @@ var Animation = {
             position:'absolute',
             top:'10px',
             left:'130px',
-            width:'460px',
+            width:'490px',
             height:'24px',
+            padding:'0px',
+            margin:'0px'
         });
-        $('#eq2').html('<span id="d1">4, </span><span id="d2">8, </span><span id="d3">12, </span><span id="d4">16, </span><span id="d5">20, </span>' +
-            '<span id="d6">24, </span><span id="d7">28, </span><span id="d8">32, </span><span id="d9">36, </span><span id="d10">40, </span>' +
-            '<span id="d11">44, </span><span id="d12">48, </span><span id="d13">52, ...</span>');
+
+        var myArray2 = ["4","8","12","16","20","24","28","32","36","40","44","48","52"];
+        for(var i = 0; i < 13; i++){
+            var myId2 = i+1;
+            var myIdStr2 = "d"+myId2;
+            var value2 = myArray2[i];
+            var width2 = value2.length > 1 ? 32: 25;
+            if(value2 == 52){
+                width2 = 60;
+            }
+            var widthStr2 = ""+width2+"px";
+            if(value2 == "52"){
+                $("#eq2").append('<div id="'+myIdStr2+'" style="position:relative;float:left;width:'+widthStr2+';">'+value2+', ...</div>');
+            }
+            else{
+                $("#eq2").append('<div id="'+myIdStr2+'" style="position:relative;float:left;width:'+widthStr2+';">'+value2+',</div>');
+            }
+        }
+
+        $('#d3').append($('#cember2'));
+        $('#cember2').css({
+            position:'absolute',
+            top:'-5px',
+            left:'-4px',
+            opacity:0
+        });
+        $('#cember2').delay(26500).animate({opacity:1}, 1000, 'easeInOutQuad');
 
         $('#thirdDiv').css({
             position:'absolute',
@@ -96,32 +160,6 @@ var Animation = {
         $('#d6').delay(5500).animate({color:animColor}, 1000, 'easeInOutQuad');
         $('#d9').delay(3250).animate({color:animColor}, 1000, 'easeInOutQuad');
         $('#d12').delay(1000).animate({color:animColor}, 1000, 'easeInOutQuad');
-
-        var circ1 = new Path.Circle(new Point(258, 46), 18);
-        circ1.strokeColor = "red";
-        circ1.opacity = 0;
-
-        var circ2 = new Path.Circle(new Point(235, 136), 18);
-        circ2.strokeColor = "red";
-        circ2.opacity = 0;
-
-        circ1.animate({
-            style:{
-                opacity: 1,
-            },
-            delay: 26500,
-            duration: 1000,
-            animationType: 'easeInOutQuad'
-        });
-
-        circ2.animate({
-            style:{
-                opacity: 1,
-            },
-            delay: 26500,
-            duration: 1000,
-            animationType: 'easeInOutQuad'
-        });
 		
     }
 }
