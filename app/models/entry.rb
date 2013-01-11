@@ -15,7 +15,7 @@ class String
   end
   
   def self.compare_turkish_letters(letter1, letter2)
-    alphabet = " 0123456789_abcçdefgğhıijklmnoöpqrştuüvwxyz"
+    alphabet = " 0123456789_abcçdefgğhıijklmnoöpqrsştuüvwxyz"
     
     letter1 = letter1.to_downcase_turkish
     letter2 = letter2.to_downcase_turkish
