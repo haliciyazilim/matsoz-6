@@ -208,32 +208,11 @@ Main.init = function(){
                 throw '';
         }
         catch(e){
-            setTimeout(Main.startAnimation,/*Main.calculateDefinitionWaitTime()*/1000);
+            setTimeout(Main.startAnimation,1000);
         }
     }
 };
-Main.calculateDefinitionWaitTime = function(){
-    function removeHTMLTags(htmlString){
-        if(htmlString){
-            var mydiv = document.createElement("div");
-            mydiv.innerHTML = htmlString;
-            if (document.all)// IE Stuff
-                return mydiv.innerText;
-            else // Mozilla does not work with innerText
-                return mydiv.textContent;
-        }
-        return null;
-    }
-    function countWords(s){
-        s = s.replace(/(^\s*)|(\s*$)/gi,"");
-        s = s.replace(/[ ]{2,}/gi," ");
-        s = s.replace(/\n /,"\n");
-        return s.split(' ').length;
-    }
-    var html = $('.definition').html();
-    html = removeHTMLTags(html);
-    return countWords(html)*400+500;
-}
+
 
 Main.initializeScreen = function() {
     setTimeout(function() { window.scrollTo(0, 1); }, 1);
