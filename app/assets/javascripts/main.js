@@ -48,7 +48,7 @@ Main.getCurrentPlatform = function(){
 }
 
 Main.config = {
-    defaultLibrary: "raphael"
+    defaultLibrary: "paper"
 };
 
 Main.startAnimation = function(){
@@ -136,10 +136,7 @@ Main.init = function(){
         framework = Main.config.defaultLibrary;
     }
 
-    if (framework == 'raphael') {
-        Main.raphaelInit();
-        Interaction.init(Main.interaction);
-    } else if (framework == 'paper') {
+    if (framework == 'paper') {
         Main.scale = 1;
         paper.install(window);
         Main.paperInit();
@@ -382,37 +379,11 @@ Main.createInteractionSkipSlider = function(){
         console.log('[up] change: '+change,event)
         if(change > 100){
             isDraggable = false;
-            var animHelper = new AnimationHelper({
-                change:change
-            });
-            animHelper.animate({
-                style:{change:800},
-                duration:250,
-                animationType:'easeIn',
-                update:function(){
-                    $(div).css({backgroundPosition:(this.change-100)+'px -9px'});
-                },
-                callback:function(){
-                    $(div).animate({opacity:0},250,function(){$(this).remove()});
-                }
-            })
+            $(div).animate({backgroundPosition:'700px -9px'},250,function(){$(this).remove();});
         }
         else{
             isDraggable = false;
-            var animHelper = new AnimationHelper({
-                change:change
-            });
-            animHelper.animate({
-                style:{change:0},
-                duration:100,
-                animationType:'easeIn',
-                update:function(){
-                    $(div).css({backgroundPosition:(this.change-100)+'px -9px'});
-                },
-                callback:function(){
-                    isDraggable = true;
-                }
-            })
+            $(div).animate({backgroundPosition:'-100px -9px'},250,function(){isDraggable = true;});
         }
         return false;
     }
@@ -461,7 +432,11 @@ Main.initializeToolbar = function(){
         window.history.go(1);
     });
     $('.btn_home').click(function(event){
-        window.location = '../';
+        if (exportedPage) {
+            window.location = '../../intro/index.html';
+        } else {
+            window.location = '../';
+        }
     });
     $('.btn_info').click(function(event){
 //        console.log("I'm here");
