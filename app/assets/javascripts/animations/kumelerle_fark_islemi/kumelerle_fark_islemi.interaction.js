@@ -71,8 +71,9 @@ var Interaction = {
     generateSets:function(){
         var set1String,set2String;
         do
-            Interaction.set1 = Set.randomGenerator();
+            Interaction.set1 = Set.randomGenerator(26);
         while(Interaction.set1.elements.length > 10)
+
         do
             Interaction.set2 = Interaction.set1.getRandomIntersectingSet();
         while(Interaction.set2.elements.length > 10 || Interaction.set1.getDifference(Interaction.set2).elements.length > 6)

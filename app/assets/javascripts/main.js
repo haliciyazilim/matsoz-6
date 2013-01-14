@@ -1,14 +1,47 @@
-// This is a manifest file that'll be compiled into main.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
+/*!
+ * Paper.js v0.22
+ *
+ * This file is part of Paper.js, a JavaScript Vector Graphics Library,
+ * based on Scriptographer.org and designed to be largely API compatible.
+ * http://paperjs.org/
+ * http://scriptographer.org/
+ *
+ * Copyright (c) 2011, Juerg Lehni & Jonathan Puckey
+ * http://lehni.org/ & http://jonathanpuckey.com/
+ *
+ * Distributed under the MIT license. See LICENSE file for details.
+ *
+ * All rights reserved.
+ *
+ * Date: Thu Nov 10 19:19:25 2011 +0100
+ *
+ ***
+ *
+ * Bootstrap.js JavaScript Framework.
+ * http://bootstrapjs.org/
+ *
+ * Copyright (c) 2006 - 2011 Juerg Lehni
+ * http://lehni.org/
+ *
+ * Distributed under the MIT license.
+ *
+ ***
+ *
+ * Parse-js
+ *
+ * A JavaScript tokenizer / parser / generator, originally written in Lisp.
+ * Copyright (c) Marijn Haverbeke <marijnh@gmail.com>
+ * http://marijn.haverbeke.nl/parse-js/
+ *
+ * Ported by to JavaScript by Mihai Bazon
+ * Copyright (c) 2010, Mihai Bazon <mihai.bazon@gmail.com>
+ * http://mihai.bazon.net/blog/
+ *
+ * Modifications and adaptions to browser (c) 2011, Juerg Lehni
+ * http://lehni.org/
+ *
+ * Distributed under the BSD license.
+ */
 //
 //= require_self
 //= require_tree ./library
@@ -48,7 +81,7 @@ Main.getCurrentPlatform = function(){
 }
 
 Main.config = {
-    defaultLibrary: "raphael"
+    defaultLibrary: "paper"
 };
 
 Main.startAnimation = function(){
@@ -136,10 +169,7 @@ Main.init = function(){
         framework = Main.config.defaultLibrary;
     }
 
-    if (framework == 'raphael') {
-        Main.raphaelInit();
-        Interaction.init(Main.interaction);
-    } else if (framework == 'paper') {
+    if (framework == 'paper') {
         Main.scale = 1;
         paper.install(window);
         Main.paperInit();
@@ -211,32 +241,11 @@ Main.init = function(){
                 throw '';
         }
         catch(e){
-            setTimeout(Main.startAnimation,/*Main.calculateDefinitionWaitTime()*/1000);
+            setTimeout(Main.startAnimation,1000);
         }
     }
 };
-Main.calculateDefinitionWaitTime = function(){
-    function removeHTMLTags(htmlString){
-        if(htmlString){
-            var mydiv = document.createElement("div");
-            mydiv.innerHTML = htmlString;
-            if (document.all)// IE Stuff
-                return mydiv.innerText;
-            else // Mozilla does not work with innerText
-                return mydiv.textContent;
-        }
-        return null;
-    }
-    function countWords(s){
-        s = s.replace(/(^\s*)|(\s*$)/gi,"");
-        s = s.replace(/[ ]{2,}/gi," ");
-        s = s.replace(/\n /,"\n");
-        return s.split(' ').length;
-    }
-    var html = $('.definition').html();
-    html = removeHTMLTags(html);
-    return countWords(html)*400+500;
-}
+
 
 Main.initializeScreen = function() {
     setTimeout(function() { window.scrollTo(0, 1); }, 1);
@@ -382,37 +391,11 @@ Main.createInteractionSkipSlider = function(){
         console.log('[up] change: '+change,event)
         if(change > 100){
             isDraggable = false;
-            var animHelper = new AnimationHelper({
-                change:change
-            });
-            animHelper.animate({
-                style:{change:800},
-                duration:250,
-                animationType:'easeIn',
-                update:function(){
-                    $(div).css({backgroundPosition:(this.change-100)+'px -9px'});
-                },
-                callback:function(){
-                    $(div).animate({opacity:0},250,function(){$(this).remove()});
-                }
-            })
+            $(div).animate({backgroundPosition:'700px -9px'},250,function(){$(this).remove();});
         }
         else{
             isDraggable = false;
-            var animHelper = new AnimationHelper({
-                change:change
-            });
-            animHelper.animate({
-                style:{change:0},
-                duration:100,
-                animationType:'easeIn',
-                update:function(){
-                    $(div).css({backgroundPosition:(this.change-100)+'px -9px'});
-                },
-                callback:function(){
-                    isDraggable = true;
-                }
-            })
+            $(div).animate({backgroundPosition:'-100px -9px'},250,function(){isDraggable = true;});
         }
         return false;
     }
@@ -461,7 +444,11 @@ Main.initializeToolbar = function(){
         window.history.go(1);
     });
     $('.btn_home').click(function(event){
-        window.location = '../';
+        if (exportedPage) {
+            window.location = '../../intro/index.html';
+        } else {
+            window.location = '../';
+        }
     });
     $('.btn_info').click(function(event){
 //        console.log("I'm here");
