@@ -1625,8 +1625,4 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
             intersect: elementsGroup2
         }
     }
-
-
-
-
 };
