@@ -1,1 +1,0 @@
-function __Styles(){animationShapeStyle={strokeColor:"#666",fillColor:new RgbColor(.8,.8,.8,.6)},interactionShapeStyle={strokeColor:"#687",fillColor:new RgbColor(.6,.8,.7,.8)}};
