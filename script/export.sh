@@ -8,6 +8,7 @@ cp -R public/resources tmp/export/
 cp -R public/assets tmp/export/
 
 find tmp/export -name *.js -o -name *.css -o -name *.html | xargs sed -i.old 's/\/assets/..\/assets/g'
+find tmp/export -name *.js -o -name *.css -o -name *.html | xargs sed -i.old 's/\/resources/..\/resources/g'
 find tmp/export -name index.html | xargs sed -i.old 's/..\/assets/assets/g'
 find tmp/export -name *.old | xargs rm
 find tmp/export -name *.gz | xargs rm
