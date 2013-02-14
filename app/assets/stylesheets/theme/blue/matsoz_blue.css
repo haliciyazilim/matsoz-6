@@ -43,7 +43,7 @@ img {
     }
 
 }
-@media screen and (max-width: 1239px){
+@media screen and (max-width: 1280px){
     #container {
         position:relative ;
         top:0px;
