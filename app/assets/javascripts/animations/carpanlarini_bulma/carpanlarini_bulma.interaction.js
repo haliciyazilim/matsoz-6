@@ -125,7 +125,7 @@ var Interaction = {
     },
     nextQuestion: function(randomNumber){
         Interaction.trial2 = 0;
-        $('#prime').css("opacity", 0)
+        $('#prime').css("opacity", 0);
         $('#texttt').html('');
         $('#missingF').html('');
         Interaction.question = Interaction.questionArray[randomNumber];
@@ -136,11 +136,13 @@ var Interaction = {
             Interaction.inputs[i].readOnly = false;
             $(Interaction.inputs[i]).css("opacity", 1);
             $(Interaction.inputs[i]).addClass("input");
+            $(Interaction.inputs[i]).css("display","block");
             Interaction.inputs[i].style.color = "black";
         }
         for(var i = 0; i < 12-Interaction.factorNum; i++){
             Interaction.inputs[Interaction.inputs.length-1-i].readOnly = true;
-            $(Interaction.inputs[Interaction.inputs.length-1-i]).css("opacity", 0.3);
+            //$(Interaction.inputs[Interaction.inputs.length-1-i]).css("opacity", 0.3);
+            $(Interaction.inputs[Interaction.inputs.length-1-i]).css("display","none");
             $(Interaction.inputs[Interaction.inputs.length-1-i]).removeClass("input");
         }
 

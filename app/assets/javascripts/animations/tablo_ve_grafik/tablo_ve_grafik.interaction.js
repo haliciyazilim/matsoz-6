@@ -122,6 +122,14 @@ var Interaction = {
                 }
             }
         }
+        for (var i = 1; i < Interaction.inputs.length; i++) {
+            Interaction.inputs[i].onfocus = function() {
+                $(this).css("z-index","100");
+            }
+            Interaction.inputs[i].onblur = function() {
+                $(this).css("z-index","0");
+            }
+        }
         Interaction.disableAutoFocus();
 
         Interaction.prepareNextQuestion();
