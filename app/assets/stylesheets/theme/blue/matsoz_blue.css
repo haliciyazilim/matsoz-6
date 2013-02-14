@@ -275,7 +275,7 @@ a.sozcuklink {
 
     font-size:16px;
     /*	font-weight:bold;*/
-    color:#8f8f8f;
+    color:#FFFFFF;
     text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
     text-decoration:none;
     text-align:left;
@@ -356,23 +356,33 @@ a.sozcuklink:hover, .sozcukselected {
 */
 div.tanim {
     position:absolute;
-    top:10px;
-    right:16px;
-    width:780px;
+    right:12px;
+    width: 759px;
 
     font-size:14px;
-    color:#c7e9ff;
+    color:#333;
     line-height:16px;
     /*	background-color:#FFF;*/
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -moz-box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+    background-color: #fff;
+    padding: 15px;
+    padding-top: 20px;
+    height: 200px;
+    top: -7px;
 }
 div.tanim strong{
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
     margin-right:8px;
     font-size:16px;
 }
 
 div.tanim em{
-    color:#c7e9ff;
+    /*color:#6ea00f;*/
+    color:#2968c0;
     display:block;
     padding:5px 10px 0px 10px;
 }
@@ -409,12 +419,12 @@ div.ornek {
 
 }
 div.ornekbaslik{
-    width:58px;
-    height:23px;
-    position:absolute;
-    left:50%;
+    width: 777px;
+    height: 23px;
+    position: absolute;
+    left: 50%;
     top: -11px;
-    margin-left:-35px;
+    margin-left: -389px;
 
 }
 div.mavikontrol {
@@ -454,9 +464,7 @@ div.sablon {
     -webkit-border-radius:6px;
     -moz-border-radius:6px;
 
-    -moz-box-shadow:	3px 3px 8px rgba(0,0,0,0.4);
-    -webkit-box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
-    box-shadow:			3px 3px 8px rgba(0,0,0,0.4);
+    -moz-box-shadow:	3px 5px 6px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 3px 5px 6px rgba(0,0,0,0.4);
+    box-shadow:			3px 5px 6px rgba(0,0,0,0.4);
 }
-
-
