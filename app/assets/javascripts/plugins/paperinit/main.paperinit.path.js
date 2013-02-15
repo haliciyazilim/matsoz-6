@@ -238,10 +238,10 @@ Main.paperInit.Path = function() {
         head.add(headRefPoint.getRotatedPoint(-angle,point2));
         head.closed = true;
 //		pt.closed = true;
-		path.strokeColor = 'black';
+		path.strokeColor = '#000';
         head.style = {
-            strokeColor: 'black',
-            fillColor : 'black'
+            strokeColor: '#000',
+            fillColor : '#000'
         };
 
 		group.addChild(path);
@@ -604,7 +604,7 @@ Main.paperInit.Path = function() {
 			payda.style = textStyle;
 			frag.addChild(payda);			
 		}
-		cizgi.strokeColor = 'black' ;
+		cizgi.strokeColor = '#000' ;
 		cizgi.add(new Point(top_x, Math.floor(top_y+scale)+0.5));
 		cizgi.add(new Point(top_x+scale*length, Math.floor(top_y+scale)+0.5));
 		frag.addChild(cizgi);
