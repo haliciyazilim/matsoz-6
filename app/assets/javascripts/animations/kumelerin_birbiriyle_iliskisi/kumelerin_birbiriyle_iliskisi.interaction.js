@@ -178,7 +178,6 @@ var Interaction = {
 		
     },
 	onFail : function(){
-        Interaction.setStatus('Yanlış! Doğru cevaplar yeşil renk ile belirtilmiştir.',false)
 
         $(Interaction.clickedOption).css(falseOptionStyle);
         $('.image-container',Interaction.clickedOption).css({
@@ -200,6 +199,11 @@ var Interaction = {
             });
             $(Interaction.options[correctAnswers[i]]).css(trueOptionStyle);
         }
+
+        if(correctAnswers.length > 1)
+            Interaction.setStatus('Yanlış! Doğru cevaplar yeşil renk ile belirtilmiştir.',false);
+        else
+            Interaction.setStatus('Yanlış! Doğru cevap yeşil renk ile belirtilmiştir.',false);
 
     }
 }
