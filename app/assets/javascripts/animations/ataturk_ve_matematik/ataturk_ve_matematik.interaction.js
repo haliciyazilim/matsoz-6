@@ -156,6 +156,23 @@ Interaction.init = function(container){
         width:103,
         textAlign:'center'
     });
+
+    Interaction.previous_button = document.createElement('input');
+    Interaction.previous_button.onclick = Interaction.previousQuestion;
+    $(container).append(Interaction.previous_button);
+    Interaction.previous_button.type = 'button';
+    Interaction.previous_button.className = 'next_button';
+    $(Interaction.previous_button).css({
+        position:'absolute',
+        backgroundImage:'url(/assets/btn_previous.png)',
+        bottom:'10%',
+        left:'10%',
+        width:103,
+        textAlign:'center'
+    });
+
+
+
     Interaction.preventNextQuestion = false;
     var NUMBER_OF_SHAPES  = Interaction.words.length;
     Interaction.shuffledArray = Util.getShuffledArray(NUMBER_OF_SHAPES);
@@ -170,14 +187,28 @@ Interaction.nextQuestion = function(){
         return;
     Interaction.preventNextQuestion = false;
     project.activeLayer.removeChildren();
-    var count = (Interaction.count++)%Interaction.shuffledArray.length;
-    var wordOrder = Interaction.shuffledArray[count];
+    Interaction.count = (++Interaction.count+Interaction.shuffledArray.length)%Interaction.shuffledArray.length;
+    var wordOrder = Interaction.shuffledArray[Interaction.count];
     ///*TEST*/wordOrder=3;/*TEST*/
-    word = Interaction.words[wordOrder];
+    var word = Interaction.words[wordOrder];
     $(Interaction.old_word).html(word.oldName);
     $(Interaction.new_word).html(word.newName);
     $(Interaction.image).html('').append(word.image);
 
+}
+
+Interaction.previousQuestion = function(){
+    if(Interaction.preventNextQuestion == true)
+        return;
+    Interaction.preventNextQuestion = false;
+    project.activeLayer.removeChildren();
+    Interaction.count = (--Interaction.count+Interaction.shuffledArray.length)%Interaction.shuffledArray.length;
+    var wordOrder = Interaction.shuffledArray[Interaction.count];
+    ///*TEST*/wordOrder=3;/*TEST*/
+    var word = Interaction.words[wordOrder];
+    $(Interaction.old_word).html(word.oldName);
+    $(Interaction.new_word).html(word.newName);
+    $(Interaction.image).html('').append(word.image);
 }
 
 Interaction.words = [
