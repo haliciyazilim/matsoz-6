@@ -3,12 +3,20 @@
   %meta{'http-equiv'=>'Content-Type', 'content' => 'text/html; charset=UTF-8'}
   = javascript_include_tag 'main.js'
   = javascript_include_tag 'splash.js'
+  = javascript_include_tag 'library/dialog.js'
   = stylesheet_link_tag 'theme/blue/matsoz_blue.css'
   = stylesheet_link_tag 'theme/blue/matsoz_splash.css'
+  = stylesheet_link_tag 'theme/blue/matsoz_dialog.css'
   = stylesheet_link_tag 'theme/alti/matsoz_alti.css'
   :javascript
     var wordList = #{@word_list.to_json};
     var currentLetter = 'a';
+  - if @exporting
+    :javascript
+      var exportedPage = true;
+  - else
+    :javascript
+      var exportedPage = false;
 #container
   -##words_list
   -#  - @all_entries.each do |entry|
@@ -48,11 +56,11 @@
       - index = index + 1
 
   %div.btn_home
-    %img{:src=>'/assets/theme/blue/ui_img/btn_home_passive.png', :width=>'40', :height=>'36', :alt=>'Ana Sayfa'}
+    %img{:src=>'/assets/theme/blue/ui_img/btn_home.png', :width=>'40', :height=>'36', :alt=>'Ana Sayfa'}
   %div.btn_info
-    %img{:src=>'/assets/theme/blue/ui_img/btn_info_passive.png', :width=>'40', :height=>'36', :alt=>'Bilgi'}
+    %img{:src=>'/assets/theme/blue/ui_img/btn_info.png', :width=>'40', :height=>'36', :alt=>'Bilgi'}
   %div.btn_print
-    %img{:src=>'/assets/theme/blue/ui_img/btn_print_passive.png', :width=>'40', :height=>'36', :alt=>'Etkileşimi Yazdır'}
+    %img{:src=>'/assets/theme/blue/ui_img/btn_print.png', :width=>'40', :height=>'36', :alt=>'Etkileşimi Yazdır'}
 
   %div.sozcuktasiyici
     - @all_entries.each do |entry|
