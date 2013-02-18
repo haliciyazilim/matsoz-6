@@ -294,7 +294,8 @@ Main.initializeNavigation = function() {
         }
     }
     var sozcuktasiyici = $('.sozcuktasiyici').get(0);
-    sozcuktasiyici.scrollByLines(13 - selectedWordIndex);
+    if(selectedWordIndex > 11)
+        sozcuktasiyici.scrollByLines(selectedWordIndex - 11);
 }
 
 //Main.initializeSoundManager = function() {
