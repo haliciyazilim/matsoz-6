@@ -254,26 +254,33 @@ function InteractionBase(){
 		}
 		Interaction.trial = 0;
 
-        if(Main.getCurrentPlatform() == Main.platform.MOBILE)
-            Interaction.disableAutoFocus();
-        else if(Main.getCurrentPlatform() == Main.platform.DESKTOP)
+        if(Main.getCurrentPlatform() == Main.platform.DESKTOP)
             Interaction.enableAutoFocus();
 
 		if(Interaction.__randomGenerator)
 			Interaction.nextQuestion(Interaction.__randomGenerator.nextNumber());	
 		else
 			Interaction.nextQuestion();
-        try{
-            if(Interaction.__disableAutoInputFocus == false){
-                Interaction.inputs[0].focus();
-            }else{
-                Interaction._removeFocusFromInputs();
+
+//        alert(Main.getCurrentPlatform() + " \n " + navigator.userAgent);
+        if(Main.getCurrentPlatform() == Main.platform.DESKTOP){
+            try{
+                if(Interaction.__disableAutoInputFocus == false){
+                    Interaction.inputs[0].focus();
+                }
+                else{
+                    Interaction._removeFocusFromInputs();
+                }
             }
+            catch(e){}
         }
-        catch(e){}
+        else{
+            Interaction._removeFocusFromInputs();
+        }
 	};
 
     Interaction._removeFocusFromInputs = function(){
+//        alert("Focuses will be removed");
         for(var i=0;i<Interaction.inputs.length;i++){
             Interaction.inputs[i].blur();
         }
