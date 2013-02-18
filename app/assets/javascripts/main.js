@@ -499,7 +499,7 @@ function detectOrientation(){
 }
 function OrientationWarningDialogBox(){
     var mask = document.createElement('div');
-    mask.className = 'dialogmaske';
+    mask.className = 'dialogmaske dialogmaske_alert';
     document.body.appendChild(mask);
 
     var dialog_box = document.createElement('div');
@@ -509,20 +509,24 @@ function OrientationWarningDialogBox(){
     dialog_box.setAttribute('DialogId',this.id);
     document.body.appendChild(dialog_box);
     $(mask).css({
-        width:$('#container').width() + 'px',
+        width:$('#container').width() + 'px'
     });
     $(dialog_box).css({
         position:'fixed',
-        width:'350px',
-        height:'100px',
+        width:'390px',
+        height:'140px',
         marginLeft:'-150px',
         marginTop:'-50px',
-        padding:'10px',
+        padding:'30px',
         fontSize:'20px',
+        lineHeight:'23px',
         color:'#f00',
         fontWeight:'bold',
         boxSizing:'border-box'
     });
+//    $(mask).css({
+//        background:"url(ui_img/serit_siyah_20.png) repeat rgba(255,0,0,0.8)"
+//    })
     $(dialog_box).html("Dikey pozisyon desteklenmemektedir. Lütfen cihazınızı yatay konuma getiriniz.");
     this.mask = mask;
     this.dialog_box = dialog_box;
