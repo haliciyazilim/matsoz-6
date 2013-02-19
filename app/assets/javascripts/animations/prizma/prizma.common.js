@@ -159,7 +159,7 @@ function ciz(secim,matrixX,matrixY,amac,sira){
                     var point;
                     for(var i=0; i<koordinat.length;i++){
                         for(var j=0; j<4;j++){
-                            point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),20);
+                            point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),5);
                             point.class="nokta";
                             point.myId="nokta"+i+j;
                             point.name="nokta"+i+j;
@@ -167,6 +167,8 @@ function ciz(secim,matrixX,matrixY,amac,sira){
                             if(amac=="ornek")
                                 grup.addChild(point);
                             point.fillColor="black";
+                            point.strokeWidth=20;
+                            //point.strokeColor="red";
                             point.opacity=0.1;
                             Interaction.noktaArray.push(point);
     
