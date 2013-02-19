@@ -4,7 +4,10 @@ var Interaction = {
         return 'paper';
     },
 	images:[
-        
+        {
+            id:'resizeImage',
+            src:'/assets/animations/benzerlik/resize.png'
+        }
     ],
     init:function(container){
         Interaction.container = container;
@@ -43,36 +46,34 @@ var Interaction = {
         Interaction.button.className = 'next_button';
         Interaction.button.onclick = Interaction.prepareNextQuestion;
         /*<[[TEST*/
-//            randomNumber = 18;
+//            randomNumber = 12;
         /*TEST]]>*/
-        var points = Interaction.generateShape(randomNumber);
+        var dots = Interaction.generateShape(randomNumber);
         var path = new Path();
 
-        for(var i=0;i<points.length;i++){
-            var cornerPoint = points[i].multiply(Interaction.size,Interaction.size).add(Interaction.referencePoint);
+        for(var i=0;i<dots.length;i++){
+            var cornerPoint = dots[i].p.multiply(Interaction.size,Interaction.size).add(Interaction.referencePoint);
             path.add(cornerPoint);
-            points[i] = cornerPoint;
+            dots[i].p = cornerPoint;
         };
         path.closed = true;
         path.set_style(interactionPathStyle);
-        console.log(path);
+//        console.log(path);
         Interaction.path = path;
-        Interaction.path.centerPoint = Util.centerOfPoints(points);
+        Interaction.path.centerPoint = Util.centerOfPoints(extricatePoints(dots));
         var differenceToInteractionCenterPoint = Interaction.centerPoint.subtract(Interaction.path.centerPoint);
         Interaction.path.position = Interaction.path.position.add(differenceToInteractionCenterPoint);
-//        Interaction.pathBounds = new Path.Rectangle(Interaction.path.bounds);
-//        Interaction.pathBounds.set_style(interactionPathBoundsStyle);
-//        Interaction.path.insertAbove(Interaction.pathBounds);
+
         Interaction.cornerPoints = [];
-        for(var i=0;i<points.length; i++){
-            points[i] = points[i].add(differenceToInteractionCenterPoint);
-            var circle = new Path.Circle(points[i],10);
-            circle.set_style(interactionCircleStyle);;
+        for(var i=0;i<dots.length; i++){
+            dots[i].p = dots[i].p.add(differenceToInteractionCenterPoint);
+            var circle = new Path.Circle(dots[i].p,6);
+            circle.opacity = dots[i].opacity;
+            circle.set_style(interactionCircleStyle);
             circle.class = 'cornerPoint';
             Interaction.cornerPoints.push(circle);
-
         }
-        Interaction.path.centerPoint = Util.centerOfPoints(points);
+        Interaction.path.centerPoint = Util.centerOfPoints(extricatePoints(dots));
 
     },
 		
@@ -103,7 +104,6 @@ var Interaction = {
         path.closed = true;
         path.set_style(interactionPathStyle);
         path.centerPoint = Util.centerOfPoints(points);
-        console.log(path)
         return path;
     },
     createTool: function(){
@@ -114,7 +114,6 @@ var Interaction = {
             if(event.item && event.item.class == 'cornerPoint'){
                 this.drag = true;
                 this.initialDistance = Interaction.path.centerPoint.getDistance(event.point);
-//                this.initialMatrix = Interaction.path.matrix;
                 for(var i=0; i<Interaction.cornerPoints.length; i++)
                     Interaction.cornerPoints[i].initialPosition = Interaction.cornerPoints[i].position
             }
@@ -126,10 +125,9 @@ var Interaction = {
                 if(this.currentDistance < 25)
                     return;
                 var ratio = this.currentDistance / this.initialDistance;
-//                Interaction.path.centerPoint.showOnCanvas();
                 for(var i=0; i<Interaction.cornerPoints.length;i++)
                     if(!Interaction.boundary.bounds.contains(Interaction.cornerPoints[i].initialPosition.scale(ratio,Interaction.path.centerPoint))){
-                        console.log("overrflowed the area")
+                        console.log("the area is overflowed");
                         return;
                     }
                 var points = [];
@@ -156,96 +154,106 @@ var Interaction = {
 
     generateShape:function(type){
         if(type < 11){
-            return InteractiveGrids.CreateShape(type);
+            var points = InteractiveGrids.CreateShape(type);
+            var dots = [];
+            for(var i=0;i<points.length;i++)
+                dots.push({p:points[i],opacity:1});
+            return dots;
         }
         var points = [];
         switch(type){
             case 11:
-                points.push(new Point(0,0));
-                points.push(new Point(0,1));
-                points.push(new Point(0,2));
-                points.push(new Point(0,3));
-                points.push(new Point(0,4));
-                points.push(new Point(1,4));
-                points.push(new Point(2,4));
-                points.push(new Point(3,4));
-                points.push(new Point(4,4));
-                points.push(new Point(4,2));
-                points.push(new Point(2,2));
-                points.push(new Point(2,0));
+                points.push({p:new Point(0,0),opacity:1});
+                points.push({p:new Point(0,1),opacity:0});
+                points.push({p:new Point(0,2),opacity:0});
+                points.push({p:new Point(0,3),opacity:0});
+                points.push({p:new Point(0,4),opacity:1});
+                points.push({p:new Point(1,4),opacity:0});
+                points.push({p:new Point(2,4),opacity:0});
+                points.push({p:new Point(3,4),opacity:0});
+                points.push({p:new Point(4,4),opacity:1});
+                points.push({p:new Point(4,2),opacity:1});
+                points.push({p:new Point(2,2),opacity:1});
+                points.push({p:new Point(2,0),opacity:1});
                 break;
             case 12:
-                points.push(new Point(3,0));
-                points.push(new Point(4,2));
-                points.push(new Point(6,2));
-                points.push(new Point(4.3,3));
-                points.push(new Point(5,5));
-                points.push(new Point(3,3.8));
-                points.push(new Point(1,5));
-                points.push(new Point(1.6,3));
-                points.push(new Point(0,2));
-                points.push(new Point(2,2));
+                points.push({p:new Point(3,0)  ,opacity:1});
+                points.push({p:new Point(4,2)  ,opacity:1});
+                points.push({p:new Point(6,2)  ,opacity:1});
+                points.push({p:new Point(4.3,3),opacity:1});
+                points.push({p:new Point(5,5)  ,opacity:1});
+                points.push({p:new Point(3,3.8),opacity:1});
+                points.push({p:new Point(1,5)  ,opacity:1});
+                points.push({p:new Point(1.6,3),opacity:1});
+                points.push({p:new Point(0,2)  ,opacity:1});
+                points.push({p:new Point(2,2)  ,opacity:1});
                 break;
             case 13:
-                points.push(new Point(0,1));
-                points.push(new Point(0,3));
-                points.push(new Point(3,3));
-                points.push(new Point(3,4));
-                points.push(new Point(5,2));
-                points.push(new Point(3,0));
-                points.push(new Point(3,1));
+                points.push({p:new Point(0,1),opacity:1});
+                points.push({p:new Point(0,3),opacity:1});
+                points.push({p:new Point(3,3),opacity:1});
+                points.push({p:new Point(3,4),opacity:1});
+                points.push({p:new Point(5,2),opacity:1});
+                points.push({p:new Point(3,0),opacity:1});
+                points.push({p:new Point(3,1),opacity:1});
                 break;
             case 14:
-                points.push(new Point(1,0));
-                points.push(new Point(0,2));
-                points.push(new Point(1,4));
-                points.push(new Point(2,2));
+                points.push({p:new Point(1,0),opacity:1});
+                points.push({p:new Point(0,2),opacity:1});
+                points.push({p:new Point(1,4),opacity:1});
+                points.push({p:new Point(2,2),opacity:1});
                 break;
             case 15:
-                points.push(new Point(2,0));
-                points.push(new Point(0,2));
-                points.push(new Point(0,4));
-                points.push(new Point(4,4));
-                points.push(new Point(4,2));
+                points.push({p:new Point(2,0),opacity:1});
+                points.push({p:new Point(0,2),opacity:1});
+                points.push({p:new Point(0,4),opacity:1});
+                points.push({p:new Point(4,4),opacity:1});
+                points.push({p:new Point(4,2),opacity:1});
                 break;
             case 16:
-                points.push(new Point(0,0));
-                points.push(new Point(1,0));
-                points.push(new Point(2,0));
-                points.push(new Point(3,0));
-                points.push(new Point(3,1));
-                points.push(new Point(2,1));
-                points.push(new Point(2,2));
-                points.push(new Point(1,2));
-                points.push(new Point(1,1));
-                points.push(new Point(0,1));
+                points.push({p:new Point(0,0),opacity:1});
+                points.push({p:new Point(1,0),opacity:0});
+                points.push({p:new Point(2,0),opacity:0});
+                points.push({p:new Point(3,0),opacity:1});
+                points.push({p:new Point(3,1),opacity:1});
+                points.push({p:new Point(2,1),opacity:1});
+                points.push({p:new Point(2,2),opacity:1});
+                points.push({p:new Point(1,2),opacity:1});
+                points.push({p:new Point(1,1),opacity:1});
+                points.push({p:new Point(0,1),opacity:1});
                 break;
             case 17:
-                points.push(new Point(0,0));
-                points.push(new Point(1,0));
-                points.push(new Point(2,0));
-                points.push(new Point(2,1));
-                points.push(new Point(3,1));
-                points.push(new Point(3,2));
-                points.push(new Point(2,2));
-                points.push(new Point(1,2));
-                points.push(new Point(1,1));
-                points.push(new Point(0,1));
+                points.push({p:new Point(0,0),opacity:1});
+                points.push({p:new Point(1,0),opacity:0});
+                points.push({p:new Point(2,0),opacity:1});
+                points.push({p:new Point(2,1),opacity:1});
+                points.push({p:new Point(3,1),opacity:1});
+                points.push({p:new Point(3,2),opacity:1});
+                points.push({p:new Point(2,2),opacity:0});
+                points.push({p:new Point(1,2),opacity:1});
+                points.push({p:new Point(1,1),opacity:1});
+                points.push({p:new Point(0,1),opacity:1});
                 break;
             case 18:
-                points.push(new Point(0,1));
-                points.push(new Point(0,2));
-                points.push(new Point(1,2));
-                points.push(new Point(2,2));
-                points.push(new Point(3,2));
-                points.push(new Point(3,1));
-                points.push(new Point(3,0));
-                points.push(new Point(2,0));
-                points.push(new Point(2,1));
-                points.push(new Point(1,1));
+                points.push({p:new Point(0,1),opacity:1});
+                points.push({p:new Point(0,2),opacity:1});
+                points.push({p:new Point(1,2),opacity:0});
+                points.push({p:new Point(2,2),opacity:0});
+                points.push({p:new Point(3,2),opacity:1});
+                points.push({p:new Point(3,1),opacity:0});
+                points.push({p:new Point(3,0),opacity:1});
+                points.push({p:new Point(2,0),opacity:1});
+                points.push({p:new Point(2,1),opacity:1});
+                points.push({p:new Point(1,1),opacity:0});
                 break;
 
         }
         return points;
     }
+}
+function extricatePoints(points){
+    var p_s  = [];
+    for(var i=0;i<points.length;i++)
+        p_s.push(points[i].p);
+    return p_s;
 }
