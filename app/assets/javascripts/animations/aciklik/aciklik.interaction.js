@@ -39,7 +39,7 @@ var Interaction = {
         });
 
         $(container).append("<div id='ortalama'>");
-        $("#ortalama").html("Artitmetik ortalama = <b id='sonucOrtalama'></b>");
+        $("#ortalama").html("Aritmetik ortalama = <b id='sonucOrtalama'></b>");
         $("#ortalama").css({
             position:"absolute",
             width:"250px",
