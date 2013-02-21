@@ -27,11 +27,11 @@ function __Interaction_Base_Languages(){
             TURKISH:"Lütfen tüm kutucukları doldurunuz.",
             ENGLISH:"Please fill all the boxes."
         },
-        "status.numberNumber":{
+        "status.emptyNumber":{
             TURKISH:"Lütfen bir sayı giriniz.",
             ENGLISH:"Please enter a number."
         },
-        "status.numberNumbers":{
+        "status.emptyNumbers":{
             TURKISH:"Lütfen kutucuklara sayı giriniz.",
             ENGLISH:"Please enter numbers to boxes."
         },
