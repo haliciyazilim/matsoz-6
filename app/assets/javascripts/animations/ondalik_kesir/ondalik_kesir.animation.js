@@ -189,7 +189,7 @@ var Animation = {
         $("#Oyuzler").css("font-size","medium");
 
         $("#Oyuzler",container).append("<div class='Oyatay'>");
-        $("#Oyuzler .Oyatay").html("Yüzler");
+        $("#Oyuzler .Oyatay").html("Yüzler <br> Basamağı");
 
         $("#OSoruCokluInput #Oyuzler",container).append("<div id='OgirdiYuzler' >");
         $("#OgirdiYuzler").css("width","40px")
@@ -256,7 +256,7 @@ var Animation = {
         $("#Oonlar").css("font-size","medium");
 
         $("#Oonlar",container).append("<div class='Oyatay'>");
-        $("#Oonlar .Oyatay").html("Onlar");
+        $("#Oonlar .Oyatay").html("Onlar <br> Basamağı");
 
 
         $("#OSoruCokluInput #Oonlar",container).append("<div id='OgirdiOnlar' >");
@@ -306,7 +306,7 @@ var Animation = {
         $("#Obirler").css("font-size","medium");
 
         $("#Obirler",container).append("<div class='Oyatay'>");
-        $("#Obirler .Oyatay").html("Birler");
+        $("#Obirler .Oyatay").html("Birler <br> Basamağı");
 
         $("#OSoruCokluInput #Obirler",container).append("<div id='OgirdiBirler' >");
         $("#OgirdiBirler").css("width","40px")
@@ -375,7 +375,7 @@ var Animation = {
         $("#OondaBirler").css("font-size","medium");
 
         $("#OondaBirler",container).append("<div class='Oyatay'>");
-        $("#OondaBirler .Oyatay").html("Onda Birler");
+        $("#OondaBirler .Oyatay").html("Onda Birler <br> Basamağı");
 
         $("#OSoruCokluInput #OondaBirler",container).append("<div id='OgirdiOndaBirler' >");
         $("#OgirdiOndaBirler").css("width","40px")
@@ -425,7 +425,7 @@ var Animation = {
         $("#OyuzdeBirler").css("font-size","medium");
 
         $("#OyuzdeBirler",container).append("<div class='Oyatay'>");
-        $("#OyuzdeBirler .Oyatay").html("Yüzde Birler");
+        $("#OyuzdeBirler .Oyatay").html("Yüzde Birler <br> Basamağı");
 
         $("#OSoruCokluInput #OyuzdeBirler",container).append("<div id='OgirdiYuzdeBirler' >");
         $("#OgirdiYuzdeBirler").css("width","40px")
@@ -472,7 +472,7 @@ var Animation = {
         $("#ObindeBirler").css("font-size","medium");
 
         $("#ObindeBirler",container).append("<div class='Oyatay'>");
-        $("#ObindeBirler .Oyatay").html("Binde Birler");
+        $("#ObindeBirler .Oyatay").html("Binde Birler <br> Basamağı");
 
 
         $("#OSoruCokluInput #ObindeBirler",container).append("<div id='OgirdiBindeBirler' >");
@@ -535,7 +535,7 @@ var Animation = {
         $(".Oyatay").css("height","30px");
         $(".Oyatay").css("width","150px");
         $(".Oyatay").css("bottom","130px");
-        $(".Oyatay").css("left","-50px");
+        $(".Oyatay").css("left","-53px");
 
         $(".Oyatay").css("font-size","small");
 
