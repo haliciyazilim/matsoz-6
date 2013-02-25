@@ -47,6 +47,7 @@ var Animation = {
         $("#sonNokta img").css({display:"inline-block"});
 
 
+
         var sayiDogrusuTop=90;
         var fontSize=16;
 
@@ -169,13 +170,14 @@ var Animation = {
                 Interaction.solaOk.remove();
                 Interaction.solaOk = new Path.OneSidedArrow(new Point(pieceLength*12-10, sayiDogrusuTop+20), new Point(this.okPosition, sayiDogrusuTop+20), 10, 30);
                 Interaction.solaOk.strokeColor="blue";
-                Interaction.SolaOk.fillColor="blue"
+                Interaction.solaOk.fillColor="blue"
                 Interaction.solaOk.opacity=this.opacity*10;
 
 
 
             },
             callback: function(){
+                console.log("CallBAck");
                 $("#cumle").animate({opacity:1},1000);
                 $("#sonNokta").delay(1000).animate({opacity:1},1000);
             }

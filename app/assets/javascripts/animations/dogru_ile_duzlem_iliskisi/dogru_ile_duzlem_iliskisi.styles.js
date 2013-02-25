@@ -8,7 +8,7 @@ function __Styles(){
     surfaceStyleLine = {
         strokeColor: "#8b5400",
 
-        strokeWidth: 2,
+        strokeWidth: 2
         //opacity:0
     };
 
@@ -36,8 +36,8 @@ function __Styles(){
     // uygualama
 
     dogruStyle={
-        strokeColor:new RgbColor(1,0.5,0,0),
-        strokeWidth:2
+        strokeColor:new RgbColor(1,0,0,0),
+        strokeWidth:10
 
     }
 

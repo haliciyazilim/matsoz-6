@@ -55,9 +55,9 @@ var Interaction = {
 
 
 
-        var tik;
-        var tiklama=0;
-        var tool=new Tool();
+        tik="";
+        tiklama=0;
+        tool=new Tool();
         //tool.distanceThreshold = 100;
         Interaction.tiklama=onMouseDown;
         tool.onMouseDown=Interaction.tiklama;
@@ -143,13 +143,13 @@ var Interaction = {
                                 if(dogru<4){
                                     Interaction.setStatus('Doğru; şimdi diğer cisim köşegenini belirleyiniz.',true);
 
-                                    birinciTiklama.opacity=0;
-                                    ikinciTiklama.opacity=0;
+                                    birinciTiklama.opacity=0.1;
+                                    ikinciTiklama.opacity=0.1;
                                 }
                                 else if(dogru==4){
                                     Interaction.setStatus('Doğru; cisim köşegenlerinin tamamını buldunuz.',true);
-                                    birinciTiklama.opacity=0;
-                                    ikinciTiklama.opacity=0;
+                                    birinciTiklama.opacity=0.1;
+                                    ikinciTiklama.opacity=0.1;
                                     dogru=0;
                                     tool.onMouseDown=null;
                                     $(".next_button").css("opacity","1").attr("disabled",false);
@@ -162,8 +162,8 @@ var Interaction = {
                             else{
 
 
-                                birinciTiklama.opacity=0;
-                                ikinciTiklama.opacity=0;
+                                birinciTiklama.opacity=0.1;
+                                ikinciTiklama.opacity=0.1;
                                 birinciTiklama=null;
                                 ikinciTiklama=null;
                                 tiklama=0;
@@ -174,22 +174,27 @@ var Interaction = {
                                     Interaction.setStatus('Bulamadın; cisim köşegenleri yukarıda belirtilmiştir.',false);
                                     $(".next_button").css("opacity","1").attr("disabled",false);
                                     hata=0;
-
+                                    console.log("koordinat 2");
+                                    console.log(koordinat);
                                     if(Interaction.dogruNoktalar.indexOf("nokta00")==-1){
                                         var cizgi=new Path.Line(new Point(koordinat[0][0].x,koordinat[0][0].y),new Point(koordinat[1][1].x,koordinat[1][1].y));
                                         cizgi.strokeColor="red";
+                                        console.log("if 1");
                                     }
                                     if(Interaction.dogruNoktalar.indexOf("nokta01")==-1){
                                         var cizgi=new Path.Line(new Point(koordinat[0][1].x,koordinat[0][1].y),new Point(koordinat[1][0].x,koordinat[1][0].y));
                                         cizgi.strokeColor="red";
+                                        console.log("if 2");
                                     }
                                     if(Interaction.dogruNoktalar.indexOf("nokta02")==-1){
                                         var cizgi=new Path.Line(new Point(koordinat[0][2].x,koordinat[0][2].y),new Point(koordinat[1][3].x,koordinat[1][3].y));
                                         cizgi.strokeColor="red";
+                                        console.log("if 3");
                                     }
                                     if(Interaction.dogruNoktalar.indexOf("nokta03")==-1){
                                         var cizgi=new Path.Line(new Point(koordinat[0][3].x,koordinat[0][3].y),new Point(koordinat[1][2].x,koordinat[1][2].y));
                                         cizgi.strokeColor="red";
+                                        console.log("if 4");
                                     }
                                 }
                                 else{
@@ -261,9 +266,16 @@ var Interaction = {
         Interaction.button.onclick=Interaction.prepareNextQuestion;
         Main.interactionProject.activeLayer.removeChildren();
         tool.onMouseDown=Interaction.tiklama;
-
+        Interaction.dogruNoktalar=[];
         $(".next_button").css("opacity","0").attr("disabled",true);
 
+        birinciTiklama="";
+        ikinciTiklama="";
+        kosegen="";
+        hata=0;
+        dogru=0;
+        tiklama=0;
+        
         var cizilecek=sekiller[sayi[sira]];
         //var cizilecek=sekiller[0];
         ciz(cizilecek);

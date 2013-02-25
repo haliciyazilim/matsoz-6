@@ -127,9 +127,11 @@ var Interaction = {
             right:"0",
             left:"0"
 
-        }, true,true);
+        }, false,true);
         Interaction.input.id="girdi";
         $("#girdi").attr("maxLength","2");
+        $("#girdi").keydown(function(){Interaction.setStatus('',false);});
+        $("#girdi").attr("onkeypress","return SadeceRakam(event,('-','-'))");
 
 
 
@@ -154,14 +156,7 @@ var Interaction = {
 	Interaction.prepareNextQuestion();
 		},
 	nextQuestion: function(randomNumber){
-        $("#girdi").get(0).onkeydown = function(event){
-            console.log(Interaction.__status.CORRECT);
-            console.log(event.keyCode);
-            if(event.keyCode==109){
-                $("#girdi").val("–")
-                return false;
-            }
-        };
+
 
             if(randomNumber==0)
                 randomNumber++;
@@ -237,10 +232,16 @@ var Interaction = {
                 if(Interaction.cevap=="" || Interaction.cevap==null){
                  Interaction.setStatus('Lütfen sayı doğrusunda bir noktayı seçin.', false);
                  return false;
+               }
+
             }
-            else
-                return true;
+            else{
+                if(!Util.isNumber($("#girdi").val())){
+                    Interaction.setStatus('Girdiğiniz sayının formatı uygun değil; lütfen düzeltiniz.',false);
+                    return false;
+                }
             }
+
 		
 		},
 	isAnswerCorrect : function(value){
@@ -276,3 +277,10 @@ var Interaction = {
 		
 	}
 }
+
+// Sadece rakam girilmesini sağlanıyor.
+function SadeceRakam(e,allowedchars){
+    var key=e.charCode==undefined?e.keyCode:e.charCode;
+    if((/^[0-9]+$/.test(String.fromCharCode(key)))||key==0||key==13 ||isPassKey(key,allowedchars)){return true;}else{return false;}}
+function isPassKey(key,allowedchars){if(allowedchars!=null){for(var i=0;i<allowedchars.length;i++){if(allowedchars[i]==String.fromCharCode(key))return true;}}return false;}
+function SadeceRakamBlur(e,clear){var nesne=e.target?e.target:e.srcElement;var val=nesne.value;val=val.replace(/^\s+|\s+$/g,"");if(clear)val=val.replace(/\s{2,}/g," ");nesne.value=val;}

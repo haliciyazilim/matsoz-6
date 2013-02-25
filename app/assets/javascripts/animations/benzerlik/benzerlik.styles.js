@@ -10,8 +10,14 @@ function __Styles(){
 //        strokeColor:'#CCC'
 //    };
     interactionCircleStyle = {
-        strokeColor:new RgbColor(0,0,0,0),
-        fillColor:new RgbColor(0,0,0,0)
+        strokeColor:new RgbColor(0,0,0,0.0),
+        strokeWidth:25,
+//        fillColor:new RgbColor(
+//            parseInt("fd",16)/255,
+//            parseInt("db",16)/255,
+//            parseInt("80",16)/255,1.0)
+        fillColor:new RgbColor(0,0,0,0.5)
+
     }
 
 }

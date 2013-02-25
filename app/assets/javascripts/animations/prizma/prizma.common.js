@@ -145,32 +145,67 @@ function ciz(secim,matrixX,matrixY,amac,sira){
                 path = shape.project();
             },
             callback:function(){
-                koordinatBack=shape.surfaces.backSurface.get2DPoints(matrix);
-                koordinatFront=shape.surfaces.frontSurface.get2DPoints(matrix);
-                koordinatLeft=shape.surfaces.leftSurface.get2DPoints(matrix);
-                koordinatRight=shape.surfaces.rightSurface.get2DPoints(matrix);
-
-                koordinat=[koordinatBack,koordinatFront];
-
-                renk=["black","yellow","red","green"]
-                var point;
-                for(var i=0; i<koordinat.length;i++){
-                    for(var j=0; j<4;j++){
-                        point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),5);
-                        point.class="nokta";
-                        point.myId="nokta"+i+j;
-                        point.name="nokta"+i+j;
-
-                        if(amac=="ornek")
-                            grup.addChild(point);
-                        //point.fillColor=renk[j];
-
-                        Interaction.noktaArray.push(point);
-
-
+                
+                if(amac!="ornek"){
+                    koordinatBack=shape.surfaces.backSurface.get2DPoints(matrix);
+                    koordinatFront=shape.surfaces.frontSurface.get2DPoints(matrix);
+                    koordinatLeft=shape.surfaces.leftSurface.get2DPoints(matrix);
+                    koordinatRight=shape.surfaces.rightSurface.get2DPoints(matrix);
+                    koordinat=[];
+                    koordinat=[koordinatBack,koordinatFront];
+                    console.log("koordinat 1");
+                    console.log(koordinat);
+                    renk=["black","yellow","red","green"]
+                    var point;
+                    for(var i=0; i<koordinat.length;i++){
+                        for(var j=0; j<4;j++){
+                            point= new Path.Circle(new Point(koordinat[i][j].x,koordinat[i][j].y),5);
+                            point.class="nokta";
+                            point.myId="nokta"+i+j;
+                            point.name="nokta"+i+j;
+    
+                            if(amac=="ornek")
+                                grup.addChild(point);
+                            point.fillColor="black";
+                            point.strokeWidth=20;
+                            //point.strokeColor="red";
+                            point.opacity=0.1;
+                            Interaction.noktaArray.push(point);
+    
+    
+                        }
                     }
                 }
                 if(amac=="ornek"){
+                    
+                    koordinatBackO=shape.surfaces.backSurface.get2DPoints(matrix);
+                    koordinatFrontO=shape.surfaces.frontSurface.get2DPoints(matrix);
+                    koordinatLeftO=shape.surfaces.leftSurface.get2DPoints(matrix);
+                    koordinatRightO=shape.surfaces.rightSurface.get2DPoints(matrix);
+                    koordinatO=[];
+                    koordinatO=[koordinatBackO,koordinatFrontO];
+                    console.log("koordinatO 1");
+                    console.log(koordinatO);
+                    renk=["black","yellow","red","green"]
+                    var point;
+                    for(var i=0; i<koordinatO.length;i++){
+                        for(var j=0; j<4;j++){
+                            point= new Path.Circle(new Point(koordinatO[i][j].x,koordinatO[i][j].y),20);
+                            point.class="nokta";
+                            point.myId="nokta"+i+j;
+                            point.name="nokta"+i+j;
+    
+                            if(amac=="ornek")
+                                grup.addChild(point);
+                            point.fillColor="black";
+                            point.opacity=0.1;
+                            Interaction.noktaArray.push(point);
+    
+    
+                        }
+                    }
+                    
+                    
                     ornekAnim(grup,"Dik kare prizma",0,sira);
                 }
             }
