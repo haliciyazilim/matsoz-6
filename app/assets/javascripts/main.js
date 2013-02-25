@@ -540,6 +540,5 @@ function OrientationWarningDialogBox(){
         this.mask.style.display = 'none';
         this.dialog_box.style.display = 'none';
     }
-
 }
 $(document).ready(detectOrientation);
