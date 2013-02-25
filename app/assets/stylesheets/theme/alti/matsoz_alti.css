@@ -2,23 +2,16 @@ div.tanim strong{
 		color:#ef9911;
 }
 div.tanim a {
-	color:#fcbd18;
+	color:#ef9911;
 	text-decoration:none;
 	border-bottom:1px solid #fcbd18;
 }
 div.tanim a:hover {
-	color:#FFFFFF;
-	text-decoration:none;
-	border-bottom:none;
+	color:#ef9911;
 }
-
-
 div.mavikontrol {
 	background-color:#fddb80;
 }
-
-
-
 .ornekbaslik_bg {
 	background:url(ornek.png) no-repeat 50% 50%;
 	}
