@@ -1,1 +1,0 @@
-var Animation={images:[],init:function(e){Animation.container=e;var t=new GIF({src:"/assets/animations/benzerlik/benzerlik.jpg",width:730,height:170,parent:e,count:144,css:{position:"absolute",top:"50%",left:"50%",marginLeft:"-375px",marginTop:"-85px"}});setTimeout(function(){console.log("animation"),t.play(14)},2e3),Main.animationFinished(13e3)}};
