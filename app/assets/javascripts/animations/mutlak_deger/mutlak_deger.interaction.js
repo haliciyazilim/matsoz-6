@@ -61,10 +61,12 @@ var Interaction = {
             fontSize: '20px'
             
             
-        },true,false);
+        },false,false);
         Interaction.input.id="girdi";
-        
-        
+
+        $("#girdi").keydown(function(){Interaction.setStatus('',false);});
+        $("#girdi").attr("onkeypress","return SadeceRakam(event,('-','-'))");
+
         $("#soru #girilen").append(Interaction.input);
         $("input").css("height","100%").css("margin","auto").attr("maxLength","4");
         
@@ -98,7 +100,12 @@ var Interaction = {
     },
 	
     preCheck : function(){
-        
+        console.log("Precheck: "+$("#girdi").val());
+        console.log(Util.isNumber($("#girdi").val()));
+        if(!Util.isNumber($("#girdi").val())){
+            Interaction.setStatus('Girdiğiniz sayının formatı uygun değil; lütfen düzeltiniz.',false);
+            return false;
+        }
     },
     isAnswerCorrect : function(value){
         if(value==Interaction.randomNumber)
@@ -116,3 +123,11 @@ var Interaction = {
         
     }
 }
+
+
+// Sadece rakam girilmesini sağlanıyor.
+function SadeceRakam(e,allowedchars){
+    var key=e.charCode==undefined?e.keyCode:e.charCode;
+    if((/^(-)?[0-9]+$/.test(String.fromCharCode(key)))||key==0||key==13 ||isPassKey(key,allowedchars)){return true;}else{return false;}}
+function isPassKey(key,allowedchars){if(allowedchars!=null){for(var i=0;i<allowedchars.length;i++){if(allowedchars[i]==String.fromCharCode(key))return true;}}return false;}
+function SadeceRakamBlur(e,clear){var nesne=e.target?e.target:e.srcElement;var val=nesne.value;val=val.replace(/^\s+|\s+$/g,"");if(clear)val=val.replace(/\s{2,}/g," ");nesne.value=val;}

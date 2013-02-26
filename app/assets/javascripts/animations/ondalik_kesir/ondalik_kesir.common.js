@@ -148,7 +148,7 @@ etkilesim=function(amac){
         $("#yuzler").css("font-size","medium");
 
         $("#yuzler",container).append("<div class='yatay'>");
-        $("#yuzler .yatay").html("Yüzler");
+        $("#yuzler .yatay").html("Yüzler <br> Basamağı");
 
         $("#SoruCokluInput #yuzler",container).append("<div id='girdiYuzler' >");
         $("#girdiYuzler").css("width","40px")
@@ -199,7 +199,7 @@ etkilesim=function(amac){
         $("#onlar").css("font-size","medium");
 
         $("#onlar",container).append("<div class='yatay'>");
-        $("#onlar .yatay").html("Onlar");
+        $("#onlar .yatay").html("Onlar <br> Basamağı");
 
 
         $("#SoruCokluInput #onlar",container).append("<div id='girdiOnlar' >");
@@ -246,7 +246,7 @@ etkilesim=function(amac){
         $("#birler").css("font-size","medium");
 
         $("#birler",container).append("<div class='yatay'>");
-        $("#birler .yatay").html("Birler");
+        $("#birler .yatay").html("Birler <br> Basamağı");
 
         $("#SoruCokluInput #birler",container).append("<div id='girdiBirler' >");
         $("#girdiBirler").css("width","40px")
@@ -310,7 +310,7 @@ etkilesim=function(amac){
         $("#ondaBirler").css("font-size","medium");
 
         $("#ondaBirler",container).append("<div class='yatay'>");
-        $("#ondaBirler .yatay").html("Onda Birler");
+        $("#ondaBirler .yatay").html("Onda Birler <br> Basamağı");
 
         $("#SoruCokluInput #ondaBirler",container).append("<div id='girdiOndaBirler' >");
         $("#girdiOndaBirler").css("width","40px")
@@ -355,7 +355,7 @@ etkilesim=function(amac){
         $("#yuzdeBirler").css("font-size","medium");
 
         $("#yuzdeBirler",container).append("<div class='yatay'>");
-        $("#yuzdeBirler .yatay").html("Yüzde Birler");
+        $("#yuzdeBirler .yatay").html("Yüzde Birler <br> Basamağı");
 
         $("#SoruCokluInput #yuzdeBirler",container).append("<div id='girdiYuzdeBirler' >");
         $("#girdiYuzdeBirler").css("width","40px")
@@ -398,7 +398,7 @@ etkilesim=function(amac){
         $("#bindeBirler").css("font-size","medium");
 
         $("#bindeBirler",container).append("<div class='yatay'>");
-        $("#bindeBirler .yatay").html("Binde Birler");
+        $("#bindeBirler .yatay").html("Binde Birler <br> Basamağı");
 
 
         $("#SoruCokluInput #bindeBirler",container).append("<div id='girdiBindeBirler' >");
@@ -458,7 +458,7 @@ etkilesim=function(amac){
         $(".yatay").css("height","6px");
         $(".yatay").css("width","130px");
         $(".yatay").css("bottom","110px");
-        $(".yatay").css("left","-50px");
+        $(".yatay").css("left","-55px");
         //$("#yatay").css("right","200px");
         //$("#yatay").css("margin","auto");
         $(".yatay").css("font-size","small");

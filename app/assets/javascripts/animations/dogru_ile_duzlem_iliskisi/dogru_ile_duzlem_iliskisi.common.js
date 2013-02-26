@@ -6,8 +6,8 @@ dogrular=function(){
     var p="paralel";
     var pk=dogru;
     //cati
-    catiAY=new Point(164,122)
-    catiAX=new Point(212,35)
+    catiAY=new Point(120,122)
+    catiAX=new Point(168,35)
     catiA=new Path.Line(catiAX,catiAY);
     catiA.style=dogruStyle;
     catiA.class=k;
@@ -17,7 +17,7 @@ dogrular=function(){
     dogrularArray.push(catiA);
 
     catiBY=new Point(318,35)
-    catiBX=new Point(212,35)
+    catiBX=new Point(168,35)
     catiB=new Path.Line(catiBX,catiBY);
     catiB.style=dogruStyle;
     catiB.class=p;
@@ -37,7 +37,7 @@ dogrular=function(){
     dogrularArray.push(catiC);
 
     catiDY=new Point(305,122)
-    catiDX=new Point(164,122)
+    catiDX=new Point(120,122)
     catiD=new Path.Line(catiDX,catiDY);
     catiD.style=dogruStyle;
     catiD.class=p;
@@ -57,8 +57,8 @@ dogrular=function(){
     dogrularArray.push(arkaCati);
 
     // mavi duvarın solu ve altı
-    maviDuvarSolY=new Point(170,122)
-    maviDuvarSolX=new Point(170,213)
+    maviDuvarSolY=new Point(122,122)
+    maviDuvarSolX=new Point(122,213)
     maviDuvarSol=new Path.Line(maviDuvarSolX,maviDuvarSolY);
     maviDuvarSol.style=dogruStyle;
     maviDuvarSol.class=pk;
@@ -67,7 +67,7 @@ dogrular=function(){
     maviDuvarSol.name="maviDuvarSol";
     dogrularArray.push(maviDuvarSol);
 
-    maviDuvarSagY=new Point(170,211)
+    maviDuvarSagY=new Point(123,211)
     maviDuvarSagX=new Point(304,211)
     maviDuvarSag=new Path.Line(maviDuvarSagX,maviDuvarSagY);
     maviDuvarSag.style=dogruStyle;
@@ -81,8 +81,8 @@ dogrular=function(){
 
 
     // agaç
-    agacY=new Point(109,235)
-    agacX=new Point(109,152)
+    agacY=new Point(61,235)
+    agacX=new Point(61,152)
     agac=new Path.Line(agacX,agacY);
     agac.style=dogruStyle;
     agac.class=p;
@@ -94,8 +94,8 @@ dogrular=function(){
 
 
     //merdiven
-    merdivenSolY=new Point(180,139)
-    merdivenSolX=new Point(152,229)
+    merdivenSolY=new Point(150,139)
+    merdivenSolX=new Point(117,240)
     merdivenSol=new Path.Line(merdivenSolX,merdivenSolY);
     merdivenSol.style=dogruStyle;
     merdivenSol.class=k;
@@ -104,8 +104,8 @@ dogrular=function(){
     merdivenSol.name="merdivenSol";
     dogrularArray.push(merdivenSol);
 
-    merdivenSagY=new Point(205,139)
-    merdivenSagX=new Point(178,229)
+    merdivenSagY=new Point(175,139)
+    merdivenSagX=new Point(142,240)
     merdivenSag=new Path.Line(merdivenSagX,merdivenSagY);
     merdivenSag.style=dogruStyle;
     merdivenSag.class=k;
@@ -116,8 +116,8 @@ dogrular=function(){
 
 
     //basamaklar
-    basamak1Y=new Point(176,153)
-    basamak1X=new Point(200,153)
+    basamak1Y=new Point(144,149)
+    basamak1X=new Point(170,149)
     basamak1=new Path.Line(basamak1X,basamak1Y);
     basamak1.style=dogruStyle;
     basamak1.class=p;
@@ -126,8 +126,8 @@ dogrular=function(){
     basamak1.name="basamak1";
     dogrularArray.push(basamak1);
 
-    basamak2Y=new Point(170,175)
-    basamak2X=new Point(194,175)
+    basamak2Y=new Point(139,172)
+    basamak2X=new Point(163,172)
     basamak2=new Path.Line(basamak2X,basamak2Y);
     basamak2.style=dogruStyle;
     basamak2.class=p;
@@ -136,8 +136,8 @@ dogrular=function(){
     basamak2.name="basamak2";
     dogrularArray.push(basamak2);
 
-    basamak3Y=new Point(162,195)
-    basamak3X=new Point(187,195)
+    basamak3Y=new Point(130,198)
+    basamak3X=new Point(155,198)
     basamak3=new Path.Line(basamak3X,basamak3Y);
     basamak3.style=dogruStyle;
     basamak3.class=p;
@@ -146,8 +146,8 @@ dogrular=function(){
     basamak3.name="basamak3";
     dogrularArray.push(basamak3);
 
-    basamak4Y=new Point(156,216)
-    basamak4X=new Point(180,216)
+    basamak4Y=new Point(123,222)
+    basamak4X=new Point(146,222)
     basamak4=new Path.Line(basamak4X,basamak4Y);
     basamak4.style=dogruStyle;
     basamak4.class=p;
@@ -157,8 +157,8 @@ dogrular=function(){
     dogrularArray.push(basamak4);
 
     //pencereler
-    pencere1AY=new Point(221,142)
-    pencere1AX=new Point(249,142)
+    pencere1AY=new Point(206,138)
+    pencere1AX=new Point(290,138)
     pencere1A=new Path.Line(pencere1AX,pencere1AY);
     pencere1A.style=dogruStyle;
     pencere1A.class=pk;
@@ -167,8 +167,8 @@ dogrular=function(){
     pencere1A.name="pencere1A";
     dogrularArray.push(pencere1A);
 
-    pencere1BY=new Point(247,142)
-    pencere1BX=new Point(247,194)
+    pencere1BY=new Point(289,138)
+    pencere1BX=new Point(289,197)
     pencere1B=new Path.Line(pencere1BX,pencere1BY);
     pencere1B.style=dogruStyle;
     pencere1B.class=pk;
@@ -177,8 +177,28 @@ dogrular=function(){
     pencere1B.name="pencere1B";
     dogrularArray.push(pencere1B);
 
-    pencere1CY=new Point(221,193)
-    pencere1CX=new Point(248,193)
+    pencere1IcY=new Point(247,140)
+    pencere1IcX=new Point(247,197)
+    pencere1Ic=new Path.Line(pencere1IcX,pencere1IcY);
+    pencere1Ic.style=dogruStyle;
+    pencere1Ic.class=pk;
+    pencere1Ic.cati=k;
+    pencere1Ic.sari=p;
+    pencere1Ic.name="pencere1Ic";
+    dogrularArray.push(pencere1Ic);
+
+    pencere1Ic2Y=new Point(206,169)
+    pencere1Ic2X=new Point(290,169)
+    pencere1Ic2=new Path.Line(pencere1Ic2X,pencere1Ic2Y);
+    pencere1Ic2.style=dogruStyle;
+    pencere1Ic2.class=pk;
+    pencere1Ic2.cati=p;
+    pencere1Ic2.sari=k;
+    pencere1Ic2.name="pencere1Ic2";
+    dogrularArray.push(pencere1Ic2);
+
+    pencere1CY=new Point(206,198)
+    pencere1CX=new Point(290,198)
     pencere1C=new Path.Line(pencere1CX,pencere1CY);
     pencere1C.style=dogruStyle;
     pencere1C.class=pk;
@@ -187,8 +207,8 @@ dogrular=function(){
     pencere1C.sari=k;
     dogrularArray.push(pencere1C);
 
-    pencere1DY=new Point(223,142)
-    pencere1DX=new Point(223,193)
+    pencere1DY=new Point(206,138)
+    pencere1DX=new Point(206,197)
     pencere1D=new Path.Line(pencere1DX,pencere1DY);
     pencere1D.style=dogruStyle;
     pencere1D.class=pk;
@@ -197,26 +217,10 @@ dogrular=function(){
     pencere1D.name="pencere1D";
     dogrularArray.push(pencere1D);
 
-    pencere2AY=new Point(260,142)
-    pencere2AX=new Point(286,142)
-    pencere2A=new Path.Line(pencere2AX,pencere2AY);
-    pencere2A.style=dogruStyle;
-    pencere2A.class=pk;
-    pencere2A.cati=p;
-    pencere2A.sari=k;
-    pencere2A.name="pencere2A";
-    dogrularArray.push(pencere2A);
 
-    pencere2BY=new Point(284,142)
-    pencere2BX=new Point(284,192)
-    pencere2B=new Path.Line(pencere2BX,pencere2BY);
-    pencere2B.style=dogruStyle;
-    pencere2B.class=pk;
-    pencere2B.cati=k;
-    pencere2B.sari=p;
-    pencere2B.name="pencere2B";
-    dogrularArray.push(pencere2B);
 
+
+/*
     pencere2CY=new Point(286,192)
     pencere2CX=new Point(260,192)
     pencere2C=new Path.Line(pencere2CX,pencere2CY);
@@ -227,6 +231,7 @@ dogrular=function(){
     pencere2C.name="pencere2C";
     dogrularArray.push(pencere2C);
 
+
     pencere2DY=new Point(261,142)
     pencere2DX=new Point(261,192)
     pencere2D=new Path.Line(pencere2DX,pencere2DY);
@@ -236,10 +241,10 @@ dogrular=function(){
     pencere2D.sari=p;
     pencere2D.name="pencere2D";
     dogrularArray.push(pencere2D);
+*/
 
-
-    pencere3AY=new Point(322,136)
-    pencere3AX=new Point(345,130)
+    pencere3AY=new Point(326,136)
+    pencere3AX=new Point(378,120)
     pencere3A=new Path.Line(pencere3AX,pencere3AY);
     pencere3A.style=dogruStyle;
     pencere3A.class=k;
@@ -248,8 +253,8 @@ dogrular=function(){
     pencere3A.name="pencere3A";
     dogrularArray.push(pencere3A);
 
-    pencere3BY=new Point(343,130)
-    pencere3BX=new Point(343,181)
+    pencere3BY=new Point(378,120)
+    pencere3BX=new Point(378,172)
     pencere3B=new Path.Line(pencere3BX,pencere3BY);
     pencere3B.style=dogruStyle;
     pencere3B.class=p;
@@ -258,8 +263,28 @@ dogrular=function(){
     pencere3B.name="pencere3B";
     dogrularArray.push(pencere3B);
 
-    pencere3CY=new Point(345,181)
-    pencere3CX=new Point(322,186)
+    pencere3IcY=new Point(326,162)
+    pencere3IcX=new Point(378,147)
+    pencere3Ic=new Path.Line(pencere3IcX,pencere3IcY);
+    pencere3Ic.style=dogruStyle;
+    pencere3Ic.class=k;
+    pencere3Ic.cati=k;
+    pencere3Ic.sari=pk;
+    pencere3Ic.name="pencere3Ic";
+    dogrularArray.push(pencere3Ic);
+
+    pencere3Ic2Y=new Point(353,128)
+    pencere3Ic2X=new Point(353,180)
+    pencere3Ic2=new Path.Line(pencere3Ic2X,pencere3Ic2Y);
+    pencere3Ic2.style=dogruStyle;
+    pencere3Ic2.class=p;
+    pencere3Ic2.cati=k;
+    pencere3Ic2.sari=pk;
+    pencere3Ic2.name="pencere3Ic2";
+    dogrularArray.push(pencere3Ic2);
+
+    pencere3CY=new Point(378,172)
+    pencere3CX=new Point(326,188)
     pencere3C=new Path.Line(pencere3CX,pencere3CY);
     pencere3C.style=dogruStyle;
     pencere3C.class=k;
@@ -268,8 +293,8 @@ dogrular=function(){
     pencere3C.name="pencere3C";
     dogrularArray.push(pencere3C);
 
-    pencere3DY=new Point(322,136)
-    pencere3DX=new Point(322,187)
+    pencere3DY=new Point(326,136)
+    pencere3DX=new Point(326,188)
     pencere3D=new Path.Line(pencere3DX,pencere3DY);
     pencere3D.style=dogruStyle;
     pencere3D.class="paralel";
@@ -282,8 +307,8 @@ dogrular=function(){
 
 
     //sarı duvar
-    sariDuvarAY=new Point(305,122)
-    sariDuvarAX=new Point(304,211)
+    sariDuvarAY=new Point(307,122)
+    sariDuvarAX=new Point(306,211)
     sariDuvarA=new Path.Line(sariDuvarAX,sariDuvarAY);
     sariDuvarA.style=dogruStyle;
     sariDuvarA.class=pk;
@@ -293,7 +318,7 @@ dogrular=function(){
     dogrularArray.push(sariDuvarA);
 
     sariDuvarBY=new Point(304,122)
-    sariDuvarBX=new Point(394,95)
+    sariDuvarBX=new Point(396,95)
     sariDuvarB=new Path.Line(sariDuvarBX,sariDuvarBY);
     sariDuvarB.style=dogruStyle;
     sariDuvarB.class=k;
@@ -302,8 +327,10 @@ dogrular=function(){
     sariDuvarB.name="sariDuvarB";
     dogrularArray.push(sariDuvarB);
 
-    sariDuvarCY=new Point(394,95)
-    sariDuvarCX=new Point(394,181)
+
+
+    sariDuvarCY=new Point(396,95)
+    sariDuvarCX=new Point(396,181)
     sariDuvarC=new Path.Line(sariDuvarCX,sariDuvarCY);
     sariDuvarC.style=dogruStyle;
     sariDuvarC.class=p;
@@ -313,7 +340,7 @@ dogrular=function(){
     dogrularArray.push(sariDuvarC);
 
     sariDuvarDY=new Point(304,211)
-    sariDuvarDX=new Point(394,181)
+    sariDuvarDX=new Point(396,181)
     sariDuvarD=new Path.Line(sariDuvarDX,sariDuvarDY);
     sariDuvarD.style=dogruStyle;
     sariDuvarD.class=k;
@@ -323,8 +350,8 @@ dogrular=function(){
     dogrularArray.push(sariDuvarD);
 
     //lamba direği
-    lambaY=new Point(377,142);
-    lambaX=new Point(377,232);
+    lambaY=new Point(423,142);
+    lambaX=new Point(423,232);
     lamba=new Path.Line(lambaX,lambaY);
     lamba.style=dogruStyle;
     lamba.class=p;
@@ -403,7 +430,7 @@ dogrular=function(){
         if(hitResult){
             console.log("ÇAtı: "+event.item.cati);
             if(event.item.class=="paralel" || event.item.class=="kesişen"){
-                if(event.item.strokeWidth==2 & dogru==event.item.class){
+                if(event.item.strokeWidth==10 & dogru==event.item.class){
                     console.log("IF: "+event.item.name+","+event.item.opacity)
                     //event.item.opacity=0.5;
                     event.item.style=seciliStyle;
