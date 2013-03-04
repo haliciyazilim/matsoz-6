@@ -445,6 +445,7 @@ Main.initializeToolbar = function(isPassive){
             aboutUsUrl = './resources/about_us/about_us.htm';
         }
     }
+    catch(e){}
     Main.InfoDialog.addContent(
         'Program Hakkında',
         '<iframe src="'+aboutUsUrl+'" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
