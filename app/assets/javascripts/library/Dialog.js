@@ -20,7 +20,7 @@ var Dialog = Class.extend({
         dialog_box.setAttribute('DialogId',this.id);
         document.body.appendChild(dialog_box);
 
-        $(dialog_box).append('<a href="#" id="kapat" onclick="Dialog.CloseDialogWithId('+this.id+')"><img src="/assets/theme/blue/ui_img/cancel.png" alt="Kapat" /></a>');
+        $(dialog_box).append('<a href="#" id="kapat" onclick="Dialog.CloseDialogWithId('+this.id+')"></a>');
 
         var dialog_tab_bar = document.createElement('div');
         dialog_tab_bar.className = 'dialog_tab_bar';
