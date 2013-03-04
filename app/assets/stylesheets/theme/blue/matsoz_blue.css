@@ -391,8 +391,8 @@ div.simgebg {
     height:138px;
     position:relative;
     z-index:15;
-    bottom:12px;
-    right:-12px;
+    bottom:25px;
+    right:-28px;
     background:url(ui_img/simge_bg.png) no-repeat center transparent;
 }
 div.simge {
