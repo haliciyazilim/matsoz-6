@@ -441,8 +441,8 @@ Main.initializeToolbar = function(isPassive){
     var aboutUsUrl = '/resources/about_us/about_us.htm';
     try{
         if(exportedPage){
-            matsozManualUrl = './resources/matsoz_manuel/matsoz_manuel.htm';
-            aboutUsUrl = './resources/about_us/about_us.htm';
+            matsozManualUrl = 'resources/matsoz_manuel/matsoz_manuel.htm';
+            aboutUsUrl = 'resources/about_us/about_us.htm';
         }
     }
     catch(e){}
