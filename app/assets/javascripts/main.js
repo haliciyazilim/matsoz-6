@@ -461,7 +461,7 @@ Main.initializeToolbar = function(isPassive){
         try{
             if (exportedPage) {
                 try{
-                    if(indexpage){
+                    if(indexPage){
                         window.location = '../intro/index.html';
                     }
                 }
