@@ -437,13 +437,21 @@ Main.createInteractionSkipSlider = function(){
 
 Main.initializeToolbar = function(isPassive){
     Main.InfoDialog = new Dialog({title:'Information'});
+    var matsozManualUrl = '/resources/matsoz_manuel/matsoz_manuel.htm';
+    var aboutUsUrl = '/resources/about_us/about_us.htm';
+    try{
+        if(exportedPage){
+            matsozManualUrl = './resources/matsoz_manuel/matsoz_manuel.htm';
+            aboutUsUrl = './resources/about_us/about_us.htm';
+        }
+    }
     Main.InfoDialog.addContent(
         'Program Hakkında',
-        '<iframe src="/resources/about_us/about_us.htm" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
+        '<iframe src="'+aboutUsUrl+'" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
     );
     Main.InfoDialog.addContent(
         'Kullanıcı Kılavuzu',
-        '<iframe src="/resources/matsoz_manuel/matsoz_manuel.htm" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
+        '<iframe src="'+matsozManualUrl+'" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
     );
 
     $('.btn_home').click(function(event){
