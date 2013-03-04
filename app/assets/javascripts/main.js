@@ -460,9 +460,12 @@ Main.initializeToolbar = function(isPassive){
     $('.btn_home').click(function(event){
         try{
             if (exportedPage) {
-                if(indexpage){
-                    window.location = '../intro/index.html';
-                }else{
+                try{
+                    if(indexPage){
+                        window.location = '../intro/index.html';
+                    }
+                }
+                catch(e){
                     window.location = '../../intro/index.html';
                 }
             }
