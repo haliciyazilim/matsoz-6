@@ -1,1 +1,0 @@
-function __Styles(){fillColor="#f3b93e",rectStyle={fillColor:"#f3b93e",strokeWidth:1,strokeColor:"#af762f"},animationSubtractCss={width:120,position:"absolute",top:"35px",left:"250px",fontSize:"24px",textAlign:"right",fontWeight:"bold",fontFamily:"cursive",zIndex:1,color:"#fff"},navigator.appName=="Microsoft Internet Explorer"&&(animationSubtractCss.fontFamily="arial")};
