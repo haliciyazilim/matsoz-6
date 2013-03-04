@@ -441,8 +441,10 @@ Main.initializeToolbar = function(isPassive){
     var aboutUsUrl = '/resources/about_us/about_us.htm';
     try{
         if(exportedPage){
-            matsozManualUrl = 'resources/matsoz_manuel/matsoz_manuel.htm';
-            aboutUsUrl = 'resources/about_us/about_us.htm';
+            if(indexPage){
+                matsozManualUrl = 'resources/matsoz_manuel/matsoz_manuel.htm';
+                aboutUsUrl = 'resources/about_us/about_us.htm';
+            }
         }
     }
     catch(e){}
@@ -458,9 +460,11 @@ Main.initializeToolbar = function(isPassive){
     $('.btn_home').click(function(event){
         try{
             if (exportedPage) {
-                window.location = '../../intro/index.html';
-            } else {
-                window.location = '../';
+                if(indexpage){
+                    window.location = '../intro/index.html';
+                }else{
+                    window.location = '../../intro/index.html';
+                }
             }
         }
         catch(e){

@@ -3,7 +3,6 @@
   %meta{'http-equiv'=>'Content-Type', 'content' => 'text/html; charset=UTF-8'}
   = javascript_include_tag 'main.js'
   = javascript_include_tag 'splash.js'
-  = javascript_include_tag 'library/dialog.js'
   = stylesheet_link_tag 'theme/blue/matsoz_blue.css'
   = stylesheet_link_tag 'theme/blue/matsoz_splash.css'
   = stylesheet_link_tag 'theme/blue/matsoz_dialog.css'
@@ -17,6 +16,8 @@
   - else
     :javascript
       var exportedPage = false;
+  :javascript
+    var indexPage = true;
 #container
   -##words_list
   -#  - @all_entries.each do |entry|
