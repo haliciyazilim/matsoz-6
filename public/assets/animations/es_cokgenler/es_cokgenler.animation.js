@@ -1,0 +1,1 @@
+var Animation={images:[],init:function(e){Animation.container=e;var t=new GIF({src:"/assets/animations/es_cokgenler/es_cokgenler.jpg",width:750,height:160,parent:Animation.container,count:90,css:{position:"absolute",top:"50%",left:"50%",marginLeft:"-375px",marginTop:"-80px"}});setTimeout(function(){t.play(10)},2e3),Main.animationFinished(11100)}};
