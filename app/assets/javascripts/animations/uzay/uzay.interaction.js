@@ -24,7 +24,7 @@ var Interaction = {
         Interaction.matrix = Util.createProjectionMatrixForObjectAt(250,150);
         Interaction.prepareNextQuestion();
     },
-	nextQuestion: function(randomNumber){
+	nextQuestion: function(){
         Interaction.pause();
         Interaction.resume(3000);
         Interaction.button.className = "next_button";
@@ -34,7 +34,13 @@ var Interaction = {
 //        Interaction.Shapes[Interaction.shapeIndex]();
         Interaction.playScenerio(Interaction.Scenarios[Interaction.shapeIndex]);
 //        /*<[[TEST*/ Interaction.playScenerio(Interaction.Scenarios[ 9 ]); /*TEST]]>*/
-        Interaction.shapeIndex = ++Interaction.shapeIndex % Interaction.Scenarios.length;
+        if(Interaction.shapeIndex == Interaction.Scenarios.length-1){
+            Interaction.button.style.display = 'none';
+        }
+        else{
+            Interaction.shapeIndex = ++Interaction.shapeIndex % Interaction.Scenarios.length;
+        }
+//        if(Interaction.shapeIndex == )
     },
     createRectanglePrisim:function(){
         var pr = new ExpandablePrism(350, 225, 100, Interaction.matrix);
@@ -48,7 +54,7 @@ var Interaction = {
                     point(scenario[i]);
                     break;
                 case "line":
-                    line(scenario[i]);
+                    Line(scenario[i]);
                     break;
                 case "surface":
                     surface(scenario[i]);

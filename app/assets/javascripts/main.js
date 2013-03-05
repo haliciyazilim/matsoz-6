@@ -437,17 +437,37 @@ Main.createInteractionSkipSlider = function(){
 
 Main.initializeToolbar = function(isPassive){
     Main.InfoDialog = new Dialog({title:'Information'});
+    var matsozManualUrl = '/resources/matsoz_manuel/matsoz_manuel.htm';
+    var aboutUsUrl = '/resources/about_us/about_us.htm';
+    try{
+        if(exportedPage){
+            if(indexPage){
+                matsozManualUrl = 'resources/matsoz_manuel/matsoz_manuel.htm';
+                aboutUsUrl = 'resources/about_us/about_us.htm';
+            }
+        }
+    }
+    catch(e){}
     Main.InfoDialog.addContent(
         'Program Hakkında',
-        '<div style="width: 100%; margin: auto; box-sizing: border-box; padding: 100px; padding-top: 50px; padding-right: 250px; line-height: 20px;">Bu ürün TÜBİTAK ve Milli Eğitim Bakanlığı adına Halıcı Bilgi İşlem AŞ tarafından geliştirilmiştir. <br/><a href="http://www.halici.com.tr" target="_blank">www.halici.com.tr</a><br/>Etkileşimli Matematik Sözlüğü<br/>Güncelleme Tarihi:  2013-01-21<br/>Versiyon: 1.0.1<br/><div style="padding-top: 20px; padding-bottom: 20px"><img src="/assets/eba_logo_renkli.png" style="display: inline; margin-right: 30px" /><img src="/assets/halici_logo_renkli.png" style="display: inline" /></div>Tablet için kullanıma uygun olup Chrome ve Safari tarayıcıları ile çalışır.<br/>Tarayıcı Gereksinimleri: Javascript, HTML5, CSS3<br/>İhtiyaç duyulacak gereksinimler ve programın işlevselliği kullandığınız işletim sistemi ve donanıma bağlı olarak değişiklik gösterebilir.<br/></div>'
+        '<iframe src="'+aboutUsUrl+'" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
     );
-    Main.InfoDialog.addContent('Kullanıcı Kılavuzu','<iframe src="/resources/matsoz_manuel/matsoz_manuel.htm" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>');
+    Main.InfoDialog.addContent(
+        'Kullanıcı Kılavuzu',
+        '<iframe src="'+matsozManualUrl+'" style="width: 100%; height: 99%; border: none; padding: 0px; box-sizing: border-box; overflow: hidden; margin: 0px;"></iframe>'
+    );
+
     $('.btn_home').click(function(event){
         try{
             if (exportedPage) {
-                window.location = '../../intro/index.html';
-            } else {
-                window.location = '../';
+                try{
+                    if(indexPage){
+                        window.location = '../intro/index.html';
+                    }
+                }
+                catch(e){
+                    window.location = '../../intro/index.html';
+                }
             }
         }
         catch(e){
@@ -540,6 +560,5 @@ function OrientationWarningDialogBox(){
         this.mask.style.display = 'none';
         this.dialog_box.style.display = 'none';
     }
-
 }
 $(document).ready(detectOrientation);

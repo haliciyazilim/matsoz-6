@@ -47,7 +47,7 @@ function surface(scene){
     }
 
 }
-function line(scene){
+function Line(scene){
     var centerPoint = Util.centerOfPoints([
         Util.project(scene.point1,Interaction.matrix),
         Util.project(scene.point2,Interaction.matrix)

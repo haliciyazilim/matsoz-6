@@ -14,7 +14,7 @@ var Interaction = {
     ],
     init:function(container){
         Interaction.container = container;
-        Main.setObjective('Yandaki eş küplerle oluşturulmuş şeklin istenen yönde görünümünü kareli bölgeye çiziniz ve kontrol ediniz.');
+        Main.setObjective('Yandaki eş küplerle oluşturulmuş şeklin istenen yönde görünümünü kareli bölgede karelerin üzerine basarak çiziniz ve kontrol ediniz.');
         Interaction.paper = {
             width:$(container).width(),
             height:$(container).height()
