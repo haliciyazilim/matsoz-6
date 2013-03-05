@@ -1375,7 +1375,7 @@ Set.drawSets = function(container, topLeftPoint, sets, letters) {
 			elementsSize1.height = 28;
 		}
 	} else if (set2DifferenceSet1.elements.length == 0) {		
-		var vennSize1 = new Size(noOfElements1*10*2 + 110, 128);	
+		var vennSize1 = new Size(noOfElements1*10*2 + 130, 128);
 		var vennBoundingBox1 = new Rectangle(topLeftPoint, vennSize1);
 		var textPoint1 = new Point(vennBoundingBox1.x+vennBoundingBox1.width*0.1, vennBoundingBox1.y+vennBoundingBox1.height*0.1);
 		
