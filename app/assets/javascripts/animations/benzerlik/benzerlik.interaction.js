@@ -4,10 +4,6 @@ var Interaction = {
         return 'paper';
     },
 	images:[
-        {
-            id:'resizeImage',
-            src:'/assets/animations/benzerlik/resize.png'
-        }
     ],
     init:function(container){
         Interaction.container = container;
