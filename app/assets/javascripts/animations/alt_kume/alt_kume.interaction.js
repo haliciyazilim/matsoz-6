@@ -163,14 +163,14 @@ var Interaction = {
         Interaction.kumeElemanlar=Interaction.birinciKume.elemanlar();
         console.log(Interaction.kumeElemanlar[kumeAdresArray[i]]);
         Interaction.yeniKume=[];
-        $("#dogruCevap").append("<b>A ⊂ B = {</b> ");
+        $("#dogruCevap").append("<b>B = {</b>  ");
         for(var i=0; i<Interaction.inputs.length;i++){
             $("#dogruCevap").append(Interaction.kumeElemanlar[kumeAdresArray[i]]);
             Interaction.yeniKume.push(Interaction.kumeElemanlar[kumeAdresArray[i]]);
             if((i+1)!=Interaction.inputs.length)
                 $("#dogruCevap").append(", ");
             else
-                $("#dogruCevap").append(" <b>}</b>");
+                $("#dogruCevap").append(" <b>}<br />B ⊂ A </b>");
         }
 
 
