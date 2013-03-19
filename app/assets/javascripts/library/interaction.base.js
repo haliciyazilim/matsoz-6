@@ -239,9 +239,9 @@ function InteractionBase(){
 			Interaction.setStatus('');
 		if(Interaction.__inputVersion == 2)
 			Interaction.flushInputs();
+        Interaction.enableEntryForInputs();
 		for(i = 0; i < Interaction.inputs.length; i++){
 			if(Interaction.inputs[i]){
-				$(Interaction.inputs[i]).get(0).onkeydown = null;
 				Interaction.inputs[i].value = '';
 				$(Interaction.inputs[i]).removeClass('input_user_answer_correct');
 				$(Interaction.inputs[i]).removeClass('input_user_answer_wrong');
@@ -369,12 +369,7 @@ function InteractionBase(){
 		//call user-defined functions
 		if(isCorrect){
 			Interaction.__status(Interaction.__status.CORRECT);
-			$(Interaction.inputs).each(function(index, element) {
-            	$(this).get(0).onkeydown = function(event){
-					if(event.keyCode != 13)
-						return false;
-				}
-            });
+            Interaction.disableEntryForInputs();
 			
 			if(Interaction.onCorrectAnswer)
 				Interaction.onCorrectAnswer();
@@ -389,13 +384,7 @@ function InteractionBase(){
 //			Main.wrongSound.play();
 		}
 		else{			
-			$(Interaction.inputs).each(function(index, element) {
-				$(this).get(0).onfocus = null;
-            	$(this).get(0).onkeydown = function(event){
-					if(event.keyCode != 13)
-						return false;
-				}   
-            });
+			Interaction.disableEntryForInputs();
 
 			if(Interaction.onFail)
 				Interaction.onFail();
@@ -408,7 +397,32 @@ function InteractionBase(){
 		}
 		Interaction.trial++;
 	};
-	
+
+    Interaction.enableEntryForInputs = function(){
+        $(Interaction.inputs).each(function(index, element) {
+//            $(this).get(0).onkeydown = null;
+//            $(this).get(0).onkeypress = null;
+//            $(this).get(0).onkeyup = null;
+            $(this).get(0).disabled = false;
+        });
+    }
+
+    Interaction.disableEntryForInputs = function(){
+
+        $(Interaction.inputs).each(function(index, element) {
+//            $(this).get(0).onfocus = null;
+            $(this).get(0).disabled = true;
+//            var f = function(event){
+//                if(event.keyCode != 13)
+//                    return false;
+//            };
+//            $(this).get(0).onkeydown = f;
+//            $(this).get(0).onkeypress = f;
+//            $(this).get(0).onkeyup = f;
+
+        });
+    }
+
 	Interaction.__inputFilter__onlyNumbers = function (e,allowedchars){
 		var isPassKey =function (key,allowedchars){
 			if(allowedchars!=null){
