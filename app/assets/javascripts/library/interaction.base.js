@@ -160,14 +160,14 @@ function InteractionBase(){
 		else 	
 			input.setAttribute('isNumber','false');
         input.setAttribute('type','text');
-        if(isNumber == true && Main.getCurrentPlatform() == Main.platform.MOBILE){
-            $(input).keydown(function(){
-                this.setAttribute('type','text');
-            });
-            $(input).focus(function(){
-                this.setAttribute('type','number');
-            });
-        }
+//        if(isNumber == true && Main.getCurrentPlatform() == Main.platform.MOBILE){
+//            $(input).keydown(function(){
+//                this.setAttribute('type','text');
+//            });
+//            $(input).focus(function(){
+//                this.setAttribute('type','number');
+//            });
+//        }
 		$(input)
 			.attr({
 				'class':'input',

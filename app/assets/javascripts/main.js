@@ -294,8 +294,10 @@ Main.initializeNavigation = function() {
         }
     }
     var sozcuktasiyici = $('.sozcuktasiyici').get(0);
-    if(selectedWordIndex > 11)
-        sozcuktasiyici.scrollByLines(selectedWordIndex - 11);
+    if(selectedWordIndex > 12){
+        var scrollAmount = (selectedWordIndex - 12)* 42;
+        $(sozcuktasiyici).animate({ scrollTop: scrollAmount+"px"},500);
+    }
 }
 
 //Main.initializeSoundManager = function() {
