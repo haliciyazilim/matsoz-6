@@ -57,7 +57,7 @@ var Interaction = {
 
         tik="";
         tiklama=0;
-        tool=new Tool();
+        var tool=new Tool();
         //tool.distanceThreshold = 100;
         Interaction.tiklama=onMouseDown;
         tool.onMouseDown=Interaction.tiklama;
