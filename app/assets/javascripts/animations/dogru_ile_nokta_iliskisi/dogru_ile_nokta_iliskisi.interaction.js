@@ -106,8 +106,13 @@ var Interaction = {
         Main.setObjective("Bu noktadan geçen bir doğru çizmek için ekranda uygun yerlerde iki noktaya basınız.");
         Interaction.pointA = null;
         Interaction.pointB = null;
-        Interaction.tool.onMouseDown = function(event){
+        Interaction.tool.onMouseUp = function(event){
+            if(Interaction.isMouseDown != true)
+                return;
+            Interaction.isMouseDown = false;
             if(Interaction.pointA != null){
+                if(Interaction.pointA.x == event.point.x && Interaction.pointA.y == event.point.y)
+                    return;
                 Interaction.pointB = event.point;
                 Interaction.pointB.showOnCanvas(Interaction.pointRadius);
                 var p1 = Interaction.pointA.findPointTo(Interaction.pointB,-50);
@@ -131,6 +136,9 @@ var Interaction = {
                 Interaction.pointA.showOnCanvas(Interaction.pointRadius);
             }
         }
+        Interaction.tool.onMouseDown = function(event){
+            Interaction.isMouseDown = true;
+        }
 
     },
     selectLine:function(){
@@ -145,7 +153,10 @@ var Interaction = {
             Interaction.pointB,
             15,30
         );
-        Interaction.tool.onMouseDown = function(event){
+        Interaction.tool.onMouseUp = function(event){
+            if(Interaction.isMouseDown != true)
+            return;
+            Interaction.isMouseDown = false;
             var projectedPoint = event.point.projectToLine(Interaction.pointA,Interaction.pointB);
             if(event.point.getDistance(projectedPoint) > 15)
                 return;
@@ -156,14 +167,17 @@ var Interaction = {
                 return;
             if(Interaction.circle1 == undefined || Interaction.circle2 == undefined)
             {
+                if(Interaction.circle1 && Interaction.circle1.position.x == projectedPoint.x && Interaction.circle1.position.y == projectedPoint.y)
+                    return;
                 var circle = projectedPoint.showOnCanvas(10);
                 if(Interaction.circle1 == undefined)
                     Interaction.circle1 = circle;
                 else if(Interaction.circle2 == undefined)
                     Interaction.circle2 = circle;
             }
-
-
+        }
+        Interaction.tool.onMouseDown = function(event){
+            Interaction.isMouseDown = true;
         }
 
     },
