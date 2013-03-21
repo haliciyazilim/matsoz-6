@@ -444,18 +444,18 @@ var Animation = {
                             style:{opacity:0},
                             duration:1000
                         })
-                        Animation.ki1.animate({
+                       /* Animation.ki1.animate({
                             style:{opacity:0},
                             duration:1000
-                        })
-                        Animation.ki2.animate({
+                        })*/
+                       /* Animation.ki2.animate({
                             style:{opacity:0},
                             duration:1000
                         })
                         Animation.kin.animate({
                             style:{opacity:0},
                             duration:1000
-                        })
+                        })*/
                     }
                 }
 

@@ -7,6 +7,8 @@ var Interaction = {
         
     ],
     init:function(container){
+
+        console.log("********* init -interaction");
         Interaction.container = container;
         Main.setObjective('');
         Interaction.paper = {

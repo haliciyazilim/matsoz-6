@@ -1,5 +1,6 @@
 dogrular=function(){
     //xxx.class mavi duvarın özelliği
+    console.log("********* dorular - common");
 
     dogrularArray=[];
     var k="kesişen";
@@ -393,8 +394,8 @@ dogrular=function(){
     }
 
 
-    tool=new Tool();
-    tool.distanceThreshold = 200;
+   var tool=new Tool();
+    //tool.distanceThreshold = 200;
     tool.onMouseDown=onMouseDown;
     tool.onMouseUp=onMouseUp;
 
@@ -428,7 +429,7 @@ dogrular=function(){
 
 
         if(hitResult){
-            console.log("ÇAtı: "+event.item.cati);
+
             if(event.item.class=="paralel" || event.item.class=="kesişen"){
                 if(event.item.strokeWidth==10 & dogru==event.item.class){
                     console.log("IF: "+event.item.name+","+event.item.opacity)
@@ -441,7 +442,7 @@ dogrular=function(){
                     Interaction.seciliId.push(event.item)
                     Interaction.seciliClass.push(event.item.class)
                     console.log(Interaction.seciliId);
-                    console.log(Interaction.seciliClass);
+                    console.log("seçili class"+Interaction.seciliClass);
 
                     sayac--;
                     $("#sayac").html(sayac);
