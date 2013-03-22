@@ -58,10 +58,15 @@ var Interaction = {
         tik="";
         tiklama=0;
         var tool=new Tool();
-        //tool.distanceThreshold = 100;
+        tool.distanceThreshold = 100;
         Interaction.tiklama=onMouseDown;
         tool.onMouseDown=Interaction.tiklama;
         tool.onMouseUp=onMouseUp;
+
+        Interaction.basilanNokta={
+            x:0,
+            y:0
+        };
 
         if( navigator.platform.indexOf("Win") >-1 || navigator.platform.indexOf("Mac") >-1 || navigator.platform.indexOf("Linux") >-1){
             if( navigator.platform != 'Linux armv6l' && navigator.platform != 'Linux armv7l')
@@ -79,7 +84,16 @@ var Interaction = {
         var idler=["nokta00","nokta01","nokta02","nokta03","nokta10","nokta11","nokta12","nokta13"];
 
         Interaction.dogruNoktalar=[];
+
         function onMouseDown(event) {
+            if(Interaction.basilanNokta.x==event.point.x && Interaction.basilanNokta.y==event.point.y)
+                return;
+
+            Interaction.basilanNokta.x=event.point.x;
+            Interaction.basilanNokta.y=event.point.y;
+
+            console.log("qqqqqqqqonMouseDown:2 "+Interaction.basilanNokta.x+", "+Interaction.basilanNokta.y);
+
             if(event.item){
 
                 if(event.item.class=="nokta"){
@@ -207,19 +221,23 @@ var Interaction = {
                             tiklama++;
                             birinciTiklama=null;
                             console.log(birinciTiklama)
-                            event.item.opacity=0;
+                            event.item.opacity=0.1;
+                            event.item.fillColor="black";
 
                         }
                     }
 
                 }
             }
+
+
+
+
         }
 
         function onMouseUp(){
             if(tiklama==2)
                 tiklama=0;
-
         }
 
 
