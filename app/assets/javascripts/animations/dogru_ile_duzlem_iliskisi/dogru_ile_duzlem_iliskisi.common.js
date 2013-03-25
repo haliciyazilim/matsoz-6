@@ -1,5 +1,6 @@
 dogrular=function(){
     //xxx.class mavi duvarın özelliği
+    console.log("********* dorular - common");
 
     dogrularArray=[];
     var k="kesişen";
@@ -17,7 +18,7 @@ dogrular=function(){
     dogrularArray.push(catiA);
 
     catiBY=new Point(318,35)
-    catiBX=new Point(168,35)
+    catiBX=new Point(166,35)
     catiB=new Path.Line(catiBX,catiBY);
     catiB.style=dogruStyle;
     catiB.class=p;
@@ -68,7 +69,7 @@ dogrular=function(){
     dogrularArray.push(maviDuvarSol);
 
     maviDuvarSagY=new Point(123,211)
-    maviDuvarSagX=new Point(304,211)
+    maviDuvarSagX=new Point(307,211)
     maviDuvarSag=new Path.Line(maviDuvarSagX,maviDuvarSagY);
     maviDuvarSag.style=dogruStyle;
     maviDuvarSag.class=pk;
@@ -308,7 +309,7 @@ dogrular=function(){
 
     //sarı duvar
     sariDuvarAY=new Point(307,122)
-    sariDuvarAX=new Point(306,211)
+    sariDuvarAX=new Point(307,213)
     sariDuvarA=new Path.Line(sariDuvarAX,sariDuvarAY);
     sariDuvarA.style=dogruStyle;
     sariDuvarA.class=pk;
@@ -330,7 +331,7 @@ dogrular=function(){
 
 
     sariDuvarCY=new Point(396,95)
-    sariDuvarCX=new Point(396,181)
+    sariDuvarCX=new Point(396,183)
     sariDuvarC=new Path.Line(sariDuvarCX,sariDuvarCY);
     sariDuvarC.style=dogruStyle;
     sariDuvarC.class=p;
@@ -393,14 +394,16 @@ dogrular=function(){
     }
 
 
-    tool=new Tool();
-    tool.distanceThreshold = 200;
-    tool.onMouseDown=onMouseDown;
-    tool.onMouseUp=onMouseUp;
+    Interaction.tool=new Tool();
+    Interaction.tool.distanceThreshold = 200;
+    Interaction.tool.onMouseDown=onMouseDown;
+    Interaction.tool.onMouseUp=onMouseUp;
+
+    console.log("qqqqqqqqqqqqqqqqq on mouse down qqqqqqqqqqqqqqqqqqqqqqq");
 
     if( navigator.platform.indexOf("Win") >-1 || navigator.platform.indexOf("Mac") >-1 || navigator.platform.indexOf("Linux") >-1){
         if( navigator.platform != 'Linux armv6l' && navigator.platform != 'Linux armv7l')
-            tool.onMouseMove=onMouseMove;
+            Interaction.tool.onMouseMove=onMouseMove;
     }
 
 
@@ -408,7 +411,7 @@ dogrular=function(){
         segments: true,
         stroke: true,
         fill: true,
-        tolerance: 10
+        tolerance: 30
 
     };
 
@@ -417,20 +420,39 @@ dogrular=function(){
     sayac=dogru=="paralel"?paralel:kesisen;
     console.log("SAYAÇ: "+sayac);
 
+    Interaction.basilanNokta={
+        x:0,
+        y:0
+    };
+
+
     function onMouseDown(event) {
 
+        console.log("onMouseDown: ");
+        console.log(event.point);
+
+        console.log("onMouseDown: if**********************");
+        if( (navigator.platform == 'Linux armv6l' || navigator.platform == 'Linux armv7l') && Interaction.basilanNokta.x==event.point.x && Interaction.basilanNokta.y==event.point.y)
+                return;
 
 
-       var hitResult = project.hitTest(event.point, hitOptions);
+        Interaction.basilanNokta.x=event.point.x;
+        Interaction.basilanNokta.y=event.point.y;
+
+
+        console.log("qqqqqqqqonMouseDown:2 "+Interaction.basilanNokta.x+", "+Interaction.basilanNokta.y);
+
+
+        var hitResult = project.hitTest(event.point, hitOptions);
 
 
 
 
 
         if(hitResult){
-            console.log("ÇAtı: "+event.item.cati);
+
             if(event.item.class=="paralel" || event.item.class=="kesişen"){
-                if(event.item.strokeWidth==10 & dogru==event.item.class){
+                if(event.item.strokeWidth==20 & dogru==event.item.class){
                     console.log("IF: "+event.item.name+","+event.item.opacity)
                     //event.item.opacity=0.5;
                     event.item.style=seciliStyle;
@@ -441,7 +463,7 @@ dogrular=function(){
                     Interaction.seciliId.push(event.item)
                     Interaction.seciliClass.push(event.item.class)
                     console.log(Interaction.seciliId);
-                    console.log(Interaction.seciliClass);
+                    console.log("seçili class"+Interaction.seciliClass);
 
                     sayac--;
                     $("#sayac").html(sayac);
@@ -487,14 +509,9 @@ dogrular=function(){
     }
 
     function onMouseUp(){
-
-
     }
 
-
-
     function onMouseMove(event) {
-
         var hitResult = project.hitTest(event.point, hitOptions);
 
         if (hitResult && hitResult.item){
@@ -520,21 +537,29 @@ dogrular=function(){
     }
 
 
+
 }
 
 yanlisSecim=function(sekil){
     bekleme=1000;
     islem=500;
     sekil.strokeColor="red";
+    sekil.strokeWidth=10;
     sekil.animate({
         style:{
-            strokeColor:new RgbColor(1,0.5,0,0)
+            strokeColor:new RgbColor(1,0.5,0,0),
+            strokeWidth:20
         },
         delay:bekleme,
         duration:islem
     });
     $(Interaction.status).delay(bekleme).animate({opacity:0},islem,function(){$(Interaction.status).html("").css("opacity","1")});
 }
+
+
+
+
+
 /*
 
  goster=function(){

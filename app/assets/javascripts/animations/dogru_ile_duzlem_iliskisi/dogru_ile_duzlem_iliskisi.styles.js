@@ -37,7 +37,7 @@ function __Styles(){
 
     dogruStyle={
         strokeColor:new RgbColor(1,0,0,0),
-        strokeWidth:10
+        strokeWidth:20
 
     }
 

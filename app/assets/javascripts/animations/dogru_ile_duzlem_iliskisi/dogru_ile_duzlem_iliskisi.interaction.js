@@ -7,6 +7,8 @@ var Interaction = {
         
     ],
     init:function(container){
+
+        console.log("********* navigator.platform: "+navigator.platform);
         Interaction.container = container;
         Main.setObjective('');
         Interaction.paper = {
@@ -109,6 +111,8 @@ var Interaction = {
         Main.interactionProject.activeLayer.removeChildren();
         $("input").css("opacity","0").attr("disabled","disabled");
 
+
+
         soruDuzlem=soruDuzlemRandomArray[Interaction.soru];
         switch (soruDuzlem){
             case 0:
@@ -137,6 +141,7 @@ var Interaction = {
         soruMetin= "Yandaki resimde evin <b>"+duzlem+"</b> ile <b>"+dogru+"</b> tüm doğru parçalarını bulunuz ve kontrol ediniz.";
         Main.setObjective(soruMetin);
         dogrular();
+
         if(Interaction.soru%2==0){
 
             $("#sayac").html(kesisen);
@@ -244,13 +249,14 @@ var Interaction = {
         {
             $("input").css("opacity","1").removeAttr("disabled");
             $("#sayac").html("0");
-            tool.onMouseDown=null;
+            console.log("xxxxxxxxxx onmousedown null");
+            //Interaction.tool.onMouseDown=null;
             return true;
         }
         else{
             $("input").css("opacity","1").removeAttr("disabled");
             $("#sayac").html("0");
-            tool.onMouseDown=null;
+            //Interaction.tool.onMouseDown=null;
             return false;
         }
 
