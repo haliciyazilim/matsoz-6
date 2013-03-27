@@ -81,7 +81,7 @@ var Interaction = {
             }
         });
 
-        Interaction.grids.createTool("ShapePattern");
+        Interaction.tool = Interaction.grids.createTool("ShapePattern");
         Interaction.shape = Shape3.Generate(randomNumber);
         Interaction.shape.draw(new Point(150,200));
 
@@ -113,6 +113,7 @@ var Interaction = {
 		Interaction.showCorrectAnswer();
     },
     showCorrectAnswer:function(){
+        Interaction.tool.remove();
         Interaction.pause();
         Interaction.shape.showCorrectSide(Interaction.askedSide);
     }
