@@ -490,6 +490,7 @@ Main();
 var orientationWarningDialog = null;
 window.onorientationchange = detectOrientation;
 function detectOrientation(){
+
     if(window['orientation'] == undefined)
         return;
     if(typeof window.onorientationchange != 'undefined'){
@@ -502,22 +503,18 @@ function detectOrientation(){
                 orientationWarningDialog = new OrientationWarningDialogBox();
             }
             orientationWarningDialog.show();
-            detectOrientation();
         }
         else if ( orientation == -90 ) {
             if(orientationWarningDialog == null){
                 orientationWarningDialog = new OrientationWarningDialogBox();
-
             }
             orientationWarningDialog.show();
-            detectOrientation();
         }
         else if ( orientation == 180 ) {
             if(orientationWarningDialog != null)
                 orientationWarningDialog.hide();
         }
     }
-
 }
 function OrientationWarningDialogBox(){
     var mask = document.createElement('div');

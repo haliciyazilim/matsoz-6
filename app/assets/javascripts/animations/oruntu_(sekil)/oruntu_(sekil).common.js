@@ -120,6 +120,7 @@ InteractiveGrids.prototype.createTool = function(patternName){
         this.down = false;
     }
     tool.activate();
+    return tool;
 }
 
 InteractiveGrids.prototype.getInputPattern = function(){

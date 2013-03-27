@@ -251,7 +251,14 @@ var Interaction = {
                     .css("-ms-transform","rotate("+this.donus+"deg)")
                     .css("-moz-transform","rotate("+this.donus+"deg)")
                     .css("-o-transform","rotate("+this.donus+"deg)");
+                $("input").attr("disabled", "disabled");
+
+            },
+            callback:function(){
+                $("input").removeAttr("disabled");
             }
+
+
 
 
         });
