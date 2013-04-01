@@ -177,7 +177,19 @@ var Interaction = {
 
 
                                 birinciTiklama.opacity=0.1;
-                                ikinciTiklama.opacity=0.1;
+                                ikinciTiklama.opacity=0.5;
+                                birinciTiklama.fillColor="black";
+                                ikinciTiklama.strokeColor='red';
+                            ikinciTiklama.animate({
+                                    style:{
+                                        fillColor:new RgbColor(0,0,0,0.2),
+                                        strokeColor:new RgbColor(0,0,0,0)
+
+                                    },
+                                    delay:500,
+                                    duration:500
+                                });
+
                                 birinciTiklama=null;
                                 ikinciTiklama=null;
                                 tiklama=0;
@@ -220,9 +232,11 @@ var Interaction = {
                         else if(birinciTiklama.myId==event.item.myId){
                             tiklama++;
                             birinciTiklama=null;
+                            console.log("birinciTiklama");
                             console.log(birinciTiklama)
                             event.item.opacity=0.1;
                             event.item.fillColor="black";
+
 
                         }
                     }
