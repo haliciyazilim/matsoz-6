@@ -190,6 +190,7 @@ var Interaction = {
             $(".giydirilmis").remove();
 
             $(".esyalar").css("opacity","1");
+            $(".esyalar").css("border-width","0px");
             var tisort="";
             var pantolon="";
             var ayakkabi="";

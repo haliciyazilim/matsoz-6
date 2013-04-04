@@ -7,6 +7,7 @@ var sil=function(secilen, parent){
     console.log($("#pantolon1"));
     if($(this.secilen).hasClass("tisortler")==true){
         $(".tisortler").css("opacity","1");
+        $(".tisortler").css("border-width","0px");
         var tisortElemanlar=$(".tisortler");
         //console.log(tisortElemanlar)
             for(var i=0;i<tisortElemanlar.length;i++){
@@ -30,6 +31,7 @@ var sil=function(secilen, parent){
 
     else if($(this.secilen).hasClass("pantolonlar")==true){
         $(".pantolonlar").css("opacity","1");
+        $(".pantolonlar").css("border-width","0px");
         var pantolonElemanlar=$(".pantolonlar");
 
         for(var i=0;i<pantolonElemanlar.length;i++){
@@ -50,6 +52,7 @@ var sil=function(secilen, parent){
 
     else if($(this.secilen).hasClass("ayakkabilar")==true){
         $(".ayakkabilar").css("opacity","1");
+        $(".ayakkabilar").css("border-width","0px");
         var ayakkabiElemanlar=$("#ayakkabiCerceve").children();
         for(var i=0;i<ayakkabiElemanlar.length;i++){
             if($(this.secilen).get(0).className=="giydirilmis")
@@ -127,8 +130,10 @@ function esyalarClick (){
 
     sil(this,$(this).get(0).className);
     //console.log(seciliYeniId);
-    $(this).clone().attr("id",seciliYeniId).appendTo("#"+seciliCerceveId).css("opacity","0.4");
+    $(this).clone().attr("id",seciliYeniId).appendTo("#"+seciliCerceveId).css("opacity","1");
     $(this).css("opacity","0.4");
+    $(this).css("border-style","solid").css("border-width","2px").css("border-color","red");
+
 
 
 
