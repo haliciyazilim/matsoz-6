@@ -177,7 +177,7 @@ dogrular=function(){
     pencere1B.sari=p;
     pencere1B.name="pencere1B";
     dogrularArray.push(pencere1B);
-
+/*
     pencere1IcY=new Point(247,140)
     pencere1IcX=new Point(247,197)
     pencere1Ic=new Path.Line(pencere1IcX,pencere1IcY);
@@ -197,7 +197,7 @@ dogrular=function(){
     pencere1Ic2.sari=k;
     pencere1Ic2.name="pencere1Ic2";
     dogrularArray.push(pencere1Ic2);
-
+ */
     pencere1CY=new Point(206,198)
     pencere1CX=new Point(290,198)
     pencere1C=new Path.Line(pencere1CX,pencere1CY);
@@ -263,7 +263,7 @@ dogrular=function(){
     pencere3B.sari=pk;
     pencere3B.name="pencere3B";
     dogrularArray.push(pencere3B);
-
+/*
     pencere3IcY=new Point(326,162)
     pencere3IcX=new Point(378,147)
     pencere3Ic=new Path.Line(pencere3IcX,pencere3IcY);
@@ -283,7 +283,7 @@ dogrular=function(){
     pencere3Ic2.sari=pk;
     pencere3Ic2.name="pencere3Ic2";
     dogrularArray.push(pencere3Ic2);
-
+*/
     pencere3CY=new Point(378,172)
     pencere3CX=new Point(326,188)
     pencere3C=new Path.Line(pencere3CX,pencere3CY);

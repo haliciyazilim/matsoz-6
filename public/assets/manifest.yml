@@ -41,6 +41,7 @@ animations/ataturk_ve_geometri/yuzey.jpg: animations/ataturk_ve_geometri/yuzey.j
 animations/benzerlik/benzerlik.gif: animations/benzerlik/benzerlik.gif
 animations/benzerlik/benzerlik.jpg: animations/benzerlik/benzerlik.jpg
 animations/benzerlik/benzerlik_.jpg: animations/benzerlik/benzerlik_.jpg
+animations/benzerlik/resize.png: animations/benzerlik/resize.png
 animations/board_black.jpg: animations/board_black.jpg
 animations/board_green.jpg: animations/board_green.jpg
 animations/btn_gray_draw.png: animations/btn_gray_draw.png
@@ -92,6 +93,7 @@ animations/dogal_sayilarda_uslu_nicelik/uslu_ok_2.png: animations/dogal_sayilard
 animations/dogal_sayilarda_uslu_nicelik/uslu_ok_3.png: animations/dogal_sayilarda_uslu_nicelik/uslu_ok_3.png
 animations/dogru_ile_duzlem_iliskisi/btn_gray_cevapgoster.png: animations/dogru_ile_duzlem_iliskisi/btn_gray_cevapgoster.png
 animations/dogru_ile_duzlem_iliskisi/dogru_duzlem_etkilesim.png: animations/dogru_ile_duzlem_iliskisi/dogru_duzlem_etkilesim.png
+animations/dogru_ile_duzlem_iliskisi/dogru_duzlem_etkilesim_eski.png: animations/dogru_ile_duzlem_iliskisi/dogru_duzlem_etkilesim_eski.png
 animations/dogru_ile_nokta_iliskisi/alperen.jpg: animations/dogru_ile_nokta_iliskisi/alperen.jpg
 animations/dogru_ile_nokta_iliskisi/ankara.png: animations/dogru_ile_nokta_iliskisi/ankara.png
 animations/dogru_ile_nokta_iliskisi/ankara_dogrusal.gif: animations/dogru_ile_nokta_iliskisi/ankara_dogrusal.gif
