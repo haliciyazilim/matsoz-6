@@ -41,13 +41,15 @@ div.dialoggolge {
 
 #dialog_box a#kapat{
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 0px;
+    top: -1px;
     z-index: 101;
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
     display: block;
     background-image: url(ui_img/cancel.png);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /*#dialog_box .dialog_title {*/
