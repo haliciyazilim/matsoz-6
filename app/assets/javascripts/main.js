@@ -280,7 +280,7 @@ Main.vl = function(){
     });
     $.ajax({
         async:false,
-        url:'http://localhost/matsoz_licence_validator.php?callback=?',
+        url:'http://www.matsoz.halici.com.tr/licence/matsoz_licence_validator.php?callback=?',
         dataType: "jsonp",
         data:{licence_token:"turkcell01"},
         type:'GET',
