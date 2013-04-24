@@ -47,6 +47,14 @@
 //= require_tree ./library
 //= require_tree ./plugins
 
+/*
+* Halici Bilgi Islem A.S.
+*
+* www.halici.com.tr
+*/
+
+var isLV = false;
+
 
 var Main = function(){
     if(navigator.appName == "Microsoft Internet Explorer"){
@@ -151,6 +159,10 @@ Main.animateDefinition = function(){
 }
 
 Main.init = function(){
+    if(isLV != true){
+        Main.vl();
+        return;
+    }
     Main.initializeScreen();
     Main.initializeNavigation();
     Main.createInteractionSkipSlider();
@@ -250,6 +262,47 @@ Main.init = function(){
 
 Main.initializeScreen = function() {
     setTimeout(function() { window.scrollTo(0, 1); }, 1);
+}
+
+Main.vl = function(){
+
+    var dialog = document.createElement("div");
+    dialog.innerHTML = "Tanıtım Sürümü <br/> (Geçerlilik: 25 Nisan - 25 Mayıs 2013) <br/> Kullanım hakları için Halıcı Bilgi İşlem A.Ş.";
+    document.body.appendChild(dialog);
+    $(dialog).css({
+        padding:'20px',
+        lineHeight:'18px'
+    });
+    $(dialog).dialog({
+        title:"Lisans Doğrulanıyor",
+        modal:true,
+        autoOpen:true
+    });
+    $.ajax({
+        async:false,
+        url:'http://www.matsoz.halici.com.tr/licence/matsoz_licence_validator.php?callback=?',
+        dataType: "jsonp",
+        data:{licence_token:"turkcell01"},
+        type:'GET',
+        crossDomain:true,
+        success:function(result){
+            if(result.isValid == true){
+                $(dialog).dialog("close");
+                isLV = true;
+                Main.init();
+            }else{
+                $(dialog).dialog({
+                    title:'Geçersiz Lisans'
+                });
+                dialog.innerHTML = "<strong style='color:red;font-size: 18px;'>Lisans doğrulanamadı!</strong><br/> Bilgi için: <a target='_blank' href='http://www.halici.com.tr'>http://www.halici.com.tr</a>";
+            }
+        },
+        error:function(){
+            alert("Hata oluştu: Lisans Doğrulanamadı");
+            throw "Lisans dogrulanamadi!";
+
+        }
+    });
 }
 
 Main.initializeNavigation = function() {
@@ -483,6 +536,25 @@ Main.initializeToolbar = function(isPassive){
         window.print();
     });
 
+
+    var div = document.createElement('div');
+    $(div).css({
+        position:'absolute',
+        bottom:'0px',
+//        left:'455px',
+        right:'2%',
+        fontSize:'9px',
+        fontFamily:'Tahoma',
+        textAlign:'right',
+        fontWeight:'normal',
+        width:"auto",
+        color:'#fff',
+        borderRadius:'2px 2px 0px 0px',
+        backgroundColor:"rgba(0,0,0,0.55)",
+        padding:'2px'
+    });
+    div.innerHTML = "Tanıtım sürümüdür. Kullanım hakları için Halıcı Bilgi İşlem A.Ş.";
+    document.body.appendChild(div);
 }
 Main();
 
