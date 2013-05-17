@@ -53,7 +53,7 @@
 * www.halici.com.tr
 */
 
-var isLV = false;
+var isLV = true;
 
 
 var Main = function(){
