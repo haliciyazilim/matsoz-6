@@ -8,7 +8,7 @@ gem 'rails', '3.2.1'
 gem 'haml'
 
 # For file storage
-gem 'paperclip'
+gem 'paperclip', :git => 'git://github.com/lsegal/paperclip', :branch => 'remove-aws-sdk-version-check'
 gem 'aws-sdk'
 gem 'aws-s3'
 

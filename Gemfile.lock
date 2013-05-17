@@ -1,3 +1,15 @@
+GIT
+  remote: git://github.com/lsegal/paperclip
+  revision: 022598c1e9982c9199d5b28971faa25281b0bb8d
+  branch: remove-aws-sdk-version-check
+  specs:
+    paperclip (3.4.1)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.0)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,7 +61,10 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.1)
       ffi (~> 1.0.6)
-    cocaine (0.2.1)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.1)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -100,12 +115,6 @@ GEM
     multi_xml (0.5.1)
     nokogiri (1.5.0)
     nokogiri (1.5.0-x86-mingw32)
-    paperclip (3.1.2)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (>= 0.0.2)
-      mime-types
     pg (0.12.2)
     pg (0.12.2-x86-mingw32)
     polyglot (0.3.3)
@@ -197,7 +206,7 @@ DEPENDENCIES
   haml
   jquery-rails
   launchy
-  paperclip
+  paperclip!
   pg
   rails (= 3.2.1)
   rspec-rails
