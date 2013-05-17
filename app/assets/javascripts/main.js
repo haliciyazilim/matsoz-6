@@ -559,77 +559,77 @@ Main.initializeToolbar = function(isPassive){
 Main();
 
 
-var orientationWarningDialog = null;
-window.onorientationchange = detectOrientation;
-function detectOrientation(){
-
-    if(window['orientation'] == undefined)
-        return;
-    if(typeof window.onorientationchange != 'undefined'){
-        if ( orientation == 0 ) {
-            if(orientationWarningDialog != null)
-                orientationWarningDialog.hide();
-        }
-        else if ( orientation == 90 ) {
-            if(orientationWarningDialog == null){
-                orientationWarningDialog = new OrientationWarningDialogBox();
-            }
-            orientationWarningDialog.show();
-        }
-        else if ( orientation == -90 ) {
-            if(orientationWarningDialog == null){
-                orientationWarningDialog = new OrientationWarningDialogBox();
-            }
-            orientationWarningDialog.show();
-        }
-        else if ( orientation == 180 ) {
-            if(orientationWarningDialog != null)
-                orientationWarningDialog.hide();
-        }
-    }
-}
-function OrientationWarningDialogBox(){
-    var mask = document.createElement('div');
-    mask.className = 'dialogmaske dialogmaske_alert';
-    document.body.appendChild(mask);
-
-    var dialog_box = document.createElement('div');
-    dialog_box.id = 'dialog_box';
-    dialog_box.dialog = this;
-    dialog_box.className = 'dialoggolge';
-    dialog_box.setAttribute('DialogId',this.id);
-    document.body.appendChild(dialog_box);
-    $(mask).css({
-        width:$('#container').width() + 'px'
-    });
-    $(dialog_box).css({
-        position:'fixed',
-        width:'390px',
-        height:'140px',
-        marginLeft:'-150px',
-        marginTop:'-50px',
-        padding:'30px',
-        fontSize:'20px',
-        lineHeight:'23px',
-        color:'#f00',
-        fontWeight:'bold',
-        boxSizing:'border-box'
-    });
+//var orientationWarningDialog = null;
+//window.onorientationchange = detectOrientation;
+//function detectOrientation(){
+//
+//    if(window['orientation'] == undefined)
+//        return;
+//    if(typeof window.onorientationchange != 'undefined'){
+//        if ( orientation == 0 ) {
+//            if(orientationWarningDialog != null)
+//                orientationWarningDialog.hide();
+//        }
+//        else if ( orientation == 90 ) {
+//            if(orientationWarningDialog == null){
+//                orientationWarningDialog = new OrientationWarningDialogBox();
+//            }
+//            orientationWarningDialog.show();
+//        }
+//        else if ( orientation == -90 ) {
+//            if(orientationWarningDialog == null){
+//                orientationWarningDialog = new OrientationWarningDialogBox();
+//            }
+//            orientationWarningDialog.show();
+//        }
+//        else if ( orientation == 180 ) {
+//            if(orientationWarningDialog != null)
+//                orientationWarningDialog.hide();
+//        }
+//    }
+//}
+//function OrientationWarningDialogBox(){
+//    var mask = document.createElement('div');
+//    mask.className = 'dialogmaske dialogmaske_alert';
+//    document.body.appendChild(mask);
+//
+//    var dialog_box = document.createElement('div');
+//    dialog_box.id = 'dialog_box';
+//    dialog_box.dialog = this;
+//    dialog_box.className = 'dialoggolge';
+//    dialog_box.setAttribute('DialogId',this.id);
+//    document.body.appendChild(dialog_box);
 //    $(mask).css({
-//        background:"url(ui_img/serit_siyah_20.png) repeat rgba(255,0,0,0.8)"
-//    })
-    $(dialog_box).html("Dikey pozisyon desteklenmemektedir. Lütfen cihazınızı yatay konuma getiriniz.");
-    this.mask = mask;
-    this.dialog_box = dialog_box;
-
-
-    this.show = function(){
-        this.mask.style.display = 'block';
-        this.dialog_box.style.display = 'block';
-    }
-    this.hide = function(){
-        this.mask.style.display = 'none';
-        this.dialog_box.style.display = 'none';
-    }
-}
-$(document).ready(detectOrientation);
+//        width:$('#container').width() + 'px'
+//    });
+//    $(dialog_box).css({
+//        position:'fixed',
+//        width:'390px',
+//        height:'140px',
+//        marginLeft:'-150px',
+//        marginTop:'-50px',
+//        padding:'30px',
+//        fontSize:'20px',
+//        lineHeight:'23px',
+//        color:'#f00',
+//        fontWeight:'bold',
+//        boxSizing:'border-box'
+//    });
+////    $(mask).css({
+////        background:"url(ui_img/serit_siyah_20.png) repeat rgba(255,0,0,0.8)"
+////    })
+//    $(dialog_box).html("Dikey pozisyon desteklenmemektedir. Lütfen cihazınızı yatay konuma getiriniz.");
+//    this.mask = mask;
+//    this.dialog_box = dialog_box;
+//
+//
+//    this.show = function(){
+//        this.mask.style.display = 'block';
+//        this.dialog_box.style.display = 'block';
+//    }
+//    this.hide = function(){
+//        this.mask.style.display = 'none';
+//        this.dialog_box.style.display = 'none';
+//    }
+//}
+//$(document).ready(detectOrientation);
