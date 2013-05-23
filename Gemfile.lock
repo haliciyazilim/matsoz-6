@@ -1,15 +1,3 @@
-GIT
-  remote: git://github.com/lsegal/paperclip
-  revision: 022598c1e9982c9199d5b28971faa25281b0bb8d
-  branch: remove-aws-sdk-version-check
-  specs:
-    paperclip (3.4.1)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.5.0)
-      mime-types
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,6 +103,12 @@ GEM
     multi_xml (0.5.1)
     nokogiri (1.5.0)
     nokogiri (1.5.0-x86-mingw32)
+    paperclip (3.4.1)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.0)
+      mime-types
     pg (0.12.2)
     pg (0.12.2-x86-mingw32)
     polyglot (0.3.3)
@@ -206,7 +200,7 @@ DEPENDENCIES
   haml
   jquery-rails
   launchy
-  paperclip!
+  paperclip
   pg
   rails (= 3.2.1)
   rspec-rails
