@@ -1,1 +1,0 @@
-var Animation={images:[{id:"ataturk_geometri_bg",src:"/assets/animations/ataturk_ve_geometri/ataturk_geometri_bg.jpg"}],init:function(e){Animation.container=e,$(e).append($("#ataturk_geometri_bg").css({position:"absolute",left:"15px",top:"20px"}).fadeIn(1e3,"linear")),Main.animationFinished(1e3)}};
