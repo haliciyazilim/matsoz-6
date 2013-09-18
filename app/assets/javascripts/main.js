@@ -596,24 +596,24 @@ Main.initializeToolbar = function(isPassive){
     });
 
 
-    var div = document.createElement('div');
-    $(div).css({
-        position:'absolute',
-        bottom:'0px',
-//        left:'455px',
-        right:'2%',
-        fontSize:'9px',
-        fontFamily:'Tahoma',
-        textAlign:'right',
-        fontWeight:'normal',
-        width:"auto",
-        color:'#fff',
-        borderRadius:'2px 2px 0px 0px',
-        backgroundColor:"rgba(0,0,0,0.55)",
-        padding:'2px'
-    });
-    div.innerHTML = "Tanıtım sürümüdür. Kullanım hakları için Halıcı Bilgi İşlem A.Ş.";
-    document.body.appendChild(div);
+//     var div = document.createElement('div');
+//     $(div).css({
+//         position:'absolute',
+//         bottom:'0px',
+// //        left:'455px',
+//         right:'2%',
+//         fontSize:'9px',
+//         fontFamily:'Tahoma',
+//         textAlign:'right',
+//         fontWeight:'normal',
+//         width:"auto",
+//         color:'#fff',
+//         borderRadius:'2px 2px 0px 0px',
+//         backgroundColor:"rgba(0,0,0,0.55)",
+//         padding:'2px'
+//     });
+//     div.innerHTML = "Tanıtım sürümüdür. Kullanım hakları için Halıcı Bilgi İşlem A.Ş.";
+//     document.body.appendChild(div);
 }
 Main();
 
